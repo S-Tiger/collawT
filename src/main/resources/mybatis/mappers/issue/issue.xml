@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="issue">
+	<resultMap id="issueResult01" type="IssueVO">
+		<result property="i_Num" column="i_Num"  />
+		<result property="c_Id" column="c_Id"  />
+		<result property="i_Name" column="i_Name" />
+		<result property="i_Content" column="i_Content" />
+		<result property="i_DATE" column="i_DATE" />
+		<result property="i_Groupnum" column="i_Groupnum" />
+		<result property="mem_Id" column="mem_Id" />
+		
+	</resultMap>
+
+	<select id="searchList" resultMap="issueResult01" parameterType="java.util.Map"> 
+      <![CDATA[
+         select i_Num, c_Id, i_Name, i_Content, i_DATE, i_Groupnum , mem_Id
+         from issue
+      ]]>
+		<where>
+			<if test=" mem_Id != ''  and  mem_Id != null">
+				id = #{mem_Id}
+			</if>
+		</where>
+	</select>
+	
+	<insert id="issueInsert" parameterType="IssueVO">
+		insert into issue(i_Num, c_Id, i_Name, i_Content, i_DATE, i_Groupnum , mem_Id) 
+		values(issue_i_num.nextval, #{c_Id}, #{i_Name}, #{i_Content} , #{i_DATE} , #{i_Groupnum} , #{mem_Id})
+	</insert>	
+
+</mapper>

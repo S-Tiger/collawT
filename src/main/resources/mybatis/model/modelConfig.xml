@@ -11,5 +11,8 @@
 		
 		
 		<typeAlias type="project.sample.vo.MemberVO" alias="MemberVO" />
+		
+		
+		<typeAlias type="project.issue.vo.IssueVO" alias="IssueVO" />
 	</typeAliases> 
 </configuration>

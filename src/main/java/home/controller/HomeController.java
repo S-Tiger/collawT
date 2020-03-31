@@ -28,4 +28,17 @@ public class HomeController {
 		
 		return "sample/joinForm";
 	}
+	
+	@RequestMapping("/issue")
+	public String project(Model model) {
+
+		return "/issue//issue";
+	}
+	
+	@RequestMapping("/issueadd")
+	public String projectadd(Model model) {
+
+		return "/issue/issueadd";
+	}
+	
 }
