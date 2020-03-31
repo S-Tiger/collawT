@@ -22,5 +22,10 @@ public class HomeController {
 		
 		return "main/index";
 	}
-	
+
+	@RequestMapping("/join")
+	public String join(Model model) {
+		
+		return "sample/joinForm";
+	}
 }
