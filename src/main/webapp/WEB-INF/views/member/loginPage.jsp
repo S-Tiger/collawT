@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"
+    isELIgnored="false" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
+<c:set var="result" value="${param.result }" /><!-- 컨트롤러에서 로그인 실패할때 가져오는 값. -->
+<%
+   request.setCharacterEncoding("UTF-8");
+%>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +30,7 @@
   <c:choose>
 	<c:when test="${result=='loginFailed' }">
 	  <script>
-	    window.onload=function(){
+	  window.onload=function(){
 	      alert("아이디나 비밀번호가 틀립니다.다시 로그인 하세요!");
 	    }
 	  </script>
@@ -41,7 +49,7 @@
 
       <form action="/member/login" method="post">
         <div class="input-group mb-3">
-          <input type="email" name="memId" class="form-control" placeholder="아이디 이메일 형식">
+          <input type="email" name="mem_Id" class="form-control" placeholder="아이디 이메일 형식">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -49,7 +57,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" name="memPw" class="form-control" placeholder="비밀번호">
+          <input type="password" name="mem_Pwd" class="form-control" placeholder="비밀번호">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
