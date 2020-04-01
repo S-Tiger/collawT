@@ -1,6 +1,6 @@
-package project.sample.dao;
+package project.member.dao;
 
-import project.sample.vo.MemberVO;
+import project.member.vo.MemberVO;
 
 public interface MemberDao {
 	

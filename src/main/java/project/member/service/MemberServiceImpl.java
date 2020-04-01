@@ -1,4 +1,4 @@
-package project.sample.service;
+package project.member.service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
-import project.sample.dao.MemberDaoImpl;
-import project.sample.vo.MemberVO;
+import project.member.dao.MemberDaoImpl;
+import project.member.vo.MemberVO;
 
 
 @Service //서비스는 서비스 라고 어노테이션을 작성해주세요 @Repository,@Component 등도 사용가능하지만 서비스는 서비스로 사용하는게 정석이고 직관적
@@ -41,6 +41,16 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public MemberVO login(MemberVO memberVO) throws Exception {
+		// TODO Auto-generated method stub
+		
+		return dao.memberSelect(memberVO);
+	}
+
+
+
 
 	
 
