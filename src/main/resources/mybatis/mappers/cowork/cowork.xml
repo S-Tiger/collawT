@@ -13,7 +13,7 @@
 		
 	</resultMap>
 
-	<select id="searchList" resultMap="issueResult01" parameterType="java.util.Map"> 
+	<select id="searchList" resultMap="coworkResult01" parameterType="java.util.Map"> 
       <![CDATA[
          select c_Id, c_Name, c_Comment, mem_Id, c_Category
          from co_work

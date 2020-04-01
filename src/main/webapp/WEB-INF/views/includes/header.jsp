@@ -172,11 +172,7 @@
           <img src="../resources/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-<<<<<<< HEAD
-          <a href="#" class="d-block">${sessionSope.member}</a>
-=======
           <a href="#" class="d-block">${sessionScope.member}</a>
->>>>>>> refs/remotes/origin/master
         </div>
       </div>
 

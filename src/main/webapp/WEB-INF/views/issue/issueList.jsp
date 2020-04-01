@@ -50,7 +50,7 @@
                   <tr>
                       <td>  ${issueList.mem_Id}    </td>
                       <td>  ${issueList.i_Name}    </td>
-                      <td>  ${issueList.i_DATE}    </td>
+                      <td>  ${issueList.i_Date}    </td>
                    </tr>
                    </c:forEach>
               </tbody>

@@ -13,6 +13,7 @@
 	<!-- collaw-T 알리아스 -->
 		<typeAlias type="project.member.vo.MemberVO" alias="MemberVO" />
 		<typeAlias type="project.issue.vo.IssueVO" alias="IssueVO" />
+		<typeAlias type="project.cowork.vo.CoworkVO" alias="CoworkVO" />
 		
 		
 	</typeAliases> 
