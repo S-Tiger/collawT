@@ -14,6 +14,7 @@
 </div>
 <!-- ./wrapper -->
 
+<<<<<<< HEAD
 <!-- jQuery -->
 <script src="../resources/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
@@ -22,5 +23,7 @@
 <script src="../resources/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../resources/dist/js/demo.js"></script>
+=======
+>>>>>>> refs/remotes/origin/master
 </body>
 </html>
