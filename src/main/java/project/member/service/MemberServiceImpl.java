@@ -24,7 +24,7 @@ public class MemberServiceImpl implements MemberService {
 	MemberDaoImpl dao; //서비스는 dao에 접근하여 데이터를 가져오기때문에  dao연결하고 시작합니다.
 	                   //요청은 controller -> service -> dao 응답은 반대 생각하면 됩니다.
 	
-	@Override
+	@Override//회원가
 	public void memberRegister(MemberVO memberVO) {//똑같이 vo를 매개변수로 넣으면 get set을 알아서해주기때문에 코드가 줄어듦
 		int result = dao.memberInsert(memberVO); 
 		
@@ -47,6 +47,17 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		
 		return dao.memberSelect(memberVO);
+	}
+
+	@Override//회원정보 업데이
+	public void memberUpdate(MemberVO memberVO) {
+		// TODO Auto-generated method stub
+		int result = dao.memberUpdate(memberVO); 
+		if (result == 0) {
+			System.out.println("Update Fail!!");
+		} else {
+			System.out.println("Update Success!!");
+		}
 	}
 
 

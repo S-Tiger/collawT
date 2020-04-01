@@ -10,13 +10,13 @@ import project.member.vo.MemberVO;
 public class MemberDaoImpl implements MemberDao {
 	
 	@Autowired
-	private SqlSession sqlSesssion; //맵퍼에 접근하기위한 SQL세션
+	private SqlSession sqlSession; //맵퍼에 접근하기위한 SQL세션
 	
 
 	@Override
 	public int memberInsert(MemberVO memberVO) {
 		// TODO Auto-generated method stub
-		int stat = sqlSesssion.update("member.insertMember", memberVO); //맵퍼실행문 sqlSession.update 
+		int stat = sqlSession.update("member.insertMember", memberVO); //맵퍼실행문 sqlSession.update 
 													//을 통해 데이터 변경 및 삽입 삭제은 update를 사용 sample.insertMember는
 													//맵퍼 키값입니다 해당하는 sql문 실행 밑 데이터를 가져옵니다
 													//sqlSession.selectList("맵퍼키값",데이터)는 해당하는 
@@ -28,8 +28,15 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public MemberVO memberSelect(MemberVO memberVO) {
 		// TODO Auto-generated method stub
-		MemberVO memvo = sqlSesssion.selectOne("member.login", memberVO);
-		return memvo;
+		MemberVO memberVo = sqlSession.selectOne("member.login", memberVO);
+		return memberVo;
+	}
+	//개인정보 업데이트
+	@Override
+	public int memberUpdate(MemberVO memberVO) {
+		// TODO Auto-generated method stub
+		int stat = sqlSession.update("member.updateMember", memberVO);
+		return stat;
 	}
 
 	

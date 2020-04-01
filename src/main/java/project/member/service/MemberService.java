@@ -7,4 +7,5 @@ public interface MemberService {
 	public void memberRegister(MemberVO memberVO);
 	public void memberSearch(MemberVO memberVO);
 	public MemberVO login(MemberVO memberVO)throws Exception;
+	public void memberUpdate(MemberVO memberVO);
 }

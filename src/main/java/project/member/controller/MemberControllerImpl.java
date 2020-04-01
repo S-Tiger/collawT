@@ -8,12 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.xmlbeans.impl.jam.mutable.MElement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -41,12 +45,12 @@ public class MemberControllerImpl implements MemberController{
 	@GetMapping("/signup")
 	public String signup() {
 		System.out.println("회원가입페이지");
-		return "/member/register";
+		return "/member/signup";
 		
 	}
 	//로그인 페이지
 	@Override
-	@GetMapping("/loginForm")
+	@GetMapping("/loginPage")
 	public String loginFrorm() {
 		System.out.println("로그인페이지");
 		
@@ -62,7 +66,6 @@ public class MemberControllerImpl implements MemberController{
 		request.setCharacterEncoding("utf-8");													  //다른이름으로 지정하고 싶을 경우  ex : @ModelAttribute(변수이름) MeberVo memberVO
 																									//으로하시면 변수이름. 으로 접근가능합니다
 		service.memberRegister(memberVO); 														// service에 memberRegister를 실행하는 부분
-		System.out.println("gege");
 		return "/member/loginPage"; // 리턴타입엔 패키지명/jsp파일 로 작성하여주세요 view에서도 패키지/jsp로 관리해주세요
 	}
 
@@ -83,13 +86,14 @@ public class MemberControllerImpl implements MemberController{
 		if(memVO != null) {
 		HttpSession session = request.getSession();
 		
-		session.setAttribute("member", memVO.getMem_Name());
+		session.setAttribute("mem_name", memVO.getMem_Name());
+		session.setAttribute("mem_pwd", memVO.getMem_Pwd());
 		session.setAttribute("isLogin", true);
 		mav.setViewName("/main/index");
 		
 		}else {//실패했을경우
 			rAttr.addAttribute("result","loginFailed");
-		mav.setViewName("redirect:/member/loginForm");
+		mav.setViewName("redirect:/member/loginPage");
 		
 		}
 
@@ -107,23 +111,34 @@ public class MemberControllerImpl implements MemberController{
 		ModelAndView mav =new ModelAndView();
 		System.out.println("로그인컨트롤러");
 		//로그인로직
-		MemberVO memVO = service.login(member);
+		MemberVO memberVO = service.login(member);
 		System.out.println(member);
 		//로그인시 세션에.. 로그인성공
-		if(memVO != null) {
+		if(memberVO != null) {
 		HttpSession session = request.getSession();
 		
-		session.setAttribute("member", memVO.getMem_Name());
+		session.setAttribute("mem_id", memberVO.getMem_Name());
+		session.setAttribute("mem_pwd", memberVO.getMem_Pwd());
 		session.setAttribute("isLogin", true);
-		mav.setViewName("/member/loginOk");
+		mav.setViewName("/main/index");
 		
 		}else {//실패했을경우
 			rAttr.addAttribute("result","loginFailed");
-		mav.setViewName("redirect:/member/loginForm");
+		mav.setViewName("redirect:/member/loginPage");
 		
 		}
 
 		return mav;
+	}
+
+	@Override
+	@RequestMapping(value = "/updateMember")
+	public String memUpdate(MemberVO member, RedirectAttributes rAttr, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		
+		service.memberUpdate(member);
+		
+		return "redirect:/member/memberUpdate";
 	}
 	
 

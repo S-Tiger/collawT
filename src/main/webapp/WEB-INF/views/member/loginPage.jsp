@@ -47,7 +47,7 @@
     <div class="card-body login-card-body">
       <p class="login-box-msg">Login</p>
 
-      <form action="/member/login" method="post">
+      <form action="/member/loginTest" method="post">
         <div class="input-group mb-3">
           <input type="email" name="mem_Id" class="form-control" placeholder="아이디 이메일 형식">
           <div class="input-group-append">

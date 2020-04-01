@@ -69,7 +69,7 @@
             <div class="icheck-primary">
               <input type="checkbox" id="agreeTerms" name="terms" value="agree">
               <label for="agreeTerms">
-               동의? <a href="#">어보감</a>
+              회원가입 <a href="#">동의</a>
               </label>
             </div>
           </div>
