@@ -40,12 +40,17 @@ public class issueControllerImpl {
 		
 	}
 	
-	@PostMapping("/add")
-	public String searchInsert(IssueVO issueVO) throws Exception {
+	@PostMapping("/insert")
+	public String issueInsert(IssueVO issueVO) throws Exception {
 		
 		issueService.issueInsert(issueVO);
 		
-		return "/issue/issue";
+		return "redirect:/issue/list";
+	
 	}
-
+	
+	@GetMapping("/testinsert")
+	public String test() {
+		return "/issue/issueadd";
+	}
 }

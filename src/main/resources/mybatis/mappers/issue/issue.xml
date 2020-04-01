@@ -29,7 +29,7 @@
 	
 	<insert id="issueInsert" parameterType="IssueVO">
 		insert into issue(i_Num, c_Id, i_Name, i_Content, i_Date, i_Groupnum , mem_Id) 
-		values(issue_i_num.nextval, #{c_Id}, #{i_Name}, #{i_Content} , #{i_Date} , #{i_Groupnum} , #{mem_Id})
+		values(issue_i_num.nextval, #{c_Id}, #{i_Name}, #{i_Content} , sysdate , #{i_Groupnum} , #{mem_Id})
 	</insert>	
 
 </mapper>
