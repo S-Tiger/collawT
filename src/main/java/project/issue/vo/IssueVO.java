@@ -7,7 +7,7 @@ public class IssueVO {
 	private String c_Id;
 	private String i_Name;
 	private String i_Content;
-	private String i_DATE;
+	private String i_Date;
 	private String i_Groupnum;
 	private String mem_Id;
 	
@@ -35,11 +35,11 @@ public class IssueVO {
 	public void setI_Content(String i_Content) {
 		this.i_Content = i_Content;
 	}
-	public String getI_DATE() {
-		return i_DATE;
+	public String getI_Date() {
+		return i_Date;
 	}
-	public void setI_DATE(String i_DATE) {
-		this.i_DATE = i_DATE;
+	public void setI_Date(String i_Date) {
+		this.i_Date = i_Date;
 	}
 	public String getI_Groupnum() {
 		return i_Groupnum;

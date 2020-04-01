@@ -26,8 +26,8 @@
          from   test_member
       ]]>
 		<where>
-			<if test=" memId != ''  and  memId != null">
-				id = #{memId}
+			<if test=" mem_Id != ''  and  mem_Id != null">
+				id = #{mem_Id}
 			</if>
 		</where>
 	</select>

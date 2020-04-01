@@ -9,7 +9,7 @@
 		<result property="c_Id" column="c_Id"  />
 		<result property="i_Name" column="i_Name" />
 		<result property="i_Content" column="i_Content" />
-		<result property="i_DATE" column="i_DATE" />
+		<result property="i_Date" column="i_Date" />
 		<result property="i_Groupnum" column="i_Groupnum" />
 		<result property="mem_Id" column="mem_Id" />
 		
@@ -17,7 +17,7 @@
 
 	<select id="searchList" resultMap="issueResult01" parameterType="java.util.Map"> 
       <![CDATA[
-         select i_Num, c_Id, i_Name, i_Content, i_DATE, i_Groupnum , mem_Id
+         select i_Num, c_Id, i_Name, i_Content, i_Date, i_Groupnum , mem_Id
          from issue
       ]]>
 		<where>
@@ -28,8 +28,8 @@
 	</select>
 	
 	<insert id="issueInsert" parameterType="IssueVO">
-		insert into issue(i_Num, c_Id, i_Name, i_Content, i_DATE, i_Groupnum , mem_Id) 
-		values(issue_i_num.nextval, #{c_Id}, #{i_Name}, #{i_Content} , #{i_DATE} , #{i_Groupnum} , #{mem_Id})
+		insert into issue(i_Num, c_Id, i_Name, i_Content, i_Date, i_Groupnum , mem_Id) 
+		values(issue_i_num.nextval, #{c_Id}, #{i_Name}, #{i_Content} , #{i_Date} , #{i_Groupnum} , #{mem_Id})
 	</insert>	
 
 </mapper>
