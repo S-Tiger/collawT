@@ -5,17 +5,16 @@
 
 <mapper namespace="member">
 	<resultMap id="memberResult01" type="MemberVO">
-		<result property="memId" column="mem_id"  />
-		<result property="memPw" column="mem_pwd" />
-		<result property="memName" column="mem_name" />
-		<result property="memJoinDate" column="mem_joindate" /> 
+		<result property="mem_Id" column="mem_Id"  />
+		<result property="mem_Pwd" column="mem_Pwd" />
+		<result property="mem_Name" column="mem_Name" />
 	</resultMap>
 
 	<select id="login" resultMap="memberResult01" parameterType="memberVO">
 	
 	<![CDATA[
 		select * from member
-		where mem_id =#{memId} and mem_pwd=#{memPw}
+		where mem_id =#{mem_Id} and mem_pwd=#{mem_Pw}
 	]]>
 	
 	</select>
@@ -23,7 +22,7 @@
 
 	<select id="searchList" resultMap="memberResult01" parameterType="java.util.Map"> 
       <![CDATA[
-         select memId, memPw, memName
+         select mem_Id, mem_Pwd, mem_Name
          from   test_member
       ]]>
 		<where>
@@ -37,7 +36,8 @@
 	
 	
 	<insert id="insertMember" parameterType="java.util.Map">
-		insert into member(mem_id, mem_pwd, mem_name, mem_joindate) values(#{memId}, #{memPw}, #{memName}, #{memJoinDate})
+		insert into member(mem_id, mem_pwd, mem_name, mem_joindate) 
+		values(#{mem_Id}, #{mem_Pwd}, #{mem_Name}, sysdate)
 	</insert>	
 
 </mapper>

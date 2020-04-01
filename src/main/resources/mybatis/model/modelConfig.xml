@@ -10,7 +10,7 @@
 		<typeAlias type="project.hm.hmp002_d001.vo.Hmp002_d001VO"  alias="hmp002_d001VO" />
 		
 		
-		<typeAlias type="project.sample.vo.MemberVO" alias="MemberVO" />
+		<typeAlias type="project.member.vo.MemberVO" alias="MemberVO" />
 		
 		
 		<typeAlias type="project.issue.vo.IssueVO" alias="IssueVO" />

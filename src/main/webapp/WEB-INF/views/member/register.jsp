@@ -32,7 +32,7 @@
 
       <form action="/member/join" method="post">
         <div class="input-group mb-3">
-          <input type="text" name="memName" class="form-control" placeholder="이름">
+          <input type="text" name="mem_Name" class="form-control" placeholder="이름">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -40,7 +40,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="text" name="memId" class="form-control" placeholder="아이디 입력 이메일 형식">
+          <input type="text" name="mem_Id" class="form-control" placeholder="아이디 입력 이메일 형식">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -48,7 +48,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" name="memPw" class="form-control" placeholder="비밀번호">
+          <input type="password" name="mem_Pwd" class="form-control" placeholder="비밀번호">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>

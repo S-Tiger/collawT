@@ -2,6 +2,15 @@ package project.issue.vo;
 
 public class IssueVO {
 
+	
+	private String i_Num;
+	private String c_Id;
+	private String i_Name;
+	private String i_Content;
+	private String i_DATE;
+	private String i_Groupnum;
+	private String mem_Id;
+	
 	public String getI_Num() {
 		return i_Num;
 	}
@@ -44,14 +53,6 @@ public class IssueVO {
 	public void setMem_Id(String mem_Id) {
 		this.mem_Id = mem_Id;
 	}
-	private String i_Num;
-	private String c_Id;
-	private String i_Name;
-	private String i_Content;
-	private String i_DATE;
-	private String i_Groupnum;
-	private String mem_Id;
-	
 	
 
 }

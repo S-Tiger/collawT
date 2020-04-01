@@ -62,7 +62,7 @@ public class MemberController {
 		System.out.println(memberVO);															 //으로하시면 변수이름. 으로 접근가능합니다
 		service.memberRegister(memberVO); 														// service에 memberRegister를 실행하는 부분
 
-		return "member/login"; // 리턴타입엔 패키지명/jsp파일 로 작성하여주세요 view에서도 패키지/jsp로 관리해주세요
+		return "redirect:member/login"; // 리턴타입엔 패키지명/jsp파일 로 작성하여주세요 view에서도 패키지/jsp로 관리해주세요
 	}
 
 	
