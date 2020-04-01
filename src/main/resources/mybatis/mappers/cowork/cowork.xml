@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cowork">
+	<resultMap id="coworkResult01" type="CoworkVO">
+		<result property="c_Id" column="c_Id"  />
+		<result property="c_Name" column="c_Name" />
+		<result property="c_Comment" column="i_Content" />
+		<result property="mem_Id" column="mem_Id" />
+		<result property="c_Category" column="c_Category" />
+		
+	</resultMap>
+
+	<select id="searchList" resultMap="issueResult01" parameterType="java.util.Map"> 
+      <![CDATA[
+         select c_Id, c_Name, c_Comment, mem_Id, c_Category
+         from co_work
+      ]]>
+		<where>
+			<if test=" c_Name != ''  and  c_Name != null">
+				id = #{c_Name}
+			</if>
+		</where>
+	</select>
+	
+	<insert id="insertCowork" parameterType="CoworkVO">
+		insert into co_work(c_Id, c_Name, c_Comment, mem_Id, c_Category) 
+		values(co_work_c_Id.nextval, #{c_Name}, #{c_Comment}, #{mem_Id} , #{c_Category})
+	</insert>	
+
+</mapper>
