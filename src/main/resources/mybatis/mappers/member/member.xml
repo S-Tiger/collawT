@@ -14,7 +14,7 @@
 	
 	<![CDATA[
 		select * from member
-		where mem_id =#{mem_Id} and mem_pwd=#{mem_Pw}
+		where mem_Id =#{mem_Id} and mem_Pwd=#{mem_Pwd}
 	]]>
 	
 	</select>
@@ -36,8 +36,8 @@
 	
 	
 	<insert id="insertMember" parameterType="java.util.Map">
-		insert into member(mem_id, mem_pwd, mem_name, mem_joindate) 
-		values(#{mem_Id}, #{mem_Pwd}, #{mem_Name}, sysdate)
+		insert into member(mem_id, mem_pwd, mem_name, mem_joindate, mem_kind) 
+		values(#{mem_Id}, #{mem_Pwd}, #{mem_Name}, sysdate, '00')
 	</insert>	
 
 </mapper>
