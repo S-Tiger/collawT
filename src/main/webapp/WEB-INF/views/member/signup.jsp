@@ -112,7 +112,7 @@
         </div>
         <!-- <input type="button" id="checkBtn" onClick="" value="중복체크하기"> -->
         <!-- 아이디 중복값  -->
-         <div class="check_font" id="id_check">중복</div>
+         <div class="check_font" id="id_check"></div>
         <div class="input-group mb-3">
           <input type="password" id="pw" name="mem_Pwd" class="form-control" placeholder="비밀번호">
           <div class="input-group-append">
@@ -160,7 +160,7 @@
         </a>
       </div>
 
-      <a href="../login.html" class="text-center">이미 회원가입을 하셨나요?</a>
+      <a href="/member/loginPage" class="text-center">이미 회원가입을 하셨나요?</a>
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->
