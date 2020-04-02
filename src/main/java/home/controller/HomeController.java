@@ -29,10 +29,10 @@ public class HomeController {
 		return "sample/joinForm";
 	}
 	
-	@RequestMapping("/issue")
+	@RequestMapping("/coworkTest")
 	public String project(Model model) {
 
-		return "/issue//issue";
+		return "cowork/coworkinsert";
 	}
 	
 	@RequestMapping("/issueadd")

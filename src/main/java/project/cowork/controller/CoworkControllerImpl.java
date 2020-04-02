@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,12 +17,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mysql.jdbc.interceptors.SessionAssociationInterceptor;
+
 import project.cowork.service.CoworkService;
 import project.cowork.vo.CoworkVO;
 import project.issue.vo.IssueVO;
 
 @Controller
-@RequestMapping("/work/*")
+@RequestMapping("/cowork/*")
 public class CoworkControllerImpl implements CoworkController {
 	
 	@Autowired
@@ -35,9 +38,9 @@ public class CoworkControllerImpl implements CoworkController {
 		
 		List<CoworkVO> list = coworkService.searchList(searchMap); //vo타입에 list를 생성하고 서비스에서 가져온 데이터를 list에 넣습니다
 		
-		model.addAttribute("work_List", list); //work_List 라는 이름으로 list객체를 넣습니다
+		model.addAttribute("coworklist", list); //work_List 라는 이름으로 list객체를 넣습니다
 		
-		return "url"; //뷰url지정해주세요
+		return "cowork/list"; //뷰url지정해주세요
 		
 	}
 
@@ -49,11 +52,13 @@ public class CoworkControllerImpl implements CoworkController {
 
 	@Override
 	@PostMapping("/insert") 
-	public String insertCowork(CoworkVO coworkVO) throws Exception {
+	public String insertCowork(CoworkVO coworkVO, HttpSession session) throws Exception {
+		coworkVO.setMem_Id((String)session.getAttribute("mem_id"));
 
 		coworkService.insertCowork(coworkVO);
 		
-		return null;
+		return "redirect:/cowork/list";
+		
 	}
 
 	@Override
