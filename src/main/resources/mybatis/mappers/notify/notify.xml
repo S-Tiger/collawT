@@ -3,7 +3,7 @@
       PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
    
-<mapper namespace = " notify">
+<mapper namespace = "notify">
 	<insert id="notifyInsert" parameterType = "NotifyVO">
 
 	insert into notify(not_Num, not_Link, not_Status, not_Kind, mem_Id, c_Id)
