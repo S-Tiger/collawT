@@ -34,13 +34,15 @@
           <li class="breadcrumb-item"><a href="#">내가 작성한 이슈</a></li>
           <li class="breadcrumb-item"><a href="#">캘린더</a></li>
          </ol>
+         
+         <input type="button" value="이슈 작성" class="btn btn-success float-right" onclick="location.href='insert'">
 
-          <div class="card-tools">
+          <!-- <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
               <i class="fas fa-minus"></i></button>
             <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
               <i class="fas fa-times"></i></button>
-          </div>
+          </div> -->
         </div>
         <div class="card-body p-0">
           <table class="table table-striped projects">

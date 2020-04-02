@@ -49,8 +49,8 @@ public class issueControllerImpl {
 	
 	}
 	
-	@GetMapping("/testinsert")
+	@GetMapping("/insert")
 	public String test() {
-		return "/issue/issueadd";
+		return "/issue/issueInsert";
 	}
 }

@@ -19,6 +19,7 @@
       <![CDATA[
          select i_Num, c_Id, i_Name, i_Content, i_Date, i_Groupnum , mem_Id
          from issue
+         order by i_Num desc
       ]]>
 		<where>
 			<if test=" mem_Id != ''  and  mem_Id != null">

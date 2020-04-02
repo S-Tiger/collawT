@@ -79,4 +79,7 @@
     <task:scheduler id="scheduler" pool-size="10" />
     <task:executor id="executor" keep-alive="5" pool-size="10-20" queue-capacity="10" rejection-policy="ABORT" />
     -->
+    
+        <!-- ckeditor -->
+    <resources location="/WEB-INF/views/ckeditor/" mapping="/ckeditor/**"></resources>
 </beans:beans>
