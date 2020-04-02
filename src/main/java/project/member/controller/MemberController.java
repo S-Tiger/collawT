@@ -17,7 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import project.member.vo.MemberVO;
 
 public interface MemberController {
-	public String getServerTime(Locale locale);
+//	public String getServerTime(Locale locale);
 
 public String signup();
 

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<c:set var="contextPath" value="<%= request.getContextPath()%>"></c:set> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,6 +21,46 @@
   <link rel="stylesheet" href="../resources/dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <script type="text/javascript">
+  $(function(){
+	  
+ 		$("#joinForm").submit(function(){
+			if($("#pw").val() !== $("#pw2").val()){
+				alert("비밀번호가 다릅니다.");
+				$("#pw").val("").focus();
+				$("#pw2").val("");
+				return false;
+			}else if ($("#pw").val().length < 8) {
+				alert("비밀번호는 8자 이상으로 설정해야 합니다.");
+				$("#pw").val("").focus();
+				return false;
+			}
+		});
+ 		
+ /* function fn_idCheck(){
+		var mem_id = $("#mem_id").val();
+		alert(mem_id);
+			$.ajax({
+				url : "http://localhost:9090/member/check_id",
+				type : "POST",
+				data : {
+					mem_id : mem_id
+				},
+				success : function(data) {
+					if (data == 1) {
+						$("#id_check").text("중복된 아이디가 있습니다.");
+						$("#joinBtn").prop("disabled", "disabled");
+					} else {
+						$("#id_check").text("");
+						$("#joinBtn").removeAttr("disabled");
+					}
+				},
+			})
+		}); */
+ 
+	});
+</script>
 </head>
 <body class="hold-transition register-page">
 <div class="register-box">
@@ -30,7 +72,7 @@
     <div class="card-body register-card-body">
       <p class="login-box-msg">회원가입</p>
 
-      <form action="/member/join" method="post">
+      <form action="/member/join" method="post" id="joinForm">
         <div class="input-group mb-3">
           <input type="text" name="mem_Name" class="form-control" placeholder="이름">
           <div class="input-group-append">
@@ -40,15 +82,18 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="text" name="mem_Id" class="form-control" placeholder="아이디 입력 이메일 형식">
+          <input type="text" name="mem_Id" id="mem_Id" class="form-control" placeholder="아이디 입력 이메일 형식">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
-            </div>
+             </div>
           </div>
         </div>
+        <input type="button" id="checkBtn" onClick="fn_idCheck()" value="중복체크하기">
+        <!-- 아이디 중복값  -->
+          <span class="check_font" id="id_check"></span>
         <div class="input-group mb-3">
-          <input type="password" name="mem_Pwd" class="form-control" placeholder="비밀번호">
+          <input type="password" id="pw" name="mem_Pwd" class="form-control" placeholder="비밀번호">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -56,7 +101,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="비밀번호 확인">
+          <input type="password" id="pw2" class="form-control" placeholder="비밀번호 확인">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -75,7 +120,8 @@
           </div>
           <!-- /.col -->
           <div class="col-4">
-            <input type="submit" class="btn btn-primary btn-block" value="회원가입">
+            <button type="submit" id="joinBtn" class="btn btn-primary btn-block" >회원가입</button>
+            <button onclick="history.go(-1);" class="btn btn-primary btn-block" >취소</button>
           </div>
           <!-- /.col -->
         </div>
