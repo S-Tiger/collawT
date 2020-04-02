@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -35,5 +36,5 @@ public String update_mypage(MemberVO member, HttpSession session, RedirectAttrib
 	
 public String update_pw(MemberVO member, String old_pw, HttpSession session, HttpServletResponse response, RedirectAttributes rttr) throws Exception;
 public String logout(HttpSession session, HttpServletResponse response) throws Exception;
-
+public int check_id(@RequestParam("mem_Id") String mem_Id, HttpServletResponse response) throws Exception;
 }

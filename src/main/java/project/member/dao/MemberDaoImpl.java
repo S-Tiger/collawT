@@ -46,7 +46,8 @@ public class MemberDaoImpl implements MemberDao {
 
 	// 아이디 중복 검사
 		public int check_id(String mem_id) throws Exception{
-			return sqlSession.selectOne("member.check_id", mem_id);
+			int result = sqlSession.selectOne("member.check_id", mem_id);
+			return result;
 		}
 
 

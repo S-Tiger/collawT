@@ -95,11 +95,11 @@ public class MemberServiceImpl implements MemberService {
 	
 	// 아이디 중복 검사(AJAX)
 	@Override
-	public void check_id(String mem_id, HttpServletResponse response) throws Exception {
-		PrintWriter out = response.getWriter();
-		System.out.println(dao.check_id(mem_id));
-		out.println(dao.check_id(mem_id));
-		out.close();
+	public int check_id(String mem_id) throws Exception {
+		
+		int result = dao.check_id(mem_id); 
+		
+		return result;
 	}
 
 	

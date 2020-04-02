@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
-<c:set var="contextPath" value="<%= request.getContextPath()%>"></c:set> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<c:set var="contextPath"  value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,29 +36,49 @@
 				$("#pw").val("").focus();
 				return false;
 			}
-		});
- 		
- /* function fn_idCheck(){
-		var mem_id = $("#mem_id").val();
-		alert(mem_id);
-			$.ajax({
-				url : "http://localhost:9090/member/check_id",
-				type : "POST",
-				data : {
-					mem_id : mem_id
-				},
-				success : function(data) {
-					if (data == 1) {
-						$("#id_check").text("중복된 아이디가 있습니다.");
-						$("#joinBtn").prop("disabled", "disabled");
-					} else {
-						$("#id_check").text("");
-						$("#joinBtn").removeAttr("disabled");
-					}
-				},
-			})
-		}); */
- 
+		}); 
+ 	// 아이디 유효성 검사(1 = 중복 / 0 != 중복)
+ 		$("#mem_Id").blur(function() {
+ 			var mem_Id = $('#mem_Id').val();
+			console.log("블러");
+ 			$.ajax({
+ 				url : '${contextPath}/member/check_id?mem_Id='+ mem_Id,
+ 				type : 'get',
+ 				success : function(data) {
+ 					console.log("1 = 중복o / 0 = 중복x : "+ data);							
+ 					
+ 					if (data == 1) {
+ 							// 1 : 아이디가 중복되는 문구
+ 							$("#id_check").text("사용중인 아이디입니다 :p");
+ 							$("#id_check").css("color", "red");
+ 							$("#joinForm").attr("disabled", true);
+ 						} else {
+ 							
+ 							if(idJ.test(mem_Id)){
+ 								// 0 : 아이디 길이 / 문자열 검사
+ 								$("#id_check").text("");
+ 								$("#joinForm").attr("disabled", false);
+ 					
+ 							} else if(mem_Id == ""){
+ 								
+ 								$('#id_check').text('아이디를 입력해주세요 :)');
+ 								$('#id_check').css('color', 'red');
+ 								$("#joinForm").attr("disabled", true);				
+ 								
+ 							} else {
+ 								
+ 								$('#id_check').text("아이디는 소문자와 숫자 4~12자리만 가능합니다 :) :)");
+ 								$('#id_check').css('color', 'red');
+ 								$("#joinForm").attr("disabled", true);
+ 							}
+ 							
+ 						}
+ 					}, error : function() {
+ 							console.log("실패");
+ 					}
+ 				});
+ 			});
+
 	});
 </script>
 </head>
@@ -89,9 +109,9 @@
              </div>
           </div>
         </div>
-        <input type="button" id="checkBtn" onClick="fn_idCheck()" value="중복체크하기">
+        <!-- <input type="button" id="checkBtn" onClick="" value="중복체크하기"> -->
         <!-- 아이디 중복값  -->
-          <span class="check_font" id="id_check"></span>
+         <div class="check_font" id="id_check">중복</div>
         <div class="input-group mb-3">
           <input type="password" id="pw" name="mem_Pwd" class="form-control" placeholder="비밀번호">
           <div class="input-group-append">

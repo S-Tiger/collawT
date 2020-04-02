@@ -1,5 +1,6 @@
 package project.member.controller;
 
+import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.xmlbeans.impl.jam.mutable.MElement;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpOutputMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -184,10 +186,21 @@ public class MemberControllerImpl implements MemberController{
 		}
 
 		// 아이디 중복 검사(AJAX)
-		@RequestMapping(value = "/check_id", method = RequestMethod.POST)
-		public void check_id(@RequestParam("mem_Id") String mem_Id, HttpServletResponse response) throws Exception{
+		@RequestMapping(value = "/check_id", method = RequestMethod.GET)
+		@ResponseBody
+		public int check_id(@RequestParam("mem_Id") String mem_Id, HttpServletResponse response) throws Exception{
+		
 			System.out.println("아작스");
-			//	service.check_id(mem_Id, response);
+			System.out.println(mem_Id);
+			int result= service.check_id(mem_Id);
+			System.out.println("controller result:"+result);
+//			PrintWriter out = response.getWriter();
+//			if(result == 1) {
+//				out.print("no_usable");
+//			}else {
+//				out.print("usable");
+//			}
+			return result;
 		}
 	
 
