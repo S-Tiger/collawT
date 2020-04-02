@@ -53,8 +53,5 @@ public class HomeController {
 	public String main(Model model) {
 	return "main/index";}
 	
-	@RequestMapping("/main")
-	public String main(Model model) {
-	return "main/index";}
 	
 }
