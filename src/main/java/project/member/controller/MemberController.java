@@ -21,20 +21,13 @@ public interface MemberController {
 //	public String getServerTime(Locale locale);
 
 public String signup();
-
 public String loginFrorm();
 public String mypage()throws Exception;
-
 public String memJoin(MemberVO memberVO,HttpServletRequest request, HttpServletResponse response)throws Exception;
-
 public ModelAndView memLogin(MemberVO member,RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response)throws Exception;
-
 public ModelAndView memLogintest(MemberVO member,RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response)throws Exception ;
-
 public String memUpdate(MemberVO member,RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response)throws Exception;
 public String update_mypage(MemberVO member, HttpSession session, RedirectAttributes rttr) throws Exception;
-	
 public String update_pw(MemberVO member, String old_pw, HttpSession session, HttpServletResponse response, RedirectAttributes rttr) throws Exception;
-public String logout(HttpSession session, HttpServletResponse response) throws Exception;
-public int check_id(@RequestParam("mem_Id") String mem_Id, HttpServletResponse response) throws Exception;
+public int check_id(@RequestParam("mem_Id") String mem_Id) throws Exception;
 }

@@ -53,7 +53,8 @@
  							$("#id_check").css("color", "red");
  							$("#joinForm").attr("disabled", true);
  						} else {
- 							
+ 							$("#id_check").text("사용가능한 아이디입니다 :p");
+ 							$("#id_check").css("color", "green");
  							if(idJ.test(mem_Id)){
  								// 0 : 아이디 길이 / 문자열 검사
  								$("#id_check").text("");

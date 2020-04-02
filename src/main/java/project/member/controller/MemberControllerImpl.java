@@ -176,19 +176,12 @@ public class MemberControllerImpl implements MemberController{
 			rttr.addFlashAttribute("msg", "비밀번호 수정 완료");
 			return "redirect:/member/mypage";
 		}
-		// 로그아웃
-		@RequestMapping(value = "/logout", method = RequestMethod.GET)
-		public String logout(HttpSession session, HttpServletResponse response) throws Exception{
-			session.invalidate();
-//			session.removeAttribute("member");
-//			service.logout(response);
-			return "redirect:/";
-		}
+	
 
 		// 아이디 중복 검사(AJAX)
 		@RequestMapping(value = "/check_id", method = RequestMethod.GET)
-		@ResponseBody
-		public int check_id(@RequestParam("mem_Id") String mem_Id, HttpServletResponse response) throws Exception{
+		@ResponseBody   //리스폰스바디는 매소드가 스트링이거나 타입이 있을때 ajax로통신할 경우 꼭써야함그렇게 하지 않으면 뷰 리졸버가 반응을함.
+		public int check_id(@RequestParam("mem_Id") String mem_Id) throws Exception{
 		
 			System.out.println("아작스");
 			System.out.println(mem_Id);
