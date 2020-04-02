@@ -153,23 +153,33 @@ public class MemberControllerImpl implements MemberController{
 	}
 
 	// mypage 수정
-		@RequestMapping(value = "/update_mypage.do", method = RequestMethod.POST)
+		@RequestMapping(value = "/update_mypage", method = RequestMethod.POST)
 		public String update_mypage(@ModelAttribute MemberVO member, HttpSession session, RedirectAttributes rttr) throws Exception{
-			System.out.println("수정");
-			System.out.println(member.getMem_Id());
-			System.out.println(member.getMem_Name());
-			session.setAttribute("member", service.updateMypage(member));
-			rttr.addFlashAttribute("msg", "회원정보 수정 완료");
-			return "redirect:/member/mypage.do";
-		}
+	         System.out.println("수정");
+	         System.out.println(member.getMem_Id());
+	         System.out.println(member.getMem_Name());
+	         service.updateMypage(member);
+	         rttr.addFlashAttribute("msg", "회원정보 수정 완료");
+	         session.setAttribute("mem_name", member.getMem_Name());
+	         return "/main/index";
+	      }
 		
 		// 비밀번호 변경
-		@RequestMapping(value = "/update_pw.do", method = RequestMethod.POST)
+		@RequestMapping(value = "/update_pw", method = RequestMethod.POST)
 		public String update_pw(@ModelAttribute MemberVO member, @RequestParam("old_pw") String old_pw, HttpSession session, HttpServletResponse response, RedirectAttributes rttr) throws Exception{
 			session.setAttribute("member", service.update_pw(member, old_pw, response));
 			rttr.addFlashAttribute("msg", "비밀번호 수정 완료");
-			return "redirect:/member/mypage.do";
+			return "redirect:/member/mypage";
 		}
+		// 로그아웃
+		@RequestMapping(value = "/logout", method = RequestMethod.GET)
+		public String logout(HttpSession session, HttpServletResponse response) throws Exception{
+			session.invalidate();
+//			session.removeAttribute("member");
+//			service.logout(response);
+			return "redirect:";
+		}
+
 
 	
 

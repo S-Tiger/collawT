@@ -34,5 +34,6 @@ public String memUpdate(MemberVO member,RedirectAttributes rAttr, HttpServletReq
 public String update_mypage(MemberVO member, HttpSession session, RedirectAttributes rttr) throws Exception;
 	
 public String update_pw(MemberVO member, String old_pw, HttpSession session, HttpServletResponse response, RedirectAttributes rttr) throws Exception;
+public String logout(HttpSession session, HttpServletResponse response) throws Exception;
 
 }

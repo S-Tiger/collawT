@@ -88,6 +88,16 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 
+	// 로그아웃
+	@Override
+	public void logout(HttpServletResponse response) throws Exception {
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script>");
+		out.println("location.href=document.referrer;");
+		out.println("</script>");
+		out.close();
+	}
 
 
 	

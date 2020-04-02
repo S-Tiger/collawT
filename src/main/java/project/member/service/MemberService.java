@@ -12,4 +12,5 @@ public interface MemberService {
 	public int memberUpdate(MemberVO memberVO);
 	public MemberVO updateMypage(MemberVO memberVO)throws Exception;
 	public MemberVO update_pw(MemberVO member, String old_pw, HttpServletResponse response) throws Exception;
+	public void logout(HttpServletResponse response) throws Exception ;
 }
