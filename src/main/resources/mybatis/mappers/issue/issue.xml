@@ -14,23 +14,46 @@
 		<result property="mem_Id" column="mem_Id" />
 		
 	</resultMap>
-
+	<!-- 글 목록 -->
 	<select id="searchList" resultMap="issueResult01" parameterType="java.util.Map"> 
       <![CDATA[
          select i_Num, c_Id, i_Name, i_Content, i_Date, i_Groupnum , mem_Id
          from issue
          order by i_Num desc
       ]]>
-		<where>
-			<if test=" mem_Id != ''  and  mem_Id != null">
-				id = #{mem_Id}
-			</if>
-		</where>
+		
 	</select>
 	
+	
+	<!-- 글 입력 -->
 	<insert id="issueInsert" parameterType="IssueVO">
 		insert into issue(i_Num, c_Id, i_Name, i_Content, i_Date, i_Groupnum , mem_Id) 
 		values(issue_i_num.nextval, #{c_Id}, #{i_Name}, #{i_Content} , sysdate , #{i_Groupnum} , #{mem_Id})
 	</insert>	
+	
+	
+	<!-- 게시글 조회 -->
+	<select id="issueRead" parameterType="String" resultType="project.issue.vo.IssueVO" > 
+      <![CDATA[
+         select i_Num, c_Id, i_Name, i_Content, i_Date, i_Groupnum , mem_Id
+         from issue
+         where i_Num=#{i_Num}
+      ]]>
+	</select>
+	
+	<!-- 게시물 삭제 -->
+	<delete id="issueDelete" parameterType="String">
+		DELETE 
+		  FROM issue
+		 WHERE i_Num=#{i_Num}
+	</delete>
+	
+	<!-- 게시물 수정 -->
+	<update id="issueUpdate" parameterType="project.issue.vo.IssueVO">
+		UPDATE issue
+		   SET i_Name    =   #{i_Name},
+		   	   i_Content  =   #{i_Content}
+		 WHERE i_Num=#{i_Num}
+	</update>
 
 </mapper>

@@ -51,7 +51,7 @@
                  <c:forEach var="issueList" items="${issueList}" >	
                   <tr>
                       <td>  ${issueList.mem_Id}    </td>
-                      <td>  ${issueList.i_Name}    </td>
+                      <td> <a href="/issue/read?i_Num=${issueList.i_Num}"> ${issueList.i_Name}</a>    </td>
                       <td>  ${issueList.i_Date}    </td>
                    </tr>
                    </c:forEach>

@@ -41,10 +41,10 @@
                 <script>
                 CKEDITOR.replace("i_Content");
                 
-					//CKEDITOR.replace("i_Content", {
-						//filebrowserUploadUrl :"/imageUpload.do"
-					   // filebrowserImageUploadUrl: 'MacaronicsServlet?command=ckeditor_upload'	
-					//});
+					/* CKEDITOR.replace("i_Content", {
+						filebrowserUploadUrl :"/ckeditorimageUpload.do"
+					    filebrowserImageUploadUrl: 'MacaronicsServlet?command=ckeditor_upload'	
+					}); */
 					</script>
               </div>
               </div>
