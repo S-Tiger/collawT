@@ -177,7 +177,7 @@ public class MemberControllerImpl implements MemberController{
 			session.invalidate();
 //			session.removeAttribute("member");
 //			service.logout(response);
-			return "redirect:";
+			return "redirect:/";
 		}
 
 

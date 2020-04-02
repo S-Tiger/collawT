@@ -9,11 +9,16 @@
 		<result property="mem_Pwd" column="mem_Pwd" />
 		<result property="mem_Name" column="mem_Name" />
 	</resultMap>
-<!-- 회원정보 수정 -->
+	<!-- 회원정보 수정 -->
 	<update id="update_mypage" parameterType="memberVO">
 		update member set mem_Name = #{mem_Name} where mem_Id =#{mem_Id}
 	</update>
-
+	
+	<!-- 아이디 중복 검사 -->
+	<select id="check_id" parameterType="String" resultType="int">
+		select count(*) from member where mem_Id = #{mem_Id}
+	</select>
+	
 	<!-- 회원정보 수정 -->
 	<update id="updateMember" parameterType="memberVO">
 		<![CDATA[
