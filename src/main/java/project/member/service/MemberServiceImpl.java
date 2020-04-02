@@ -1,11 +1,14 @@
 package project.member.service;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -50,13 +53,37 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override//회원정보 업데이
-	public void memberUpdate(MemberVO memberVO) {
+	public int memberUpdate(MemberVO memberVO) {
 		// TODO Auto-generated method stub
 		int result = dao.memberUpdate(memberVO); 
 		if (result == 0) {
 			System.out.println("Update Fail!!");
 		} else {
 			System.out.println("Update Success!!");
+		}
+		return result;
+	}
+
+	@Override
+	public MemberVO updateMypage(MemberVO memberVO) throws Exception {
+		dao.memberUpdate(memberVO);
+		return dao.login(memberVO.getMem_Id());
+	}
+
+	@Override
+	public MemberVO update_pw(MemberVO member, String old_pw, HttpServletResponse response) throws Exception {
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		if(!old_pw.equals(dao.login(member.getMem_Id()).getMem_Pwd())) {
+			out.println("<script>");
+			out.println("alert('기존 비밀번호가 다릅니다.');");
+			out.println("history.go(-1);");
+			out.println("</script>");
+			out.close();
+			return null;
+		}else {
+			dao.memberUpdate(member);
+			return dao.login(member.getMem_Id());
 		}
 	}
 

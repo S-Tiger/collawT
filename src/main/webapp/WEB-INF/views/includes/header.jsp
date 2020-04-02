@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <!DOCTYPE html>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
   <meta charset="utf-8">
@@ -172,6 +172,11 @@
           <img src="../resources/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
+        <c:if test="${sessionScope.mem_id != null}">
+			<form action="/member/mypage">마이페이지(${sessionScope.mem_id})<br>
+				<input type="submit" value="마이페이지 이동하기">
+			</form>
+		</c:if>
           <a href="#" class="d-block">${sessionScope.member}</a>
         </div>
       </div>

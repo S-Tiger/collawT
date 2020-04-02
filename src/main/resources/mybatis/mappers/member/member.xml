@@ -9,7 +9,26 @@
 		<result property="mem_Pwd" column="mem_Pwd" />
 		<result property="mem_Name" column="mem_Name" />
 	</resultMap>
+<!-- 회원정보 수정 -->
+	<update id="update_mypage" parameterType="memberVO">
+		update member set mem_Name = #{mem_Name} where mem_Id =#{mem_Id}
+	</update>
 
+	<!-- 회원정보 수정 -->
+	<update id="updateMember" parameterType="memberVO">
+		<![CDATA[
+			update member
+			set mem_Pwd=#{mem_Pwd}, mem_Name=#{mem_Name}
+			where mem_Id=#{mem_Id} 
+		]]>
+	
+	</update>
+	
+	<select id="logina" parameterType="String" resultType="memberVO">
+		select * from member where mem_Id = #{mem_Id}
+	</select>
+	
+	
 	<select id="login" resultMap="memberResult01" parameterType="memberVO">
 	
 	<![CDATA[
@@ -36,7 +55,8 @@
 	
 	
 	<insert id="insertMember" parameterType="java.util.Map">
-		insert into member(mem_id, mem_pwd, mem_name, mem_joindate, mem_kind) 
+		
+		insert into member(mem_id, mem_pwd, mem_name, mem_joindate, mem_kind)
 		values(#{mem_Id}, #{mem_Pwd}, #{mem_Name}, sysdate, '00')
 	</insert>	
 

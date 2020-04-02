@@ -35,8 +35,13 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public int memberUpdate(MemberVO memberVO) {
 		// TODO Auto-generated method stub
-		int stat = sqlSession.update("member.updateMember", memberVO);
+		int stat = sqlSession.update("member.update_mypage", memberVO);
 		return stat;
+	}
+
+	@Override
+	public MemberVO login(String mem_id) throws Exception {
+			return sqlSession.selectOne("member.logina", mem_id);
 	}
 
 	
