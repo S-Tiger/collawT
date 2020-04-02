@@ -40,7 +40,7 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="/" class="nav-link">Home</a>
+        <a href="/main" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
@@ -158,7 +158,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar elevation-4 sidebar-light-teal">
     <!-- Brand Logo -->
-    <a href="/" class="brand-link navbar-teal">
+    <a href="/main" class="brand-link navbar-teal">
       <img src="../resources/dist/img/Logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
       <span class="brand-text font-weight-light">Collaw T</span>
@@ -190,31 +190,30 @@
                with font-awesome or any other icon font library -->
           <li class="nav-item has-treeview menu-open">
             <a href="#" class="nav-link active">
+            
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                   메인대시보드
+           	등록된 협업공간
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/project" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>메인프로젝트</p>
+                <a href="/issue/list" class="nav-link active">
+                  <i class="nav-icon fas fa-user-secret"></i>
+                  <p>프라이빗 공간</p>
                 </a>
               </li>
+              <c:forEach var="coworklist" items="${coworklist}"> 
+              
               <li class="nav-item">
-                <a href="/" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>아직 비어있는 값</p>
+                <a href="/main" class="nav-link">
+                  <i class="nav-icon fas fa-sitemap"></i>
+                  <p>${coworklist.c_Name} </p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="/" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>아직 비어있는 값</p>
-                </a>
-              </li>
+              
+               </c:forEach>
             </ul>
           </li>
           <li class="nav-item">

@@ -41,4 +41,8 @@ public class HomeController {
 		return "/issue/issueadd";
 	}
 	
+	@RequestMapping("/main")
+	public String main(Model model) {
+	return "main/index";}
+	
 }
