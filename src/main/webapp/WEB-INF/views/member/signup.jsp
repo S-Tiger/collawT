@@ -55,12 +55,9 @@
  						} else {
  							$("#id_check").text("사용가능한 아이디입니다 :p");
  							$("#id_check").css("color", "green");
- 							if(idJ.test(mem_Id)){
- 								// 0 : 아이디 길이 / 문자열 검사
- 								$("#id_check").text("");
- 								$("#joinForm").attr("disabled", false);
+ 						
  					
- 							} else if(mem_Id == ""){
+								if(mem_Id == ""){
  								
  								$('#id_check').text('아이디를 입력해주세요 :)');
  								$('#id_check').css('color', 'red');
@@ -103,7 +100,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="text" name="mem_Id" id="mem_Id" class="form-control" placeholder="아이디는 이메일 형식입니다">
+          <input type="email" name="mem_Id" id="mem_Id" class="form-control" placeholder="아이디는 이메일 형식입니다">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>

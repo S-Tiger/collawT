@@ -24,7 +24,7 @@ public class MemberDaoImpl implements MemberDao {
 		
 		return stat;
 	}
-
+	//로그인.
 	@Override
 	public MemberVO memberSelect(MemberVO memberVO) {
 		// TODO Auto-generated method stub
@@ -38,17 +38,22 @@ public class MemberDaoImpl implements MemberDao {
 		int stat = sqlSession.update("member.update_mypage", memberVO);
 		return stat;
 	}
-
+	//로그인테스트
 	@Override
 	public MemberVO login(String mem_id) throws Exception {
 			return sqlSession.selectOne("member.logina", mem_id);
 	}
 
 	// 아이디 중복 검사
-		public int check_id(String mem_id) throws Exception{
-			int result = sqlSession.selectOne("member.check_id", mem_id);
-			return result;
-		}
+	public int check_id(String mem_id) throws Exception{
+		int result = sqlSession.selectOne("member.check_id", mem_id);
+		return result;
+	}
+	//비밀번호변경
+	@Override
+	public int update_pw(MemberVO memberVO) throws Exception {
+		return sqlSession.update("member.update_pw", memberVO);
+	}
 
 
 }

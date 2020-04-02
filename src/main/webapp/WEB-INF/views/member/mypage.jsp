@@ -80,18 +80,18 @@
 				</form>
 				<br />
 				<form id="pwForm" action="/member/update_pw" method="post">	
-					<input type="hidden" name="id" value="${sessionScope.mem_id}">
+					<input type="hidden" name="mem_Id" value="${sessionScope.mem_id}">
 					<p>
 						<label>Password</label>
 						<input class="w3-input" id="old_pw" name="old_pw" type="password" required>
 					</p>
 					<p>
 						<label>New Password</label> 
-						<input class="w3-input" id="pw" name="pw" type="password" required>
+						<input class="w3-input" id="pw" name="mem_Pwd" type="password" required>
 					</p>
 					<p>
 						<label>Confirm</label>
-						<input class="w3-input" type="password" id="pw2" type="password" required>
+						<input class="w3-input"id="pw2" type="password" type="password" required>
 					</p>
 					<p class="w3-center">
 						<button type="submit" id="joinBtn" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">비밀번호 변경</button>

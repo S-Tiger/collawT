@@ -111,11 +111,6 @@ public class MemberControllerImpl implements MemberController{
 	@Override
 	@RequestMapping(value = "/loginTest",method = RequestMethod.POST)
 	public ModelAndView memLogintest(MemberVO member,RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response)throws Exception {
-		System.out.println(request.getContextPath());
-		System.out.println(member.getMem_Id());
-		System.out.println(member.getMem_Pwd());
-//		String memId=(String)request.getParameter("memId");
-//		String memPw=(String)request.getParameter("memPw");
 		ModelAndView mav =new ModelAndView();
 		System.out.println("로그인컨트롤러");
 		//로그인로직
@@ -123,18 +118,16 @@ public class MemberControllerImpl implements MemberController{
 		//로그인시 세션에.. 로그인성공
 		if(memberVO != null) {
 		HttpSession session = request.getSession();
-		
 		session.setAttribute("mem_name", memberVO.getMem_Name());
 		session.setAttribute("mem_pwd", memberVO.getMem_Pwd());
 		session.setAttribute("mem_id", memberVO.getMem_Id());
 		session.setAttribute("isLogin", true);
 		mav.setViewName("/main/index");
-		
 		}else {//실패했을경우
-			rAttr.addAttribute("result","loginFailed");
+		rAttr.addAttribute("result","loginFailed");
 		mav.setViewName("redirect:/member/loginPage");
 		
-		}
+		}//end if
 
 		return mav;
 	}
@@ -142,17 +135,16 @@ public class MemberControllerImpl implements MemberController{
 	@Override
 	@RequestMapping(value = "/updateMember",method = RequestMethod.POST)
 	public String memUpdate(MemberVO member,RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response)throws Exception  {
-		
+
 		service.memberUpdate(member);
-				
-		
-		
 		return "redirect:/member/loginOk";
+		
 	}
 
 	@Override
 	@GetMapping("/mypage")
 	public String mypage() throws Exception {
+		
 		System.out.println("마이페이지");
 		return "/member/mypage";
 	}
@@ -172,9 +164,19 @@ public class MemberControllerImpl implements MemberController{
 		// 비밀번호 변경
 		@RequestMapping(value = "/update_pw", method = RequestMethod.POST)
 		public String update_pw(@ModelAttribute MemberVO member, @RequestParam("old_pw") String old_pw, HttpSession session, HttpServletResponse response, RedirectAttributes rttr) throws Exception{
-			session.setAttribute("member", service.update_pw(member, old_pw, response));
-			rttr.addFlashAttribute("msg", "비밀번호 수정 완료");
+			System.out.println(old_pw);
+			System.out.println(member.getMem_Id());
+			System.out.println(member.getMem_Pwd());
+			System.out.println(member.getMem_Name());
+			MemberVO memberVO = service.update_pw(member, old_pw, response);
+//			if(memberVO!=null) {
+			session.setAttribute("member", memberVO);
+			rttr.addAttribute("msg", "비밀번호 수정 완료");
 			return "redirect:/member/mypage";
+//			}else {
+//				rttr.addAttribute("msg", "실패");
+//				return "redirect:/member/mypage";
+//			}
 		}
 	
 

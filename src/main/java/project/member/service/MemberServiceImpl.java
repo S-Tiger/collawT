@@ -78,6 +78,7 @@ public class MemberServiceImpl implements MemberService {
 	public MemberVO update_pw(MemberVO member, String old_pw, HttpServletResponse response) throws Exception {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
+		System.out.println("service: "+dao.login(member.getMem_Id()).getMem_Pwd());
 		if(!old_pw.equals(dao.login(member.getMem_Id()).getMem_Pwd())) {
 			out.println("<script>");
 			out.println("alert('기존 비밀번호가 다릅니다.');");
@@ -86,7 +87,7 @@ public class MemberServiceImpl implements MemberService {
 			out.close();
 			return null;
 		}else {
-			dao.memberUpdate(member);
+			dao.update_pw(member);
 			return dao.login(member.getMem_Id());
 		}
 	}
