@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
@@ -28,13 +29,27 @@ public class MemberServiceImpl implements MemberService {
 	                   //요청은 controller -> service -> dao 응답은 반대 생각하면 됩니다.
 	
 	@Override//회원가입
-	public void memberJoin(MemberVO memberVO) {//똑같이 vo를 매개변수로 넣으면 get set을 알아서해주기때문에 코드가 줄어듦
-		int result = dao.memberInsert(memberVO); 
-		
-		if (result == 0) {
-			System.out.println("Join Fail!!");
+	public int memberJoin(MemberVO memberVO,HttpServletResponse response) throws Exception {//똑같이 vo를 매개변수로 넣으면 get set을 알아서해주기때문에 코드가 줄어듦
+		//이거안쓰면 글씨 깨짐
+		response.setContentType("text/html;charset=utf-8");
+		//아이디 중복을확인하여 1이면 가입을 못하게 막는다.
+		if (dao.check_id(memberVO.getMem_Id()) == 1) {
+			System.out.println("동일한 아이디");
+			PrintWriter out = response.getWriter();
+			response.setCharacterEncoding("utf-8");
+			out.println("<script type=\"text/javascript\">");
+			out.println("alert('동일한 아이디가 있습니다.');");
+			out.println("history.go(-1);");
+			out.println("</script>");
+			out.close();
+			
+			return 0;
+			
 		} else {
-			System.out.println("Join Success!!");
+			//가입완료
+			dao.memberInsert(memberVO);
+			System.out.println("회원가입 완료");
+			return 1;
 		}
 		
 	}
@@ -103,7 +118,16 @@ public class MemberServiceImpl implements MemberService {
 		return result;
 	}
 
-	
+	// 인증키 생성
+	@Override
+	public String create_key() throws Exception {
+		String key = "";
+		Random rd = new Random();
+		for (int i = 0; i < 4; i++) {
+				key += rd.nextInt(10);
+			}
+			return key;
+		}
 
 
 
