@@ -31,16 +31,17 @@ public class IssueServiceImpl implements IssueService {
 	
 	//글 목록 조회
 	@Override
-	public List<IssueVO> searchList(Map<String, Object> searchMap) {
-		List<IssueVO> list =  issueDAO.searchList(searchMap); 
+	public List<Map> searchList() throws Exception{
+		List<Map> list = issueDAO.searchList();
 		return list;
-		// TODO Auto-generated method stub
 	}
 	
 	//게시글 조회
 	@Override
-	public IssueVO issueRead(String i_Num) {
-		return issueDAO.issueRead(i_Num);
+	public List<Map> issueRead(String i_Num) {
+		List<Map> list = null;
+		list = issueDAO.issueRead(i_Num);
+		return list;
 		
 	}
 

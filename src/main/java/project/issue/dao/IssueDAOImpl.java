@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import project.issue.vo.IssueVO;
@@ -25,17 +26,19 @@ public class IssueDAOImpl implements issueDAO {
 	
 	//글 목록 조회
 	@Override
-	public List<IssueVO> searchList(Map<String, Object> searchMap) {
-		List<IssueVO> list = sqlSession.selectList("issue.searchList", searchMap);
-		return list;
+	public List<Map> searchList() throws DataAccessException{
 		
+		List<Map> list = sqlSession.selectList("issue.searchList");
+		return list;
+	
 	}
 	
 	//개별글 조회
 	@Override
-	public IssueVO issueRead(String i_Num) {
-
-		return sqlSession.selectOne("issue.issueRead",i_Num);
+	public List<Map> issueRead(String i_Num) {
+		List<Map> list = null;
+		list = sqlSession.selectList("issue.issueRead",i_Num);
+		return list;
 	}
 
 	//글 삭제

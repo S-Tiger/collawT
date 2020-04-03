@@ -5,55 +5,75 @@
 
 <mapper namespace="issue">
 	<resultMap id="issueResult01" type="IssueVO">
-		<result property="i_Num" column="i_Num"  />
-		<result property="c_Id" column="c_Id"  />
+		<!-- property는 화면단에서 쓸 이름, column은 데이터컬럼명이랑 동일 -->
+		<result property="i_Num" column="i_Num" />
+		<result property="c_Id" column="c_Id" />
 		<result property="i_Name" column="i_Name" />
 		<result property="i_Content" column="i_Content" />
 		<result property="i_Date" column="i_Date" />
 		<result property="i_Groupnum" column="i_Groupnum" />
 		<result property="mem_Id" column="mem_Id" />
-		
 	</resultMap>
+	
+	<resultMap id="issueResult02" type="java.util.HashMap">
+		<!-- property는 화면단에서 쓸 이름, column은 데이터컬럼명이랑 동일 -->
+		<result property="i_Num" column="i_Num" />
+		<result property="c_Id" column="c_Id" />
+		<result property="i_Name" column="i_Name" />
+		<result property="i_Content" column="i_Content" />
+		<result property="i_Date" column="i_Date" />
+		<result property="i_Groupnum" column="i_Groupnum" />
+		<result property="mem_Id" column="mem_Id" />
+		<result property="mem_Name" column="mem_Name" />
+	</resultMap>
+
+	
+
 	<!-- 글 목록 -->
-	<select id="searchList" resultMap="issueResult01" parameterType="java.util.Map"> 
+	<select id="searchList" resultMap="issueResult02"> 
       <![CDATA[
-         select i_Num, c_Id, i_Name, i_Content, i_Date, i_Groupnum , mem_Id
-         from issue
-         order by i_Num desc
+        select I.i_Num, I.c_Id, I.i_Name, I.i_Content, I.i_Date, I.mem_Id, M.mem_name
+		from issue I, member M
+		where I.mem_Id = M.mem_Id
+		order by i_Num desc
       ]]>
-		
+
 	</select>
-	
-	
+
+
 	<!-- 글 입력 -->
 	<insert id="issueInsert" parameterType="IssueVO">
-		insert into issue(i_Num, c_Id, i_Name, i_Content, i_Date, i_Groupnum , mem_Id) 
-		values(issue_i_num.nextval, #{c_Id}, #{i_Name}, #{i_Content} , sysdate , #{i_Groupnum} , #{mem_Id})
-	</insert>	
-	
-	
+		insert into issue(i_Num,
+		c_Id, i_Name, i_Content, i_Date, i_Groupnum , mem_Id)
+		values(issue_i_num.nextval, #{c_Id}, #{i_Name}, #{i_Content} , sysdate
+		, #{i_Groupnum} , #{mem_Id})
+	</insert>
+
+
 	<!-- 게시글 조회 -->
-	<select id="issueRead" parameterType="String" resultType="project.issue.vo.IssueVO" > 
+	<select id="issueRead" resultMap="issueResult02"> 
       <![CDATA[
-         select i_Num, c_Id, i_Name, i_Content, i_Date, i_Groupnum , mem_Id
-         from issue
-         where i_Num=#{i_Num}
+        select I.i_Num, I.c_Id, I.i_Name, I.i_Content, I.i_Date, I.mem_Id, M.mem_name
+		from issue I, member M
+		where I.mem_Id = M.mem_Id
+        and I.i_Num=#{i_Num}
       ]]>
 	</select>
-	
+
 	<!-- 게시물 삭제 -->
 	<delete id="issueDelete" parameterType="String">
-		DELETE 
-		  FROM issue
-		 WHERE i_Num=#{i_Num}
+		DELETE
+		FROM issue
+		WHERE i_Num=#{i_Num}
 	</delete>
-	
+
 	<!-- 게시물 수정 -->
-	<update id="issueUpdate" parameterType="project.issue.vo.IssueVO">
+	<update id="issueUpdate"
+		parameterType="project.issue.vo.IssueVO">
 		UPDATE issue
-		   SET i_Name    =   #{i_Name},
-		   	   i_Content  =   #{i_Content}
-		 WHERE i_Num=#{i_Num}
+		SET i_Name = #{i_Name},
+		i_Content = #{i_Content}
+		WHERE i_Num=#{i_Num}
 	</update>
 
 </mapper>

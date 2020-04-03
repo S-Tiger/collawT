@@ -2,9 +2,44 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@include file="../includes/header.jsp"%>
 
-<!-- <script type="text/javascript" src="/ckeditor/ckeditor.js"></script> -->
-
 <script src = "${path}/ckeditor/ckeditor.js"></script>
+<script
+	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		
+		//글쓰기 빈 값 안되게 검사
+		$("#submit").click(function(){
+			var i_Name = $("#i_Name").val();
+			var c_Id = $("#c_Id").val();
+			var i_Groupnum = $("#i_Groupnum").val();
+			
+			if(i_Name==''){
+				alert("이슈명을 입력하세요");
+				document.insertForm.i_Name.focus();
+				return false; 
+			}
+			
+			if(c_Id==''){
+				alert("협업공간ID를 입력하세요");
+				document.insertForm.c_Id.focus();
+				return false; 
+			}
+			if(i_Groupnum==''){
+				alert("이슈그룹번호를 입력하세요");
+				document.insertForm.i_Groupnum.focus();
+				return false; 
+			}
+			
+			document.insertForm.submit();
+			
+		});
+		
+		});
+	
+</script>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -26,18 +61,18 @@
           </div>
         </div>
         <div class="card-body p-0">
-          <form action="/issue/insert" method="post" encType="UTF-8">
+          <form name = insertForm action="/issue/insert" method="post" encType="UTF-8">
               <div class="form-group">
               <div class="col-md-6">
                 <label for="inputName">이슈명</label>
-                <input type="text" name="i_Name" class="form-control">
+                <input type="text" id = "i_Name" name="i_Name" class="form-control">
               </div>
               </div>
               <div class="form-group">
               <div class="col-md-6">
                 <label for="inputDescription">이슈 내용</label>
                 
-                <textarea name="i_Content" class="form-control" rows="4">              </textarea>
+                <textarea name="i_Content" id="i_Content" class="form-control" rows="4">              </textarea>
                 <script>
                 CKEDITOR.replace("i_Content");
                 
@@ -66,15 +101,15 @@
                 </select>
                 </div>
                 <!--협업공간ID,작성일,회원아이디  hidden   회원아이디와 협업공간ID는 나중에 바꾸기-->
-                협업공간ID는 나중에 세션에서 끌어오기<input name="c_Id" type="text"><br>
+                협업공간ID는 나중에 세션에서 끌어오기<input name="c_Id" id="c_Id" type="text"><br>
 				
-		멤버ID는 나중에 세션에서 끌어오기<input name="mem_Id" type="text"><br>
-		이슈그룹번호는 나중에 세션에서 끌어오기<input name="i_Groupnum" type="text"><br>
+		<!-- 멤버ID는 나중에 세션에서 끌어오기<input name="mem_Id" type="text"><br> -->
+		이슈그룹번호는 나중에 세션에서 끌어오기<input name="i_Groupnum" id="i_Groupnum" type="text"><br>
 				
               </div>
         <div class="row">
         <div class="col-sm-6">
-          <input type="submit" value="이슈 작성" class="btn btn-success float-right">
+          <input type="submit" id = "submit" value="이슈 작성" class="btn btn-success float-right">
         </div>
         <br><br><br>
       </div>
