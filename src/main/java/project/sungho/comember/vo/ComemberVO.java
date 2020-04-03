@@ -1,4 +1,4 @@
-package project.comember.vo;
+package project.sungho.comember.vo;
 
 import org.springframework.stereotype.Component;
 

@@ -1,11 +1,11 @@
-package project.comember.service;
+package project.sungho.comember.service;
 
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
-import project.comember.vo.ComemberVO;
+import project.sungho.comember.vo.ComemberVO;
 
 
 

@@ -1,4 +1,4 @@
-package project.cowork.service;
+package project.sungho.cowork.service;
 
 import java.util.List;
 import java.util.Map;
@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
-import project.comember.dao.ComemberDAO;
-import project.cowork.dao.CoworkDAO;
-import project.cowork.vo.CoworkVO;
+import project.sungho.comember.dao.ComemberDAO;
+import project.sungho.cowork.dao.CoworkDAO;
+import project.sungho.cowork.vo.CoworkVO;
 
 
 @Service //서비스는 서비스 어노테이션을 작성해준다 
@@ -38,7 +38,6 @@ public class CoworkServiceImpl implements CoworkService {
 	public void insertCowork(Map<String, Object> datahMap) throws Exception {
 		String c_Id = coworkDAO.selectSqc();
 		datahMap.put("c_Id",c_Id);
-		
 		System.out.println(datahMap.toString());
 		coworkDAO.insertCowork(datahMap);//DAO에 insertCowork함수 실행
 		comemberDAO.insertComember(datahMap);

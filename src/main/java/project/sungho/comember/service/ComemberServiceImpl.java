@@ -1,4 +1,4 @@
-package project.comember.service;
+package project.sungho.comember.service;
 
 import java.util.List;
 import java.util.Map;
@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
-import project.comember.dao.ComemberDAO;
-import project.comember.vo.ComemberVO;
+import project.sungho.comember.dao.ComemberDAO;
+import project.sungho.comember.vo.ComemberVO;
 
 
 

@@ -1,4 +1,4 @@
-package project.cowork.vo;
+package project.sungho.cowork.vo;
 
 import org.springframework.stereotype.Component;
 
