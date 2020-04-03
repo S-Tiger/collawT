@@ -12,7 +12,7 @@ public class MemberDaoImpl implements MemberDao {
 	@Autowired
 	private SqlSession sqlSession; //맵퍼에 접근하기위한 SQL세션
 	
-
+	//회원가입
 	@Override
 	public int memberInsert(MemberVO memberVO) {
 		// TODO Auto-generated method stub
