@@ -205,15 +205,19 @@
                 </a>
               </li>
               <c:forEach var="coworklist" items="${coworklist}"> 
-              
               <li class="nav-item">
                 <a href="/main" class="nav-link">
                   <i class="nav-icon fas fa-sitemap"></i>
                   <p>${coworklist.c_Name} </p>
                 </a>
               </li>
-              
                </c:forEach>
+                 <li class="nav-item">
+                <a href="/coworkcreate" class="nav-link">
+                  <i class="nav-icon fas fa-folder"></i>
+                  <p>협업공간 생성 </p>
+                </a>
+              </li>
             </ul>
           </li>
           <li class="nav-item">
