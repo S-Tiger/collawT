@@ -1,4 +1,4 @@
-package project.cowork.dao;
+package project.sungho.cowork.dao;
 
 import java.util.List;
 import java.util.Map;
@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
-import project.cowork.vo.CoworkVO;
+import project.sungho.cowork.vo.CoworkVO;
 
 @Repository //DAO는 @Repsoitory 혹은 @Component로 빈객체를 자동 등록한다
 public class CoworkDAOImpl implements CoworkDAO {

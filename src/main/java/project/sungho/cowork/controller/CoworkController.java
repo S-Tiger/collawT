@@ -1,4 +1,4 @@
-package project.cowork.controller;
+package project.sungho.cowork.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

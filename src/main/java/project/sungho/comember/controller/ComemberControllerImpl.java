@@ -1,11 +1,11 @@
-package project.comember.controller;
+package project.sungho.comember.controller;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
-import project.cowork.vo.CoworkVO;
+import project.sungho.cowork.vo.CoworkVO;
 
 
 @Controller
