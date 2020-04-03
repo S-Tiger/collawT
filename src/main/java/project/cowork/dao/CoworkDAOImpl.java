@@ -9,7 +9,6 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import project.cowork.vo.CoworkVO;
-import project.hm.hmp001_d001.vo.Hmp001_d001VO;
 
 @Repository //DAO는 @Repsoitory 혹은 @Component로 빈객체를 자동 등록한다
 public class CoworkDAOImpl implements CoworkDAO {
@@ -34,14 +33,25 @@ public class CoworkDAOImpl implements CoworkDAO {
 	}
 
 	@Override
-	public void insertCowork(CoworkVO coworkVO) throws DataAccessException {
-		sqlSession.update("cowork.insertCowork", coworkVO);
+	public void insertCowork(Map<String, Object> dataMap) throws DataAccessException {
+		sqlSession.update("cowork.insertCowork", dataMap);
+		
 		//맵퍼에 cowork.insertCowork 를 찾아 실행 
 	}
 
 	@Override
 	public void deleteCowork(Map<String, Object> dataMap) throws DataAccessException {
 		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public String selectSqc() throws DataAccessException {
+		// TODO Auto-generated method stub
+		String c_Id = sqlSession.selectOne("cowork.selectSqc");
+		System.out.println(c_Id);
+		return c_Id;
 		
 	}
 

@@ -15,6 +15,7 @@
 		<typeAlias type="project.issue.vo.IssueVO" alias="IssueVO" />
 		<typeAlias type="project.cowork.vo.CoworkVO" alias="CoworkVO" />
 		<typeAlias type="project.notify.vo.NotifyVO" alias="NotifyVO" />
+		<typeAlias type="project.comember.vo.ComemberVO" alias="ComemberVO" />
 		
 		
 	</typeAliases> 
