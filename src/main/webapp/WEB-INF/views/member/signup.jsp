@@ -44,7 +44,9 @@
 			}
 		}); 
  	// 아이디 유효성 검사(1 = 중복 / 0 != 중복)
- 		$("#mem_Id").blur(function() {
+ 		$("#mem_Id").keyup(function() {
+ 			var idJ = /^[a-z0-9]{4,12}$/;
+ 			var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
  			var mem_Id = $('#mem_Id').val();
 			console.log("블러");
  			$.ajax({
@@ -61,13 +63,13 @@
  						} else {
  							$("#id_check").text("사용가능한 아이디입니다 :p");
  							$("#id_check").css("color", "green");
- 						
+ 							$("#joinBtn").attr("disabled", false);
  							if(idJ.test(mem_Id)){
-								if(mem_Id == " "){
+								if(mem_Id == ""){
  								
  								$('#id_check').text('아이디를 입력해주세요 :)');
  								$('#id_check').css('color', 'red');
- 								$("#joinBtn").attr("disabled", true);				
+ 								$("#joinBtn").attr("disabled", false);				
  								
  							} else {
  								
@@ -143,7 +145,7 @@
           </div>
           <!-- /.col -->
           <div class="col-4">
-            <button type="submit" id="joinBtn" class="btn btn-primary btn-block" disabled="">회원가입</button>
+            <button type="submit" id="joinBtn" class="btn btn-primary btn-block" >회원가입</button>
             <button onclick="history.go(-1);" class="btn btn-primary btn-block" >취소</button>
           </div>
           <!-- /.col -->

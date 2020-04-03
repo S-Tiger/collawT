@@ -77,11 +77,11 @@
 				<form id="myForm" action="/member/update_mypage" method="post">
 					<p>
 						<label>ID</label> 
-						<input class="form-control" type="email" id="mem_Id" name="mem_Id" readonly value="${sessionScope.mem_id}"> 
+						<input class="form-control" type="email" id="mem_Id" name="mem_Id" readonly value="${sessionScope.mem_Id}"> 
 					</p>
 					<p>
 						<label>이름</label> 
-						<input class="w3-input" type="text" id="mem_Name" name="mem_Name" value="${sessionScope.mem_name}" required> 
+						<input class="w3-input" type="text" id="mem_Name" name="mem_Name" value="${sessionScope.mem_Name}" required> 
 					</p>
 					<p class="w3-center">
 						<button type="submit" class="btn btn-block btn-success">회원정보 변경</button>
@@ -89,7 +89,7 @@
 				</form>
 				<br />
 				<form id="pwForm" action="/member/update_pw" method="post">	
-					<input type="hidden" name="mem_Id" value="${sessionScope.mem_id}">
+					<input type="hidden" name="mem_Id" value="${sessionScope.mem_Id}">
 					<p>
 						<label>기존비밀번호</label>
 						<input class="w3-input" id="old_pw" name="old_pw" type="password" required>

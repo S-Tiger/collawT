@@ -92,7 +92,7 @@
       <!-- /.social-auth-links -->
 
       <p class="mb-1">
-        <a href="../resources/pages/examples/forgot-password.html">비밀번호를 잊어버리셨나요?</a>
+        <a href="/member/forgotPwd">비밀번호를 잊어버리셨나요?</a>
       </p>
       <p class="mb-0">
         <a href="/member/signup" class="text-center">회원가입</a>

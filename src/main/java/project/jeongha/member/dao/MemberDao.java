@@ -1,6 +1,6 @@
-package project.member.dao;
+package project.jeongha.member.dao;
 
-import project.member.vo.MemberVO;
+import project.jeongha.member.vo.MemberVO;
 
 public interface MemberDao {
 	

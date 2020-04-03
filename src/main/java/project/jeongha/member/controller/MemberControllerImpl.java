@@ -1,4 +1,4 @@
-package project.member.controller;
+package project.jeongha.member.controller;
 
 import java.io.PrintWriter;
 import java.text.DateFormat;
@@ -24,8 +24,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import project.member.service.MemberServiceImpl;
-import project.member.vo.MemberVO;
+import project.jeongha.member.service.MemberServiceImpl;
+import project.jeongha.member.vo.MemberVO;
 
 @Controller // 컨트롤러 어노테이션 컨트롤 마다 작성해주세요
 @RequestMapping("/member/*") // 컨트롤러 맵핑 어노테이션 /패키지명/* 로 지정해주세요
@@ -48,19 +48,24 @@ public class MemberControllerImpl implements MemberController{
 	@GetMapping("/signup")
 	public String signup() {
 		System.out.println("회원가입페이지");
-		
 		return "/member/signup";
-		
 	}
+	
 	//로그인 페이지
 	@Override
 	@GetMapping("/loginPage")
 	public String loginFrorm() {
 		System.out.println("로그인페이지");
-		
 		return "member/loginPage";
 	}
 	
+	//비밀번호 찾기 페이지
+	@Override
+	@GetMapping("/forgotPwd")
+	public String forgot() {
+		System.out.println("비밀번호 찾기 페이지");
+		return "member/forgotPwd";
+	}
 	
 	// @PostMapping("memJoin") //위아래중 편한걸로 사용하세요 URL 대소문자 구분하니 주의해주세요
 	//회원가입정보등록 DB
@@ -120,9 +125,9 @@ public class MemberControllerImpl implements MemberController{
 		//로그인시 세션에.. 로그인성공
 		if(memberVO != null) {
 		HttpSession session = request.getSession();
-		session.setAttribute("mem_name", memberVO.getMem_Name());
-		session.setAttribute("mem_pwd", memberVO.getMem_Pwd());
-		session.setAttribute("mem_id", memberVO.getMem_Id());
+		session.setAttribute("mem_Name", memberVO.getMem_Name());
+		session.setAttribute("mem_Pwd", memberVO.getMem_Pwd());
+		session.setAttribute("mem_Id", memberVO.getMem_Id());
 		session.setAttribute("isLogin", true);
 		mav.setViewName("/main/index");
 		}else {//실패했을경우
@@ -159,7 +164,7 @@ public class MemberControllerImpl implements MemberController{
 	         System.out.println(member.getMem_Name());
 	         service.updateMypage(member);
 	         rttr.addFlashAttribute("msg", "회원정보 수정 완료");
-	         session.setAttribute("mem_name", member.getMem_Name());
+	         session.setAttribute("mem_Name", member.getMem_Name());
 	         return "/main/index";
 	      }
 		
@@ -198,6 +203,13 @@ public class MemberControllerImpl implements MemberController{
 //				out.print("usable");
 //			}
 			return result;
+		}
+		//비밀번호 찾기
+		@Override
+		@RequestMapping(value = "/find_pw", method = RequestMethod.POST)
+		public void find_pw(MemberVO member, HttpServletResponse response) throws Exception {
+			// TODO Auto-generated method stub
+			service.find_pw(response, member);
 		}
 	
 

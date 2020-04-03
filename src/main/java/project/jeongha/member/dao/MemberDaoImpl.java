@@ -1,10 +1,10 @@
-package project.member.dao;
+package project.jeongha.member.dao;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import project.member.vo.MemberVO;
+import project.jeongha.member.vo.MemberVO;
 
 @Repository
 public class MemberDaoImpl implements MemberDao {

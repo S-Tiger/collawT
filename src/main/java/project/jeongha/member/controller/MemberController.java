@@ -1,4 +1,4 @@
-package project.member.controller;
+package project.jeongha.member.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import project.member.vo.MemberVO;
+import project.jeongha.member.vo.MemberVO;
 
 public interface MemberController {
 //	public String getServerTime(Locale locale);
@@ -30,4 +30,6 @@ public String memUpdate(MemberVO member,RedirectAttributes rAttr, HttpServletReq
 public String update_mypage(MemberVO member, HttpSession session, RedirectAttributes rttr) throws Exception;
 public String update_pw(MemberVO member, String old_pw, HttpSession session, HttpServletResponse response, RedirectAttributes rttr) throws Exception;
 public int check_id(@RequestParam("mem_Id") String mem_Id) throws Exception;
+public String forgot() ;
+public void find_pw(MemberVO member, HttpServletResponse response) throws Exception;
 }

@@ -11,11 +11,12 @@
 		<typeAlias type="project.hm.hmp002_d001.vo.Hmp002_d001VO"  alias="hmp002_d001VO" />
 		
 	<!-- collaw-T 알리아스 -->
-		<typeAlias type="project.member.vo.MemberVO" alias="MemberVO" />
+		<typeAlias type="project.jeongha.member.vo.MemberVO" alias="MemberVO" />
 		<typeAlias type="project.issue.vo.IssueVO" alias="IssueVO" />
-		<typeAlias type="project.cowork.vo.CoworkVO" alias="CoworkVO" />
 		<typeAlias type="project.notify.vo.NotifyVO" alias="NotifyVO" />
-		<typeAlias type="project.comember.vo.ComemberVO" alias="ComemberVO" />
+		
+		<typeAlias type="project.sungho.comember.vo.ComemberVO" alias="ComemberVO" />
+		<typeAlias type="project.sungho.cowork.vo.CoworkVO" alias="CoworkVO" />
 		
 		
 	</typeAliases> 
