@@ -35,6 +35,12 @@
 				alert("비밀번호는 8자 이상으로 설정해야 합니다.");
 				$("#pw").val("").focus();
 				return false;
+			}else if ($("#mem_Id").val()==""){
+				alert("아이디를 입력해주세요.");
+				return false;
+			}else if ($("#mem_Name".val()=="")){
+				alert("이름을 입력해주세요.")
+				return false;
 			}
 		}); 
  	// 아이디 유효성 검사(1 = 중복 / 0 != 중복)
@@ -56,8 +62,8 @@
  							$("#id_check").text("사용가능한 아이디입니다 :p");
  							$("#id_check").css("color", "green");
  						
- 					
-								if(mem_Id == ""){
+ 							if(idJ.test(mem_Id)){
+								if(mem_Id == " "){
  								
  								$('#id_check').text('아이디를 입력해주세요 :)');
  								$('#id_check').css('color', 'red');
@@ -69,14 +75,13 @@
  								$('#id_check').css('color', 'red');
  								$("#joinForm").attr("disabled", true);
  							}
- 							
+ 							}
  						}
  					}, error : function() {
  							console.log("실패");
  					}
  				});
  			});
-
 	});
 </script>
 </head>

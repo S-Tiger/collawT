@@ -52,14 +52,23 @@
 				return false;
 			}
 		}));
-	})
+		
+		$("#pw2").blur(function() {
+			if($("#pw").val() != $("#pw2").val()){
+			$('#pw_check').text('비밀번호가 일치하지 않습니다. :)');
+				$('#pw_check').css('color', 'red');
+				$("#myForm").attr("disabled", true);
+			}
+		}
+		
+	});
 </script>
 </head>
 <body class="login-page">
 	<div class="login-box">
 		<div class="card-body login-card-body">
 			<div class="login-logo">
-			<a href="../resources/index2.html">
+			<a href="javascript:window.history.back();">
 				<b>Collaw T</b></a>
 			</div>
 			<div class="card">
@@ -68,33 +77,35 @@
 				<form id="myForm" action="/member/update_mypage" method="post">
 					<p>
 						<label>ID</label> 
-						<input class="w3-input" type="text" id="mem_Id" name="mem_Id" readonly value="${sessionScope.mem_id}"> 
+						<input class="form-control" type="email" id="mem_Id" name="mem_Id" readonly value="${sessionScope.mem_id}"> 
 					</p>
 					<p>
 						<label>이름</label> 
 						<input class="w3-input" type="text" id="mem_Name" name="mem_Name" value="${sessionScope.mem_name}" required> 
 					</p>
 					<p class="w3-center">
-						<button type="submit" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">회원정보 변경</button>
+						<button type="submit" class="btn btn-block btn-success">회원정보 변경</button>
 					</p>
 				</form>
 				<br />
 				<form id="pwForm" action="/member/update_pw" method="post">	
 					<input type="hidden" name="mem_Id" value="${sessionScope.mem_id}">
 					<p>
-						<label>Password</label>
+						<label>기존비밀번호</label>
 						<input class="w3-input" id="old_pw" name="old_pw" type="password" required>
 					</p>
 					<p>
-						<label>New Password</label> 
+						<label>새로운 비밀번호</label> 
 						<input class="w3-input" id="pw" name="mem_Pwd" type="password" required>
 					</p>
 					<p>
-						<label>Confirm</label>
+						<label>새로운 비밀번호 확인</label>
 						<input class="w3-input"id="pw2" type="password" type="password" required>
 					</p>
+					  <div class="check_font" id="pw_check">test</div>
 					<p class="w3-center">
-						<button type="submit" id="joinBtn" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">비밀번호 변경</button>
+						<button type="submit" id="joinBtn" class="btn btn-block btn-success">비밀번호 변경</button>
+						<button type="button" class="btn btn-block btn-success" onclick="history.back(-1);">뒤로가기</button>
 					</p>
 				</form>
 			</div>

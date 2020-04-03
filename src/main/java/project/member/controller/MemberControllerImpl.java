@@ -70,6 +70,8 @@ public class MemberControllerImpl implements MemberController{
 		request.setCharacterEncoding("utf-8");													  //다른이름으로 지정하고 싶을 경우  ex : @ModelAttribute(변수이름) MeberVo memberVO
 																									//으로하시면 변수이름. 으로 접근가능합니다
 		service.memberJoin(memberVO); 														// service에 memberRegister를 실행하는 부분
+		//중복된 아이디를 가입했을때 오류가난다.
+		//조건을 주자
 		return "/member/loginPage"; // 리턴타입엔 패키지명/jsp파일 로 작성하여주세요 view에서도 패키지/jsp로 관리해주세요
 	}
 
