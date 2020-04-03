@@ -4,12 +4,13 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="cowork">
-	<resultMap id="coworkResult01" type="CoworkVO">
+	<resultMap id="coworkResult01" type="java.util.Map">
 		<result property="c_Id" column="c_Id"  />
 		<result property="c_Name" column="c_Name" />
 		<result property="c_Comment" column="i_Content" />
 		<result property="mem_Id" column="mem_Id" />
 		<result property="c_Category" column="c_Category" />
+		
 		
 	</resultMap>
 
