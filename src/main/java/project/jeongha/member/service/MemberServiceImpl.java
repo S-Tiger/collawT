@@ -132,15 +132,16 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	public void sendEmail(MemberVO memberVO, String div) throws Exception {
+		System.out.println("11111111111"+memberVO.getMem_Name());
 		// Mail Server 설정
 		String charSet = "utf-8";
 		String hostSMTP = "smtp.naver.com";
-		// 아이디 비번
+		// 네이버 아이디, 비밀번호
 		String hostSMTPid = "collawtmanager@naver.com";
 		String hostSMTPpwd = "qlxmzoavm%!00";
 
-		// 보내는 사람 EMail, 제목, 내용
-		String fromEmail = "collawtmanager@naver.com";
+		// 보내는 사람 EMail,이름, 제목, 내용
+		String fromEmail = "collawtmanager@naver.com"; 
 		String fromName = "CollawT 관리자";
 		String subject = "";
 		String msg = "";
@@ -175,10 +176,13 @@ public class MemberServiceImpl implements MemberService {
 			email.setCharset(charSet);
 			email.setSSL(true);
 			email.setHostName(hostSMTP);
+			//네이버smtp 포트번
 			email.setSmtpPort(587);
 
+			//메일 아이디 비밀번호
 			email.setAuthentication(hostSMTPid, hostSMTPpwd);
 			email.setTLS(true);
+			//받는사람
 			email.addTo(mail, charSet);
 			email.setFrom(fromEmail, fromName, charSet);
 			email.setSubject(subject);
@@ -207,7 +211,9 @@ public class MemberServiceImpl implements MemberService {
 			for (int i = 0; i < 12; i++) {
 				pw += (char) ((Math.random() * 26) + 97);
 			}
+			
 			member.setMem_Pwd(pw);
+			member.setMem_Name("콜라우티회원");
 			// 비밀번호 변경
 			dao.update_pw(member);
 			

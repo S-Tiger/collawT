@@ -172,14 +172,14 @@
           <img src="../resources/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-        <c:if test="${sessionScope.mem_id != null}">
-        	<a href = "/member/mypage" class="nav-link active">마이페이지(${sessionScope.mem_name}) </a>
+        <c:if test="${sessionScope.mem_Id != null}">
+        	<a href = "/member/mypage" class="nav-link active">마이페이지(${sessionScope.mem_Name}) </a>
         	<input type="button" value="로그아웃" onclick="location.href='/logout'">
 			<%-- <form action="/member/mypage">${sessionScope.mem_name}<br>
 				<a type="submit" class="nav-link" value="마이페이지 이동하기">
 			</form> --%>
 		</c:if>
-          <a href="#" class="d-block">${sessionScope.mem_id}</a>
+          <a href="#" class="d-block">${sessionScope.mem_Id}</a>
         </div>
       </div>
 
