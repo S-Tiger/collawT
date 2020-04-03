@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="comember">
+	<resultMap id="comemberResult01" type="ComemberVO">
+		<result property="c_Id" column="c_Id"  />
+		<result property="mem_Id" column="mem_Id" />
+		<result property="grade" column="grade" />
+		
+	</resultMap>
+
+	<select id="searchList" resultMap="comemberResult01" parameterType="java.util.Map"> 
+      <![CDATA[
+         select c_Id, mem_Id, grade
+         from co_member
+      ]]>
+		<where>
+			<if test=" mem_Id != ''  and  mem_Id != null">
+				mem_Id = #{mem_Id}
+			</if>
+		</where>
+	</select>
+	
+	<insert id="insertComember" parameterType="java.util.Map">
+		insert into co_member(c_Id, mem_Id, grade) 
+		values(#{c_Id}, #{mem_Id}, '02')
+	</insert>	
+
+</mapper>

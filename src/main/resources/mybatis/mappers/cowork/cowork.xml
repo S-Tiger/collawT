@@ -20,14 +20,22 @@
       ]]>
 		<where>
 			<if test=" c_Name != ''  and  c_Name != null">
-				id = #{c_Name}
+				c_Name = #{c_Name}
 			</if>
 		</where>
 	</select>
 	
-	<insert id="insertCowork" parameterType="CoworkVO">
+	
+	<select id="selectSqc" resultType="String"> 
+      <![CDATA[
+         select co_work_c_Id.nextval as c_Id
+         from dual
+      ]]>
+	</select>
+	
+	<insert id="insertCowork" parameterType="java.util.Map">
 		insert into co_work(c_Id, c_Name, c_Comment, mem_Id, c_Category) 
-		values(co_work_c_Id.nextval, #{c_Name}, #{c_Comment}, #{mem_Id} , #{c_Category})
+		values(#{c_Id}, #{c_Name}, #{c_Comment}, #{mem_Id} , #{c_Category})
 	</insert>	
 
 </mapper>

@@ -1,4 +1,4 @@
-package project.member.controller;
+package project.jeongha.member.controller;
 
 import java.io.PrintWriter;
 import java.text.DateFormat;
@@ -24,8 +24,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import project.member.service.MemberServiceImpl;
-import project.member.vo.MemberVO;
+import project.jeongha.member.service.MemberServiceImpl;
+import project.jeongha.member.vo.MemberVO;
 
 @Controller // 컨트롤러 어노테이션 컨트롤 마다 작성해주세요
 @RequestMapping("/member/*") // 컨트롤러 맵핑 어노테이션 /패키지명/* 로 지정해주세요
@@ -48,28 +48,35 @@ public class MemberControllerImpl implements MemberController{
 	@GetMapping("/signup")
 	public String signup() {
 		System.out.println("회원가입페이지");
-		
 		return "/member/signup";
-		
 	}
+	
 	//로그인 페이지
 	@Override
 	@GetMapping("/loginPage")
 	public String loginFrorm() {
 		System.out.println("로그인페이지");
-		
 		return "member/loginPage";
 	}
 	
+	//비밀번호 찾기 페이지
+	@Override
+	@GetMapping("/forgotPwd")
+	public String forgot() {
+		System.out.println("비밀번호 찾기 페이지");
+		return "member/forgotPwd";
+	}
 	
 	// @PostMapping("memJoin") //위아래중 편한걸로 사용하세요 URL 대소문자 구분하니 주의해주세요
 	//회원가입정보등록 DB
 	@Override
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
-	public String memJoin(MemberVO memberVO,HttpServletRequest request, HttpServletResponse response)throws Exception { // 매게변수로 vo가 들어갔을경우 자동으로 변수이름에 맞는걸 set get 해줍니다.
+	public String memJoin(@ModelAttribute MemberVO memberVO,HttpServletRequest request, HttpServletResponse response)throws Exception { // 매게변수로 vo가 들어갔을경우 자동으로 변수이름에 맞는걸 set get 해줍니다.
 		request.setCharacterEncoding("utf-8");													  //다른이름으로 지정하고 싶을 경우  ex : @ModelAttribute(변수이름) MeberVo memberVO
-																									//으로하시면 변수이름. 으로 접근가능합니다
-		service.memberJoin(memberVO); 														// service에 memberRegister를 실행하는 부분
+																							//으로하시면 변수이름. 으로 접근가능합니다
+		service.memberJoin(memberVO,response); 														// service에 memberRegister를 실행하는 부분
+		//중복된 아이디를 가입했을때 오류가난다.
+		//조건을 주자
 		return "/member/loginPage"; // 리턴타입엔 패키지명/jsp파일 로 작성하여주세요 view에서도 패키지/jsp로 관리해주세요
 	}
 
@@ -111,11 +118,6 @@ public class MemberControllerImpl implements MemberController{
 	@Override
 	@RequestMapping(value = "/loginTest",method = RequestMethod.POST)
 	public ModelAndView memLogintest(MemberVO member,RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response)throws Exception {
-		System.out.println(request.getContextPath());
-		System.out.println(member.getMem_Id());
-		System.out.println(member.getMem_Pwd());
-//		String memId=(String)request.getParameter("memId");
-//		String memPw=(String)request.getParameter("memPw");
 		ModelAndView mav =new ModelAndView();
 		System.out.println("로그인컨트롤러");
 		//로그인로직
@@ -123,18 +125,16 @@ public class MemberControllerImpl implements MemberController{
 		//로그인시 세션에.. 로그인성공
 		if(memberVO != null) {
 		HttpSession session = request.getSession();
-		
-		session.setAttribute("mem_name", memberVO.getMem_Name());
-		session.setAttribute("mem_pwd", memberVO.getMem_Pwd());
-		session.setAttribute("mem_id", memberVO.getMem_Id());
+		session.setAttribute("mem_Name", memberVO.getMem_Name());
+		session.setAttribute("mem_Pwd", memberVO.getMem_Pwd());
+		session.setAttribute("mem_Id", memberVO.getMem_Id());
 		session.setAttribute("isLogin", true);
 		mav.setViewName("/main/index");
-		
 		}else {//실패했을경우
-			rAttr.addAttribute("result","loginFailed");
+		rAttr.addAttribute("result","loginFailed");
 		mav.setViewName("redirect:/member/loginPage");
 		
-		}
+		}//end if
 
 		return mav;
 	}
@@ -142,17 +142,16 @@ public class MemberControllerImpl implements MemberController{
 	@Override
 	@RequestMapping(value = "/updateMember",method = RequestMethod.POST)
 	public String memUpdate(MemberVO member,RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response)throws Exception  {
-		
+
 		service.memberUpdate(member);
-				
-		
-		
 		return "redirect:/member/loginOk";
+		
 	}
 
 	@Override
 	@GetMapping("/mypage")
 	public String mypage() throws Exception {
+		
 		System.out.println("마이페이지");
 		return "/member/mypage";
 	}
@@ -165,30 +164,33 @@ public class MemberControllerImpl implements MemberController{
 	         System.out.println(member.getMem_Name());
 	         service.updateMypage(member);
 	         rttr.addFlashAttribute("msg", "회원정보 수정 완료");
-	         session.setAttribute("mem_name", member.getMem_Name());
+	         session.setAttribute("mem_Name", member.getMem_Name());
 	         return "/main/index";
 	      }
 		
 		// 비밀번호 변경
 		@RequestMapping(value = "/update_pw", method = RequestMethod.POST)
 		public String update_pw(@ModelAttribute MemberVO member, @RequestParam("old_pw") String old_pw, HttpSession session, HttpServletResponse response, RedirectAttributes rttr) throws Exception{
-			session.setAttribute("member", service.update_pw(member, old_pw, response));
-			rttr.addFlashAttribute("msg", "비밀번호 수정 완료");
+			System.out.println(old_pw);
+			System.out.println(member.getMem_Id());
+			System.out.println(member.getMem_Pwd());
+			System.out.println(member.getMem_Name());
+			MemberVO memberVO = service.update_pw(member, old_pw, response);
+//			if(memberVO!=null) {
+			session.setAttribute("member", memberVO);
+			rttr.addAttribute("msg", "비밀번호 수정 완료");
 			return "redirect:/member/mypage";
+//			}else {
+//				rttr.addAttribute("msg", "실패");
+//				return "redirect:/member/mypage";
+//			}
 		}
-		// 로그아웃
-		@RequestMapping(value = "/logout", method = RequestMethod.GET)
-		public String logout(HttpSession session, HttpServletResponse response) throws Exception{
-			session.invalidate();
-//			session.removeAttribute("member");
-//			service.logout(response);
-			return "redirect:/";
-		}
+	
 
 		// 아이디 중복 검사(AJAX)
 		@RequestMapping(value = "/check_id", method = RequestMethod.GET)
-		@ResponseBody
-		public int check_id(@RequestParam("mem_Id") String mem_Id, HttpServletResponse response) throws Exception{
+		@ResponseBody   //리스폰스바디는 매소드가 스트링이거나 타입이 있을때 ajax로통신할 경우 꼭써야함그렇게 하지 않으면 뷰 리졸버가 반응을함.
+		public int check_id(@RequestParam("mem_Id") String mem_Id) throws Exception{
 		
 			System.out.println("아작스");
 			System.out.println(mem_Id);
@@ -201,6 +203,13 @@ public class MemberControllerImpl implements MemberController{
 //				out.print("usable");
 //			}
 			return result;
+		}
+		//비밀번호 찾기
+		@Override
+		@RequestMapping(value = "/find_pw", method = RequestMethod.POST)
+		public void find_pw(MemberVO member, HttpServletResponse response) throws Exception {
+			// TODO Auto-generated method stub
+			service.find_pw(response, member);
 		}
 	
 

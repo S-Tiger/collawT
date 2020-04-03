@@ -8,7 +8,10 @@
 		<result property="mem_Id" column="mem_Id"  />
 		<result property="mem_Pwd" column="mem_Pwd" />
 		<result property="mem_Name" column="mem_Name" />
+		<!-- <result property="forgot_Key" column="mem_Imagname" /> -->
 	</resultMap>
+	
+	
 	<!-- 회원정보 수정 -->
 	<update id="update_mypage" parameterType="memberVO">
 		update member set mem_Name = #{mem_Name} where mem_Id =#{mem_Id}
@@ -16,7 +19,9 @@
 	
 	<!-- 아이디 중복 검사 -->
 	<select id="check_id" parameterType="String" resultType="int">
+		<![CDATA[
 		select count(*) from member where mem_Id = #{mem_Id}
+		]]>
 	</select>
 	
 	<!-- 회원정보 수정 -->
@@ -29,13 +34,13 @@
 	
 	</update>
 	
+	<!-- 테스트용도 -->
 	<select id="logina" parameterType="String" resultType="memberVO">
 		select * from member where mem_Id = #{mem_Id}
 	</select>
 	
-	
+	<!--로그인 -->
 	<select id="login" resultMap="memberResult01" parameterType="memberVO">
-	
 	<![CDATA[
 		select * from member
 		where mem_Id =#{mem_Id} and mem_Pwd=#{mem_Pwd}
@@ -50,19 +55,21 @@
          from   test_member
       ]]>
 		<where>
-			<if test=" mem_Id != ''  and  mem_Id != null">
+			<if test="mem_Id != ''  and  mem_Id != null">
 				id = #{mem_Id}
 			</if>
 		</where>
 	</select>
 	
-	
-	
-	
+	<!-- 회원가입 -->
 	<insert id="insertMember" parameterType="java.util.Map">
-		
 		insert into member(mem_id, mem_pwd, mem_name, mem_joindate, mem_kind)
 		values(#{mem_Id}, #{mem_Pwd}, #{mem_Name}, sysdate, '00')
 	</insert>	
+	
+	<!-- 비밀번호 변경 -->
+	<update id="update_pw" parameterType="memberVO">
+		update member set mem_pwd = #{mem_Pwd} where mem_id = #{mem_Id}
+	</update>
 
 </mapper>

@@ -173,8 +173,8 @@
         </div>
         <div class="info">
         <c:if test="${sessionScope.mem_id != null}">
-        	<a href = "./mypage" class="nav-link active">마이페이지(${sessionScope.mem_name}) </a>
-        	<input type="button" value="로그아웃" onclick="location.href='./logout'">
+        	<a href = "/member/mypage" class="nav-link active">마이페이지(${sessionScope.mem_name}) </a>
+        	<input type="button" value="로그아웃" onclick="location.href='/logout'">
 			<%-- <form action="/member/mypage">${sessionScope.mem_name}<br>
 				<a type="submit" class="nav-link" value="마이페이지 이동하기">
 			</form> --%>
@@ -205,15 +205,19 @@
                 </a>
               </li>
               <c:forEach var="coworklist" items="${coworklist}"> 
-              
               <li class="nav-item">
                 <a href="/main" class="nav-link">
                   <i class="nav-icon fas fa-sitemap"></i>
                   <p>${coworklist.c_Name} </p>
                 </a>
               </li>
-              
                </c:forEach>
+                 <li class="nav-item">
+                <a href="/coworkcreate" class="nav-link">
+                  <i class="nav-icon fas fa-folder"></i>
+                  <p>협업공간 생성 </p>
+                </a>
+              </li>
             </ul>
           </li>
           <li class="nav-item">

@@ -1,4 +1,4 @@
-package project.member.vo;
+package project.jeongha.member.vo;
 
 import java.util.Date;
 
@@ -8,6 +8,8 @@ public class MemberVO {
 	private String mem_Pwd;
 	private String mem_Name;
 	
+	//임
+//	private String forgot_Key;
 	
 	public String getMem_Id() {
 		return mem_Id;
@@ -27,6 +29,12 @@ public class MemberVO {
 	public void setMem_Name(String mem_Name) {
 		this.mem_Name = mem_Name;
 	}
+//	public String getForgot_Key() {
+//		return forgot_Key;
+//	}
+//	public void setForgot_Key(String forgot_Key) {
+//		this.forgot_Key = forgot_Key;
+//	}
 	
 	
 }

@@ -1,13 +1,15 @@
-package project.cowork.controller;
+package project.sungho.cowork.controller;
 
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,13 +17,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.mysql.jdbc.interceptors.SessionAssociationInterceptor;
+import project.sungho.cowork.service.CoworkService;
+import project.sungho.cowork.vo.CoworkVO;
 
-import project.cowork.service.CoworkService;
-import project.cowork.vo.CoworkVO;
-import project.issue.vo.IssueVO;
 
 @Controller
 @RequestMapping("/cowork/*")
@@ -29,9 +28,9 @@ public class CoworkControllerImpl implements CoworkController {
 	
 	@Autowired
 	CoworkService coworkService;
-
+	
 	@Override
-	@GetMapping("/list") //뿌려지는건 Get매핑
+	@GetMapping("/list")
 	public String searchList(@RequestParam(value="mem_Id", required=false)String mem_Id, Model model) throws Exception {
 		Map<String, Object> searchMap = new HashMap<String, Object>();
 		searchMap.put("mem_Id", mem_Id);	 
@@ -52,10 +51,18 @@ public class CoworkControllerImpl implements CoworkController {
 
 	@Override
 	@PostMapping("/insert") 
-	public String insertCowork(CoworkVO coworkVO, HttpSession session) throws Exception {
-		coworkVO.setMem_Id((String)session.getAttribute("mem_id"));
-
-		coworkService.insertCowork(coworkVO);
+	public String insertCowork(HttpServletRequest request, HttpServletResponse responsen) throws Exception {
+		
+		
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		
+		Enumeration enu = request.getParameterNames();
+		while (enu.hasMoreElements()) {
+			String name = (String) enu.nextElement();
+			String value = request.getParameter(name);
+			dataMap.put(name, value);
+		}
+		coworkService.insertCowork(dataMap);
 		
 		return "redirect:/cowork/list";
 		

@@ -7,7 +7,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>콜라우티 회원가입</title>
+  <title>Collaw T 회원가입</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -35,10 +35,18 @@
 				alert("비밀번호는 8자 이상으로 설정해야 합니다.");
 				$("#pw").val("").focus();
 				return false;
+			}else if ($("#mem_Id").val()==""){
+				alert("아이디를 입력해주세요.");
+				return false;
+			}else if ($("#mem_Name".val()=="")){
+				alert("이름을 입력해주세요.")
+				return false;
 			}
 		}); 
  	// 아이디 유효성 검사(1 = 중복 / 0 != 중복)
- 		$("#mem_Id").blur(function() {
+ 		$("#mem_Id").keyup(function() {
+ 			var idJ = /^[a-z0-9]{4,12}$/;
+ 			var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
  			var mem_Id = $('#mem_Id').val();
 			console.log("블러");
  			$.ajax({
@@ -51,34 +59,31 @@
  							// 1 : 아이디가 중복되는 문구
  							$("#id_check").text("사용중인 아이디입니다 :p");
  							$("#id_check").css("color", "red");
- 							$("#joinForm").attr("disabled", true);
+ 							$("#joinBtn").attr("disabled", true);
  						} else {
- 							
+ 							$("#id_check").text("사용가능한 아이디입니다 :p");
+ 							$("#id_check").css("color", "green");
+ 							$("#joinBtn").attr("disabled", false);
  							if(idJ.test(mem_Id)){
- 								// 0 : 아이디 길이 / 문자열 검사
- 								$("#id_check").text("");
- 								$("#joinForm").attr("disabled", false);
- 					
- 							} else if(mem_Id == ""){
+								if(mem_Id == ""){
  								
  								$('#id_check').text('아이디를 입력해주세요 :)');
  								$('#id_check').css('color', 'red');
- 								$("#joinForm").attr("disabled", true);				
+ 								$("#joinBtn").attr("disabled", false);				
  								
  							} else {
  								
  								$('#id_check').text("아이디는 소문자와 숫자 4~12자리만 가능합니다 :) :)");
  								$('#id_check').css('color', 'red');
- 								$("#joinForm").attr("disabled", true);
+ 								$("#joinBtn").attr("disabled", true);
  							}
- 							
+ 							}
  						}
  					}, error : function() {
  							console.log("실패");
  					}
  				});
  			});
-
 	});
 </script>
 </head>
@@ -102,7 +107,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="text" name="mem_Id" id="mem_Id" class="form-control" placeholder="아이디 입력 이메일 형식">
+          <input type="email" name="mem_Id" id="mem_Id" class="form-control" placeholder="아이디는 이메일 형식입니다">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -111,7 +116,7 @@
         </div>
         <!-- <input type="button" id="checkBtn" onClick="" value="중복체크하기"> -->
         <!-- 아이디 중복값  -->
-         <div class="check_font" id="id_check">중복</div>
+         <div class="check_font" id="id_check"></div>
         <div class="input-group mb-3">
           <input type="password" id="pw" name="mem_Pwd" class="form-control" placeholder="비밀번호">
           <div class="input-group-append">
@@ -126,7 +131,7 @@
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
             </div>
-          </div>
+          </div> 
         </div>
         
         <div class="row">
@@ -159,7 +164,7 @@
         </a>
       </div>
 
-      <a href="../login.html" class="text-center">이미 회원가입을 하셨나요?</a>
+      <a href="/member/loginPage" class="text-center">이미 회원가입을 하셨나요?</a>
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->

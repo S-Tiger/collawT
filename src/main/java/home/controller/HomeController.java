@@ -4,6 +4,9 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -29,7 +32,7 @@ public class HomeController {
 		return "sample/joinForm";
 	}
 	
-	@RequestMapping("/coworkTest")
+	@RequestMapping("/coworkcreate")
 	public String project(Model model) {
 
 		return "cowork/coworkinsert";
@@ -40,9 +43,16 @@ public class HomeController {
 
 		return "/issue/issueadd";
 	}
-	
+	// 로그아웃
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout(HttpSession session, HttpServletResponse response) throws Exception{
+		session.invalidate();
+		return "redirect:/";
+	}
 	@RequestMapping("/main")
 	public String main(Model model) {
-	return "main/index";}
+	return "main/index";
+	}
+	
 	
 }

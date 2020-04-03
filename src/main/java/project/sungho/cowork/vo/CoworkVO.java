@@ -1,6 +1,4 @@
-package project.cowork.vo;
-
-import java.sql.Date;
+package project.sungho.cowork.vo;
 
 import org.springframework.stereotype.Component;
 
