@@ -61,9 +61,12 @@
  							$("#id_check").css("color", "red");
  							$("#joinBtn").attr("disabled", true);
  						} else {
+ 							// 0 : 아이디 사용가능 문구
  							$("#id_check").text("사용가능한 아이디입니다 :p");
  							$("#id_check").css("color", "green");
  							$("#joinBtn").attr("disabled", false);
+ 							
+ 							//아이디 유효성 검사
  							if(idJ.test(mem_Id)){
 								if(mem_Id == ""){
  								
@@ -73,7 +76,7 @@
  								
  							} else {
  								
- 								$('#id_check').text("아이디는 소문자와 숫자 4~12자리만 가능합니다 :) :)");
+ 								$('#id_check').text("잘못된 아이디 형식입니다. 이메일 주소를 입력해 주세요 :)");
  								$('#id_check').css('color', 'red');
  								$("#joinBtn").attr("disabled", true);
  							}
@@ -90,7 +93,7 @@
 <body class="hold-transition register-page">
 <div class="register-box">
   <div class="register-logo">
-    <a href="../resources/index2.html"><b>Collaw</b>T</a>
+    <a href="javascript:window.history.back();"><b>Collaw</b>T</a>
   </div>
 
   <div class="card">

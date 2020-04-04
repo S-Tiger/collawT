@@ -10,7 +10,7 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<title>마이페이지</title>
+<title>회원탈퇴</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Font Awesome -->
 <link rel="stylesheet"
@@ -43,30 +43,11 @@
 	rel="stylesheet">
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
-	$(function(){
-		if(${msg != null}){
-			alert('${msg}');
-		};
-		
-		if($("#pwForm").submit(function(){
-			console.log("11");
-			if($("#pw").val() !== $("#pw2").val()){
-				alert("비밀번호가 다릅니다.");
-				$("#pw").val("").focus();
-				$("#pw2").val("");
-				return false;
-			}else if ($("#pw").val().length < 8) {
-				alert("비밀번호는 8자 이상으로 설정해야 합니다.");
-				$("#pw").val("").focus();
-				return false;
-			}else if($.trim($("#pw").val()) !== $("#pw").val()){
-				alert("공백은 입력이 불가능합니다.");
-				return false;
-			}else{
-				alert("비밀번호가 수정되었습니다.");
-			}
-		}));
-	});
+	function fn_deleteMem(){
+		if(!confirm("정말탈퇴 하시겠습니까?")){
+			return false;
+		}
+	};
 </script>
 </head>
 <body class="login-page">
@@ -77,51 +58,20 @@
 			</div>
 			<div class="card">
 				<div class="card-body login-card-body">
-					<b class="login-box-msg">My Page</b>
-					<form id="myForm" action="/member/update_mypage" method="post">
+					<b class="login-box-msg" ><center>회원탈퇴</center></b>
 						<p class="login-box-msg">
-							<label>ID</label> <input class="form-control" type="email"
-								id="mem_Id" name="mem_Id" readonly
-								value="${sessionScope.mem_Id}">
-						</p>
-						<p class="login-box-msg">
-							<label>이름</label> <input class="form-control" type="text"
-								id="mem_Name" name="mem_Name" value="${sessionScope.mem_Name}"
-								required>
-						</p>
-						<p class="login-box-msg">
-							<button type="submit" class="btn btn-block btn-success">회원정보
-								변경</button>
-						</p>
-					</form>
-					<br />
-					<form id="pwForm" action="/member/update_pw" method="post">
+					<form id="outMemberForm" action="/member/delete_Member" method="post">
+					<h1>${sessionScope.mem_Id}</h1>
 						<input type="hidden" name="mem_Id" value="${sessionScope.mem_Id}">
 						<p class="login-box-msg">
-							<label>기존비밀번호</label> <input class="form-control" id="old_pw"
-								name="old_pw" type="password" required>
+							<label>기존비밀번호</label> <input class="form-control" id="pwd"
+								name="pwd" type="password" required>
 						</p>
-						<p class="login-box-msg">
-							<label>새로운 비밀번호</label> <input class="form-control" id="pw"
-								name="mem_Pwd" type="password" required>
-						</p>
-						<p class="login-box-msg">
-							<label>새로운 비밀번호 확인</label> <input class="form-control" id="pw2"
-								type="password" type="password" required>
-						</p>
-						<div class="check_font" id="pw_check">hello</div>
-						<p class="login-box-msg">
-							<button type="submit" id="joinBtn"
-								class="btn btn-block btn-success">비밀번호 변경</button>
+							<button type="submit" id="outBtn"
+								class="btn btn-block btn-success" onclick="fn_deleteMem()">회원탈퇴</button>
 							<button type="button" class="btn btn-block btn-success"
 								onclick="history.back(-1);">뒤로가기</button>
-						</p>
 					</form>
-					<p class="login-box-msg">
-							<input type="button" id="outBtn"
-								class="btn btn-block btn-success" value="회원탈퇴" onclick="location.href='/member/outMember'">
-						
-						</p>
 				</div>
 			</div>
 		</div>

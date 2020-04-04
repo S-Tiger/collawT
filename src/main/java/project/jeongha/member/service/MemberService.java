@@ -15,6 +15,6 @@ public interface MemberService {
 	public int check_id(String mem_id) throws Exception ;
 	public String create_key() throws Exception ;
 	public void sendEmail(MemberVO memberVO, String div) throws Exception;
-	public void find_pw(HttpServletResponse response, MemberVO member) throws Exception ;
-
+	public void find_pw(HttpServletResponse response, MemberVO memberVO) throws Exception ;
+	public MemberVO delete_Member(MemberVO memberVO, String pwd, HttpServletResponse response) throws Exception ;
 }

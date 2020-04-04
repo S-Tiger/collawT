@@ -72,4 +72,10 @@
 		update member set mem_pwd = #{mem_Pwd} where mem_id = #{mem_Id}
 	</update>
 
+	<!-- 회원탈퇴 -->
+	<delete id="delete_member" parameterType="memberVO">
+		delete from member where mem_id =#{mem_Id}
+	</delete>
+
+
 </mapper>

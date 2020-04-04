@@ -11,5 +11,6 @@ public interface MemberDao {
 	public int memberUpdate(MemberVO memberVO);
 	public int check_id(String mem_id) throws Exception;
 	public int update_pw(MemberVO memberVO) throws Exception;
+	public int delete_Member(MemberVO memberVO) throws Exception;
 
 }

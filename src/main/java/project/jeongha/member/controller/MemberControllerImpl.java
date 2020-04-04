@@ -62,13 +62,27 @@ public class MemberControllerImpl implements MemberController{
 	//비밀번호 찾기 페이지
 	@Override
 	@GetMapping("/forgotPwd")
-	public String forgot() {
+	public String findPw() {
 		System.out.println("비밀번호 찾기 페이지");
 		return "member/forgotPwd";
 	}
-	
+	//비밀번호 찾기 페이지
+		@Override
+		@GetMapping("/outMember")
+		public String outMember() {
+			System.out.println("비밀번호 찾기 페이지");
+			return "member/outMember";
+		}
+		@Override
+		@GetMapping("/mypage")
+		public String mypage() throws Exception {
+			
+			System.out.println("마이페이지");
+			return "/member/mypage";
+		}
+
 	// @PostMapping("memJoin") //위아래중 편한걸로 사용하세요 URL 대소문자 구분하니 주의해주세요
-	//회원가입정보등록 DB
+	//회원가입
 	@Override
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
 	public String memJoin(@ModelAttribute MemberVO memberVO,HttpServletRequest request, HttpServletResponse response)throws Exception { // 매게변수로 vo가 들어갔을경우 자동으로 변수이름에 맞는걸 set get 해줍니다.
@@ -81,7 +95,7 @@ public class MemberControllerImpl implements MemberController{
 	}
 
 	
-	//로그인 
+	//로그인 -> *안쓰는중*
 	@Override
 	@RequestMapping(value = "/login",method = RequestMethod.POST)
 	public ModelAndView memLogin(MemberVO member,RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response)throws Exception {
@@ -139,45 +153,28 @@ public class MemberControllerImpl implements MemberController{
 		return mav;
 	}
 
-	@Override
-	@RequestMapping(value = "/updateMember",method = RequestMethod.POST)
-	public String memUpdate(MemberVO member,RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response)throws Exception  {
-
-		service.memberUpdate(member);
-		return "redirect:/member/loginOk";
-		
-	}
-
-	@Override
-	@GetMapping("/mypage")
-	public String mypage() throws Exception {
-		
-		System.out.println("마이페이지");
-		return "/member/mypage";
-	}
-
+	
 	// mypage 수정
 		@RequestMapping(value = "/update_mypage", method = RequestMethod.POST)
-		public String update_mypage(@ModelAttribute MemberVO member, HttpSession session, RedirectAttributes rttr) throws Exception{
+		public String update_mypage(@ModelAttribute MemberVO memberVO, HttpSession session, RedirectAttributes rttr) throws Exception{
 	         System.out.println("수정");
-	         System.out.println(member.getMem_Id());
-	         System.out.println(member.getMem_Name());
-	         service.updateMypage(member);
+	         System.out.println(memberVO.getMem_Id());
+	         System.out.println(memberVO.getMem_Name());
+	         service.updateMypage(memberVO);
 	         rttr.addFlashAttribute("msg", "회원정보 수정 완료");
-	         session.setAttribute("mem_Name", member.getMem_Name());
+	         session.setAttribute("mem_Name", memberVO.getMem_Name());
 	         return "/main/index";
 	      }
 		
 		// 비밀번호 변경
 		@RequestMapping(value = "/update_pw", method = RequestMethod.POST)
-		public String update_pw(@ModelAttribute MemberVO member, @RequestParam("old_pw") String old_pw, HttpSession session, HttpServletResponse response, RedirectAttributes rttr) throws Exception{
+		public String update_pw(@ModelAttribute MemberVO memberVO, @RequestParam("old_pw") String old_pw, HttpSession session, HttpServletResponse response, RedirectAttributes rttr) throws Exception{
 			System.out.println(old_pw);
-			System.out.println(member.getMem_Id());
-			System.out.println(member.getMem_Pwd());
-			System.out.println(member.getMem_Name());
-			MemberVO memberVO = service.update_pw(member, old_pw, response);
+			System.out.println(memberVO.getMem_Id());
+			System.out.println(memberVO.getMem_Pwd());
+			System.out.println(memberVO.getMem_Name());
+			MemberVO member = service.update_pw(memberVO, old_pw, response);
 //			if(memberVO!=null) {
-			session.setAttribute("member", memberVO);
 			rttr.addAttribute("msg", "비밀번호 수정 완료");
 			return "redirect:/member/mypage";
 //			}else {
@@ -207,9 +204,23 @@ public class MemberControllerImpl implements MemberController{
 		//비밀번호 찾기
 		@Override
 		@RequestMapping(value = "/find_pw", method = RequestMethod.POST)
-		public void find_pw(MemberVO member, HttpServletResponse response) throws Exception {
+		public void find_pw(MemberVO memberVO, HttpServletResponse response) throws Exception {
 			// TODO Auto-generated method stub
-			service.find_pw(response, member);
+			service.find_pw(response, memberVO);
+		}
+
+		//회원 탈퇴
+		@Override
+		@RequestMapping(value = "delete_Member")
+		public String delete_Member(@ModelAttribute MemberVO memberVO,@RequestParam ("pwd")String pwd, HttpServletResponse response, HttpSession session, RedirectAttributes rttr)throws Exception {
+			System.out.println("ccccccccccccccccccccccc");
+			System.out.println("pwd: "+pwd);
+			System.out.println("Id: "+memberVO.getMem_Id());
+			MemberVO member = service.delete_Member(memberVO, pwd, response);
+			//세션초기화
+			session.invalidate();
+			
+			return "redirect:/";
 		}
 	
 

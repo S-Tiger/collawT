@@ -94,11 +94,13 @@ public class MemberServiceImpl implements MemberService {
 
 	// 비밀번호변경
 	@Override
-	public MemberVO update_pw(MemberVO member, String old_pw, HttpServletResponse response) throws Exception {
+	public MemberVO update_pw(MemberVO memberVO, String old_pw, HttpServletResponse response) throws Exception {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
-		System.out.println("service: " + dao.login(member.getMem_Id()).getMem_Pwd());
-		if (!old_pw.equals(dao.login(member.getMem_Id()).getMem_Pwd())) {
+		//로그인된 아이디(히든태그)로 로그인 비밀번호로 접근하여 맞는지 안맞는지 확인
+		System.out.println("service password: " + dao.login(memberVO.getMem_Id()).getMem_Pwd());
+		System.out.println("service Id: "+dao.login(memberVO.getMem_Id()));
+		if (!old_pw.equals(dao.login(memberVO.getMem_Id()).getMem_Pwd())) {
 			out.println("<script>");
 			out.println("alert('기존 비밀번호가 다릅니다.');");
 			out.println("history.go(-1);");
@@ -106,17 +108,15 @@ public class MemberServiceImpl implements MemberService {
 			out.close();
 			return null;
 		} else {
-			dao.update_pw(member);
-			return dao.login(member.getMem_Id());
+			dao.update_pw(memberVO);
+			return dao.login(memberVO.getMem_Id());
 		}
 	}
 
 	// 아이디 중복 검사(AJAX)
 	@Override
 	public int check_id(String mem_id) throws Exception {
-
 		int result = dao.check_id(mem_id);
-
 		return result;
 	}
 
@@ -176,7 +176,7 @@ public class MemberServiceImpl implements MemberService {
 			email.setCharset(charSet);
 			email.setSSL(true);
 			email.setHostName(hostSMTP);
-			//네이버smtp 포트번
+			//네이버smtp 포트번호
 			email.setSmtpPort(587);
 
 			//메일 아이디 비밀번호
@@ -193,13 +193,15 @@ public class MemberServiceImpl implements MemberService {
 		}
 	}
 
+	
+	//비밀번호찾기 이메일 보내기
 	@Override
-	public void find_pw(HttpServletResponse response, MemberVO member) throws Exception {
-		// TODO Auto-generated method stub
+	public void find_pw(HttpServletResponse response, MemberVO memberVO) throws Exception {
+		System.out.println("임시비밀번호 보내기!!");
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		// 아이디가 없으면
-		if (dao.check_id(member.getMem_Id()) == 0) {
+		if (dao.check_id(memberVO.getMem_Id()) == 0) {
 			out.print("<script>");
 			out.println("alert('가입된 이메일이 아닙니다. 회원가입을 해주세요');");
 			out.println("history.go(-1);");
@@ -212,19 +214,40 @@ public class MemberServiceImpl implements MemberService {
 				pw += (char) ((Math.random() * 26) + 97);
 			}
 			
-			member.setMem_Pwd(pw);
-			member.setMem_Name("콜라우티회원");
+			memberVO.setMem_Pwd(pw);
+			memberVO.setMem_Name("콜라우티회원");
 			// 비밀번호 변경
-			dao.update_pw(member);
+			dao.update_pw(memberVO);
 			
 			// 비밀번호 변경 메일 발송
-			sendEmail(member, "find_pw");
+			sendEmail(memberVO, "find_pw");
 			out.print("<script>");
 			out.println("alert('이메일로 임시비밀번호를 전송하였습니다. 확인해 주세요!');");
 			out.println("history.go(-1);");
 			out.println("</script>");
 			out.close();
 		}
+	}
+	//회원탈퇴
+	@Override
+	public MemberVO delete_Member(MemberVO memberVO, String pwd, HttpServletResponse response) throws Exception {
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		System.out.println("service password: " + dao.login(memberVO.getMem_Id()).getMem_Pwd());
+		//디비 비밀번호와 입력한 비밀번호가 같다면
+		if (!pwd.equals(dao.login(memberVO.getMem_Id()).getMem_Pwd())) {
+			out.println("<script>");
+			out.println("alert('기존 비밀번호가 다릅니다.');");
+			out.println("history.go(-1);");
+			out.println("</script>");
+			out.close();
+			return null;
+		//비밀번호가 맞다면.
+		}else {
+			dao.delete_Member(memberVO);
+			return dao.login(memberVO.getMem_Id());
+		}
+	
 	}
 
 }
