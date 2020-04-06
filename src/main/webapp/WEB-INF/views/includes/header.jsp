@@ -34,7 +34,7 @@
 <div class="wrapper">
 
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-dark navbar-teal">
+  <nav class="main-header navbar navbar-expand navbar-light">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
@@ -157,10 +157,10 @@
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar elevation-4 sidebar-light-teal">
+  <aside class="main-sidebar elevation-4 sidebar-dark-danger">
     <!-- Brand Logo -->
-    <a href="/main" class="brand-link navbar-teal">
-      <img src="../resources/dist/img/Logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+    <a href="/main" class="brand-link navbar-danger">
+      <img src="../resources/dist/img/logocollawT.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
       <span class="brand-text font-weight-light">Collaw T</span>
     </a>
@@ -172,15 +172,15 @@
         <div class="image">
           <img src="../resources/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
-        <div class="info">
+        <div class="info" style="width: 175px">
         <c:if test="${sessionScope.mem_Id != null}">
-        	<a href = "/member/mypage" class="nav-link active">마이페이지(${sessionScope.mem_Name}) </a>
+        	<a href = "/member/mypage" class="nav-link active" style="width: 100px; padding: 0px;">${sessionScope.mem_Name} </a>
         	<input type="button" value="로그아웃" onclick="location.href='/logout'">
 			<%-- <form action="/member/mypage">${sessionScope.mem_name}<br>
 				<a type="submit" class="nav-link" value="마이페이지 이동하기">
 			</form> --%>
 		</c:if>
-          <a href="#" class="d-block">${sessionScope.mem_Id}</a>ddd
+          <a href="#" class="d-block">${sessionScope.mem_Id}</a>
         </div>
       </div>
 

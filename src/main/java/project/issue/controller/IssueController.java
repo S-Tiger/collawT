@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import project.issue.vo.IssueVO;
 
-public interface issueController {
+public interface IssueController {
 
 	public ModelAndView searchList(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
