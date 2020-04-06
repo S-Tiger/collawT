@@ -12,6 +12,6 @@ public interface CoworkController {
 	
 	public String updateCowork(Model model) throws Exception;
 	public String insertCowork(HttpServletRequest request, HttpServletResponse response) throws Exception;
-	public String deleteCowork(Model model) throws Exception;
+	public String deleteCowork(Model model, HttpServletRequest request, HttpServletResponse responsen) throws Exception;
 
 }

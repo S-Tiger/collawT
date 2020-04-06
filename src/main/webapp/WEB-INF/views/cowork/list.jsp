@@ -35,7 +35,7 @@
           <li class="breadcrumb-item"><a href="#">캘린더</a></li>
          </ol>
          
-         <input type="button" value="이슈 작성" class="btn btn-success float-right" onclick="location.href='insert'">
+         <input type="button" value="협업공간 삭제" class="btn btn-success float-right" onclick="location.href='delete'">
 
           <!-- <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">

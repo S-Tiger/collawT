@@ -10,7 +10,7 @@
 		<result property="c_Comment" column="i_Content" />
 		<result property="mem_Id" column="mem_Id" />
 		<result property="c_Category" column="c_Category" />
-		
+
 		
 	</resultMap>
 
@@ -38,5 +38,10 @@
 		insert into co_work(c_Id, c_Name, c_Comment, mem_Id, c_Category) 
 		values(#{c_Id}, #{c_Name}, #{c_Comment}, #{mem_Id} , #{c_Category})
 	</insert>	
+	
+	
+	<delete id="deleteCowork" parameterType="String">
+		delete from co_work where c_Id =#{c_Id}
+	</delete>
 
 </mapper>

@@ -35,19 +35,26 @@ public class CoworkServiceImpl implements CoworkService {
 	}
 
 	@Override
-	public void insertCowork(Map<String, Object> datahMap) throws Exception {
+	public void insertCowork(Map<String, Object> dataMap) throws Exception {
 		String c_Id = coworkDAO.selectSqc();
-		datahMap.put("c_Id",c_Id);
-		System.out.println(datahMap.toString());
-		coworkDAO.insertCowork(datahMap);//DAO에 insertCowork함수 실행
-		comemberDAO.insertComember(datahMap);
+		dataMap.put("c_Id",c_Id);
+		System.out.println(dataMap.toString());
+		coworkDAO.insertCowork(dataMap);//DAO에 insertCowork함수 실행
+		comemberDAO.insertComember(dataMap);
 		
 	}
 
 	@Override
-	public void deleteCowork(Map<String, Object> dataMap) throws Exception {
-		// TODO Auto-generated method stub
+	public int deleteCowork(Map<String, Object> dataMap) throws Exception {
+		comemberDAO.deleteComemberAll(dataMap);
+		int result = coworkDAO.deleteCowork(dataMap);
+		if(result == 0 ) {
+			System.out.println("삭제 실패!!");
+		} else {
+			System.out.println("삭제 성공!!");
+		}
 		
+		return result;
 	}
 
 }

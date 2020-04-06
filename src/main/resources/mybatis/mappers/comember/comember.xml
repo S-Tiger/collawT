@@ -27,5 +27,27 @@
 		insert into co_member(c_Id, mem_Id, grade) 
 		values(#{c_Id}, #{mem_Id}, '02')
 	</insert>	
-
+	
+	
+	<delete id="deleteComember" parameterType="java.util.Map">
+	  	delete from co_member
+	  <where>
+	   <choose>
+	   		<when test ="c_Id != '' and c_Id != null and mem_Id != ''  and  mem_Id != null">
+	   		c_Id = #{c_Id} and mem_Id = ${mem_Id}
+	   		</when>
+	   		<when test ="c_Id != '' and c_Id != null">
+	   		c_Id = #{c_Id}
+	   		</when>
+	   		<when test="mem_Id != ''  and  mem_Id != null">
+	   		mem_Id = #{mem_Id}
+	   		</when>
+	   </choose>
+	  </where>
+	</delete>
+	
+	<delete id="deleteComemberAll" parameterType="java.util.Map">
+	  	delete from co_member where c_Id =#{c_Id}
+	</delete>
+	
 </mapper>

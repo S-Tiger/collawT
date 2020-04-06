@@ -12,7 +12,7 @@ public interface CoworkDAO {
 	 
 	 public void updateCowork(Map<String, Object> dataMap) throws DataAccessException;
 	 public void insertCowork(Map<String, Object> dataMap) throws DataAccessException;
-	 public void deleteCowork(Map<String, Object> dataMap) throws DataAccessException;
+	 public int deleteCowork(Map<String, Object> dataMap) throws DataAccessException;
 	 
 	 public String selectSqc() throws DataAccessException;;
 

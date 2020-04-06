@@ -77,9 +77,18 @@ public class CoworkControllerImpl implements CoworkController {
 	}
 
 	@Override
-	public String deleteCowork(Model model) throws Exception {
+	@GetMapping("/delete")
+	public String deleteCowork(Model model, HttpServletRequest request, HttpServletResponse responsen) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		
+		String c_Id = request.getParameter("c_Id");
+		
+		dataMap.put("c_Id", c_Id);
+		
+		coworkService.deleteCowork(dataMap);
+		
+		return "redirect:/cowork/list";
 	}
 
 }

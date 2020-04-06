@@ -60,24 +60,24 @@ public class CoworkAopImpl {
 	@Autowired
 	CoworkService coworkService;
 	
-//	@After("execution(* project.*.*.dao.*.*(..))")
-//	public void aroundAdvice() throws Throwable {
-//
-//		HttpServletRequest request = 
-//				((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
-//				.getRequest();
-//
-//		HttpSession session = request.getSession();
-//
-//		String mem_Id = (String) session.getAttribute("mem_Id");
-//
-//		Map<String, Object> searchMap = new HashMap<String, Object>();
-//		searchMap.put("mem_Id", mem_Id);
-//		 
-//		List<CoworkVO> list = coworkService.searchList(searchMap);
-//		
-//		request.setAttribute("coworklist", list);
-//
-//		System.out.println("AOP 실행");
-//	}
+	@After("execution(* project.*.*.controller.*.*(..))")
+	public void aroundAdvice() throws Throwable {
+
+		HttpServletRequest request = 
+				((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
+				.getRequest();
+
+		HttpSession session = request.getSession();
+
+		String mem_Id = (String) session.getAttribute("mem_Id");
+
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		searchMap.put("mem_Id", mem_Id);
+		 
+		List<CoworkVO> list = coworkService.searchList(searchMap);
+		
+		request.setAttribute("coworklist", list);
+
+		System.out.println("AOP 실행");
+	}
 }

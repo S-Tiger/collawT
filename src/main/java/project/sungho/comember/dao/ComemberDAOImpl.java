@@ -31,9 +31,9 @@ public class ComemberDAOImpl implements ComemberDAO {
 	}
 
 	@Override
-	public void insertComember(Map<String, Object> datahMap) throws DataAccessException {
+	public void insertComember(Map<String, Object> dataMap) throws DataAccessException {
 		
-		sqlSession.update("comember.insertComember",datahMap);
+		sqlSession.update("comember.insertComember",dataMap);
 		// TODO Auto-generated method stub
 		
 	}
@@ -41,7 +41,14 @@ public class ComemberDAOImpl implements ComemberDAO {
 	@Override
 	public void deleteComember(Map<String, Object> dataMap) throws DataAccessException {
 		// TODO Auto-generated method stub
+		sqlSession.delete("comember.deleteComember",dataMap);
+	}
+	
+	public void deleteComemberAll(Map<String, Object> dataMap) throws DataAccessException {
+		// TODO Auto-generated method stub
+		sqlSession.delete("comember.deleteComemberAll",dataMap);
 		
 	}
+	
 	
 }

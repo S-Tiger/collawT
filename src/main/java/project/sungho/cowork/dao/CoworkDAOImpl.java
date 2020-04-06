@@ -40,9 +40,12 @@ public class CoworkDAOImpl implements CoworkDAO {
 	}
 
 	@Override
-	public void deleteCowork(Map<String, Object> dataMap) throws DataAccessException {
+	public int deleteCowork(Map<String, Object> dataMap) throws DataAccessException {
 		// TODO Auto-generated method stub
 		
+		int result = sqlSession.delete("cowork.deleteCowork", dataMap);
+		
+		return result;
 	}
 
 
