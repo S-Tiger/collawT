@@ -91,7 +91,7 @@
 
 
 	<beans:bean id="LoginInterceptor"
-		class="project.sungho.interceptor.LoginInterceptor"></beans:bean>
+		class="project.sungho.interceptor.Interceptor"></beans:bean>
 	<interceptors>
 		<interceptor>
 			<mapping path="/**" />

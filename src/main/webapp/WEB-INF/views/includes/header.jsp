@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -199,10 +200,11 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/issue/list" class="nav-link active">
+                <a href="/issue/list" class="nav-link">
                   <i class="nav-icon fas fa-user-secret"></i>
                   <p>프라이빗 공간</p>
                 </a>
+               
               </li>
               <c:forEach var="coworklist" items="${coworklist}"> 
               <li class="nav-item">

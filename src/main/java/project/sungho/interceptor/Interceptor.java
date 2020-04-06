@@ -15,7 +15,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import project.sungho.cowork.service.CoworkService;
 import project.sungho.cowork.vo.CoworkVO;
 
-public class LoginInterceptor extends HandlerInterceptorAdapter {
+public class Interceptor extends HandlerInterceptorAdapter {
 	@Autowired
 	CoworkService coworkService;
 
