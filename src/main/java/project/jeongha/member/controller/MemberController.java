@@ -2,7 +2,9 @@ package project.jeongha.member.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import project.imgblob.ImgBlobVO;
 import project.jeongha.member.vo.MemberVO;
 
 public interface MemberController {
@@ -33,5 +36,7 @@ public String findPw() ;
 public void find_pw(MemberVO memberVO, HttpServletResponse response) throws Exception;
 public String outMember() ;
 public String delete_Member(MemberVO memberVO,String pw,HttpServletResponse response, HttpSession session, RedirectAttributes rttr)throws Exception;
+public String saveImage(MemberVO vo) throws Exception;
+
 
 }

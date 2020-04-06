@@ -27,6 +27,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import project.imgblob.ImgBlobVO;
+import project.jeongha.member.dao.MemberDaoImpl;
 import project.jeongha.member.service.MemberServiceImpl;
 import project.jeongha.member.vo.MemberVO;
 import project.sungho.cowork.service.CoworkService;
@@ -39,6 +41,9 @@ public class MemberControllerImpl implements MemberController{
 	@Autowired // 메모리할당 어노테이션 기존 자바 new로 선언하는 것들에 작성해주세요
 	MemberServiceImpl service;
 
+	@Autowired
+	MemberDaoImpl dao;
+	
 	@Autowired
 	CoworkService coworkService;
 	
@@ -151,6 +156,7 @@ public class MemberControllerImpl implements MemberController{
 		session.setAttribute("mem_Name", memberVO.getMem_Name());
 		session.setAttribute("mem_Pwd", memberVO.getMem_Pwd());
 		session.setAttribute("mem_Id", memberVO.getMem_Id());
+		session.setAttribute("mem_file", memberVO.getMem_File());
 		session.setAttribute("isLogin", true);
 
 		
@@ -239,6 +245,26 @@ public class MemberControllerImpl implements MemberController{
 			
 			return "redirect:/";
 		}
+		
+		//이미지 저장
+		@Override
+		@RequestMapping(value = "/saveImage")
+		public String saveImage(MemberVO memberVO) throws Exception {
+				//이미지 저장 컨트롤러
+				try {
+					Map<String, Object> hmap = new HashMap<String, Object>();
+					hmap.put("mem_Id", memberVO.getMem_Id());
+					hmap.put("mem_File", memberVO.getMem_File().getBytes());
+					
+					System.out.println("ImgSave Controller: "+hmap);
+					dao.saveImage(hmap);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				return "redirect:/member/mypage";
+			}
+		
+		
 	
 
 }

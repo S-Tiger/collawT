@@ -94,7 +94,12 @@
 								변경</button>
 						</p>
 					</form>
-					<br />
+					<!-- 프로필사진변경 -->
+					<form action="/member/saveImage" enctype="multipart/form-data" method="post">
+						<input type="hidden" name="mem_Id" value="${sessionScope.mem_Id}">
+						<input type="file" name="mem_File" /> 
+						<input type="submit" value="이미지저장" />
+					</form>
 					<form id="pwForm" action="/member/update_pw" method="post">
 						<input type="hidden" name="mem_Id" value="${sessionScope.mem_Id}">
 						<p class="login-box-msg">
@@ -114,14 +119,14 @@
 							<button type="submit" id="joinBtn"
 								class="btn btn-block btn-success">비밀번호 변경</button>
 							<button type="button" class="btn btn-block btn-success"
-								onclick="history.back(-1);">뒤로가기</button>
+								onclick="location.href='/main'">뒤로가기</button>
 						</p>
 					</form>
 					<p class="login-box-msg">
-							<input type="button" id="outBtn"
-								class="btn btn-block btn-success" value="회원탈퇴" onclick="location.href='/member/outMember'">
-						
-						</p>
+						<input type="button" id="outBtn" class="btn btn-block btn-success"
+							value="회원탈퇴" onclick="location.href='/member/outMember'">
+
+					</p>
 				</div>
 			</div>
 		</div>

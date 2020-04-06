@@ -1,5 +1,7 @@
 package project.jeongha.member.dao;
 
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -62,6 +64,13 @@ public class MemberDaoImpl implements MemberDao {
 	public int delete_Member(MemberVO memberVO) throws Exception {
 		return sqlSession.delete("member.delete_member", memberVO);
 	}
+	//프로필사진 변경
+	@Override
+	public void saveImage(Map<String, Object> hmap) throws Exception {
+		sqlSession.update("member.saveImage",hmap);
+		}
+		
+	
 
 
 }

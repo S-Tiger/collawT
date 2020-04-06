@@ -8,8 +8,12 @@
 		<result property="mem_Id" column="mem_Id"  />
 		<result property="mem_Pwd" column="mem_Pwd" />
 		<result property="mem_Name" column="mem_Name" />
+		<result property="mem_Imagine" column="mem_Imagine" />
+		<result property="mem_File" column="mem_File" javaType="[B" jdbcType="BLOB"  />
 		<!-- <result property="forgot_Key" column="mem_Imagname" /> -->
 	</resultMap>
+	
+	
 	
 	
 	<!-- 회원정보 수정 -->
@@ -33,6 +37,12 @@
 		]]>
 	
 	</update>
+	<!--프로필 사진 -->
+	<update id="saveImage" parameterType="java.util.Map">
+		update member
+		set mem_File=#{mem_File}
+		where mem_id =#{mem_Id}
+	</update>	
 	
 	<!-- 테스트용도 -->
 	<select id="logina" parameterType="String" resultType="memberVO">
@@ -65,7 +75,8 @@
 	<insert id="insertMember" parameterType="java.util.Map">
 		insert into member(mem_id, mem_pwd, mem_name, mem_joindate, mem_kind)
 		values(#{mem_Id}, #{mem_Pwd}, #{mem_Name}, sysdate, '00')
-	</insert>	
+	</insert>
+	
 	
 	<!-- 비밀번호 변경 -->
 	<update id="update_pw" parameterType="memberVO">

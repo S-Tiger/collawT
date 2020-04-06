@@ -22,7 +22,7 @@ import project.issue.vo.IssueVO;
 @Controller
 
 @RequestMapping("/issue/*")
-public class IssueControllerImpl implements IssueController {
+public class IssueControllerImpl implements issueController {
 	
 	
 	@Autowired
