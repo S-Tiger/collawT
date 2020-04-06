@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -31,13 +32,20 @@ public class CoworkControllerImpl implements CoworkController {
 	
 	@Override
 	@GetMapping("/list")
-	public String searchList(@RequestParam(value="mem_Id", required=false)String mem_Id, Model model) throws Exception {
+	public String searchList(Model model ,HttpServletRequest request, HttpServletResponse responsen) throws Exception {
 		Map<String, Object> searchMap = new HashMap<String, Object>();
-		searchMap.put("mem_Id", mem_Id);	 
+		
+		HttpSession session = request.getSession();
+		
+		String mem_Id = (String)session.getAttribute("mem_Id");
+				
+		
+		searchMap.put("mem_Id", mem_Id);	
+		
 		
 		List<CoworkVO> list = coworkService.searchList(searchMap); //vo타입에 list를 생성하고 서비스에서 가져온 데이터를 list에 넣습니다
 		
-		model.addAttribute("coworklist", list); //work_List 라는 이름으로 list객체를 넣습니다
+		model.addAttribute("coworklist", list); 
 		
 		return "cowork/list"; //뷰url지정해주세요
 		

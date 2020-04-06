@@ -16,6 +16,7 @@ import org.aspectj.lang.annotation.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Component;
+import org.springframework.ui.Model;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -59,26 +60,24 @@ public class CoworkAopImpl {
 	@Autowired
 	CoworkService coworkService;
 	
-	@AfterReturning("execution(* project.*.controller.*.*())")
-	public void aroundAdvice() throws Throwable {
-
-		HttpServletRequest request = 
-				((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
-				.getRequest();
-
-		HttpSession session = request.getSession();
-
-		String mem_Id = (String) session.getAttribute("mem_id");
-
-		Map<String, Object> searchMap = new HashMap<String, Object>();
-		searchMap.put("mem_Id", mem_Id);
-		 
-		List<CoworkVO> list = coworkService.searchList(searchMap);
-		
-		request.setAttribute("coworklist", list);
-		
-		//model.addAttribute("coworklist", list);
-
-		System.out.println("AOP 실행");
-	}
+//	@After("execution(* project.*.*.dao.*.*(..))")
+//	public void aroundAdvice() throws Throwable {
+//
+//		HttpServletRequest request = 
+//				((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
+//				.getRequest();
+//
+//		HttpSession session = request.getSession();
+//
+//		String mem_Id = (String) session.getAttribute("mem_Id");
+//
+//		Map<String, Object> searchMap = new HashMap<String, Object>();
+//		searchMap.put("mem_Id", mem_Id);
+//		 
+//		List<CoworkVO> list = coworkService.searchList(searchMap);
+//		
+//		request.setAttribute("coworklist", list);
+//
+//		System.out.println("AOP 실행");
+//	}
 }

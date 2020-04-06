@@ -49,7 +49,7 @@
                 </select>
               </div>
               </div>
-              <input type="hidden"  name = mem_Id value= ${sessionScope.mem_id }>
+              <input type="hidden"  name = mem_Id value= ${sessionScope.mem_Id }>
           <input type="submit" value="이슈 작성" class="btn btn-success float-right">
         <div class="row">
         <div class="col-sm-6">

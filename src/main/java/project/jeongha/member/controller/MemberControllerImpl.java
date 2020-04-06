@@ -3,7 +3,10 @@ package project.jeongha.member.controller;
 import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,6 +29,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import project.jeongha.member.service.MemberServiceImpl;
 import project.jeongha.member.vo.MemberVO;
+import project.sungho.cowork.service.CoworkService;
+import project.sungho.cowork.vo.CoworkVO;
 
 @Controller // 컨트롤러 어노테이션 컨트롤 마다 작성해주세요
 @RequestMapping("/member/*") // 컨트롤러 맵핑 어노테이션 /패키지명/* 로 지정해주세요
@@ -34,6 +39,9 @@ public class MemberControllerImpl implements MemberController{
 	@Autowired // 메모리할당 어노테이션 기존 자바 new로 선언하는 것들에 작성해주세요
 	MemberServiceImpl service;
 
+	@Autowired
+	CoworkService coworkService;
+	
 //	@Override
 //	@ModelAttribute("serverTime") // 모델어트리뷰트 어노테이션은 이컨트롤러가 매핑어뎁터로 메소드를 실행하기전에 먼저 실행하는 메소드 입니다.
 //	public String getServerTime(Locale locale) { // 이경우 jsp에 ${serverTime} 으로 현재시간을 리턴하는데
@@ -144,6 +152,14 @@ public class MemberControllerImpl implements MemberController{
 		session.setAttribute("mem_Pwd", memberVO.getMem_Pwd());
 		session.setAttribute("mem_Id", memberVO.getMem_Id());
 		session.setAttribute("isLogin", true);
+
+		
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		searchMap.put("mem_Id", memberVO.getMem_Id());
+		 
+		List<CoworkVO> list = coworkService.searchList(searchMap);
+		
+		request.setAttribute("coworklist", list);
 		mav.setViewName("/main/index");
 		}else {//실패했을경우
 		rAttr.addAttribute("result","loginFailed");
