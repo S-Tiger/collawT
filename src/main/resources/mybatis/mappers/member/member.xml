@@ -9,7 +9,7 @@
 		<result property="mem_Pwd" column="mem_Pwd" />
 		<result property="mem_Name" column="mem_Name" />
 		<result property="mem_Imagine" column="mem_Imagine" />
-		<result property="mem_File" column="mem_File" javaType="[B" jdbcType="BLOB"  />
+		<!-- <result property="mem_File" column="mem_File" javaType="[B" jdbcType="BLOB"  /> -->
 		<!-- <result property="forgot_Key" column="mem_Imagname" /> -->
 	</resultMap>
 	

@@ -156,9 +156,10 @@ public class MemberControllerImpl implements MemberController{
 		session.setAttribute("mem_Name", memberVO.getMem_Name());
 		session.setAttribute("mem_Pwd", memberVO.getMem_Pwd());
 		session.setAttribute("mem_Id", memberVO.getMem_Id());
-		session.setAttribute("mem_file", memberVO.getMem_File());
+//		session.setAttribute("mem_File", memberVO.getMem_File().isEmpty());
+//		System.out.println("boolean"+ memberVO.getMem_File().isEmpty());
 		session.setAttribute("isLogin", true);
-
+		session.setAttribute("member", memberVO);
 		
 		Map<String, Object> searchMap = new HashMap<String, Object>();
 		searchMap.put("mem_Id", memberVO.getMem_Id());

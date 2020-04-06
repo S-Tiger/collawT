@@ -180,7 +180,7 @@
 				<a type="submit" class="nav-link" value="마이페이지 이동하기">
 			</form> --%>
 		</c:if>
-          <a href="#" class="d-block">${sessionScope.mem_Id}</a>
+          <a href="#" class="d-block">${sessionScope.mem_Id}</a>ddd
         </div>
       </div>
 
