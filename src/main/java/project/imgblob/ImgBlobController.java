@@ -18,11 +18,11 @@ public class ImgBlobController {
 
 	/**
 	 * 이미지 저장위한 Form Tag
-	 * 
 	 * @return
 	 */
 	@RequestMapping(value = "/formFile")
 	public String formFile() {
+		System.out.println("이미지 저장 ");
 		return "imgblob/formFile";
 	}
 
@@ -34,9 +34,11 @@ public class ImgBlobController {
 	 */
 	@RequestMapping(value = "/saveImage")
 	public String saveImage(ImgBlobVO vo) {
+		//이미지 저장 컨트롤러
 		try {
 			Map<String, Object> hmap = new HashMap<String, Object>();
 			hmap.put("img", vo.getImgFile().getBytes());
+			System.out.println("ImgSave Controller: "+hmap);
 			dao.saveImage(hmap);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -61,9 +63,11 @@ public class ImgBlobController {
 	 */
 	@RequestMapping(value = "/getByteImage")
 	public ResponseEntity<byte[]> getByteImage() {
+		System.out.println("그림파일 가져오기");
+		System.out.println(dao.getByteImage());
 		Map<String, Object> map = dao.getByteImage();
 		byte[] imageContent = (byte[]) map.get("img");
-
+		System.out.println("getImg: "+map.get("img"));
 		final HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.IMAGE_PNG);
 		return new ResponseEntity<byte[]>(imageContent, headers, HttpStatus.OK);

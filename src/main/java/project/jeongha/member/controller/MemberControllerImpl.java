@@ -102,6 +102,7 @@ public class MemberControllerImpl implements MemberController{
 		System.out.println(request.getContextPath());
 //		String memId=(String)request.getParameter("memId");
 //		String memPw=(String)request.getParameter("memPw");
+		
 		System.out.println(member.getMem_Id());
 		System.out.println(member.getMem_Pwd());
 		ModelAndView mav =new ModelAndView();

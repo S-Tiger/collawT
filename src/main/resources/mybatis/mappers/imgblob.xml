@@ -14,7 +14,7 @@
 	</insert>
 
 	<select id="getByteImage" resultMap="clobMap">
-		SELECT img
+		SELECT *
 		FROM img_table
 	</select>
 </mapper>
