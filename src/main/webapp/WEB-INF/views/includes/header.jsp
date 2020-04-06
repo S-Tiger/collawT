@@ -189,10 +189,10 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item has-treeview menu-open">
+          <li class="nav-item has-treeview" style="border-bottom: 1px solid #4f5962;">
             <a href="#" class="nav-link active">
             
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="nav-icon far fa-handshake"></i>
               <p>
            	등록된 협업공간
                 <i class="right fas fa-angle-left"></i>
@@ -216,7 +216,7 @@
                </c:forEach>
                  <li class="nav-item">
                 <a href="/coworkcreate" class="nav-link">
-                  <i class="nav-icon fas fa-folder"></i>
+                  <i class="nav-icon fas fa-folder-plus"></i>
                   <p>협업공간 생성 </p>
                 </a>
               </li>
@@ -226,8 +226,9 @@
             <a href="../resources/pages/widgets.html" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
-                Widgets
-                <span class="right badge badge-danger">New</span>
+                	새로운 소식
+                <span class="badge badge-info right">3</span>
+                <!--  <span class="right badge badge-danger">New</span>-->
               </p>
             </a>
           </li>
