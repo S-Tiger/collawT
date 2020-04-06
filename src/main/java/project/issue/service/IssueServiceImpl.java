@@ -1,5 +1,6 @@
 package project.issue.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +18,7 @@ public class IssueServiceImpl implements IssueService {
 	IssueDAOImpl issueDAO;
 	
 	
-	//±Û ÀÔ·Â
+	//ê¸€ ë“±ë¡
 	@Override
 	public void  issueInsert(IssueVO issueVO) {
 		int result = issueDAO.issueInsert(issueVO);
@@ -29,29 +30,27 @@ public class IssueServiceImpl implements IssueService {
 		}
 	}
 	
-	//±Û ¸ñ·Ï Á¶È¸
+	//ëª©ë¡ ì¡°íšŒ
 	@Override
 	public List<Map> searchList() throws Exception{
 		List<Map> list = issueDAO.searchList();
 		return list;
 	}
 	
-	//°Ô½Ã±Û Á¶È¸
+	//ê²Œì‹œê¸€ ì¡°íšŒ
 	@Override
-	public List<Map> issueRead(String i_Num) {
-		List<Map> list = null;
-		list = issueDAO.issueRead(i_Num);
-		return list;
+	public Map<String, Object> issueRead(String i_Num) {
+		return issueDAO.issueRead(i_Num);
 		
 	}
 
-	//±Û »èÁ¦
+	//ê¸€ ì‚­ì œ
 	@Override
 	public void issueDelete(String i_Num) throws Exception {
 		issueDAO.issueDelete(i_Num);
 	}
 
-	//±Û ¼öÁ¤
+	//ê¸€ ìˆ˜ì •
 	@Override
 	public void issueUpdate(IssueVO issueVO) throws Exception {
 		issueDAO.issueUpdate(issueVO);

@@ -20,7 +20,7 @@
 		<result property="i_Num" column="i_Num" />
 		<result property="c_Id" column="c_Id" />
 		<result property="i_Name" column="i_Name" />
-		<result property="i_Content" column="i_Content" />
+		<result property="i_Content" column="i_Content" jdbcType="CLOB" javaType="java.lang.String"/>
 		<result property="i_Date" column="i_Date" />
 		<result property="i_Groupnum" column="i_Groupnum" />
 		<result property="mem_Id" column="mem_Id" />
@@ -51,7 +51,7 @@
 
 
 	<!-- 게시글 조회 -->
-	<select id="issueRead" resultMap="issueResult02"> 
+	<select id="issueRead"  parameterType="String" resultMap="issueResult02"> 
       <![CDATA[
         select I.i_Num, I.c_Id, I.i_Name, I.i_Content, I.i_Date, I.mem_Id, M.mem_name
 		from issue I, member M

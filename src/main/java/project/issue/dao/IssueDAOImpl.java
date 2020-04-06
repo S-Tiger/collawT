@@ -1,22 +1,23 @@
 package project.issue.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
+
 import project.issue.vo.IssueVO;
 
 @Repository
-public class IssueDAOImpl implements issueDAO {
+public class IssueDAOImpl implements IssueDAO {
 	
 	@Autowired
 	private SqlSession sqlSession;
 	
-	//±€ ¿‘∑¬
+	//Í∏Ä ÏûÖÎ†•
 	@Override
 	public int issueInsert(IssueVO issueVO) {
 		int result;
@@ -24,7 +25,7 @@ public class IssueDAOImpl implements issueDAO {
 		return result;
 	}
 	
-	//±€ ∏Ò∑œ ¡∂»∏
+	//Í∏Ä Î™©Î°ù
 	@Override
 	public List<Map> searchList() throws DataAccessException{
 		
@@ -33,22 +34,21 @@ public class IssueDAOImpl implements issueDAO {
 	
 	}
 	
-	//∞≥∫∞±€ ¡∂»∏
+	//Í≤åÏãúÍ∏Ä Ï°∞Ìöå
 	@Override
-	public List<Map> issueRead(String i_Num) {
-		List<Map> list = null;
-		list = sqlSession.selectList("issue.issueRead",i_Num);
-		return list;
+	public Map<String, Object> issueRead(String i_Num) {
+		return sqlSession.selectOne("issue.issueRead",i_Num);
+		
 	}
 
-	//±€ ªË¡¶
+	//Í∏Ä ÏÇ≠Ï†ú
 	@Override
 	public void issueDelete(String i_Num) throws Exception {
 		sqlSession.delete("issue.issueDelete", i_Num);
 		
 	}
 	
-	//±€ ºˆ¡§
+	//Í∏Ä ÏàòÏ†ï
 	@Override
 	public void issueUpdate(IssueVO issueVO) throws Exception {
 		sqlSession.update("issue.issueUpdate", issueVO);

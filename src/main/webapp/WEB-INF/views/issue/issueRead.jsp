@@ -63,6 +63,7 @@
 			<div class="col-md-6">
 
 				<!-- Box Comment -->
+				
 				<form name="readForm" role="form">
 
 					<div class="card card-widget">
@@ -100,7 +101,7 @@
 							<br>
 							<br>
 								<p id="i_Content" name="i_Content"><c:out value="${issueRead.i_Content}" escapeXml="false"/></p>
-							
+						
 							
 							
 							<br>
