@@ -1,14 +1,14 @@
-package project.issue.controller;
+package project.euna.issue.controller;
 
 
 import java.util.List;
 import java.util.Map;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,8 +16,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import project.issue.service.IssueService;
-import project.issue.vo.IssueVO;
+import project.euna.issue.service.IssueService;
+import project.euna.issue.vo.IssueVO;
+import project.euna.reply.service.ReplyService;
 
 @Controller
 
@@ -25,15 +26,20 @@ import project.issue.vo.IssueVO;
 public class IssueControllerImpl implements IssueController {
 	
 	
-	@Autowired
+	@Inject
 	IssueService issueService;
+	
+	@Inject
+	ReplyService replyService;
 	
 	//글 목록 조회
 	@Override
 	@GetMapping("/list")
 	public ModelAndView searchList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
+		
 		List<Map> list = issueService.searchList();
+		
 		
 		ModelAndView mav = new ModelAndView("issue/issueList");
 		mav.addObject("issueList", list);
@@ -65,15 +71,18 @@ public class IssueControllerImpl implements IssueController {
 	//개별 글 조회
 	@Override
 	@GetMapping("/read")
-	public ModelAndView issueRead(String i_Num, HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView issueRead(String i_Num, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		Map<String, Object> searchMap = issueService.issueRead(i_Num);
+		
+		Map<String, Object> board = issueService.issueRead(i_Num);
+		List<Map> reply = replyService.searchList(i_Num);
 		
 		ModelAndView mav = new ModelAndView("issue/issueRead");
-		mav.addObject("issueRead", searchMap);
+		mav.addObject("issueRead", board);
+		mav.addObject("replyList", reply);
 		
-		System.out.println(searchMap);
-		System.out.println(searchMap.get("MEM_ID"));
+		System.out.println("controller board"+board);
+		System.out.println("controller reply"+reply);
 		
 		return mav;
 	}
@@ -108,6 +117,9 @@ public class IssueControllerImpl implements IssueController {
 		//수정한 게시물로 리턴
 		return "redirect:/issue/read?i_Num="+i_Num;
 	}
+	
+
+	
 
 
 }

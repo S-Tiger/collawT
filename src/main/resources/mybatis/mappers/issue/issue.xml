@@ -69,7 +69,7 @@
 
 	<!-- 게시물 수정 -->
 	<update id="issueUpdate"
-		parameterType="project.issue.vo.IssueVO">
+		parameterType="project.euna.issue.vo.IssueVO">
 		UPDATE issue
 		SET i_Name = #{i_Name},
 		i_Content = #{i_Content}

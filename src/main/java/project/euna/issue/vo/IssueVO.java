@@ -1,4 +1,4 @@
-package project.issue.vo;
+package project.euna.issue.vo;
 
 public class IssueVO {
 

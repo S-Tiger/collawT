@@ -1,4 +1,4 @@
-package project.issue.dao;
+package project.euna.issue.dao;
 
 import java.util.HashMap;
 import java.util.List;
@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
-import project.issue.vo.IssueVO;
+import project.euna.issue.vo.IssueVO;
 
 @Repository
 public class IssueDAOImpl implements IssueDAO {

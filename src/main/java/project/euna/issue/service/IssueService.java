@@ -1,4 +1,4 @@
-package project.issue.service;
+package project.euna.issue.service;
 
 import java.util.HashMap;
 import java.util.List;
@@ -8,7 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.ui.Model;
 
-import project.issue.vo.IssueVO;
+import project.euna.issue.vo.IssueVO;
 
 public interface IssueService {
 

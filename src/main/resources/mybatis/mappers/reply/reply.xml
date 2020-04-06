@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="reply">
+	<resultMap id="replyResult01" type="ReplyVO">
+		<!-- property는 화면단에서 쓸 이름, column은 데이터컬럼명이랑 동일 -->
+		<result property="i_Num" column="i_Num" />
+		<result property="r_Num" column="r_Num" />
+		<result property="r_Content" column="r_Content" />
+		<result property="r_Date" column="r_Date" />
+		<result property="mem_Id" column="mem_Id" />
+		<result property="c_Id" column="c_Id" />
+	</resultMap>
+	
+	<resultMap id="replyResult02" type="java.util.HashMap">
+		<!-- property는 화면단에서 쓸 이름, column은 데이터컬럼명이랑 동일 -->
+		<result property="r_Num" column="r_Num" />
+		<result property="r_Content" column="r_Content" jdbcType="CLOB" javaType="java.lang.String"/>
+		<result property="r_Date" column="r_Date" />
+		<result property="i_Num" column="i_Num" />
+		<result property="c_Id" column="c_Id" />
+		<result property="mem_Id" column="mem_Id" />
+		<result property="mem_Name" column="mem_Name" />
+		
+	</resultMap>
+
+	
+
+	<!-- 댓글 목록 -->
+	<select id="searchList" resultMap="replyResult02"> 
+      <![CDATA[
+        select R.r_Num, R.r_Content, R.r_Date, R.i_Num, R.c_Id, R.mem_Id, M.mem_Name
+		from reply R, member M
+		where M.mem_Id=R.mem_Id
+		and i_Num = #{i_Num}
+		order by r_Num desc
+      ]]>
+
+	</select>
+	
+
+	<!-- 댓글 입력 -->
+	<insert id="replyInsert" parameterType="ReplyVO">
+		insert into reply(r_Num, r_Content, r_Date, i_Num, c_Id, mem_Id)
+		values(reply_r_num.nextval, #{r_Content}, sysdate, #{i_Num} , #{c_Id} , #{mem_Id})
+	</insert>
+
+
+
+	<!-- 게시물 삭제 -->
+	<!-- <delete id="issueDelete" parameterType="String">
+		DELETE
+		FROM issue
+		WHERE i_Num=#{i_Num}
+	</delete>
+ -->
+	<!-- 게시물 수정 -->
+	<!-- <update id="issueUpdate"
+		parameterType="project.euna.issue.vo.IssueVO">
+		UPDATE issue
+		SET i_Name = #{i_Name},
+		i_Content = #{i_Content}
+		WHERE i_Num=#{i_Num}
+	</update> -->
+
+</mapper>

@@ -11,7 +11,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		var formObj = $("form[name='readForm']");
-	
+			
 
 		//수정페이지로 이동 jquery
 		$("#update_btn").on("click", function() {
@@ -31,7 +31,43 @@
 			}
 			
 		})
+		
+		
+ 		//댓글 입력 버튼 클릭 시 이벤트
+		$("#replyInsert_btn").on("click", function() {
+			var r_Content = $("#r_Content").val();
+			//댓글 입력 비어있으면 아무 이벤트도 일어나지 않게 하기
+			if(r_Content==''){
+				return false;
+			}
+		})
+			/* }else{
+				$.ajax({
+					url:"/reply/replyInsert",
+					type:'get',
+					data:{
+						r_Content: $("#r_Content").val(),
+						i_Num : $("#i_Num").val(),
+						c_Id : $("#c_Id").val()
+					},
+					success:function(data){
+						if(data == 1) {
+	                        console.log("댓글이 정상적으로 입력되었습니다.");
+	                        $("#r_Content").val("");
+						}
+					}
+				})
+			}
+		}) */
+		
+		//댓글 조회 ajax
+		/* $.ajax({
+			url : 'issue/read'
+		}) */
+		
 	})
+	
+	
 </script>
 
 
@@ -42,13 +78,10 @@
 		<div class="container-fluid">
 			<div class="row mb-2">
 				<div class="col-sm-6">
-					<h1>Project Edit</h1>
+					
 				</div>
 				<div class="col-sm-6">
-					<ol class="breadcrumb float-sm-right">
-						<li class="breadcrumb-item"><a href="#">Home</a></li>
-						<li class="breadcrumb-item active">Project Edit</li>
-					</ol>
+			
 				</div>
 			</div>
 		</div>
@@ -63,7 +96,7 @@
 			<div class="col-md-6">
 
 				<!-- Box Comment -->
-				
+<!-- 본문 부분~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->				
 				<form name="readForm" role="form">
 
 					<div class="card card-widget">
@@ -119,107 +152,11 @@
 								value="${issueRead.i_Num}" /> <br>
 							<br>
 
-							<!-- 본인만 글 수정, 삭제 가능 나중에 mem_Id로 수정하기!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
-						
-						<c:if test="${sessionScope.mem_id == issueRead.mem_Id}">
-						
-								<input type="submit" value="삭제" id="delete_btn"
-									class="btn btn-success float-right">
-								<input type="submit" value="수정" id="update_btn"
-									class="btn btn-success float-right">
-						</c:if>
+							
+							
+<!-- 첨부파일 부분~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->				
 
-							<input type="button" value="목록"
-								class="btn btn-success float-right"
-								onclick="location.href='list'">
-
-						</div>
-
-						<!-- /.card-body -->
-
-						<!-- /.card -->
-					</div>
-
-					<!-- /.col -->
-					<div class="col-md-6">
-						<!-- Box Comment -->
-
-					</div>
-
-					<!-- /.card -->
-			</div>
-			</form>
-
-
-
-
-
-			<div class="col-md-6">
-				<div class="card">
-					<div class="card-header">
-
-						<div class="card-tools">
-							<button type="button" class="btn btn-tool"
-								data-card-widget="collapse" data-toggle="tooltip"
-								title="Collapse">
-								<i class="fas fa-minus"></i>
-							</button>
-						</div>
-					</div>
-					<!-- /.card-body -->
-					<div class="card-footer card-comments">
-						<div class="card-comment">
-							<!-- User image -->
-							<img class="img-circle img-sm"
-								src="../resources/dist/img/user3-128x128.jpg" alt="User Image">
-
-							<div class="comment-text">
-								<span class="username"> Maria Gonzales <span
-									class="text-muted float-right">8:03 PM Today</span>
-								</span>
-								<!-- /.username -->
-								It is a long established fact that a reader will be distracted
-								by the readable content of a page when looking at its layout.
-							</div>
-							<!-- /.comment-text -->
-						</div>
-						<!-- /.card-comment -->
-						<div class="card-comment">
-							<!-- User image -->
-							<img class="img-circle img-sm"
-								src="../resources/dist/img/user4-128x128.jpg" alt="User Image">
-
-							<div class="comment-text">
-								<span class="username"> Luna Stark <span
-									class="text-muted float-right">8:03 PM Today</span>
-								</span>
-								<!-- /.username -->
-								It is a long established fact that a reader will be distracted
-								by the readable content of a page when looking at its layout.
-							</div>
-							<!-- /.comment-text -->
-						</div>
-						<!-- /.card-comment -->
-					</div>
-					<!-- /.card-footer -->
-					<div class="card-footer">
-
-						<!-- 댓글 -->
-						<form action="#" method="post">
-							<img class="img-fluid img-circle img-sm"
-								src="../resources/dist/img/user4-128x128.jpg" alt="Alt Text">
-							<!-- .img-push is used to add margin to elements next to floating images -->
-							<div class="img-push">
-								<input type="text" class="form-control form-control-sm"
-									placeholder="Press enter to post comment">
-							</div>
-						</form>
-
-
-						<!-- /.card-body -->
-					</div>
-					<!-- /.card -->
-					<!-- <div class="card card-info">
+					<div class="card card-info">
             <div class="card-header">
               <h3 class="card-title">Files</h3>
 
@@ -248,49 +185,127 @@
                         <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
                       </div>
                     </td>
-                  <tr>
-                    <td>UAT.pdf</td>
-                    <td>28.4883 kb</td>
-                    <td class="text-right py-0 align-middle">
-                      <div class="btn-group btn-group-sm">
-                        <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                      </div>
-                    </td>
-                  <tr>
-                    <td>Email-from-flatbal.mln</td>
-                    <td>57.9003 kb</td>
-                    <td class="text-right py-0 align-middle">
-                      <div class="btn-group btn-group-sm">
-                        <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                      </div>
-                    </td>
-                  <tr>
-                    <td>Logo.png</td>
-                    <td>50.5190 kb</td>
-                    <td class="text-right py-0 align-middle">
-                      <div class="btn-group btn-group-sm">
-                        <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                      </div>
-                    </td>
-                  <tr>
-                    <td>Contract-10_12_2014.docx</td>
-                    <td>44.9715 kb</td>
-                    <td class="text-right py-0 align-middle">
-                      <div class="btn-group btn-group-sm">
-                        <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                      </div>
-                    </td>
-
+                 
                 </tbody>
               </table>
             </div>
-            /.card-body
+           <!--  /.card-body -->
           </div>
-          /.card -->
+          <!-- /.card -->
+<!-- 본인만 글 수정, 삭제 가능-->
+						
+						<c:if test="${sessionScope.mem_Id == issueRead.mem_Id}">
+						
+								<input type="submit" value="삭제" id="delete_btn"
+									class="btn btn-success float-right">
+								<input type="submit" value="수정" id="update_btn"
+									class="btn btn-success float-right">
+						</c:if>
+
+							<input type="button" value="목록"
+								class="btn btn-success float-right"
+								onclick="location.href='list'">
+								
+								<br><br><br>
+						</div>
+
+						<!-- /.card-body -->
+
+						<!-- /.card -->
+					</div>
+
+					<!-- /.col -->
+					<div class="col-md-6">
+						<!-- Box Comment -->
+
+					</div>
+
+					<!-- /.card -->
+					
+			</div>
+			</form>
+
+<!-- /.card -->
+
+
+
+
+<!-- 댓글 부분~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->				
+
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header">
+
+						<div class="card-tools">
+							<button type="button" class="btn btn-tool"
+								data-card-widget="collapse" data-toggle="tooltip"
+								title="Collapse">
+								<i class="fas fa-minus"></i>
+							</button>
+						</div>
+					</div>
+					<!-- /.card-body -->
+					<div class="card-footer card-comments">
+						<div class="card-comment">
+							<!-- User image 나중에 바꾸기!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+							<c:forEach var="replyList" items="${replyList}" >
+							<img class="img-circle img-sm"
+								src="../resources/dist/img/user3-128x128.jpg" alt="User Image">
+
+							<div class="comment-text">
+							
+								
+								<span class="username"> ${replyList.mem_Name}
+								
+								
+								<span class="text-muted float-right">${replyList.r_Date} </span>
+								<span class="text-muted float-right">삭제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+								<span class="text-muted float-right">수정&nbsp;&nbsp;&nbsp;</span>
+								
+								</span>
+								<!-- /.username -->
+								${replyList.r_Content}
+								
+							</div>
+							<div class="comment-text">
+							</div>
+							<br>
+							</c:forEach>
+							<!-- /.comment-text -->
+						</div>
+						<!-- /.card-comment -->
+						<div class="card-comment">
+							<!-- User image -->
+						
+							
+							<!-- /.comment-text -->
+						</div>
+						<!-- /.card-comment -->
+					</div>
+					<!-- /.card-footer -->
+					<div class="card-footer">
+
+						<!-- 댓글  입력-->
+						<form name="replyForm" action="/reply/replyInsert" method="post" encType="UTF-8">
+							<img class="img-fluid img-circle img-sm"
+								src="../resources/dist/img/user4-128x128.jpg" alt="Alt Text">
+							<!-- .img-push is used to add margin to elements next to floating images -->
+							<div class="img-push">
+								<input type="text" id="r_Content" name="r_Content" class="form-control form-control-sm"
+									placeholder="댓글을 입력하세요">
+									<input type="submit" id="replyInsert_btn" name="replyInsert_btn" class="btn btn-block btn-default btn-xs" value="입력" />
+									
+									<input type="hidden" id="i_Num" name="i_Num" value="${issueRead.i_Num}" />
+									<input type="hidden" id="c_Id" name="c_Id" value="${issueRead.i_Num}" />
+								
+								
+							</div>
+						</form>
+
+
+						<!-- /.card-body -->
+					</div>
+					
 				</div>
 			</div>
 			<div class="row">

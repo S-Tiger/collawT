@@ -1,4 +1,4 @@
-package project.issue.service;
+package project.euna.issue.service;
 
 import java.util.HashMap;
 import java.util.List;
@@ -7,8 +7,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import project.issue.dao.IssueDAOImpl;
-import project.issue.vo.IssueVO;
+import project.euna.issue.dao.IssueDAOImpl;
+import project.euna.issue.vo.IssueVO;
 
 
 @Service

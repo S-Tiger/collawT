@@ -1,4 +1,4 @@
-package project.issue.dao;
+package project.euna.issue.dao;
 
 import java.util.HashMap;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
-import project.issue.vo.IssueVO;
+import project.euna.issue.vo.IssueVO;
 
 public interface IssueDAO {
 
