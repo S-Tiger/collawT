@@ -52,7 +52,7 @@
 	</beans:bean>
 
 	<!-- 타일즈 실습 설정 -->
-	<beans:bean id="tilesConfigurer"
+	<!-- <beans:bean id="tilesConfigurer"
 		class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
 		<beans:property name="definitions">
 			<beans:list>
@@ -66,7 +66,7 @@
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<beans:property name="viewClass"
 			value="org.springframework.web.servlet.view.tiles2.TilesView" />
-	</beans:bean>
+	</beans:bean> -->
 
 	<!-- 다중파일 업로드 -->
 	<beans:bean id="multipartResolver"
@@ -101,6 +101,7 @@
 			<beans:ref bean="LoginInterceptor" />
 		</interceptor>
 	</interceptors>
+	
 	<!-- batch -->
 	<!-- <task:annotation-driven executor="executor" scheduler="scheduler"/> 
 		<task:scheduler id="scheduler" pool-size="10" /> <task:executor id="executor" 

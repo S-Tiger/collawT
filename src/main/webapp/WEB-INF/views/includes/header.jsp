@@ -7,7 +7,6 @@
 <script type="text/javascript">
 window.onload = function() {
 	var getmenu = getCookie('menu');
-	console.log(getmenu);
 	var menuId = document.getElementById('menustat');
 	if (getmenu != null) {
 	menuId.className = getmenu;
@@ -16,14 +15,11 @@ window.onload = function() {
 };
 function menuclick(){
 	deleteCookie('menu');
-	var name = 'menu';
 	var stat =  document.getElementById('menustat').className;
-	var exp = '1';
-	
 	if (stat == 'nav-item has-treeview menu-open') {
-			setCookie(name, 'nav-item has-treeview' , exp);
+			setCookie('menu', 'nav-item has-treeview' , 1);
 	}else if (stat == 'nav-item has-treeview' ){
-		setCookie(name, 'nav-item has-treeview menu-open' , exp);
+		setCookie('menu', 'nav-item has-treeview menu-open' , 1);
 	}
 	console.log(getCookie('menu'));
 }
@@ -47,7 +43,7 @@ var deleteCookie = function(name) {
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>AdminLTE 3 | Dashboard</title>
+<title>협업툴 Collaw T - 간단하고 쉬운협업</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Font Awesome -->
@@ -163,7 +159,7 @@ var deleteCookie = function(name) {
 									<p class="text-sm text-muted">
 										<i class="far fa-clock mr-1"></i> 4 Hours Ago
 									</p>
-								</div>
+								</div></div>
 							</div> <!-- Message End -->
 						</a>
 						<div class="dropdown-divider"></div>
@@ -223,9 +219,9 @@ var deleteCookie = function(name) {
 							class="img-circle elevation-2" alt="User Image">
 					</div>
 					<div class="info" style="width: 175px">
-						<c:if test="${sessionScope.mem_Id != null}">
+						<c:if test="${member.mem_Id != null}">
 							<a href="/member/mypage" class="nav-link active"
-								style="width: 100px; padding: 0px;">${sessionScope.mem_Name}
+								style="width: 100px; padding: 0px;">${member.mem_Name}
 							</a>
 							<input type="button" value="로그아웃"
 								onclick="location.href='/logout'">
@@ -233,7 +229,7 @@ var deleteCookie = function(name) {
 				<a type="submit" class="nav-link" value="마이페이지 이동하기">
 			</form> --%>
 						</c:if>
-						<a href="#" class="d-block">${sessionScope.mem_Id}</a>
+						<a href="#" class="d-block">${member.mem_Id}</a>
 					</div>
 				</div>
 

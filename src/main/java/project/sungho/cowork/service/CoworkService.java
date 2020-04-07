@@ -10,6 +10,7 @@ import project.sungho.cowork.vo.CoworkVO;
 
 public interface CoworkService {
 	 public List<CoworkVO> searchList(Map<String, Object> searchMap) throws DataAccessException;
+	 public Map<String, Object> searchMain(Map<String, Object> searchMap) throws DataAccessException;
 	 
 	 public void updateCowork(Map<String, Object> dataMap) throws Exception;
 	 public void insertCowork(Map<String, Object> dataMap) throws Exception;

@@ -2,8 +2,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
-
 <%@include file="../includes/header.jsp"%>
+<style>
+@font-face { font-family: 'Recipekorea'; 
+src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/Recipekorea.woff') 
+format('woff'); font-weight: normal; font-style: normal; }
+</style>
+
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -12,7 +17,8 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Dashboard</h1>
+            <h1 class="m-0 text-dark" style="font-family: Recipekorea;">&nbsp; ${pjt.c_Name}</h1>
+            <p class="breadcrumb float-sm-left">&nbsp; ${pjt.c_Comment}</p>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">

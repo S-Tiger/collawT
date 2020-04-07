@@ -28,6 +28,13 @@ public class CoworkServiceImpl implements CoworkService {
 		List<CoworkVO> list =  coworkDAO.searchList(searchMap);  //DAO에 searchList함수 실행
 		return list;
 	}
+	
+	@Override
+	public Map<String, Object> searchMain(Map<String, Object> searchMap) throws DataAccessException {
+		
+		Map<String, Object> pjt = coworkDAO.searchMain(searchMap);  //DAO에 searchList함수 실행
+		return pjt;
+	}
 
 	@Override
 	public void updateCowork(Map<String, Object> dataMap) throws Exception {

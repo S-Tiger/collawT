@@ -24,7 +24,7 @@
               <i class="fas fa-times"></i></button>
           </div>
         </div>
-          <form action="/cowork/insert" method="post" encType="UTF-8">
+          <form action="/project/insert" method="post" encType="UTF-8">
         <div class="card-body p-0">
               <div class="form-group">
               <div class="col-md-6">

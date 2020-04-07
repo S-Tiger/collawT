@@ -14,6 +14,8 @@ public interface CoworkDAO {
 	 public void insertCowork(Map<String, Object> dataMap) throws DataAccessException;
 	 public int deleteCowork(Map<String, Object> dataMap) throws DataAccessException;
 	 
-	 public String selectSqc() throws DataAccessException;;
+	 public String selectSqc() throws DataAccessException;
+
+	Map<String, Object> searchMain(Map<String, Object> searchMap) throws DataAccessException;;
 
 }

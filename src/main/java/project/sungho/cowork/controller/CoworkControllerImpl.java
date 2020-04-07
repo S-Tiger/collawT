@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import project.sungho.cowork.service.CoworkService;
 import project.sungho.cowork.vo.CoworkVO;
@@ -56,18 +57,14 @@ public class CoworkControllerImpl implements CoworkController {
 	@GetMapping("/main")
 	public String searchMain(Model model ,HttpServletRequest request, HttpServletResponse responsen) throws Exception {
 		Map<String, Object> searchMap = new HashMap<String, Object>();
+		String c_Id = (String)request.getParameter("c_Id");
 		
-		HttpSession session = request.getSession();
+		searchMap.put("c_Id", c_Id);
 		
-		String c_Id = (String)session.getAttribute("c_Id");
-		
-		
-		searchMap.put("c_Id", c_Id);	
+		Map<String, Object>pjt = coworkService.searchMain(searchMap); //vo타입에 list를 생성하고 서비스에서 가져온 데이터를 list에 넣습니다
 		
 		
-		List<CoworkVO> list = coworkService.searchList(searchMap); //vo타입에 list를 생성하고 서비스에서 가져온 데이터를 list에 넣습니다
-		
-		model.addAttribute("coworklist", list); 
+		model.addAttribute("pjt", pjt); 
 		
 		return "cowork/main"; //뷰url지정해주세요
 		
@@ -94,7 +91,7 @@ public class CoworkControllerImpl implements CoworkController {
 		}
 		coworkService.insertCowork(dataMap);
 		
-		return "redirect:/cowork/list";
+		return "redirect:/main";
 		
 	}
 
@@ -110,7 +107,7 @@ public class CoworkControllerImpl implements CoworkController {
 		
 		coworkService.deleteCowork(dataMap);
 		
-		return "redirect:/project/list";
+		return "redirect:/main";
 	}
 	
 	

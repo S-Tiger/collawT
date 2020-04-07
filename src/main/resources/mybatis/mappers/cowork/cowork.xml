@@ -7,14 +7,24 @@
 	<resultMap id="coworkResult01" type="java.util.Map">
 		<result property="c_Id" column="c_Id"  />
 		<result property="c_Name" column="c_Name" />
-		<result property="c_Comment" column="i_Content" />
+		<result property="c_Comment" column="c_Comment" jdbcType="CLOB" javaType="java.lang.String" />
+		<result property="mem_Id" column="mem_Id" />
+		<result property="c_Category" column="c_Category" />
+
+		
+	</resultMap>
+	
+	<resultMap id="coworkResult02" type="java.util.Map">
+		<result property="c_Id" column="c_Id"  />
+		<result property="c_Name" column="c_Name" />
+		<result property="c_Comment" column="c_Comment" jdbcType="CLOB" javaType="java.lang.String" />
 		<result property="mem_Id" column="mem_Id" />
 		<result property="c_Category" column="c_Category" />
 
 		
 	</resultMap>
 
-	<select id="searchList" resultMap="coworkResult01" parameterType="java.util.Map"> 
+	<select id="searchList" resultMap="coworkResult01" parameterType="coworkVO"> 
       <![CDATA[
          select c_Id, c_Name, c_Comment, mem_Id, c_Category
          from co_work
@@ -23,6 +33,20 @@
 		<where>
 			<if test=" mem_Id != ''  and  mem_Id != null">
 				mem_Id = #{mem_Id}
+			</if>
+		</where>
+		  order by mem_Id asc
+	</select>
+	
+	
+	<select id="searchMain" resultMap="coworkResult02" parameterType="java.util.Map"> 
+      <![CDATA[
+         select c_Id, c_Name, c_Comment, mem_Id, c_Category
+         from co_work
+      ]]>
+		<where>
+			<if test=" c_Id != ''  and  c_Id != null">
+				c_Id = #{c_Id}
 			</if>
 		</where>
 		  order by mem_Id asc
