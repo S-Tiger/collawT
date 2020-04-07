@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -82,11 +83,11 @@
 						<p class="login-box-msg">
 							<label>ID</label> <input class="form-control" type="email"
 								id="mem_Id" name="mem_Id" readonly
-								value="${sessionScope.mem_Id}">
+								value="${member.mem_Id}">
 						</p>
 						<p class="login-box-msg">
 							<label>이름</label> <input class="form-control" type="text"
-								id="mem_Name" name="mem_Name" value="${sessionScope.mem_Name}"
+								id="mem_Name" name="mem_Name" value="${member.mem_Name}"
 								required>
 						</p>
 						<p class="login-box-msg">
@@ -96,12 +97,14 @@
 					</form>
 					<!-- 프로필사진변경 -->
 					<form action="/member/saveImage" enctype="multipart/form-data" method="post">
-						<input type="hidden" name="mem_Id" value="${sessionScope.mem_Id}">
+						<input type="hidden" name="mem_Id" value="${member.mem_Id}">
 						<input type="file" name="mem_File" /> 
 						<input type="submit" value="이미지저장" />
 					</form>
+
+					<!--   <img alt="" src="${contextPath}/getByteImage" /> 이미지 -->
 					<form id="pwForm" action="/member/update_pw" method="post">
-						<input type="hidden" name="mem_Id" value="${sessionScope.mem_Id}">
+						<input type="hidden" name="mem_Id" value="${member.mem_Id}">
 						<p class="login-box-msg">
 							<label>기존비밀번호</label> <input class="form-control" id="old_pw"
 								name="old_pw" type="password" required>

@@ -83,7 +83,7 @@ public class MemberControllerImpl implements MemberController{
 		@Override
 		@GetMapping("/outMember")
 		public String outMember() {
-			System.out.println("비밀번호 찾기 페이지");
+			System.out.println("회원탈퇴 찾기 페이지");
 			return "member/outMember";
 		}
 		@Override
@@ -100,46 +100,51 @@ public class MemberControllerImpl implements MemberController{
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
 	public String memJoin(@ModelAttribute MemberVO memberVO,HttpServletRequest request, HttpServletResponse response)throws Exception { // 매게변수로 vo가 들어갔을경우 자동으로 변수이름에 맞는걸 set get 해줍니다.
 		request.setCharacterEncoding("utf-8");													  //다른이름으로 지정하고 싶을 경우  ex : @ModelAttribute(변수이름) MeberVo memberVO
-																							//으로하시면 변수이름. 으로 접근가능합니다
-		service.memberJoin(memberVO,response); 														// service에 memberRegister를 실행하는 부분
+		Map<String,Object> joinMem =new HashMap<String, Object>();
+		joinMem.put("mem_Id", memberVO.getMem_Id());
+		joinMem.put("mem_Pwd", memberVO.getMem_Pwd());
+		joinMem.put("mem_Name", memberVO.getMem_Name());		
+		
+		//으로하시면 변수이름. 으로 접근가능합니다
+		service.memberJoin(joinMem,memberVO,response); 														// service에 memberRegister를 실행하는 부분
 		//중복된 아이디를 가입했을때 오류가난다.
 		//조건을 주자
 		return "/member/loginPage"; // 리턴타입엔 패키지명/jsp파일 로 작성하여주세요 view에서도 패키지/jsp로 관리해주세요
 	}
 
 	
-	//로그인 -> *안쓰는중*
-	@Override
-	@RequestMapping(value = "/login",method = RequestMethod.POST)
-	public ModelAndView memLogin(MemberVO member,RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response)throws Exception {
-		System.out.println(request.getContextPath());
-//		String memId=(String)request.getParameter("memId");
-//		String memPw=(String)request.getParameter("memPw");
-		
-		System.out.println(member.getMem_Id());
-		System.out.println(member.getMem_Pwd());
-		ModelAndView mav =new ModelAndView();
-		System.out.println("로그인컨트롤러");
-		//로그인로직
-		MemberVO memVO = service.login(member);
-		System.out.println(member);
-		//로그인시 세션에.. 로그인성공
-		if(memVO != null) {
-		HttpSession session = request.getSession();
-		
-		session.setAttribute("mem_name", memVO.getMem_Name());
-		session.setAttribute("mem_pwd", memVO.getMem_Pwd());
-		session.setAttribute("isLogin", true);
-		mav.setViewName("/main/index");
-		
-		}else {//실패했을경우
-			rAttr.addFlashAttribute("result","loginFailed");
-		mav.setViewName("redirect:/member/loginPage");
-		
-		}
-
-		return mav;
-	}
+//	//로그인 -> *안쓰는중*
+//	@Override
+//	@RequestMapping(value = "/login",method = RequestMethod.POST)
+//	public ModelAndView memLogin(MemberVO member,RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response)throws Exception {
+//		System.out.println(request.getContextPath());
+////		String memId=(String)request.getParameter("memId");
+////		String memPw=(String)request.getParameter("memPw");
+//		
+//		System.out.println(member.getMem_Id());
+//		System.out.println(member.getMem_Pwd());
+//		ModelAndView mav =new ModelAndView();
+//		System.out.println("로그인컨트롤러");
+//		//로그인로직
+//		MemberVO memVO = service.login(member);
+//		System.out.println(member);
+//		//로그인시 세션에.. 로그인성공
+//		if(memVO != null) {
+//		HttpSession session = request.getSession();
+//		
+//		session.setAttribute("mem_name", memVO.getMem_Name());
+//		session.setAttribute("mem_pwd", memVO.getMem_Pwd());
+//		session.setAttribute("isLogin", true);
+//		mav.setViewName("/main/index");
+//		
+//		}else {//실패했을경우
+//			rAttr.addFlashAttribute("result","loginFailed");
+//		mav.setViewName("redirect:/member/loginPage");
+//		
+//		}
+//
+//		return mav;
+//	}
 	
 	
 	//로그인 테스트 컨트롤러->회원정보수정
@@ -148,27 +153,31 @@ public class MemberControllerImpl implements MemberController{
 	public ModelAndView memLogintest(MemberVO member,RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response)throws Exception {
 		ModelAndView mav =new ModelAndView();
 		System.out.println("로그인컨트롤러");
+		Map<String, Object> memLogin = new HashMap<String, Object>();
+		memLogin.put("mem_Id", member.getMem_Id());
+		memLogin.put("mem_Pwd", member.getMem_Pwd());
 		//로그인로직
-		MemberVO memberVO = service.login(member);
+		Map<String, Object> memberVO = service.login(memLogin);
 		//로그인시 세션에.. 로그인성공
 		if(memberVO != null) {
+		System.out.println("로그인 성공(객체): "+memberVO);
 		HttpSession session = request.getSession();
-		session.setAttribute("mem_Name", memberVO.getMem_Name());
-		session.setAttribute("mem_Pwd", memberVO.getMem_Pwd());
-		session.setAttribute("mem_Id", memberVO.getMem_Id());
+//		session.setAttribute("mem_Name", memberVO.getMem_Name());
+//		session.setAttribute("mem_Pwd", memberVO.getMem_Pwd());
+//		session.setAttribute("mem_Id", memberVO.getMem_Id());
 //		session.setAttribute("mem_File", memberVO.getMem_File().isEmpty());
 //		System.out.println("boolean"+ memberVO.getMem_File().isEmpty());
-		session.setAttribute("isLogin", true);
+//		session.setAttribute("isLogin", true);
 		session.setAttribute("member", memberVO);
-		
-		Map<String, Object> searchMap = new HashMap<String, Object>();
-		searchMap.put("mem_Id", memberVO.getMem_Id());
+		//jsp페이지에서 ${member.mem_Id}---->이런식으로 접근해야됨
+//		Map<String, Object> searchMap = new HashMap<String, Object>();
+//		searchMap.put("mem_Id", memberVO.getMem_Id());
 		 
-		List<CoworkVO> list = coworkService.searchList(searchMap);
+//		List<CoworkVO> list = coworkService.searchList(searchMap);
 		
-		request.setAttribute("coworklist", list);
+//		request.setAttribute("coworklist", list);
 		mav.setViewName("/main/index");
-		}else {//실패했을경우
+		} else {//실패했을경우
 		rAttr.addAttribute("result","loginFailed");
 		mav.setViewName("redirect:/member/loginPage");
 		
@@ -186,7 +195,7 @@ public class MemberControllerImpl implements MemberController{
 	         System.out.println(memberVO.getMem_Name());
 	         service.updateMypage(memberVO);
 	         rttr.addFlashAttribute("msg", "회원정보 수정 완료");
-	         session.setAttribute("mem_Name", memberVO.getMem_Name());
+	         session.setAttribute("member", memberVO);
 	         return "/main/index";
 	      }
 		
@@ -215,22 +224,18 @@ public class MemberControllerImpl implements MemberController{
 		
 			System.out.println("아작스");
 			System.out.println(mem_Id);
+			//아이디가 있는지 없는지 있으면 1 없으면 0
 			int result= service.check_id(mem_Id);
+			
 			System.out.println("controller result:"+result);
-//			PrintWriter out = response.getWriter();
-//			if(result == 1) {
-//				out.print("no_usable");
-//			}else {
-//				out.print("usable");
-//			}
 			return result;
 		}
 		//비밀번호 찾기
 		@Override
 		@RequestMapping(value = "/find_pw", method = RequestMethod.POST)
-		public void find_pw(MemberVO memberVO, HttpServletResponse response) throws Exception {
+		public void find_pw(Map<String,Object> member, MemberVO memberVO, HttpServletResponse response) throws Exception {
 			// TODO Auto-generated method stub
-			service.find_pw(response, memberVO);
+			service.find_pw(response, memberVO, member);
 		}
 
 		//회원 탈퇴
@@ -252,6 +257,15 @@ public class MemberControllerImpl implements MemberController{
 		@RequestMapping(value = "/saveImage")
 		public String saveImage(MemberVO memberVO) throws Exception {
 				//이미지 저장 컨트롤러
+			 
+			System.out.println(memberVO.getMem_Id());
+			System.out.println(memberVO.getMem_File().getBytes());
+//			try {
+//				
+//				dao.saveImage(memberVO);
+//			} catch (Exception e) {
+//				System.out.println("이미지저장 오류");
+//			}
 				try {
 					Map<String, Object> hmap = new HashMap<String, Object>();
 					hmap.put("mem_Id", memberVO.getMem_Id());

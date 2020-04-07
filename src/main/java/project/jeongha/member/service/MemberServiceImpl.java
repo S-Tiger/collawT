@@ -30,13 +30,14 @@ public class MemberServiceImpl implements MemberService {
 	// 요청은 controller -> service -> dao 응답은 반대 생각하면 됩니다.
 
 	@Override // 회원가입
-	public int memberJoin(MemberVO memberVO, HttpServletResponse response) throws Exception {// 똑같이 vo를 매개변수로 넣으면 get
+	public int memberJoin(Map<String,Object> member,MemberVO memberVO, HttpServletResponse response) throws Exception {// 똑같이 vo를 매개변수로 넣으면 get
 																								// set을 알아서해주기때문에 코드가
 																								// 줄어듦
 		// 이거안쓰면 글씨 깨짐
 		response.setContentType("text/html;charset=utf-8");
 		// 아이디 중복을확인하여 1이면 가입을 못하게 막는다.
 		if (dao.check_id(memberVO.getMem_Id()) == 1) {
+		//if (dao.check_id(memberVO) == 1) {
 			System.out.println("동일한 아이디");
 			PrintWriter out = response.getWriter();
 			response.setCharacterEncoding("utf-8");
@@ -51,7 +52,7 @@ public class MemberServiceImpl implements MemberService {
 		} else {
 			// 가입완료
 			// memberVO.setForgot_key(create_key());
-			dao.memberInsert(memberVO);
+			dao.memberJoin(member);
 			System.out.println("회원가입 완료");
 			return 1;
 		}
@@ -66,10 +67,10 @@ public class MemberServiceImpl implements MemberService {
 
 	// 로그인
 	@Override
-	public MemberVO login(MemberVO memberVO) throws Exception {
+	public Map<String, Object> login(Map<String, Object> memLogin) throws Exception {
 		// TODO Auto-generated method stub
 
-		return dao.memberSelect(memberVO);
+		return dao.memberLogin(memLogin);
 	}
 
 	// 회원정보 업데이트(아직안씀)
@@ -196,12 +197,13 @@ public class MemberServiceImpl implements MemberService {
 	
 	//비밀번호찾기 이메일 보내기
 	@Override
-	public void find_pw(HttpServletResponse response, MemberVO memberVO) throws Exception {
+	public void find_pw(HttpServletResponse response, MemberVO memberVO,Map<String,Object> member) throws Exception {
 		System.out.println("임시비밀번호 보내기!!");
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		// 아이디가 없으면
 		if (dao.check_id(memberVO.getMem_Id()) == 0) {
+		//if (dao.check_id(member) == 0) {
 			out.print("<script>");
 			out.println("alert('가입된 이메일이 아닙니다. 회원가입을 해주세요');");
 			out.println("history.go(-1);");
@@ -226,7 +228,7 @@ public class MemberServiceImpl implements MemberService {
 			out.println("history.go(-1);");
 			out.println("</script>");
 			out.close();
-		}
+		} 
 	}
 	//회원탈퇴
 	@Override

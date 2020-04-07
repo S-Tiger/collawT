@@ -4,12 +4,12 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="member">
-	<resultMap id="memberResult01" type="MemberVO">
+	<resultMap id="memberResult01" type="java.util.HashMap">
 		<result property="mem_Id" column="mem_Id"  />
 		<result property="mem_Pwd" column="mem_Pwd" />
 		<result property="mem_Name" column="mem_Name" />
 		<result property="mem_Imagine" column="mem_Imagine" />
-		<!-- <result property="mem_File" column="mem_File" javaType="[B" jdbcType="BLOB"  /> -->
+		<result property="mem_File" column="mem_File" javaType="[B" jdbcType="BLOB"  />
 		<!-- <result property="forgot_Key" column="mem_Imagname" /> -->
 	</resultMap>
 	
@@ -17,7 +17,7 @@
 	
 	
 	<!-- 회원정보 수정 -->
-	<update id="update_mypage" parameterType="memberVO">
+	<update id="update_mypage" parameterType="java.util.Map">
 		update member set mem_Name = #{mem_Name} where mem_Id =#{mem_Id}
 	</update>
 	
@@ -29,7 +29,7 @@
 	</select>
 	
 	<!-- 회원정보 수정 -->
-	<update id="updateMember" parameterType="memberVO">
+	<update id="updateMember" parameterType="java.util.Map">
 		<![CDATA[
 			update member
 			set mem_Pwd=#{mem_Pwd}, mem_Name=#{mem_Name}
@@ -50,7 +50,7 @@
 	</select>
 	
 	<!--로그인 -->
-	<select id="login" resultMap="memberResult01" parameterType="memberVO">
+	<select id="login" resultMap="memberResult01" parameterType="java.util.Map">
 	<![CDATA[
 		select * from member
 		where mem_Id =#{mem_Id} and mem_Pwd=#{mem_Pwd}
@@ -72,7 +72,7 @@
 	</select>
 	
 	<!-- 회원가입 -->
-	<insert id="insertMember" parameterType="java.util.Map">
+	<insert id="memberJoin" parameterType="java.util.Map">
 		insert into member(mem_id, mem_pwd, mem_name, mem_joindate, mem_kind)
 		values(#{mem_Id}, #{mem_Pwd}, #{mem_Name}, sysdate, '00')
 	</insert>
