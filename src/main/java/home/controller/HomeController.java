@@ -32,11 +32,7 @@ public class HomeController {
 		return "sample/joinForm";
 	}
 	
-	@RequestMapping("/coworkcreate")
-	public String project(Model model) {
-
-		return "cowork/coworkinsert";
-	}
+	
 	
 	@RequestMapping("/issueadd")
 	public String projectadd(Model model) {

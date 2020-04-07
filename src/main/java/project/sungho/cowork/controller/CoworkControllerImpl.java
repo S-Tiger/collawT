@@ -24,7 +24,7 @@ import project.sungho.cowork.vo.CoworkVO;
 
 
 @Controller
-@RequestMapping("/cowork/*")
+@RequestMapping("/project/*")
 public class CoworkControllerImpl implements CoworkController {
 	
 	@Autowired
@@ -48,6 +48,28 @@ public class CoworkControllerImpl implements CoworkController {
 		model.addAttribute("coworklist", list); 
 		
 		return "cowork/list"; //뷰url지정해주세요
+		
+	}
+	
+	
+	@Override
+	@GetMapping("/main")
+	public String searchMain(Model model ,HttpServletRequest request, HttpServletResponse responsen) throws Exception {
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		
+		HttpSession session = request.getSession();
+		
+		String c_Id = (String)session.getAttribute("c_Id");
+		
+		
+		searchMap.put("c_Id", c_Id);	
+		
+		
+		List<CoworkVO> list = coworkService.searchList(searchMap); //vo타입에 list를 생성하고 서비스에서 가져온 데이터를 list에 넣습니다
+		
+		model.addAttribute("coworklist", list); 
+		
+		return "cowork/main"; //뷰url지정해주세요
 		
 	}
 
@@ -88,7 +110,14 @@ public class CoworkControllerImpl implements CoworkController {
 		
 		coworkService.deleteCowork(dataMap);
 		
-		return "redirect:/cowork/list";
+		return "redirect:/project/list";
+	}
+	
+	
+	@RequestMapping("/create")
+	public String project(Model model) {
+
+		return "cowork/coworkinsert";
 	}
 
 }

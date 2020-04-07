@@ -2,7 +2,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
-<%@include file="../includes/header.jsp" %>
+
+<%@include file="../includes/header.jsp"%>
+
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -616,5 +618,5 @@
   <!-- /.content-wrapper -->
   
 
+<%@include file="../includes/footer.jsp"%>
 
- <%@include file="../includes/footer.jsp" %>

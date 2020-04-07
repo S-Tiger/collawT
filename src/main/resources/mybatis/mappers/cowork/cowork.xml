@@ -18,12 +18,14 @@
       <![CDATA[
          select c_Id, c_Name, c_Comment, mem_Id, c_Category
          from co_work
+       
       ]]>
 		<where>
-			<if test=" c_Name != ''  and  c_Name != null">
-				c_Name = #{c_Name}
+			<if test=" mem_Id != ''  and  mem_Id != null">
+				mem_Id = #{mem_Id}
 			</if>
 		</where>
+		  order by mem_Id asc
 	</select>
 	
 	
