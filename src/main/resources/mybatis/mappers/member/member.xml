@@ -87,6 +87,13 @@
 	<delete id="delete_member" parameterType="memberVO">
 		delete from member where mem_id =#{mem_Id}
 	</delete>
-
+	<!-- 사진불러오기 -->
+	<select id="getByteImage" resultMap="memberResult01">
+	<![CDATA[
+		SELECT mem_File
+		FROM member
+		where mem_Id = asd222@222.com
+	 ]]>
+	</select>
 
 </mapper>

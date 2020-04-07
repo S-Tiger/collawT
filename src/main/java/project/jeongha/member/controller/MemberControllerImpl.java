@@ -14,7 +14,11 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.xmlbeans.impl.jam.mutable.MElement;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpOutputMessage;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -279,7 +283,17 @@ public class MemberControllerImpl implements MemberController{
 				return "redirect:/member/mypage";
 			}
 		
-		
+		@RequestMapping(value = "/getByteImage")
+		public ResponseEntity<byte[]> getByteImage() {
+			System.out.println("그림파일 가져오기");
+			System.out.println(dao.getByteImage());
+			Map<String, Object> img = dao.getByteImage();
+			byte[] imageContent = (byte[]) img.get("img");
+			System.out.println("getImg: "+img.get("img"));
+			final HttpHeaders headers = new HttpHeaders();
+			headers.setContentType(MediaType.IMAGE_PNG);
+			return new ResponseEntity<byte[]>(imageContent, headers, HttpStatus.OK);
+		}	
 	
 
 }

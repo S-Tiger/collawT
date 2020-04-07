@@ -64,18 +64,16 @@ public class MemberDaoImpl implements MemberDao {
 	public int delete_Member(MemberVO memberVO) throws Exception {
 		return sqlSession.delete("member.delete_member", memberVO);
 	}
-	//프로필사진
+	//프로필사진 저장
 	@Override
 	public void saveImage(Map<String, Object> hmap) throws Exception {
 		sqlSession.update("member.saveImage",hmap);
 		}
-//		
-//	//프로필사진
-//	@Override
-//	public void saveImage(MemberVO memberVO) throws Exception {
-//		sqlSession.update("member.saveImage",memberVO);
-//	}
-//	
-
+	@Override
+	public Map<String, Object> getByteImage() {
+		return sqlSession.selectOne("member.getByteImage");
+	}
+	
+	
 
 }

@@ -101,8 +101,8 @@
 						<input type="file" name="mem_File" /> 
 						<input type="submit" value="이미지저장" />
 					</form>
+					<img alt="" src="/member/getByteImage"/>${member.mem_File}
 
-					<!--   <img alt="" src="${contextPath}/getByteImage" /> 이미지 -->
 					<form id="pwForm" action="/member/update_pw" method="post">
 						<input type="hidden" name="mem_Id" value="${member.mem_Id}">
 						<p class="login-box-msg">
