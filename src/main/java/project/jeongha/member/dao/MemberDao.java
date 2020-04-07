@@ -8,13 +8,13 @@ public interface MemberDao {
 	
 	public MemberVO login(String mem_id) throws Exception;
 	
-	public int memberInsert(MemberVO memberVO);
-	public MemberVO memberSelect(MemberVO memberVO);
+	public int memberJoin(Map<String,Object> memberVO);
+	public Map<String, Object> memberLogin(Map<String, Object> memLogin);
 	public int memberUpdate(MemberVO memberVO);
 	public int check_id(String mem_id) throws Exception;
 	public int update_pw(MemberVO memberVO) throws Exception;
 	public int delete_Member(MemberVO memberVO) throws Exception;
 	public void saveImage(Map<String, Object> hmap) throws Exception;
-	
+	//public void saveImage(MemberVO memberVO) throws Exception;
 
 }

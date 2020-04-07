@@ -61,8 +61,8 @@
 					<b class="login-box-msg" ><center>회원탈퇴</center></b>
 						<p class="login-box-msg">
 					<form id="outMemberForm" action="/member/delete_Member" method="post">
-					<h1>${sessionScope.mem_Id}</h1>
-						<input type="hidden" name="mem_Id" value="${sessionScope.mem_Id}">
+					<h1>${member.mem_Id}</h1>
+						<input type="hidden" name="mem_Id" value="${member.mem_Id}">
 						<p class="login-box-msg">
 							<label>기존비밀번호</label> <input class="form-control" id="pwd"
 								name="pwd" type="password" required>

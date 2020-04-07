@@ -223,9 +223,9 @@ var deleteCookie = function(name) {
 							class="img-circle elevation-2" alt="User Image">
 					</div>
 					<div class="info" style="width: 175px">
-						<c:if test="${sessionScope.mem_Id != null}">
+						<c:if test="${member.mem_Id != null}">
 							<a href="/member/mypage" class="nav-link active"
-								style="width: 100px; padding: 0px;">${sessionScope.mem_Name}
+								style="width: 100px; padding: 0px;">${member.mem_Name}
 							</a>
 							<input type="button" value="로그아웃"
 								onclick="location.href='/logout'">
@@ -233,7 +233,7 @@ var deleteCookie = function(name) {
 				<a type="submit" class="nav-link" value="마이페이지 이동하기">
 			</form> --%>
 						</c:if>
-						<a href="#" class="d-block">${sessionScope.mem_Id}</a>
+						<a href="#" class="d-block">${member.mem_Id}</a>
 					</div>
 				</div>
 

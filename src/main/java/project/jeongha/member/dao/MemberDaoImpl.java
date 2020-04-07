@@ -16,9 +16,9 @@ public class MemberDaoImpl implements MemberDao {
 	
 	//회원가입
 	@Override
-	public int memberInsert(MemberVO memberVO) {
+	public int memberJoin(Map<String,Object> memberVO) {
 		// TODO Auto-generated method stub
-		int stat = sqlSession.update("member.insertMember", memberVO); //맵퍼실행문 sqlSession.update 
+		int stat = sqlSession.update("member.memberJoin", memberVO); //맵퍼실행문 sqlSession.update 
 													//을 통해 데이터 변경 및 삽입 삭제은 update를 사용 sample.insertMember는
 													//맵퍼 키값입니다 해당하는 sql문 실행 밑 데이터를 가져옵니다
 													//sqlSession.selectList("맵퍼키값",데이터)는 해당하는 
@@ -28,9 +28,9 @@ public class MemberDaoImpl implements MemberDao {
 	}
 	//로그인.
 	@Override
-	public MemberVO memberSelect(MemberVO memberVO) {
+	public Map<String, Object> memberLogin(Map<String, Object> memLogin) {
 		// TODO Auto-generated method stub
-		MemberVO memberVo = sqlSession.selectOne("member.login", memberVO);
+		Map<String, Object> memberVo = sqlSession.selectOne("member.login", memLogin);
 		return memberVo;
 	}
 	
@@ -64,13 +64,18 @@ public class MemberDaoImpl implements MemberDao {
 	public int delete_Member(MemberVO memberVO) throws Exception {
 		return sqlSession.delete("member.delete_member", memberVO);
 	}
-	//프로필사진 변경
+	//프로필사진
 	@Override
 	public void saveImage(Map<String, Object> hmap) throws Exception {
 		sqlSession.update("member.saveImage",hmap);
 		}
-		
-	
+//		
+//	//프로필사진
+//	@Override
+//	public void saveImage(MemberVO memberVO) throws Exception {
+//		sqlSession.update("member.saveImage",memberVO);
+//	}
+//	
 
 
 }
