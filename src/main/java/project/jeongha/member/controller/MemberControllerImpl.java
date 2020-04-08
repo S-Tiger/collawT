@@ -174,12 +174,12 @@ public class MemberControllerImpl implements MemberController{
 //		session.setAttribute("isLogin", true);
 		session.setAttribute("member", memberVO);
 		//jsp페이지에서 ${member.mem_Id}---->이런식으로 접근해야됨
-//		Map<String, Object> searchMap = new HashMap<String, Object>();
 //		searchMap.put("mem_Id", memberVO.getMem_Id());
 		 
-//		List<CoworkVO> list = coworkService.searchList(searchMap);
+		List<CoworkVO> list = coworkService.searchList(memberVO);
 		
-//		request.setAttribute("coworklist", list);
+		request.setAttribute("coworklist", list);
+		
 		mav.setViewName("/main/index");
 		} else {//실패했을경우
 		rAttr.addAttribute("result","loginFailed");

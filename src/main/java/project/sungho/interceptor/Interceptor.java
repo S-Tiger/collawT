@@ -24,19 +24,18 @@ public class Interceptor extends HandlerInterceptorAdapter {
 			throws Exception {
 
 		HttpSession session = request.getSession();
-		String mem_Id = (String) session.getAttribute("mem_Id");
-
+		Map<String, Object> member = new HashMap<String,Object>();
+		
+		member = (Map<String, Object>) session.getAttribute("member");
+		
 		String uri = (String) request.getRequestURI();
-		if (mem_Id == null) {
+		if (member == null) {
 			response.sendRedirect("/member/loginPage");
 			return false;
-		}else if (mem_Id != null){
+		}else if (member != null){
 			System.out.println(uri);
 			
-			Map<String, Object> searchMap = new HashMap<String, Object>();
-			searchMap.put("mem_Id", mem_Id);
-			 
-			List<CoworkVO> list = coworkService.searchList(searchMap);
+			List<CoworkVO> list = coworkService.searchList(member);
 			
 			request.setAttribute("coworklist", list);
 
