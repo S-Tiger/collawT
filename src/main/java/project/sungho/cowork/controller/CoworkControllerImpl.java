@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.ModelAndView;
 
 import project.sungho.cowork.service.CoworkService;
@@ -33,7 +34,7 @@ public class CoworkControllerImpl implements CoworkController {
 	
 	@Override
 	@GetMapping("/list")
-	public String searchList(Model model ,HttpServletRequest request, HttpServletResponse responsen) throws Exception {
+	public String searchList(Model model ,HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Map<String, Object> searchMap = new HashMap<String, Object>();
 		
 		HttpSession session = request.getSession();
@@ -55,7 +56,7 @@ public class CoworkControllerImpl implements CoworkController {
 	
 	@Override
 	@GetMapping("/main")
-	public String searchMain(Model model ,HttpServletRequest request, HttpServletResponse responsen) throws Exception {
+	public String searchMain(Model model ,HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Map<String, Object> searchMap = new HashMap<String, Object>();
 		String c_Id = (String)request.getParameter("c_Id");
 		
@@ -71,14 +72,26 @@ public class CoworkControllerImpl implements CoworkController {
 	}
 
 	@Override
-	public String updateCowork(Model model) throws Exception {
+	@PostMapping("/update")
+	public String updateCowork(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		
+		Enumeration enu = request.getParameterNames();
+		while (enu.hasMoreElements()) {
+			String name = (String) enu.nextElement();
+			String value = request.getParameter(name);
+			dataMap.put(name, value);
+		}
+		coworkService.updateCowork(dataMap);
+		
+		return "redirect:/project/main?c_Id="+request.getParameter("c_Id");
+		
 	}
 
 	@Override
 	@PostMapping("/insert") 
-	public String insertCowork(HttpServletRequest request, HttpServletResponse responsen) throws Exception {
+	public String insertCowork(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		
 		Map<String, Object> dataMap = new HashMap<String, Object>();
@@ -96,8 +109,8 @@ public class CoworkControllerImpl implements CoworkController {
 	}
 
 	@Override
-	@GetMapping("/delete")
-	public String deleteCowork(Model model, HttpServletRequest request, HttpServletResponse responsen) throws Exception {
+	@PostMapping("/delete")
+	public String deleteCowork(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
 		Map<String, Object> dataMap = new HashMap<String, Object>();
 		

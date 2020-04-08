@@ -38,7 +38,7 @@ public class CoworkServiceImpl implements CoworkService {
 
 	@Override
 	public void updateCowork(Map<String, Object> dataMap) throws Exception {
-		
+		coworkDAO.updateCowork(dataMap);
 	}
 
 	@Override

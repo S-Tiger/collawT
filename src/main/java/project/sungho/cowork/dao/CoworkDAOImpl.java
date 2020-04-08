@@ -37,6 +37,7 @@ public class CoworkDAOImpl implements CoworkDAO {
 	@Override
 	public void updateCowork(Map<String, Object> dataMap) throws DataAccessException {
 		// TODO Auto-generated method stub
+		sqlSession.update("cowork.updateCowork", dataMap);
 		
 	}
 

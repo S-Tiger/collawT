@@ -69,5 +69,14 @@
 	<delete id="deleteCowork" parameterType="String">
 		delete from co_work where c_Id =#{c_Id}
 	</delete>
+	
+	<update id="updateCowork" parameterType="java.util.Map">
+		update co_work
+		set  c_Name = #{c_Name}
+		   , c_Comment = #{c_Comment}
+		   , mem_Id = #{mem_Id}
+		   , c_Category = #{c_Category}
+		where c_Id = #{c_Id}
+	</update>
 
 </mapper>
