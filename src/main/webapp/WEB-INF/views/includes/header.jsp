@@ -234,9 +234,6 @@
 								style="width: 100px; padding: 0px;">${member.mem_Name} </a>
 							<input type="button" value="로그아웃"
 								onclick="location.href='/logout'">
-							<%-- <form action="/member/mypage">${sessionScope.mem_name}<br>
-				<a type="submit" class="nav-link" value="마이페이지 이동하기">
-			</form> --%>
 						</c:if>
 						<a href="#" class="d-block">${member.mem_Id}</a>
 					</div>

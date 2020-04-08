@@ -44,9 +44,10 @@
 			}
 		}); 
  	// 아이디 유효성 검사(1 = 중복 / 0 != 중복)
- 		$("#mem_Id").keyup(function() {
+ 		$("#mem_Id").blur(function() {
  			var idJ = /^[a-z0-9]{4,12}$/;
- 			var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+ 			var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z]?)*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+ 			var _kor = /[ㄱ-ㅎ가-힣]/g;
  			var mem_Id = $('#mem_Id').val();
 			console.log("블러");
  			$.ajax({
@@ -67,7 +68,7 @@
  							$("#joinBtn").attr("disabled", false);
  							
  							//아이디 유효성 검사
- 							if(idJ.test(mem_Id)){
+ 							if(idJ.test(mem_Id)||_kor.test(mem_Id)){
 								if(mem_Id == ""){
  								
  								$('#id_check').text('아이디를 입력해주세요 :)');
