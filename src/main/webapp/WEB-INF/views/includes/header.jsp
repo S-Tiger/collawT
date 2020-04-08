@@ -5,40 +5,41 @@
 <!DOCTYPE html>
 <html>
 <script type="text/javascript">
-window.onload = function() {
-	var getmenu = getCookie('menu');
-	var menuId = document.getElementById('menustat');
-	if (getmenu != null) {
-	menuId.className = getmenu;
+	window.onload = function() {
+		var getmenu = getCookie('menu');
+		var menuId = document.getElementById('menustat');
+		if (getmenu != null) {
+			menuId.className = getmenu;
+		}
+		//쿠키생성
+	};
+	function menuclick() {
+		deleteCookie('menu');
+		var stat = document.getElementById('menustat').className;
+		if (stat == 'nav-item has-treeview menu-open') {
+			setCookie('menu', 'nav-item has-treeview', 1);
+		} else if (stat == 'nav-item has-treeview') {
+			setCookie('menu', 'nav-item has-treeview menu-open', 1);
+		}
+		console.log(getCookie('menu'));
 	}
-	//쿠키생성
-};
-function menuclick(){
-	deleteCookie('menu');
-	var stat =  document.getElementById('menustat').className;
-	if (stat == 'nav-item has-treeview menu-open') {
-			setCookie('menu', 'nav-item has-treeview' , 1);
-	}else if (stat == 'nav-item has-treeview' ){
-		setCookie('menu', 'nav-item has-treeview menu-open' , 1);
+	function setCookie(name, value, exp) {
+		var date = new Date();
+		date.setTime(date.getTime() + exp * 24 * 60 * 60 * 1000);
+		document.cookie = name + '=' + value + ';expires=' + date.toUTCString()
+				+ ';path=/';
 	}
-	console.log(getCookie('menu'));
-}
-function setCookie(name, value, exp) {
-	var date = new Date();
-	date.setTime(date.getTime() + exp * 24 * 60 * 60 * 1000);
-	document.cookie = name + '=' + value + ';expires=' + date.toUTCString()
-			+ ';path=/';
-}
-//쿠키가져오기
-function getCookie(name) {
-	var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
-	return value ? value[2] : null;
-}
-//쿠키삭제
-var deleteCookie = function(name) {
-    var date = new Date();
-    document.cookie = name + "= " + "; expires=" + date.toUTCString() + "; path=/";
-}
+	//쿠키가져오기
+	function getCookie(name) {
+		var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+		return value ? value[2] : null;
+	}
+	//쿠키삭제
+	var deleteCookie = function(name) {
+		var date = new Date();
+		document.cookie = name + "= " + "; expires=" + date.toUTCString()
+				+ "; path=/";
+	}
 </script>
 <head>
 <meta charset="utf-8">
@@ -114,7 +115,7 @@ var deleteCookie = function(name) {
 					<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 						<a href="#" class="dropdown-item"> <!-- Message Start -->
 							<div class="media">
-								<img src="../resources/dist/img/user1-128x128.jpg"
+								<img src="resources/dist/img/user1-128x128.jpg"
 									alt="User Avatar" class="img-size-50 mr-3 img-circle">
 								<div class="media-body">
 									<h3 class="dropdown-item-title">
@@ -131,7 +132,7 @@ var deleteCookie = function(name) {
 						<div class="dropdown-divider"></div>
 						<a href="#" class="dropdown-item"> <!-- Message Start -->
 							<div class="media">
-								<img src="../resources/dist/img/user8-128x128.jpg"
+								<img src="resources/dist/img/user8-128x128.jpg"
 									alt="User Avatar" class="img-size-50 img-circle mr-3">
 								<div class="media-body">
 									<h3 class="dropdown-item-title">
@@ -148,7 +149,7 @@ var deleteCookie = function(name) {
 						<div class="dropdown-divider"></div>
 						<a href="#" class="dropdown-item"> <!-- Message Start -->
 							<div class="media">
-								<img src="../resources/dist/img/user3-128x128.jpg"
+								<img src="resources/dist/img/user3-128x128.jpg"
 									alt="User Avatar" class="img-size-50 img-circle mr-3">
 								<div class="media-body">
 									<h3 class="dropdown-item-title">
@@ -159,7 +160,7 @@ var deleteCookie = function(name) {
 									<p class="text-sm text-muted">
 										<i class="far fa-clock mr-1"></i> 4 Hours Ago
 									</p>
-								</div></div>
+								</div>
 							</div> <!-- Message End -->
 						</a>
 						<div class="dropdown-divider"></div>
@@ -221,8 +222,7 @@ var deleteCookie = function(name) {
 					<div class="info" style="width: 175px">
 						<c:if test="${member.mem_Id != null}">
 							<a href="/member/mypage" class="nav-link active"
-								style="width: 100px; padding: 0px;">${member.mem_Name}
-							</a>
+								style="width: 100px; padding: 0px;">${member.mem_Name} </a>
 							<input type="button" value="로그아웃"
 								onclick="location.href='/logout'">
 							<%-- <form action="/member/mypage">${sessionScope.mem_name}<br>
@@ -240,8 +240,9 @@ var deleteCookie = function(name) {
 						<!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
 						<li class="nav-item has-treeview" id="menustat"
-							 style="border-bottom: 1px solid #4f5962;"><a href="#"
-							class="nav-link active" onclick="menuclick()"> <i class="nav-icon far fa-handshake"></i>
+							style="border-bottom: 1px solid #4f5962;"><a href="#"
+							class="nav-link active" onclick="menuclick()"> <i
+								class="nav-icon far fa-handshake"></i>
 								<p>
 									등록된 협업공간 <i class="right fas fa-angle-left"></i>
 								</p>
@@ -252,7 +253,8 @@ var deleteCookie = function(name) {
 										<p>프라이빗 공간</p>
 								</a></li>
 								<c:forEach var="coworklist" items="${coworklist}">
-									<li class="nav-item"><a href="/project/main?c_Id=${coworklist.c_Id}" class="nav-link">
+									<li class="nav-item"><a
+										href="/project/main?c_Id=${coworklist.c_Id}" class="nav-link">
 											<i class="nav-icon fas fa-sitemap"></i>
 											<p>${coworklist.c_Name}</p>
 									</a></li>

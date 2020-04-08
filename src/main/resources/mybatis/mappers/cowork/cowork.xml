@@ -49,7 +49,7 @@
 				c_Id = #{c_Id}
 			</if>
 		</where>
-		  order by mem_Id asc
+		  order by to_number(c_Id) asc
 	</select>
 	
 	
