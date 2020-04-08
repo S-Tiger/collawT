@@ -15,5 +15,5 @@ public interface MemberDao {
 	public int update_pw(MemberVO memberVO) throws Exception;
 	public int delete_Member(MemberVO memberVO) throws Exception;
 	public void saveImage(Map<String, Object> hmap) throws Exception;
-	public Map<String, Object> getByteImage() ;
+	public Map<String, Object> getByteImage(String mem_Id) ;
 }

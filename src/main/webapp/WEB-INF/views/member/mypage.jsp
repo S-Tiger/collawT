@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -82,8 +82,7 @@
 					<form id="myForm" action="/member/update_mypage" method="post">
 						<p class="login-box-msg">
 							<label>ID</label> <input class="form-control" type="email"
-								id="mem_Id" name="mem_Id" readonly
-								value="${member.mem_Id}">
+								id="mem_Id" name="mem_Id" readonly value="${member.mem_Id}">
 						</p>
 						<p class="login-box-msg">
 							<label>이름</label> <input class="form-control" type="text"
@@ -96,43 +95,59 @@
 						</p>
 					</form>
 					<!-- 프로필사진변경 -->
-					<form action="/member/saveImage" enctype="multipart/form-data" method="post">
+					<form action="/member/saveImage" enctype="multipart/form-data"
+						method="post">
 						<input type="hidden" name="mem_Id" value="${member.mem_Id}">
-						<input type="file" name="mem_File" /> 
-						<input type="submit" value="이미지저장" />
+						<input type="file" name="mem_File" /> <input type="submit"
+							value="이미지저장" />
 					</form>
-					<img alt="" src="/member/getByteImage"/>${member.mem_File}
+					<!-- 프로필사진 -->
+					<p>프로필 사진:</p>
+					<div class="user-panel mt-3 pb-3 mb-3 d-flex">
+						<div class="image">
+							<c:if test="${member.mem_File != null }">
+								<div class="profile">
+									<img alt="프로필사진" width="50" height="50"
+										src="/member/getByteImage?mem_Id=${member.mem_Id}" />
+								</div>
+							</c:if>
+							<c:if test="${member.mem_File == null }">
+								<img src="../resources/dist/img/user2-160x160.jpg"
+									class="img-circle elevation-2" alt="User Image">
+							</c:if>
+						</div>
+					</div>
+						<form id="pwForm" action="/member/update_pw" method="post">
+							<input type="hidden" name="mem_Id" value="${member.mem_Id}">
+							<p class="login-box-msg">
+								<label>기존비밀번호</label> <input class="form-control" id="old_pw"
+									name="old_pw" type="password" required>
+							</p>
+							<p class="login-box-msg">
+								<label>새로운 비밀번호</label> <input class="form-control" id="pw"
+									name="mem_Pwd" type="password" required>
+							</p>
+							<p class="login-box-msg">
+								<label>새로운 비밀번호 확인</label> <input class="form-control" id="pw2"
+									type="password" type="password" required>
+							</p>
+							<div class="check_font" id="pw_check">hello</div>
+							<p class="login-box-msg">
+								<button type="submit" id="joinBtn"
+									class="btn btn-block btn-success">비밀번호 변경</button>
+								<button type="button" class="btn btn-block btn-success"
+									onclick="location.href='/main'">뒤로가기</button>
+							</p>
+						</form>
+						<p class="login-box-msg">
+							<input type="button" id="outBtn"
+								class="btn btn-block btn-success" value="회원탈퇴"
+								onclick="location.href='/member/outMember'">
 
-					<form id="pwForm" action="/member/update_pw" method="post">
-						<input type="hidden" name="mem_Id" value="${member.mem_Id}">
-						<p class="login-box-msg">
-							<label>기존비밀번호</label> <input class="form-control" id="old_pw"
-								name="old_pw" type="password" required>
 						</p>
-						<p class="login-box-msg">
-							<label>새로운 비밀번호</label> <input class="form-control" id="pw"
-								name="mem_Pwd" type="password" required>
-						</p>
-						<p class="login-box-msg">
-							<label>새로운 비밀번호 확인</label> <input class="form-control" id="pw2"
-								type="password" type="password" required>
-						</p>
-						<div class="check_font" id="pw_check">hello</div>
-						<p class="login-box-msg">
-							<button type="submit" id="joinBtn"
-								class="btn btn-block btn-success">비밀번호 변경</button>
-							<button type="button" class="btn btn-block btn-success"
-								onclick="location.href='/main'">뒤로가기</button>
-						</p>
-					</form>
-					<p class="login-box-msg">
-						<input type="button" id="outBtn" class="btn btn-block btn-success"
-							value="회원탈퇴" onclick="location.href='/member/outMember'">
-
-					</p>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 </body>
 </html>

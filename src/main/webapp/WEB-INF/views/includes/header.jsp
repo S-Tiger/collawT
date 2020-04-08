@@ -215,9 +215,18 @@
 			<div class="sidebar">
 				<!-- Sidebar user panel (optional) -->
 				<div class="user-panel mt-3 pb-3 mb-3 d-flex">
-					<div class="image">
-						<img src="../resources/dist/img/user2-160x160.jpg"
-							class="img-circle elevation-2" alt="User Image">
+						<div class="image">
+							<c:if test="${member.mem_File != null }">
+								<div class="profile">
+									<img alt="프로필사진" width="50" height="50"
+										src="/member/getByteImage?mem_Id=${member.mem_Id}" />
+								</div>
+							</c:if>
+							<c:if test="${member.mem_File == null }">
+								<img src="../resources/dist/img/user2-160x160.jpg"
+									class="img-circle elevation-2" alt="User Image">
+							</c:if>
+						</div>
 					</div>
 					<div class="info" style="width: 175px">
 						<c:if test="${member.mem_Id != null}">

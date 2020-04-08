@@ -70,8 +70,8 @@ public class MemberDaoImpl implements MemberDao {
 		sqlSession.update("member.saveImage",hmap);
 		}
 	@Override
-	public Map<String, Object> getByteImage() {
-		return sqlSession.selectOne("member.getByteImage");
+	public Map<String, Object> getByteImage(String mem_Id) {
+		return sqlSession.selectOne("member.getByteImage", mem_Id);
 	}
 	
 	

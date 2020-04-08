@@ -115,45 +115,10 @@ public class MemberControllerImpl implements MemberController{
 		//조건을 주자
 		return "/member/loginPage"; // 리턴타입엔 패키지명/jsp파일 로 작성하여주세요 view에서도 패키지/jsp로 관리해주세요
 	}
-
-	
-//	//로그인 -> *안쓰는중*
-//	@Override
-//	@RequestMapping(value = "/login",method = RequestMethod.POST)
-//	public ModelAndView memLogin(MemberVO member,RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response)throws Exception {
-//		System.out.println(request.getContextPath());
-////		String memId=(String)request.getParameter("memId");
-////		String memPw=(String)request.getParameter("memPw");
-//		
-//		System.out.println(member.getMem_Id());
-//		System.out.println(member.getMem_Pwd());
-//		ModelAndView mav =new ModelAndView();
-//		System.out.println("로그인컨트롤러");
-//		//로그인로직
-//		MemberVO memVO = service.login(member);
-//		System.out.println(member);
-//		//로그인시 세션에.. 로그인성공
-//		if(memVO != null) {
-//		HttpSession session = request.getSession();
-//		
-//		session.setAttribute("mem_name", memVO.getMem_Name());
-//		session.setAttribute("mem_pwd", memVO.getMem_Pwd());
-//		session.setAttribute("isLogin", true);
-//		mav.setViewName("/main/index");
-//		
-//		}else {//실패했을경우
-//			rAttr.addFlashAttribute("result","loginFailed");
-//		mav.setViewName("redirect:/member/loginPage");
-//		
-//		}
-//
-//		return mav;
-//	}
-	
 	
 	//로그인 테스트 컨트롤러->회원정보수정
 	@Override
-	@RequestMapping(value = "/loginTest",method = RequestMethod.POST)
+	@RequestMapping(value = "/login",method = RequestMethod.POST)
 	public ModelAndView memLogintest(MemberVO member,RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response)throws Exception {
 		ModelAndView mav =new ModelAndView();
 		System.out.println("로그인컨트롤러");
@@ -165,16 +130,10 @@ public class MemberControllerImpl implements MemberController{
 		//로그인시 세션에.. 로그인성공
 		if(memberVO != null) {
 		System.out.println("로그인 성공(객체): "+memberVO);
+
 		HttpSession session = request.getSession();
-//		session.setAttribute("mem_Name", memberVO.getMem_Name());
-//		session.setAttribute("mem_Pwd", memberVO.getMem_Pwd());
-//		session.setAttribute("mem_Id", memberVO.getMem_Id());
-//		session.setAttribute("mem_File", memberVO.getMem_File().isEmpty());
-//		System.out.println("boolean"+ memberVO.getMem_File().isEmpty());
-//		session.setAttribute("isLogin", true);
 		session.setAttribute("member", memberVO);
 		//jsp페이지에서 ${member.mem_Id}---->이런식으로 접근해야됨
-//		searchMap.put("mem_Id", memberVO.getMem_Id());
 		 
 		List<CoworkVO> list = coworkService.searchList(memberVO);
 		
@@ -190,7 +149,6 @@ public class MemberControllerImpl implements MemberController{
 		return mav;
 	}
 
-	
 	// mypage 수정
 		@RequestMapping(value = "/update_mypage", method = RequestMethod.POST)
 		public String update_mypage(@ModelAttribute MemberVO memberVO, HttpSession session, RedirectAttributes rttr) throws Exception{
@@ -259,41 +217,40 @@ public class MemberControllerImpl implements MemberController{
 		//이미지 저장
 		@Override
 		@RequestMapping(value = "/saveImage")
-		public String saveImage(MemberVO memberVO) throws Exception {
-				//이미지 저장 컨트롤러
-			 
+		public String saveImage(MemberVO memberVO,HttpServletResponse request,HttpServletResponse response,HttpSession session) throws Exception{
+			//이미지 저장 컨트롤러
 			System.out.println(memberVO.getMem_Id());
 			System.out.println(memberVO.getMem_File().getBytes());
-//			try {
-//				
-//				dao.saveImage(memberVO);
-//			} catch (Exception e) {
-//				System.out.println("이미지저장 오류");
-//			}
+			Map<String,Object> member00 = new HashMap<String,Object>();
+			member00 =(Map<String,Object>) session.getAttribute("member");
+			System.out.println("세션에서 가져온거member00 :"+member00);
 				try {
-					Map<String, Object> hmap = new HashMap<String, Object>();
-					hmap.put("mem_Id", memberVO.getMem_Id());
-					hmap.put("mem_File", memberVO.getMem_File().getBytes());
 					
-					System.out.println("ImgSave Controller: "+hmap);
-					dao.saveImage(hmap);
+					//Map<String, Object> member = new HashMap<String, Object>();
+					member00.put("mem_File", memberVO.getMem_File().getBytes());
+					
+					System.out.println("ImgSave Controller: "+member00);
+					dao.saveImage(member00);
+					//세션 문제 추가...
+					session.setAttribute("member",member00);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				return "redirect:/member/mypage";
+				return "/main/index";
 			}
-		
-		@RequestMapping(value = "/getByteImage")
-		public ResponseEntity<byte[]> getByteImage() {
+
+		//프로필 사진가져옴  /getByteImage?mem_Id=
+		@RequestMapping(value = "/getByteImage", method = RequestMethod.GET)
+		public ResponseEntity<byte[]> getByteImage(@RequestParam("mem_Id")String mem_Id) {
 			System.out.println("그림파일 가져오기");
-			System.out.println(dao.getByteImage());
-			Map<String, Object> img = dao.getByteImage();
-			byte[] imageContent = (byte[]) img.get("img");
-			System.out.println("getImg: "+img.get("img"));
+			System.out.println("dao.getByteImage: "+dao.getByteImage(mem_Id));
+			Map<String, Object> img = dao.getByteImage(mem_Id);
+			//blob컬럼명 img.get("mem_File")
+			byte[] imageContent = (byte[]) img.get("mem_File");
+			System.out.println("getImg: "+img.get("mem_File"));
 			final HttpHeaders headers = new HttpHeaders();
 			headers.setContentType(MediaType.IMAGE_PNG);
 			return new ResponseEntity<byte[]>(imageContent, headers, HttpStatus.OK);
-		}	
-	
+		}
 
 }
