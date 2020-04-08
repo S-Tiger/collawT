@@ -97,7 +97,10 @@
 			<mapping path="/**" />
 			<mvc:exclude-mapping path="/resources/**" />
 			<exclude-mapping path="/" />
-			<exclude-mapping path="/member/*" />
+			<exclude-mapping path="/member/loginPage"/>
+			<exclude-mapping path="/member/login"/>
+			<exclude-mapping path="/member/signup"/>
+			<exclude-mapping path="/member/join"/>
 			<beans:ref bean="LoginInterceptor" />
 		</interceptor>
 	</interceptors>
