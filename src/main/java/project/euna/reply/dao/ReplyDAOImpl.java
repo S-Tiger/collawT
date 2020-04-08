@@ -28,11 +28,12 @@ public class ReplyDAOImpl implements ReplyDAO {
 		}
 		
 		
-	//글 입력
+	//댓글 입력
 	@Override
 	public int replyInsert(ReplyVO replyVO) {
 		int result;
 		result = sqlSession.update("reply.replyInsert", replyVO);
+		System.out.println(result);
 		return result;
 	}
 //	

@@ -32,10 +32,10 @@
 	<!-- 글 목록 -->
 	<select id="searchList" resultMap="issueResult02"> 
       <![CDATA[
-        select I.i_Num, I.c_Id, I.i_Name, I.i_Content, I.i_Date, I.mem_Id, M.mem_name
+		select I.i_Num, I.c_Id, I.i_Name, I.i_Content, I.i_Date, I.mem_Id, M.mem_name
 		from issue I, member M
 		where I.mem_Id = M.mem_Id
-		order by i_Num desc
+		order by to_number(i_Num) desc
       ]]>
 
 	</select>
@@ -43,9 +43,9 @@
 
 	<!-- 글 입력 -->
 	<insert id="issueInsert" parameterType="IssueVO">
-		insert into issue(i_Num,
-		c_Id, i_Name, i_Content, i_Date, i_Groupnum , mem_Id)
-		values(issue_i_num.nextval, #{c_Id}, #{i_Name}, #{i_Content} , sysdate
+		insert into issue(i_Num, c_Id, i_Name, i_Content, i_Date, i_Groupnum , mem_Id)
+		values(issue_i_num.nextval, #{c_Id}, #{i_Name}, #{i_Content} ,  
+		(select to_char(sysdate, 'YYYY/MM/DD/ HH24:MI:SS') from dual)
 		, #{i_Groupnum} , #{mem_Id})
 	</insert>
 

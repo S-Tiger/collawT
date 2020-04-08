@@ -4,7 +4,7 @@
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
+    <!-- 협업공간명 불러오기로 수정할 것!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
@@ -12,21 +12,17 @@
             <h1>협업공간명</h1>
             <small>협업공간 설명</small>
           </div>
-<!--           <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">project</li>
-            </ol>
-          </div> -->
         </div>
-      </div><!-- /.container-fluid -->
+      </div>
     </section>
 
     <!-- Main content -->
     <section class="content">
 
-      <!-- Default box -->
+    <!-- card -->
       <div class="card">
+      
+        <!-- 표 윗부분 -->
         <div class="card-header">
         <ol class="breadcrumb float-sm-left">
           <li class="breadcrumb-item"><a href="#">협업공간 이슈</a></li>
@@ -34,19 +30,13 @@
           <li class="breadcrumb-item"><a href="#">내가 작성한 이슈</a></li>
           <li class="breadcrumb-item"><a href="#">캘린더</a></li>
          </ol>
-         
          <input type="button" value="이슈 작성" class="btn btn-success float-right" onclick="location.href='insert'">
-
-          <!-- <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-              <i class="fas fa-minus"></i></button>
-            <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
-              <i class="fas fa-times"></i></button>
-          </div> -->
         </div>
+        <!-- /표 윗부분 -->
+        
+        <!-- 리스트 부분 -->
         <div class="card-body p-0">
           <table class="table table-striped projects">
-              
               <tbody>
                  <c:forEach var="issueList" items="${issueList}" >	
                   <tr>
@@ -58,12 +48,14 @@
               </tbody>
           </table>
         </div>
-        <!-- /.card-body -->
+        <!-- /리스트 부분 -->
+        
+        
       </div>
       <!-- /.card -->
 
     </section>
-    <!-- /.content -->
+    <!-- /Main content -->
   </div>
   <!-- /.content-wrapper -->
 

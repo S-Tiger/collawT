@@ -1,6 +1,7 @@
 package project.euna.issue.controller;
 
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -52,7 +54,13 @@ public class IssueControllerImpl implements IssueController {
 	@Override
 	@PostMapping("/insert")
 	public String issueInsert(IssueVO issueVO, HttpSession session) throws Exception {
-		issueVO.setMem_Id((String)session.getAttribute("mem_Id"));
+		
+		Map<String, Object> member = new HashMap<String,Object>();
+		member = (Map<String, Object>) session.getAttribute("member");
+		String mem_Id = (String) member.get("mem_Id");
+		
+		issueVO.setMem_Id(mem_Id);
+		
 		issueService.issueInsert(issueVO);
 		
 		return "redirect:/issue/list";
@@ -75,15 +83,13 @@ public class IssueControllerImpl implements IssueController {
 		
 		
 		Map<String, Object> board = issueService.issueRead(i_Num);
-		List<Map> reply = replyService.searchList(i_Num);
+		//List<Map> reply = replyService.searchList(i_Num);
 		
 		ModelAndView mav = new ModelAndView("issue/issueRead");
 		mav.addObject("issueRead", board);
-		mav.addObject("replyList", reply);
-		
+		//mav.addObject("replyList", reply);
 		System.out.println("controller board"+board);
-		System.out.println("controller reply"+reply);
-		
+		//System.out.println("controller reply"+reply);
 		return mav;
 	}
 	

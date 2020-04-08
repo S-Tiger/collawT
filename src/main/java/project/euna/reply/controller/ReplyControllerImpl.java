@@ -1,6 +1,7 @@
 package project.euna.reply.controller;
 
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,13 +11,12 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import project.euna.issue.vo.IssueVO;
 import project.euna.reply.service.ReplyService;
 import project.euna.reply.vo.ReplyVO;
 
@@ -31,20 +31,64 @@ public class ReplyControllerImpl implements ReplyController {
 	
 	//댓글 쓰기 DB에 넣기
 	@Override
-	@PostMapping("/replyInsert")
+	@PostMapping("/insert")
+	@ResponseBody
 	public String replyInsert(ReplyVO replyVO, HttpSession session) throws Exception {
-		replyVO.setMem_Id((String)session.getAttribute("mem_Id"));
+		Map<String, Object> member = new HashMap<String,Object>();
+		member = (Map<String, Object>) session.getAttribute("member");
+		String mem_Id = (String) member.get("mem_Id");
+		
+		replyVO.setMem_Id(mem_Id);
 
 		
 		replyService.replyInsert(replyVO);
-		
-		String i_Num = replyVO.getI_Num();
-		
-		return "redirect:/issue/read?i_Num="+i_Num;
+				
+		return "redirect:/reply/list";
 	
 	}
 	
+	//댓글 목록
+	@Override
+	@GetMapping("/list/{i_Num}")
+	@ResponseBody
+	public List<Map> searchList(@RequestParam String i_Num, HttpServletRequest request, HttpServletResponse response) throws Exception{
+		System.out.println("1111111111111111111111controller reply");
+		
+		System.out.println(i_Num);
+		
+		List<Map> reply = replyService.searchList(i_Num);
+
+		return reply;
+	}
+//	public ResponseEntity<List<Map>> searchList(@PathVariable("i_Num") String i_Num){
+//		System.out.println("1111111111111111111111controller reply");
+//		ResponseEntity<List<Map>> entity = null;
+//		try {
+//			entity = new ResponseEntity<>(replyService.searchList(i_Num), HttpStatus.OK);
+//		}catch(Exception e){
+//			e.printStackTrace();
+//			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+//		}
+//		return entity;
+//	}
 	
+
+	
+	
+//	@ResponseBody
+//	public ResponseEntity<List<Map>> list(@PathVariable("i_Num") String i_Num){
+//		ResponseEntity<List<Map>> entity = null;
+//		try {
+//			entity = new ResponseEntity<List<Map>>(replyService.searchList(i_Num), HttpStatus.OK);
+//		}catch(Exception e) {
+//			e.printStackTrace();
+//			entity = new ResponseEntity<List<Map>>(HttpStatus.BAD_REQUEST);
+//		}
+//		return entity;
+//	}
+	
+	
+
 	
 	
 //	//글 쓰기 화면
