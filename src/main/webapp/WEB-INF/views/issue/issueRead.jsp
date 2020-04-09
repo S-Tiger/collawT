@@ -79,7 +79,7 @@ $(document).ready(function() {
 						str+='<div class="card-footer card-comments">';
 						
 						str+='<div class="card-comment">';
-						str+='<img alt="User Image" width="50" height="50"	src="/member/getByteImage?mem_Id=${member.mem_Id}" class="img-circle elevation-2"/>';
+						str+='<img alt="User Image" width="50" height="50"	src="/member/getByteImage?mem_Id='+result[i].mem_Id+'" class="img-circle elevation-2"/>';
 						str+='<div class="comment-text">';
 						str+='<span class="username">'+result[i].mem_Name;
 						str+='<span class="text-muted float-right">'+result[i].r_Date+'</span>';
@@ -227,7 +227,7 @@ $(document).ready(function() {
 
 								<!-- 멤버이미지 넣기 -->
 								<img alt="프로필사진" width="50" height="50"
-								src="/member/getByteImage?mem_Id=${member.mem_Id}" class="img-circle elevation-2"/>
+								src="/member/getByteImage?mem_Id=${issueRead.mem_Id}" class="img-circle elevation-2"/>
 								<span class="username" id="mem_Name" name="mem_Name"><c:out
 										value="${issueRead.mem_Name}" /></span> <span class="description"
 									id="i_Date" name="i_Date"><c:out

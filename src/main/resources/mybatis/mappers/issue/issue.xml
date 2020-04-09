@@ -29,6 +29,31 @@
 
 	
 
+	<!-- 글 목록 페이징-->
+<!-- 		<select id="searchList" resultMap="issueResult02"> 
+      <![CDATA[
+		select i_Num, c_Id, i_Name, i_Content, i_Date, mem_Id, mem_name
+        from (
+            select I.i_Num, I.c_Id, I.i_Name, I.i_Content, I.i_Date, I.mem_Id, M.mem_name, row_number() over(order by I.i_Num desc) as rnum
+            from issue I, member M
+            where I.mem_Id = M.mem_Id
+            )
+        where rnum between #{rowStart} and #{rowEnd}
+        order by i_Num desc
+      ]]>
+
+	</select> -->
+	
+	<!-- 게시물 총 갯수 -->
+	<select id="listCount" resultType="int"> 
+      <![CDATA[
+        select count(i_Num)
+        from issue
+        where i_Num>0
+      ]]>
+
+	</select>
+	
 	<!-- 글 목록 -->
 	<select id="searchList" resultMap="issueResult02"> 
       <![CDATA[

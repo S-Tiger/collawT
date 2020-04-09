@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import project.euna.issue.service.IssueService;
+import project.euna.issue.vo.Criteria;
 import project.euna.issue.vo.IssueVO;
+import project.euna.issue.vo.PageMaker;
 import project.euna.reply.service.ReplyService;
 
 @Controller
@@ -42,9 +43,14 @@ public class IssueControllerImpl implements IssueController {
 		
 		List<Map> list = issueService.searchList();
 		
+//		PageMaker pageMaker = new PageMaker();
+//		pageMaker.setCri(cri);
+//		pageMaker.setTotalCount(issueService.listCount());
+		
 		
 		ModelAndView mav = new ModelAndView("issue/issueList");
 		mav.addObject("issueList", list);
+		//mav.addObject("pageMaker", pageMaker);
 		return mav;
 		
 	}

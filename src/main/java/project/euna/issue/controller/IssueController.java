@@ -8,12 +8,13 @@ import javax.servlet.http.HttpSession;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 
+import project.euna.issue.vo.Criteria;
 import project.euna.issue.vo.IssueVO;
 
 public interface IssueController {
 
+	//public ModelAndView searchList(Criteria cri, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView searchList(HttpServletRequest request, HttpServletResponse response) throws Exception;
-	
 	public String issueInsert(IssueVO issueVO, HttpSession session) throws Exception;
 	public String issueInsert();
 	
