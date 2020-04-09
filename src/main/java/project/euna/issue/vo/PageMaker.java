@@ -1,5 +1,5 @@
 package project.euna.issue.vo;
-
+//
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -11,11 +11,14 @@ public class PageMaker {
 	private boolean next;
 	private int displayPageNum = 10;
 	private Criteria cri;
+	
+	
 	public int getTotalCount() {
 		return totalCount;
 	}
 	public void setTotalCount(int totalCount) {
 		this.totalCount = totalCount;
+		calcData();
 	}
 	public int getStartPage() {
 		return startPage;

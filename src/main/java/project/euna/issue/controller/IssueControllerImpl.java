@@ -36,21 +36,36 @@ public class IssueControllerImpl implements IssueController {
 	ReplyService replyService;
 	
 	//글 목록 조회
+//	@Override
+//	@GetMapping("/list")
+//	public ModelAndView searchList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+//		
+//		
+//		List<Map> list = issueService.searchList();
+//		
+//		
+//		ModelAndView mav = new ModelAndView("issue/issueList");
+//		mav.addObject("issueList", list);
+//		return mav;
+//		
+//	}
+	
+	//글 목록 조회 페이징
 	@Override
 	@GetMapping("/list")
-	public ModelAndView searchList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView searchList(Criteria cri, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		
-		List<Map> list = issueService.searchList();
-		
-//		PageMaker pageMaker = new PageMaker();
-//		pageMaker.setCri(cri);
-//		pageMaker.setTotalCount(issueService.listCount());
+		List<Map> list = issueService.searchList(cri);
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@controller cri : "+cri);
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(issueService.listCount());
 		
 		
 		ModelAndView mav = new ModelAndView("issue/issueList");
 		mav.addObject("issueList", list);
-		//mav.addObject("pageMaker", pageMaker);
+		mav.addObject("pageMaker", pageMaker);
 		return mav;
 		
 	}

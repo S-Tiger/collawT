@@ -1,12 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@include file="../includes/header.jsp"%>
-<script
-	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <style type="text/css">
 			li {list-style: none; float: left; padding: 6px;}
-		</style>
+</style>
 		
 		
   <!-- Content Wrapper. Contains page content -->
@@ -19,47 +17,32 @@
             <h1>협업공간명</h1>
             <small>협업공간 설명</small>
           </div>
-          
-         
         </div>
       </div>
     </section>
 
     <!-- Main content -->
     <section class="content">
-    	
-    
 
     <!-- card -->
       <div class="card">
       
-      
         <!-- 표 윗부분 -->
-<div class="card-header" style="background-color:#fff;">
-        <ol class="breadcrumb-sm-left" style="margin:0px; border:none; padding-inline-start: 0px;  width:600px; float:left">
+        <div class="card-header">
+        <ol class="breadcrumb float-sm-left">
           <li class="breadcrumb-item"><a href="#">협업공간 이슈</a></li>
           <li class="breadcrumb-item"><a href="#">칸반</a></li>
           <li class="breadcrumb-item"><a href="#">내가 작성한 이슈</a></li>
           <li class="breadcrumb-item"><a href="#">캘린더</a></li>
          </ol>
-         <input type="button" value="이슈 작성" class="btn btn-success float-right" onclick="location.href='insert'" 
-         style="width:100px; text-align:center; float:right">
-    </div>
-    
+         <input type="button" value="이슈 작성" class="btn btn-success float-right" onclick="location.href='insert'">
+        </div>
         <!-- /표 윗부분 -->
         
         <!-- 리스트 부분 -->
         <div class="card-body p-0">
-           
-          <table id="example1" class="table table-striped projects">
+          <table class="table table-striped projects">
               <tbody>
-              <thead>
-                <tr>
-                  <th>닉네임</th>
-                  <th>이슈명</th>
-                  <th>작성일</th>
-                </tr>
-                </thead>
                  <c:forEach var="issueList" items="${issueList}" >	
                   <tr>
                       <td>  ${issueList.mem_Name}    </td>
@@ -73,8 +56,7 @@
         <!-- /리스트 부분 -->
         
         <!-- 페이징 -->
-  <div class="card-footer">
-        
+        <div>
    <ul>
     <c:if test="${pageMaker.prev}">
     	<li><a href="list${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
@@ -87,8 +69,7 @@
     <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
     	<li><a href="list${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
     </c:if> 
-  </div>
-  
+  </ul>
 </div>
         <!--/페이징  -->
       </div>
@@ -98,17 +79,6 @@
     <!-- /Main content -->
   </div>
   <!-- /.content-wrapper -->
-  
-  <script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true,
-      "autoWidth": false,
-
-    });
-    
-    
-</script>
 
 
 <%@include file="../includes/footer.jsp"%>

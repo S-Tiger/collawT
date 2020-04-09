@@ -29,7 +29,7 @@ public class IssueServiceImpl implements IssueService {
 	@Override
 	public void  issueInsert(IssueVO issueVO) {
 		int result = issueDAO.issueInsert(issueVO);
-		//notifyDAO.notifyInsert(issueVO);
+		notifyDAO.notifyInsert(issueVO);
 		
 		if (result == 0) {
 			System.out.println("Join Fail!!");
@@ -39,25 +39,25 @@ public class IssueServiceImpl implements IssueService {
 	}
 	
 	//목록 조회
-	@Override
-	public List<Map> searchList() throws Exception{
-		List<Map> list = issueDAO.searchList();
-		return list;
-	}
+//	@Override
+//	public List<Map> searchList() throws Exception{
+//		List<Map> list = issueDAO.searchList();
+//		return list;
+//	}
 	
 	
 	//목록 조회 페이징
-//	@Override
-//	public List<Map> searchList(Criteria cri) throws Exception{
-//		List<Map> list = issueDAO.searchList(cri);
-//		return list;
-//	}
-//	
+	@Override
+	public List<Map> searchList(Criteria cri) throws Exception{
+		List<Map> list = issueDAO.searchList(cri);
+		return list;
+	}
+	
 	//게시물 총 갯수
-//	@Override
-//	public int listCount() throws Exception{
-//		return issueDAO.listCount();
-//	}
+	@Override
+	public int listCount() throws Exception{
+		return issueDAO.listCount();
+	}
 	
 	//게시글 조회
 	@Override

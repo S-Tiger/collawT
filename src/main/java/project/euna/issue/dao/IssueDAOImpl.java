@@ -26,28 +26,28 @@ public class IssueDAOImpl implements IssueDAO {
 	}
 	
 	//글 목록
-	@Override
-	public List<Map> searchList() throws DataAccessException{
-		
-		List<Map> list = sqlSession.selectList("issue.searchList");
-		return list;
-	
-	}
-	
-	//글 목록 페이징
 //	@Override
-//	public List<Map> searchList(Criteria cri) throws DataAccessException{
+//	public List<Map> searchList() throws DataAccessException{
 //		
-//		List<Map> list = sqlSession.selectList("issue.searchList", cri);
+//		List<Map> list = sqlSession.selectList("issue.searchList");
 //		return list;
 //	
 //	}
 	
+	//글 목록 페이징
+	@Override
+	public List<Map> searchList(Criteria cri) throws DataAccessException{
+		
+		List<Map> list = sqlSession.selectList("issue.searchList", cri);
+		return list;
+	
+	}
+	
 	//게시물 총 갯수
-//	@Override
-//	public int listCount() throws Exception {
-//		return sqlSession.selectOne("issue.listCount");
-//	}
+	@Override
+	public int listCount() throws Exception {
+		return sqlSession.selectOne("issue.listCount");
+	}
 	
 	//게시글 조회
 	@Override
