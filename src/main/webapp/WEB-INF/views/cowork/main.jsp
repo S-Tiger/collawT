@@ -44,6 +44,7 @@
     border: 1px solid #17a2b8;
     padding: 2px;
     margin: 2px;
+    display: inline-block;
 }
 #applydelete {
 	margin: 2px;
@@ -88,6 +89,7 @@
 								if (data == 1) {
 									// 1 : 아이디가 중복되는 문구
 									$('#applyList').append("<span id= 'applyspan'>"+mem_Id+"<a id ='applydelete' href='#'>x</a></span>");
+									$('#applyform').append("<input type='hidden' name='mem_Id' value='"+mem_Id+"'>");
 									$('#mem_Id').val("");
 									
 								} else {
@@ -177,13 +179,15 @@
 		<div style= "padding-bottom: 25px">
 			<h4 class="m-0 text-dark"
 				style="font-family: Recipekorea; padding-bottom: 5px;">초대 리스트</h4>
-			<div id = "applyList" class = "form-control" style="height: 152px;"></div> <span
+			<div id = "applyList" class = "form-control" style="height: 152px; width: 490px; white-space: pre-line;"></div> <span
 				style="font-size: 0.9em; line-height: 1.0; color: #a1a1a1;">
+			
 				 초대 메세지를 보낼 파트너 아이디를 여기서 확인할 수 있습니다.</span>
 		</div>
 		<div><span style="float: left; padding-right: 50px;">
+			<form action="/apply/insert" method="post" id = "applyform"><input type="hidden" name="c_Id" value="${pjt.c_Id}">
 			<button type="submit" class="btn btn-block btn-success" 
-			style="width: 220px;">초대하기</button></span>
+			style="width: 220px;">초대하기</button></form></span>
 		<span>
 		<button type="reset" class="btn btn-block btn-success" onclick="history.go(0);" style="width: 220px">취소</button></span>
 		</div>
