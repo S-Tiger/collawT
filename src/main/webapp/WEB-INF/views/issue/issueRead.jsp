@@ -76,21 +76,28 @@ $(document).ready(function() {
 				var str="";
 				if(result!=0){
 					for(var i in result){
+						str+='<div class="card-footer card-comments">';
+						
 						str+='<div class="card-comment">';
+						str+='<img alt="User Image" width="50" height="50"	src="/member/getByteImage?mem_Id=${member.mem_Id}" class="img-circle elevation-2"/>';
 						str+='<div class="comment-text">';
 						str+='<span class="username">'+result[i].mem_Name;
 						str+='<span class="text-muted float-right">'+result[i].r_Date+'</span>';
-						str+=('${member.mem_Id}'==result[i].mem_Id ? "&nbsp;&nbsp;&nbsp;<a href='javascript:replyModifyForm("+result[i].r_Num+",\""+result[i].r_Content+"\")'>수정</a>" : "");
-						str+=('${member.mem_Id}'==result[i].mem_Id ? "&nbsp;<a href='javascript:replyDelete("+result[i].r_Num+")'>삭제</a>" : "");
-						
+						str+='<small>'+('${member.mem_Id}'==result[i].mem_Id ? "&nbsp;&nbsp;&nbsp;<a href='javascript:replyModifyForm("+result[i].r_Num+",\""+result[i].r_Content+"\")'>수정</a>" : "")+'</small>';
+						str+='<small>'+('${member.mem_Id}'==result[i].mem_Id ? "&nbsp;&nbsp;&nbsp;<a href='javascript:replyDelete("+result[i].r_Num+")'>삭제</a>" : "")+'</small></span>';
 						
 						str+='<p id="replyContent'+result[i].r_Num+'" name="replyContent">'+result[i].r_Content+'</p>';
-						str+='</div></div></div></div>';
+						str+='</div></div></div>';
 						str+='<input type="hidden" id="r_Num" name="r_Num" value="'+result[i].r_Num+'" />';
 					}
 					
 				}else{
-					str+='작성된 댓글이 없습니다.'
+					str+='<div class="card-footer card-comments">';
+					
+					str+='<div class="card-comment">';
+					str+='<div class="comment-text">';
+					str+='<p style="text-align:center;"><small>작성된 댓글이 없습니다.</small></p>'
+					str+='</div></div></div>';
 				}
 				$("#replyList").html(str);
 			}
@@ -219,8 +226,8 @@ $(document).ready(function() {
 
 
 								<!-- 멤버이미지 넣기 -->
-								<img class="img-circle"
-									src="../resources/dist/img/user1-128x128.jpg" alt="User Image">
+								<img alt="프로필사진" width="50" height="50"
+								src="/member/getByteImage?mem_Id=${member.mem_Id}" class="img-circle elevation-2"/>
 								<span class="username" id="mem_Name" name="mem_Name"><c:out
 										value="${issueRead.mem_Name}" /></span> <span class="description"
 									id="i_Date" name="i_Date"><c:out
@@ -348,7 +355,7 @@ $(document).ready(function() {
 
 						
 							<img class="img-fluid img-circle img-sm"
-								src="../resources/dist/img/user4-128x128.jpg" alt="Alt Text">
+								src="/member/getByteImage?mem_Id=${member.mem_Id}" alt="Alt Text" width="50" height="50" >
 							
 							<div class="img-push">
 								<input type="text" id="r_Content" name="r_Content" class="form-control form-control-sm"	placeholder="댓글을 입력하세요">
