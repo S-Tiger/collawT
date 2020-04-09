@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 <!DOCTYPE html>
 <html>
 <script type="text/javascript">
@@ -41,6 +41,66 @@
 				+ "; path=/";
 	}
 </script>
+
+<script type="text/javascript">
+
+/*  $(function(){
+	
+
+	$('#test00').click(function(){
+		console.log("ddd");
+		$.ajax({
+			url:'/notify/update',
+			dataType : 'Json'
+			type:'get',
+			success: function() {
+		console.log(ee)
+		},
+			error: function(){
+				console.log()
+					alert("erorr");
+				}
+		});
+		})
+	}); */   
+  $(function(){
+		
+	/*   $('#test00').click(function(){
+			console.log("ddd");
+			$.ajax({
+				url:'${contextPath}/notify/update',
+				dataType : 'Json',
+				type:'get',
+				success: function() {
+			console.log(ee)
+			},
+				error: function(){
+					console.log()
+						alert("erorr");
+					}
+			});
+			}) */
+		$('#test00').ready(function(){
+			console.log("ddd");
+			$.ajax({
+				url:'${contextPath}/notify/view',
+				
+				type:'get',
+				success: function(data) {
+			
+			$('#test01').text(data);
+			console.log(data)
+			$('#test00').text(data);
+			},
+				error: function(){
+					console.log()
+						alert("erorr");
+					}
+			});
+			})
+		}); 
+</script>
+
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -88,7 +148,7 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link">Home</a>
+        <a href="/main" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
@@ -168,18 +228,18 @@
         </div>
       </li>
       <!-- Notifications Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-bell"></i>
-          <span class="badge badge-warning navbar-badge">15</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-item dropdown-header">15 Notifications</span>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-envelope mr-2"></i> 4 new messages
-            <span class="float-right text-muted text-sm">3 mins</span>
-          </a>
+      <li class="nav-item dropdown"><a class="nav-link"
+					data-toggle="dropdown" href="#"> <i class="far fa-bell"></i> <span
+						class="badge badge-warning navbar-badge" id ="test00"></span>
+				</a>
+					<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+						<span class="dropdown-item dropdown-header" >15
+							Notifications</span>
+						<div class="dropdown-divider"></div>
+						<a href="/notify/update" class="dropdown-item"> <i
+							class="fas fa-envelope mr-2" id = "test01"></i> <span
+							class="float-right text-muted text-sm">3 mins</span>
+						</a>
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item">
             <i class="fas fa-users mr-2"></i> 8 friend requests
@@ -664,3 +724,15 @@
 		</div>
 		<!-- /.sidebar -->
 	</aside>
+© 2020 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About

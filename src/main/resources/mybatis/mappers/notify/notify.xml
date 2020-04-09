@@ -4,11 +4,53 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
    
 <mapper namespace = "notify">
-	<insert id="notifyInsert" parameterType = "NotifyVO">
 
-	insert into notify(not_Num, not_Link, not_Status, not_Kind, mem_Id, c_Id)
-	values(#{not_Num}, #{not_Link},#{not_Status},#{not_Kind},#{mem_Id},#{c_Id})
+	<resultMap id ="notifyResult01" type = "NotifyVO">
+		<result property = "not_Num" column = "not_Num"/>
+		<result property = "not_Link" column = "not_Link"/>
+		<result property = "not_Status" column = "not_Status"/>
+		<result property = "not_Kind" column = "not_Kind"/>
+		<result property = "mem_Id" column = "mem_Id"/>
+		<result property = "c_Id" column = "c_Id"/>
+		
+	</resultMap>
 	
+	<select id="searchNotify" resultMap = "notifyResult01" parameterType="java.util.Map">
+	<![CDATA[
+         select not_Num, not_Link, not_Status, not_Kind, mem_Id, c_Id 
+              from notify
+         
+      ]]>
+		 <where>
+			
+			 <if test = "not_Status != '' and not_Status != 0">
+			     not_Status = '0'
+			</if> 
+		 </where> 
+	</select>
+	<select id = "viewNoti" resultType = "int" parameterType = "String">
+	<![CDATA[
+	select count(not_Link) from notify
+	]]>
+	<where>
+	not_Status = '0'
+	</where>
+	</select>
+	<insert id="notifyInsert" parameterType = "issueVO">
+<![CDATA[
+	insert into notify(not_Num, not_Link, not_Status, not_Kind, mem_Id, c_Id)
+    select notify_seq.nextval,'ee','0','',mem_Id,c_Id
+    from co_member
+    where c_Id = #{c_Id}
+	]]>
 	</insert>
+	<update id ="notifyUpdate" parameterType = "NotifyVO">
+	<![CDATA[
+	update notify set not_Status = '1'
+	  ]]>
+	  <where>
+	  not_Status = '0'
+	  </where>
+	</update>
 
 </mapper>

@@ -1,14 +1,16 @@
 package project.euna.issue.service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.inject.Inject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import project.euna.issue.dao.IssueDAOImpl;
 import project.euna.issue.vo.IssueVO;
+import project.notify.dao.NotifyDAOImpl;
 
 
 @Service
@@ -16,6 +18,7 @@ public class IssueServiceImpl implements IssueService {
 	
 	@Autowired
 	IssueDAOImpl issueDAO;
+	
 	
 	
 	//글 등록
