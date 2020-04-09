@@ -6,3 +6,4 @@ public interface NotifyController {
 	//public String notifyInsert(NotifyVO notifyVO) throws Exception;
 
 }
+//ㄴ
