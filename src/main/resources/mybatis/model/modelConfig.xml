@@ -24,6 +24,7 @@
 		<!-- 성호 -->
 		<typeAlias type="project.sungho.comember.vo.ComemberVO" alias="ComemberVO" />
 		<typeAlias type="project.sungho.cowork.vo.CoworkVO" alias="CoworkVO" />
+		<typeAlias type="project.sungho.apply.vo.ApplyVO" alias="ApplyVO" />
 		
 		
 	</typeAliases> 
