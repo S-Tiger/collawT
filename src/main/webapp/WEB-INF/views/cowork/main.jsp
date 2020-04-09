@@ -2,8 +2,16 @@
 	pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<c:set var="contextPath"  value="${pageContext.request.contextPath}" />
 <%@include file="../includes/header.jsp"%>
+
+
 <style>
+.accent-teal .btn-link, .accent-teal a:not(.dropdown-item):not(.btn-app):not(.nav-link):not(.brand-link) {
+    color: #343a40;
+}
+
+
 @font-face {
 	font-family: 'Recipekorea';
 	src:
@@ -12,6 +20,7 @@
 	font-weight: normal;
 	font-style: normal;
 }
+ 
 
 .needpopup {
 	border-radius: 6px;
@@ -29,7 +38,20 @@
 .needpopup p+p {
 	margin-top: 10px;
 }
+
+#applyspan {
+	background-clip: padding-box;
+    border: 1px solid #17a2b8;
+    padding: 2px;
+    margin: 2px;
+    display: inline-block;
+}
+#applydelete {
+	margin: 2px;
+}
+
 </style>
+
 
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -38,6 +60,7 @@
 <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="../resources/modal/dist/needpopup.min.js"></script>
 <script>
+
 	needPopup.config.custom = {
 		'removerPlace' : 'outside',
 		'closeOnOutside' : false,
@@ -50,37 +73,61 @@
 	};
 	needPopup.init();
 
-	//버튼으로 삭제하기 위한 j쿼리
-	/*    $(document).ready(function () {
-	     $("button[name=delete]").click(function() {
-	   	  var c_Id = $(this).attr('value');
-	   	  var $form = $('<form></form>');
-	   	  $form.attr({ action: "/project/delete" method: "post" });
-	   	  $form.appendTo('body');
-	   	  var info=<'input type="hidden" value='+ c_Id + 'name="c_Id">'; 
-		$form.append(info);
-	       $form.submit();
 
-	     }) });  
-	 */
+	$('#update-popup').ready(function (){
+			    $('#mem_Id').keydown(function(event) {
+			    	
+			    	if(event.keyCode == '13'){
+			    		var mem_Id = $('#mem_Id').val();
+			    		
+			    		$.ajax({
+							url : '${contextPath}/apply/memberCheck?mem_Id=' + mem_Id,
+							type : 'get',
+							success : function(data) {
+								console.log("1 = 중복o / 0 = 중복x : " + data);
+
+								if (data == 1) {
+									// 1 : 아이디가 중복되는 문구
+									$('#applyList').append("<span id= 'applyspan'>"+mem_Id+"<a id ='applydelete' href='#'>x</a></span>");
+									$('#applyform').append("<input type='hidden' name='mem_Id' value='"+mem_Id+"'>");
+									$('#mem_Id').val("");
+									
+								} else {
+									// 0 : 아이디 사용가능 문구
+									$("#id_check").text("잘못된 아이디 입니다 다시 확인해주세요 :p");
+									$("#id_check").css("color", "red");
+								}
+							}
+						})
+			    	}else{
+			    		$("#id_check").text("이메일 주소를 입력하고 Enter키를 눌러 파트너들을 초대해 보세요.");
+						$("#id_check").css("color", "#a1a1a1");
+			    	}
+			    	
+			    });
+			});
+
+
+			
+			
 </script>
-<!-- 모달 팝업 내용 -->
-<div id='small-popup' class="needpopup">
+<!-- 정보변경 모달 팝업 내용 -->
+<div id='update-popup' class="needpopup">
 	<a href="#"></a>
 	<p>
 	<form id="projectupdate" action="/project/update" method="post">
 		<p class="login-box-msg" style="padding-bottom: 10px">
 			<input type="hidden" id="c_Id" name="c_Id" value="${pjt.c_Id}">
-			<label>이름</label> <input class="form-control" type="text" id="c_Name"
+			<label style="font-family: Recipekorea; padding-bottom: 5px;">이름</label> <input class="form-control" type="text" id="c_Name"
 				name="c_Name" required value="${pjt.c_Name}">
 		</p>
 		<p class="login-box-msg" style="padding-bottom: 10px">
-			<label>설명</label>
+			<label style="font-family: Recipekorea; padding-bottom: 5px;">설명</label>
 			<textarea class="form-control" rows="3" id="c_Comment"
 				name="c_Comment" required>${pjt.c_Comment}</textarea>
 		</p>
 		<p class="login-box-msg" style="padding-bottom: 10px">
-			<label>관리자</label><br> <select name="mem_Id">
+			<label style="font-family: Recipekorea; padding-bottom: 5px;">관리자</label><br> <select name="mem_Id">
 				<option value="${pjt.mem_Id}">${pjt.mem_Id}</option>
 				<option value="학생">학생</option>
 				<option value="회사원">회사원</option>
@@ -88,7 +135,7 @@
 			</select>
 		</p>
 		<p class="login-box-msg" style="padding-bottom: 10px">
-			<label>카테고리</label><br> <select name="c_Category">
+			<label style="font-family: Recipekorea; padding-bottom: 5px;">카테고리</label><br> <select name="c_Category">
 				<option value="${pjt.c_Category}">${pjt.c_Category}</option>
 				<option value="0">협업업무관련</option>
 				<option value="1">개인업무관련</option>
@@ -96,15 +143,55 @@
 			</select>
 		</p>
 		<p class="login-box-msg" style="padding-bottom: 10px">
-			<button type="submit" class="btn btn-block btn-success" >정보변경</button>
+			<button type="submit" class="btn btn-block btn-success">정보변경</button>
 		</p>
 		<br>
 	</form>
 	<p>
 	<form id="projectdelete" action="/project/delete" method="post">
-	<input type="hidden" id="c_Id" name="c_Id" value="${pjt.c_Id}">
-		<button type="submit" class="btn btn-block btn-success" >협업공간삭제</button></form>
+		<input type="hidden" id="c_Id" name="c_Id" value="${pjt.c_Id}">
+		<button style="background-color: #dc3545;" type="submit" class="btn btn-block btn-success">협업공간삭제</button>
+	</form>
 	</p>
+</div>
+<!-- 맴버초대 모달 팝업 내용 -->
+<div id='add-popup' class="needpopup">
+	<a href="#"></a>
+	<p>
+		<div style="padding-bottom: 25px;">
+			<h4 class="m-0 text-dark"
+				style="font-family: Recipekorea; padding-bottom: 5px;">파트너 초대</h4>
+			<span style="font-size: 0.9em; line-height: 1.0; color: #a1a1a1;">
+				많은 사람을 초대하여 원활한 의사소통으로 업무를 효율적으로 처리해보세요. 회사 동료뿐만 아니라 외부 협업자도 파트너로
+				초대할 수 있습니다.</span>
+		</div>
+
+		<div style="padding-bottom: 25px;">
+			<h4 class="m-0 text-dark"
+				style="font-family: Recipekorea; padding-bottom: 5px;">파트너 아이디</h4>
+			<input class="form-control" type="text" id="mem_Id" name="mem_Id"
+				required> <span id= "id_check"
+				style="font-size: 0.9em; line-height: 1.0; color: #a1a1a1;">
+				이메일 주소를 입력하고 Enter키를 눌러 파트너들을 초대해 보세요.</span>
+		</div>
+
+
+		<div style= "padding-bottom: 25px">
+			<h4 class="m-0 text-dark"
+				style="font-family: Recipekorea; padding-bottom: 5px;">초대 리스트</h4>
+			<div id = "applyList" class = "form-control" style="height: 152px; width: 490px; white-space: pre-line;"></div> <span
+				style="font-size: 0.9em; line-height: 1.0; color: #a1a1a1;">
+			
+				 초대 메세지를 보낼 파트너 아이디를 여기서 확인할 수 있습니다.</span>
+		</div>
+		<div><span style="float: left; padding-right: 50px;">
+			<form action="/apply/insert" method="post" id = "applyform"><input type="hidden" name="c_Id" value="${pjt.c_Id}">
+			<button type="submit" class="btn btn-block btn-success" 
+			style="width: 220px;">초대하기</button></form></span>
+		<span>
+		<button type="reset" class="btn btn-block btn-success" onclick="history.go(0);" style="width: 220px">취소</button></span>
+		</div>
+		
 </div>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -117,17 +204,21 @@
 						<h1 class="m-0 text-dark"
 							style="font-family: Recipekorea; max-width: 80%; float: left;">
 							&nbsp;${pjt.c_Name}</h1>
-						<a href="#" data-needpopup-show="#small-popup" class="nav-link"
-							style="width: 31px; color: black;"><i
-							class="nav-icon fas fa-cogs" style="padding-left: 10px;"> </i></a>
+						<a style="font-size: 20px;" href="/#"
+							data-needpopup-show="#update-popup"><i
+							class="nav-icon fas fa-cogs"
+							style="padding-left: 10px; padding-bottom: 20px;"> </i></a>
 					</div>
 					<p class="breadcrumb float-sm-left">&nbsp; ${pjt.c_Comment}</p>
 				</div>
 				<!-- /.col -->
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
-						<li class="breadcrumb-item"><a href="/main">Home</a></li>
-						<li class="breadcrumb-item active">Dashboard v1</li>
+
+						<li class="breadcrumb-item"><a style="font-size: 30px; "
+							href="/#" data-needpopup-show="#add-popup"> <i
+								style="width: 25px; height: 25px;" class="ion ion-person-add"></i></a></li>
+						<li class="breadcrumb-item active">파트너 추가</li>
 					</ol>
 				</div>
 				<!-- /.col -->

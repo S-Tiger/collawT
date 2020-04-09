@@ -24,6 +24,7 @@ public class IssueServiceImpl implements IssueService {
 	NotifyDAOImpl notifyDAO;
 	
 	
+	
 	//글 등록
 	@Override
 	public void  issueInsert(IssueVO issueVO) {

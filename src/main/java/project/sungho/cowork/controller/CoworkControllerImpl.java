@@ -41,7 +41,6 @@ public class CoworkControllerImpl implements CoworkController {
 		
 		String mem_Id = (String)session.getAttribute("mem_Id");
 				
-		
 		searchMap.put("mem_Id", mem_Id);	
 		
 		
@@ -113,16 +112,15 @@ public class CoworkControllerImpl implements CoworkController {
 	public String deleteCowork(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
 		Map<String, Object> dataMap = new HashMap<String, Object>();
-		
+
 		String c_Id = request.getParameter("c_Id");
-		
+
 		dataMap.put("c_Id", c_Id);
-		
+
 		coworkService.deleteCowork(dataMap);
-		
+
 		return "redirect:/main";
 	}
-	
 	
 	@RequestMapping("/create")
 	public String project(Model model) {
