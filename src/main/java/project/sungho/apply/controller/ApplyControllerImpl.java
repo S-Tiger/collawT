@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -51,13 +52,15 @@ public class ApplyControllerImpl implements ApplyController {
 	}
 
 	@Override
+	@PostMapping("insert")
 	public String insertApply(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Map<String, Object> dataMap = new HashMap<String, Object>();
-
+		System.out.println("초대인설트");
 		Enumeration enu = request.getParameterNames();
 		while (enu.hasMoreElements()) {
 			String name = (String) enu.nextElement();
 			String value = request.getParameter(name);
+			System.out.println(name+","+value);
 			dataMap.put(name, value);
 		}
 		applyService.insertApply(dataMap);
