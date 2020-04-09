@@ -49,86 +49,30 @@ public class ReplyControllerImpl implements ReplyController {
 	
 	//댓글 목록
 	@Override
-	@GetMapping("/list/{i_Num}")
+	@GetMapping("/list")
 	@ResponseBody
-	public List<Map> searchList(@RequestParam String i_Num, HttpServletRequest request, HttpServletResponse response) throws Exception{
+	public List<Map> searchList(@RequestParam ("i_Num")String i_Num, HttpServletRequest request, HttpServletResponse response) throws Exception{
 		System.out.println("1111111111111111111111controller reply");
 		
-		System.out.println(i_Num);
+		System.out.println("i_Num : "+i_Num);
 		
-		List<Map> reply = replyService.searchList(i_Num);
-
-		return reply;
+		List<Map> list = replyService.searchList(i_Num);
+		return list;
 	}
-//	public ResponseEntity<List<Map>> searchList(@PathVariable("i_Num") String i_Num){
-//		System.out.println("1111111111111111111111controller reply");
-//		ResponseEntity<List<Map>> entity = null;
-//		try {
-//			entity = new ResponseEntity<>(replyService.searchList(i_Num), HttpStatus.OK);
-//		}catch(Exception e){
-//			e.printStackTrace();
-//			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-//		}
-//		return entity;
-//	}
-	
+
 
 	
+	//댓글 삭제
+	@Override
+	@PostMapping("/delete")
+	@ResponseBody
+	public void replyDelete(ReplyVO replyVO) throws Exception{
+		
 	
-//	@ResponseBody
-//	public ResponseEntity<List<Map>> list(@PathVariable("i_Num") String i_Num){
-//		ResponseEntity<List<Map>> entity = null;
-//		try {
-//			entity = new ResponseEntity<List<Map>>(replyService.searchList(i_Num), HttpStatus.OK);
-//		}catch(Exception e) {
-//			e.printStackTrace();
-//			entity = new ResponseEntity<List<Map>>(HttpStatus.BAD_REQUEST);
-//		}
-//		return entity;
-//	}
-	
-	
-
-	
-	
-//	//글 쓰기 화면
-//	@Override
-//	@GetMapping("/insert")
-//	public String issueInsert() {
-//		
-//		return "/issue/issueInsert";
-//	}
-//	
-//	
-//	//개별 글 조회
-//	@Override
-//	@GetMapping("/read")
-//	public ModelAndView issueRead(String i_Num, HttpServletRequest request, HttpServletResponse response) throws Exception {
-//		
-//		
-//		Map<String, Object> board = issueService.issueRead(i_Num);
-//		List<Map> reply = replyService.searchList(i_Num);
-//		
-//		ModelAndView mav = new ModelAndView("issue/issueRead");
-//		mav.addObject("issueRead", board);
-//		mav.addObject("replyList", reply);
-//		
-//		System.out.println("controller board"+board);
-//		System.out.println("controller reply"+reply);
-//		
-//		return mav;
-//	}
-//	
-//	
-//	//게시글 삭제
-//	@Override
-//	@PostMapping("/delete")
-//	public String issueDelete(IssueVO issueVO) throws Exception{
-//	
-//		issueService.issueDelete(issueVO.getI_Num());
-//		
-//		return "redirect:/issue/list";
-//	}
+		replyService.replyDelete(replyVO);
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!r_Num : "+replyVO.getR_Num());
+		
+	}
 //	
 //	//게시글 수정 페이지로 이동
 //	@Override

@@ -37,21 +37,13 @@ public class ReplyServiceImpl implements ReplyService {
 			System.out.println("Join Success!!");
 		}
 	}
-//	
-//	
-//	
-//	//게시글 조회
-//	@Override
-//	public Map<String, Object> issueRead(String i_Num) {
-//		return issueDAO.issueRead(i_Num);
-//		
-//	}
-//
-//	//글 삭제
-//	@Override
-//	public void issueDelete(String i_Num) throws Exception {
-//		issueDAO.issueDelete(i_Num);
-//	}
+
+
+	//댓글 삭제
+	@Override
+	public void replyDelete(ReplyVO replyVO) throws Exception {
+		replyDAO.replyDelete(replyVO);
+	}
 //
 //	//글 수정
 //	@Override

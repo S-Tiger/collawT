@@ -7,63 +7,17 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
 
-getReply();
-
-
-function getReply(){
-var i_Num = $("#i_Num").val();
-	
-	$.getJSON("/reply/list/"+i_Num, function(data){
-		console.log(data);
-		var str = "";
-		$(data).each(function(){
-			str+='<div class="card-comment">';
-			
-			
-			str+='<div class="comment-text">';
-			str+='<span class="username">'+value.mem_Name;
-			str+='<span class="text-muted float-right">'+value.r_Date+'</span>';
-			str+='<span class="text-muted float-right">삭제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
-			str+='<span class="text-muted float-right">수정&nbsp;&nbsp;&nbsp;</span></span>';
-			str+=value.r_Content;
-			str+='</div><br></div></div></div>';
-		})
-		$("#replyList").html(str);
-	})
-}
-	
-	/* $.ajax({
-		type : "get",
-		url : "/reply/list"
-		success:function(reply){
-			var str = "";
-			console.log(reply);
-			$(result).each(function(){
-				str+='<div class="card-comment">';
-				str+='<div class="comment-text">';
-				str+='<span class="username">'+value.mem_Name;
-				str+='<span class="text-muted float-right">'+value.r_Date+'</span>';
-				str+='<span class="text-muted float-right">삭제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
-				str+='<span class="text-muted float-right">수정&nbsp;&nbsp;&nbsp;</span></span>';
-				str+=value.r_Content;
-				str+='</div><br></div></div></div>';
-			})
-			$("#replyList").html(str);
-		}
-	}) */
-	
-	
-	
- 	
-
-
 
 
 $(document).ready(function() {
+	//댓글 목록 항상 호출
+	getReplyList();
+	
 	var formObj = $("form[name='readForm']");
+	var formReply = $("form[name='replyForm']");
 
 	//수정페이지로 이동 jquery
-	$("#update_btn").on("click", function() {
+ 	$("#update_btn").on("click", function() {
 		
 		formObj.attr("action", "/issue/update");
 		formObj.attr("method", "get");
@@ -100,16 +54,84 @@ $(document).ready(function() {
 					c_Id : $("#c_Id").val()
 				},
 				success:function(data){
-					if(data == 1) {
-                        $("#r_Content").val('');
-                        replyList();
-					}
+					
+                        $("#r_Content").val("");
+                        getReplyList();
+					
 				}
 			})
 		}
 	})
+	
+	
+	
+	//댓글 목록
+	function getReplyList(){
+		$.ajax({
+			type:"get",
+			url : "${path}/reply/list?i_Num=${issueRead.i_Num}",
+			
+			success:function(result){
+				console.log(result);
+				var str="";
+				if(result!=0){
+					for(var i in result){
+						str+='<div class="card-comment">';
+						str+='<div class="comment-text">';
+						str+='<span class="username">'+result[i].mem_Name;
+						str+='<span class="text-muted float-right">'+result[i].r_Date+'</span>';
+						
+						str+='<span class="text-muted float-right"><a href="javascript:replyDelete()" id="replyDelete" name="replyDelete">삭제</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+						str+='<span class="text-muted float-right"><a href="#" onclick="replyModifyForm()">수정</a>&nbsp;&nbsp;&nbsp;</span></span>';
+						;
+						str+=result[i].r_Content;
+						str+='</div><br></div></div></div>';
+						str+='<input type="hidden" id="r_Num" name="r_Num" value="'+result[i].r_Num+'" />';
+					}
+					//str+='<c:if test="'+${member.mem_Id} == result[i].mem_Id+'">';
+					//str+='</c:if>'
+				}else{
+					str+='작성된 댓글이 없습니다.'
+				}
+				$("#replyList").html(str);
+			}
+				
+		})
+		
+	}
+	
+	
+	
 })
-
+	//댓글 삭제
+  	function replyDelete(){
+		if(confirm("삭제하시겠습니까?")){
+			var r_Num = $("#r_Num").val();
+			$.ajax({
+				url : "/reply/delete",
+				data : {"r_Num" : r_Num},
+				type : 'post',
+				success:function(){
+					alert("삭제되었습니다.");
+					location.reload();
+				}
+			})
+			
+		}
+			
+	}
+	
+	//댓글 수정창 열기
+ 	function replyModifyForm(){
+		var str="";
+		str+='<div class="card-footer">';
+		str+='<img class="img-fluid img-circle img-sm" src="../resources/dist/img/user4-128x128.jpg" alt="Alt Text">';
+		str+='<div class="img-push">';
+		str+='<input type="text" id="r_Content" name="r_Content" class="form-control form-control-sm"	placeholder="댓글을 입력하세요">';
+		str+='';
+	} 
+	
+	//댓글 수정 db
 </script>
 
 <!-- Content Wrapper. Contains page content -->
@@ -240,7 +262,7 @@ $(document).ready(function() {
 								<input type="submit" value="삭제" id="delete_btn"
 									class="btn btn-success float-right">
 								<input type="submit" value="수정" id="update_btn"
-									class="btn btn-success float-right">
+									class="btn btn-success float-right" onclick="update()">
 						</c:if>
 
 							<input type="button" value="목록"
@@ -287,28 +309,26 @@ $(document).ready(function() {
 					</div>
 					<!-- /.card-body -->
 					<div id="replyList"></div>
+					
+					<!-- 댓글  입력-->
 					<div class="card-footer">
 
-						<!-- 댓글  입력-->
+						
 							<img class="img-fluid img-circle img-sm"
 								src="../resources/dist/img/user4-128x128.jpg" alt="Alt Text">
-							<!-- .img-push is used to add margin to elements next to floating images -->
+							
 							<div class="img-push">
-								<input type="text" id="r_Content" name="r_Content" class="form-control form-control-sm"
-									placeholder="댓글을 입력하세요">
-									<!-- <input type="submit" id="replyInsert_btn" name="replyInsert_btn" class="btn btn-block btn-default btn-xs" value="입력" /> -->
+								<input type="text" id="r_Content" name="r_Content" class="form-control form-control-sm"	placeholder="댓글을 입력하세요">
+									
 									<button class = "btn btn-block btn-default btn-xs" type = "button" id="replyInsert_btn" name="replyInsert_btn">입력</button>
+									
 									<input type="hidden" id="i_Num" name="i_Num" value="${issueRead.i_Num}" />
 									<input type="hidden" id="c_Id" name="c_Id" value="${issueRead.i_Num}" />
 								
-								
 							</div>
-						
-
-
-						<!-- /.card-body -->
-					</div>
 					
+					</div>
+					<!-- /댓글 입력 -->
 				</div>
 			</div>
 			<div class="row">

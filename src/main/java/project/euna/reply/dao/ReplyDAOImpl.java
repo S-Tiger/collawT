@@ -28,30 +28,21 @@ public class ReplyDAOImpl implements ReplyDAO {
 		}
 		
 		
-	//댓글 입력
+	//글 입력
 	@Override
 	public int replyInsert(ReplyVO replyVO) {
 		int result;
 		result = sqlSession.update("reply.replyInsert", replyVO);
-		System.out.println(result);
 		return result;
 	}
-//	
-//	
-//	
-//	//게시글 조회
-//	@Override
-//	public Map<String, Object> issueRead(String i_Num) {
-//		return sqlSession.selectOne("issue.issueRead",i_Num);
-//		
-//	}
-//
-//	//글 삭제
-//	@Override
-//	public void issueDelete(String i_Num) throws Exception {
-//		sqlSession.delete("issue.issueDelete", i_Num);
-//		
-//	}
+
+
+	//댓글 삭제
+	@Override
+	public void replyDelete(ReplyVO replyVO) throws Exception {
+		sqlSession.delete("reply.replyDelete", replyVO);
+		
+	}
 //	
 //	//글 수정
 //	@Override

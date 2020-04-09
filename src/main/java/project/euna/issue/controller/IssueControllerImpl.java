@@ -83,13 +83,10 @@ public class IssueControllerImpl implements IssueController {
 		
 		
 		Map<String, Object> board = issueService.issueRead(i_Num);
-		//List<Map> reply = replyService.searchList(i_Num);
 		
 		ModelAndView mav = new ModelAndView("issue/issueRead");
 		mav.addObject("issueRead", board);
-		//mav.addObject("replyList", reply);
 		System.out.println("controller board"+board);
-		//System.out.println("controller reply"+reply);
 		return mav;
 	}
 	

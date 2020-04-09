@@ -49,13 +49,13 @@
 
 
 
-	<!-- 게시물 삭제 -->
-	<!-- <delete id="issueDelete" parameterType="String">
+	<!-- 댓글 삭제 -->
+	<delete id="replyDelete" parameterType="ReplyVO">
 		DELETE
-		FROM issue
-		WHERE i_Num=#{i_Num}
+		FROM reply
+		WHERE r_Num=#{r_Num}
 	</delete>
- -->
+
 	<!-- 게시물 수정 -->
 	<!-- <update id="issueUpdate"
 		parameterType="project.euna.issue.vo.IssueVO">
