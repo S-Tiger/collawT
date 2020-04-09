@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -73,29 +74,20 @@ public class ReplyControllerImpl implements ReplyController {
 		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!r_Num : "+replyVO.getR_Num());
 		
 	}
-//	
-//	//게시글 수정 페이지로 이동
-//	@Override
-//	@GetMapping("/update")
-//	public String issueUpdate(IssueVO issueVO, Model model) throws Exception {
-//		model.addAttribute("issueUpdate",issueService.issueRead(issueVO.getI_Num()) );
-//		return "/issue/issueUpdate";
-//	}
-//	
-//	//게시글 수정 db에 넣기
-//	@Override
-//	@PostMapping("/update")
-//	public String issueUpdate(IssueVO issueVO) throws Exception {
-//		issueService.issueUpdate(issueVO);
-//		
-//		String i_Num = issueVO.getI_Num();
-//		
-//		//수정한 게시물로 리턴
-//		return "redirect:/issue/read?i_Num="+i_Num;
-//	}
-//	
-//
-//	
+	
+
+	
+	//게시글 수정 db에 넣기
+	@Override
+	@PostMapping("/update")
+	@ResponseBody
+	public void replyUpdate(ReplyVO replyVO) throws Exception {
+		replyService.replyUpdate(replyVO);
+		
+	}
+	
+
+	
 
 
 }

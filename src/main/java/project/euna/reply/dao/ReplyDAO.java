@@ -14,4 +14,6 @@ public interface ReplyDAO {
 	public List<Map> searchList(String i_Num) throws DataAccessException;
 	public int replyInsert(ReplyVO replyVO);
 	public void replyDelete(ReplyVO replyVO) throws Exception;
+	public void replyUpdate(ReplyVO replyVO) throws Exception;
+
 }

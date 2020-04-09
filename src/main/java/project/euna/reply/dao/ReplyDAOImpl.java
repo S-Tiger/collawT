@@ -43,11 +43,11 @@ public class ReplyDAOImpl implements ReplyDAO {
 		sqlSession.delete("reply.replyDelete", replyVO);
 		
 	}
-//	
-//	//글 수정
-//	@Override
-//	public void issueUpdate(IssueVO issueVO) throws Exception {
-//		sqlSession.update("issue.issueUpdate", issueVO);
-//	}
-
+	
+	//댓글 수정
+	@Override
+	public void replyUpdate(ReplyVO replyVO) throws Exception {
+		sqlSession.update("reply.replyUpdate", replyVO);
+	}
+	
 }

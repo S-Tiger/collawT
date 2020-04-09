@@ -80,16 +80,15 @@ $(document).ready(function() {
 						str+='<div class="comment-text">';
 						str+='<span class="username">'+result[i].mem_Name;
 						str+='<span class="text-muted float-right">'+result[i].r_Date+'</span>';
+						str+=('${member.mem_Id}'==result[i].mem_Id ? "&nbsp;&nbsp;&nbsp;<a href='javascript:replyModifyForm("+result[i].r_Num+",\""+result[i].r_Content+"\")'>수정</a>" : "");
+						str+=('${member.mem_Id}'==result[i].mem_Id ? "&nbsp;<a href='javascript:replyDelete("+result[i].r_Num+")'>삭제</a>" : "");
 						
-						str+='<span class="text-muted float-right"><a href="javascript:replyDelete()" id="replyDelete" name="replyDelete">삭제</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
-						str+='<span class="text-muted float-right"><a href="#" onclick="replyModifyForm()">수정</a>&nbsp;&nbsp;&nbsp;</span></span>';
-						;
-						str+=result[i].r_Content;
-						str+='</div><br></div></div></div>';
+						
+						str+='<p id="replyContent'+result[i].r_Num+'" name="replyContent">'+result[i].r_Content+'</p>';
+						str+='</div></div></div></div>';
 						str+='<input type="hidden" id="r_Num" name="r_Num" value="'+result[i].r_Num+'" />';
 					}
-					//str+='<c:if test="'+${member.mem_Id} == result[i].mem_Id+'">';
-					//str+='</c:if>'
+					
 				}else{
 					str+='작성된 댓글이 없습니다.'
 				}
@@ -103,10 +102,13 @@ $(document).ready(function() {
 	
 	
 })
+
+
 	//댓글 삭제
-  	function replyDelete(){
+  	function replyDelete(r_Num){
+	
 		if(confirm("삭제하시겠습니까?")){
-			var r_Num = $("#r_Num").val();
+			
 			$.ajax({
 				url : "/reply/delete",
 				data : {"r_Num" : r_Num},
@@ -121,17 +123,48 @@ $(document).ready(function() {
 			
 	}
 	
+	
+	
 	//댓글 수정창 열기
- 	function replyModifyForm(){
+  	function replyModifyForm(r_Num, r_Content){
+		
 		var str="";
-		str+='<div class="card-footer">';
-		str+='<img class="img-fluid img-circle img-sm" src="../resources/dist/img/user4-128x128.jpg" alt="Alt Text">';
-		str+='<div class="img-push">';
-		str+='<input type="text" id="r_Content" name="r_Content" class="form-control form-control-sm"	placeholder="댓글을 입력하세요">';
-		str+='';
+		
+		str+='<div><input type="text" id="r_Content'+r_Num+'" name="r_Content'+r_Num+'" class="form-control form-control-sm"	value="'+r_Content+'" ></div>';
+		str+='<button class = "btn btn-block btn-default btn-xs" type = "button" id="replyInsert_btn" name="replyInsert_btn" onclick="replyUpdate('+r_Num+')">입력</button>';
+		str+='<button class = "btn btn-block btn-default btn-xs" type = "button" id="replyCancel_btn" name="replyCancel_btn" onclick="replyCancle('+r_Num+',\''+r_Content+'\')">취소</button>';
+	
+
+		$('#replyContent'+r_Num).html(str);	
+			
 	} 
+
+	 
 	
 	//댓글 수정 db
+	function replyUpdate(r_Num){
+		var updateContent = $('[name=r_Content'+r_Num+']').val();
+	    
+	    $.ajax({
+	        url : '/reply/update',
+	        type : 'post',
+	        data : {'r_Content' : updateContent, 'r_Num' : r_Num},
+	        success : function(data){
+	           
+	            	location.reload();
+	        }
+	    });
+	}
+	
+	//댓글 입력 취소 버튼 클릭시
+	function replyCancle(r_Num, r_Content){
+		var str="";
+		str+='<p id="replyContent'+r_Num+'" name="replyContent">'+r_Content+'</p>';
+			
+		$('#replyContent'+r_Num).html(str);	
+	}
+	
+	
 </script>
 
 <!-- Content Wrapper. Contains page content -->
@@ -311,7 +344,7 @@ $(document).ready(function() {
 					<div id="replyList"></div>
 					
 					<!-- 댓글  입력-->
-					<div class="card-footer">
+					<div class="card-footer" id="replyInput" name="replyInput">
 
 						
 							<img class="img-fluid img-circle img-sm"
@@ -324,6 +357,7 @@ $(document).ready(function() {
 									
 									<input type="hidden" id="i_Num" name="i_Num" value="${issueRead.i_Num}" />
 									<input type="hidden" id="c_Id" name="c_Id" value="${issueRead.i_Num}" />
+									
 								
 							</div>
 					

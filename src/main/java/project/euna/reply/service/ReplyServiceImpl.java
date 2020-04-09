@@ -44,14 +44,13 @@ public class ReplyServiceImpl implements ReplyService {
 	public void replyDelete(ReplyVO replyVO) throws Exception {
 		replyDAO.replyDelete(replyVO);
 	}
-//
-//	//글 수정
-//	@Override
-//	public void issueUpdate(IssueVO issueVO) throws Exception {
-//		issueDAO.issueUpdate(issueVO);
-//	}
 
-	
+	//댓글 수정
+	@Override
+	public void replyUpdate(ReplyVO replyVO) throws Exception {
+		replyDAO.replyUpdate(replyVO);
+	}
+
 	
 
 }
