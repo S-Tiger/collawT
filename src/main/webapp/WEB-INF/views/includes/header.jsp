@@ -219,7 +219,7 @@
 				<div class="image">
 					<c:if test="${member.mem_File != null }">
 						<div class="profile">
-							<img alt="프로필사진" width="50" height="50"
+							<img alt="User Image" width="50" height="50" class="img-circle elevation-2"
 								src="/member/getByteImage?mem_Id=${member.mem_Id}" />
 						</div>
 					</c:if>
@@ -232,10 +232,12 @@
 					<c:if test="${member.mem_Id != null}">
 						<a href="/member/mypage" class="nav-link active"
 							style="width: 100px; padding: 0px;">${member.mem_Name} </a>
-						<input type="button" value="로그아웃"
-							onclick="location.href='/logout'">
-					</c:if>
 					<a href="#" class="d-block">${member.mem_Id}</a>
+						<!-- <input type="button" value="로그아웃"
+							onclick="location.href='/logout'"> -->
+							<a href="/logout" class="nav-link active"
+							style="width: 100px; padding: 0px;">로그아웃</a>
+					</c:if>
 				</div>
 			</div>
 

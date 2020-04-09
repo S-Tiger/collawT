@@ -17,7 +17,7 @@
 	
 	
 	<!-- 회원정보 수정 -->
-	<update id="update_mypage" parameterType="java.util.Map">
+	<update id="updateMypage" parameterType="java.util.Map">
 		update member set mem_Name = #{mem_Name} where mem_Id =#{mem_Id}
 	</update>
 	

@@ -1,27 +1,13 @@
 package project.jeongha.member.controller;
 
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import project.imgblob.ImgBlobVO;
 import project.jeongha.member.vo.MemberVO;
 
 public interface MemberController {
@@ -42,5 +28,6 @@ public String outMember() ;
 public String delete_Member(MemberVO memberVO,String pw,HttpServletResponse response, HttpSession session, RedirectAttributes rttr)throws Exception;
 public String saveImage(MemberVO memberVO,HttpServletResponse request,HttpServletResponse response, HttpSession session) throws Exception;
 public ResponseEntity<byte[]> getByteImage(String mem_Id) ;
+public String resize();
 
 }

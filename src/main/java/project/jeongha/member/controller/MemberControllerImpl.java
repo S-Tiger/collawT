@@ -155,9 +155,14 @@ public class MemberControllerImpl implements MemberController{
 	         System.out.println("수정");
 	         System.out.println(memberVO.getMem_Id());
 	         System.out.println(memberVO.getMem_Name());
-	         service.updateMypage(memberVO);
+	         Map<String,Object> member00 = new HashMap<String,Object>();
+			member00 =(Map<String,Object>) session.getAttribute("member");
+			System.out.println("세션에서 가져온거member00 :"+member00);
+			member00.put("mem_Id", memberVO.getMem_Id());
+			member00.put("mem_Name", memberVO.getMem_Name());
+	         service.updateMypage(member00);
 	         rttr.addFlashAttribute("msg", "회원정보 수정 완료");
-	         session.setAttribute("member", memberVO);
+	         session.setAttribute("member", member00);
 	         return "/main/index";
 	      }
 		
@@ -251,6 +256,13 @@ public class MemberControllerImpl implements MemberController{
 			final HttpHeaders headers = new HttpHeaders();
 			headers.setContentType(MediaType.IMAGE_PNG);
 			return new ResponseEntity<byte[]>(imageContent, headers, HttpStatus.OK);
+		}
+
+		@Override
+		@RequestMapping(value = "/resize")
+		public String resize() {
+			// TODO Auto-generated method stub
+			return "/member/resize";
 		}
 
 }

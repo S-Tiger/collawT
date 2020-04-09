@@ -74,7 +74,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	// 회원정보 업데이트(아직안씀)
-	@Override
+/*	@Override
 	public int memberUpdate(MemberVO memberVO) {
 		// TODO Auto-generated method stub
 		int result = dao.memberUpdate(memberVO);
@@ -84,13 +84,13 @@ public class MemberServiceImpl implements MemberService {
 			System.out.println("Update Success!!");
 		}
 		return result;
-	}
+	}*/
 
 	// 개인정보변경(이름만)
 	@Override
-	public MemberVO updateMypage(MemberVO memberVO) throws Exception {
+	public MemberVO updateMypage(Map<String, Object> memberVO) throws Exception {
 		dao.memberUpdate(memberVO);
-		return dao.login(memberVO.getMem_Id());
+		return dao.login(memberVO);
 	}
 
 	// 비밀번호변경
@@ -99,9 +99,9 @@ public class MemberServiceImpl implements MemberService {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		//로그인된 아이디(히든태그)로 로그인 비밀번호로 접근하여 맞는지 안맞는지 확인
-		System.out.println("service password: " + dao.login(memberVO.getMem_Id()).getMem_Pwd());
-		System.out.println("service Id: "+dao.login(memberVO.getMem_Id()));
-		if (!old_pw.equals(dao.login(memberVO.getMem_Id()).getMem_Pwd())) {
+		System.out.println("service password: " + dao.loginC(memberVO.getMem_Id()).getMem_Pwd());
+		System.out.println("service Id: "+dao.loginC(memberVO.getMem_Id()));
+		if (!old_pw.equals(dao.loginC(memberVO.getMem_Id()).getMem_Pwd())) {
 			out.println("<script>");
 			out.println("alert('기존 비밀번호가 다릅니다.');");
 			out.println("history.go(-1);");
@@ -110,7 +110,7 @@ public class MemberServiceImpl implements MemberService {
 			return null;
 		} else {
 			dao.update_pw(memberVO);
-			return dao.login(memberVO.getMem_Id());
+			return dao.loginC(memberVO.getMem_Id());
 		}
 	}
 
@@ -235,9 +235,9 @@ public class MemberServiceImpl implements MemberService {
 	public MemberVO delete_Member(MemberVO memberVO, String pwd, HttpServletResponse response) throws Exception {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
-		System.out.println("service password: " + dao.login(memberVO.getMem_Id()).getMem_Pwd());
+		System.out.println("service password: " + dao.loginC(memberVO.getMem_Id()).getMem_Pwd());
 		//디비 비밀번호와 입력한 비밀번호가 같다면
-		if (!pwd.equals(dao.login(memberVO.getMem_Id()).getMem_Pwd())) {
+		if (!pwd.equals(dao.loginC(memberVO.getMem_Id()).getMem_Pwd())) {
 			out.println("<script>");
 			out.println("alert('기존 비밀번호가 다릅니다.');");
 			out.println("history.go(-1);");
@@ -247,7 +247,7 @@ public class MemberServiceImpl implements MemberService {
 		//비밀번호가 맞다면.
 		}else {
 			dao.delete_Member(memberVO);
-			return dao.login(memberVO.getMem_Id());
+			return dao.loginC(memberVO.getMem_Id());
 		}
 	
 	}

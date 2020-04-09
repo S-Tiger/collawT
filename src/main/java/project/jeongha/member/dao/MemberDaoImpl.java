@@ -36,18 +36,25 @@ public class MemberDaoImpl implements MemberDao {
 	
 	//개인정보 업데이트
 	@Override
-	public int memberUpdate(MemberVO memberVO) {
+	public int memberUpdate(Map<String, Object> memberVO) {
 		// TODO Auto-generated method stub
-		int stat = sqlSession.update("member.update_mypage", memberVO);
+		int stat = sqlSession.update("member.updateMypage", memberVO);
 		return stat;
 	}
 	
-	//로그인테스트
+	//로그인
 	@Override
-	public MemberVO login(String mem_id) throws Exception {
+	public MemberVO login(Map<String, Object> mem_id) throws Exception {
 			return sqlSession.selectOne("member.logina", mem_id);
 	}
 
+
+	@Override
+	public MemberVO loginC(String mem_id) throws Exception {
+			return sqlSession.selectOne("member.logina", mem_id);
+	}
+	
+	
 	//아이디 중복 검사
 	public int check_id(String mem_id) throws Exception{
 		int result = sqlSession.selectOne("member.check_id", mem_id);
