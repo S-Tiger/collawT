@@ -22,6 +22,14 @@
   height: auto;
 }
 
+.user-img {
+
+  margin: 0 auto;
+  padding: 3px;
+  width: 100px;
+  height: 95px;
+}
+
 </style>
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
@@ -151,16 +159,17 @@ $(function(){
             <div class="card card-primary card-outline">
               <div class="card-body box-profile">
               <!-- 변경된이미지 -->
-                <div id="holder" class="profile-user-img img-fluid img-circle">
+                <div id="holder" class="user-img img-fluid img-circle">
                 <!-- 아이디 있으면.. -->
+                
                 <c:if test="${member.mem_File != null }">
-					<img alt="User Image" class="profile-user-img img-fluid img-circle"
-						src="/member/getByteImage?mem_Id=${member.mem_Id}" />
+					<img src="/member/getByteImage?mem_Id=${member.mem_Id}" 
+					    class="user-img img-fluid img-circle" alt="User Image"  />
 				</c:if>
 				
 				<c:if test="${member.mem_File == null }">
 					<img src="../resources/dist/img/user2-160x160.jpg"
-						class="profile-user-img img-fluid img-circle" alt="User Image">
+						class="user-img img-fluid img-circle" alt="User Image">
 				</c:if>
                 </div>
                 <h3 class="profile-username text-center">${member.mem_Name}</h3>
@@ -241,15 +250,14 @@ $(function(){
               			<p class="login-box-msg">이용해주셔서 감사합니다.</p>
                 <label for="inputEstimatedBudget">현재 비밀번호</label>
                 <input class="form-control" id="pwd" name="pwd" type="password" required>
-              </div>
-              <div class="form-group">
-              </div>
-              <!-- 변경폼 -->
               <div class="row">
        			 <div class="col-12">
          		 	<input type="submit" value="회원탈퇴" class="btn btn-success float-right" onclick="fn_deleteMem()"/>
         		</div>
       		  </div>
+              </div>
+              <!-- 변경폼 -->
+              
       		  </form>
             </div>
             <!-- /.card-body -->
@@ -293,12 +301,12 @@ $(function(){
 			img.src = event.target.result;
 
 			img.width = 100;
-			img.height = 100;
+			img.height = 95;
 			
 			holder.innerHTML = '';
 			holder.appendChild(img);
 			holder.width = 100;
-			holder.height = 100;
+			holder.height = 95;
 
 		};
 		reader.readAsDataURL(file);

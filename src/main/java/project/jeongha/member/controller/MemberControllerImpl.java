@@ -67,6 +67,7 @@ public class MemberControllerImpl implements MemberController{
 		System.out.println("회원가입페이지");
 		return "/member/signup";
 	}
+	 
 	
 	//로그인 페이지
 	@Override
