@@ -35,7 +35,7 @@
 		from reply R, member M
 		where M.mem_Id=R.mem_Id
 		and i_Num = #{i_Num}
-		order by r_Num desc
+		order by r_Num asc
       ]]>
 
 	</select>
