@@ -94,7 +94,7 @@
 <body class="hold-transition register-page">
 <div class="register-box">
   <div class="register-logo">
-    <a href="javascript:window.history.back();"><b>Collaw</b>T</a>
+    <a href="/"><b>Collaw</b>T</a>
   </div>
 
   <div class="card">
