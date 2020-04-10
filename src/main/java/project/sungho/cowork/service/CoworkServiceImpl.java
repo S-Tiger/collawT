@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import project.sungho.apply.dao.ApplyDAO;
 import project.sungho.comember.dao.ComemberDAO;
 import project.sungho.cowork.dao.CoworkDAO;
 import project.sungho.cowork.vo.CoworkVO;
@@ -20,6 +21,10 @@ public class CoworkServiceImpl implements CoworkService {
 	
 	@Autowired
 	private ComemberDAO comemberDAO;
+	
+	@Autowired
+	private ApplyDAO applyDAO;
+	
 	
 	
 	@Override
@@ -54,6 +59,7 @@ public class CoworkServiceImpl implements CoworkService {
 	@Override
 	public int deleteCowork(Map<String, Object> dataMap) throws Exception {
 		comemberDAO.deleteComemberAll(dataMap);
+		applyDAO.deleteApply(dataMap);
 		int result = coworkDAO.deleteCowork(dataMap);
 		if(result == 0 ) {
 			System.out.println("삭제 실패!!");

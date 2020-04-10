@@ -30,6 +30,7 @@ public class ApplyControllerImpl implements ApplyController {
 	ApplyService applyService;
 
 	@Override
+	@RequestMapping("/list")
 	public String searchList(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		HttpSession session = request.getSession();
@@ -42,7 +43,7 @@ public class ApplyControllerImpl implements ApplyController {
 
 		model.addAttribute("applylist", list);
 
-		return "apply/list";
+		return "newspeed/newspeedList";
 	}
 
 	@Override
@@ -55,22 +56,31 @@ public class ApplyControllerImpl implements ApplyController {
 	@PostMapping("insert")
 	public String insertApply(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Map<String, Object> dataMap = new HashMap<String, Object>();
-		System.out.println("초대인설트");
+		
+		String c_Id = request.getParameter("c_Id");
+		String mem_Id[] = request.getParameterValues("mem_Id");
+		
+		for (int i = 0; i < mem_Id.length; i++) {
+			dataMap.put("c_Id", c_Id);
+			dataMap.put("mem_Id", mem_Id[i]);
+			applyService.insertApply(dataMap);
+		}
+
+		return "redirect:/project/main?c_Id="+c_Id;
+	}
+
+	@Override
+	public String deleteApply(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// TODO Auto-generated method stub
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		
 		Enumeration enu = request.getParameterNames();
 		while (enu.hasMoreElements()) {
 			String name = (String) enu.nextElement();
 			String value = request.getParameter(name);
-			System.out.println(name+","+value);
 			dataMap.put(name, value);
 		}
-		applyService.insertApply(dataMap);
-
-		return "redirect:/main";
-	}
-
-	@Override
-	public String deleteApply(Model model) throws Exception {
-		// TODO Auto-generated method stub
+		applyService.deleteApply(dataMap);
 		return null;
 	}
 

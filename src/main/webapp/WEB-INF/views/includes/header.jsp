@@ -327,7 +327,7 @@
 									<p>협업공간 생성</p>
 							</a></li>
 						</ul></li>
-					<li class="nav-item"><a href="/issue/list"
+					<li class="nav-item"><a href="/apply/list"
 						class="nav-link"> <i class="nav-icon fas fa-th"></i>
 							<p>
 								새로운 소식 <span class="badge badge-info right">3</span>

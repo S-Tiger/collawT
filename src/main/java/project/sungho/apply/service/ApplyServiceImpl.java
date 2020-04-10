@@ -20,9 +20,10 @@ public class ApplyServiceImpl implements ApplyService{
 
 	@Override
 	public List<ApplyVO> searchList(Map<String, Object> searchMap) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
+		List<ApplyVO> list =  applyDAO.searchList(searchMap);  //DAO에 searchList함수 실행
+			return list;
+		}
 
 	@Override
 	public void updateApply(Map<String, Object> dataMap) throws Exception {
@@ -33,12 +34,13 @@ public class ApplyServiceImpl implements ApplyService{
 	@Override
 	public void insertApply(Map<String, Object> dataMap) throws Exception {
 		// TODO Auto-generated method stub
-		
+		applyDAO.insertApply(dataMap);
 	}
 
 	@Override
 	public void deleteApply(Map<String, Object> dataMap) throws Exception {
 		// TODO Auto-generated method stub
+		applyDAO.deleteApply(dataMap);
 		
 	}
 

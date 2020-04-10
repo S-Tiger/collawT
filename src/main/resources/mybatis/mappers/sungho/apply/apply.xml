@@ -31,12 +31,25 @@
 	
 	<insert id="insertApply" parameterType="java.util.Map">
 		insert into apply_mem(c_Id, mem_Id, ap_Date, ap_Yn, ap_Status) 
-		values(#{c_Id}, #{mem_Id}, sysdate, #{ap_Yn} , #{ap_Status})
+		values(#{c_Id}, #{mem_Id}, sysdate, 1 , 1)
 	</insert>	
 	
 	
-	<delete id="deleteApply" parameterType="String">
-		delete from co_work where c_Id =#{c_Id}
+	<delete id="deleteApply" parameterType="java.util.Map">
+		delete from apply_mem
+		 <where>
+	   <choose>
+	   		<when test ="c_Id != '' and c_Id != null and mem_Id != ''  and  mem_Id != null">
+	   		c_Id = #{c_Id} and mem_Id = ${mem_Id}
+	   		</when>
+	   		<when test ="c_Id != '' and c_Id != null">
+	   		c_Id = #{c_Id}
+	   		</when>
+	   		<when test="mem_Id != ''  and  mem_Id != null">
+	   		mem_Id = #{mem_Id}
+	   		</when>
+	   </choose>
+	  </where>
 	</delete>
 	
 	<update id="updateApply" parameterType="java.util.Map">

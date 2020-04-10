@@ -76,10 +76,12 @@
 
 	$('#update-popup').ready(function (){
 			    $('#mem_Id').keydown(function(event) {
-			    	
 			    	if(event.keyCode == '13'){
 			    		var mem_Id = $('#mem_Id').val();
-			    		
+			    		if(mem_Id == '${member.mem_Id}'){
+			    			$("#id_check").text("자신을 초대할수 없습니다 :p");
+							$("#id_check").css("color", "red");
+			    		}else{
 			    		$.ajax({
 							url : '${contextPath}/apply/memberCheck?mem_Id=' + mem_Id,
 							type : 'get',
@@ -87,18 +89,17 @@
 								console.log("1 = 중복o / 0 = 중복x : " + data);
 
 								if (data == 1) {
-									// 1 : 아이디가 중복되는 문구
+									
 									$('#applyList').append("<span id= 'applyspan'>"+mem_Id+"<a id ='applydelete' href='#'>x</a></span>");
 									$('#applyform').append("<input type='hidden' name='mem_Id' value='"+mem_Id+"'>");
 									$('#mem_Id').val("");
 									
 								} else {
-									// 0 : 아이디 사용가능 문구
 									$("#id_check").text("잘못된 아이디 입니다 다시 확인해주세요 :p");
 									$("#id_check").css("color", "red");
 								}
 							}
-						})
+						})}
 			    	}else{
 			    		$("#id_check").text("이메일 주소를 입력하고 Enter키를 눌러 파트너들을 초대해 보세요.");
 						$("#id_check").css("color", "#a1a1a1");
@@ -184,12 +185,13 @@
 				 초대 메세지를 보낼 파트너 아이디를 여기서 확인할 수 있습니다.</span>
 		</div>
 		<div><span style="float: left; padding-right: 50px;">
+		<form action="/apply/insert" method="post" id = "applyform">
 			<input type="hidden" name="c_Id" value="${pjt.c_Id}">
 			<button type="submit" class="btn btn-block btn-success" 
 			style="width: 220px;">초대하기</button></form></span>
 		<span>
 		<button type="reset" class="btn btn-block btn-success" onclick="history.go(0);" style="width: 220px">취소</button>
-		<form action="/apply/insert" method="post" id = "applyform"></span>
+		</span>
 		</div>
 		
 </div>

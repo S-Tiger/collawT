@@ -17,7 +17,7 @@ public interface ApplyController {
 
 	public String insertApply(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
-	public String deleteApply(Model model) throws Exception;
+	public String deleteApply(HttpServletRequest request, HttpServletResponse responsel) throws Exception;
 
 	public int memberCheck(@RequestParam("mem_Id") String mem_Id) throws Exception;
 	
