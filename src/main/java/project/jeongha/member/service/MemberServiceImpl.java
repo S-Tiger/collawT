@@ -140,11 +140,11 @@ public class MemberServiceImpl implements MemberService {
 		String hostSMTP = "smtp.naver.com";
 
 		// 네이버 아이디, 비밀번호
-		String hostSMTPid = "collawtmanager@naver.com";
-		String hostSMTPpwd = "qlxmzoavm%!00";
+		String hostSMTPid = "asd_7088@naver.com";
+		String hostSMTPpwd = "dkswjdgk901!";
 
 		// 보내는 사람 EMail,이름, 제목, 내용
-		String fromEmail = "collawtmanager@naver.com"; 
+		String fromEmail = "asd_7088@naver.com"; 
 		String fromName = "CollawT 관리자";
 		String subject = "";
 		String msg = "";
@@ -192,6 +192,7 @@ public class MemberServiceImpl implements MemberService {
 			email.setHtmlMsg(msg);
 			email.send();
 		} catch (Exception e) {
+			
 			System.out.println("메일발송 실패 : " + e);
 		}
 	}

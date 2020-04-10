@@ -139,7 +139,7 @@ public class MemberControllerImpl implements MemberController{
 		
 		request.setAttribute("coworklist", list);
 		
-		mav.setViewName("/main/index");
+		mav.setViewName("redirect:/main");
 		} else {//실패했을경우
 		rAttr.addAttribute("result","loginFailed");
 		mav.setViewName("redirect:/member/loginPage");

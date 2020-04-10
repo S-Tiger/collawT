@@ -5,9 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 <c:set var="result" value="${param.result }" /><!-- 컨트롤러에서 로그인 실패할때 가져오는 값. -->
-<%
-   request.setCharacterEncoding("UTF-8");
-%>  
+<% request.setCharacterEncoding("UTF-8"); %>  
 <!DOCTYPE html>
 <html>
 <head>
