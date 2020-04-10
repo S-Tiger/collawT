@@ -22,6 +22,7 @@ $(function(){
 		alert('${msg}');
 	};
 	
+	//비밀번호같지 확인하는 자바스크립트 (서브밋할때 작동됨)
 	if($("#pwForm").submit(function(){
 		console.log("11");
 		if($("#pw").val() !== $("#pw2").val()){
@@ -40,6 +41,19 @@ $(function(){
 			alert("비밀번호가 수정되었습니다.");
 		}
 	}));
+	
+	//파일 비어잇는거 못들어가게함 서브밋 탈때 작동됨
+	if($("#fileupload").submit(function(){
+		console.log("fileUpload");
+		 var fileCheck = $("#imageFile").val();
+		 if(!fileCheck){
+		        alert("프로필 사진을 첨부해 주세요");
+		   return false;
+		 }else{
+			 alert("프로필사진이 변경 되었습니다.");
+		 }
+	}));
+
 }); 
 	
 	
@@ -362,12 +376,12 @@ $(function(){
 									</div>
 								</div>
 														<!-- 이미지 저장 blob -->
-								<form action="/member/saveImage" enctype="multipart/form-data"
+								<form action="/member/saveImage" id="fileupload" enctype="multipart/form-data"
 									method="post" class="form-horizontal">
 									<input type="hidden" name="mem_Id" value="${member.mem_Id}">
 									<input type="file" class="form-control" name="mem_File" id="imageFile"
 										accept="image/gif, image/jpeg, image/png" /><br> <br>
-									<input type="submit" class="btn btn-success float-right"
+									<input type="submit" class="btn btn-success float-right" 
 										value="프로필 사진 변경" />
 								</form>
 								
@@ -484,5 +498,6 @@ $(function(){
 		return false;
 
 	};
+
 	</script>
 <%@include file="../includes/footer.jsp"%>

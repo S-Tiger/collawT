@@ -97,13 +97,8 @@
 			<mapping path="/**" />
 			<mvc:exclude-mapping path="/resources/**" />
 			<exclude-mapping path="/" />
-			<exclude-mapping path="/member/loginPage"/>
-			<exclude-mapping path="/member/login"/>
-			<exclude-mapping path="/member/signup"/>
-			<exclude-mapping path="/member/join"/>
-			<exclude-mapping path="/member/forgotPwd"/>
-			<exclude-mapping path="/member/find_pw"/>
-			<exclude-mapping path="/member/check_id"/>
+			<exclude-mapping path="/member/*"/>
+			
 			<beans:ref bean="LoginInterceptor" />
 		</interceptor>
 	</interceptors>
