@@ -101,6 +101,9 @@
 			<exclude-mapping path="/member/login"/>
 			<exclude-mapping path="/member/signup"/>
 			<exclude-mapping path="/member/join"/>
+			<exclude-mapping path="/member/forgotPwd"/>
+			<exclude-mapping path="/member/find_pw"/>
+			
 			<beans:ref bean="LoginInterceptor" />
 		</interceptor>
 	</interceptors>
