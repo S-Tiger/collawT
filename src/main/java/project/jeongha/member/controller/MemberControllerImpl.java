@@ -175,7 +175,7 @@ public class MemberControllerImpl implements MemberController{
 			System.out.println(memberVO.getMem_Name());
 			MemberVO member = service.update_pw(memberVO, old_pw, response);
 //			if(memberVO!=null) {
-			rttr.addAttribute("msg", "비밀번호 수정 완료");
+			rttr.addAttribute("msg", "");
 			return "redirect:/member/mypage";
 //			}else {
 //				rttr.addAttribute("msg", "실패");
