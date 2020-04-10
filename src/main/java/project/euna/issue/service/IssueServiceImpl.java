@@ -29,7 +29,7 @@ public class IssueServiceImpl implements IssueService {
 	@Override
 	public void  issueInsert(IssueVO issueVO) {
 		int result = issueDAO.issueInsert(issueVO);
-		notifyDAO.notifyInsert(issueVO);
+		//notifyDAO.notifyInsert(issueVO);
 		
 		if (result == 0) {
 			System.out.println("Join Fail!!");
