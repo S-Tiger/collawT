@@ -279,7 +279,7 @@
 				<span class="image">
 					<span><c:if test="${member.mem_File != null }">
 						<div class="profile">
-							<img alt="User Image" width="70" height="70" class="img-circle elevation-2"
+							<img alt="User Image" width="160" height="160" class="img-circle elevation-2"
 								src="/member/getByteImage?mem_Id=${member.mem_Id}" />&nbsp;&nbsp;
 						</div>
 					</c:if>
