@@ -16,8 +16,8 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>협업공간명</h1>
-            <small>협업공간 설명</small>
+            <h1>프라이빗 공간</h1>
+            <small>자유롭게 사용 가능한 개인 공간입니다 :D</small>
           </div>
           
          
@@ -36,7 +36,7 @@
       
         <!-- 표 윗부분 -->
 <div class="card-header" style="background-color:#fff;">
-        <ol class="breadcrumb-sm-left" style="margin:0px; border:none; padding-inline-start: 0px;  width:600px; float:left">
+        <ol class="breadcrumb-sm-left" style="margin:0px; border:none; padding-inline-start: 0px;  width:400px; float:left">
           <li class="breadcrumb-item"><a href="#">협업공간 이슈</a></li>
           <li class="breadcrumb-item"><a href="#">칸반</a></li>
           <li class="breadcrumb-item"><a href="#">내가 작성한 이슈</a></li>
@@ -53,13 +53,7 @@
            
           <table id="example1" class="table table-striped projects">
               <tbody>
-              <thead>
-                <tr>
-                  <th>닉네임</th>
-                  <th>이슈명</th>
-                  <th>작성일</th>
-                </tr>
-                </thead>
+
                  <c:forEach var="issueList" items="${issueList}" >	
                   <tr>
                       <td>  ${issueList.mem_Name}    </td>

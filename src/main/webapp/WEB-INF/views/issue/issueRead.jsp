@@ -7,7 +7,6 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
 
-//ㄴㅇㄹㄴㅇㄹ
 
 $(document).ready(function() {
 	//댓글 목록 항상 호출
@@ -96,7 +95,7 @@ $(document).ready(function() {
 					
 					str+='<div class="card-comment">';
 					str+='<div class="comment-text">';
-					str+='<p style="text-align:center;"><small>작성된 댓글이 없습니다.</small></p>'
+					str+='<p style="text-align:center;"><small><br><br>작성된 댓글이 없습니다.<br>이 글의 첫 번째 댓글을 작성해주세요 :D</small></p>'
 					str+='</div></div></div>';
 				}
 				$("#replyList").html(str);
@@ -137,16 +136,16 @@ $(document).ready(function() {
 		
 		var str="";
 		
-		str+='<div><input type="text" id="r_Content'+r_Num+'" name="r_Content'+r_Num+'" class="form-control form-control-sm"	value="'+r_Content+'" ></div>';
-		str+='<button class = "btn btn-block btn-default btn-xs" type = "button" id="replyInsert_btn" name="replyInsert_btn" onclick="replyUpdate('+r_Num+')">입력</button>';
-		str+='<button class = "btn btn-block btn-default btn-xs" type = "button" id="replyCancel_btn" name="replyCancel_btn" onclick="replyCancle('+r_Num+',\''+r_Content+'\')">취소</button>';
+		str+='<div><textarea id="r_Content'+r_Num+'" name="r_Content'+r_Num+'" class="form-control">'+r_Content+'</textarea></div>';
+		str+='<small><a href="javascript:replyUpdate('+r_Num+')" id="replyInsert_btn" name="replyInsert_btn">입력</span></small>&nbsp;&nbsp;';
+		str+='<small><a href="javascript:replyCancle('+r_Num+',\''+r_Content+'\')" id="replyCancel_btn" name="replyCancel_btn">취소</span></small>';
 	
-
+		
 		$('#replyContent'+r_Num).html(str);	
 			
 	} 
 
-	 
+  
 	
 	//댓글 수정 db
 	function replyUpdate(r_Num){
@@ -206,19 +205,7 @@ $(document).ready(function() {
 						<div class="card-header">
 							<span id="i_Name" name="i_Name"><b><c:out
 										value="${issueRead.i_Name}" /></b></span>
-							<!-- /.user-block -->
-							<div class="card-tools">
 
-								<button type="button" class="btn btn-tool"
-									data-card-widget="collapse">
-									<i class="fas fa-minus"></i>
-								</button>
-								<button type="button" class="btn btn-tool"
-									data-card-widget="remove">
-									<i class="fas fa-times"></i>
-								</button>
-							</div>
-							<!-- /.card-tools -->
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body">
@@ -337,17 +324,8 @@ $(document).ready(function() {
 
 			<div class="col-md-6">
 				<div class="card">
-					<div class="card-header">
 
-						<div class="card-tools">
-							<button type="button" class="btn btn-tool"
-								data-card-widget="collapse" data-toggle="tooltip"
-								title="Collapse">
-								<i class="fas fa-minus"></i>
-							</button>
-						</div>
-					</div>
-					<!-- /.card-body -->
+					
 					<div id="replyList"></div>
 					
 					<!-- 댓글  입력-->
@@ -358,9 +336,10 @@ $(document).ready(function() {
 								src="/member/getByteImage?mem_Id=${member.mem_Id}" alt="Alt Text" width="50" height="50" >
 							
 							<div class="img-push">
-								<input type="text" id="r_Content" name="r_Content" class="form-control form-control-sm"	placeholder="댓글을 입력하세요">
+								<textarea id="r_Content" name="r_Content" class="form-control"	placeholder="댓글을 입력하세요"></textarea>
 									
-									<button class = "btn btn-block btn-default btn-xs" type = "button" id="replyInsert_btn" name="replyInsert_btn">입력</button>
+									
+									<small><a href="#" id="recplyInsert_btn" name="replyInsert_btn">입력</span></small>
 									
 									<input type="hidden" id="i_Num" name="i_Num" value="${issueRead.i_Num}" />
 									<input type="hidden" id="c_Id" name="c_Id" value="${issueRead.i_Num}" />
