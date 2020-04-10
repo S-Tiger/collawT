@@ -39,7 +39,7 @@
             where I.mem_Id = M.mem_Id
             )
         where rnum between #{rowStart} and #{rowEnd}
-        order by i_Num desc
+        order by to_number(i_Num) desc
       ]]>
 
 	</select>
