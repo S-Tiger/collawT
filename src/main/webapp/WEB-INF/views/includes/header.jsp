@@ -223,7 +223,7 @@
             </div>
             <!-- Message End -->
           </a>
-          <div class="dropdown-divider"></div>
+          <div class="dropdown-divider">
           <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
         </div>
       </li>
@@ -233,8 +233,7 @@
 						class="badge badge-warning navbar-badge" id ="test00"></span>
 				</a>
 					<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-						<span class="dropdown-item dropdown-header" >15
-							Notifications</span>
+						<span class="dropdown-item dropdown-header" >15 Notifications</span>
 						<div class="dropdown-divider"></div>
 						<a href="/notify/update" class="dropdown-item"> <i
 							class="fas fa-envelope mr-2" id = "test01"></i> <span
@@ -328,56 +327,28 @@
 							</a></li>
 						</ul></li>
 					<li class="nav-item"><a href="/apply/list"
-						class="nav-link"> <i class="nav-icon fas fa-th"></i>
+						class="nav-link"> <i class="nav-icon fas fa-book-open"></i>
 							<p>
 								새로운 소식 <span class="badge badge-info right">3</span>
 								<!--  <span class="right badge badge-danger">New</span>-->
 							</p>
 					</a></li>
-					<li class="nav-item has-treeview"><a href="#" class="nav-link">
-							<i class="nav-icon fas fa-copy"></i>
+					<li class="nav-item"><a href="/apply/list"
+						class="nav-link"> <i class="nav-icon fas fa-bookmark"></i>
 							<p>
-								Layout Options <i class="fas fa-angle-left right"></i> <span
-									class="badge badge-info right">6</span>
+								북마크 <span class="badge badge-info right"></span>
+								<!--  <span class="right badge badge-danger">New</span>-->
 							</p>
-					</a>
-						<ul class="nav nav-treeview">
-							<li class="nav-item"><a
-								href="../resources/pages/layout/top-nav.html" class="nav-link">
-									<i class="far fa-circle nav-icon"></i>
-									<p>Top Navigation</p>
-							</a></li>
-							<li class="nav-item"><a
-								href="../resources/pages/layout/top-nav-sidebar.html"
-								class="nav-link"> <i class="far fa-circle nav-icon"></i>
-									<p>Top Navigation + Sidebar</p>
-							</a></li>
-							<li class="nav-item"><a
-								href="../resources/pages/layout/boxed.html" class="nav-link">
-									<i class="far fa-circle nav-icon"></i>
-									<p>Boxed</p>
-							</a></li>
-							<li class="nav-item"><a
-								href="../resources/pages/layout/fixed-sidebar.html"
-								class="nav-link"> <i class="far fa-circle nav-icon"></i>
-									<p>Fixed Sidebar</p>
-							</a></li>
-							<li class="nav-item"><a
-								href="../resources/pages/layout/fixed-topnav.html"
-								class="nav-link"> <i class="far fa-circle nav-icon"></i>
-									<p>Fixed Navbar</p>
-							</a></li>
-							<li class="nav-item"><a
-								href="../resources/pages/layout/fixed-footer.html"
-								class="nav-link"> <i class="far fa-circle nav-icon"></i>
-									<p>Fixed Footer</p>
-							</a></li>
-							<li class="nav-item"><a
-								href="../resources/pages/layout/collapsed-sidebar.html"
-								class="nav-link"> <i class="far fa-circle nav-icon"></i>
-									<p>Collapsed Sidebar</p>
-							</a></li>
-						</ul></li>
+					</a></li>
+					
+					<li class="nav-item"><a href="/apply/list"
+						class="nav-link"> <i class="nav-icon fas fa-calendar-check"></i>
+							<p>
+								전체 캘린더 <span class="badge badge-info right"></span>
+								<!--  <span class="right badge badge-danger">New</span>-->
+							</p>
+					</a></li>
+					
 					
 						
 				</ul>
