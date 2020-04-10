@@ -28,7 +28,7 @@
 			console.log(canvas);
 			console.log(ctx);
 			// 캔버스에 업로드된 이미지를 그려줍니다
-			ctx.drawImage(img, 400, 500);
+			ctx.drawImage(img, 0, 0);
  			
 			// 최대폭을 100 으로 정했다고 가정했을때
 			// 최대폭을 넘어가는 경우 canvas 크기를 변경해 줍니다.
@@ -63,6 +63,8 @@
 		reader.readAsDataURL(file);
 
 	}
+	
+	
 </script>
 
 </head>
@@ -83,7 +85,7 @@
 		<img src="" id="output">
 	</div>
 
-
+<input type="image">
 
 
 </body>

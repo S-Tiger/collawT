@@ -262,7 +262,15 @@ public class MemberControllerImpl implements MemberController{
 		@RequestMapping(value = "/resize")
 		public String resize() {
 			// TODO Auto-generated method stub
+			System.out.println("1234123412341234");
 			return "/member/resize";
 		}
-
+		@Override
+		@RequestMapping(value = "/profile")
+		public String profile() {
+			// TODO Auto-generated method stub
+			System.out.println("1234123412341234");
+			return "/member/profile";
+		}
+		
 }

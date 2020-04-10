@@ -276,29 +276,24 @@
 		<div class="sidebar">
 			<!-- Sidebar user panel (optional) -->
 			<div class="user-panel mt-3 pb-3 mb-3 d-flex">
-				<div class="image">
-					<c:if test="${member.mem_File != null }">
+				<span class="image">
+					<span><c:if test="${member.mem_File != null }">
 						<div class="profile">
-							<img alt="User Image" width="50" height="50" class="img-circle elevation-2"
-								src="/member/getByteImage?mem_Id=${member.mem_Id}" />
+							<img alt="User Image" width="70" height="70" class="img-circle elevation-2"
+								src="/member/getByteImage?mem_Id=${member.mem_Id}" />&nbsp;&nbsp;
 						</div>
 					</c:if>
+					</span>
 					<c:if test="${member.mem_File == null }">
 							<img src="../resources/dist/img/user2-160x160.jpg"
 								class="img-circle elevation-2" alt="User Image">
 					</c:if>
-				</div>
-				<div class="info" style="width: 175px">
+				</span>
 					<c:if test="${member.mem_Id != null}">
-						<a href="/member/mypage" class="nav-link active"
-							style="width: 100px; padding: 0px;">${member.mem_Name} </a>
-					<a href="#" class="d-block">${member.mem_Id}</a>
-						<!-- <input type="button" value="로그아웃"
-							onclick="location.href='/logout'"> -->
-							<a href="/logout" class="nav-link active"
-							style="width: 100px; padding: 0px;">로그아웃</a>
+						<a href="/member/mypage" class="nav-link active" style="width: 100px; padding: 0px;">${member.mem_Name} </a>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<a href="/logout" class="nav-link active" style="width: 100px; padding: 0px;">로그아웃</a>
 					</c:if>
-				</div>
 			</div>
 
 			<!-- Sidebar Menu -->

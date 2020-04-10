@@ -40,7 +40,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="../resources/index2.html"><b>Collaw</b>T</a>
+    <a href="/"><b>Collaw</b>T</a>
   </div>
   <!-- /.login-logo -->
   <div class="card">

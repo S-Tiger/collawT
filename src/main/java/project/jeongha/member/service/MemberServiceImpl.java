@@ -134,9 +134,11 @@ public class MemberServiceImpl implements MemberService {
 
 	public void sendEmail(MemberVO memberVO, String div) throws Exception {
 		System.out.println("11111111111"+memberVO.getMem_Name());
+
 		// Mail Server 설정
 		String charSet = "utf-8";
 		String hostSMTP = "smtp.naver.com";
+
 		// 네이버 아이디, 비밀번호
 		String hostSMTPid = "collawtmanager@naver.com";
 		String hostSMTPpwd = "qlxmzoavm%!00";
