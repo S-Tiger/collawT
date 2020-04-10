@@ -73,19 +73,6 @@ public class MemberServiceImpl implements MemberService {
 		return dao.memberLogin(memLogin);
 	}
 
-	// 회원정보 업데이트(아직안씀)
-/*	@Override
-	public int memberUpdate(MemberVO memberVO) {
-		// TODO Auto-generated method stub
-		int result = dao.memberUpdate(memberVO);
-		if (result == 0) {
-			System.out.println("Update Fail!!");
-		} else {
-			System.out.println("Update Success!!");
-		}
-		return result;
-	}*/
-
 	// 개인정보변경(이름만)
 	@Override
 	public MemberVO updateMypage(Map<String, Object> memberVO) throws Exception {
@@ -141,10 +128,10 @@ public class MemberServiceImpl implements MemberService {
 
 		// 네이버 아이디, 비밀번호
 		String hostSMTPid = "asd_7088@naver.com";
-		String hostSMTPpwd = "dkswjdgk901!";
+		String hostSMTPpwd = "비밀번호 안알려줌";
 
 		// 보내는 사람 EMail,이름, 제목, 내용
-		String fromEmail = "asd_7088@naver.com"; 
+		String fromEmail = "CollawT@collawt.com"; 
 		String fromName = "CollawT 관리자";
 		String subject = "";
 		String msg = "";
