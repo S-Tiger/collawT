@@ -17,6 +17,32 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
+$(function(){
+	if(${msg != null}){
+		alert('${msg}');
+	};
+	
+	if($("#pwForm").submit(function(){
+		console.log("11");
+		if($("#pw").val() !== $("#pw2").val()){
+			alert("비밀번호가 다릅니다.");
+			$("#pw").val("").focus();
+			$("#pw2").val("");
+			return false;
+		}else if ($("#pw").val().length < 8) {
+			alert("비밀번호는 8자 이상으로 설정해야 합니다.");
+			$("#pw").val("").focus();
+			return false;
+		}else if($.trim($("#pw").val()) !== $("#pw").val()){
+			alert("공백은 입력이 불가능합니다.");
+			return false;
+		}else{
+			alert("비밀번호가 수정되었습니다.");
+		}
+	}));
+}); 
+	
+	
 	function fn_deleteMem(){
 		if(!confirm("정말탈퇴 하시겠습니까?")){
 			return false;
@@ -59,7 +85,7 @@
 						src="/member/getByteImage?mem_Id=${member.mem_Id}" />
 				</c:if>
 				<c:if test="${member.mem_File == null }">
-					<img src="/resources/dist/img/user4-128x128.jpg"
+					<img src="../resources/dist/img/user2-160x160.jpg"
 						class="profile-user-img img-fluid img-circle" alt="User Image">
 				</c:if>
                 </div>
