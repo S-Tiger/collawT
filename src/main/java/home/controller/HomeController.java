@@ -2,8 +2,11 @@ package home.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -21,10 +24,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
+	public String home(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response, Object handler) {
+		
+		
+		HttpSession session = request.getSession();
+		Map<String, Object> member = new HashMap<String,Object>();
+		
+		member = (Map<String, Object>) session.getAttribute("member");
+		
+		String uri = (String) request.getRequestURI();
+		if (member != null) {
+			return "redirect:/main";
+			}else {
 		
 		return "index";
-	}
+	}}
 
 	@RequestMapping("/join")
 	public String join(Model model) {
