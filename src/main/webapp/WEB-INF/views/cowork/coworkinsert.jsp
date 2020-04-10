@@ -1,9 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@include file="../includes/header.jsp"%>
+<script type="text/javascript">
+	$(document).ready(function (){
+		
+ 	$("#projectInsert").click(function(){
+ 			if ($('#c_Name').val() == ''){
+				alert("협업공간명을 입력해주세요! :D");
+				return false;
+			}
+
+ 			
+ 			
+			if ($('#c_Category').val() == '00') {
+				alert("카테고리를 선택해주세요! :D");
+				return false;
+
+			}
+		})
+
+	});
+</script>
 
 <!-- <script type="text/javascript" src="/ckeditor/ckeditor.js"></script> -->
 
+ 
+ 
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -29,20 +51,20 @@
               <div class="form-group">
               <div class="col-md-6">
                 <label for="inputName">협업공간명</label>
-                <input type="text" name="c_Name" class="form-control">
+                <input type="text" name="c_Name" id="c_Name" class="form-control">
               </div>
               </div>
               <div class="form-group">
               <div class="col-md-6">
                 <label for="inputDescription">협업공간 설명</label>
-                <textarea name="c_Comment" class="form-control" rows="2"></textarea>
+                <textarea name="c_Comment" id="c_Comment" class="form-control" rows="2"></textarea>
               </div>
               </div>
               <div class="form-group">
               <div class="col-md-6">
                 <label for="inputStatus">카테고리</label>
-               <select class="form-control custom-select" name= "c_Category">
-                  <option selected disabled>선택해주세요</option>
+               <select class="form-control custom-select" name= "c_Category" id="c_Category">
+                  <option value="00" hidden>선택해주세요</option>
                   <option value="01">협업관련 업무관리</option>
                   <option value="02">개인 업무관리</option>
                   <option value="03">학업관련 과제관리<option>
@@ -51,7 +73,7 @@
               </div>
               <input type="hidden"  name = mem_Id value= ${member.mem_Id }>
               <div class="col-md-6">
-          <input type="submit" value="협업공간 생성" class="btn btn-success float-right">
+          <input type="submit" value="협업공간 생성" class="btn btn-success float-right" id="projectInsert" >
           </div>
       </form>
         </div>
