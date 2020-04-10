@@ -188,7 +188,6 @@ public class MemberControllerImpl implements MemberController{
 		@RequestMapping(value = "/check_id", method = RequestMethod.GET)
 		@ResponseBody   //리스폰스바디는 매소드가 스트링이거나 타입이 있을때 ajax로통신할 경우 꼭써야함그렇게 하지 않으면 뷰 리졸버가 반응을함.
 		public int check_id(@RequestParam("mem_Id") String mem_Id) throws Exception{
-		
 			System.out.println("아작스");
 			System.out.println(mem_Id);
 			//아이디가 있는지 없는지 있으면 1 없으면 0
@@ -197,6 +196,7 @@ public class MemberControllerImpl implements MemberController{
 			System.out.println("controller result:"+result);
 			return result;
 		}
+		
 		//비밀번호 찾기
 		@Override
 		@RequestMapping(value = "/find_pw", method = RequestMethod.POST)

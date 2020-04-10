@@ -101,7 +101,6 @@ $(function(){
             </div>
             <!-- /.card -->
             <!-- About Me Box -->
-            
             <!-- /.card -->
           </div>
           <!-- /.col -->

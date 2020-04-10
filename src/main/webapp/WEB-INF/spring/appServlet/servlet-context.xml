@@ -103,7 +103,7 @@
 			<exclude-mapping path="/member/join"/>
 			<exclude-mapping path="/member/forgotPwd"/>
 			<exclude-mapping path="/member/find_pw"/>
-			
+			<exclude-mapping path="/member/check_id"/>
 			<beans:ref bean="LoginInterceptor" />
 		</interceptor>
 	</interceptors>

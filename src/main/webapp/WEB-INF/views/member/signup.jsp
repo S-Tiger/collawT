@@ -110,6 +110,7 @@
             </div>
           </div>
         </div>
+        
         <div class="input-group mb-3">
           <input type="email" name="mem_Id" id="mem_Id" class="form-control" placeholder="아이디는 이메일 형식입니다">
           <div class="input-group-append">
