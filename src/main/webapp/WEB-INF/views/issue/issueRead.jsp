@@ -339,8 +339,8 @@ $(document).ready(function() {
 								<textarea id="r_Content" name="r_Content" class="form-control"	placeholder="댓글을 입력하세요"></textarea>
 									
 									
-									<small><a href="#" id="recplyInsert_btn" name="replyInsert_btn">입력</span></small>
-									
+									<small><a href="#" id="replyInsert_btn" name="replyInsert_btn">입력</a></small>
+																		
 									<input type="hidden" id="i_Num" name="i_Num" value="${issueRead.i_Num}" />
 									<input type="hidden" id="c_Id" name="c_Id" value="${issueRead.i_Num}" />
 									
