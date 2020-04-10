@@ -50,12 +50,9 @@
               </div>
               </div>
               <input type="hidden"  name = mem_Id value= ${member.mem_Id }>
-          <input type="submit" value="이슈 작성" class="btn btn-success float-right">
-        <div class="row">
-        <div class="col-sm-6">
-        </div>
-        <br><br><br>
-      </div>
+              <div class="col-md-6">
+          <input type="submit" value="협업공간 생성" class="btn btn-success float-right">
+          </div>
       </form>
         </div>
         <!-- /.card-body -->

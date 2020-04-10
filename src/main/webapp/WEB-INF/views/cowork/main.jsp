@@ -142,17 +142,16 @@
 				<option value="2">학업과제관련</option>
 			</select>
 		</p>
-		<p class="login-box-msg" style="padding-bottom: 10px">
+		<span>
 			<button type="submit" class="btn btn-block btn-success">정보변경</button>
-		</p>
-		<br>
-	</form>
-	<p>
-	<form id="projectdelete" action="/project/delete" method="post">
+			</form>
+	</span>
+	<span>
+		<form id="projectdelete" action="/project/delete" method="post">
 		<input type="hidden" id="c_Id" name="c_Id" value="${pjt.c_Id}">
 		<button style="background-color: #dc3545;" type="submit" class="btn btn-block btn-success">협업공간삭제</button>
 	</form>
-	</p>
+	</span>
 </div>
 <!-- 맴버초대 모달 팝업 내용 -->
 <div id='add-popup' class="needpopup">
@@ -160,7 +159,7 @@
 	<p>
 		<div style="padding-bottom: 25px;">
 			<h4 class="m-0 text-dark"
-				style="font-family: Recipekorea; padding-bottom: 5px;">파트너 초대</h4>
+				style="font-family: Recipekorea; padding-bottom: 5px;" >파트너 초대</h4>
 			<span style="font-size: 0.9em; line-height: 1.0; color: #a1a1a1;">
 				많은 사람을 초대하여 원활한 의사소통으로 업무를 효율적으로 처리해보세요. 회사 동료뿐만 아니라 외부 협업자도 파트너로
 				초대할 수 있습니다.</span>
@@ -169,7 +168,7 @@
 		<div style="padding-bottom: 25px;">
 			<h4 class="m-0 text-dark"
 				style="font-family: Recipekorea; padding-bottom: 5px;">파트너 아이디</h4>
-			<input class="form-control" type="text" id="mem_Id" name="mem_Id"
+			<input style="margin-bottom: 5px;" class="form-control" type="text" id="mem_Id" name="mem_Id"
 				required> <span id= "id_check"
 				style="font-size: 0.9em; line-height: 1.0; color: #a1a1a1;">
 				이메일 주소를 입력하고 Enter키를 눌러 파트너들을 초대해 보세요.</span>
@@ -179,17 +178,18 @@
 		<div style= "padding-bottom: 25px">
 			<h4 class="m-0 text-dark"
 				style="font-family: Recipekorea; padding-bottom: 5px;">초대 리스트</h4>
-			<div id = "applyList" class = "form-control" style="height: 152px; width: 490px; white-space: pre-line;"></div> <span
-				style="font-size: 0.9em; line-height: 1.0; color: #a1a1a1;">
+			<div id = "applyList" class = "form-control" style="height: 152px; width: 490px; white-space: pre-line; margin-bottom: 5px;"></div> <span
+				style="font-size: 0.9em; line-height: 1.0; color: #a1a1a1; ">
 			
 				 초대 메세지를 보낼 파트너 아이디를 여기서 확인할 수 있습니다.</span>
 		</div>
 		<div><span style="float: left; padding-right: 50px;">
-			<form action="/apply/insert" method="post" id = "applyform"><input type="hidden" name="c_Id" value="${pjt.c_Id}">
+			<input type="hidden" name="c_Id" value="${pjt.c_Id}">
 			<button type="submit" class="btn btn-block btn-success" 
 			style="width: 220px;">초대하기</button></form></span>
 		<span>
-		<button type="reset" class="btn btn-block btn-success" onclick="history.go(0);" style="width: 220px">취소</button></span>
+		<button type="reset" class="btn btn-block btn-success" onclick="history.go(0);" style="width: 220px">취소</button>
+		<form action="/apply/insert" method="post" id = "applyform"></span>
 		</div>
 		
 </div>
