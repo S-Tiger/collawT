@@ -5,7 +5,7 @@
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <style type="text/css">
-			li {list-style: none; float: left; padding: 6px;}
+			#liStyle {list-style: none; float: left; padding: 6px;}
 		</style>
 		
 		
@@ -37,10 +37,10 @@
         <!-- 표 윗부분 -->
 <div class="card-header" style="background-color:#fff;">
         <ol class="breadcrumb-sm-left" style="margin:0px; border:none; padding-inline-start: 0px;  width:400px; float:left">
-          <li class="breadcrumb-item"><a href="#">협업공간 이슈</a></li>
-          <li class="breadcrumb-item"><a href="#">칸반</a></li>
-          <li class="breadcrumb-item"><a href="#">내가 작성한 이슈</a></li>
-          <li class="breadcrumb-item"><a href="#">캘린더</a></li>
+          <li id="liStyle" class="breadcrumb-item"><a href="#">협업공간 이슈</a></li>
+          <li id="liStyle" class="breadcrumb-item"><a href="#">칸반</a></li>
+          <li id="liStyle" class="breadcrumb-item"><a href="#">내가 작성한 이슈</a></li>
+          <li id="liStyle" class="breadcrumb-item"><a href="#">캘린더</a></li>
          </ol>
          <input type="button" value="이슈 작성" class="btn btn-success float-right" onclick="location.href='insert'" 
          style="width:100px; text-align:center; float:right">
@@ -71,17 +71,17 @@
         
    <ul>
     <c:if test="${pageMaker.prev}">
-    	<li><a href="list${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
+    	<li id="liStyle"><a href="list${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
     </c:if> 
 
     <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-    	<li><a href="list${pageMaker.makeQuery(idx)}">${idx}</a></li>
+    	<li id="liStyle"><a href="list${pageMaker.makeQuery(idx)}">${idx}</a></li>
     </c:forEach>
 
     <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-    	<li><a href="list${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
+    	<li id="liStyle"><a href="list${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
     </c:if> 
-  </div>
+  </ul>
   
 </div>
         <!--/페이징  -->
