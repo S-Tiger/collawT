@@ -4,6 +4,12 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <!DOCTYPE html>
 <html>
+<style type="text/css">
+.user-pane img {
+     height: 40px;
+     width: 40px;
+}
+</style>
 <script type="text/javascript">
 	window.onload = function() {
 		var getmenu = getCookie('menu');
@@ -274,7 +280,7 @@
 		<!-- Sidebar -->
 		<div class="sidebar">
 			<!-- Sidebar user panel (optional) -->
-			<div class="user-panel mt-3 pb-3 mb-3 d-flex">
+			<div class="user-pane mt-3 pb-3 mb-3 d-flex">
 				<span class="image">
 					<c:if test="${member.mem_File != null }">
 						<div class="profile">
