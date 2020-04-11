@@ -25,7 +25,6 @@
 .user-img {
 
   margin: 0 auto;
-  padding: 3px;
   width: 100px;
   height: 95px;
 }
@@ -115,9 +114,9 @@ $(function(){
                   <i class="fas fa-minus"></i></button>
               </div>
             </div>
-              <form class="form-horizontal" action="/member/update_mypage" method="post">
             <div class="card-body">
               <div class="form-group">
+              <form class="form-horizontal" action="/member/update_mypage" method="post">
                 <label for="inputEstimatedBudget">ID</label>
                 <input class="form-control" type="email" id="mem_Id" name="mem_Id" readonly value="${member.mem_Id}">
               </div>
@@ -250,11 +249,11 @@ $(function(){
               			<p class="login-box-msg">이용해주셔서 감사합니다.</p>
                 <label for="inputEstimatedBudget">현재 비밀번호</label>
                 <input class="form-control" id="pwd" name="pwd" type="password" required>
+      		  </div>
               <div class="row">
        			 <div class="col-12">
          		 	<input type="submit" value="회원탈퇴" class="btn btn-success float-right" onclick="fn_deleteMem()"/>
         		</div>
-      		  </div>
               </div>
               <!-- 변경폼 -->
               
