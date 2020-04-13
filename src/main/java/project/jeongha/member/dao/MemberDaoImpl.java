@@ -80,6 +80,11 @@ public class MemberDaoImpl implements MemberDao {
 	public Map<String, Object> getByteImage(String mem_Id) {
 		return sqlSession.selectOne("member.getByteImage", mem_Id);
 	}
+	@Override
+	public Map<String, Object> searchList(Map<String, Object> member) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("member.searchList", member);
+	}
 	
 	
 

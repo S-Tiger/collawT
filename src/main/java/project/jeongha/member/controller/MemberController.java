@@ -1,10 +1,12 @@
 package project.jeongha.member.controller;
 
+import java.io.IOException;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -30,5 +32,9 @@ public String delete_Member(MemberVO memberVO,String pw,HttpServletResponse resp
 public String saveImage(MemberVO memberVO,HttpServletResponse request,HttpServletResponse response, HttpSession session) throws Exception;
 public ResponseEntity<byte[]> getByteImage(String mem_Id) ;
 public String resize();
-public String profile() ;
+public String profile();
+public String naverLogin(Model model, HttpSession session);
+public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session) throws IOException;
+public String naverLogin();
+public String logsuccess();
 }

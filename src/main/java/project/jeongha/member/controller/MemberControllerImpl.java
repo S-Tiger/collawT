@@ -1,5 +1,6 @@
 package project.jeongha.member.controller;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.util.Date;
@@ -31,10 +32,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.github.scribejava.core.model.OAuth2AccessToken;
+
 import project.imgblob.ImgBlobVO;
 import project.jeongha.member.dao.MemberDaoImpl;
 import project.jeongha.member.service.MemberServiceImpl;
 import project.jeongha.member.vo.MemberVO;
+import project.jeongha.member.vo.NaverLoginBO;
 import project.sungho.cowork.service.CoworkService;
 import project.sungho.cowork.vo.CoworkVO;
 
@@ -51,7 +55,15 @@ public class MemberControllerImpl implements MemberController{
 	@Autowired
 	CoworkService coworkService;
 	
-//	@Override
+	//Naver LoginBO
+	private NaverLoginBO naverLoginBO;
+	private String apiResult = null;
+
+	@Autowired
+    private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
+        this.naverLoginBO = naverLoginBO;
+	}
+	//	@Override
 //	@ModelAttribute("serverTime") // 모델어트리뷰트 어노테이션은 이컨트롤러가 매핑어뎁터로 메소드를 실행하기전에 먼저 실행하는 메소드 입니다.
 //	public String getServerTime(Locale locale) { // 이경우 jsp에 ${serverTime} 으로 현재시간을 리턴하는데
 //													// 다른방법으로도 사용가능하니 사용하실려면 사용하세요
@@ -98,7 +110,20 @@ public class MemberControllerImpl implements MemberController{
 			System.out.println("마이페이지");
 			return "/member/mypage";
 		}
-
+		
+	@Override
+	@GetMapping("/naverLogin")
+	public String naverLogin() {
+		System.out.println("네이버 로그인 화면");
+		return "member/naverLogin";
+	}
+	@Override
+	@GetMapping("/naversuccess")
+	public String logsuccess() {
+		System.out.println("로그인성공");
+		return "member/naversuccess";
+	}
+	
 	// @PostMapping("memJoin") //위아래중 편한걸로 사용하세요 URL 대소문자 구분하니 주의해주세요
 	//회원가입
 	@Override
@@ -116,6 +141,59 @@ public class MemberControllerImpl implements MemberController{
 		//조건을 주자
 		return "/member/loginPage"; // 리턴타입엔 패키지명/jsp파일 로 작성하여주세요 view에서도 패키지/jsp로 관리해주세요
 	}
+	
+	//naver Login
+	@Override
+	@RequestMapping(value = "/naverlogin", method = { RequestMethod.GET, RequestMethod.POST })
+	public String naverLogin(Model model, HttpSession session) {
+		/* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
+        String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
+        
+        //https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=sE***************&
+        //redirect_uri=http%3A%2F%2F211.63.89.90%3A8090%2Flogin_project%2Fcallback&state=e68c269c-5ba9-4c31-85da-54c16c658125
+        System.out.println("네이버:" + naverAuthUrl);
+        
+        //네이버 
+        model.addAttribute("url", naverAuthUrl);
+
+        /* 생성한 인증 URL을 View로 전달 */
+        return "/naverLogin";
+	}
+	//네이버 로그인 성공시 callback호출 메소드
+	@Override
+    @RequestMapping(value = "/callback", method = { RequestMethod.GET, RequestMethod.POST })
+	public String callback(Model model, String code, String state, HttpSession session) throws IOException {
+		System.out.println("여기는 callback");
+        OAuth2AccessToken oauthToken;
+        oauthToken = naverLoginBO.getAccessToken(session, code, state);
+        //로그인 사용자 정보를 읽어온다.
+        apiResult = naverLoginBO.getUserProfile(oauthToken);
+        System.out.println(naverLoginBO.getUserProfile(oauthToken).toString());
+        model.addAttribute("result", apiResult);
+        System.out.println("result"+apiResult);
+        /* 네이버 로그인 성공 페이지 View 호출 */
+//      JSONObject jsonobj = jsonparse.stringToJson(apiResult, "response");
+//      String snsId = jsonparse.JsonToString(jsonobj, "id");
+//      String name = jsonparse.JsonToString(jsonobj, "name");
+//
+//      UserVO vo = new UserVO();
+//      vo.setUser_snsId(snsId);
+//      vo.setUser_name(name);
+//
+//      System.out.println(name);
+//      try {
+//          vo = service.naverLogin(vo);
+//      } catch (Exception e) {
+//          // TODO Auto-generated catch block
+//          e.printStackTrace();
+//      }
+
+
+//      session.setAttribute("login",vo);
+//      return new ModelAndView("user/loginPost", "result", vo);
+        return "redirect:/naversuccess";
+	}
+	
 	
 	//로그인 테스트 컨트롤러->회원정보수정
 	@Override
@@ -135,11 +213,6 @@ public class MemberControllerImpl implements MemberController{
 		HttpSession session = request.getSession();
 		session.setAttribute("member", memberVO);
 		//jsp페이지에서 ${member.mem_Id}---->이런식으로 접근해야됨
-		 
-		List<CoworkVO> list = coworkService.searchList(memberVO);
-		
-		request.setAttribute("coworklist", list);
-		
 		mav.setViewName("redirect:/main");
 		} else {//실패했을경우
 		rAttr.addAttribute("result","loginFailed");
@@ -273,5 +346,10 @@ public class MemberControllerImpl implements MemberController{
 			System.out.println("1234123412341234");
 			return "/member/profile";
 		}
+
+	
+
+
+	
 		
 }

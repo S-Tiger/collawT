@@ -18,4 +18,5 @@ public interface MemberService {
 	public void sendEmail(MemberVO memberVO, String div) throws Exception;
 	public void find_pw(HttpServletResponse response, MemberVO memberVO,Map<String,Object> member) throws Exception ;
 	public MemberVO delete_Member(MemberVO memberVO, String pwd, HttpServletResponse response) throws Exception ;
+	public Map<String, Object> searchList(Map<String, Object> memLogin)throws Exception;
 }

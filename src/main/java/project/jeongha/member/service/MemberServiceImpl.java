@@ -242,4 +242,10 @@ public class MemberServiceImpl implements MemberService {
 	
 	}
 
+	@Override
+	public Map<String, Object> searchList(Map<String, Object> memLogin) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

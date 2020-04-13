@@ -16,4 +16,5 @@ public interface MemberDao {
 	public void saveImage(Map<String, Object> hmap) throws Exception;
 	public Map<String, Object> getByteImage(String mem_Id) ;
 	public MemberVO loginC(String mem_id) throws Exception ;
+	public Map<String, Object> searchList(Map<String, Object> memLogin);
 }
