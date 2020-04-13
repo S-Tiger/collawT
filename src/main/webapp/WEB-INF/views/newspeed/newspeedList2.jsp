@@ -12,6 +12,11 @@
 	font-weight: normal;
 	font-style: normal;
 }
+
+
+.nav-pills .nav-link.active{
+		    background-color: #dc3545;
+}
 </style>
 
 <div class="content-wrapper">
