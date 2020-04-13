@@ -1,5 +1,6 @@
 package project.jeongha.member.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -81,9 +82,9 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.selectOne("member.getByteImage", mem_Id);
 	}
 	@Override
-	public Map<String, Object> searchList(Map<String, Object> member) {
+	public List<Map> searchList(Map<String, Object> searchMap) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("member.searchList", member);
+		return sqlSession.selectList("member.searchList", searchMap);
 	}
 	
 	

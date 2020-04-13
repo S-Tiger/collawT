@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import project.jeongha.member.service.MemberService;
 import project.sungho.apply.service.ApplyService;
 import project.sungho.apply.vo.ApplyVO;
 import project.sungho.cowork.vo.CoworkVO;
@@ -28,6 +29,9 @@ public class ApplyControllerImpl implements ApplyController {
 
 	@Autowired
 	ApplyService applyService;
+	
+	@Autowired
+	MemberService memberService;
 
 	@Override
 	@RequestMapping("/list")
@@ -39,11 +43,11 @@ public class ApplyControllerImpl implements ApplyController {
 
 		searchMap = (Map<String, Object>) session.getAttribute("member");
 
-		List<ApplyVO> list = applyService.searchList(searchMap);
+		List<Map> list = applyService.searchList(searchMap);
 
 		model.addAttribute("applylist", list);
 
-		return "newspeed/newspeedList2";
+		return "newspeed/newspeedList3";
 	}
 
 	@Override
@@ -56,13 +60,15 @@ public class ApplyControllerImpl implements ApplyController {
 	@PostMapping("insert")
 	public String insertApply(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Map<String, Object> dataMap = new HashMap<String, Object>();
+		HttpSession session = request.getSession();
 		
 		String c_Id = request.getParameter("c_Id");
 		String mem_Id[] = request.getParameterValues("mem_Id");
-		
+		String invite =  (String)session.getAttribute("mem_Id");
 		for (int i = 0; i < mem_Id.length; i++) {
 			dataMap.put("c_Id", c_Id);
 			dataMap.put("mem_Id", mem_Id[i]);
+			dataMap.put("invite", invite);
 			applyService.insertApply(dataMap);
 		}
 

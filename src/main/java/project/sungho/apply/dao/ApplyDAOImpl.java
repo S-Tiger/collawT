@@ -19,9 +19,9 @@ public class ApplyDAOImpl implements ApplyDAO {
 	private SqlSession sqlSession;
 	
 	@Override
-	public List<ApplyVO> searchList(Map<String, Object> searchMap) throws DataAccessException {
+	public List<Map> searchList(Map<String, Object> searchMap) throws DataAccessException {
 		// TODO Auto-generated method stub
-		List<ApplyVO> list = sqlSession.selectList("apply.searchList", searchMap); 
+		List<Map> list = sqlSession.selectList("apply.searchList", searchMap); 
 		return list;
 	}
 

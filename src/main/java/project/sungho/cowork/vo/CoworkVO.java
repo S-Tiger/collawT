@@ -10,6 +10,7 @@ public class CoworkVO {
 	private String c_Comment;
 	private String mem_Id;
 	private String c_Category;
+	private String invite;
 	
 	public String getC_Id() {
 		return c_Id;
@@ -40,6 +41,12 @@ public class CoworkVO {
 	}
 	public void setC_Category(String c_Category) {
 		this.c_Category = c_Category;
+	}
+	public String getInvite() {
+		return invite;
+	}
+	public void setInvite(String invite) {
+		this.invite = invite;
 	}
 
 	

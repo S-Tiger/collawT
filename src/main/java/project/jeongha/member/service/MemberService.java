@@ -1,5 +1,6 @@
 package project.jeongha.member.service;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
@@ -18,5 +19,5 @@ public interface MemberService {
 	public void sendEmail(MemberVO memberVO, String div) throws Exception;
 	public void find_pw(HttpServletResponse response, MemberVO memberVO,Map<String,Object> member) throws Exception ;
 	public MemberVO delete_Member(MemberVO memberVO, String pwd, HttpServletResponse response) throws Exception ;
-	public Map<String, Object> searchList(Map<String, Object> memLogin)throws Exception;
+	public List<Map> searchList(Map<String, Object> memLogin)throws Exception;
 }

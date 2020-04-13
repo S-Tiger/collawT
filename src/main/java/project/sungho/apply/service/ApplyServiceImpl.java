@@ -19,9 +19,9 @@ public class ApplyServiceImpl implements ApplyService{
 	ApplyDAO applyDAO;
 
 	@Override
-	public List<ApplyVO> searchList(Map<String, Object> searchMap) throws DataAccessException {
+	public List<Map> searchList(Map<String, Object> searchMap) throws DataAccessException {
 
-		List<ApplyVO> list =  applyDAO.searchList(searchMap);  //DAO에 searchList함수 실행
+		List<Map> list =  applyDAO.searchList(searchMap);  //DAO에 searchList함수 실행
 			return list;
 		}
 
