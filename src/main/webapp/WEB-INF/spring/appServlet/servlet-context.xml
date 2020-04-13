@@ -99,6 +99,7 @@
 			<exclude-mapping path="/" />
 			<exclude-mapping path="/member/*"/>
 			<exclude-mapping path="/logout"/>
+			<exclude-mapping path="/notify/view" />
 			
 			<beans:ref bean="LoginInterceptor" />
 		</interceptor>

@@ -4,24 +4,29 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="comember">
-	<resultMap id="comemberResult01" type="ComemberVO">
+	<resultMap id="comemberResult01" type="java.util.Map">
 		<result property="c_Id" column="c_Id"  />
 		<result property="mem_Id" column="mem_Id" />
 		<result property="grade" column="grade" />
-		
+		<result property="c_Name" column="c_Name" />
 	</resultMap>
 
 	<select id="searchList" resultMap="comemberResult01" parameterType="java.util.Map"> 
       <![CDATA[
-         select c_Id, mem_Id, grade
-         from co_member
+         select c_Id, mem_Id, grade, c_Name
+			from(select m.c_Id, m.mem_Id, m.grade, w.c_Name
+       		  from co_member m, co_work w
+         		 where m.c_Id = w.c_Id
+         )
       ]]>
 		<where>
 			<if test=" mem_Id != ''  and  mem_Id != null">
 				mem_Id = #{mem_Id}
 			</if>
 		</where>
+		order by to_number(c_Id) asc
 	</select>
+	
 	
 	<insert id="insertComember" parameterType="java.util.Map">
 		insert into co_member(c_Id, mem_Id, grade) 

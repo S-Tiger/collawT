@@ -43,7 +43,7 @@ public class ApplyControllerImpl implements ApplyController {
 
 		model.addAttribute("applylist", list);
 
-		return "newspeed/newspeedList";
+		return "newspeed/newspeedList2";
 	}
 
 	@Override

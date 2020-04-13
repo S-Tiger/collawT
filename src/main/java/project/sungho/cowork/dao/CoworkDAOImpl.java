@@ -29,7 +29,6 @@ public class CoworkDAOImpl implements CoworkDAO {
 	public Map<String, Object> searchMain(Map<String, Object> searchMap) throws DataAccessException {
 		
 		return sqlSession.selectOne("cowork.searchMain", searchMap); 
-		//맵퍼에 cowork.searchList 를 찾아 실행 
 		
 	}
 

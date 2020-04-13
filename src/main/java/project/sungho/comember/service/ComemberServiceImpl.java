@@ -19,9 +19,10 @@ public class ComemberServiceImpl implements ComemberService{
 	ComemberDAO comemberDAO;
 
 	@Override
-	public List<ComemberVO> searchList(Map<String, Object> searchMap) throws DataAccessException {
+	public List<Map> searchList(Map<String, Object> searchMap) throws DataAccessException {
 		// TODO Auto-generated method stub
-		return null;
+		List<Map> list =  comemberDAO.searchList(searchMap);  //DAO에 searchList함수 실행
+		return list;
 	}
 
 	@Override
