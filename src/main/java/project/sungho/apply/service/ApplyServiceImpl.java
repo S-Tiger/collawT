@@ -52,4 +52,11 @@ public class ApplyServiceImpl implements ApplyService{
 		 
 	}
 
+	@Override
+	public int acceptApply(Map<String, Object> dataMap) throws Exception {
+		
+		return applyDAO.acceptApply(dataMap);
+		
+	}
+
 }

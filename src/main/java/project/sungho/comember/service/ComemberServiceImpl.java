@@ -33,6 +33,7 @@ public class ComemberServiceImpl implements ComemberService{
 
 	@Override
 	public void insertComember(Map<String, Object> dataMap) throws Exception {
+		comemberDAO.insertComember(dataMap);
 		// TODO Auto-generated method stub
 		
 	}

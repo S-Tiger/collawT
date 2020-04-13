@@ -18,6 +18,19 @@
 			menuId.className = getmenu;
 		}
 		//쿠키생성
+		var getmenu = getCookie('apply');
+		var menuId1 = document.getElementById('activity');
+		var menuId2 = document.getElementById('timeline');
+		var menuId3 = document.getElementById('activityMenu');
+		var menuId4 = document.getElementById('timelineMenu');
+		//var applysub = applymenus.siblings();
+		if (getmenu != null) {
+			menuId1.className = 'tab-pane';
+			menuId2.className = 'tab-pane active';
+			menuId3.className = 'nav-link';
+			menuId4.className = 'nav-link active';
+			deleteCookie('apply');
+		}
 	};
 	function menuclick() {
 		deleteCookie('menu');
@@ -144,7 +157,7 @@
 	rel="stylesheet">
 </head>
 <body class="sidebar-mini layout-fixed accent-teal">
-	<div class="wrapper">
+	<div class="wrapper" id="start">
 
 		<!-- Navbar -->
 		 <nav class="main-header navbar navbar-expand navbar-light">
@@ -332,7 +345,7 @@
 									<p>협업공간 생성</p>
 							</a></li>
 						</ul></li>
-					<li class="nav-item"><a href="/apply/list"
+					<li class="nav-item"><a href="/news/list"
 						class="nav-link"> <i class="nav-icon fas fa-book-open"></i>
 							<p>
 								새로운 소식 <span class="badge badge-info right">3</span>

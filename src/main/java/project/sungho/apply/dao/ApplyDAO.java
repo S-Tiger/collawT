@@ -19,4 +19,5 @@ public interface ApplyDAO {
 	 public void deleteApply(Map<String, Object> dataMap) throws DataAccessException;
 	 
 	 public int memberCheck(String mem_Id) throws Exception;
+	 public int acceptApply(Map<String, Object> dataMap) throws Exception;
 }

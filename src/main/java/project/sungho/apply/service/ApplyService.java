@@ -19,4 +19,8 @@ public interface ApplyService {
 	 public void deleteApply(Map<String, Object> dataMap) throws Exception;
 	 
 	 public int memberCheck(String mem_Id) throws Exception;
+	 
+	 public int acceptApply(Map<String, Object> dataMap) throws Exception;
+		
+
 }

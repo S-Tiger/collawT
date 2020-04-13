@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<c:set var="contextPath"  value="${pageContext.request.contextPath}" />
 <%@include file="../includes/header.jsp"%>
 
 <style>
@@ -18,6 +20,32 @@
 		    background-color: #dc3545;
 }
 </style>
+
+<script type="text/javascript">
+
+
+	$(document).ready(function(){
+		$('#acceptsubmit').click(function() {
+			var mem_Id = $('#mem_Id').val();
+			var c_Id = $('#c_Id').val();
+			console.log(mem_Id +","+ c_Id);
+		$.ajax({
+			url : '${contextPath}/news/accept?mem_Id='+mem_Id+'&c_Id='+c_Id,
+			type : 'get',
+			success : function(data) {
+				if (data == 1) {
+					alert('수락하셨습니다.');
+					setCookie('apply', 'active', 1)
+					location.reload();
+				}
+			}
+		})
+		
+		})
+	});
+
+				
+</script>
 
 <div class="content-wrapper">
 	<div class="content-header" style="height: 100px">
@@ -38,10 +66,10 @@
 		<div class="card">
 			<div class="card-header p-2">
 				<ul class="nav nav-pills">
-					<li class="nav-item"><a class="nav-link active"
-						href="#activity" data-toggle="tab">새로운 소식</a></li>
-					<li class="nav-item"><a class="nav-link" href="#timeline"
-						data-toggle="tab">내가 받은 초대</a></li>
+					<li class="nav-item" ><a class="nav-link active"
+						href="#activity" data-toggle="tab" id="activityMenu">새로운 소식</a></li>
+					<li class="nav-item" id = "applymenu"><a class="nav-link" href="#timeline"
+						data-toggle="tab" id= "timelineMenu">내가 받은 초대</a></li>
 					<li class="nav-item"><a class="nav-link" href="#settings"
 						data-toggle="tab">Settings</a></li>
 				</ul>
@@ -189,6 +217,8 @@
 							<!-- /.timeline-label -->
 							<!-- timeline item -->
 							 <c:forEach var="applylist" items="${applylist}">
+							 <c:choose>
+							 <c:when  test= "${applylist.ap_Yn eq 'waiting'}">
 							<div>
 								<i class="fas fa-envelope bg-primary"></i>
 
@@ -196,16 +226,21 @@
 									<span class="time"><i class="far fa-clock"></i> ${applylist.ap_Date}</span>
 
 									<h3 class="timeline-header">
-										<a href="#">${applylist.c_Name}</a> 에서 가입요청이 왔습니다
+										<a href="#">${applylist.c_Name}</a>에서 가입요청이 왔습니다
 									</h3>
-
-									<div class="timeline-body"></div>
-									<div class="timeline-footer">
-										<a href="#" class="btn btn-primary btn-sm" style="color: white;">수락</a> <a
-											href="#" class="btn btn-danger btn-sm" style="color: white;">거절</a>
+									<div class="timeline-body">${applylist.mem_Name}님께서 회원님을  ${applylist.c_Name}에 초대하셨습니다. </div>
+									<div class="timeline-footer" id="timeline-footer">
+									<form action="/news/accept" method="post" style="display: inline;  margin: 5;">
+									<input type="hidden" name="c_Id" id="c_Id" value="${applylist.c_Id}">
+									<input type="hidden" name="mem_Id" id="mem_Id" value="${applylist.mem_Id}">
+										<a id = "acceptsubmit" href="#" class="btn btn-primary btn-sm" style="color: white;">수락</a>
+										<a id = "rejectsubmit" href="#" class="btn btn-danger btn-sm" style="color: white;">거절</a>
+										</form>
 									</div>
 								</div>
 							</div>
+							</c:when>
+							</c:choose>
 							  </c:forEach>
 							<!-- END timeline item -->
 							<!-- timeline item -->

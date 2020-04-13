@@ -21,4 +21,6 @@ public interface ApplyController {
 
 	public int memberCheck(@RequestParam("mem_Id") String mem_Id) throws Exception;
 	
+	public int acceptApply(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
 }

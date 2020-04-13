@@ -53,6 +53,14 @@ public class ApplyDAOImpl implements ApplyDAO {
 		result = sqlSession.selectOne("apply.memberCheck",mem_Id);
 		return result;
 	}
+
+	@Override
+	public int acceptApply(Map<String, Object> dataMap) throws Exception {
+		// TODO Auto-generated method stub
+		int result;
+		result = sqlSession.update("apply.acceptApply",dataMap);
+		return result;
+	}
 	
 	
 }
