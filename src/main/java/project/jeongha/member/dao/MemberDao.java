@@ -18,4 +18,5 @@ public interface MemberDao {
 	public Map<String, Object> getByteImage(String mem_Id) ;
 	public MemberVO loginC(String mem_id) throws Exception ;
 	public List<Map> searchList(Map<String, Object> searchMap);
+	public int memberJoinApi(Map<String,Object> memberVO);
 }

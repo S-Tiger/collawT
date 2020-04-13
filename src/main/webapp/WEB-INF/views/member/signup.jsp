@@ -103,7 +103,7 @@
 
       <form action="/member/join" method="post" id="joinForm">
         <div class="input-group mb-3">
-          <input type="text" name="mem_Name" class="form-control" placeholder="이름">
+          <input type="text" name="mem_Name" class="form-control" placeholder="콜라우티에서 사용할 이름">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -151,7 +151,7 @@
           <!-- /.col -->
           <div class="col-4">
             <button type="submit" id="joinBtn" class="btn btn-primary btn-block" >회원가입</button>
-            <button onclick="history.go(-1);" class="btn btn-primary btn-block" >취소</button>
+            <button onclick="history.go(-1);" class="btn btn-primary btn-block" >뒤로가기</button>
           </div>
           <!-- /.col -->
         </div>
@@ -159,7 +159,7 @@
 
       <div class="social-auth-links text-center">
         <p>- OR -</p>
-        <a href="${url}" class="btn btn-block btn-primary">
+        <a href="${naverLoginUrl}" class="btn btn-block btn-primary">
           <img width="223" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/>네이버</a>
         <a href="#" class="btn btn-block btn-danger">
           <i class="fab fa-google-plus mr-2"></i>

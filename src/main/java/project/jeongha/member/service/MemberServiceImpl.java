@@ -249,4 +249,17 @@ public class MemberServiceImpl implements MemberService {
 		return dao.searchList(searchMap);
 	}
 
+	@Override
+	public int memberJoin(Map<String, Object> member) throws Exception {
+		dao.memberJoin(member);
+		return 1;
+	}
+
+	@Override
+	public int memberJoinApi(Map<String, Object> member) throws Exception {
+		dao.memberJoinApi(member);
+		return 1;
+	}
+	
+	
 }

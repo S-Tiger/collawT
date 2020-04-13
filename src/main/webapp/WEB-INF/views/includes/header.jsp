@@ -5,10 +5,12 @@
 <!DOCTYPE html>
 <html>
 <style type="text/css">
-.user-pane img {
+.user-panel img {
      height: 40px;
      width: 40px;
 }
+
+
 </style>
 <script type="text/javascript">
 	window.onload = function() {
@@ -293,17 +295,17 @@
 		<!-- Sidebar -->
 		<div class="sidebar">
 			<!-- Sidebar user panel (optional) -->
-			<div class="user-pane mt-3 pb-3 mb-3 d-flex">
+			<div class="user-panel mt-3 pb-3 mb-3 d-flex" >
 				<span class="image">
 					<c:if test="${member.mem_File != null }">
 						<div class="profile">
-							<img alt="User Image" width="160" height="160" class="img-circle elevation-2"
+							<img alt="User Image" style="width:40px; height:40px" class="img-circle elevation-2"
 								src="/member/getByteImage?mem_Id=${member.mem_Id}" />&nbsp;&nbsp;
 						</div>
 					</c:if>
 					
 					<c:if test="${member.mem_File == null }">
-							<img src="../resources/dist/img/user2-160x160.jpg"
+							<img src="../resources/dist/img/user2-160x160.jpg" style="width:40px; height:40px"
 								class="img-circle elevation-2" alt="User Image">
 					</c:if>
 				</span>

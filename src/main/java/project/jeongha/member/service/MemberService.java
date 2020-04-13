@@ -20,4 +20,6 @@ public interface MemberService {
 	public void find_pw(HttpServletResponse response, MemberVO memberVO,Map<String,Object> member) throws Exception ;
 	public MemberVO delete_Member(MemberVO memberVO, String pwd, HttpServletResponse response) throws Exception ;
 	public List<Map> searchList(Map<String, Object> memLogin)throws Exception;
+	public int memberJoin(Map<String,Object> member) throws Exception;
+	public int memberJoinApi(Map<String, Object> member) throws Exception;
 }

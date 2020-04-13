@@ -133,7 +133,9 @@ $(function(){
        			 <div class="col-12">
          		 	<input type="submit" value="이름변경" class="btn btn-success float-right">
          		 	</form>
-         		 	<!--이름바꾸는 폼 끝  -->
+         		 	<!--이름바꾸는 폼 끝  --><p>result:  ${result }</p>
+         		 	<p>member: ${member}</p>
+         		 	<img src="${member.mem_File }" class="user-img img-fluid img-circle">
         		</div>
       		  </div>
             </div>

@@ -8,7 +8,7 @@
 		<result property="mem_Id" column="mem_Id"  />
 		<result property="mem_Pwd" column="mem_Pwd" />
 		<result property="mem_Name" column="mem_Name" />
-		<result property="mem_Imagine" column="mem_Imagine" />
+		<result property="mem_ImgName" column="mem_ImgName" />
 		<result property="mem_File" column="mem_File" javaType="[B" jdbcType="BLOB"  />
 		<!-- <result property="forgot_Key" column="mem_Imagname" /> -->
 	</resultMap>
@@ -77,6 +77,10 @@
 		values(#{mem_Id}, #{mem_Pwd}, #{mem_Name}, sysdate, '00')
 	</insert>
 	
+	<insert id="memberJoinApi" parameterType="java.util.Map">
+		insert into member(mem_id, mem_name, mem_imgname, mem_joindate, mem_kind)
+		values(#{mem_Id}, #{mem_Name}, #{mem_ImgName}, sysdate, '00')
+	</insert>
 	
 	<!-- 비밀번호 변경 -->
 	<update id="update_pw" parameterType="memberVO">
