@@ -21,4 +21,5 @@ public interface IssueService {
 	public void issueUpdate(IssueVO issueVO) throws Exception;
 	public int listCount() throws Exception;
 	public List<Map> fileList(String i_Num) throws Exception;
+	public void fileDelete(AppendixVO appendixVO) throws Exception;
 }

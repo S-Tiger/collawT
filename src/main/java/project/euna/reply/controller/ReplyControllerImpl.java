@@ -52,11 +52,7 @@ public class ReplyControllerImpl implements ReplyController {
 	@Override
 	@GetMapping("/list")
 	@ResponseBody
-	public List<Map> searchList(@RequestParam ("i_Num")String i_Num, HttpServletRequest request, HttpServletResponse response) throws Exception{
-		System.out.println("1111111111111111111111controller reply");
-		
-		System.out.println("i_Num : "+i_Num);
-		
+	public List<Map> searchList(@RequestParam ("i_Num")String i_Num, HttpServletRequest request, HttpServletResponse response) throws Exception{		
 		List<Map> list = replyService.searchList(i_Num);
 		return list;
 	}
@@ -71,7 +67,6 @@ public class ReplyControllerImpl implements ReplyController {
 		
 	
 		replyService.replyDelete(replyVO);
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!r_Num : "+replyVO.getR_Num());
 		
 	}
 	

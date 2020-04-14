@@ -22,6 +22,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -33,6 +35,7 @@ import project.euna.issue.vo.Criteria;
 import project.euna.issue.vo.IssueVO;
 import project.euna.issue.vo.PageMaker;
 import project.euna.reply.service.ReplyService;
+import project.euna.reply.vo.ReplyVO;
 
 @Controller
 
@@ -73,15 +76,13 @@ public class IssueControllerImpl implements IssueController {
 	//글 쓰기 DB에 넣기
 	@Override
 	@PostMapping("/insert")
-	public String issueInsert(AppendixVO appendixVO, IssueVO issueVO, HttpSession session) throws Exception {
+	public String issueInsert(IssueVO issueVO, HttpSession session) throws Exception {
 	
 		Map<String, Object> member = new HashMap<String,Object>();
 		member = (Map<String, Object>) session.getAttribute("member");
 		String mem_Id = (String) member.get("mem_Id");
 		
-		//System.out.println("파일크기 + :"+appendixVO.getA_File().getBytes());
-		
-		
+
 		issueVO.setMem_Id(mem_Id);
 		
 		issueService.issueInsert(issueVO);
@@ -93,9 +94,12 @@ public class IssueControllerImpl implements IssueController {
 	//글 쓰기 화면
 	@Override
 	@GetMapping("/insert")
-	public String issueInsert() {
-		
-		return "/issue/issueInsert";
+	public ModelAndView issueInsert() {
+		Map<String, Object> i_Num = issueDAO.get_i_Num();
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!"+i_Num);
+		ModelAndView mav = new ModelAndView("/issue/issueInsert");
+		mav.addObject("i_Num", i_Num);
+		return mav;
 	}
 	
 
@@ -157,16 +161,20 @@ public class IssueControllerImpl implements IssueController {
 	
 
 	
-	//실제 파일첨부 테스트
+	//파일첨부
 	@Override
 	@PostMapping("/fileUpload")
-	public String saveFile(MultipartHttpServletRequest mtfRequest, AppendixVO appendixVO) throws Exception{
+	@ResponseBody
+	public String saveFile(IssueVO issueVO, MultipartHttpServletRequest mtfRequest, AppendixVO appendixVO) throws Exception{
 		List<MultipartFile> fileList = mtfRequest.getFiles("a_File");
 		
 		for (MultipartFile mf : fileList) {
 			String a_RealName = mf.getOriginalFilename(); // 원본 파일 명
 			String a_Size = Long.toString((mf.getSize())); // 파일 사이즈
 			String a_NameEx = a_RealName.substring(a_RealName.lastIndexOf(".")+1);
+			String i_Num=issueVO.getI_Num();
+		
+		
 			
 			try {
 				Map<String, Object> file = new HashMap<String, Object>();
@@ -174,7 +182,7 @@ public class IssueControllerImpl implements IssueController {
 				file.put("a_File", appendixVO.getA_File().getBytes());
 				file.put("a_NameEx", a_NameEx);
 				file.put("a_Size", a_Size);
-				file.put("i_Num", "261");
+				file.put("i_Num", i_Num);
 				
 				issueDAO.saveFile(file);
 				
@@ -193,6 +201,15 @@ public class IssueControllerImpl implements IssueController {
 	}
 	
 	
+	//해당글의 첨부파일 목록 확인하기
+	@Override
+	@GetMapping("/fileread")
+	@ResponseBody
+	public List<Map> fileRead(@RequestParam ("i_Num")String i_Num, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		List<Map> list = issueService.fileList(i_Num);
+		
+		return list;
+	}
 
 	
 	//파일 다운로드
@@ -224,6 +241,18 @@ public class IssueControllerImpl implements IssueController {
 	
 		return new ResponseEntity<byte[]>(file, headers, HttpStatus.OK);
 
+	}
+	
+	//첨부파일 삭제
+	@Override
+	@PostMapping("/filedelete")
+	@ResponseBody
+	public void fileDelete(AppendixVO appendixVO) throws Exception{
+		
+	
+		issueService.fileDelete(appendixVO);
+		
+		
 	}
 
 

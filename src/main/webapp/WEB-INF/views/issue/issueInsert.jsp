@@ -5,10 +5,12 @@
 <script src = "${path}/ckeditor/ckeditor.js"></script>
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
 
 
 <script type="text/javascript">
 	$(document).ready(function() {
+		getFileList();
 		
 		//글쓰기 빈 값 안되게 검사
 		$("#submit").click(function(){
@@ -51,16 +53,21 @@
 		 })
 		 
 		//파일첨부 ajax
-		$('#file').on("click", function(e){
+		$('#a_File').change(function(e){
 			var formData = new FormData();
-			var inputFile = $("input[name=file']");
+			var inputFile = $("input[name='a_File']");
 			var files = inputFile[0].files;
+			var i_Num = $("#i_Num").val();
 			
 			console.log(files);
+		
 			
-			for(var i=0; i<file.length; i++){
-				formData.append("uploadFile", files[i]);
+			for(var i=0; i<files.length; i++){
+				formData.append("a_File", files[i]);
+				
 			}
+			formData.append("i_Num", i_Num)
+			console.log(formData);
 			
 			$.ajax({
 				url:'/issue/fileUpload',
@@ -69,12 +76,70 @@
 				data:formData,
 				type:'POST',
 				success:function(result){
-					alert("uploaded");
+				
+					getFileList();
 				}
 			});
 		});
+		
 	
-	});
+	})
+	
+	//첨부된 파일 리스트
+		 function getFileList(){
+			$.ajax({
+				type:"get",
+				url : "${path}/issue/fileread?i_Num=${i_Num.NEXTVAL}",
+						
+				success:function(result){
+					var str="";
+					if(result!=0){
+						str+='<table class="table">';
+						
+		                    
+						for(var i in result){
+							str+='<tr><td><span id="a_RealName" name="a_RealName">'+result[i].a_RealName+'</span></td>';
+							str+='<td><span id="a_Size" name="a_Size">'+(result[i].a_Size/1000)+'kb</span></td>';
+							str+='<td><input type="hidden" id="a_Num" name="a_Num" value="'+result[i].a_Num+'"/></td>';
+							str+='<td class="text-right py-0 align-middle">';
+							str+='<div class="btn-group btn-group-sm" ><a href="javascript:fileDelete('+result[i].a_Num+')" class="btn btn-danger" ><i class="fas fa-trash" ></i></a></div>';
+							str+='</td></tr>'
+						}
+						
+						str+='</tbody></table>'
+						
+					}else{
+						str+='<p style="text-align:center;"><small><br><br>첨부된 파일이 없습니다.</small></p>'
+						
+					}
+					$("#fileList").html(str);
+				}
+			})
+			
+			
+			
+			
+		}
+	
+	//댓글 삭제
+  	function fileDelete(a_Num){
+	
+			$.ajax({
+				url : "/issue/filedelete",
+				data : {"a_Num" : a_Num},
+				type : 'post',
+				success:function(){
+					
+					getFileList();
+					
+				}
+			})
+			
+		
+			
+	}
+	
+
 	
 </script>
 
@@ -107,7 +172,7 @@
         	<div class="form-group">
           
               <div class="form-group">
-             
+             	<input type="hidden" id = "i_Num" name="i_Num" value="${i_Num.NEXTVAL}">
                 <label for="inputName">이슈명</label>
                 <input type="text" id = "i_Name" name="i_Name" class="form-control">
               </div>
@@ -116,7 +181,7 @@
              
                 <label for="inputDescription">이슈 내용</label>
                 
-                <textarea name="i_Content" id="i_Content" class="form-control" rows="4" style="width:100px;">              </textarea>
+                <textarea name="i_Content" id="i_Content" class="form-control" style="width:100px;">              </textarea>
                 <script>
            
                 //CK에디터 적용
@@ -140,7 +205,42 @@
 					</script>
               </div>
              
-              <div class="form-group">
+              </div>
+        
+        </div>
+        
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+</div>
+
+<!--  파일 첨부 -->
+
+<div class="col-md-6">
+
+<div class="card card-info" >
+          
+            <div class="card-body">
+            <label for="inputName">첨부파일</label>
+            
+            <a href="#"><button type="button" class="btn btn-block btn-default btn-xs float-right" onclick="oncilck=document.all.a_File.click()" style="width:50px; margin:1px">추가</button></a>
+            <input type="file" id="a_File" name="a_File" style="display:none" multiple="multiple"/>
+           <br>
+               
+				<div id="fileList"></div>
+
+              <br>
+              
+              
+          
+          
+            </div>
+            
+          </div>
+         <div class="card card-info" >
+          
+            <div class="card-body">
+             <div class="form-group">
               
                 <label for="inputStatus">담당자</label>
                <select class="form-control custom-select">
@@ -181,64 +281,10 @@
 				
 		<!-- 멤버ID는 나중에 세션에서 끌어오기<input name="mem_Id" type="text"><br> -->
 		이슈그룹번호는 나중에 세션에서 끌어오기<input name="i_Groupnum" id="i_Groupnum" type="text"><br>
-				
-              </div>
-        <div class="row">
-        <div class="col-sm-6">
-          <input type="submit" id = "submit" value="이슈 작성" class="btn btn-success float-right" style="margin:3px;">
+				<input type="submit" id = "submit" value="이슈 작성" class="btn btn-success float-right" style="margin:3px;">
           <input type="button" id = "cancel" value="작성 취소" class="btn btn-success float-right" style="margin:3px;" onclick="location.href='list'">
-        </div>
-        <br><br><br>
-        
-      </div>
-      
-      
-      
-        </div>
-        
-        <!-- /.card-body -->
-      </div>
-      <!-- /.card -->
-</div>
-
-<!--  파일 첨부 -->
-<div class="col-md-6">
-<div class="card card-info" >
-          
-            <div class="card-body p-0">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th>파일명</th>
-                    <th>파일 크기</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                <c:forEach var="file" items="${file}" >
-
-                  <tr>
-                    <td><span id="a_RealName" name="a_RealName">${file.a_RealName}</span></td>
-                    <td><span id="a_Size" name="a_Size">${file.a_Size}</span></td>
-                    <td><input type="hidden" id="a_Num" name="a_Num" value="${file.a_Num}"/></td>
-                    <td class="text-right py-0 align-middle">
-                      <div class="btn-group btn-group-sm">
-                        
-                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                      </div>
-                    </td>
-                    </tr>
-                    </c:forEach>
-                 
-                </tbody>
-              </table>
+              </div>
               
-            </div>
-            
-          </div>
-          <input type="button" id = "addFile" name = "addFile" value="파일 첨부" class="btn btn-success float-right" style="margin:3px; background-color:gray" onclick="oncilck=document.all.file.click()"/>
-          <input type="file" id="file" name="file" style="display:none" multiple="multiple" enctype="multipart/form-data"/>
-          <!--  -->
     </section>
     <!-- /.content -->
     </form>

@@ -69,13 +69,19 @@
 
 	</select>
 	
+	<!-- 글쓰기 화면 전환 시 글번호 먼저 가져오기 -->
+	<select id="get_i_Num" resultMap="issueResult02"> 
+      <![CDATA[
+		select issue_i_Num.nextval from dual
+      ]]>
 
+	</select>
 
 
 	<!-- 글 입력 -->
 	<insert id="issueInsert" parameterType="IssueVO">
 		insert into issue(i_Num, c_Id, i_Name, i_Content, i_Date, i_Groupnum , mem_Id, i_Start, i_End)
-		values(issue_i_num.nextval, #{c_Id}, #{i_Name}, #{i_Content} ,  
+		values(#{i_Num}, #{c_Id}, #{i_Name}, #{i_Content} ,  
 		(select to_char(sysdate, 'YYYY/MM/DD/ HH24:MI:SS') from dual)
 		, #{i_Groupnum} , #{mem_Id}, #{i_Start}, #{i_End})
 	</insert>
@@ -108,7 +114,8 @@
 	</update>
 	
 	<!-- 파일 업로드 -->
- 		<insert id="saveFile" parameterType="java.util.HashMap">		
+
+ 	<insert id="saveFile" parameterType="java.util.HashMap">
 		insert into appendix(a_Num, a_RealName, a_File, a_NameEx, i_Num, a_Size)
 		values(appendix_seq.nextval, #{a_RealName}, #{a_File}, #{a_NameEx}, #{i_Num}, #{a_Size})
 	</insert>
@@ -124,6 +131,7 @@
       ]]>
 
 	</select>
+
 	
 	<!-- 파일 다운로드 -->
 	<select id="download" resultMap="fileResult01">
@@ -131,6 +139,14 @@
 		FROM appendix
 		where a_Num=#{a_Num}
 	</select>
+	
+	
+	<!-- 파일 삭제 -->
+	<delete id="fileDelete" parameterType="AppendixVO">
+		DELETE
+		FROM appendix
+		WHERE a_Num=#{a_Num}
+	</delete>
  
 
 </mapper>

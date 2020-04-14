@@ -12,6 +12,7 @@ import project.euna.issue.dao.IssueDAOImpl;
 import project.euna.issue.vo.AppendixVO;
 import project.euna.issue.vo.Criteria;
 import project.euna.issue.vo.IssueVO;
+import project.euna.reply.vo.ReplyVO;
 import project.notify.dao.NotifyDAOImpl;
 
 
@@ -84,6 +85,10 @@ public class IssueServiceImpl implements IssueService {
 		
 
 	
-	
+	//첨부파일 삭제
+		@Override
+		public void fileDelete(AppendixVO appendixVO) throws Exception {
+			issueDAO.fileDelete(appendixVO);
+		}
 
 }

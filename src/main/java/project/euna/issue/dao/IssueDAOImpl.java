@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import project.euna.issue.vo.AppendixVO;
 import project.euna.issue.vo.Criteria;
 import project.euna.issue.vo.IssueVO;
+import project.euna.reply.vo.ReplyVO;
 
 @Repository
 public class IssueDAOImpl implements IssueDAO {
@@ -81,6 +82,19 @@ public class IssueDAOImpl implements IssueDAO {
 	public Map<String, Object> download(String a_Num) {
 		return sqlSession.selectOne("issue.download", a_Num);
 	}
+	
+	//글쓰기 화면 전환 시 글번호 가져오기
+	@Override
+	public Map<String, Object> get_i_Num() {
+		return sqlSession.selectOne("issue.get_i_Num");
+	}
+	
+	//댓글 삭제
+		@Override
+		public void fileDelete(AppendixVO appendixVO) throws Exception {
+			sqlSession.delete("issue.fileDelete", appendixVO);
+			
+		}
 
 
 	//이미지 불러오기

@@ -21,4 +21,6 @@ public interface IssueDAO {
 	public void saveFile(Map<String, Object> hmap) throws Exception;
 	public List<Map> fileList(String i_Num) throws DataAccessException;
 	public Map<String, Object> download(String a_Num);
+	public Map<String, Object> get_i_Num();
+	public void fileDelete(AppendixVO appendixVO) throws Exception;
 }

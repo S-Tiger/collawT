@@ -66,6 +66,12 @@ $(document).ready(function() {
 	
 	
 	
+
+	
+	
+	
+})
+
 	//댓글 목록
 	function getReplyList(){
 		$.ajax({
@@ -73,7 +79,7 @@ $(document).ready(function() {
 			url : "${path}/reply/list?i_Num=${issueRead.i_Num}",
 			
 			success:function(result){
-				console.log(result);
+				
 				var str="";
 				if(result!=0){
 					for(var i in result){
@@ -106,10 +112,6 @@ $(document).ready(function() {
 		})
 		
 	}
-	
-	
-	
-})
 
 
 	//댓글 삭제
@@ -123,7 +125,8 @@ $(document).ready(function() {
 				type : 'post',
 				success:function(){
 					alert("삭제되었습니다.");
-					location.reload();
+					getReplyList();
+					
 				}
 			})
 			
@@ -159,7 +162,7 @@ $(document).ready(function() {
 	        data : {'r_Content' : updateContent, 'r_Num' : r_Num},
 	        success : function(data){
 	           
-	            	location.reload();
+	        	getReplyList();
 	        }
 	    });
 	}
