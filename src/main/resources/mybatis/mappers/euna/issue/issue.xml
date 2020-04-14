@@ -109,8 +109,8 @@
 	
 	<!-- 파일 업로드 -->
  		<insert id="saveFile" parameterType="java.util.HashMap">		
-		insert into appendix(a_Num, a_RealName, a_File, a_NameEx, i_Num)
-		values(appendix_seq.nextval, #{a_RealName}, #{a_File}, #{a_NameEx}, #{i_Num})
+		insert into appendix(a_Num, a_RealName, a_File, a_NameEx, i_Num, a_Size)
+		values(appendix_seq.nextval, #{a_RealName}, #{a_File}, #{a_NameEx}, #{i_Num}, #{a_Size})
 	</insert>
 	
 	

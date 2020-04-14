@@ -17,7 +17,7 @@
 </head>
 <body>
 
-<form action="/issue/saveFile" enctype="multipart/form-data"
+<form action="/issue/fileUpload" enctype="multipart/form-data"
 									method="post" class="form-horizontal" enctype="multipart/form-data">
 <input type='file' name='a_File' id='a_File' multiple="multiple">
 <input type='text' name='i_Num' id='i_Num'>

@@ -230,13 +230,12 @@ $(document).ready(function() {
 								
 								
 							</div>
+							
+							<br>
+							<!-- 시작일/종료일 : 둘다 null이면 아예 안뜨게-->
+							<c:if test="${not empty issueRead.i_Start&& not empty issueRead.i_End}">
 							<br>
 							<br>
-							<br>
-							<!-- 시작일/종료일 -->
-								
-								<c:if test="${not empty issueRead.i_Start&& not empty issueRead.i_End}">
-								
 								<span class="text-muted float-left">
 								<ion-icon name="calendar-outline" style="font-size:24"></ion-icon>
 								&nbsp;
@@ -265,9 +264,11 @@ $(document).ready(function() {
 							
 <!-- 첨부파일 부분~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->				
 
+<!-- 첨부된 파일 없으면 창 아예 안보이게  -->		
+<c:if test="${not empty file}">
 					<div class="card card-info">
             <div class="card-header">
-              <h3 class="card-title">Files</h3>
+              <h3 class="card-title">Download</h3>
 
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -278,27 +279,29 @@ $(document).ready(function() {
               <table class="table">
                 <thead>
                   <tr>
-                    <th>File Name</th>
-                    <th>File Size</th>
+                    <th>파일명</th>
+                    <th>파일 크기</th>
                     <th></th>
                   </tr>
                 </thead>
                 <tbody>
 
+				  <c:forEach var="file" items="${file}" >
                   <tr>
-                    <td>Functional-requirements.docx</td>
-                    <td>49.8005 kb</td>
+                    <td><span id="a_RealName" name="a_RealName">${file.a_RealName}</span></td>
+                    <td><span id="a_Size" name="a_Size">${file.a_Size/1000}kb</span></td>
                     <td class="text-right py-0 align-middle">
-                      <div class="btn-group btn-group-sm">
-                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                      </div>
+                      <a href="/issue/download?a_Num=${file.a_Num}"><ion-icon name="arrow-down-circle-outline"  style="font-size:24"></ion-icon></a>
                     </td>
-                 
+                 </tr>
+                 </c:forEach>
                 </tbody>
               </table>
             </div>
            <!--  /.card-body -->
           </div>
+          <br>
+          </c:if>
           <!-- /.card -->
           
           <!-- 이거 나중에 기능 넣기 -->

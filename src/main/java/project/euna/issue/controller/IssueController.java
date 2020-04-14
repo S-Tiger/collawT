@@ -28,7 +28,7 @@ public interface IssueController {
 	public String issueUpdate(IssueVO issueVO) throws Exception;
 	
 	public String saveFile(MultipartHttpServletRequest mtfRequest, AppendixVO appendixVO) throws Exception;
-	public ModelAndView fileList(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	//public ModelAndView fileList(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ResponseEntity<byte[]> download(AppendixVO appendixVO, HttpServletResponse response);
 }
 

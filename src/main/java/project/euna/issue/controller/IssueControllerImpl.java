@@ -108,9 +108,11 @@ public class IssueControllerImpl implements IssueController {
 		
 		
 		Map<String, Object> board = issueService.issueRead(i_Num);
+		List<Map> list = issueService.fileList(i_Num);
 		
 		ModelAndView mav = new ModelAndView("issue/issueRead");
 		mav.addObject("issueRead", board);
+		mav.addObject("file", list);
 		return mav;
 	}
 	
@@ -163,7 +165,7 @@ public class IssueControllerImpl implements IssueController {
 		
 		for (MultipartFile mf : fileList) {
 			String a_RealName = mf.getOriginalFilename(); // 원본 파일 명
-			String a_Size = Long.toString(mf.getSize()); // 파일 사이즈
+			String a_Size = Long.toString((mf.getSize())); // 파일 사이즈
 			String a_NameEx = a_RealName.substring(a_RealName.lastIndexOf(".")+1);
 			
 			try {
@@ -172,9 +174,10 @@ public class IssueControllerImpl implements IssueController {
 				file.put("a_File", appendixVO.getA_File().getBytes());
 				file.put("a_NameEx", a_NameEx);
 				file.put("a_Size", a_Size);
-				file.put("i_Num", "225");
+				file.put("i_Num", "261");
 				
 				issueDAO.saveFile(file);
+				
 				
 			} catch (IllegalStateException e) {
 				// TODO Auto-generated catch block
@@ -190,20 +193,7 @@ public class IssueControllerImpl implements IssueController {
 	}
 	
 	
-	//파일첨부 리스트 조회
-	@Override
-	@GetMapping("/viewfile")
-	public ModelAndView fileList(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
-		String i_Num = "225";
-		
-		List<Map> list = issueService.fileList(i_Num);
 
-		ModelAndView mav = new ModelAndView("issue/fileview");
-		mav.addObject("file", list);
-		return mav;
-		
-	}
 	
 	//파일 다운로드
 	@Override
