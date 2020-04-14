@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import project.euna.issue.dao.IssueDAOImpl;
+import project.euna.issue.vo.AppendixVO;
 import project.euna.issue.vo.Criteria;
 import project.euna.issue.vo.IssueVO;
 import project.notify.dao.NotifyDAOImpl;
@@ -29,7 +30,7 @@ public class IssueServiceImpl implements IssueService {
 	@Override
 	public void  issueInsert(IssueVO issueVO) {
 		int result = issueDAO.issueInsert(issueVO);
-		//notifyDAO.notifyInsert(issueVO);
+		notifyDAO.notifyInsert(issueVO);
 		
 		if (result == 0) {
 			System.out.println("Join Fail!!");
@@ -38,12 +39,6 @@ public class IssueServiceImpl implements IssueService {
 		}
 	}
 	
-	//목록 조회
-//	@Override
-//	public List<Map> searchList() throws Exception{
-//		List<Map> list = issueDAO.searchList();
-//		return list;
-//	}
 	
 	
 	//목록 조회 페이징
@@ -77,6 +72,16 @@ public class IssueServiceImpl implements IssueService {
 	public void issueUpdate(IssueVO issueVO) throws Exception {
 		issueDAO.issueUpdate(issueVO);
 	}
+	
+	//파일 목록 조회
+	@Override
+		public List<Map> fileList(String i_Num) throws Exception{
+			List<Map> list = issueDAO.fileList(i_Num);
+			System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!service i_Num : "+i_Num);
+
+			return list;
+		}
+		
 
 	
 	

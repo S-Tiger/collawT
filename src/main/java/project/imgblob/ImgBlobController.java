@@ -37,8 +37,9 @@ public class ImgBlobController {
 		//이미지 저장 컨트롤러
 		try {
 			Map<String, Object> hmap = new HashMap<String, Object>();
+			
+			
 			hmap.put("img", vo.getImgFile().getBytes());
-			System.out.println("ImgSave Controller: "+hmap);
 			dao.saveImage(hmap);
 		} catch (Exception e) {
 			e.printStackTrace();

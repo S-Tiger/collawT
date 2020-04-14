@@ -5,7 +5,9 @@
 <%@include file="../includes/header.jsp"%>
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
 <script type="text/javascript">
+
 
 
 $(document).ready(function() {
@@ -169,9 +171,10 @@ $(document).ready(function() {
 			
 		$('#replyContent'+r_Num).html(str);	
 	}
-	
+
 	
 </script>
+
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -209,20 +212,44 @@ $(document).ready(function() {
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body">
+						<span class="text-muted float-right"id="i_Date" name="i_Date" style="font-size:small">
+								<c:out	value="${issueRead.i_Date}" /></span>
 							<div class="user-block">
+							
+							
 
 
 								<!-- 멤버이미지 넣기 -->
+								
 								<img alt="프로필사진" width="50" height="50"
 								src="/member/getByteImage?mem_Id=${issueRead.mem_Id}" class="img-circle elevation-2"/>
-								<span class="username" id="mem_Name" name="mem_Name"><c:out
-										value="${issueRead.mem_Name}" /></span> <span class="description"
-									id="i_Date" name="i_Date"><c:out
-										value="${issueRead.i_Date}" /></span>
+								<span class="username" id="mem_Name" name="mem_Name">
+								<c:out value="${issueRead.mem_Name}" /></span>
+								<span class="description"id="mem_Id" name="mem_Id">
+								<c:out	value="${issueRead.mem_Id}" /></span> 
+								
+								
 							</div>
 							<br>
 							<br>
 							<br>
+							<!-- 시작일/종료일 -->
+								
+								<c:if test="${not empty issueRead.i_Start&& not empty issueRead.i_End}">
+								
+								<span class="text-muted float-left">
+								<ion-icon name="calendar-outline" style="font-size:24"></ion-icon>
+								&nbsp;
+								</span>
+								
+								<span id="i_Start" name="i_Start" class="text-muted float-left" style="font-size:medium"><c:out value="${issueRead.i_Start}~"/></span>
+								
+								<span id="i_End" name="i_End" class="text-muted float-left" style="font-size:medium"><c:out value="${issueRead.i_End}"/></span>
+								</c:if>
+								<br>
+								<br>
+							
+							<!-- 내용 -->
 								<p id="i_Content" name="i_Content"><c:out value="${issueRead.i_Content}" escapeXml="false"/></p>
 						
 							
@@ -230,15 +257,7 @@ $(document).ready(function() {
 							<br>
 							<br>
 							<br>
-							<!-- 이거 나중에 기능 넣기 -->
-							<button type="button" class="btn btn-default btn-sm">
-								<i class="fas fa-share"></i> Share
-							</button>
-							<button type="button" class="btn btn-default btn-sm">
-								<i class="far fa-thumbs-up"></i> Like
-							</button>
-							<span class="float-right text-muted">127 likes - 3
-								comments</span> <input type="hidden" id="i_Num" name="i_Num"
+							 <input type="hidden" id="i_Num" name="i_Num"
 								value="${issueRead.i_Num}" /> <br>
 							<br>
 
@@ -271,7 +290,6 @@ $(document).ready(function() {
                     <td>49.8005 kb</td>
                     <td class="text-right py-0 align-middle">
                       <div class="btn-group btn-group-sm">
-                        <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
                         <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
                       </div>
                     </td>
@@ -282,19 +300,29 @@ $(document).ready(function() {
            <!--  /.card-body -->
           </div>
           <!-- /.card -->
+          
+          <!-- 이거 나중에 기능 넣기 -->
+							<button type="button" class="btn btn-default btn-sm">
+								<i class="fas fa-share"></i> Share
+							</button>
+							<!-- 숫자 카운트 넣기 -->
+							<button type="button" class="btn btn-default btn-sm">
+								<i class="far fa-thumbs-up"></i> Like 1111
+							</button>
+							
 <!-- 본인만 글 수정, 삭제 가능-->
 						
 						<c:if test="${member.mem_Id == issueRead.mem_Id}">
 						
 								<input type="submit" value="삭제" id="delete_btn"
-									class="btn btn-success float-right">
+									class="btn btn-success float-right" style="margin:3px;">
 								<input type="submit" value="수정" id="update_btn"
-									class="btn btn-success float-right" onclick="update()">
+									class="btn btn-success float-right" onclick="update()" style="margin:3px;">
 						</c:if>
 
 							<input type="button" value="목록"
 								class="btn btn-success float-right"
-								onclick="location.href='list'">
+								onclick="location.href='list'" style="margin:3px;">
 								
 								<br><br><br>
 						</div>

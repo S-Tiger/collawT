@@ -17,7 +17,7 @@
 		<!-- 은아 -->
 		<typeAlias type="project.euna.issue.vo.IssueVO" alias="IssueVO" />
 		<typeAlias type="project.euna.reply.vo.ReplyVO" alias="ReplyVO" />
-		
+		<typeAlias type="project.euna.issue.vo.AppendixVO" alias="AppendixVO" />
 		<!-- 동윤 -->
 		<typeAlias type="project.notify.vo.NotifyVO" alias="NotifyVO" />
 		

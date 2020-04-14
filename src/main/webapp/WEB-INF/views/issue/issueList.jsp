@@ -99,7 +99,8 @@
       "responsive": true,
       "autoWidth": false,
 
-    });
+    })
+  });
     
     
 </script>

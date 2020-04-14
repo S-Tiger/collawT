@@ -7,6 +7,8 @@ public class IssueVO {
 	private String c_Id;
 	private String i_Name;
 	private String i_Content;
+	private String i_Start;
+	private String i_End;
 	private String i_Date;
 	private String i_Groupnum;
 	private String mem_Id;
@@ -52,6 +54,18 @@ public class IssueVO {
 	}
 	public void setMem_Id(String mem_Id) {
 		this.mem_Id = mem_Id;
+	}
+	public String getI_Start() {
+		return i_Start;
+	}
+	public void setI_Start(String i_Start) {
+		this.i_Start = i_Start;
+	}
+	public String getI_End() {
+		return i_End;
+	}
+	public void setI_End(String i_End) {
+		this.i_End = i_End;
 	}
 	
 
