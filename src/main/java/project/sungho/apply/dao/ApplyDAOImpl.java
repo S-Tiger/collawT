@@ -19,9 +19,9 @@ public class ApplyDAOImpl implements ApplyDAO {
 	private SqlSession sqlSession;
 	
 	@Override
-	public List<ApplyVO> searchList(Map<String, Object> searchMap) throws DataAccessException {
+	public List<Map> searchList(Map<String, Object> searchMap) throws DataAccessException {
 		// TODO Auto-generated method stub
-		List<ApplyVO> list = sqlSession.selectList("apply.searchList", searchMap); 
+		List<Map> list = sqlSession.selectList("apply.searchList", searchMap); 
 		return list;
 	}
 
@@ -51,6 +51,14 @@ public class ApplyDAOImpl implements ApplyDAO {
 		// TODO Auto-generated method stub
 		int result;
 		result = sqlSession.selectOne("apply.memberCheck",mem_Id);
+		return result;
+	}
+
+	@Override
+	public int acceptApply(Map<String, Object> dataMap) throws Exception {
+		// TODO Auto-generated method stub
+		int result;
+		result = sqlSession.update("apply.acceptApply",dataMap);
 		return result;
 	}
 	

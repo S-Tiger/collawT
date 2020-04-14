@@ -10,7 +10,7 @@ import project.sungho.comember.vo.ComemberVO;
 
 
 public interface ComemberService {
-	public List<ComemberVO> searchList(Map<String, Object> searchMap) throws DataAccessException;
+	public List<Map> searchList(Map<String, Object> searchMap) throws DataAccessException;
 	 
 	 public void updateComember(Map<String, Object> dataMap) throws Exception;
 	 public void insertComember(Map<String, Object> dataMap) throws Exception;

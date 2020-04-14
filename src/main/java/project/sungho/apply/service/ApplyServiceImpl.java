@@ -19,9 +19,9 @@ public class ApplyServiceImpl implements ApplyService{
 	ApplyDAO applyDAO;
 
 	@Override
-	public List<ApplyVO> searchList(Map<String, Object> searchMap) throws DataAccessException {
+	public List<Map> searchList(Map<String, Object> searchMap) throws DataAccessException {
 
-		List<ApplyVO> list =  applyDAO.searchList(searchMap);  //DAO에 searchList함수 실행
+		List<Map> list =  applyDAO.searchList(searchMap);  //DAO에 searchList함수 실행
 			return list;
 		}
 
@@ -50,6 +50,13 @@ public class ApplyServiceImpl implements ApplyService{
 		// TODO Auto-generated method stub
 		return applyDAO.memberCheck(mem_Id);
 		 
+	}
+
+	@Override
+	public int acceptApply(Map<String, Object> dataMap) throws Exception {
+		
+		return applyDAO.acceptApply(dataMap);
+		
 	}
 
 }

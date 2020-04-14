@@ -19,9 +19,12 @@ public class ComemberDAOImpl implements ComemberDAO {
 	private SqlSession sqlSession;
 	
 	@Override
-	public List<ComemberVO> searchList(Map<String, Object> searchMap) throws DataAccessException {
+	public List<Map> searchList(Map<String, Object> searchMap) throws DataAccessException {
 		// TODO Auto-generated method stub
-		return null;
+		List<Map> list = sqlSession.selectList("comember.searchList", searchMap); 
+		//맵퍼에 cowork.searchList 를 찾아 실행 
+
+		return list;
 	}
 
 	@Override

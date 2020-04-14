@@ -1,5 +1,6 @@
 package project.jeongha.member.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import project.jeongha.member.vo.MemberVO;
@@ -16,4 +17,6 @@ public interface MemberDao {
 	public void saveImage(Map<String, Object> hmap) throws Exception;
 	public Map<String, Object> getByteImage(String mem_Id) ;
 	public MemberVO loginC(String mem_id) throws Exception ;
+	public List<Map> searchList(Map<String, Object> searchMap);
+	public int memberJoinApi(Map<String,Object> memberVO);
 }

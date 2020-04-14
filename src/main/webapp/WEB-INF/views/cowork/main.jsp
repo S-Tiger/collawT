@@ -75,6 +75,17 @@
 
 
 	$('#update-popup').ready(function (){
+				$('#insertsubmit').click(function() {
+					var listnum = $('#applyList').childElementCount;
+					
+					if (listnum == undefined) {
+					alert("초대 리스트가 비어있습니다");
+						return false;
+						
+					}
+				})
+		
+		
 			    $('#mem_Id').keydown(function(event) {
 			    	if(event.keyCode == '13'){
 			    		var mem_Id = $('#mem_Id').val();
@@ -83,7 +94,7 @@
 							$("#id_check").css("color", "red");
 			    		}else{
 			    		$.ajax({
-							url : '${contextPath}/apply/memberCheck?mem_Id=' + mem_Id,
+							url : '${contextPath}/news/memberCheck?mem_Id=' + mem_Id,
 							type : 'get',
 							success : function(data) {
 								console.log("1 = 중복o / 0 = 중복x : " + data);
@@ -185,9 +196,9 @@
 				 초대 메세지를 보낼 파트너 아이디를 여기서 확인할 수 있습니다.</span>
 		</div>
 		<div><span style="float: left; padding-right: 50px;">
-		<form action="/apply/insert" method="post" id = "applyform">
+		<form action="/news/insert" method="post" id = "applyform">
 			<input type="hidden" name="c_Id" value="${pjt.c_Id}">
-			<button type="submit" class="btn btn-block btn-success" 
+			<button type="submit" id= "insertsubmit" class="btn btn-block btn-success" 
 			style="width: 220px;">초대하기</button></form></span>
 		<span>
 		<button type="reset" class="btn btn-block btn-success" onclick="history.go(0);" style="width: 220px">취소</button>

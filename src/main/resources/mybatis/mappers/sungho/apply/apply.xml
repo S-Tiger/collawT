@@ -10,19 +10,25 @@
 		<result property="ap_Date" column="ap_Date" />
 		<result property="ap_Yn" column="ap_Yn" />
 		<result property="ap_Status" column="ap_Status" />
-
+		<result property="c_Name" column="c_Name" />
+		<result property="invite" column="invite" />
+		<result property="mem_Name" column="mem_Name" />
+		
 		
 	</resultMap>
 	
-	<select id="searchList" resultMap="applyResult01" parameterType="applyVO"> 
+	<select id="searchList" resultMap="applyResult01" parameterType="java.util.Map"> 
       <![CDATA[
-         select c_Id, mem_Id, ap_Date, ap_Yn, ap_Status
-         from apply_mem
+         select a.c_Id, a.mem_Id, a.ap_Date, a.ap_Yn, a.ap_Status,a.invite, b.c_Name, c.mem_Name
+         from apply_mem a, co_work b, member c
+         
        
       ]]>
 		<where>
+		a.c_Id = b.c_Id
+		and a.invite = c.mem_Id	
 			<if test=" mem_Id != ''  and  mem_Id != null">
-				mem_Id = #{mem_Id}
+			and	a.mem_Id = #{mem_Id}
 			</if>
 		</where>
 		  order by ap_Date desc
@@ -30,8 +36,8 @@
 	
 	
 	<insert id="insertApply" parameterType="java.util.Map">
-		insert into apply_mem(c_Id, mem_Id, ap_Date, ap_Yn, ap_Status) 
-		values(#{c_Id}, #{mem_Id}, sysdate, 1 , 1)
+		insert into apply_mem(c_Id, mem_Id, ap_Date, ap_Yn, ap_Status, invite) 
+		values(#{c_Id}, #{mem_Id}, sysdate, 'waiting', 1, #{invite})
 	</insert>	
 	
 	
@@ -67,5 +73,14 @@
 		select count(*) from member where mem_Id = #{mem_Id}
 		]]>
 	</select>
+	
+	<update id="acceptApply" parameterType="java.util.Map">
+	 <![CDATA[
+	 UPDATE APPLY_MEM
+	 SET ap_Yn = 'Yes'
+	 where c_Id = #{c_Id}
+	 and mem_Id = #{mem_Id}
+	 ]]>
+	</update>
 
 </mapper>

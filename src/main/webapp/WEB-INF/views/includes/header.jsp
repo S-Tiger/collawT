@@ -5,10 +5,12 @@
 <!DOCTYPE html>
 <html>
 <style type="text/css">
-.user-pane img {
+.user-panel img {
      height: 40px;
      width: 40px;
 }
+
+
 </style>
 <script type="text/javascript">
 	window.onload = function() {
@@ -18,6 +20,19 @@
 			menuId.className = getmenu;
 		}
 		//쿠키생성
+		var getmenu = getCookie('apply');
+		var menuId1 = document.getElementById('activity');
+		var menuId2 = document.getElementById('timeline');
+		var menuId3 = document.getElementById('activityMenu');
+		var menuId4 = document.getElementById('timelineMenu');
+		//var applysub = applymenus.siblings();
+		if (getmenu != null) {
+			menuId1.className = 'tab-pane';
+			menuId2.className = 'tab-pane active';
+			menuId3.className = 'nav-link';
+			menuId4.className = 'nav-link active';
+			deleteCookie('apply');
+		}
 	};
 	function menuclick() {
 		deleteCookie('menu');
@@ -144,7 +159,7 @@
 	rel="stylesheet">
 </head>
 <body class="sidebar-mini layout-fixed accent-teal">
-	<div class="wrapper">
+	<div class="wrapper" id="start">
 
 		<!-- Navbar -->
 		 <nav class="main-header navbar navbar-expand navbar-light">
@@ -280,17 +295,17 @@
 		<!-- Sidebar -->
 		<div class="sidebar">
 			<!-- Sidebar user panel (optional) -->
-			<div class="user-pane mt-3 pb-3 mb-3 d-flex">
+			<div class="user-panel mt-3 pb-3 mb-3 d-flex" >
 				<span class="image">
 					<c:if test="${member.mem_File != null }">
 						<div class="profile">
-							<img alt="User Image" width="160" height="160" class="img-circle elevation-2"
+							<img alt="User Image" style="width:40px; height:40px" class="img-circle elevation-2"
 								src="/member/getByteImage?mem_Id=${member.mem_Id}" />&nbsp;&nbsp;
 						</div>
 					</c:if>
 					
 					<c:if test="${member.mem_File == null }">
-							<img src="../resources/dist/img/user2-160x160.jpg"
+							<img src="../resources/dist/img/user2-160x160.jpg" style="width:40px; height:40px"
 								class="img-circle elevation-2" alt="User Image">
 					</c:if>
 				</span>
@@ -332,7 +347,7 @@
 									<p>협업공간 생성</p>
 							</a></li>
 						</ul></li>
-					<li class="nav-item"><a href="/apply/list"
+					<li class="nav-item"><a href="/news/list"
 						class="nav-link"> <i class="nav-icon fas fa-book-open"></i>
 							<p>
 								새로운 소식 <span class="badge badge-info right">3</span>

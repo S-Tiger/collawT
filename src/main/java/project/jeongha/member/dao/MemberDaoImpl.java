@@ -1,5 +1,6 @@
 package project.jeongha.member.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -26,6 +27,20 @@ public class MemberDaoImpl implements MemberDao {
 		
 		return stat;
 	}
+	
+	//회원가입
+		@Override
+		public int memberJoinApi(Map<String,Object> memberVO) {
+			// TODO Auto-generated method stub
+			int stat = sqlSession.update("member.memberJoinApi", memberVO); //맵퍼실행문 sqlSession.update 
+														//을 통해 데이터 변경 및 삽입 삭제은 update를 사용 sample.insertMember는
+														//맵퍼 키값입니다 해당하는 sql문 실행 밑 데이터를 가져옵니다
+														//sqlSession.selectList("맵퍼키값",데이터)는 해당하는 
+														//데이터를 가져올떄 사용합니다. 
+			
+			return stat;
+		}
+	
 	//로그인.
 	@Override
 	public Map<String, Object> memberLogin(Map<String, Object> memLogin) {
@@ -79,6 +94,11 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public Map<String, Object> getByteImage(String mem_Id) {
 		return sqlSession.selectOne("member.getByteImage", mem_Id);
+	}
+	@Override
+	public List<Map> searchList(Map<String, Object> searchMap) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("member.searchList", searchMap);
 	}
 	
 	

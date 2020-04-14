@@ -12,12 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import project.sungho.cowork.service.CoworkService;
-import project.sungho.cowork.vo.CoworkVO;
+import project.sungho.comember.service.ComemberService;
+import project.sungho.comember.vo.ComemberVO;
 
 public class Interceptor extends HandlerInterceptorAdapter {
 	@Autowired
-	CoworkService coworkService;
+	ComemberService comemberService;
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
@@ -35,7 +35,7 @@ public class Interceptor extends HandlerInterceptorAdapter {
 		}else if (member != null){
 			System.out.println(uri);
 			
-			List<CoworkVO> list = coworkService.searchList(member);
+			List<Map> list = comemberService.searchList(member);
 			
 			request.setAttribute("coworklist", list);
 
@@ -43,7 +43,7 @@ public class Interceptor extends HandlerInterceptorAdapter {
 		}
 		
 
-		
+//		
 		return true;
 	}
 
