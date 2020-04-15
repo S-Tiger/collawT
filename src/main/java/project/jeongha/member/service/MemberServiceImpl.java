@@ -260,6 +260,12 @@ public class MemberServiceImpl implements MemberService {
 		dao.memberJoinApi(member);
 		return 1;
 	}
+
+	@Override
+	public int memberJoinApiGoogle(Map<String, Object> member) throws Exception {
+		dao.memberJoinApiGoogle(member);
+		return 1;
+	}
 	
 	
 }

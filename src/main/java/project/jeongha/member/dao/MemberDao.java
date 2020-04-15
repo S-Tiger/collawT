@@ -19,4 +19,5 @@ public interface MemberDao {
 	public MemberVO loginC(String mem_id) throws Exception ;
 	public List<Map> searchList(Map<String, Object> searchMap);
 	public int memberJoinApi(Map<String,Object> memberVO);
+	public int memberJoinApiGoogle(Map<String, Object> memberVO);
 }

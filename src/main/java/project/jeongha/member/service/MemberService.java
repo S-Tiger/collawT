@@ -22,4 +22,5 @@ public interface MemberService {
 	public List<Map> searchList(Map<String, Object> memLogin)throws Exception;
 	public int memberJoin(Map<String,Object> member) throws Exception;
 	public int memberJoinApi(Map<String, Object> member) throws Exception;
+	public int memberJoinApiGoogle(Map<String, Object> member) throws Exception;
 }

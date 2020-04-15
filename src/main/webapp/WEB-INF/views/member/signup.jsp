@@ -161,7 +161,19 @@
         <p>- OR -</p>
         <a href="${naverLoginUrl}" class="btn btn-block btn-primary">
           <img width="223" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/>네이버</a>
-        <a href="#" class="btn btn-block btn-danger">
+       <input type="button" id="loginBtn" value="login">
+					<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+					<script>
+						$("#loginBtn")
+								.click(
+										function() {
+											location.href = "https://accounts.google.com/o/oauth2/auth?client_id="
+													+ "332997436138-3g0cj5k952gddaro03grkth547udnh41.apps.googleusercontent.com"
+													+ "&redirect_uri="
+													+ "http://localhost:9092/member/googleLogin"
+													+ "&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email&approval_prompt=force&access_type=offline";
+										});
+					</script>
           <i class="fab fa-google-plus mr-2"></i>
           구글로그인
         </a>

@@ -1,9 +1,18 @@
 package project.jeongha.member.controller;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.net.ssl.HttpsURLConnection;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -25,6 +34,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
+import com.google.gson.Gson;
+
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -33,6 +44,7 @@ import project.jeongha.member.dao.MemberDaoImpl;
 import project.jeongha.member.service.MemberServiceImpl;
 import project.jeongha.member.vo.MemberVO;
 import project.jeongha.member.vo.NaverLoginBO;
+import project.jeongha.member.vo.Token;
 import project.sungho.cowork.service.CoworkService;
 
 @Controller // 컨트롤러 어노테이션 컨트롤 마다 작성해주세요
@@ -67,7 +79,7 @@ public class MemberControllerImpl implements MemberController {
 
 	// 회원가입페이지
 	@Override
-	//@GetMapping("/signup")
+	// @GetMapping("/signup")
 	public String signup() {
 		System.out.println("회원가입페이지");
 		return "/member/signup";
@@ -96,7 +108,8 @@ public class MemberControllerImpl implements MemberController {
 		System.out.println("회원탈퇴 찾기 페이지");
 		return "member/outMember";
 	}
-
+	
+	//마이페이지
 	@Override
 	@GetMapping("/mypage")
 	public String mypage() throws Exception {
@@ -105,19 +118,6 @@ public class MemberControllerImpl implements MemberController {
 		return "/member/mypage";
 	}
 
-	@Override
-	@GetMapping("/login2")
-	public String naverLogin() {
-		System.out.println("네이버 로그인 화면");
-		return "member/login";
-	}
-
-	@Override
-	@GetMapping("/naversuccess")
-	public String logsuccess() {
-		System.out.println("로그인성공");
-		return "member/naversuccess";
-	}
 
 	// @PostMapping("memJoin") //위아래중 편한걸로 사용하세요 URL 대소문자 구분하니 주의해주세요
 	// 회원가입
@@ -140,7 +140,7 @@ public class MemberControllerImpl implements MemberController {
 
 	// naver Login
 	@Override
-	@RequestMapping(value = "/loginPage")//member/loginPage
+	@RequestMapping(value = "/loginPage") // member/loginPage
 	public String naverLogin(Model model, HttpSession session) {
 		/* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
 		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
@@ -156,9 +156,8 @@ public class MemberControllerImpl implements MemberController {
 		return "/member/loginPage";
 	}
 
-	
 	@Override
-	@RequestMapping(value = "/signup")//member/loginPage
+	@RequestMapping(value = "/signup") // member/loginPage
 	public String naverSignup(Model model, HttpSession session) {
 		/* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
 		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
@@ -173,13 +172,12 @@ public class MemberControllerImpl implements MemberController {
 		/* 생성한 인증 URL을 View로 전달 */
 		return "/member/signup";
 	}
-	
-	
+
 	// 네이버 로그인 성공시 callback호출 메소드
 	@Override
-	@RequestMapping(value = "/callback", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/naverCallback", method = { RequestMethod.GET, RequestMethod.POST })
 	public String callback(Model model, String code, String state, HttpSession session)
-			throws IOException, ParseException , Exception{
+			throws IOException, ParseException, Exception {
 		System.out.println("여기는 callback");
 		OAuth2AccessToken oauthToken;
 		oauthToken = naverLoginBO.getAccessToken(session, code, state);
@@ -187,19 +185,11 @@ public class MemberControllerImpl implements MemberController {
 		apiResult = naverLoginBO.getUserProfile(oauthToken); // String형식의 json데이터
 		System.out.println(apiResult);
 		/**
-		 * apiResult json 구조 
-		 {"resultcode":"00","message":"success",
-		 "response":{
-		 "id":"45166773",
-		 "nickname":"Jeongha An",
-		 "profile_image":
-		 "https:\/\/phinf.pstatic.net\/contact\/20190213_294\/15499850679839Oki2_JPEG\/image.jpg",
-		 "age":"30-39",
-		 "gender":"M",
-		 "email":
-		 "asd_7088@naver.com",
-		 "name":"\uc548\uc815\ud558",
-		 "birthday":"03-26"}}
+		 * apiResult json 구조 response: {"resultcode":"00","message":"success", "response":{
+		 * "id":"45166773", "nickname":"Jeongha An", "profile_image":
+		 * "https:\/\/phinf.pstatic.net\/contact\/20190213_294\/15499850679839Oki2_JPEG\/image.jpg",
+		 * "age":"30-39", "gender":"M", "email": "asd_7088@naver.com",
+		 * "name":"\uc548\uc815\ud558", "birthday":"03-26"}}
 		 **/
 		// 2. String형식인 apiResult를 json형태로 바꿈
 		JSONParser parser = new JSONParser();
@@ -210,32 +200,103 @@ public class MemberControllerImpl implements MemberController {
 		JSONObject response_obj = (JSONObject) jsonObj.get("response");
 		// response의 nickname값 파싱
 		String mem_Name = (String) response_obj.get("nickname");
-		String mem_Id =(String) response_obj.get("email"); 
-		String mem_ImgName =(String) response_obj.get("profile_image"); 
+		String mem_Id = (String) response_obj.get("email");
+		String mem_ImgName = (String) response_obj.get("profile_image");
 		System.out.println(mem_Id);
 		// 4.파싱 닉네임 세션으로 저장
-		
+
 		Map<String, Object> member = new HashMap<String, Object>();
 		member.put("mem_Id", mem_Id);
 		member.put("mem_Name", mem_Name);
-		//member.put("mem_ImgName",mem_ImgName);
-		
-		//아이디가 없다면.
+		// member.put("mem_ImgName",mem_ImgName);
+
+		// 아이디가 없다면.
 		System.out.println(member);
 		int result = service.check_id(mem_Id);
-		if(result!=1) {
-		System.out.println("아이디 없음");
+		if (result != 1) {
+			System.out.println("아이디 없음");
 			service.memberJoinApi(member);
 			session.setAttribute("member", member);
 			return "/main/index";
-		}else {
+		} else {
+
+			System.out.println("아이디가 있음");
+			session.setAttribute("member", member);
+			model.addAttribute("result", apiResult);
+
+			return "/main/index";
+		}
+	}
+
+	// 구글 Callback호출 메소드  http://localhost:9092/member/googleLogin  -> google api등록 필요
+	@RequestMapping(value = "/googleLogin", method = { RequestMethod.GET, RequestMethod.POST })
+	public String googleCallback(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+			Model model) throws IOException, Exception {
+		System.out.println("여기는 googleCallback");
+
+		String code = request.getParameter("code");
+		String query = "code=" + code;
+		// 구글 로그인 인증키
+		query += "&client_id=" + "332997436138-3g0cj5k952gddaro03grkth547udnh41.apps.googleusercontent.com";
+		// 구글 로그인 인증키 비밀번호
+		query += "&client_secret=" + "D930_U4ICILL756vxBavV1W8";
+		// 리다렉트 할 주소
+		query += "&redirect_uri=" + "http://localhost:9092/member/googleLogin";
+		query += "&grant_type=authorization_code";
+
+		// 토큰권한 google에 요청
+		String tokenJson = getHttpConnection("https://accounts.google.com/o/oauth2/token", query);
+		System.out.println("google에 요청한 데이터: " + tokenJson.toString());
+		// 토큰 제이슨 형태로 바꾸기
+		Gson gson = new Gson();
+		Token token = gson.fromJson(tokenJson, Token.class);
+
+		String ret = getHttpConnection(
+				"https://www.googleapis.com/oauth2/v1/userinfo?access_token=" + token.getAccess_token());
+		System.out.println("ret: " + ret);
+		/* 구글에서 보내준 개인정보.. 이름없음
+		 * ret: {
+  				"id": "108033630427505881754",
+  				"email": "ajh7893@gmail.com",
+  				"verified_email": true,
+  				"picture": "https://lh3.googleusercontent.com/a-/AOh14Gimu7yC6xpwV-dtxLDrfJeGJwdwUt8EeBIiCDS6P2g"
+		 * */
+		//json -> obj
+		JSONParser parser = new JSONParser();
+		Object obj = parser.parse(ret);
+		JSONObject jsonObj = (JSONObject) obj;
+		System.out.println("obj: "+obj);
 		
-		System.out.println("아이디가 있음");
-		session.setAttribute("member", member);
-		model.addAttribute("result", apiResult);
+		String mem_Id = (String) jsonObj.get("email");
+		String mem_ImgName=(String) jsonObj.get("picture");
+
+		System.out.println("추출된ID: "+mem_Id);
+		System.out.println(mem_ImgName);
+		
+		Map<String, Object> member = new HashMap<String, Object>();
+		member.put("mem_Id", mem_Id);
+		//구글이 이름을 제공하지 않아 아이디로 이름 대체
+		member.put("mem_Name", mem_Id);
+		// member.put("mem_ImgName",mem_ImgName);
+		System.out.println("member: "+member);
+		
+		int result = service.check_id(mem_Id);
+		if (result != 1) {
+			System.out.println("아이디 없음");
+			service.memberJoinApiGoogle(member);
+			session.setAttribute("member", member);
+			return "/main/index";
+		} else {
+
+			System.out.println("아이디가 있음");
+			session.setAttribute("member", member);
+			
+		}
+		
+		
+		
 
 		return "/main/index";
-		}
 	}
 
 	// 로그인 테스트 컨트롤러->회원정보수정
@@ -245,7 +306,7 @@ public class MemberControllerImpl implements MemberController {
 			HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		System.out.println("로그인컨트롤러");
-		
+
 		Map<String, Object> memLogin = new HashMap<String, Object>();
 		memLogin.put("mem_Id", member.getMem_Id());
 		memLogin.put("mem_Pwd", member.getMem_Pwd());
@@ -324,12 +385,13 @@ public class MemberControllerImpl implements MemberController {
 		// TODO Auto-generated method stub
 		service.find_pw(response, memberVO, member);
 	}
-	//로그아웃
+
+	// 로그아웃
 	@RequestMapping(value = "/logout1", method = { RequestMethod.GET, RequestMethod.POST })
-	public String logout(HttpSession session)throws IOException {
-	System.out.println("여기는 logout");
-	session.invalidate();
-	return "redirect:member/index1";
+	public String logout(HttpSession session) throws IOException {
+		System.out.println("여기는 logout");
+		session.invalidate();
+		return "redirect:member/index1";
 	}
 
 	// 회원 탈퇴
@@ -337,7 +399,6 @@ public class MemberControllerImpl implements MemberController {
 	@RequestMapping(value = "delete_Member")
 	public String delete_Member(@ModelAttribute MemberVO memberVO, @RequestParam("pwd") String pwd,
 			HttpServletResponse response, HttpSession session, RedirectAttributes rttr) throws Exception {
-		System.out.println("ccccccccccccccccccccccc");
 		System.out.println("pwd: " + pwd);
 		System.out.println("Id: " + memberVO.getMem_Id());
 		MemberVO member = service.delete_Member(memberVO, pwd, response);
@@ -365,7 +426,7 @@ public class MemberControllerImpl implements MemberController {
 
 			System.out.println("ImgSave Controller: " + member00);
 			dao.saveImage(member00);
-			// 세션 문제 추가...
+			// 세션 문제 추가...변경 후 사진 파일 추가 해서 세션에,,,
 			session.setAttribute("member", member00);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -377,7 +438,6 @@ public class MemberControllerImpl implements MemberController {
 	@RequestMapping(value = "/getByteImage", method = RequestMethod.GET)
 	public ResponseEntity<byte[]> getByteImage(@RequestParam("mem_Id") String mem_Id) {
 		// System.out.println("그림파일 가져오기");
-		// System.out.println("dao.getByteImage: "+dao.getByteImage(mem_Id));
 		Map<String, Object> img = dao.getByteImage(mem_Id);
 		// blob컬럼명 img.get("mem_File")
 		byte[] imageContent = (byte[]) img.get("mem_File");
@@ -387,20 +447,60 @@ public class MemberControllerImpl implements MemberController {
 		return new ResponseEntity<byte[]>(imageContent, headers, HttpStatus.OK);
 	}
 
+	
+	//google OAuth인증함수
 	@Override
-	@RequestMapping(value = "/mypage11")
-	public String resize() {
-		// TODO Auto-generated method stub
-		System.out.println("1234123412341234");
-		return "/member/mypage11";
+	public String getHttpConnection(String uri, String param) throws ServletException, IOException {
+		URL url = new URL(uri);
+		HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
+		conn.setRequestMethod("POST");
+		conn.setDoOutput(true);
+		try (OutputStream stream = conn.getOutputStream()) {
+			try (BufferedWriter wd = new BufferedWriter(new OutputStreamWriter(stream))) {
+				wd.write(param);
+			}
+		}
+		int responseCode = conn.getResponseCode();
+		System.out.println("response code: " + responseCode);
+
+		String line;
+		StringBuffer buffer = new StringBuffer();
+		try (InputStream stream = conn.getInputStream()) {
+			try (BufferedReader rd = new BufferedReader(new InputStreamReader(stream))) {
+				while ((line = rd.readLine()) != null) {
+					buffer.append(line);
+					buffer.append('\r');
+				}
+			}
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		return buffer.toString();
 	}
 
+	
+	//google OAuth인증함수
 	@Override
-	@RequestMapping(value = "/profile")
-	public String profile() {
-		// TODO Auto-generated method stub
-		System.out.println("1234123412341234");
-		return "/member/profile";
+	public String getHttpConnection(String uri) throws ServletException, IOException {
+		URL url = new URL(uri);
+		HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
+		conn.setRequestMethod("GET");
+		int responseCode = conn.getResponseCode();
+		System.out.println("response: " + responseCode);
+
+		String line;
+		StringBuffer buffer = new StringBuffer();
+		try (InputStream stream = conn.getInputStream()) {
+			try (BufferedReader rd = new BufferedReader(new InputStreamReader(stream))) {
+				while ((line = rd.readLine()) != null) {
+					buffer.append(line);
+					buffer.append('\r');
+				}
+			}
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		return buffer.toString();
 	}
 
 }

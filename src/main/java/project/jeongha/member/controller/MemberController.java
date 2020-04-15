@@ -2,6 +2,8 @@ package project.jeongha.member.controller;
 
 import java.io.IOException;
 import java.util.Map;
+
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -33,13 +35,12 @@ public String outMember() ;
 public String delete_Member(MemberVO memberVO,String pw,HttpServletResponse response, HttpSession session, RedirectAttributes rttr)throws Exception;
 public String saveImage(MemberVO memberVO,HttpServletResponse request,HttpServletResponse response, HttpSession session) throws Exception;
 public ResponseEntity<byte[]> getByteImage(String mem_Id) ;
-public String resize();
-public String profile();
 public String naverLogin(Model model, HttpSession session);
 public String naverSignup(Model model, HttpSession session);
 public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session) throws IOException,ParseException,Exception ;
-public String naverLogin();
-public String logsuccess();
 public String logout(HttpSession session)throws IOException ;
-
+public String googleCallback(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+        Model model) throws IOException, Exception;
+public String getHttpConnection(String uri, String param) throws ServletException, IOException;
+public String getHttpConnection(String uri) throws ServletException, IOException;
 }

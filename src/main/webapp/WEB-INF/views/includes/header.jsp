@@ -311,8 +311,8 @@
 				</span>
 				
 					<span class="info" style="width: 170px;">
-						<a href="/member/mypage"  style="padding: 0px; margin-right: 30px;">${member.mem_Name} </a>
-						<a href="/logout"  style="padding: 0px; text-align:right;">로그아웃</a>
+						<a href="/member/mypage"  style="padding: 0px; margin-right: 0px;">${member.mem_Name} </a>
+						<a href="/logout"  style="padding: 0px; text-align:right;"><i class="fas fa-sign-out-alt"></i></a>
 					</span>	
 			</div>
 
