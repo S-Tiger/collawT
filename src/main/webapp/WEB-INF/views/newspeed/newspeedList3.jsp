@@ -57,7 +57,7 @@
 							style="font-family: Recipekorea; max-width: 80%;">
 							새로운 소식</h1>
 					</div>
-					<p class="breadcrumb float-sm-left">ddd</p>
+					<p class="breadcrumb float-sm-left">내용바꿔야함</p>
 				</div>
 			</div>
 		</div>

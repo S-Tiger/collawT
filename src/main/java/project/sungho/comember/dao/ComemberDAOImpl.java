@@ -18,14 +18,23 @@ public class ComemberDAOImpl implements ComemberDAO {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	//회원별 가입한 공간리스트를 불러오기위한 DAO
 	@Override
 	public List<Map> searchList(Map<String, Object> searchMap) throws DataAccessException {
-		// TODO Auto-generated method stub
 		List<Map> list = sqlSession.selectList("comember.searchList", searchMap); 
-		//맵퍼에 cowork.searchList 를 찾아 실행 
 
 		return list;
 	}
+	
+	//공간에 가입한 회원리스트를  불러오기위한 DAO
+	@Override
+	public List<Map> memberList(Map<String, Object> searchMap) throws DataAccessException {
+		List<Map> list = sqlSession.selectList("comember.memberList", searchMap); 
+		
+		return list;
+	}
+	
+	
 
 	@Override
 	public void updateComember(Map<String, Object> dataMap) throws DataAccessException {
@@ -52,6 +61,10 @@ public class ComemberDAOImpl implements ComemberDAO {
 		sqlSession.delete("comember.deleteComemberAll",dataMap);
 		
 	}
+
+
+
+
 	
 	
 }

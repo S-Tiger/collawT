@@ -18,10 +18,17 @@ public class ComemberServiceImpl implements ComemberService{
 	@Autowired
 	ComemberDAO comemberDAO;
 
+	//회원별 가입한 공간리스트를 불러오기위한 서비스
 	@Override
 	public List<Map> searchList(Map<String, Object> searchMap) throws DataAccessException {
-		// TODO Auto-generated method stub
-		List<Map> list =  comemberDAO.searchList(searchMap);  //DAO에 searchList함수 실행
+		List<Map> list =  comemberDAO.searchList(searchMap); 
+		return list;
+	}
+	
+	//공간에 가입한 회원리스트를  불러오기위한 서비스
+	@Override
+	public List<Map> memberList(Map<String, Object> searchMap) throws DataAccessException {
+		List<Map> list =  comemberDAO.memberList(searchMap); 
 		return list;
 	}
 
@@ -43,5 +50,7 @@ public class ComemberServiceImpl implements ComemberService{
 		// TODO Auto-generated method stub
 		
 	}
+
+
 
 }

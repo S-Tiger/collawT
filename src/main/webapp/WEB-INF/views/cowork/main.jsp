@@ -76,12 +76,10 @@
 
 	$('#update-popup').ready(function (){
 				$('#insertsubmit').click(function() {
-					var listnum = $('#applyList').childElementCount;
-					
-					if (listnum == undefined) {
+					var listnum = $('#applyList').children().length;
+					if (listnum == 0) {
 					alert("초대 리스트가 비어있습니다");
 						return false;
-						
 					}
 				})
 		
@@ -104,6 +102,8 @@
 									$('#applyList').append("<span id= 'applyspan'>"+mem_Id+"<a id ='applydelete' href='#'>x</a></span>");
 									$('#applyform').append("<input type='hidden' name='mem_Id' value='"+mem_Id+"'>");
 									$('#mem_Id').val("");
+									
+									
 									
 								} else {
 									$("#id_check").text("잘못된 아이디 입니다 다시 확인해주세요 :p");
@@ -139,15 +139,18 @@
 				name="c_Comment" required>${pjt.c_Comment}</textarea>
 		</p>
 		<p class="login-box-msg" style="padding-bottom: 10px">
-			<label style="font-family: Recipekorea; padding-bottom: 5px;">관리자</label><br> <select name="mem_Id">
-				<option value="${pjt.mem_Id}">${pjt.mem_Id}</option>
-				<option value="학생">학생</option>
-				<option value="회사원">회사원</option>
-				<option value="기타">기타</option>
+			<label style="font-family: Recipekorea; padding-bottom: 5px;">관리자 변경</label><br><select name="mem_Id">
+				<option value="${member.mem_Id}">${member.mem_Name}(${member.mem_Id})</option>
+			<c:forEach var="memberList" items="${memberList}" >	
+				<c:if test="${memberList.mem_Id != pjt.mem_Id}">
+				<option value="${memberList.mem_Id}">${memberList.mem_Name}(${memberList.mem_Id})</option>
+				</c:if>
+				</c:forEach>
 			</select>
 		</p>
 		<p class="login-box-msg" style="padding-bottom: 10px">
 			<label style="font-family: Recipekorea; padding-bottom: 5px;">카테고리</label><br> <select name="c_Category">
+			
 				<option value="${pjt.c_Category}">${pjt.c_Category}</option>
 				<option value="0">협업업무관련</option>
 				<option value="1">개인업무관련</option>
@@ -215,14 +218,17 @@
 				<div class="col-sm-6">
 					<div>
 						<h1 class="m-0 text-dark"
-							style="font-family: Recipekorea; max-width: 80%; float: left;">
+							style="font-family: Recipekorea; max-width: 80%; display: contents;">
 							&nbsp;${pjt.c_Name}</h1>
-						<a style="font-size: 20px;" href="/#"
+							<c:if test="${member.mem_Id == pjt.mem_Id}">
+						<a style="font-size: 20px;  margin: 3px;" href="/#"
 							data-needpopup-show="#update-popup"><i
-							class="nav-icon fas fa-cogs"
-							style="padding-left: 10px; padding-bottom: 20px;"> </i></a>
+							class="nav-icon fas fa-cogs"> </i></a>
+							</c:if>
 					</div>
-					<p class="breadcrumb float-sm-left">&nbsp; ${pjt.c_Comment}</p>
+					<div>
+					<p class="breadcrumb float-sm-left" style="position: absolute; margin-top: 10px">&nbsp; ${pjt.c_Comment}</p>
+					</div>
 				</div>
 				<!-- /.col -->
 				<div class="col-sm-6">
