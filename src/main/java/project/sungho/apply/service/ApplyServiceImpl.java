@@ -51,12 +51,17 @@ public class ApplyServiceImpl implements ApplyService{
 		return applyDAO.memberCheck(mem_Id);
 		 
 	}
-
+	
+	//초대 수락 서비스
 	@Override
 	public int acceptApply(Map<String, Object> dataMap) throws Exception {
-		
 		return applyDAO.acceptApply(dataMap);
-		
+	}
+	
+	//초대 거절 서비스 
+	@Override
+	public int rejectApply(Map<String, Object> dataMap) throws Exception {
+		return applyDAO.rejectApply(dataMap);
 	}
 
 }

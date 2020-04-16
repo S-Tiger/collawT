@@ -23,4 +23,6 @@ public interface ApplyController {
 	
 	public int acceptApply(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
+	public int rejectApply(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
 }

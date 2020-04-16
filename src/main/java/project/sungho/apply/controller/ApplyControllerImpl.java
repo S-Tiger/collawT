@@ -108,6 +108,8 @@ public class ApplyControllerImpl implements ApplyController {
 		return result;
 	}
 
+	
+	//초대 수락을 위한 ajax 컨트롤러
 	@Override
 	@GetMapping("accept")
 	@ResponseBody
@@ -124,5 +126,25 @@ public class ApplyControllerImpl implements ApplyController {
 		comemberService.insertComember(dataMap);
 		return applyService.acceptApply(dataMap);
 	}
+	
+	
+	
+	//초대 거절을 위한 ajax 컨트롤러 
+	@Override
+	@GetMapping("reject")
+	@ResponseBody
+	public int rejectApply(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// TODO Auto-generated method stub
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		
+		Enumeration enu = request.getParameterNames();
+		while (enu.hasMoreElements()) {
+			String name = (String) enu.nextElement();
+			String value = request.getParameter(name);
+			dataMap.put(name, value);
+		}
+		return applyService.rejectApply(dataMap);
+	}
+	
 
 }

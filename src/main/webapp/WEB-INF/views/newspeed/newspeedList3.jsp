@@ -22,24 +22,40 @@
 </style>
 
 <script type="text/javascript">
-
-
 	$(document).ready(function(){
-		$('#acceptsubmit').click(function() {
+		$('#myform').click(function(event) {
+			
+			var button_Id = event.target.getAttribute('id');
 			var mem_Id = $('#mem_Id').val();
 			var c_Id = $('#c_Id').val();
-			console.log(mem_Id +","+ c_Id);
-		$.ajax({
-			url : '${contextPath}/news/accept?mem_Id='+mem_Id+'&c_Id='+c_Id,
-			type : 'get',
-			success : function(data) {
-				if (data == 1) {
+			console.log(button_Id)
+			//초대 수락을 위한 ajax
+			if (button_Id == 'acceptsubmit') {
+				$.ajax({
+				url : '${contextPath}/news/accept?mem_Id='+mem_Id+'&c_Id='+c_Id,
+				type : 'get',
+				success : function(data) {
+					if (data == 1) {
 					alert('수락하셨습니다.');
 					setCookie('apply', 'active', 1)
 					location.reload();
-				}
+							}
+						}
+					})
+			
+			}else if(button_Id == 'rejectsubmit'){//초대 거절을 위한 ajax
+				$.ajax({
+					url : '${contextPath}/news/reject?mem_Id='+mem_Id+'&c_Id='+c_Id,
+					type : 'get',
+					success : function(data) {
+						if (data == 1) {
+						alert('거절하셨습니다.');
+						setCookie('apply', 'active', 1)
+						location.reload();
+							}
+						}
+					}) 
 			}
-		})
 		
 		})
 	});
@@ -54,11 +70,12 @@
 				<div class="col-sm-6">
 					<div>
 						<h1 class="m-0 text-dark"
-							style="font-family: Recipekorea; max-width: 80%;">
-							새로운 소식</h1>
+							style="font-family: Recipekorea; max-width: 80%; display: contents;">새로운 소식</h1>
 					</div>
-					<p class="breadcrumb float-sm-left">내용바꿔야함</p>
-				</div>
+					<div>
+					<p class="breadcrumb float-sm-left" style="position: absolute; margin-top: 10px">새로운 소식을 한번에 관리하세요 :D</p>
+					</div>
+					</div>
 			</div>
 		</div>
 	</div>
@@ -230,7 +247,7 @@
 									</h3>
 									<div class="timeline-body">${applylist.mem_Name}님께서 회원님을  ${applylist.c_Name}에 초대하셨습니다. </div>
 									<div class="timeline-footer" id="timeline-footer">
-									<form action="/news/accept" method="post" style="display: inline;  margin: 5;">
+									<form  id = "myform" action="/news/accept" method="post" style="display: inline;  margin: 5;">
 									<input type="hidden" name="c_Id" id="c_Id" value="${applylist.c_Id}">
 									<input type="hidden" name="mem_Id" id="mem_Id" value="${applylist.mem_Id}">
 										<a id = "acceptsubmit" href="#" class="btn btn-primary btn-sm" style="color: white;">수락</a>

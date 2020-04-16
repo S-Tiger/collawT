@@ -63,4 +63,13 @@ public class ApplyDAOImpl implements ApplyDAO {
 	}
 	
 	
+	@Override
+	public int rejectApply(Map<String, Object> dataMap) throws Exception {
+		// TODO Auto-generated method stub
+		int result;
+		result = sqlSession.update("apply.rejectApply",dataMap);
+		return result;
+	}
+	
+	
 }
