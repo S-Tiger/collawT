@@ -296,7 +296,7 @@
 		<div class="sidebar">
 			<!-- Sidebar user panel (optional) -->
 			<div class="user-panel mt-3 pb-3 mb-3 d-flex" >
-				<span class="image">
+				<span class="image" style="padding-left: .6rem;">
 					<c:if test="${member.mem_File != null }">
 						<div class="profile">
 							<img alt="User Image" style="width:40px; height:40px" class="img-circle elevation-2"
@@ -312,7 +312,7 @@
 				
 					<span class="info" style="width: 170px;">
 						<a href="/member/mypage"  style="padding: 0px; margin-right: 0px;">${member.mem_Name} </a>
-						<a href="/logout"  style="padding: 0px; text-align:right;"><i class="fas fa-sign-out-alt"></i></a>
+						<a href="/logout"  style="padding: 0px; margin-top: 3; float:right;"><i class="fas fa-sign-out-alt"></i></a>
 					</span>	
 			</div>
 
