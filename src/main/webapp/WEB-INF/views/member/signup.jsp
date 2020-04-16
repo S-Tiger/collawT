@@ -103,7 +103,7 @@
 
       <form action="/member/join" method="post" id="joinForm">
         <div class="input-group mb-3">
-          <input type="text" name="mem_Name" class="form-control" placeholder="콜라우티에서 사용할 이름">
+          <input type="text" name="mem_Name" class="form-control" placeholder="콜라우티에서 사용할 이름 또는 닉네임">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -158,15 +158,12 @@
       </form>
 
       <div class="social-auth-links text-center">
-        <p>- OR -</p>
-        <a href="${naverLoginUrl}" class="btn btn-block btn-primary">
-          <img width="223" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/>네이버</a>
-       <input type="button" id="loginBtn" value="login">
+        <a href="${naverLoginUrl}" class="btn btn-block btn-danger" style="background-color:#29c23b" > <i class="fab fa-neos mr-2" ></i>네이버 로그인</a>
+					<button type="button" id="loginBtn" class="btn btn-block btn-danger"><i class="fab fa-google-plus mr-2"></i>구글 로그인</button>
+					<!-- 구글 로그인 -->
 					<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 					<script>
-						$("#loginBtn")
-								.click(
-										function() {
+						$("#loginBtn").click(function(){
 											location.href = "https://accounts.google.com/o/oauth2/auth?client_id="
 													+ "332997436138-3g0cj5k952gddaro03grkth547udnh41.apps.googleusercontent.com"
 													+ "&redirect_uri="
@@ -174,9 +171,6 @@
 													+ "&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email&approval_prompt=force&access_type=offline";
 										});
 					</script>
-          <i class="fab fa-google-plus mr-2"></i>
-          구글로그인
-        </a>
       </div>
 
       <a href="/member/loginPage" class="text-center">이미 회원가입을 하셨나요?</a>

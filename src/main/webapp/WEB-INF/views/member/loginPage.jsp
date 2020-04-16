@@ -87,22 +87,28 @@
 				</form>
 
 				<div class="social-auth-links text-center mb-3">
-					<p>- OR -</p>
-					<a href="${naverLoginUrl}"> <img width="223"
-						src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" /></a>
-					
-					<a href="#" class="btn btn-block btn-danger"> <i
-						class="fab fa-google-plus mr-2"></i>구글 로그인
-					</a>
+					<p>  </p>
+					<a href="${naverLoginUrl}" class="btn btn-block btn-danger" style="background-color:#29c23b" > <i class="fab fa-neos mr-2" ></i>네이버 로그인</a>
+					<button type="button" id="loginBtn" class="btn btn-block btn-danger"><i class="fab fa-google-plus mr-2"></i>구글 로그인</button>
 				</div>
 				<!-- /.social-auth-links -->
-
+				
 				<p class="mb-1">
 					<a href="/member/forgotPwd">비밀번호를 잊어버리셨나요?</a>
 				</p>
 				<p class="mb-0">
 					<a href="/member/signup" class="text-center">회원가입</a>
 				</p>
+				<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+				<script>
+						$("#loginBtn").click(function() {
+									location.href = "https://accounts.google.com/o/oauth2/auth?client_id="
+													+ "332997436138-3g0cj5k952gddaro03grkth547udnh41.apps.googleusercontent.com"
+													+ "&redirect_uri="
+													+ "http://localhost:9092/member/googleLogin"
+													+ "&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email&approval_prompt=force&access_type=offline";
+										});
+					</script>
 			</div>
 			<!-- /.login-card-body -->
 		</div>

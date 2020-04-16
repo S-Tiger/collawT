@@ -22,6 +22,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -60,6 +61,9 @@ public class MemberControllerImpl implements MemberController {
 	@Autowired
 	CoworkService coworkService;
 
+	@Autowired
+	BCryptPasswordEncoder passEncoder;
+	
 	// Naver LoginBO
 	private NaverLoginBO naverLoginBO;
 	private String apiResult = null;
@@ -126,9 +130,13 @@ public class MemberControllerImpl implements MemberController {
 	public String memJoin(@ModelAttribute MemberVO memberVO, HttpServletRequest request, HttpServletResponse response)
 			throws Exception { // 매게변수로 vo가 들어갔을경우 자동으로 변수이름에 맞는걸 set get 해줍니다.
 		request.setCharacterEncoding("utf-8"); // 다른이름으로 지정하고 싶을 경우 ex : @ModelAttribute(변수이름) MeberVo memberVO
+		//복호화
+		String inputPass = memberVO.getMem_Pwd();
+		String mem_Pwd = passEncoder.encode(inputPass);
+		
 		Map<String, Object> joinMem = new HashMap<String, Object>();
 		joinMem.put("mem_Id", memberVO.getMem_Id());
-		joinMem.put("mem_Pwd", memberVO.getMem_Pwd());
+		joinMem.put("mem_Pwd", mem_Pwd);
 		joinMem.put("mem_Name", memberVO.getMem_Name());
 
 		// 으로하시면 변수이름. 으로 접근가능합니다
@@ -292,10 +300,6 @@ public class MemberControllerImpl implements MemberController {
 			session.setAttribute("member", member);
 			
 		}
-		
-		
-		
-
 		return "/main/index";
 	}
 
@@ -305,23 +309,31 @@ public class MemberControllerImpl implements MemberController {
 	public ModelAndView memLogin(MemberVO member, RedirectAttributes rAttr, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		System.out.println("로그인컨트롤러");
 
 		Map<String, Object> memLogin = new HashMap<String, Object>();
 		memLogin.put("mem_Id", member.getMem_Id());
 		memLogin.put("mem_Pwd", member.getMem_Pwd());
 		// 로그인로직
 		Map<String, Object> memberVO = service.login(memLogin);
+		
+		//db에 복호화된 비밀번호를 매치시킴 
+		boolean passMatch =passEncoder.matches(member.getMem_Pwd(), (String) memberVO.get("mem_Pwd"));
+	
 		// 로그인시 세션에.. 로그인성공
-		if (memberVO != null) {
+		if (memberVO != null && passMatch) {
 			System.out.println("로그인 성공(객체): " + memberVO);
 
 			HttpSession session = request.getSession();
 			session.setAttribute("member", memberVO);
 			// jsp페이지에서 ${member.mem_Id}---->이런식으로 접근해야됨
 			mav.setViewName("redirect:/main");
-		} else {// 실패했을경우
+	
+		// 실패했을경우	
+		} else {
+			System.out.println("로그인 실패");
 			rAttr.addAttribute("result", "loginFailed");
+			HttpSession session = request.getSession();
+			session.setAttribute("member",null);
 			mav.setViewName("redirect:/member/loginPage");
 
 		} // end if
