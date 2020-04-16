@@ -2,17 +2,22 @@ package project.euna.issue.controller;
 
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -27,6 +32,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.google.gson.JsonObject;
 
 import project.euna.issue.dao.IssueDAO;
 import project.euna.issue.service.IssueService;
@@ -217,16 +224,13 @@ public class IssueControllerImpl implements IssueController {
 	@GetMapping("/download")
 	public ResponseEntity<byte[]> download(AppendixVO appendixVO, HttpServletResponse response) {
 		String a_Num = appendixVO.getA_Num();
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! : "+a_Num);
 	
 
 		Map<String, Object> map = issueDAO.download(a_Num);
 		String a_RealName = (String) map.get("a_RealName");
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! : "+a_RealName);
 		
 		byte[] file = (byte[]) map.get("a_File");
 		
-		System.out.println("!!!!!!!!!!!!!!!!!!!!a_File: "+map.get("a_File"));
 		
 		final HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
@@ -260,66 +264,59 @@ public class IssueControllerImpl implements IssueController {
 	
 	
 	//ckeditor 이미지 파일 업로드
-//	@GetMapping("/imageUpload")
-//	public void communityImageUpload(HttpServletRequest request, HttpServletResponse response, @RequestParam MultipartFile upload) {
-//		System.out.println("ckeditor image test!!!!!!!!!!!!!!!!!!!!!!!");
-//		
-//		 // 랜덤 문자 생성
-//        UUID uid = UUID.randomUUID();
-//        
-//        OutputStream out = null;
-//        PrintWriter printWriter = null;
-//        
-//        //인코딩
-//        response.setCharacterEncoding("utf-8");
-//        response.setContentType("text/html;charset=utf-8");
-//        
-//        try{
-//            
-//            //파일 이름 가져오기
-//            String fileName = upload.getOriginalFilename();
-//            byte[] bytes = upload.getBytes();
-//            
-//            //이미지 경로 생성
-//            String path = fileDir.getPath() + "ckImage/";// fileDir는 전역 변수라 그냥 이미지 경로 설정해주면 된다.
-//            String ckUploadPath = path + uid + "_" + fileName;
-//            File folder = new File(path);
-//            
-//            //해당 디렉토리 확인
-//            if(!folder.exists()){
-//                try{
-//                    folder.mkdirs(); // 폴더 생성
-//                }catch(Exception e){
-//                    e.getStackTrace();
-//                }
-//            }
-//            
-//            out = new FileOutputStream(new File(ckUploadPath));
-//            out.write(bytes);
-//            out.flush(); // outputStram에 저장된 데이터를 전송하고 초기화
-//            
-//            String callback = request.getParameter("CKEditorFuncNum");
-//            printWriter = response.getWriter();
-//            String fileUrl = "/mine/ckImgSubmit.do?uid=" + uid + "&fileName=" + fileName;  // 작성화면
-//            
-//        // 업로드시 메시지 출력
-//          printWriter.println("{\"filename\" : \""+fileName+"\", \"uploaded\" : 1, \"url\":\""+fileUrl+"\"}");
-//          printWriter.flush();
-//            
-//        }catch(IOException e){
-//            e.printStackTrace();
-//        } finally {
-//          try {
-//           if(out != null) { out.close(); }
-//           if(printWriter != null) { printWriter.close(); }
-//          } catch(IOException e) { e.printStackTrace(); }
-//         }
-//        
-//        return;
-//    }
-//	
-		
-	}
+	@PostMapping("/imageUpload")
+	@ResponseBody
+	public String fileUpload(HttpServletRequest req, HttpServletResponse resp, 
+                 MultipartHttpServletRequest multiFile) throws Exception {
+		JsonObject json = new JsonObject();
+		PrintWriter printWriter = null;
+		OutputStream out = null;
+		MultipartFile file = multiFile.getFile("upload");
+		if(file != null){
+			if(file.getSize() > 0 && StringUtils.isNotBlank(file.getName())){
+				if(file.getContentType().toLowerCase().startsWith("image/")){
+					try{
+						String fileName = file.getName();
+						byte[] bytes = file.getBytes();
+						String uploadPath = req.getServletContext().getRealPath("/img");
+						File uploadFile = new File(uploadPath);
+						if(!uploadFile.exists()){
+							uploadFile.mkdirs();
+						}
+						fileName = UUID.randomUUID().toString();
+						uploadPath = uploadPath + "/" + fileName;
+						out = new FileOutputStream(new File(uploadPath));
+                        out.write(bytes);
+                        
+                        printWriter = resp.getWriter();
+                        resp.setContentType("text/html");
+                        String fileUrl = req.getContextPath() + "/img/" + fileName;
+                        
+                        // json 데이터로 등록
+                        // {"uploaded" : 1, "fileName" : "test.jpg", "url" : "/img/test.jpg"}
+                        // 이런 형태로 리턴이 나가야함.
+                        json.addProperty("uploaded", 1);
+                        json.addProperty("fileName", fileName);
+                        json.addProperty("url", fileUrl);
+                        
+                        printWriter.println(json);
+                    }catch(IOException e){
+                        e.printStackTrace();
+                    }finally{
+                        if(out != null){
+                            out.close();
+                        }
+                        if(printWriter != null){
+                            printWriter.close();
+                        }		
+					}
+				}
+			}
+		}
+		return null;
+	}	
+	
+}
 
 
 

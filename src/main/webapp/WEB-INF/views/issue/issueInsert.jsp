@@ -185,20 +185,24 @@
                 <script>
            
                 //CK에디터 적용
-					 CKEDITOR.replace("i_Content", {
-						filebrowserUploadUrl :"/issue/imageUpload"
-					   	
-					});
+					CKEDITOR.replace( 'i_Content', {
+	allowedContent:true,
+	toolbar :[['NewPage','Preview','Bold','Italic','Underline','Strike','-','Subscript','Superscript','-','-',
+	'JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','Outdent','Indent','HorizontalRule','Link','Unlink','-',
+	'Find','Replace','SelectAll','Image','Youtube','Table','SpecialChar'],
+	'/',['Styles','Format','Font','FontSize','Undo','Redo'],['TextColor','BGColor'],['Cut','Copy','Paste','PasteText'],['Source']],
+	filebrowserImageUploadUrl: '/issue/imageUpload',
+	});
                 
-				        CKEDITOR.on('dialogDefinition', function( ev ){
+ 				        CKEDITOR.on('dialogDefinition', function( ev ){
 				            var dialogName = ev.data.name;
 				            var dialogDefinition = ev.data.definition;
 				         
 				            switch (dialogName) {
 				                case 'image': //Image Properties dialog
 				                    //dialogDefinition.removeContents('info');
-				                    dialogDefinition.removeContents('Link');
-				                    dialogDefinition.removeContents('advanced');
+				                    //dialogDefinition.removeContents('Link'); // 링크탭 제거
+				                    dialogDefinition.removeContents('advanced'); // 자세히탭 제거
 				                    break;
 				            }
 				        });

@@ -78,12 +78,27 @@
                 <textarea id="i_Content" name="i_Content" class="form-control" rows="4">
                 <c:out value="${issueUpdate.i_Content}" /></textarea>
                 <script>
-                CKEDITOR.replace("i_Content");
-                
-					/* CKEDITOR.replace("i_Content", {
-						filebrowserUploadUrl :"/ckeditorimageUpload.do"
-					    filebrowserImageUploadUrl: 'MacaronicsServlet?command=ckeditor_upload'	
-					}); */
+                CKEDITOR.replace( 'i_Content', {
+                	allowedContent:true,
+                	toolbar :[['NewPage','Preview','Bold','Italic','Underline','Strike','-','Subscript','Superscript','-','-',
+                	'JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','Outdent','Indent','HorizontalRule','Link','Unlink','-',
+                	'Find','Replace','SelectAll','Image','Youtube','Table','SpecialChar'],
+                	'/',['Styles','Format','Font','FontSize','Undo','Redo'],['TextColor','BGColor'],['Cut','Copy','Paste','PasteText'],['Source']],
+                	filebrowserImageUploadUrl: '/issue/imageUpload',
+                	});
+                                
+                 				        CKEDITOR.on('dialogDefinition', function( ev ){
+                				            var dialogName = ev.data.name;
+                				            var dialogDefinition = ev.data.definition;
+                				         
+                				            switch (dialogName) {
+                				                case 'image': //Image Properties dialog
+                				                    //dialogDefinition.removeContents('info');
+                				                    //dialogDefinition.removeContents('Link'); // 링크탭 제거
+                				                    dialogDefinition.removeContents('advanced'); // 자세히탭 제거
+                				                    break;
+                				            }
+                				        });
 					</script>
               </div>
               </div>
@@ -113,8 +128,9 @@
               </div>
         <div class="row">
         <div class="col-sm-6">
-          <input type="submit" id="submit" value="수정" class="btn btn-success float-right">
-          <input type="button" id="cancel_btn" value="취소" class="btn btn-success float-right">
+        <input type="button" id="cancel_btn" value="취소" class="btn btn-success float-right" style="margin:3px;">
+          <input type="submit" id="submit" value="수정" class="btn btn-success float-right" style="margin:3px;">
+          
         </div>
         <br><br><br>
       </div>

@@ -4,45 +4,21 @@
  */
 
 CKEDITOR.editorConfig = function( config ) {
-	// Define changes to default configuration here.
-	// For complete reference see:
-	// https://ckeditor.com/docs/ckeditor4/latest/api/CKEDITOR_config.html
-
-	// The toolbar groups arrangement, optimized for two toolbar rows.
-	config.toolbarGroups = [
-		{ name: 'clipboard',   groups: [ 'clipboard', 'undo' ] },
-		{ name: 'editing',     groups: [ 'find', 'selection', 'spellchecker' ] },
-		{ name: 'links' },
-		{ name: 'insert' },
-		{ name: 'forms' },
-		{ name: 'tools' },
-		{ name: 'document',	   groups: [ 'mode', 'document', 'doctools' ] },
-		{ name: 'others' },
-		'/',
-		{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
-		{ name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
-		{ name: 'styles' },
-		{ name: 'colors' },
-		{ name: 'about' }
-	];
-
-	// Remove some buttons provided by the standard plugins, which are
-	// not needed in the Standard(s) toolbar.
-	config.removeButtons = 'Underline,Subscript,Superscript';
-
-	// Set the most common block elements.
-	config.format_tags = 'p;h1;h2;h3;pre';
-
-	// Simplify the dialog windows.
-	config.removeDialogTabs = 'image:advanced;link:advanced';
+	// Define changes to default configuration here. For example:
+	config.language = 'ko';
+	// config.uiColor = '#AADC6E';
 	
-	//이미지 업로드 수정
-	//config.filebrowserUploadUrl = '${path}/
-	//'업로드 된 파일을 처리할 프로그램 경로(ex:/ckeditor/fileUpload.aspx'); 
+	config.toolbarCanCollapse = true;
+	config.enterMode =CKEDITOR.ENTER_BR;
+	config.height = '300px';
+	config.font_names='나눔고딕/나눔고딕, Nanum Gothic, ng, sans-serif;굴림/굴림, Gulim; 돋움/돋움, Dotum; 바탕/바탕, Batang; 궁서/궁서, Gungsuh/Arial/Arial;Tahoma/Tahoma;Verdana/Verdana';
+	config.filebrowserImageUploadUrl = '/include/editor/upload/upload.asp';		//이미지 업로드 경로 (설정하면 업로드 플러그인에 탭이생김)
+	config.extraAllowedContent = 'video[*]{*};source[*]{*}';		//video , embed 등 막힌 태그를 허용하게 하는 설정
+	config.extraPlugins = 'youtube'; //유튜브 플러그인 추가
 	
-	//한글 글꼴 추가
-	//config.font_names = CKEDITOR.config.font_names = '맑은 고딕/Malgun Gothic;굴림/Gulim;돋움/Dotum;바탕/Batang;궁서/Gungsuh;' + CKEDITOR.config.font_names;
-	
-	//엔터키 처리
-	config.enterMode = CKEDITOR.ENTER_BR;
+	//엑셀 내용 그대로 복사해 오기.
+	config.pasteFromWordPromptCleanup = true;
+	config.pasteFromWordRemoveStyles = false;
+	config.pasteFromWordRemoveFontStyles = false;
+	config.allowedContent=true;
 };

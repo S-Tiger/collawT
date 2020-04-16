@@ -271,7 +271,8 @@ $(document).ready(function() {
 <c:if test="${not empty file}">
 					<div class="card card-info">
             <div class="card-header">
-              <h3 class="card-title">Download</h3>
+             <label for="inputName">첨부파일</label>
+              
 
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -280,13 +281,7 @@ $(document).ready(function() {
             </div>
             <div class="card-body p-0">
               <table class="table">
-                <thead>
-                  <tr>
-                    <th>파일명</th>
-                    <th>파일 크기</th>
-                    <th></th>
-                  </tr>
-                </thead>
+
                 <tbody>
 
 				  <c:forEach var="file" items="${file}" >
