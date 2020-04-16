@@ -13,11 +13,12 @@ public interface MemberDao {
 	public int memberUpdate(Map<String, Object> memberVO);
 	public int check_id(String mem_id) throws Exception;
 	public int update_pw(MemberVO memberVO) throws Exception;
-	public int delete_Member(MemberVO memberVO) throws Exception;
+	public int memberDelete(Map<String, Object> memberVO) throws Exception;
 	public void saveImage(Map<String, Object> hmap) throws Exception;
 	public Map<String, Object> getByteImage(String mem_Id) ;
 	public MemberVO loginC(String mem_id) throws Exception ;
 	public List<Map> searchList(Map<String, Object> searchMap);
 	public int memberJoinApi(Map<String,Object> memberVO);
 	public int memberJoinApiGoogle(Map<String, Object> memberVO);
+	public int check_idMap(Map<String, Object> mem_id) throws Exception;
 }

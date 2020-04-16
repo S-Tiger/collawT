@@ -67,10 +67,19 @@ public class MemberServiceImpl implements MemberService {
 
 	// 로그인
 	@Override
-	public Map<String, Object> login(Map<String, Object> memLogin) throws Exception {
-		// TODO Auto-generated method stub
-
-		return dao.memberLogin(memLogin);
+	public Map<String, Object> login(Map<String, Object> memLogin, HttpServletResponse response) throws Exception {
+		if(dao.check_idMap(memLogin)==0) {
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('등록된 아이디가 없습니다. 회원가입을 해주세요.');");
+			out.println("history.go(-1);");
+			out.println("</script>");
+			out.close();
+			return null;
+		}else {
+			return dao.memberLogin(memLogin);
+		}
 	}
 
 	// 개인정보변경(이름만)
@@ -222,23 +231,23 @@ public class MemberServiceImpl implements MemberService {
 	}
 	//회원탈퇴
 	@Override
-	public MemberVO delete_Member(MemberVO memberVO, String pwd, HttpServletResponse response) throws Exception {
+	public Map<String, Object> memberDelete(Map<String, Object> memberVO, HttpServletResponse response) throws Exception {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
-		System.out.println("service password: " + dao.loginC(memberVO.getMem_Id()).getMem_Pwd());
+		System.out.println("service password: " + dao.memberLogin(memberVO));
 		//디비 비밀번호와 입력한 비밀번호가 같다면
-		if (!pwd.equals(dao.loginC(memberVO.getMem_Id()).getMem_Pwd())) {
-			out.println("<script>");
-			out.println("alert('기존 비밀번호가 다릅니다.');");
-			out.println("history.go(-1);");
-			out.println("</script>");
-			out.close();
-			return null;
-		//비밀번호가 맞다면.
-		}else {
-			dao.delete_Member(memberVO);
-			return dao.loginC(memberVO.getMem_Id());
-		}
+//		if (!pwd.equals(dao.loginC(memberVO.getMem_Id()).getMem_Pwd())) {
+//			out.println("<script>");
+//			out.println("alert('기존 비밀번호가 다릅니다.');");
+//			out.println("history.go(-1);");
+//			out.println("</script>");
+//			out.close();
+//			return null;
+//		//비밀번호가 맞다면.
+//		}else {
+			dao.memberDelete(memberVO);
+			return dao.memberLogin(memberVO);
+		//}
 	
 	}
 

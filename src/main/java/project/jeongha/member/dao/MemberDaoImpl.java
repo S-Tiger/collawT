@@ -68,6 +68,11 @@ public class MemberDaoImpl implements MemberDao {
 		int result = sqlSession.selectOne("member.check_id", mem_id);
 		return result;
 	}
+	//
+	public int check_idMap(Map<String, Object> mem_id) throws Exception {
+		int result = sqlSession.selectOne("member.check_idMap", mem_id);
+		return result;
+	}
 
 	// 비밀번호변경
 	@Override
@@ -77,7 +82,7 @@ public class MemberDaoImpl implements MemberDao {
 
 	// 회원탈퇴
 	@Override
-	public int delete_Member(MemberVO memberVO) throws Exception {
+	public int memberDelete(Map<String, Object> memberVO) throws Exception {
 		return sqlSession.delete("member.delete_member", memberVO);
 	}
 

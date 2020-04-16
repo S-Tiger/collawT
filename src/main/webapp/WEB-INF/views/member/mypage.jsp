@@ -290,8 +290,8 @@ $(function(){
 						method="post">
 						<input type="hidden" name="mem_Id" value="${member.mem_Id}" />
 						<p class="login-box-msg">이용해주셔서 감사합니다.</p>
-						<label for="inputEstimatedBudget">현재 비밀번호</label> <input
-							class="form-control" id="pwd" name="pwd" type="password" required>
+						<label for="inputEstimatedBudget">현재 비밀번호</label> 
+						<input class="form-control" id="pwd" name="mem_Pwd" type="password" required>
 				</div>
 				<div class="row">
 					<div class="col-12">

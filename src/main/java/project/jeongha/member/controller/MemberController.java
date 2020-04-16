@@ -32,7 +32,7 @@ public int check_id(@RequestParam("mem_Id") String mem_Id) throws Exception;
 public String findPw() ;
 public void find_pw(Map<String,Object> member,MemberVO memberVO, HttpServletResponse response) throws Exception;
 public String outMember() ;
-public String delete_Member(MemberVO memberVO,String pw,HttpServletResponse response, HttpSession session, RedirectAttributes rttr)throws Exception;
+public String memberDelete(MemberVO memberVO, HttpServletResponse response, HttpSession session, RedirectAttributes rttr)throws Exception;
 public String saveImage(MemberVO memberVO,HttpServletResponse request,HttpServletResponse response, HttpSession session) throws Exception;
 public ResponseEntity<byte[]> getByteImage(String mem_Id) ;
 public String naverLogin(Model model, HttpSession session);

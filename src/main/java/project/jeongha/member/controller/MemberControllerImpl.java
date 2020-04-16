@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -314,7 +315,7 @@ public class MemberControllerImpl implements MemberController {
 		memLogin.put("mem_Id", member.getMem_Id());
 		memLogin.put("mem_Pwd", member.getMem_Pwd());
 		// 로그인로직
-		Map<String, Object> memberVO = service.login(memLogin);
+		Map<String, Object> memberVO = service.login(memLogin,response);
 		
 		//db에 복호화된 비밀번호를 매치시킴 
 		boolean passMatch =passEncoder.matches(member.getMem_Pwd(), (String) memberVO.get("mem_Pwd"));
@@ -329,11 +330,17 @@ public class MemberControllerImpl implements MemberController {
 			mav.setViewName("redirect:/main");
 	
 		// 실패했을경우	
-		} else {
+		}else {
+			
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('등록 되지 않은 아이디 또는 비밀번호가 틀렸습니다.');");
+			out.println("history.go(-1);");
+			out.println("</script>");
+			out.close();
 			System.out.println("로그인 실패");
 			rAttr.addAttribute("result", "loginFailed");
-			HttpSession session = request.getSession();
-			session.setAttribute("member",null);
 			mav.setViewName("redirect:/member/loginPage");
 
 		} // end if
@@ -409,14 +416,33 @@ public class MemberControllerImpl implements MemberController {
 	// 회원 탈퇴
 	@Override
 	@RequestMapping(value = "delete_Member")
-	public String delete_Member(@ModelAttribute MemberVO memberVO, @RequestParam("pwd") String pwd,
+	public String memberDelete(@ModelAttribute MemberVO memberVO,
 			HttpServletResponse response, HttpSession session, RedirectAttributes rttr) throws Exception {
-		System.out.println("pwd: " + pwd);
+		response.setContentType("text/html;charset=utf-8");
+		Map<String, Object> memLogin = new HashMap<String, Object>();
+		memLogin.put("mem_Id", memberVO.getMem_Id());
+		memLogin.put("mem_Pwd", memberVO.getMem_Pwd());
+		// 로그인로직
+		Map<String, Object> member = service.login(memLogin,response);
+		
+		//db에 복호화된 비밀번호를 매치시킴 
+		boolean passMatch =passEncoder.matches(memberVO.getMem_Pwd(), (String) member.get("mem_Pwd"));
+		if (member != null && passMatch) {
 		System.out.println("Id: " + memberVO.getMem_Id());
-		MemberVO member = service.delete_Member(memberVO, pwd, response);
+		service.memberDelete(member, response);
 		// 세션초기화
 		session.invalidate();
-
+		}else {
+			PrintWriter out = response.getWriter();
+				out.println("<script>");
+				out.println("alert('기존 비밀번호가 다릅니다.');");
+				out.println("history.go(-1);");
+				out.println("</script>");
+				out.close();
+				return null;
+		}
+		
+		
 		return "redirect:/";
 	}
 
