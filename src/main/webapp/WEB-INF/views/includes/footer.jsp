@@ -1,5 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-
 <footer class="main-footer">
     <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
     All rights reserved.
@@ -19,8 +17,7 @@
 </div>
 <!-- ./wrapper -->
 
-</body>
-</html>
+
 <!-- jQuery -->
 <script src="../resources/plugins/jquery/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
@@ -55,3 +52,5 @@
 <script src="../resources/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../resources/dist/js/demo.js"></script>
+</body>
+</html>

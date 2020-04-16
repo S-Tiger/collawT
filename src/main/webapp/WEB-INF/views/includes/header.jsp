@@ -354,7 +354,7 @@
 								<!--  <span class="right badge badge-danger">New</span>-->
 							</p>
 					</a></li>
-					<li class="nav-item"><a href="/apply/list"
+					<li class="nav-item"><a href="/news/list"
 						class="nav-link"> <i class="nav-icon fas fa-bookmark"></i>
 							<p>
 								북마크 <span class="badge badge-info right"></span>
@@ -362,7 +362,7 @@
 							</p>
 					</a></li>
 					
-					<li class="nav-item"><a href="/apply/list"
+					<li class="nav-item"><a href="/calendar/list"
 						class="nav-link"> <i class="nav-icon fas fa-calendar-check"></i>
 							<p>
 								전체 캘린더 <span class="badge badge-info right"></span>

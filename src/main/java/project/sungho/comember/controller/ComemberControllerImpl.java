@@ -23,6 +23,8 @@ public class ComemberControllerImpl implements ComemberController {
 	@Autowired
 	ComemberService comemberService;
 
+	
+	//회원별 가입한 공간리스트를 불러오기위한 컨트롤러
 	@Override
 	public String searchList(Model model ,HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
@@ -34,12 +36,11 @@ public class ComemberControllerImpl implements ComemberController {
 				
 		searchMap.put("mem_Id", mem_Id);	
 		
-		
-		List<Map> list = comemberService.searchList(searchMap); //vo타입에 list를 생성하고 서비스에서 가져온 데이터를 list에 넣습니다
+		List<Map> list = comemberService.searchList(searchMap); 
 		
 		model.addAttribute("coworklist", list); 
 		
-		return "cowork/list"; //뷰url지정해주세요
+		return "cowork/list"; 
 		
 	}
 
