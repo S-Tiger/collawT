@@ -10,7 +10,6 @@
   <title>Collaw T 회원가입</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../resources/plugins/fontawesome-free/css/all.min.css">
   <!-- Ionicons -->
@@ -24,23 +23,25 @@
   <script src="http://code.jquery.com/jquery-latest.js"></script>
   <script type="text/javascript">
   $(function(){
-	  
  		$("#joinForm").submit(function(){
+ 			var mem_Id = $('#mem_Id').val();
 			if($("#pw").val() !== $("#pw2").val()){
 				alert("비밀번호가 다릅니다.");
 				$("#pw").val("").focus();
 				$("#pw2").val("");
 				return false;
-			}else if ($("#pw").val().length < 8) {
+			}else if (mem_Id == ""){
+				alert("아이디를 입력해주세요.");
+				return false;
+			}else if ($("#pw").val().length < 4) {
 				alert("비밀번호는 8자 이상으로 설정해야 합니다.");
 				$("#pw").val("").focus();
-				return false;
-			}else if ($("#mem_Id").val()==""){
-				alert("아이디를 입력해주세요.");
 				return false;
 			}else if ($("#mem_Name".val()=="")){
 				alert("이름을 입력해주세요.")
 				return false;
+			}else if ($("#mem_Name".val() != "" && $("#mem_Id").val() != "" && $("#pw").val() != "" && $("#pw2").val() != "" )){
+				alert("콜라우티 회원이 되신걸 환영합니다.");
 			}
 		}); 
  	// 아이디 유효성 검사(1 = 중복 / 0 != 중복)

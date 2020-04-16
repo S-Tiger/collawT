@@ -64,7 +64,7 @@ public class MemberControllerImpl implements MemberController {
 
 	@Autowired
 	BCryptPasswordEncoder passEncoder;
-	
+
 	// Naver LoginBO
 	private NaverLoginBO naverLoginBO;
 	private String apiResult = null;
@@ -113,8 +113,8 @@ public class MemberControllerImpl implements MemberController {
 		System.out.println("회원탈퇴 찾기 페이지");
 		return "member/outMember";
 	}
-	
-	//마이페이지
+
+	// 마이페이지
 	@Override
 	@GetMapping("/mypage")
 	public String mypage() throws Exception {
@@ -123,7 +123,6 @@ public class MemberControllerImpl implements MemberController {
 		return "/member/mypage";
 	}
 
-
 	// @PostMapping("memJoin") //위아래중 편한걸로 사용하세요 URL 대소문자 구분하니 주의해주세요
 	// 회원가입
 	@Override
@@ -131,19 +130,15 @@ public class MemberControllerImpl implements MemberController {
 	public String memJoin(@ModelAttribute MemberVO memberVO, HttpServletRequest request, HttpServletResponse response)
 			throws Exception { // 매게변수로 vo가 들어갔을경우 자동으로 변수이름에 맞는걸 set get 해줍니다.
 		request.setCharacterEncoding("utf-8"); // 다른이름으로 지정하고 싶을 경우 ex : @ModelAttribute(변수이름) MeberVo memberVO
-		//복호화
+		// 복호화
 		String inputPass = memberVO.getMem_Pwd();
 		String mem_Pwd = passEncoder.encode(inputPass);
-		
+
 		Map<String, Object> joinMem = new HashMap<String, Object>();
 		joinMem.put("mem_Id", memberVO.getMem_Id());
 		joinMem.put("mem_Pwd", mem_Pwd);
 		joinMem.put("mem_Name", memberVO.getMem_Name());
-
-		// 으로하시면 변수이름. 으로 접근가능합니다
 		service.memberJoin(joinMem, memberVO, response); // service에 memberRegister를 실행하는 부분
-		// 중복된 아이디를 가입했을때 오류가난다.
-		// 조건을 주자
 		return "/member/loginPage"; // 리턴타입엔 패키지명/jsp파일 로 작성하여주세요 view에서도 패키지/jsp로 관리해주세요
 	}
 
@@ -194,8 +189,8 @@ public class MemberControllerImpl implements MemberController {
 		apiResult = naverLoginBO.getUserProfile(oauthToken); // String형식의 json데이터
 		System.out.println(apiResult);
 		/**
-		 * apiResult json 구조 response: {"resultcode":"00","message":"success", "response":{
-		 * "id":"45166773", "nickname":"Jeongha An", "profile_image":
+		 * apiResult json 구조 response: {"resultcode":"00","message":"success",
+		 * "response":{ "id":"45166773", "nickname":"Jeongha An", "profile_image":
 		 * "https:\/\/phinf.pstatic.net\/contact\/20190213_294\/15499850679839Oki2_JPEG\/image.jpg",
 		 * "age":"30-39", "gender":"M", "email": "asd_7088@naver.com",
 		 * "name":"\uc548\uc815\ud558", "birthday":"03-26"}}
@@ -237,7 +232,7 @@ public class MemberControllerImpl implements MemberController {
 		}
 	}
 
-	// 구글 Callback호출 메소드  http://localhost:9092/member/googleLogin  -> google api등록 필요
+	// 구글 Callback호출 메소드 http://localhost:9092/member/googleLogin -> google api등록 필요
 	@RequestMapping(value = "/googleLogin", method = { RequestMethod.GET, RequestMethod.POST })
 	public String googleCallback(HttpServletRequest request, HttpServletResponse response, HttpSession session,
 			Model model) throws IOException, Exception {
@@ -263,32 +258,30 @@ public class MemberControllerImpl implements MemberController {
 		String ret = getHttpConnection(
 				"https://www.googleapis.com/oauth2/v1/userinfo?access_token=" + token.getAccess_token());
 		System.out.println("ret: " + ret);
-		/* 구글에서 보내준 개인정보.. 이름없음
-		 * ret: {
-  				"id": "108033630427505881754",
-  				"email": "ajh7893@gmail.com",
-  				"verified_email": true,
-  				"picture": "https://lh3.googleusercontent.com/a-/AOh14Gimu7yC6xpwV-dtxLDrfJeGJwdwUt8EeBIiCDS6P2g"
-		 * */
-		//json -> obj
+		/*
+		 * 구글에서 보내준 개인정보.. 이름없음 ret: { "id": "108033630427505881754", "email":
+		 * "ajh7893@gmail.com", "verified_email": true, "picture":
+		 * "https://lh3.googleusercontent.com/a-/AOh14Gimu7yC6xpwV-dtxLDrfJeGJwdwUt8EeBIiCDS6P2g"
+		 */
+		// json -> obj
 		JSONParser parser = new JSONParser();
 		Object obj = parser.parse(ret);
 		JSONObject jsonObj = (JSONObject) obj;
-		System.out.println("obj: "+obj);
-		
-		String mem_Id = (String) jsonObj.get("email");
-		String mem_ImgName=(String) jsonObj.get("picture");
+		System.out.println("obj: " + obj);
 
-		System.out.println("추출된ID: "+mem_Id);
+		String mem_Id = (String) jsonObj.get("email");
+		String mem_ImgName = (String) jsonObj.get("picture");
+
+		System.out.println("추출된ID: " + mem_Id);
 		System.out.println(mem_ImgName);
-		
+
 		Map<String, Object> member = new HashMap<String, Object>();
 		member.put("mem_Id", mem_Id);
-		//구글이 이름을 제공하지 않아 아이디로 이름 대체
+		// 구글이 이름을 제공하지 않아 아이디로 이름 대체
 		member.put("mem_Name", mem_Id);
 		// member.put("mem_ImgName",mem_ImgName);
-		System.out.println("member: "+member);
-		
+		System.out.println("member: " + member);
+
 		int result = service.check_id(mem_Id);
 		if (result != 1) {
 			System.out.println("아이디 없음");
@@ -299,7 +292,7 @@ public class MemberControllerImpl implements MemberController {
 
 			System.out.println("아이디가 있음");
 			session.setAttribute("member", member);
-			
+
 		}
 		return "/main/index";
 	}
@@ -315,11 +308,11 @@ public class MemberControllerImpl implements MemberController {
 		memLogin.put("mem_Id", member.getMem_Id());
 		memLogin.put("mem_Pwd", member.getMem_Pwd());
 		// 로그인로직
-		Map<String, Object> memberVO = service.login(memLogin,response);
-		
-		//db에 복호화된 비밀번호를 매치시킴 
-		boolean passMatch =passEncoder.matches(member.getMem_Pwd(), (String) memberVO.get("mem_Pwd"));
-	
+		Map<String, Object> memberVO = service.login(memLogin, response);
+
+		// db에 복호화된 비밀번호를 매치시킴
+		boolean passMatch = passEncoder.matches(member.getMem_Pwd(), (String) memberVO.get("mem_Pwd"));
+
 		// 로그인시 세션에.. 로그인성공
 		if (memberVO != null && passMatch) {
 			System.out.println("로그인 성공(객체): " + memberVO);
@@ -328,14 +321,14 @@ public class MemberControllerImpl implements MemberController {
 			session.setAttribute("member", memberVO);
 			// jsp페이지에서 ${member.mem_Id}---->이런식으로 접근해야됨
 			mav.setViewName("redirect:/main");
-	
-		// 실패했을경우	
-		}else {
-			
+
+			// 실패했을경우
+		} else {
+
 			response.setContentType("text/html;charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.println("alert('등록 되지 않은 아이디 또는 비밀번호가 틀렸습니다.');");
+			out.println("alert('비밀번호가 틀렸습니다. 다시 입력해 주세요');");
 			out.println("history.go(-1);");
 			out.println("</script>");
 			out.close();
@@ -361,9 +354,10 @@ public class MemberControllerImpl implements MemberController {
 		member00.put("mem_Id", memberVO.getMem_Id());
 		member00.put("mem_Name", memberVO.getMem_Name());
 		service.updateMypage(member00);
+		//일회성이라 리프레시할 경우 데이터가 소멸한다.
 		rttr.addFlashAttribute("msg", "회원정보 수정 완료");
 		session.setAttribute("member", member00);
-		return "/main/index";
+		return "redirect:/member/mypage";
 	}
 
 	// 비밀번호 변경
@@ -416,33 +410,38 @@ public class MemberControllerImpl implements MemberController {
 	// 회원 탈퇴
 	@Override
 	@RequestMapping(value = "delete_Member")
-	public String memberDelete(@ModelAttribute MemberVO memberVO,
-			HttpServletResponse response, HttpSession session, RedirectAttributes rttr) throws Exception {
+	public String memberDelete(@ModelAttribute MemberVO memberVO, HttpServletResponse response, HttpSession session,
+			RedirectAttributes rttr) throws Exception {
 		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
 		Map<String, Object> memLogin = new HashMap<String, Object>();
 		memLogin.put("mem_Id", memberVO.getMem_Id());
 		memLogin.put("mem_Pwd", memberVO.getMem_Pwd());
 		// 로그인로직
-		Map<String, Object> member = service.login(memLogin,response);
-		
-		//db에 복호화된 비밀번호를 매치시킴 
-		boolean passMatch =passEncoder.matches(memberVO.getMem_Pwd(), (String) member.get("mem_Pwd"));
+		Map<String, Object> member = service.login(memLogin, response);
+
+		// db에 복호화된 비밀번호를 매치시킴
+		boolean passMatch = passEncoder.matches(memberVO.getMem_Pwd(), (String) member.get("mem_Pwd"));
 		if (member != null && passMatch) {
-		System.out.println("Id: " + memberVO.getMem_Id());
-		service.memberDelete(member, response);
-		// 세션초기화
-		session.invalidate();
-		}else {
-			PrintWriter out = response.getWriter();
-				out.println("<script>");
-				out.println("alert('기존 비밀번호가 다릅니다.');");
-				out.println("history.go(-1);");
-				out.println("</script>");
-				out.close();
-				return null;
+			System.out.println("Id: " + memberVO.getMem_Id());
+			service.memberDelete(member, response);
+
+			// 세션초기화
+			session.invalidate();
+			out.println("<script>");
+			out.println("alert('회원탈퇴 되었습니다. 이용해 주셔서 감사합니다.');");
+			out.println("history.go(-1);");
+			out.println("</script>");
+			out.close();
+		} else {
+			out.println("<script>");
+			out.println("alert('기존 비밀번호가 다릅니다. 다시입력해 주세요');");
+			out.println("history.go(-1);");
+			out.println("</script>");
+			out.close();
+			return null;
 		}
-		
-		
+
 		return "redirect:/";
 	}
 
@@ -485,8 +484,7 @@ public class MemberControllerImpl implements MemberController {
 		return new ResponseEntity<byte[]>(imageContent, headers, HttpStatus.OK);
 	}
 
-	
-	//google OAuth인증함수
+	// google OAuth인증함수
 	@Override
 	public String getHttpConnection(String uri, String param) throws ServletException, IOException {
 		URL url = new URL(uri);
@@ -516,8 +514,7 @@ public class MemberControllerImpl implements MemberController {
 		return buffer.toString();
 	}
 
-	
-	//google OAuth인증함수
+	// google OAuth인증함수
 	@Override
 	public String getHttpConnection(String uri) throws ServletException, IOException {
 		URL url = new URL(uri);
