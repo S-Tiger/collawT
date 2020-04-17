@@ -56,10 +56,10 @@
 
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="../resources/modal/dist/needpopup.min.css">
+<link rel="stylesheet" href="${contextPath}/resources/modal/dist/needpopup.min.css">
 
 <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
-<script src="../resources/modal/dist/needpopup.min.js"></script>
+<script src="${contextPath}/resources/modal/dist/needpopup.min.js"></script>
 <script>
 
 	needPopup.config.custom = {
@@ -248,11 +248,9 @@
 			<div class="card-header p-2">
 				<ul class="nav nav-pills">
 					<li class="nav-item" ><a class="nav-link active"
-						href="#activity" data-toggle="tab" id="activityMenu">홈</a></li>
+						href="/project/main?c_Id=${pjt.c_Id}"  id="activityMenu">홈</a></li>
 					<li class="nav-item" id = "applymenu"><a class="nav-link" href="/project/issue/list?c_Id=${pjt.c_Id}"
 						 id= "issueMenu">이슈</a></li>
-					<li class="nav-item"><a class="nav-link" href="#settings"
-						data-toggle="tab">Settings</a></li>
 				</ul>
 			</div>
 			
