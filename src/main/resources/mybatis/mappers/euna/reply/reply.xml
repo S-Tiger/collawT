@@ -61,7 +61,7 @@
 	<!-- 댓글 수정-->
 	<update id="replyUpdate" parameterType="project.euna.reply.vo.ReplyVO">
 		UPDATE reply
-		SET r_Content = #{r_Content}
+		SET r_Content = #{r_Content}, r_Date=(select to_char(sysdate, 'YYYY/MM/DD/ HH24:MI:SS') from dual)
 		WHERE r_Num=#{r_Num}
 	</update>
 

@@ -289,7 +289,7 @@ $(document).ready(function() {
                     <td><span id="a_RealName" name="a_RealName">${file.a_RealName}</span></td>
                     <td><span id="a_Size" name="a_Size">${file.a_Size/1000}kb</span></td>
                     <td class="text-right py-0 align-middle">
-                      <a href="/issue/download?a_Num=${file.a_Num}"><ion-icon name="arrow-down-circle-outline"  style="font-size:24"></ion-icon></a>
+                      <a href="/appendix/download?a_Num=${file.a_Num}"><ion-icon name="arrow-down-circle-outline"  style="font-size:24"></ion-icon></a>
                     </td>
                  </tr>
                  </c:forEach>
@@ -304,11 +304,11 @@ $(document).ready(function() {
           
           <!-- 이거 나중에 기능 넣기 -->
 							<button type="button" class="btn btn-default btn-sm">
-								<i class="fas fa-share"></i> Share
+								<i class="fas fa-share"></i> 공유
 							</button>
 							<!-- 숫자 카운트 넣기 -->
 							<button type="button" class="btn btn-default btn-sm">
-								<i class="far fa-thumbs-up"></i> Like 1111
+								<i class="fas fa-bookmark"></i> 북마크
 							</button>
 							
 <!-- 본인만 글 수정, 삭제 가능-->

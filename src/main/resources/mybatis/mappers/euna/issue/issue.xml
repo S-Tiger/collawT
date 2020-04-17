@@ -109,44 +109,14 @@
 		parameterType="project.euna.issue.vo.IssueVO">
 		UPDATE issue
 		SET i_Name = #{i_Name},
-		i_Content = #{i_Content}
+		i_Content = #{i_Content},
+		i_Date = (select to_char(sysdate, 'YYYY/MM/DD/ HH24:MI:SS') from dual),
+		i_Start = #{i_Start},
+		i_End = #{i_End}
 		WHERE i_Num=#{i_Num}
 	</update>
 	
-	<!-- 파일 업로드 -->
 
- 	<insert id="saveFile" parameterType="java.util.HashMap">
-		insert into appendix(a_Num, a_RealName, a_File, a_NameEx, i_Num, a_Size)
-		values(appendix_seq.nextval, #{a_RealName}, #{a_File}, #{a_NameEx}, #{i_Num}, #{a_Size})
-	</insert>
-	
-	
-	<!-- 파일 목록 -->
- 	<select id="fileList" resultMap="fileResult01" parameterType="String"> 
-      <![CDATA[
-		select *
-		from appendix
-		where i_Num=#{i_Num}
-		order by to_number(a_Num) desc
-      ]]>
-
-	</select>
-
-	
-	<!-- 파일 다운로드 -->
-	<select id="download" resultMap="fileResult01">
-		SELECT *
-		FROM appendix
-		where a_Num=#{a_Num}
-	</select>
-	
-	
-	<!-- 파일 삭제 -->
-	<delete id="fileDelete" parameterType="AppendixVO">
-		DELETE
-		FROM appendix
-		WHERE a_Num=#{a_Num}
-	</delete>
  
 
 </mapper>

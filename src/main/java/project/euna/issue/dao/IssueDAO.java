@@ -6,7 +6,6 @@ import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
-import project.euna.issue.vo.AppendixVO;
 import project.euna.issue.vo.Criteria;
 import project.euna.issue.vo.IssueVO;
 
@@ -18,9 +17,6 @@ public interface IssueDAO {
 	public void issueDelete(String i_Num) throws Exception;
 	public void issueUpdate(IssueVO issueVO) throws Exception;
 	public int listCount() throws Exception;
-	public void saveFile(Map<String, Object> hmap) throws Exception;
-	public List<Map> fileList(String i_Num) throws DataAccessException;
-	public Map<String, Object> download(String a_Num);
 	public Map<String, Object> get_i_Num();
-	public void fileDelete(AppendixVO appendixVO) throws Exception;
+
 }

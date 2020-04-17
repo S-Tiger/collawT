@@ -17,6 +17,8 @@
 			var i_Name = $("#i_Name").val();
 			var c_Id = $("#c_Id").val();
 			var i_Groupnum = $("#i_Groupnum").val();
+			
+		//캘린더 시작일/마감일 구하기
 			var i_Start = $("#i_Period").val().substring(0,10);
 			var i_End= $("#i_Period").val().substring(13,23);
 			
@@ -70,7 +72,7 @@
 			console.log(formData);
 			
 			$.ajax({
-				url:'/issue/fileUpload',
+				url:'/appendix/fileUpload',
 				processData:false,
 				contentType:false,
 				data:formData,
@@ -89,7 +91,7 @@
 		 function getFileList(){
 			$.ajax({
 				type:"get",
-				url : "${path}/issue/fileread?i_Num=${i_Num.NEXTVAL}",
+				url : "${path}/appendix/fileread?i_Num=${i_Num.NEXTVAL}",
 						
 				success:function(result){
 					var str="";
@@ -121,11 +123,11 @@
 			
 		}
 	
-	//댓글 삭제
+	//첨부파일 삭제
   	function fileDelete(a_Num){
 	
 			$.ajax({
-				url : "/issue/filedelete",
+				url : "/appendix/filedelete",
 				data : {"a_Num" : a_Num},
 				type : 'post',
 				success:function(){
@@ -139,6 +141,8 @@
 			
 	}
 	
+  	
+
 
 	
 </script>
@@ -186,28 +190,34 @@
            
                 //CK에디터 적용
 					CKEDITOR.replace( 'i_Content', {
-	allowedContent:true,
-	toolbar :[['NewPage','Preview','Bold','Italic','Underline','Strike','-','Subscript','Superscript','-','-',
-	'JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','Outdent','Indent','HorizontalRule','Link','Unlink','-',
-	'Find','Replace','SelectAll','Image','Youtube','Table','SpecialChar'],
-	'/',['Styles','Format','Font','FontSize','Undo','Redo'],['TextColor','BGColor'],['Cut','Copy','Paste','PasteText'],['Source']],
-	filebrowserImageUploadUrl: '/issue/imageUpload',
-	});
+						allowedContent:true,
+	
+					toolbar :[['NewPage','Preview','Bold','Italic','Underline','Strike','-','Subscript','Superscript','-','-',
+					'JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','Outdent','Indent','HorizontalRule','Link','Unlink','-',
+					'Find','Replace','SelectAll','Image','Youtube','Table','SpecialChar'],
+					'/',['Styles','Format','Font','FontSize','Undo','Redo'],['TextColor','BGColor'],['Cut','Copy','Paste','PasteText'],['Source']],
+					filebrowserImageUploadUrl: '/issue/imageUpload'
+					});
                 
- 				        CKEDITOR.on('dialogDefinition', function( ev ){
-				            var dialogName = ev.data.name;
-				            var dialogDefinition = ev.data.definition;
-				         
-				            switch (dialogName) {
-				                case 'image': //Image Properties dialog
-				                    //dialogDefinition.removeContents('info');
-				                    //dialogDefinition.removeContents('Link'); // 링크탭 제거
-				                    dialogDefinition.removeContents('advanced'); // 자세히탭 제거
-				                    break;
-				            }
-				        });
+			 	 CKEDITOR.on('dialogDefinition', function( ev ){
+			        var dialogName = ev.data.name;
+			         var dialogDefinition = ev.data.definition;
+			      
+			         switch (dialogName) {
+			             case 'image': //Image Properties dialog
+			                 //dialogDefinition.removeContents('info');
+			                 //dialogDefinition.removeContents('Link'); // 링크탭 제거
+			                 dialogDefinition.removeContents('advanced'); // 자세히탭 제거
+			                 break;
+         }
+     });
+			 	 
+	
+ 				       
 					</script>
+					
               </div>
+              <small>드래그 앤 드롭으로 이미지를 쉽게 추가할 수 있습니다.</small>
              
               </div>
         
