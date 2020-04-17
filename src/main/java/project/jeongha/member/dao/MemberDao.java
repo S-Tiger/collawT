@@ -22,4 +22,5 @@ public interface MemberDao {
 	public int memberJoinApiGoogle(Map<String, Object> memberVO);
 	public int check_idMap(Map<String, Object> mem_id) throws Exception;
 	public MemberVO loginCh(Map<String, Object> mem_id) throws Exception ;
+	public int update_pw(MemberVO memberVO) throws Exception;
 }

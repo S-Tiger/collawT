@@ -84,6 +84,11 @@ public class MemberDaoImpl implements MemberDao {
 	public int update_pw(Map<String, Object> memberVO) throws Exception {
 		return sqlSession.update("member.update_pw", memberVO);
 	}
+	
+	@Override
+	public int update_pw(MemberVO memberVO) throws Exception {
+		return sqlSession.update("member.update_pw", memberVO);
+	}
 
 	// 회원탈퇴
 	@Override

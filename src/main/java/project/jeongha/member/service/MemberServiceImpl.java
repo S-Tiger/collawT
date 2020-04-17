@@ -3,6 +3,7 @@ package project.jeongha.member.service;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -97,21 +98,8 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public MemberVO update_pw(Map<String, Object> memberVO, HttpServletResponse response) throws Exception {
 		response.setContentType("text/html;charset=utf-8");
-		//PrintWriter out = response.getWriter();
-		//로그인된 아이디(히든태그)로 로그인 비밀번호로 접근하여 맞는지 안맞는지 확인
-//		System.out.println("service password: " + dao.loginC(memberVO.getMem_Id()).getMem_Pwd());
-//		System.out.println("service Id: "+dao.loginC(memberVO.getMem_Id()).getMem_Pwd());
-//		if (!oldPwd.equals(dao.loginC(memberVO.getMem_Id()).getMem_Pwd())) {
-//			out.println("<script>");
-//			out.println("alert('기존 비밀번호가 다릅니다.');");
-//			out.println("history.go(-1);");
-//			out.println("</script>");
-//			out.close();
-//			return null;
-//		} else {
 			dao.update_pw(memberVO);
 			return dao.loginCh(memberVO);
-		//}
 	}
 
 	// 아이디 중복 검사(AJAX)
@@ -137,14 +125,14 @@ public class MemberServiceImpl implements MemberService {
 
 		// Mail Server 설정
 		String charSet = "utf-8";
-		String hostSMTP = "smtp.naver.com";
+		String hostSMTP = "smtp.gmail.com";
 
-		// 네이버 아이디, 비밀번호
-		String hostSMTPid = "asd_7088@naver.com";
-		String hostSMTPpwd = "비밀번호 안알려줌";
+		// google 아이디, 비밀번호
+		String hostSMTPid = "collawt@gmail.com";
+		String hostSMTPpwd = "zhffkdnxl%!00";
 
 		// 보내는 사람 EMail,이름, 제목, 내용
-		String fromEmail = "CollawT@collawt.com"; 
+		String fromEmail = "collawt@gmail.com"; 
 		String fromName = "CollawT 관리자";
 		String subject = "";
 		String msg = "";
@@ -206,7 +194,6 @@ public class MemberServiceImpl implements MemberService {
 		PrintWriter out = response.getWriter();
 		// 아이디가 없으면
 		if (dao.check_id(memberVO.getMem_Id()) == 0) {
-		//if (dao.check_id(member) == 0) {
 			out.print("<script>");
 			out.println("alert('가입된 이메일이 아닙니다. 회원가입을 해주세요');");
 			out.println("history.go(-1);");
@@ -218,12 +205,19 @@ public class MemberServiceImpl implements MemberService {
 			for (int i = 0; i < 12; i++) {
 				pw += (char) ((Math.random() * 26) + 97);
 			}
+			String newPwd = passEncoder.encode(pw);
+			
+//			Map<String,Object> mem =new HashMap<String, Object>();
+//			mem.put("mem_Name","콜라우티 회원");
+//			mem.put("mem_Pwd", memberVO.setMem_Pwd(newPwd));
+			memberVO.setMem_Pwd(newPwd);
+			memberVO.setMem_Name("콜라우티회원");
+			System.out.println("디비로갈것 : "+ newPwd);
+			// 비밀번호 변경
+			dao.update_pw(memberVO);
 			
 			memberVO.setMem_Pwd(pw);
-			memberVO.setMem_Name("콜라우티회원");
-			// 비밀번호 변경
-		//	dao.update_pw(memberVO);
-			
+			System.out.println("이메일비번 "+memberVO.getMem_Pwd());
 			// 비밀번호 변경 메일 발송
 			sendEmail(memberVO, "find_pw");
 			out.print("<script>");

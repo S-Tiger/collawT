@@ -60,6 +60,9 @@ public class MemberControllerImpl implements MemberController {
 	MemberDaoImpl dao;
 
 	@Autowired
+	CoworkService coworkService;
+
+	@Autowired
 	BCryptPasswordEncoder passEncoder;
 
 	// Naver LoginBO
@@ -92,7 +95,7 @@ public class MemberControllerImpl implements MemberController {
 	@GetMapping("/loginPage1")
 	public String loginFrorm() {
 		System.out.println("로그인페이지");
-		return "member/loginPage";
+		return "/member/loginPage";
 	}
 
 	// 비밀번호 찾기 페이지
@@ -100,7 +103,7 @@ public class MemberControllerImpl implements MemberController {
 	@GetMapping("/forgotPwd")
 	public String findPw() {
 		System.out.println("비밀번호 찾기 페이지");
-		return "member/forgotPwd";
+		return "/member/forgotPwd";
 	}
 
 	// 비밀번호 찾기 페이지
@@ -108,7 +111,7 @@ public class MemberControllerImpl implements MemberController {
 	@GetMapping("/outMember")
 	public String outMember() {
 		System.out.println("회원탈퇴 찾기 페이지");
-		return "member/outMember";
+		return "/member/outMember";
 	}
 
 	// 마이페이지
@@ -176,126 +179,7 @@ public class MemberControllerImpl implements MemberController {
 		return "/member/signup";
 	}
 
-	// 네이버 로그인 성공시 callback호출 메소드
-	@Override
-	@RequestMapping(value = "/naverCallback", method = { RequestMethod.GET, RequestMethod.POST })
-	public String callback(Model model, String code, String state, HttpSession session)
-			throws IOException, ParseException, Exception {
-		System.out.println("여기는 callback");
-		OAuth2AccessToken oauthToken;
-		oauthToken = naverLoginBO.getAccessToken(session, code, state);
-		// 1. 로그인 사용자 정보를 읽어온다.
-		apiResult = naverLoginBO.getUserProfile(oauthToken); // String형식의 json데이터
-		System.out.println(apiResult);
-		/**
-		 * apiResult json 구조 response: {"resultcode":"00","message":"success",
-		 * "response":{ "id":"45166773", "nickname":"Jeongha An", "profile_image":
-		 * "https:\/\/phinf.pstatic.net\/contact\/20190213_294\/15499850679839Oki2_JPEG\/image.jpg",
-		 * "age":"30-39", "gender":"M", "email": "asd_7088@naver.com",
-		 * "name":"\uc548\uc815\ud558", "birthday":"03-26"}}
-		 **/
-		// 2. String형식인 apiResult를 json형태로 바꿈
-		JSONParser parser = new JSONParser();
-		Object obj = parser.parse(apiResult);
-		JSONObject jsonObj = (JSONObject) obj;
-		// 3. 데이터 파싱
-		// Top레벨 단계 _response 파싱
-		JSONObject response_obj = (JSONObject) jsonObj.get("response");
-		// response의 nickname값 파싱
-		String mem_Name = (String) response_obj.get("nickname");
-		String mem_Id = (String) response_obj.get("email");
-		String mem_ImgName = (String) response_obj.get("profile_image");
-		System.out.println(mem_Id);
-		// 4.파싱 닉네임 세션으로 저장
-
-		Map<String, Object> member = new HashMap<String, Object>();
-		member.put("mem_Id", mem_Id);
-		member.put("mem_Name", mem_Name);
-		// member.put("mem_ImgName",mem_ImgName);
-
-		// 아이디가 없다면.
-		System.out.println(member);
-		int result = service.check_id(mem_Id);
-		if (result != 1) {
-			System.out.println("아이디 없음");
-			service.memberJoinApi(member);
-			session.setAttribute("member", member);
-			return "/main/index";
-		} else {
-
-			System.out.println("아이디가 있음");
-			session.setAttribute("member", member);
-			model.addAttribute("result", apiResult);
-
-			return "/main/index";
-		}
-	}
-
-	// 구글 Callback호출 메소드 http://localhost:9092/member/googleLogin -> google api등록 필요
-	@RequestMapping(value = "/googleLogin", method = { RequestMethod.GET, RequestMethod.POST })
-	public String googleCallback(HttpServletRequest request, HttpServletResponse response, HttpSession session,
-			Model model) throws IOException, Exception {
-		System.out.println("여기는 googleCallback");
-
-		String code = request.getParameter("code");
-		String query = "code=" + code;
-		// 구글 로그인 인증키
-		query += "&client_id=" + "332997436138-3g0cj5k952gddaro03grkth547udnh41.apps.googleusercontent.com";
-		// 구글 로그인 인증키 비밀번호
-		query += "&client_secret=" + "D930_U4ICILL756vxBavV1W8";
-		// 리다렉트 할 주소
-		query += "&redirect_uri=" + "http://localhost:8090/member/googleLogin";
-		query += "&grant_type=authorization_code";
-
-		// 토큰권한 google에 요청
-		String tokenJson = getHttpConnection("https://accounts.google.com/o/oauth2/token", query);
-		System.out.println("google에 요청한 데이터: " + tokenJson.toString());
-		// 토큰 제이슨 형태로 바꾸기
-		Gson gson = new Gson();
-		Token token = gson.fromJson(tokenJson, Token.class);
-
-		String ret = getHttpConnection(
-				"https://www.googleapis.com/oauth2/v1/userinfo?access_token=" + token.getAccess_token());
-		System.out.println("ret: " + ret);
-		/*
-		 * 구글에서 보내준 개인정보.. 이름없음 ret: { "id": "108033630427505881754", "email":
-		 * "ajh7893@gmail.com", "verified_email": true, "picture":
-		 * "https://lh3.googleusercontent.com/a-/AOh14Gimu7yC6xpwV-dtxLDrfJeGJwdwUt8EeBIiCDS6P2g"
-		 */
-		// json -> obj
-		JSONParser parser = new JSONParser();
-		Object obj = parser.parse(ret);
-		JSONObject jsonObj = (JSONObject) obj;
-		System.out.println("obj: " + obj);
-
-		String mem_Id = (String) jsonObj.get("email");
-		String mem_ImgName = (String) jsonObj.get("picture");
-
-		System.out.println("추출된ID: " + mem_Id);
-		System.out.println(mem_ImgName);
-
-		Map<String, Object> member = new HashMap<String, Object>();
-		member.put("mem_Id", mem_Id);
-		// 구글이 이름을 제공하지 않아 아이디로 이름 대체
-		member.put("mem_Name", mem_Id);
-		// member.put("mem_ImgName",mem_ImgName);
-		System.out.println("member: " + member);
-
-		int result = service.check_id(mem_Id);
-		if (result != 1) {
-			System.out.println("아이디 없음");
-			service.memberJoinApiGoogle(member);
-			session.setAttribute("member", member);
-			return "/main/index";
-		} else {
-
-			System.out.println("아이디가 있음");
-			session.setAttribute("member", member);
-
-		}
-		return "/main/index";
-	}
-
+	
 	// 로그인 테스트 컨트롤러->회원정보수정
 	@Override
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -321,7 +205,7 @@ public class MemberControllerImpl implements MemberController {
 			session.setAttribute("member", memberVO);
 			// jsp페이지에서 ${member.mem_Id}---->이런식으로 접근해야됨
 			mav.setViewName("redirect:/main");
-
+			
 			// 실패했을경우
 		} else {
 
@@ -366,33 +250,38 @@ public class MemberControllerImpl implements MemberController {
 			HttpSession session, HttpServletResponse response, RedirectAttributes rttr) throws Exception {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
+		//기존비밀번호
 		String inputPass = old_pw;
 		String oldPwd = passEncoder.encode(inputPass);
+		//새로운 비밀번호
+		String mem_Pwd = passEncoder.encode(memberVO.getMem_Pwd());
 		System.out.println("old_pw: "+old_pw);
 		System.out.println("oldPwd: "+oldPwd);
 		
 		Map<String, Object> memLogin = new HashMap<String, Object>();
+		//기존비밀번호 및 아이디
 		memLogin.put("mem_Id", memberVO.getMem_Id());
 		memLogin.put("mem_Pwd", oldPwd);
 		System.out.println("memLogin: "+memLogin);
 		
 		Map<String, Object> member = service.login(memLogin, response);
 		System.out.println("member.get(mem_Pwd): "+member.get("mem_pwd"));
-		
+		//기존비밀번호, 디비 비밀번호 비교
 		boolean passMatch = passEncoder.matches( old_pw, (String)member.get("mem_Pwd"));
-		
-		System.out.println("불리");
+		//비교
 		if(member!=null&&passMatch) {
 			System.out.println("비번 업뎃");
-			
-			
-			
+			//비번 업뎃
+			memLogin.put("mem_Id", memberVO.getMem_Id());
+			memLogin.put("mem_Pwd", mem_Pwd);
 			service.update_pw(memLogin, response);
 			
-			
-			
 		}else {
-			
+			out.println("<script>");
+			out.println("alert('기존 비밀번호가 다릅니다. 다시입력해 주세요');");
+			out.println("history.go(-1);");
+			out.println("</script>");
+			out.close();
 			System.out.println("else");
 		}
 		return "redirect:/member/mypage";
@@ -424,7 +313,7 @@ public class MemberControllerImpl implements MemberController {
 	public String logout(HttpSession session) throws IOException {
 		System.out.println("여기는 logout");
 		session.invalidate();
-		return "redirect:member/index1";
+		return "redirect:/member/index1";
 	}
 
 	// 회원 탈퇴
@@ -455,7 +344,7 @@ public class MemberControllerImpl implements MemberController {
 			out.println("history.go(-1);");
 			out.println("</script>");
 			out.close();
-			return "member/mypage";
+			return "/member/mypage";
 		}
 
 		return "redirect:/";
@@ -500,6 +389,130 @@ public class MemberControllerImpl implements MemberController {
 		return new ResponseEntity<byte[]>(imageContent, headers, HttpStatus.OK);
 	}
 
+	
+	// 네이버 로그인 성공시 callback호출 메소드
+		@Override
+		@RequestMapping(value = "/naverCallback", method = { RequestMethod.GET, RequestMethod.POST })
+		public String callback(Model model, String code, String state, HttpSession session)
+				throws IOException, ParseException, Exception {
+			System.out.println("여기는 callback");
+			OAuth2AccessToken oauthToken;
+			oauthToken = naverLoginBO.getAccessToken(session, code, state);
+			// 1. 로그인 사용자 정보를 읽어온다.
+			apiResult = naverLoginBO.getUserProfile(oauthToken); // String형식의 json데이터
+			System.out.println(apiResult);
+			/**
+			 * apiResult json 구조 response: {"resultcode":"00","message":"success",
+			 * "response":{ "id":"45166773", "nickname":"Jeongha An", "profile_image":
+			 * "https:\/\/phinf.pstatic.net\/contact\/20190213_294\/15499850679839Oki2_JPEG\/image.jpg",
+			 * "age":"30-39", "gender":"M", "email": "asd_7088@naver.com",
+			 * "name":"\uc548\uc815\ud558", "birthday":"03-26"}}
+			 **/
+			// 2. String형식인 apiResult를 json형태로 바꿈
+			JSONParser parser = new JSONParser();
+			Object obj = parser.parse(apiResult);
+			JSONObject jsonObj = (JSONObject) obj;
+			// 3. 데이터 파싱
+			// Top레벨 단계 _response 파싱
+			JSONObject response_obj = (JSONObject) jsonObj.get("response");
+			// response의 nickname값 파싱
+			String mem_Name = (String) response_obj.get("nickname");
+			String mem_Id = (String) response_obj.get("email");
+			String mem_ImgName = (String) response_obj.get("profile_image");
+			System.out.println(mem_Id);
+			// 4.파싱 닉네임 세션으로 저장
+
+			Map<String, Object> member = new HashMap<String, Object>();
+			member.put("mem_Id", mem_Id);
+			member.put("mem_Name", mem_Name);
+			// member.put("mem_ImgName",mem_ImgName);
+
+			// 아이디가 없다면.
+			System.out.println(member);
+			int result = service.check_id(mem_Id);
+			if (result != 1) {
+				System.out.println("아이디 없음");
+				service.memberJoinApi(member);
+				session.setAttribute("member", member);
+				return "/main/index";
+			} else {
+
+				System.out.println("아이디가 있음");
+				session.setAttribute("member", member);
+				model.addAttribute("result", apiResult);
+
+				return "/main/index";
+			}
+		}
+
+		// 구글 Callback호출 메소드 http://localhost:9092/member/googleLogin -> google api등록 필요
+		@RequestMapping(value = "/googleLogin", method = { RequestMethod.GET, RequestMethod.POST })
+		public String googleCallback(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+				Model model) throws IOException, Exception {
+			System.out.println("여기는 googleCallback");
+
+			String code = request.getParameter("code");
+			String query = "code=" + code;
+			// 구글 로그인 인증키
+			query += "&client_id=" + "332997436138-3g0cj5k952gddaro03grkth547udnh41.apps.googleusercontent.com";
+			// 구글 로그인 인증키 비밀번호
+			query += "&client_secret=" + "D930_U4ICILL756vxBavV1W8";
+			// 리다렉트 할 주소
+			query += "&redirect_uri=" + "http://localhost:8090/member/googleLogin";
+			query += "&grant_type=authorization_code";
+
+			// 토큰권한 google에 요청
+			String tokenJson = getHttpConnection("https://accounts.google.com/o/oauth2/token", query);
+			System.out.println("google에 요청한 데이터: " + tokenJson.toString());
+			// 토큰 제이슨 형태로 바꾸기
+			Gson gson = new Gson();
+			Token token = gson.fromJson(tokenJson, Token.class);
+
+			String ret = getHttpConnection(
+					"https://www.googleapis.com/oauth2/v1/userinfo?access_token=" + token.getAccess_token());
+			System.out.println("ret: " + ret);
+			/*
+			 * 구글에서 보내준 개인정보.. 이름없음 ret: { "id": "108033630427505881754", "email":
+			 * "ajh7893@gmail.com", "verified_email": true, "picture":
+			 * "https://lh3.googleusercontent.com/a-/AOh14Gimu7yC6xpwV-dtxLDrfJeGJwdwUt8EeBIiCDS6P2g"
+			 */
+			// json -> obj
+			JSONParser parser = new JSONParser();
+			Object obj = parser.parse(ret);
+			JSONObject jsonObj = (JSONObject) obj;
+			System.out.println("obj: " + obj);
+
+			String mem_Id = (String) jsonObj.get("email");
+			String mem_ImgName = (String) jsonObj.get("picture");
+
+			System.out.println("추출된ID: " + mem_Id);
+			System.out.println(mem_ImgName);
+
+			Map<String, Object> member = new HashMap<String, Object>();
+			member.put("mem_Id", mem_Id);
+			// 구글이 이름을 제공하지 않아 아이디로 이름 대체
+			member.put("mem_Name", mem_Id);
+			// member.put("mem_ImgName",mem_ImgName);
+			System.out.println("member: " + member);
+
+			int result = service.check_id(mem_Id);
+			if (result != 1) {
+				System.out.println("아이디 없음");
+				service.memberJoinApiGoogle(member);
+				session.setAttribute("member", member);
+				return "/main/index";
+			} else {
+
+				System.out.println("아이디가 있음");
+				session.setAttribute("member", member);
+
+			}
+			return "/main/index";
+		}
+
+	
+	
+	
 	// google OAuth인증함수
 	@Override
 	public String getHttpConnection(String uri, String param) throws ServletException, IOException {

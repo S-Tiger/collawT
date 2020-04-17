@@ -13,7 +13,7 @@
 		template="/WEB-INF/tiles/common/defaultLayout.jsp">
 		<put-attribute name="content" />
 	</definition>
-	<definition name="/index" extends="defaultLayout">
+	<definition name="index" extends="defaultLayout">
 		<put-attribute name="content" value="/WEB-INF/views/index.jsp" />
 	</definition>
 	<definition name="/member/loginPage" extends="defaultLayout">
@@ -22,6 +22,10 @@
 	<definition name="/member/signup" extends="defaultLayout">
 		<put-attribute name="content" value="/WEB-INF/views/member/signup.jsp" />
 	</definition>
+	<definition name="/member/forgotPwd" extends="defaultLayout">
+		<put-attribute name="content" value="/WEB-INF/views/member/forgotPwd.jsp" />
+	</definition>
+	
 	
 	<definition name="/*" extends="mainLayout">
 		<put-attribute name="content"
@@ -31,9 +35,6 @@
 		value="/WEB-INF/views/{1}/{2}.jsp" /> 
 		</definition>
 	<definition name="*/*" extends="mainLayout"> <put-attribute name="content" 
-		value="/WEB-INF/views/{1}/{2}.jsp" /> 
-		</definition>
-	<definition name="/project/*/*" extends="mainLayout"> <put-attribute name="content" 
 		value="/WEB-INF/views/{1}/{2}.jsp" /> 
 		</definition>
 </tiles-definitions>
