@@ -60,6 +60,13 @@
 		select * from member where mem_Id = #{mem_Id}
 		]]>
 	</select>
+	
+	<!-- 비밀번호 수정 -->
+	<select id="loginb" parameterType="java.util.Map" resultType="memberVO">
+	<![CDATA[
+		select * from member where mem_Id = #{mem_Id}
+		]]>
+	</select>
 
 	<!--로그인 -->
 	<select id="login" resultMap="memberResult01"

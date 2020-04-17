@@ -310,6 +310,7 @@ public class MemberControllerImpl implements MemberController {
 		memLogin.put("mem_Id", member.getMem_Id());
 		memLogin.put("mem_Pwd", member.getMem_Pwd());
 		// 로그인로직
+		// 담아서
 		Map<String, Object> memberVO = service.login(memLogin, response);
 
 		// db에 복호화된 비밀번호를 매치시킴
@@ -357,7 +358,7 @@ public class MemberControllerImpl implements MemberController {
 		member00.put("mem_Name", memberVO.getMem_Name());
 		service.updateMypage(member00);
 		//일회성이라 리프레시할 경우 데이터가 소멸한다.
-		rttr.addFlashAttribute("msg", "회원정보 수정 완료");
+		//rttr.addFlashAttribute("msg", "success");
 		session.setAttribute("member", member00);
 		return "redirect:/member/mypage";
 	}
@@ -366,18 +367,38 @@ public class MemberControllerImpl implements MemberController {
 	@RequestMapping(value = "/update_pw", method = RequestMethod.POST)
 	public String update_pw(@ModelAttribute MemberVO memberVO, @RequestParam("old_pw") String old_pw,
 			HttpSession session, HttpServletResponse response, RedirectAttributes rttr) throws Exception {
-		System.out.println(old_pw);
-		System.out.println(memberVO.getMem_Id());
-		System.out.println(memberVO.getMem_Pwd());
-		System.out.println(memberVO.getMem_Name());
-		MemberVO member = service.update_pw(memberVO, old_pw, response);
-//			if(memberVO!=null) {
-		rttr.addAttribute("msg", "");
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		String inputPass = old_pw;
+		String oldPwd = passEncoder.encode(inputPass);
+		System.out.println("old_pw: "+old_pw);
+		System.out.println("oldPwd: "+oldPwd);
+		
+		Map<String, Object> memLogin = new HashMap<String, Object>();
+		memLogin.put("mem_Id", memberVO.getMem_Id());
+		memLogin.put("mem_Pwd", oldPwd);
+		System.out.println("memLogin: "+memLogin);
+		
+		Map<String, Object> member = service.login(memLogin, response);
+		System.out.println("member.get(mem_Pwd): "+member.get("mem_pwd"));
+		
+		boolean passMatch = passEncoder.matches( old_pw, (String)member.get("mem_Pwd"));
+		
+		System.out.println("불리");
+		if(member!=null&&passMatch) {
+			System.out.println("비번 업뎃");
+			
+			
+			
+			service.update_pw(memLogin, response);
+			
+			
+			
+		}else {
+			
+			System.out.println("else");
+		}
 		return "redirect:/member/mypage";
-//			}else {
-//				rttr.addAttribute("msg", "실패");
-//				return "redirect:/member/mypage";
-//			}
 	}
 
 	// 아이디 중복 검사(AJAX)
@@ -437,7 +458,7 @@ public class MemberControllerImpl implements MemberController {
 			out.println("history.go(-1);");
 			out.println("</script>");
 			out.close();
-			return null;
+			return "member/mypage";
 		}
 
 		return "redirect:/";

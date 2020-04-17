@@ -9,6 +9,7 @@
 	var result = '${msg}';
 	if(result == 'success'){
 		alert('콜라우티를 이용해주셔서 감사합니다.');
+		
 		}
 	
 </script>

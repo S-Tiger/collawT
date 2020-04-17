@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.mail.HtmlEmail;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,9 @@ public class MemberServiceImpl implements MemberService {
 	private MemberDaoImpl dao; // 서비스는 dao에 접근하여 데이터를 가져오기때문에 dao연결하고 시작합니다.
 	// 요청은 controller -> service -> dao 응답은 반대 생각하면 됩니다.
 
+	@Autowired
+	BCryptPasswordEncoder passEncoder;
+	
 	@Override // 회원가입
 	public int memberJoin(Map<String,Object> member,MemberVO memberVO, HttpServletResponse response) throws Exception {// 똑같이 vo를 매개변수로 넣으면 get
 																								// set을 알아서해주기때문에 코드가
@@ -91,23 +95,23 @@ public class MemberServiceImpl implements MemberService {
 
 	// 비밀번호변경
 	@Override
-	public MemberVO update_pw(MemberVO memberVO, String old_pw, HttpServletResponse response) throws Exception {
+	public MemberVO update_pw(Map<String, Object> memberVO, HttpServletResponse response) throws Exception {
 		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out = response.getWriter();
+		//PrintWriter out = response.getWriter();
 		//로그인된 아이디(히든태그)로 로그인 비밀번호로 접근하여 맞는지 안맞는지 확인
-		System.out.println("service password: " + dao.loginC(memberVO.getMem_Id()).getMem_Pwd());
-		System.out.println("service Id: "+dao.loginC(memberVO.getMem_Id()));
-		if (!old_pw.equals(dao.loginC(memberVO.getMem_Id()).getMem_Pwd())) {
-			out.println("<script>");
-			out.println("alert('기존 비밀번호가 다릅니다.');");
-			out.println("history.go(-1);");
-			out.println("</script>");
-			out.close();
-			return null;
-		} else {
+//		System.out.println("service password: " + dao.loginC(memberVO.getMem_Id()).getMem_Pwd());
+//		System.out.println("service Id: "+dao.loginC(memberVO.getMem_Id()).getMem_Pwd());
+//		if (!oldPwd.equals(dao.loginC(memberVO.getMem_Id()).getMem_Pwd())) {
+//			out.println("<script>");
+//			out.println("alert('기존 비밀번호가 다릅니다.');");
+//			out.println("history.go(-1);");
+//			out.println("</script>");
+//			out.close();
+//			return null;
+//		} else {
 			dao.update_pw(memberVO);
-			return dao.loginC(memberVO.getMem_Id());
-		}
+			return dao.loginCh(memberVO);
+		//}
 	}
 
 	// 아이디 중복 검사(AJAX)
@@ -218,7 +222,7 @@ public class MemberServiceImpl implements MemberService {
 			memberVO.setMem_Pwd(pw);
 			memberVO.setMem_Name("콜라우티회원");
 			// 비밀번호 변경
-			dao.update_pw(memberVO);
+		//	dao.update_pw(memberVO);
 			
 			// 비밀번호 변경 메일 발송
 			sendEmail(memberVO, "find_pw");
@@ -235,7 +239,8 @@ public class MemberServiceImpl implements MemberService {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		System.out.println("service password: " + dao.memberLogin(memberVO));
-		//디비 비밀번호와 입력한 비밀번호가 같다면
+		//디비 비밀번호와 입력한 비밀번호가 다르다면
+		
 //		if (!pwd.equals(dao.loginC(memberVO.getMem_Id()).getMem_Pwd())) {
 //			out.println("<script>");
 //			out.println("alert('기존 비밀번호가 다릅니다.');");

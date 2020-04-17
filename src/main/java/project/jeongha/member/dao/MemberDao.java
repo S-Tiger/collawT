@@ -12,7 +12,7 @@ public interface MemberDao {
 	public Map<String, Object> memberLogin(Map<String, Object> memLogin);
 	public int memberUpdate(Map<String, Object> memberVO);
 	public int check_id(String mem_id) throws Exception;
-	public int update_pw(MemberVO memberVO) throws Exception;
+	public int update_pw(Map<String, Object> memberVO) throws Exception;
 	public int memberDelete(Map<String, Object> memberVO) throws Exception;
 	public void saveImage(Map<String, Object> hmap) throws Exception;
 	public Map<String, Object> getByteImage(String mem_Id) ;
@@ -21,4 +21,5 @@ public interface MemberDao {
 	public int memberJoinApi(Map<String,Object> memberVO);
 	public int memberJoinApiGoogle(Map<String, Object> memberVO);
 	public int check_idMap(Map<String, Object> mem_id) throws Exception;
+	public MemberVO loginCh(Map<String, Object> mem_id) throws Exception ;
 }

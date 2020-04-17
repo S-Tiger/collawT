@@ -45,10 +45,16 @@
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
+if ('${msg}' == 'success') {
+	alert(" 회원정보 변경 되었습니다.");
+	console.log("after:" + '${msg}');
+}else if(result != null){
+	console.log("dd");
+}
 $(function(){
-	if(${msg != null}){
+/* 	if(${msg != null}){
 		alert('${msg}');
-	};
+	}; */
 	
 	//비밀번호같지 확인하는 자바스크립트 (서브밋할때 작동됨)
 	if($("#pwForm").submit(function(){

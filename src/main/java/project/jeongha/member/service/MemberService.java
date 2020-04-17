@@ -13,7 +13,7 @@ public interface MemberService {
 	public void memberSearch(MemberVO memberVO);
 	public Map<String, Object> login(Map<String, Object> memLogin, HttpServletResponse response)throws Exception;
 	public MemberVO updateMypage(Map<String, Object> memLogin)throws Exception;
-	public MemberVO update_pw(MemberVO memberVO, String old_pw, HttpServletResponse response) throws Exception;
+	public MemberVO update_pw(Map<String, Object> memberVO, HttpServletResponse response) throws Exception;
 	public int check_id(String mem_id) throws Exception ;
 	public String create_key() throws Exception ;
 	public void sendEmail(MemberVO memberVO, String div) throws Exception;
