@@ -33,5 +33,8 @@
 	<definition name="*/*" extends="mainLayout"> <put-attribute name="content" 
 		value="/WEB-INF/views/{1}/{2}.jsp" /> 
 		</definition>
+	<definition name="/project/*/*" extends="mainLayout"> <put-attribute name="content" 
+		value="/WEB-INF/views/{1}/{2}.jsp" /> 
+		</definition>
 </tiles-definitions>
 

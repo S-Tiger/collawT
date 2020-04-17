@@ -2,6 +2,7 @@
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 <style type="text/css">
@@ -130,29 +131,29 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Font Awesome -->
 <link rel="stylesheet"
-	href="../resources/plugins/fontawesome-free/css/all.min.css">
+	href="${contextPath}/resources/plugins/fontawesome-free/css/all.min.css">
 <!-- Ionicons -->
 <link rel="stylesheet"
 	href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 <!-- Tempusdominus Bbootstrap 4 -->
 <link rel="stylesheet"
-	href="../resources/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+	href="${contextPath}/resources/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
 <!-- iCheck -->
 <link rel="stylesheet"
-	href="../resources/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+	href="${contextPath}/resources/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
 <!-- JQVMap -->
-<link rel="stylesheet" href="../resources/plugins/jqvmap/jqvmap.min.css">
+<link rel="stylesheet" href="${contextPath}/resources/plugins/jqvmap/jqvmap.min.css">
 <!-- Theme style -->
-<link rel="stylesheet" href="../resources/dist/css/adminlte.min.css">
+<link rel="stylesheet" href="${contextPath}/resources/dist/css/adminlte.min.css">
 <!-- overlayScrollbars -->
 <link rel="stylesheet"
-	href="../resources/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+	href="${contextPath}/resources/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
 <!-- Daterange picker -->
 <link rel="stylesheet"
-	href="../resources/plugins/daterangepicker/daterangepicker.css">
+	href="${contextPath}/resources/plugins/daterangepicker/daterangepicker.css">
 <!-- summernote -->
 <link rel="stylesheet"
-	href="../resources/plugins/summernote/summernote-bs4.css">
+	href="${contextPath}/resources/plugins/summernote/summernote-bs4.css">
 <!-- Google Font: Source Sans Pro -->
 <link
 	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700"
@@ -200,7 +201,7 @@
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
-              <img src="../../resources/dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+              <img src="${contextPath}/resources/dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
               <div class="media-body">
                 <h3 class="dropdown-item-title">
                   Brad Diesel
@@ -216,7 +217,7 @@
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
-              <img src="../resources/dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+              <img src="${contextPath}/resources/dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
               <div class="media-body">
                 <h3 class="dropdown-item-title">
                   John Pierce
@@ -232,7 +233,7 @@
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
-              <img src="../resources/dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+              <img src="${contextPath}/resources/dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
               <div class="media-body">
                 <h3 class="dropdown-item-title">
                   Nora Silvester
@@ -287,7 +288,7 @@
 	<aside class="main-sidebar elevation-4 sidebar-dark-danger">
 		<!-- Brand Logo -->
 		<a href="/main" class="brand-link navbar-danger"> <img
-			src="../resources/dist/img/logocollawT.png" alt="AdminLTE Logo"
+			src="${contextPath}/resources/dist/img/logocollawT.png" alt="AdminLTE Logo"
 			class="brand-image img-circle elevation-3" style="opacity: .8">
 			<span class="brand-text font-weight-light">Collaw T</span>
 		</a>
@@ -305,7 +306,7 @@
 					</c:if>
 					
 					<c:if test="${member.mem_File == null }">
-							<img src="../resources/dist/img/user2-160x160.jpg" style="width:40px; height:40px"
+							<img src="${contextPath}/resources/dist/img/user2-160x160.jpg" style="width:40px; height:40px"
 								class="img-circle elevation-2" alt="User Image">
 					</c:if>
 				</span>
