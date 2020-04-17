@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
-	
+	console.log('${msg}');
 	var result = '${msg}';
 	if(result == 'success'){
 		alert('콜라우티를 이용해주셔서 감사합니다.');

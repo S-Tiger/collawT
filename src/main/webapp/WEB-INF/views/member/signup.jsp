@@ -40,8 +40,7 @@
 			}else if ($("#mem_Name".val()=="")){
 				alert("이름을 입력해주세요.")
 				return false;
-			}else if ($("#mem_Name".val() != "" && $("#mem_Id").val() != "" && $("#pw").val() != "" && $("#pw2").val() != "" )){
-				alert("콜라우티 회원이 되신걸 환영합니다.");
+			}else if ();
 			}
 		}); 
  	// 아이디 유효성 검사(1 = 중복 / 0 != 중복)
@@ -71,7 +70,6 @@
  							//아이디 유효성 검사
  							if(idJ.test(mem_Id)||_kor.test(mem_Id)){
 								if(mem_Id == ""){
- 								
  								$('#id_check').text('아이디를 입력해주세요 :)');
  								$('#id_check').css('color', 'red');
  								$("#joinBtn").attr("disabled", false);				
@@ -92,7 +90,7 @@
 	});
 </script>
 </head>
-<body class="hold-transition register-page">
+<body class="hold-transition register-page" style="background:white">
 <div class="register-box">
   <div class="register-logo">
     <a href="/"><b>Collaw</b>T</a>
@@ -146,6 +144,18 @@
               <input type="checkbox" id="agreeTerms" name="terms" value="agree">
               <label for="agreeTerms">
               회원가입 <a href="#">동의</a>
+              <script type="text/javascript">
+              $(document).ready(function(){
+            	    $("#agreeTerms").change(function(){
+            	        if($("#agreeTerms").is(":checked")){
+            	            alert("회원가입에 동의해주셔서 감사합니다.");
+            	        }else{
+            	            alert("체크박스 체크 해제!");
+            	        }
+            	    });
+            	});
+              
+              </script>
               </label>
             </div>
           </div>
@@ -159,7 +169,7 @@
       </form>
 
       <div class="social-auth-links text-center">
-        <a href="${naverLoginUrl}" class="btn btn-block btn-danger" style="background-color:#29c23b" > <i class="fab fa-neos mr-2" ></i>네이버 로그인</a>
+        <a href="${naverLoginUrl}" class="btn btn-block btn-danger" style="background-color: #29c23b;  border-color:#29c23b;" > <i class="fab fa-neos mr-2" ></i>네이버 로그인</a>
 					<button type="button" id="loginBtn" class="btn btn-block btn-danger"><i class="fab fa-google-plus mr-2"></i>구글 로그인</button>
 					<!-- 구글 로그인 -->
 					<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

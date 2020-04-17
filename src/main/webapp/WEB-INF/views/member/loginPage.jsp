@@ -31,16 +31,76 @@
 <link
 	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700"
 	rel="stylesheet">
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
-	var result = '${msg}';
+$(document).ready(function(){
+/* 	var result = '${msg}';
 	var mem_Name ='${mem_Name}';
 	if (result == 'success') {
 		alert(mem_Name+" 님 콜라우티 회원가입을 축하 합니다.");
-	}
+	} */
+	var userInputId = getCookie("userInputId");//저장된 쿠기값 가져오기
+    $("input[name='mem_Id']").val(userInputId); 
+     
+    if($("input[name='mem_Id']").val() != ""){ // 그 전에 ID를 저장해서 처음 페이지 로딩
+                                           // 아이디 저장하기 체크되어있을 시,
+        $("#remember").attr("checked", true); // ID 저장하기를 체크 상태로 두기.
+    }
+     
+    $("#remember").change(function(){ // 체크박스에 변화가 발생시
+    	console.log("아이디 기억 체크");
+        if($("#remember").is(":checked")){ // ID 저장하기 체크했을 때,
+            var userInputId = $("input[name='mem_Id']").val();
+            setCookie("userInputId", userInputId, 7); // 7일 동안 쿠키 보관
+        }else{ // ID 저장하기 체크 해제 시,
+            deleteCookie("userInputId");
+        }
+    });
+     
+    // ID 저장하기를 체크한 상태에서 ID를 입력하는 경우, 이럴 때도 쿠키 저장.
+    $("input[name='mem_Id']").keyup(function(){ // ID 입력 칸에 ID를 입력할 때,
+        if($("#remember").is(":checked")){ // ID 저장하기를 체크한 상태라면,
+            var userInputId = $("input[name='mem_Id']").val();
+            setCookie("userInputId", userInputId, 7); // 7일 동안 쿠키 보관
+        }
+    });
+});
+ 
+function setCookie(cookieName, value, exdays){
+    var exdate = new Date();
+    exdate.setDate(exdate.getDate() + exdays);
+    var cookieValue = escape(value) + ((exdays==null) ? "" : "; expires=" + exdate.toGMTString());
+    document.cookie = cookieName + "=" + cookieValue;
+}
+ 
+function deleteCookie(cookieName){
+    var expireDate = new Date();
+    expireDate.setDate(expireDate.getDate() - 1);
+    document.cookie = cookieName + "= " + "; expires=" + expireDate.toGMTString();
+}
+ 
+function getCookie(cookieName) {
+    cookieName = cookieName + '=';
+    var cookieData = document.cookie;
+    var start = cookieData.indexOf(cookieName);
+    var cookieValue = '';
+    if(start != -1){
+        start += cookieName.length;
+        var end = cookieData.indexOf(';', start);
+        if(end == -1)end = cookieData.length;
+        cookieValue = cookieData.substring(start, end);
+    }
+    return unescape(cookieValue);
+}
+
+
+
+	
+	
 </script>
 
 </head>
-<body class="hold-transition login-page">
+<body class="hold-transition login-page" style="background: white">
 	<div class="login-box">
 		<div class="login-logo">
 			<a href="/"><b>Collaw</b>T</a>
@@ -86,9 +146,9 @@
 
 				<div class="social-auth-links text-center mb-3">
 					<p></p>
-					<a href="${naverLoginUrl}" class="btn btn-block btn-danger"
-						style="background-color: #29c23b"> <i
-						class="fab fa-neos mr-2"></i>네이버 로그인
+					<a href="${naverLoginUrl}" class="btn btn-block btn-danger" 
+						style="background-color: #29c23b;  border-color:#29c23b;"> <i class="fab fa-neos mr-2"></i>네이버
+						로그인
 					</a>
 					<button type="button" id="loginBtn"
 						class="btn btn-block btn-danger">

@@ -334,10 +334,10 @@ public class MemberControllerImpl implements MemberController {
 		if (member != null && passMatch) {
 			System.out.println("Id: " + memberVO.getMem_Id());
 			service.memberDelete(member, response);
+			session.invalidate();
 			rttr.addFlashAttribute("msg", "success");
 			
 			// 세션초기화
-			session.invalidate();
 		} else {
 			out.println("<script>");
 			out.println("alert('기존 비밀번호가 다릅니다. 다시입력해 주세요');");

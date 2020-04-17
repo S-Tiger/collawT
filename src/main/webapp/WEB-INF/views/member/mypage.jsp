@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <style type="text/css">
 #holder {
 	overflow: hidden;
@@ -44,26 +45,25 @@
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
-if ('${msg}' == 'success') {
+ if ('${msg}' == 'success') {
 	alert(" 회원정보 변경 되었습니다.");
 	console.log("after:" + '${msg}');
 }else if(result != null){
 	console.log("dd");
 }
-$(function(){
 /* 	if(${msg != null}){
 		alert('${msg}');
-	}; */
-	
+	};  */
+	$(function(){
 	//비밀번호같지 확인하는 자바스크립트 (서브밋할때 작동됨)
 	if($("#pwForm").submit(function(){
 		console.log("11");
 		if($("#pw").val() !== $("#pw2").val()){
-			alert("비밀번호가 다릅니다.");
+			alert("변경하실 비밀번호가 일치하지 않습니다.");
 			$("#pw").val("").focus();
 			$("#pw2").val("");
 			return false;
-		}else if ($("#pw").val().length < 8) {
+		}else if ($("#pw").val().length < 4) {
 			alert("비밀번호는 8자 이상으로 설정해야 합니다.");
 			$("#pw").val("").focus();
 			return false;
@@ -93,6 +93,8 @@ $(function(){
 	function fn_deleteMem(){
 		if(!confirm("정말탈퇴 하시겠습니까?")){
 			return false;
+		}else{
+			alert(" 탈퇴 되었습니다. 그동안 콜라우티를 이용해주셔서 감사합니다.");
 		}
 	};
 </script>
@@ -186,7 +188,7 @@ $(function(){
 						</div>
 						<div class="card-body">
 							<div id="left" style="padding: 10px; margin-right: 10px;">
-								<div class="card card-primary card-outline">
+								<div class="card card-primary card-outline" style="border-top:white ">
 									<div class="card-body box-profile">
 										<!-- 변경된이미지 -->
 										<div id="holder" class="user-img img-fluid img-circle">
