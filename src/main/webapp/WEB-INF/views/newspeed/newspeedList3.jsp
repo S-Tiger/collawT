@@ -15,9 +15,6 @@
 }
 
 
-.nav-pills .nav-link.active{
-		    background-color: #dc3545;
-}
 </style>
 
 <script type="text/javascript">

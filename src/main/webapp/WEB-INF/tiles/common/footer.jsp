@@ -31,8 +31,6 @@ needPopup.config.custom = {
 		}
 	};
 	needPopup.init();
-
-
 	$('#applyform').ready(function (){
 		
 				$('#insertsubmit').click(function() {
@@ -75,7 +73,23 @@ needPopup.config.custom = {
 						$("#id_check").css("color", "#a1a1a1");
 			    	}
 			    });
-			});</script>
+			});
+	</script>
+	<script type="text/javascript">
+	$('#createpjtform').ready(function (){
+ 	$("#projectInsert").click(function(){
+ 			if ($('#create_Name').val() == ''){
+				alert("협업공간명을 입력해주세요! :D");
+				return false;
+			}
+ 			
+			if ($('#create_Category').val() == '00') {
+				alert("카테고리를 선택해주세요! :D");
+				return false;
+			}
+		})
+	});
+	</script>
 
 <!-- jQuery -->
 <script src="${contextPath}/resources/plugins/jquery/jquery.min.js"></script>

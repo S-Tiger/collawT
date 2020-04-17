@@ -13,7 +13,7 @@
 		template="/WEB-INF/tiles/common/defaultLayout.jsp">
 		<put-attribute name="content" />
 	</definition>
-	<definition name="index" extends="defaultLayout">
+	<definition name="/index" extends="defaultLayout">
 		<put-attribute name="content" value="/WEB-INF/views/index.jsp" />
 	</definition>
 	<definition name="/member/loginPage" extends="defaultLayout">

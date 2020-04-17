@@ -4,6 +4,10 @@
 .accent-teal .btn-link, .accent-teal a:not(.dropdown-item):not(.btn-app):not(.nav-link):not(.brand-link) {
     color: #343a40;
 }
+
+.nav-pills .nav-link.active{
+		    background-color: #dc3545;
+}
 </style>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">

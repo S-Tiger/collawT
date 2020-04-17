@@ -12,6 +12,7 @@
      width: 40px;
 }
 
+
 @font-face {
 	font-family: 'Recipekorea';
 	src:
@@ -21,9 +22,7 @@
 	font-style: normal;
 }
 
-.nav-pills .nav-link.active{
-		    background-color: #dc3545;
-}
+
 .needpopup {
 	border-radius: 6px;
 	box-shadow: 0 1px 5px 1px rgba(0, 0, 0, 1);
@@ -51,6 +50,7 @@
 #applydelete {
 	margin: 2px;
 }
+
 
 </style>
 
@@ -395,7 +395,7 @@
 										<p>${coworklist.c_Name}</p>
 								</a></li>
 							</c:forEach>
-							<li class="nav-item"><a href="/project/create"
+							<li class="nav-item"><a href="/#" data-needpopup-show="#createpjt-popup"
 								class="nav-link"> <i class="nav-icon fas fa-folder-plus"></i>
 									<p>협업공간 생성</p>
 							</a></li>
@@ -512,5 +512,39 @@
 		<button type="reset" class="btn btn-block btn-success" onclick="history.go(0);" style="width: 220px">취소</button>
 		</span>
 		</div>
-		
+</div>
+<!-- 공간생성 모달 팝업 내용 -->
+<div id='createpjt-popup' class="needpopup">
+
+<form action="/project/insert" method="post" id="createpjtform">
+        <div class="card-body">
+              <div class="form-group">
+              <div class="col-md-6" style="max-width: 100%;" >
+                <label for="inputName">협업공간명</label>
+                <input type="text" name="c_Name" id="create_Name" class="form-control">
+              </div>
+              </div>
+              <div class="form-group">
+              <div class="col-md-6" style="max-width: 100%;">
+                <label for="inputDescription">협업공간 설명</label>
+                <textarea name="c_Comment" id="create_Comment" class="form-control" rows="4"></textarea>
+              </div>
+              </div>
+              <div class="form-group">
+              <div class="col-md-6" style="max-width: 100%;">
+                <label for="inputStatus">카테고리</label>
+               <select class="form-control custom-select" name= "c_Category" id="create_Category">
+                  <option value="00" hidden>선택해주세요</option>
+                  <option value="01">협업관련 업무관리</option>
+                  <option value="02">개인 업무관리</option>
+                  <option value="03">학업관련 과제관리<option>
+                </select>
+              </div>
+              </div>
+              <input type="hidden"  name = mem_Id value= ${member.mem_Id }>
+              <div class="col-md-6" style="max-width: 100%;">
+          <input type="submit" value="생성" class="btn btn-success float-right" id="projectInsert"  style="width: 100px;">
+          <input type="reset" class="btn btn-block btn-success" onclick="history.go(0);" value = "취소" style="background-color: #dc3545; width: 100px;">
+          </div>
+      </form>
 </div>
