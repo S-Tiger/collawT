@@ -76,9 +76,11 @@
 	
 	<update id="acceptApply" parameterType="java.util.Map">
 	 <![CDATA[
-	 DELETE FROM APPLY_MEM
+	  UPDATE APPLY_MEM
+	 SET AP_YN = 'yes'
 	 where c_Id = #{c_Id}
 	 and mem_Id = #{mem_Id}
+	 
 	 ]]>
 	</update>
 	

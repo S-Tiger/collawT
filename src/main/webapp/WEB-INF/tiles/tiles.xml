@@ -19,8 +19,8 @@
 	<definition name="/member/loginPage" extends="defaultLayout">
 		<put-attribute name="content" value="/WEB-INF/views/member/loginPage.jsp" />
 	</definition>
-	<definition name="/member/singup" extends="defaultLayout">
-		<put-attribute name="content" value="/WEB-INF/views/member/singup.jsp" />
+	<definition name="/member/signup" extends="defaultLayout">
+		<put-attribute name="content" value="/WEB-INF/views/member/signup.jsp" />
 	</definition>
 	
 	<definition name="/*" extends="mainLayout">
