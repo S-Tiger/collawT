@@ -29,12 +29,10 @@
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
 		in the /WEB-INF/views directory -->
-		
-	<beans:bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<beans:property name="prefix" value="/WEB-INF/views/" />
-		<beans:property name="suffix" value=".jsp" />
-	</beans:bean>
+
+	<!-- <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"> 
+		<beans:property name="prefix" value="/WEB-INF/views/" /> <beans:property 
+		name="suffix" value=".jsp" /> </beans:bean> -->
 
 	<mvc:view-controller path="/hello"
 		view-name="hello" />
@@ -52,21 +50,21 @@
 	</beans:bean>
 
 	<!-- 타일즈 실습 설정 -->
-	<!-- <beans:bean id="tilesConfigurer"
-		class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
-		<beans:property name="definitions">
-			<beans:list>
-				<beans:value>classpath:tiles/*.xml</beans:value>
-			</beans:list>
-		</beans:property>
-		<beans:property name="preparerFactoryClass"
-			value="org.springframework.web.servlet.view.tiles2.SpringBeanPreparerFactory" />
-	</beans:bean>
-	<beans:bean id="viewResolver"
+	<!-- Tiles viewResolver -->
+	<beans:bean id="tilesViewResolver"
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<beans:property name="viewClass"
-			value="org.springframework.web.servlet.view.tiles2.TilesView" />
-	</beans:bean> -->
+			value="org.springframework.web.servlet.view.tiles3.TilesView" />
+		<beans:property name="order" value="1" />
+	</beans:bean>
+	<beans:bean id="tilesConfigurer"
+		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<beans:property name="definitions">
+			<beans:list>
+				<beans:value>/WEB-INF/tiles/*.xml</beans:value>
+			</beans:list>
+		</beans:property>
+	</beans:bean>
 
 	<!-- 다중파일 업로드 -->
 	<beans:bean id="multipartResolver"
@@ -97,20 +95,21 @@
 			<mapping path="/**" />
 			<mvc:exclude-mapping path="/resources/**" />
 			<exclude-mapping path="/" />
-			<exclude-mapping path="/member/*"/>
-			<exclude-mapping path="/logout"/>
+			<exclude-mapping path="/member/*" />
+			<exclude-mapping path="/logout" />
 			<exclude-mapping path="/notify/view" />
-			
+
 			<beans:ref bean="LoginInterceptor" />
 		</interceptor>
 	</interceptors>
-	
+
 	<!-- batch -->
 	<!-- <task:annotation-driven executor="executor" scheduler="scheduler"/> 
 		<task:scheduler id="scheduler" pool-size="10" /> <task:executor id="executor" 
 		keep-alive="5" pool-size="10-20" queue-capacity="10" rejection-policy="ABORT" 
 		/> -->
-<beans:bean id="naverLoginBO" class="project.jeongha.member.vo.NaverLoginBO" />
+	<beans:bean id="naverLoginBO"
+		class="project.jeongha.member.vo.NaverLoginBO" />
 
 	<!-- ckeditor -->
 	<resources location="/WEB-INF/views/ckeditor/"

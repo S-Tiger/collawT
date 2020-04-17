@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?> <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<definition name="mainLayout"
+		template="/WEB-INF/tiles/common/layout.jsp">
+		<put-attribute name="header"
+			value="/WEB-INF/tiles/common/header.jsp" />
+		<put-attribute name="content" />
+		<put-attribute name="footer"
+			value="/WEB-INF/tiles/common/footer.jsp" />
+	</definition>
+	
+	<definition name="defaultLayout"
+		template="/WEB-INF/tiles/common/defaultLayout.jsp">
+		<put-attribute name="content" />
+	</definition>
+	<definition name="index" extends="defaultLayout">
+		<put-attribute name="content" value="/WEB-INF/views/index.jsp" />
+	</definition>
+	<definition name="/member/loginPage" extends="defaultLayout">
+		<put-attribute name="content" value="/WEB-INF/views/member/loginPage.jsp" />
+	</definition>
+	<definition name="/member/singup" extends="defaultLayout">
+		<put-attribute name="content" value="/WEB-INF/views/member/singup.jsp" />
+	</definition>
+	
+	<definition name="/*" extends="mainLayout">
+		<put-attribute name="content"
+			value="/WEB-INF/views/{1}.jsp" />
+	</definition>
+	<definition name="/*/*" extends="mainLayout"> <put-attribute name="content" 
+		value="/WEB-INF/views/{1}/{2}.jsp" /> 
+		</definition>
+	<definition name="*/*" extends="mainLayout"> <put-attribute name="content" 
+		value="/WEB-INF/views/{1}/{2}.jsp" /> 
+		</definition>
+</tiles-definitions>
+

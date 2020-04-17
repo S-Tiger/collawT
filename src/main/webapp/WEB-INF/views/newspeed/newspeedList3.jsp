@@ -3,7 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}" />
-<%@include file="../includes/header.jsp"%>
 
 <style>
 @font-face {
@@ -391,4 +390,3 @@
 		<!-- /.nav-tabs-custom -->
 	</div>
 </div>
-<%@include file="../includes/footer.jsp"%>
