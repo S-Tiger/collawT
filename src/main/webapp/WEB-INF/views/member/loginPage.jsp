@@ -3,7 +3,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-<c:set var="result" value="${param.result }" />
 <!-- 컨트롤러에서 로그인 실패할때 가져오는 값. -->
 <%
 	request.setCharacterEncoding("UTF-8");
@@ -32,15 +31,14 @@
 <link
 	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700"
 	rel="stylesheet">
-<c:choose>
-	<c:when test="${result=='loginFailed' }">
-		<script>
-			window.onload = function() {
-				alert("아이디나 비밀번호가 틀립니다.다시 로그인 하세요!");
-			}
-		</script>
-	</c:when>
-</c:choose>
+<script>
+	var result = '${msg}';
+	var mem_Name ='${mem_Name}';
+	if (result == 'success') {
+		alert(mem_Name+" 님 콜라우티 회원가입을 축하 합니다.");
+	}
+</script>
+
 </head>
 <body class="hold-transition login-page">
 	<div class="login-box">
@@ -87,12 +85,18 @@
 				</form>
 
 				<div class="social-auth-links text-center mb-3">
-					<p>  </p>
-					<a href="${naverLoginUrl}" class="btn btn-block btn-danger" style="background-color:#29c23b" > <i class="fab fa-neos mr-2" ></i>네이버 로그인</a>
-					<button type="button" id="loginBtn" class="btn btn-block btn-danger"><i class="fab fa-google-plus mr-2"></i>구글 로그인</button>
+					<p></p>
+					<a href="${naverLoginUrl}" class="btn btn-block btn-danger"
+						style="background-color: #29c23b"> <i
+						class="fab fa-neos mr-2"></i>네이버 로그인
+					</a>
+					<button type="button" id="loginBtn"
+						class="btn btn-block btn-danger">
+						<i class="fab fa-google-plus mr-2"></i>구글 로그인
+					</button>
 				</div>
 				<!-- /.social-auth-links -->
-				
+
 				<p class="mb-1">
 					<a href="/member/forgotPwd">비밀번호를 잊어버리셨나요?</a>
 				</p>
@@ -101,14 +105,16 @@
 				</p>
 				<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 				<script>
-						$("#loginBtn").click(function() {
-									location.href = "https://accounts.google.com/o/oauth2/auth?client_id="
-													+ "332997436138-3g0cj5k952gddaro03grkth547udnh41.apps.googleusercontent.com"
-													+ "&redirect_uri="
-													+ "http://localhost:9092/member/googleLogin"
-													+ "&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email&approval_prompt=force&access_type=offline";
-										});
-					</script>
+					$("#loginBtn")
+							.click(
+									function() {
+										location.href = "https://accounts.google.com/o/oauth2/auth?client_id="
+												+ "332997436138-3g0cj5k952gddaro03grkth547udnh41.apps.googleusercontent.com"
+												+ "&redirect_uri="
+												+ "http://localhost:8090/member/googleLogin"
+												+ "&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email&approval_prompt=force&access_type=offline";
+									});
+				</script>
 			</div>
 			<!-- /.login-card-body -->
 		</div>

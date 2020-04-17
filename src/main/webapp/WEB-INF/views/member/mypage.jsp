@@ -153,10 +153,10 @@ $(function(){
 										class="btn btn-success float-right">
 									</form>
 									<!--이름바꾸는 폼 끝  -->
-									<p>result: ${result }</p>
+									<%-- <p>result: ${result }</p>
 									<p>member: ${member}</p>
 									<img src="${member.mem_File }"
-										class="user-img img-fluid img-circle">
+										class="user-img img-fluid img-circle"> --%>
 								</div>
 							</div>
 						</div>

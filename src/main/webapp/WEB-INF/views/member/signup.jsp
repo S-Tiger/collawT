@@ -168,7 +168,7 @@
 											location.href = "https://accounts.google.com/o/oauth2/auth?client_id="
 													+ "332997436138-3g0cj5k952gddaro03grkth547udnh41.apps.googleusercontent.com"
 													+ "&redirect_uri="
-													+ "http://localhost:9092/member/googleLogin"
+													+ "http://localhost:8090/member/googleLogin"
 													+ "&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email&approval_prompt=force&access_type=offline";
 										});
 					</script>

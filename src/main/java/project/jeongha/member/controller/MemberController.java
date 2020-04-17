@@ -23,7 +23,7 @@ public interface MemberController {
 public String signup() ;
 public String loginFrorm();
 public String mypage()throws Exception;
-public String memJoin(MemberVO memberVO,HttpServletRequest request, HttpServletResponse response)throws Exception;
+public String memJoin(MemberVO memberVO,HttpServletRequest request, HttpServletResponse response, RedirectAttributes rttr)throws Exception;
 //public ModelAndView memLogin(MemberVO memberVO,RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response)throws Exception;
 public ModelAndView memLogin(MemberVO memberVO,RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response)throws Exception ;
 public String update_mypage(MemberVO memberVO, HttpSession session, RedirectAttributes rttr) throws Exception;

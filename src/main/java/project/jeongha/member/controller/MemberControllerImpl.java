@@ -122,12 +122,12 @@ public class MemberControllerImpl implements MemberController {
 		System.out.println("마이페이지");
 		return "/member/mypage";
 	}
-
+	//ModelAndView
 	// @PostMapping("memJoin") //위아래중 편한걸로 사용하세요 URL 대소문자 구분하니 주의해주세요
 	// 회원가입
 	@Override
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
-	public String memJoin(@ModelAttribute MemberVO memberVO, HttpServletRequest request, HttpServletResponse response)
+	public String memJoin(MemberVO memberVO, HttpServletRequest request, HttpServletResponse response, RedirectAttributes rttr)
 			throws Exception { // 매게변수로 vo가 들어갔을경우 자동으로 변수이름에 맞는걸 set get 해줍니다.
 		request.setCharacterEncoding("utf-8"); // 다른이름으로 지정하고 싶을 경우 ex : @ModelAttribute(변수이름) MeberVo memberVO
 		// 복호화
@@ -138,8 +138,10 @@ public class MemberControllerImpl implements MemberController {
 		joinMem.put("mem_Id", memberVO.getMem_Id());
 		joinMem.put("mem_Pwd", mem_Pwd);
 		joinMem.put("mem_Name", memberVO.getMem_Name());
+		rttr.addFlashAttribute("msg", "success");
+		rttr.addFlashAttribute("mem_Name",joinMem.get("mem_Name"));
 		service.memberJoin(joinMem, memberVO, response); // service에 memberRegister를 실행하는 부분
-		return "/member/loginPage"; // 리턴타입엔 패키지명/jsp파일 로 작성하여주세요 view에서도 패키지/jsp로 관리해주세요
+	return "redirect:/member/loginPage"; // 리턴타입엔 패키지명/jsp파일 로 작성하여주세요 view에서도 패키지/jsp로 관리해주세요
 	}
 
 	// naver Login
@@ -245,7 +247,7 @@ public class MemberControllerImpl implements MemberController {
 		// 구글 로그인 인증키 비밀번호
 		query += "&client_secret=" + "D930_U4ICILL756vxBavV1W8";
 		// 리다렉트 할 주소
-		query += "&redirect_uri=" + "http://localhost:9092/member/googleLogin";
+		query += "&redirect_uri=" + "http://localhost:8090/member/googleLogin";
 		query += "&grant_type=authorization_code";
 
 		// 토큰권한 google에 요청
@@ -332,8 +334,8 @@ public class MemberControllerImpl implements MemberController {
 			out.println("history.go(-1);");
 			out.println("</script>");
 			out.close();
-			System.out.println("로그인 실패");
-			rAttr.addAttribute("result", "loginFailed");
+			//System.out.println("로그인 실패");
+			//rAttr.addAttribute("result", "loginFailed");
 			mav.setViewName("redirect:/member/loginPage");
 
 		} // end if
@@ -345,9 +347,9 @@ public class MemberControllerImpl implements MemberController {
 	@RequestMapping(value = "/update_mypage", method = RequestMethod.POST)
 	public String update_mypage(@ModelAttribute MemberVO memberVO, HttpSession session, RedirectAttributes rttr)
 			throws Exception {
-		System.out.println("수정");
-		System.out.println(memberVO.getMem_Id());
-		System.out.println(memberVO.getMem_Name());
+		//System.out.println("수정");
+		//System.out.println(memberVO.getMem_Id());
+		//System.out.println(memberVO.getMem_Name());
 		Map<String, Object> member00 = new HashMap<String, Object>();
 		member00 = (Map<String, Object>) session.getAttribute("member");
 		System.out.println("세션에서 가져온거member00 :" + member00);
@@ -425,14 +427,10 @@ public class MemberControllerImpl implements MemberController {
 		if (member != null && passMatch) {
 			System.out.println("Id: " + memberVO.getMem_Id());
 			service.memberDelete(member, response);
-
+			rttr.addFlashAttribute("msg", "success");
+			
 			// 세션초기화
 			session.invalidate();
-			out.println("<script>");
-			out.println("alert('회원탈퇴 되었습니다. 이용해 주셔서 감사합니다.');");
-			out.println("history.go(-1);");
-			out.println("</script>");
-			out.close();
 		} else {
 			out.println("<script>");
 			out.println("alert('기존 비밀번호가 다릅니다. 다시입력해 주세요');");

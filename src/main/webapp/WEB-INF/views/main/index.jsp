@@ -1,9 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@include file="../includes/header.jsp"%>
-
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript">
+	
+	var result = '${msg}';
+	if(result == 'success'){
+		alert('콜라우티를 이용해주셔서 감사합니다.');
+		}
+	
+</script>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
