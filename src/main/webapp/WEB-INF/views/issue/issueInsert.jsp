@@ -149,7 +149,7 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <form name = insertForm action="/issue/insert" method="post" encType="UTF-8">
+        <form name = insertForm action="/project/issue/insert" method="post" encType="UTF-8">
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">

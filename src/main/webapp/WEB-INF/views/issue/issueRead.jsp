@@ -19,7 +19,7 @@ $(document).ready(function() {
 	//수정페이지로 이동 jquery
  	$("#update_btn").on("click", function() {
 		
-		formObj.attr("action", "/issue/update");
+		formObj.attr("action", "/project/issue/update");
 		formObj.attr("method", "get");
 		formObj.submit();
 	})
@@ -27,7 +27,7 @@ $(document).ready(function() {
 	//삭제 jquery
 	$("#delete_btn").on("click", function() {
 		if(confirm("삭제하시겠습니까?")){
-			formObj.attr("action", "/issue/delete");
+			formObj.attr("action", "/project/issue/delete");
 			formObj.attr("method", "post");
 			formObj.submit();
 			alert("삭제되었습니다.");
@@ -322,7 +322,7 @@ $(document).ready(function() {
 
 							<input type="button" value="목록"
 								class="btn btn-success float-right"
-								onclick="location.href='list'" style="margin:3px;">
+								onclick="location.href='list?c_Id=${issueRead.c_Id}'" style="margin:3px;">
 								
 								<br><br><br>
 						</div>
@@ -386,4 +386,3 @@ $(document).ready(function() {
 	<!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-

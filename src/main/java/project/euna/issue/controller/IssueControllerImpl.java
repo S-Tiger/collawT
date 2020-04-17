@@ -42,7 +42,7 @@ import project.euna.reply.service.ReplyService;
 
 @Controller
 
-@RequestMapping("/issue/*")
+@RequestMapping("/project/issue/*")
 public class IssueControllerImpl implements IssueController {
 	
 	
@@ -62,13 +62,13 @@ public class IssueControllerImpl implements IssueController {
 	//글 목록 조회 페이징
 	@Override
 	@GetMapping("/list")
-	public ModelAndView searchList(Criteria cri, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView searchList(Criteria cri, String c_Id, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		
 		List<Map> list = issueService.searchList(cri);
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(issueService.listCount());
+		pageMaker.setTotalCount(issueService.listCount(c_Id));
 		
 		
 		ModelAndView mav = new ModelAndView("issue/issueList");
@@ -88,12 +88,14 @@ public class IssueControllerImpl implements IssueController {
 		member = (Map<String, Object>) session.getAttribute("member");
 		String mem_Id = (String) member.get("mem_Id");
 		
+		String c_Id = issueVO.getC_Id();
+		
 
 		issueVO.setMem_Id(mem_Id);
 		
 		issueService.issueInsert(issueVO);
 		
-		return "redirect:/issue/list";
+		return "redirect:/project/issue/list?c_Id="+c_Id;
 	
 	}
 	
@@ -102,7 +104,6 @@ public class IssueControllerImpl implements IssueController {
 	@GetMapping("/insert")
 	public ModelAndView issueInsert() {
 		Map<String, Object> i_Num = issueDAO.get_i_Num();
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!"+i_Num);
 		ModelAndView mav = new ModelAndView("/issue/issueInsert");
 		mav.addObject("i_Num", i_Num);
 		return mav;
@@ -134,7 +135,9 @@ public class IssueControllerImpl implements IssueController {
 	
 		issueService.issueDelete(issueVO.getI_Num());
 		
-		return "redirect:/issue/list";
+		String c_Id = issueVO.getC_Id();
+		
+		return "redirect:/project/issue/list?c_Id="+c_Id;
 	}
 	
 	//게시글 수정 페이지로 이동
@@ -157,7 +160,7 @@ public class IssueControllerImpl implements IssueController {
 		
 		
 		//수정한 게시물로 리턴
-		return "redirect:/issue/read?i_Num="+i_Num;
+		return "redirect:/project/issue/read?i_Num="+i_Num;
 	}
 	
 

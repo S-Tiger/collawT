@@ -50,8 +50,8 @@ public class IssueServiceImpl implements IssueService {
 	
 	//게시물 총 갯수
 	@Override
-	public int listCount() throws Exception{
-		return issueDAO.listCount();
+	public int listCount(String c_Id) throws Exception{
+		return issueDAO.listCount(c_Id);
 	}
 	
 	//게시글 조회

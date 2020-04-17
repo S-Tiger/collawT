@@ -36,8 +36,8 @@ public class IssueDAOImpl implements IssueDAO {
 
 	// 게시물 총 갯수
 	@Override
-	public int listCount() throws Exception {
-		return sqlSession.selectOne("issue.listCount");
+	public int listCount(String c_Id) throws Exception {
+		return sqlSession.selectOne("issue.listCount", c_Id);
 	}
 
 	// 게시글 조회

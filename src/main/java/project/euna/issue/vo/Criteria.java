@@ -6,6 +6,7 @@ public class Criteria {
 	private int perPageNum;
 	private int rowStart;
 	private int rowEnd;
+	private String c_Id;
 	
 	public Criteria() {
 		this.page = 1;
@@ -54,6 +55,14 @@ public class Criteria {
 	public String toString() {
 		return "Criteria [page=" + page + ", perPageNum=" + perPageNum + ", rowStart=" + rowStart + ", rowEnd=" + rowEnd
 				+ "]";
+	}
+
+	public String getC_Id() {
+		return c_Id;
+	}
+
+	public void setC_Id(String c_Id) {
+		this.c_Id = c_Id;
 	}
 	
 	
