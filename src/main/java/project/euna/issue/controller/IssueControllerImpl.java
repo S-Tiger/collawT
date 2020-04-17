@@ -39,6 +39,8 @@ import project.euna.issue.vo.Criteria;
 import project.euna.issue.vo.IssueVO;
 import project.euna.issue.vo.PageMaker;
 import project.euna.reply.service.ReplyService;
+import project.sungho.comember.service.ComemberService;
+import project.sungho.cowork.service.CoworkService;
 
 @Controller
 
@@ -57,12 +59,18 @@ public class IssueControllerImpl implements IssueController {
 	
 	@Inject
 	IssueDAO issueDAO;
+	
+	@Inject
+	CoworkService coworkService;
+	
+	@Inject
+	ComemberService comemberService;
 
 	
 	//글 목록 조회 페이징
 	@Override
 	@GetMapping("/list")
-	public ModelAndView searchList(Criteria cri, String c_Id, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView searchList(Criteria cri, String c_Id, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		
 		List<Map> list = issueService.searchList(cri);
@@ -70,10 +78,15 @@ public class IssueControllerImpl implements IssueController {
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(issueService.listCount(c_Id));
 		
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		searchMap.put("c_Id", c_Id);
+		Map<String, Object>pjt = coworkService.searchMain(searchMap);
 		
 		ModelAndView mav = new ModelAndView("issue/issueList");
 		mav.addObject("issueList", list);
 		mav.addObject("pageMaker", pageMaker);
+		mav.addObject("pjt", pjt); 
+		
 		return mav;
 		
 	}

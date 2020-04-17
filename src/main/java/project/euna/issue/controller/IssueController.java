@@ -16,7 +16,7 @@ import project.euna.issue.vo.IssueVO;
 
 public interface IssueController {
 
-	public ModelAndView searchList(Criteria cri, String c_Id, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView searchList(Criteria cri, String c_Id, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public String issueInsert(IssueVO issueVO, HttpSession session) throws Exception;
 	public ModelAndView issueInsert();
 	

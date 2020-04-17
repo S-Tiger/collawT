@@ -290,12 +290,12 @@
                 
                 
                 <!--협업공간ID,작성일,회원아이디  hidden   회원아이디와 협업공간ID는 나중에 바꾸기-->
-                협업공간ID는 나중에 세션에서 끌어오기<input name="c_Id" id="c_Id" type="text"><br>
+                <!-- 협업공간ID는 나중에 세션에서 끌어오기<input name="c_Id" id="c_Id" type="text"><br> -->
 				
 		<!-- 멤버ID는 나중에 세션에서 끌어오기<input name="mem_Id" type="text"><br> -->
 		이슈그룹번호는 나중에 세션에서 끌어오기<input name="i_Groupnum" id="i_Groupnum" type="text"><br>
 				<input type="submit" id = "submit" value="이슈 작성" class="btn btn-success float-right" style="margin:3px;">
-          <input type="button" id = "cancel" value="작성 취소" class="btn btn-success float-right" style="margin:3px;" onclick="location.href='list'">
+          <input type="button" id = "cancel" value="작성 취소" class="btn btn-success float-right" style="margin:3px;" onclick="history.back(-1)">
               </div>
               
     </section>
