@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>협업툴 Collaw T - 간단하고 쉬운협업</title>
 </head>
 <body>
 <div id="container">

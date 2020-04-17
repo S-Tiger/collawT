@@ -60,9 +60,6 @@ public class MemberControllerImpl implements MemberController {
 	MemberDaoImpl dao;
 
 	@Autowired
-	CoworkService coworkService;
-
-	@Autowired
 	BCryptPasswordEncoder passEncoder;
 
 	// Naver LoginBO

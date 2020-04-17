@@ -37,13 +37,13 @@ public class HomeController {
 			return "redirect:/main";
 			}else {
 		
-		return "index";
+		return "/index";
 	}}
 
 	@RequestMapping("/join")
 	public String join(Model model) {
 		
-		return "sample/joinForm";
+		return "/sample/joinForm";
 	}
 	
 	

@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@include file="../includes/header.jsp"%>
 
 <style>
 @font-face {
@@ -333,4 +332,3 @@
 		<!-- /.nav-tabs-custom -->
 	</div>
 </div>
-<%@include file="../includes/footer.jsp"%>
