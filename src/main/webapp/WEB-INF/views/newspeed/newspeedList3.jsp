@@ -106,7 +106,7 @@
 						<div class="post">
 							<div class="user-block">
 								<img class="img-circle img-bordered-sm"
-									src="../resources/dist/img/user1-128x128.jpg" alt="user image">
+									src="${contextPath}/resources/dist/img/user1-128x128.jpg" alt="user image">
 								<span class="username"> <a href="#">Jonathan Burke
 										Jr.</a> <a href="#" class="float-right btn-tool"><i
 										class="fas fa-times"></i></a>
@@ -140,7 +140,7 @@
 						<div class="post clearfix">
 							<div class="user-block">
 								<img class="img-circle img-bordered-sm"
-									src="../resources/dist/img/user7-128x128.jpg" alt="User Image">
+									src="${contextPath}/resources/dist/img/user7-128x128.jpg" alt="User Image">
 								<span class="username"> <a href="#">Sarah Ross</a> <a
 									href="#" class="float-right btn-tool"><i
 										class="fas fa-times"></i></a>
@@ -170,7 +170,7 @@
 						<div class="post">
 							<div class="user-block">
 								<img class="img-circle img-bordered-sm"
-									src="../resources/dist/img/user6-128x128.jpg" alt="User Image">
+									src="${contextPath}/resources/dist/img/user6-128x128.jpg" alt="User Image">
 								<span class="username"> <a href="#">Adam Jones</a> <a
 									href="#" class="float-right btn-tool"><i
 										class="fas fa-times"></i></a>
@@ -179,7 +179,7 @@
 							<!-- /.user-block -->
 							<div class="row mb-3">
 								<div class="col-sm-6">
-									<img class="img-fluid" src="../resources/dist/img/photo1.png"
+									<img class="img-fluid" src="${contextPath}/resources/dist/img/photo1.png"
 										alt="Photo">
 								</div>
 								<!-- /.col -->
@@ -187,15 +187,15 @@
 									<div class="row">
 										<div class="col-sm-6">
 											<img class="img-fluid mb-3"
-												src="../resources/dist/img/photo2.png" alt="Photo"> <img
-												class="img-fluid" src="../resources/dist/img/photo3.jpg"
+												src="${contextPath}/resources/dist/img/photo2.png" alt="Photo"> <img
+												class="img-fluid" src="${contextPath}/resources/dist/img/photo3.jpg"
 												alt="Photo">
 										</div>
 										<!-- /.col -->
 										<div class="col-sm-6">
 											<img class="img-fluid mb-3"
-												src="../resources/dist/img/photo4.jpg" alt="Photo"> <img
-												class="img-fluid" src="../resources/dist/img/photo1.png"
+												src="${contextPath}/resources/dist/img/photo4.jpg" alt="Photo"> <img
+												class="img-fluid" src="${contextPath}/resources/dist/img/photo1.png"
 												alt="Photo">
 										</div>
 										<!-- /.col -->

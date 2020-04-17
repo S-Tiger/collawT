@@ -1,4 +1,7 @@
-<footer class="main-footer">
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+	
+	<footer class="main-footer">
     <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
@@ -16,7 +19,63 @@
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
+<script>
+needPopup.config.custom = {
+		'removerPlace' : 'outside',
+		'closeOnOutside' : false,
+		onShow : function() {
+			console.log('needPopup is shown');
+		},
+		onHide : function() {
+			console.log('needPopup is hidden');
+		}
+	};
+	needPopup.init();
 
+
+	$('#applyform').ready(function (){
+		
+				$('#insertsubmit').click(function() {
+					var listnum = $('#applyList').children().length;
+					if (listnum == 0) {
+					alert("초대 리스트가 비어있습니다");
+						return false;
+					}
+				})
+			    $('#mem_Id').keydown(function(event) {
+			    	if(event.keyCode == '13'){
+			    		var mem_Id = $('.form-control#mem_Id').val();
+			    		var hidden_Id = $('#hidden_Id').val();
+			    		console.log(hidden_Id);
+			    		if(mem_Id == '${member.mem_Id}'){
+			    			$("#id_check").text("자신을 초대할수 없습니다 :p");
+							$("#id_check").css("color", "red");
+			    		}else{
+			    		$.ajax({
+							url : '${contextPath}/news/memberCheck?mem_Id=' + mem_Id,
+							type : 'get',
+							success : function(data) {
+								console.log("1 = 중복o / 0 = 중복x : " + data);
+								if (data == 1) {
+									if (mem_Id == hidden_Id) {
+										$("#id_check").text("동일한 아이디를 여러번 초대할수 없습니다. :p");
+										$("#id_check").css("color", "red");
+									}else {
+									$('#applyList').append("<span id= 'applyspan'>"+mem_Id+"<a id ='applydelete' href='#'>x</a></span>");
+									$('#applyform').append("<input type='hidden' id='hidden_Id' name='mem_Id' value='"+mem_Id+"'>");
+									$('#mem_Id').val("");}
+								} else {
+									$("#id_check").text("잘못된 아이디 입니다 다시 확인해주세요 :p");
+									$("#id_check").css("color", "red");
+								}
+							}
+						})}
+			    	}else{
+			    		$("#id_check").text("이메일 주소를 입력하고 Enter키를 눌러 파트너들을 초대해 보세요.");
+						$("#id_check").css("color", "#a1a1a1");
+			    	}
+			    });
+			});</script>
 
 <!-- jQuery -->
 <script src="${contextPath}/resources/plugins/jquery/jquery.min.js"></script>

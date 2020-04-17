@@ -2,6 +2,7 @@
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
@@ -11,9 +12,51 @@
      width: 40px;
 }
 
+@font-face {
+	font-family: 'Recipekorea';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/Recipekorea.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+.nav-pills .nav-link.active{
+		    background-color: #dc3545;
+}
+.needpopup {
+	border-radius: 6px;
+	box-shadow: 0 1px 5px 1px rgba(0, 0, 0, 1);
+}
+
+.needpopup p {
+	font-size: 1.2em;
+	line-height: 1.4;
+	color: #343638;
+	margin: 15px 0;
+	margin: 0;
+}
+
+.needpopup p+p {
+	margin-top: 10px;
+}
+
+#applyspan {
+	background-clip: padding-box;
+    border: 1px solid #17a2b8;
+    padding: 2px;
+    margin: 2px;
+    display: inline-block;
+}
+#applydelete {
+	margin: 2px;
+}
 
 </style>
+
 <script type="text/javascript">
+
+
 	window.onload = function() {
 		var getmenu = getCookie('menu');
 		var menuId = document.getElementById('menustat');
@@ -63,6 +106,8 @@
 				+ "; path=/";
 	}
 </script>
+
+
 
 <script type="text/javascript">
 
@@ -126,6 +171,12 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="">
+<link rel="stylesheet" href="${contextPath}/resources/modal/dist/needpopup.min.css">
+<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="${contextPath}/resources/modal/dist/needpopup.min.js"></script>
+
+
 <title>협업툴 Collaw T - 간단하고 쉬운협업</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -159,6 +210,7 @@
 	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700"
 	rel="stylesheet">
 </head>
+
 <body class="sidebar-mini layout-fixed accent-teal">
 	<div class="wrapper" id="start">
 
@@ -379,4 +431,86 @@
 		</div>
 		<!-- /.sidebar -->
 	</aside>
+<!-- 정보변경 모달 팝업 내용 -->
+<div id='update-popup' class="needpopup">
+	<a href="#"></a>
+	<p>
+	<form id="projectupdate" action="/project/update" method="post">
+		<p class="login-box-msg" style="padding-bottom: 10px">
+			<input type="hidden" id="c_Id" name="c_Id" value="${pjt.c_Id}">
+			<label style="font-family: Recipekorea; padding-bottom: 5px;">이름</label> <input class="form-control" type="text" id="c_Name"
+				name="c_Name" required value="${pjt.c_Name}">
+		</p>
+		<p class="login-box-msg" style="padding-bottom: 10px">
+			<label style="font-family: Recipekorea; padding-bottom: 5px;">설명</label>
+			<textarea class="form-control" rows="3" id="c_Comment"
+				name="c_Comment" required>${pjt.c_Comment}</textarea>
+		</p>
+		<p class="login-box-msg" style="padding-bottom: 10px">
+			<label style="font-family: Recipekorea; padding-bottom: 5px;">관리자 변경</label><br><select name="mem_Id">
+				<option value="${member.mem_Id}">${member.mem_Name}(${member.mem_Id})</option>
+			<c:forEach var="memberList" items="${memberList}" >	
+				<c:if test="${memberList.mem_Id != pjt.mem_Id}">
+				<option value="${memberList.mem_Id}">${memberList.mem_Name}(${memberList.mem_Id})</option>
+				</c:if>
+				</c:forEach>
+			</select>
+		</p>
+		<p class="login-box-msg" style="padding-bottom: 10px">
+			<label style="font-family: Recipekorea; padding-bottom: 5px;">카테고리</label><br> <select name="c_Category">
+			
+				<option value="${pjt.c_Category}">${pjt.c_Category}</option>
+				<option value="0">협업업무관련</option>
+				<option value="1">개인업무관련</option>
+				<option value="2">학업과제관련</option>
+			</select>
+		</p>
+			<button type="submit" class="btn btn-block btn-success">정보변경</button>
+			</form>
+	<span>
+		<form id="projectdelete" action="/project/delete" method="post">
+		<input type="hidden" id="c_Id" name="c_Id" value="${pjt.c_Id}">
+		<button style="background-color: #dc3545;" type="submit" class="btn btn-block btn-success">협업공간삭제</button>
+	</form>
+	</span>
+</div>
+<!-- 맴버초대 모달 팝업 내용 -->
+<div id='add-popup' class="needpopup">
+	<p>
+		<div style="padding-bottom: 25px;">
+			<h4 class="m-0 text-dark"
+				style="font-family: Recipekorea; padding-bottom: 5px;" >파트너 초대</h4>
+			<span style="font-size: 0.9em; line-height: 1.0; color: #a1a1a1;">
+				많은 사람을 초대하여 원활한 의사소통으로 업무를 효율적으로 처리해보세요. 회사 동료뿐만 아니라 외부 협업자도 파트너로
+				초대할 수 있습니다.</span>
+		</div>
 
+		<div style="padding-bottom: 25px;">
+			<h4 class="m-0 text-dark"
+				style="font-family: Recipekorea; padding-bottom: 5px;">파트너 아이디</h4>
+			<input style="margin-bottom: 5px;" class="form-control" type="text" id="mem_Id" name="mem_Id"
+				required> <span id= "id_check"
+				style="font-size: 0.9em; line-height: 1.0; color: #a1a1a1;">
+				이메일 주소를 입력하고 Enter키를 눌러 파트너들을 초대해 보세요.</span>
+		</div>
+
+
+		<div style= "padding-bottom: 25px">
+			<h4 class="m-0 text-dark"
+				style="font-family: Recipekorea; padding-bottom: 5px;">초대 리스트</h4>
+			<div id = "applyList" class = "form-control" style="height: 152px; width: 490px; white-space: pre-line; margin-bottom: 5px;"></div> <span
+				style="font-size: 0.9em; line-height: 1.0; color: #a1a1a1; ">
+			
+				 초대 메세지를 보낼 파트너 아이디를 여기서 확인할 수 있습니다.</span>
+		</div>
+		<div><span style="float: left; padding-right: 50px;">
+		<form action="/news/insert" method="post" id = "applyform">
+			<input type="hidden" name="c_Id" value="${pjt.c_Id}">
+			<button type="submit" id= "insertsubmit" class="btn btn-block btn-success" 
+			style="width: 220px;">초대하기</button></form></span>
+		<span>
+		<button type="reset" class="btn btn-block btn-success" onclick="history.go(0);" style="width: 220px">취소</button>
+		</span>
+		</div>
+		
+</div>
