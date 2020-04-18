@@ -93,33 +93,60 @@ public class IssueControllerImpl implements IssueController {
 
 	
 	//글 쓰기 DB에 넣기
+	@SuppressWarnings("unchecked")
 	@Override
 	@PostMapping("/insert")
-	public String issueInsert(IssueVO issueVO, HttpSession session) throws Exception {
+	public String issueInsert(IssueVO issueVO, Map map, HttpSession session) throws Exception {
 	
 		Map<String, Object> member = new HashMap<String,Object>();
 		member = (Map<String, Object>) session.getAttribute("member");
 		String mem_Id = (String) member.get("mem_Id");
-		
 		String c_Id = issueVO.getC_Id();
+		String i_Name = issueVO.getI_Name();
+		String i_Content = issueVO.getI_Content();
+		String i_Date = issueVO.getI_Date();
+		String i_Start = issueVO.getI_Start();
+		String i_End = issueVO.getI_End();
+		String i_Groupnum = issueVO.getI_Groupnum();
 		
-
-		issueVO.setMem_Id(mem_Id);
+		map.put("mem_Id", mem_Id);
+		map.put("c_Id", c_Id);
+		map.put("i_Name", i_Name);
+		map.put("i_Content",i_Content);
+		map.put("i_Date", i_Date);
+		map.put("i_Start", i_Start);
+		map.put("i_End", i_End);
+		map.put("i_Groupnum", i_Groupnum);
 		
-		issueService.issueInsert(issueVO);
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!11"+map);
 		
-		return "redirect:/project/issue/list?c_Id="+c_Id;
+		
+		issueService.issueInsert(map);
+		
+		String i_Num = (String) map.get("i_Num");
+		
+		
+		return "redirect:/project/issue/read?i_Num="+i_Num;
 	
 	}
 	
 	//글 쓰기 화면
 	@Override
 	@GetMapping("/insert")
-	public ModelAndView issueInsert() {
-		Map<String, Object> i_Num = issueDAO.get_i_Num();
+	public ModelAndView issueInsert(String c_Id, HttpSession session) {
+		
+		Map<String, Object> member = new HashMap<String,Object>();
+		member = (Map<String, Object>) session.getAttribute("member");
+		String mem_Id = (String) member.get("mem_Id");
+		
+		List<Map> coList = issueService.coRead(mem_Id);
+		
+				
 		ModelAndView mav = new ModelAndView("/issue/issueInsert");
-		mav.addObject("i_Num", i_Num);
+		mav.addObject("c_Id", c_Id);
+		mav.addObject("coList", coList);
 		return mav;
+		
 	}
 	
 
@@ -233,6 +260,8 @@ public class IssueControllerImpl implements IssueController {
 		return null;
 	}	
 	
+	
+
 }
 
 

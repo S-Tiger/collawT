@@ -72,6 +72,7 @@ public class PageMaker {
 public String makeQuery(int page) {
 		UriComponents uriComponents =
 		UriComponentsBuilder.newInstance()
+							.queryParam("c_Id", cri.getC_Id())
 						    .queryParam("page", page)
 							.queryParam("perPageNum", cri.getPerPageNum())
 							.build();

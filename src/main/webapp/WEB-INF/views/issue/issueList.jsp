@@ -260,7 +260,7 @@
 						
 				</ol>
 				
-				 <button type="button" class="btn btn-success float-right" onclick="location.href='insert'"style="text-align:center; float:right; background-color:#DC3545; border-color:#DC3545; font-family:고딕;">
+				 <button type="button" class="btn btn-success float-right" onclick="location.href='/project/issue/insert?c_Id=${pjt.c_Id}'"style="text-align:center; float:right; background-color:#DC3545; border-color:#DC3545; font-family:고딕;">
 								<i class="fas fa-edit"></i> 이슈 작성</button>
 				
 			</div>

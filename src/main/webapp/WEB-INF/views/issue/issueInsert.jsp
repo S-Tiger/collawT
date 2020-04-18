@@ -14,13 +14,22 @@
 		//글쓰기 빈 값 안되게 검사
 		$("#submit").click(function(){
 			var i_Name = $("#i_Name").val();
-			var c_Id = $("#c_Id").val();
-			var i_Groupnum = $("#i_Groupnum").val();
+		
+		//캘린더 디폴트 빈 값으로 설정~~~~~~~~~~~~~~~~~~~~~~~~~~
+			$("#i_Period").html('');
+			
+			
 			
 		//캘린더 시작일/마감일 구하기
 			var i_Start = $("#i_Period").val().substring(0,10);
 			var i_End= $("#i_Period").val().substring(13,23);
+			document.insertForm.i_Start.value=i_Start;
+			document.insertForm.i_End.value=i_End;
 			
+		//협업공간 아이디 구하기
+			var c_Id=$("#c_Id").val();
+			
+			document.insertForm.c_Id.value=c_Id;
 			
 			if(i_Name==''){
 				alert("이슈명을 입력하세요");
@@ -28,11 +37,6 @@
 				return false; 
 			}
 			
-			if(c_Id==''){
-				alert("협업공간ID를 입력하세요");
-				document.insertForm.c_Id.focus();
-				return false; 
-			}
 			if(i_Groupnum==''){
 				alert("이슈그룹번호를 입력하세요");
 				document.insertForm.i_Groupnum.focus();
@@ -40,8 +44,7 @@
 			}
 			
 			
-			document.insertForm.i_Start.value=i_Start;
-			document.insertForm.i_End.value=i_End;
+			
 
 			document.insertForm.submit();
 			
@@ -175,7 +178,7 @@
         	<div class="form-group">
           
               <div class="form-group">
-             	<input type="hidden" id = "i_Num" name="i_Num" value="${i_Num.NEXTVAL}">
+             	<%-- <input type="hidden" id = "i_Num" name="i_Num" value="${i_Num.NEXTVAL}"> --%>
                 <label for="inputName">이슈명</label>
                 <input type="text" id = "i_Name" name="i_Name" class="form-control">
               </div>
@@ -266,8 +269,19 @@
              
                 <label for="inputStatus">협업공간명</label>
                <select class="form-control custom-select">
-                  <option selected disabled>Select one</option>
-                  <option>나중에 협업공간명 리스트로 가져오기</option>
+               
+              
+              
+               	<%-- <option selected value="${c_Id}" label="${c_Id}"></option> --%>
+                 <c:forEach var="coList" items="${coList}" >
+                 <option id="c_Id" value="${coList.C_ID}" label="${coList.C_NAME}"></option>
+               </c:forEach>
+                  
+                
+                   <!--협업공간ID -->
+               
+               
+               
                 </select>
                 </div>
                 
@@ -289,11 +303,9 @@
                 <!-- /.캘린더 -->
                 
                 
-                <!--협업공간ID,작성일,회원아이디  hidden   회원아이디와 협업공간ID는 나중에 바꾸기-->
-                <!-- 협업공간ID는 나중에 세션에서 끌어오기<input name="c_Id" id="c_Id" type="text"><br> -->
-				
-		<!-- 멤버ID는 나중에 세션에서 끌어오기<input name="mem_Id" type="text"><br> -->
-		이슈그룹번호는 나중에 세션에서 끌어오기<input name="i_Groupnum" id="i_Groupnum" type="text"><br>
+               
+				<!-- 이슈그룹번호는 디폴트로 '01'로 설정 -->
+		<input name="i_Groupnum" id="i_Groupnum" type="hidden" value="01"><br>
 				<input type="submit" id = "submit" value="이슈 작성" class="btn btn-success float-right" style="margin:3px;">
           <input type="button" id = "cancel" value="작성 취소" class="btn btn-success float-right" style="margin:3px;" onclick="history.back(-1)">
               </div>

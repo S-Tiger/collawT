@@ -19,9 +19,9 @@ public class IssueDAOImpl implements IssueDAO {
 
 	// 글 입력
 	@Override
-	public int issueInsert(IssueVO issueVO) {
+	public int issueInsert(Map map) {
 		int result;
-		result = sqlSession.update("issue.issueInsert", issueVO);
+		result = sqlSession.update("issue.issueInsert", map);
 		return result;
 	}
 
@@ -59,13 +59,21 @@ public class IssueDAOImpl implements IssueDAO {
 	public void issueUpdate(IssueVO issueVO) throws Exception {
 		sqlSession.update("issue.issueUpdate", issueVO);
 	}
+	
+	
+	// 협업공간 조회
+	@Override
+	public List<Map> coRead(String mem_id) {
+		return sqlSession.selectList("issue.coRead", mem_id);
+
+	}
 
 	
 	//글쓰기 화면 전환 시 글번호 가져오기
-	@Override
-	public Map<String, Object> get_i_Num() {
-		return sqlSession.selectOne("issue.get_i_Num");
-	}
+//	@Override
+//	public Map<String, Object> get_i_Num() {
+//		return sqlSession.selectOne("issue.get_i_Num");
+//	}
 	
 
 

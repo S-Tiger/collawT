@@ -72,21 +72,26 @@
 	</select>
 	
 	<!-- 글쓰기 화면 전환 시 글번호 먼저 가져오기 -->
-	<select id="get_i_Num" resultMap="issueResult02"> 
+<!-- 	<select id="get_i_Num" resultMap="issueResult02"> 
       <![CDATA[
-		select issue_i_Num.nextval from dual
+		select  from dual
       ]]>
 
-	</select>
+	</select> -->
 
 
 	<!-- 글 입력 -->
-	<insert id="issueInsert" parameterType="IssueVO">
+	<insert id="issueInsert" parameterType="java.util.HashMap">
+		<selectKey resultType="string" keyProperty="i_Num" order="BEFORE">
+        SELECT issue_i_Num.nextval as i_Num FROM dual        
+    	</selectKey>   
 		insert into issue(i_Num, c_Id, i_Name, i_Content, i_Date, i_Groupnum , mem_Id, i_Start, i_End)
 		values(#{i_Num}, #{c_Id}, #{i_Name}, #{i_Content} ,  
 		(select to_char(sysdate, 'YYYY/MM/DD/ HH24:MI:SS') from dual)
 		, #{i_Groupnum} , #{mem_Id}, #{i_Start}, #{i_End})
 	</insert>
+	
+	
 
 
 	<!-- 게시글 조회 -->
@@ -118,6 +123,17 @@
 		WHERE i_Num=#{i_Num}
 	</update>
 	
+	
+		<!-- 협업공간 조회 -->
+	<select id="coRead"  resultType="java.util.HashMap"> 
+      <![CDATA[
+			select c.c_name,c.c_id
+			from co_work c, member m
+			where c.mem_id=m.mem_id
+			and m.mem_id=#{mem_id}
+			order by c_id asc
+      ]]>
+	</select>
 
  
 

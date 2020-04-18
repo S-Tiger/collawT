@@ -28,9 +28,9 @@ public class IssueServiceImpl implements IssueService {
 	
 	//글 등록
 	@Override
-	public void  issueInsert(IssueVO issueVO) {
-		int result = issueDAO.issueInsert(issueVO);
-		notifyDAO.notifyInsert(issueVO);
+	public void  issueInsert(Map map) {
+		int result = issueDAO.issueInsert(map);
+		//notifyDAO.notifyInsert(map);
 		
 		if (result == 0) {
 			System.out.println("Join Fail!!");
@@ -71,6 +71,13 @@ public class IssueServiceImpl implements IssueService {
 	@Override
 	public void issueUpdate(IssueVO issueVO) throws Exception {
 		issueDAO.issueUpdate(issueVO);
+	}
+	
+	//협업공간 조회
+	@Override
+	public List<Map> coRead(String mem_id) {
+		return issueDAO.coRead(mem_id);
+		
 	}
 	
 
