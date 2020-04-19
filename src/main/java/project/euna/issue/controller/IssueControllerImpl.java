@@ -93,10 +93,9 @@ public class IssueControllerImpl implements IssueController {
 
 	
 	//글 쓰기 DB에 넣기
-	@SuppressWarnings("unchecked")
 	@Override
 	@PostMapping("/insert")
-	public String issueInsert(IssueVO issueVO, Map map, HttpSession session) throws Exception {
+	public String issueInsert(IssueVO issueVO, HttpSession session) throws Exception {
 	
 		Map<String, Object> member = new HashMap<String,Object>();
 		member = (Map<String, Object>) session.getAttribute("member");
@@ -107,23 +106,25 @@ public class IssueControllerImpl implements IssueController {
 		String i_Date = issueVO.getI_Date();
 		String i_Start = issueVO.getI_Start();
 		String i_End = issueVO.getI_End();
-		String i_Groupnum = issueVO.getI_Groupnum();
-		
-		map.put("mem_Id", mem_Id);
-		map.put("c_Id", c_Id);
-		map.put("i_Name", i_Name);
-		map.put("i_Content",i_Content);
-		map.put("i_Date", i_Date);
-		map.put("i_Start", i_Start);
-		map.put("i_End", i_End);
-		map.put("i_Groupnum", i_Groupnum);
-		
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!11"+map);
+		String ig_Num = issueVO.getig_Num();
 		
 		
-		issueService.issueInsert(map);
+		Map<String, Object> cmap = new HashMap<String,Object>();
+		cmap.put("mem_Id", mem_Id);
+		cmap.put("c_Id", c_Id);
+		cmap.put("i_Name", i_Name);
+		cmap.put("i_Content",i_Content);
+		cmap.put("i_Date", i_Date);
+		cmap.put("i_Start", i_Start);
+		cmap.put("i_End", i_End);
+		cmap.put("ig_Num", ig_Num);
 		
-		String i_Num = (String) map.get("i_Num");
+		
+		
+		
+		issueService.issueInsert(cmap);
+		
+		String i_Num = (String) cmap.get("i_Num");
 		
 		
 		return "redirect:/project/issue/read?i_Num="+i_Num;
@@ -135,16 +136,16 @@ public class IssueControllerImpl implements IssueController {
 	@GetMapping("/insert")
 	public ModelAndView issueInsert(String c_Id, HttpSession session) {
 		
-		Map<String, Object> member = new HashMap<String,Object>();
-		member = (Map<String, Object>) session.getAttribute("member");
-		String mem_Id = (String) member.get("mem_Id");
+//		Map<String, Object> member = new HashMap<String,Object>();
+//		member = (Map<String, Object>) session.getAttribute("member");
+//		String mem_Id = (String) member.get("mem_Id");
 		
-		List<Map> coList = issueService.coRead(mem_Id);
+		//List<Map> coList = issueService.coRead(mem_Id);
 		
 				
 		ModelAndView mav = new ModelAndView("/issue/issueInsert");
 		mav.addObject("c_Id", c_Id);
-		mav.addObject("coList", coList);
+		//mav.addObject("coList", coList);
 		return mav;
 		
 	}
@@ -160,6 +161,8 @@ public class IssueControllerImpl implements IssueController {
 		
 		Map<String, Object> board = issueService.issueRead(i_Num);
 		List<Map> list = appedixService.fileList(i_Num);
+		
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!1"+board);
 		
 		ModelAndView mav = new ModelAndView("issue/issueRead");
 		mav.addObject("issueRead", board);
@@ -184,14 +187,17 @@ public class IssueControllerImpl implements IssueController {
 	@Override
 	@GetMapping("/update")
 	public String issueUpdate(IssueVO issueVO, Model model) throws Exception {
+		List<Map> igRead = issueService.igRead();
+		
 		model.addAttribute("issueUpdate",issueService.issueRead(issueVO.getI_Num()) );
-		return "/issue/issueUpdate";
+		model.addAttribute("igRead",igRead);
+				return "/issue/issueUpdate";
 	}
 	
 	//게시글 수정 db에 넣기
 	@Override
 	@PostMapping("/update")
-	public String issueUpdate(IssueVO issueVO, AppendixVO appendixVO, @RequestParam(value="fileNoDel[]") String[] files, String[] fileNames, MultipartHttpServletRequest mpRequest) throws Exception {
+	public String issueUpdate(IssueVO issueVO) throws Exception {
 		issueService.issueUpdate(issueVO);
 		
 		String i_Num = issueVO.getI_Num();

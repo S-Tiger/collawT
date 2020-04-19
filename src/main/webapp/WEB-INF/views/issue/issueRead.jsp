@@ -208,8 +208,14 @@ $(document).ready(function() {
 
 					<div class="card card-widget">
 						<div class="card-header">
-							<span id="i_Name" name="i_Name"><b><c:out
-										value="${issueRead.i_Name}" /></b></span>
+						<span style= "
+							<c:if test="${issueRead.ig_Num == 1}">background-color:#6c757d;</c:if>
+							<c:if test="${issueRead.ig_Num == 2}">background-color:#007bff;</c:if>
+							<c:if test="${issueRead.ig_Num == 3}">background-color:#ffc107;</c:if>
+							<c:if test="${issueRead.ig_Num == 4}">background-color:#28a745;</c:if>
+							"
+							id="ig_Name" name="ig_Name" class="badge badge-success"><c:out  value="${issueRead.ig_Name}" /></span>&nbsp;&nbsp;
+							<span id="i_Name" name="i_Name"><b><c:out	value="${issueRead.i_Name}" /></b></span>
 
 						</div>
 						<!-- /.card-header -->
@@ -314,17 +320,16 @@ $(document).ready(function() {
 						
 						<c:if test="${member.mem_Id == issueRead.mem_Id}">
 						
-								<input type="submit" value="삭제" id="delete_btn"
-									class="btn btn-success float-right" style="margin:3px;">
-								<input type="submit" value="수정" id="update_btn"
-									class="btn btn-success float-right" onclick="update()" style="margin:3px;">
+									<a id="delete_btn" class="btn btn-default btn-sm float-right" style="color:#444; margin:3px;"> <i class="fas fa-trash" ></i>&nbsp;삭제</a>
+									<a id="update_btn" class="btn btn-default btn-sm float-right" href='/project/issue/update?i_Num=${issueRead.i_Num}' style="color:#444; margin:3px;"> <i class="fas fa-pencil-alt"></i>&nbsp;수정</a>
+                             
+                          
 						</c:if>
+						
+						<a id="list_btn" class="btn btn-default btn-sm float-right" href='list?c_Id=${issueRead.c_Id}' style="color:#444; margin:3px;"> <i class="fas fa-list"></i>&nbsp;목록</a>
 
-							<input type="button" value="목록"
-								class="btn btn-success float-right"
-								onclick="location.href='list?c_Id=${issueRead.c_Id}'" style="margin:3px;">
 								
-								<br><br><br>
+								<br><br>
 						</div>
 
 						<!-- /.card-body -->

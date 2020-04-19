@@ -12,6 +12,15 @@
 <script type="text/javascript">
 		 $(document).ready(function(){
 			 getFileList();
+			 getIg_Checked();
+			 
+			//이슈상태 라디오버튼 체크 값 가져오기
+			 $('input:radio[name="ig_checked"]').click(function(e){
+				 getIg_Checked();
+			 })
+			//document.insertForm.ig_Num.value=ig_Num;
+			
+			
 			 
 			//캘린더 시작일/마감일 구하기
 			var i_Period = $("#i_Start").val()+' - '+ $("#i_End").val();
@@ -131,6 +140,22 @@
 				
 					
 			}
+			
+			//라디오버튼 값 가져오기
+		  	function getIg_Checked() {
+		  	  var obj = document.getElementsByName("ig_checked");
+		  	  for(var i=0; i<obj.length;i++){ 
+		  		  if(obj[i].checked==true){
+		  			  $("#ig_Num").val(obj[i].value)
+		  		  }
+		  			  
+		  	  }
+
+		  	   
+		  	  }
+		  	 
+
+			
 	
 	</script>
 	
@@ -141,7 +166,7 @@
     
 
     <!-- Main content -->
-    <form action="/issue/update" method="post" encType="UTF-8" name="updateForm">
+    <form action="/project/issue/update" method="post" encType="UTF-8" name="updateForm">
     <section class="content-header">
 	 <div class="container-fluid">
 	  <div class="row mb-2">
@@ -239,18 +264,37 @@
                   <option>나중에 담당자명 리스트로 가져오기</option>
                 </select>
               </div>
+      <!-- 이슈그룹번호 설정 -->
+      <div class="form-group" id="issueStatus">
+		<label for="inputStatus">이슈 상태</label><br>
+		
+		<c:forEach var="igRead" items="${igRead}" >
+		<label>
+		<input type="radio" id="ig_checked" name="ig_checked" value="${igRead.IG_NUM}"
+		
+		
+		<c:if test="${igRead.IG_NUM == issueUpdate.ig_Num}">checked</c:if>> 
+		<span style= "
+		<c:if test="${igRead.IG_NUM == 1}">background-color:#6c757d;</c:if>
+		<c:if test="${igRead.IG_NUM == 2}">background-color:#007bff;</c:if>
+		<c:if test="${igRead.IG_NUM == 3}">background-color:#ffc107;</c:if>
+		<c:if test="${igRead.IG_NUM == 4}">background-color:#28a745;</c:if>
+		"
+		id="ig_Name" name="ig_Name" class="badge badge-success" >${igRead.IG_NAME}</span>&nbsp;&nbsp;</label>
+		</c:forEach>
+		<input type="hidden" id="ig_Num" name="ig_Num" value="">
+		
+		
+
+         </div>
               
-             <div class="form-group">
-             
-                <label for="inputStatus">협업공간명</label>
-               <select class="form-control custom-select">
-                  <option selected disabled>Select one</option>
-                  <option>나중에 협업공간명 리스트로 가져오기</option>
-                </select>
-                </div>
+        <!--협업공간ID -->
+         <input id="c_Id" name="c_Id" type="hidden" value="${issueUpdate.c_Id}"/>
+
+		
                 
                  <!-- 캘린더 -->
-                <div class="form-group">
+               <div class="form-group">
                    <label for="inputStatus">기간</label>
 
                   <div class="input-group">
@@ -263,12 +307,14 @@
                     <input type="hidden" id = "i_Start" name="i_Start" value="${issueUpdate.i_Start}">
                     <input type="hidden" id = "i_End" name="i_End" value="${issueUpdate.i_End}">
                   </div>
-                </div>
+              </div>
                 <!-- /.캘린더 -->
                 
-                <input type="submit" id = "submit" value="이슈 수정" class="btn btn-success float-right" style="margin:3px;">
-          <input type="button" id = "cancel" value="수정 취소" class="btn btn-success float-right" style="margin:3px;" onclick="location.href='list'">
                 
+               
+          <input type="submit" id = "submit" value="이슈 수정" class="btn btn-success float-right" style="margin:3px;">
+          <input type="button" id = "cancel" value="수정 취소" class="btn btn-success float-right" style="margin:3px;" onclick="history.back(-1)">
+                </div>
               </div>
               </section>
              
@@ -276,6 +322,7 @@
     <!-- /.content -->
      </form>
               </div>
+              
   
   <!-- /.content-wrapper -->
 

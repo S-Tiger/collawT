@@ -17,7 +17,8 @@ public interface IssueDAO {
 	public void issueDelete(String i_Num) throws Exception;
 	public void issueUpdate(IssueVO issueVO) throws Exception;
 	public int listCount(String c_Id) throws Exception;
-	public List<Map> coRead(String mem_id);
+	public List<Map> igRead();
+	//public List<Map> coRead(String mem_id);
 	//public Map<String, Object> get_i_Num();
 
 }

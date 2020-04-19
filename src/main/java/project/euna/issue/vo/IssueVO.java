@@ -10,7 +10,7 @@ public class IssueVO {
 	private String i_Start;
 	private String i_End;
 	private String i_Date;
-	private String i_Groupnum;
+	private String ig_Num;
 	private String mem_Id;
 	
 	public String getI_Num() {
@@ -43,11 +43,11 @@ public class IssueVO {
 	public void setI_Date(String i_Date) {
 		this.i_Date = i_Date;
 	}
-	public String getI_Groupnum() {
-		return i_Groupnum;
+	public String getig_Num() {
+		return ig_Num;
 	}
-	public void setI_Groupnum(String i_Groupnum) {
-		this.i_Groupnum = i_Groupnum;
+	public void setig_Num(String ig_Num) {
+		this.ig_Num = ig_Num;
 	}
 	public String getMem_Id() {
 		return mem_Id;

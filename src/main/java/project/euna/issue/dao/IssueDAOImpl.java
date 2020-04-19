@@ -60,13 +60,19 @@ public class IssueDAOImpl implements IssueDAO {
 		sqlSession.update("issue.issueUpdate", issueVO);
 	}
 	
-	
-	// 협업공간 조회
+	// 이슈그룹 조회
 	@Override
-	public List<Map> coRead(String mem_id) {
-		return sqlSession.selectList("issue.coRead", mem_id);
+	public List<Map> igRead() {
+		return sqlSession.selectList("issue.igRead");
 
 	}
+	
+	// 협업공간 조회
+//	@Override
+//	public List<Map> coRead(String mem_id) {
+//		return sqlSession.selectList("issue.coRead", mem_id);
+//
+//	}
 
 	
 	//글쓰기 화면 전환 시 글번호 가져오기

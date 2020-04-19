@@ -16,7 +16,7 @@
 			var i_Name = $("#i_Name").val();
 		
 		//캘린더 디폴트 빈 값으로 설정~~~~~~~~~~~~~~~~~~~~~~~~~~
-			$("#i_Period").html('');
+		//	$("#i_Period").val('');
 			
 			
 			
@@ -26,10 +26,6 @@
 			document.insertForm.i_Start.value=i_Start;
 			document.insertForm.i_End.value=i_End;
 			
-		//협업공간 아이디 구하기
-			var c_Id=$("#c_Id").val();
-			
-			document.insertForm.c_Id.value=c_Id;
 			
 			if(i_Name==''){
 				alert("이슈명을 입력하세요");
@@ -37,11 +33,6 @@
 				return false; 
 			}
 			
-			if(i_Groupnum==''){
-				alert("이슈그룹번호를 입력하세요");
-				document.insertForm.i_Groupnum.focus();
-				return false; 
-			}
 			
 			
 			
@@ -265,25 +256,26 @@
                 </select>
               </div>
              
-             <div class="form-group">
              
-                <label for="inputStatus">협업공간명</label>
+            
+             
+                <%-- <label for="inputStatus">협업공간명</label>
                <select class="form-control custom-select">
-               
-              
-              
-               	<%-- <option selected value="${c_Id}" label="${c_Id}"></option> --%>
+               	<option selected value="${c_Id}" label="${c_Id}"></option>
                  <c:forEach var="coList" items="${coList}" >
                  <option id="c_Id" value="${coList.C_ID}" label="${coList.C_NAME}"></option>
-               </c:forEach>
+               </c:forEach> --%>
                   
                 
-                   <!--협업공간ID -->
+        <!--협업공간ID -->
+             <input id="c_Id" name="c_Id" type="hidden" value="${c_Id}"/>
+		<!-- 이슈그룹번호는 디폴트로 '1'으로 설정 -->
+			<input name="ig_Num" id="ig_Num" type="hidden" value="1"><br>     
                
                
                
-                </select>
-                </div>
+             
+               
                 
                <!-- 캘린더 -->
                 <div class="form-group">
@@ -295,7 +287,7 @@
                         <i class="far fa-calendar-alt"></i>
                       </span>
                     </div>
-                    <input type="text" id = "i_Period" name="i_Period" class="form-control float-right">
+                    <input type="text" id = "i_Period" name="i_Period" class="form-control float-right" value="기간을 설정하세요">
                     <input type="hidden" id = "i_Start" name="i_Start" value="">
                     <input type="hidden" id = "i_End" name="i_End" value="">
                   </div>
@@ -303,9 +295,7 @@
                 <!-- /.캘린더 -->
                 
                 
-               
-				<!-- 이슈그룹번호는 디폴트로 '01'로 설정 -->
-		<input name="i_Groupnum" id="i_Groupnum" type="hidden" value="01"><br>
+
 				<input type="submit" id = "submit" value="이슈 작성" class="btn btn-success float-right" style="margin:3px;">
           <input type="button" id = "cancel" value="작성 취소" class="btn btn-success float-right" style="margin:3px;" onclick="history.back(-1)">
               </div>

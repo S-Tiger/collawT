@@ -73,12 +73,19 @@ public class IssueServiceImpl implements IssueService {
 		issueDAO.issueUpdate(issueVO);
 	}
 	
-	//협업공간 조회
+	//이슈그룹 조회
 	@Override
-	public List<Map> coRead(String mem_id) {
-		return issueDAO.coRead(mem_id);
+	public List<Map> igRead() {
+		return issueDAO.igRead();
 		
 	}
+	
+	//협업공간 조회
+	//@Override
+//	public List<Map> coRead(String mem_id) {
+//		return issueDAO.coRead(mem_id);
+//		
+//	}
 	
 
 }

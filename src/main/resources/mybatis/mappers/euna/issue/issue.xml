@@ -13,7 +13,7 @@
 		<result property="i_Date" column="i_Date" />
 		<result property="i_Start" column="i_Start" />
 		<result property="i_End" column="i_End" />
-		<result property="i_Groupnum" column="i_Groupnum" />
+		<result property="ig_Num" column="ig_Num" />
 		<result property="mem_Id" column="mem_Id" />
 	</resultMap>
 	
@@ -26,9 +26,10 @@
 		<result property="i_Date" column="i_Date" />
 		<result property="i_Start" column="i_Start" />
 		<result property="i_End" column="i_End" />
-		<result property="i_Groupnum" column="i_Groupnum" />
+		<result property="ig_Num" column="ig_Num" />
 		<result property="mem_Id" column="mem_Id" />
 		<result property="mem_Name" column="mem_Name" />
+		<result property="ig_Name" column="ig_Name" />
 	</resultMap>
 	
 		<resultMap id="fileResult01" type="java.util.HashMap">
@@ -85,10 +86,10 @@
 		<selectKey resultType="string" keyProperty="i_Num" order="BEFORE">
         SELECT issue_i_Num.nextval as i_Num FROM dual        
     	</selectKey>   
-		insert into issue(i_Num, c_Id, i_Name, i_Content, i_Date, i_Groupnum , mem_Id, i_Start, i_End)
+		insert into issue(i_Num, c_Id, i_Name, i_Content, i_Date, ig_Num , mem_Id, i_Start, i_End)
 		values(#{i_Num}, #{c_Id}, #{i_Name}, #{i_Content} ,  
 		(select to_char(sysdate, 'YYYY/MM/DD/ HH24:MI:SS') from dual)
-		, #{i_Groupnum} , #{mem_Id}, #{i_Start}, #{i_End})
+		, #{ig_Num} , #{mem_Id}, #{i_Start}, #{i_End})
 	</insert>
 	
 	
@@ -97,9 +98,10 @@
 	<!-- 게시글 조회 -->
 	<select id="issueRead"  parameterType="String" resultMap="issueResult02"> 
       <![CDATA[
-        select I.i_Num, I.c_Id, I.i_Name, I.i_Content, I.i_Date, I.mem_Id, M.mem_name, I.i_Start, I.i_End
-		from issue I, member M
+        select I.i_Num, I.c_Id, I.i_Name, I.i_Content, I.i_Date, I.mem_Id, M.mem_name, I.i_Start, I.i_End, I.ig_Num, IG.ig_Name
+		from issue I, member M, issue_group IG
 		where I.mem_Id = M.mem_Id
+		and I.ig_Num = IG.ig_Num
         and I.i_Num=#{i_Num}
       ]]>
 	</select>
@@ -113,19 +115,30 @@
 
 	<!-- 게시물 수정 -->
 	<update id="issueUpdate"
-		parameterType="project.euna.issue.vo.IssueVO">
+		parameterType="java.util.HashMap">
 		UPDATE issue
 		SET i_Name = #{i_Name},
 		i_Content = #{i_Content},
 		i_Date = (select to_char(sysdate, 'YYYY/MM/DD/ HH24:MI:SS') from dual),
 		i_Start = #{i_Start},
-		i_End = #{i_End}
+		i_End = #{i_End},
+		ig_Num = #{ig_Num}
 		WHERE i_Num=#{i_Num}
 	</update>
 	
 	
+			<!-- 협업공간 조회 -->
+ 	<select id="igRead"  resultType="java.util.HashMap"> 
+      <![CDATA[
+			select *
+			from issue_group
+			order by ig_Num asc
+      ]]>
+	</select> 
+	
+	
 		<!-- 협업공간 조회 -->
-	<select id="coRead"  resultType="java.util.HashMap"> 
+<!-- 	<select id="coRead"  resultType="java.util.HashMap"> 
       <![CDATA[
 			select c.c_name,c.c_id
 			from co_work c, member m
@@ -133,7 +146,7 @@
 			and m.mem_id=#{mem_id}
 			order by c_id asc
       ]]>
-	</select>
+	</select> -->
 
  
 

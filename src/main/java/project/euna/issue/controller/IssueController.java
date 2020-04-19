@@ -19,7 +19,7 @@ import project.euna.issue.vo.IssueVO;
 public interface IssueController {
 
 	public ModelAndView searchList(Criteria cri, String c_Id, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception;
-	public String issueInsert(IssueVO issueVO, Map map, HttpSession session) throws Exception;
+	public String issueInsert(IssueVO issueVO, HttpSession session) throws Exception;
 	public ModelAndView issueInsert(String c_Id, HttpSession session);
 	
 	public ModelAndView issueRead(String i_Num, HttpServletRequest request, HttpServletResponse response) throws Exception ;
@@ -27,7 +27,7 @@ public interface IssueController {
 	public String issueDelete(IssueVO issueVO) throws Exception;
 	
 	public String issueUpdate(IssueVO issueVO, Model model) throws Exception;
-	public String issueUpdate(IssueVO issueVO, AppendixVO appendixVO, @RequestParam(value="fileNoDel[]") String[] files, String[] fileNames, MultipartHttpServletRequest mpRequest) throws Exception;
+	public String issueUpdate(IssueVO issueVO) throws Exception;
 
 	public String imageUpload(HttpServletRequest req, HttpServletResponse resp, MultipartHttpServletRequest multiFile) throws Exception;
 }
