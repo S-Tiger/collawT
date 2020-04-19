@@ -375,7 +375,7 @@ $(document).ready(function() {
 									<small><a href="#" id="replyInsert_btn" name="replyInsert_btn">입력</a></small>
 																		
 									<input type="hidden" id="i_Num" name="i_Num" value="${issueRead.i_Num}" />
-									<input type="hidden" id="c_Id" name="c_Id" value="${issueRead.i_Num}" />
+									<input type="text" id="c_Id" name="c_Id" value="${issueRead.c_Id}" />
 									
 								
 							</div>

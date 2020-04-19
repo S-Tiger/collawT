@@ -162,7 +162,6 @@ public class IssueControllerImpl implements IssueController {
 		Map<String, Object> board = issueService.issueRead(i_Num);
 		List<Map> list = appedixService.fileList(i_Num);
 		
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!1"+board);
 		
 		ModelAndView mav = new ModelAndView("issue/issueRead");
 		mav.addObject("issueRead", board);
@@ -217,7 +216,7 @@ public class IssueControllerImpl implements IssueController {
 	@PostMapping("/imageUpload")
 	@ResponseBody
 	public String imageUpload(HttpServletRequest req, HttpServletResponse resp, 
-                 MultipartHttpServletRequest multiFile) throws Exception {
+                 MultipartHttpServletRequest multiFile, HttpSession session) throws Exception {
 		JsonObject json = new JsonObject();
 		PrintWriter printWriter = null;
 		OutputStream out = null;
@@ -228,7 +227,7 @@ public class IssueControllerImpl implements IssueController {
 					try{
 						String fileName = file.getName();
 						byte[] bytes = file.getBytes();
-						String uploadPath = req.getServletContext().getRealPath("/img");
+						String uploadPath = session.getServletContext().getRealPath("/");
 						File uploadFile = new File(uploadPath);
 						if(!uploadFile.exists()){
 							uploadFile.mkdirs();

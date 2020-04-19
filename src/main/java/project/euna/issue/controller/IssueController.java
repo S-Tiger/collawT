@@ -29,6 +29,7 @@ public interface IssueController {
 	public String issueUpdate(IssueVO issueVO, Model model) throws Exception;
 	public String issueUpdate(IssueVO issueVO) throws Exception;
 
-	public String imageUpload(HttpServletRequest req, HttpServletResponse resp, MultipartHttpServletRequest multiFile) throws Exception;
+	public String imageUpload(HttpServletRequest req, HttpServletResponse resp, 
+            MultipartHttpServletRequest multiFile, HttpSession session) throws Exception;
 }
 

@@ -43,6 +43,7 @@ public class ReplyControllerImpl implements ReplyController {
 
 		
 		replyService.replyInsert(replyVO);
+		System.out.println("!!!!!!!!!!!!!!!!!1"+replyVO);
 				
 		return "redirect:/reply/list";
 	

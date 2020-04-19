@@ -10,6 +10,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		getFileList();
+		 periodCheck();
 		
 		//글쓰기 빈 값 안되게 검사
 		$("#submit").click(function(){
@@ -132,6 +133,14 @@
 			
 		
 			
+	}
+	
+	function periodCheck(){
+		var obj = document.getElementsByName("periodCheck");
+		if(obj.checked==true){
+			alert("!!")
+			$("#periodGroup").remove();
+		}
 	}
 	
   	
@@ -279,25 +288,42 @@
                 
                <!-- 캘린더 -->
                 <div class="form-group">
+                <div class="row">
+                	<div class="col-8">
                    <label for="inputStatus">기간</label>
+                   </div>
+             
+                   <div class="col-4" >
+                   <div class="icheck-danger" style="text-align:right; ">
+                        <input type="checkbox" value="" id="periodCheck" name="periodCheck">
+                        <label for="periodCheck" ><small>기간 미설정</small></label>
+                      </div>
+                      </div>
+                      </div>
+                      
 
-                  <div class="input-group">
+                  <div class="input-group" id="periodGroup">
                     <div class="input-group-prepend">
                       <span class="input-group-text">
                         <i class="far fa-calendar-alt"></i>
                       </span>
                     </div>
-                    <input type="text" id = "i_Period" name="i_Period" class="form-control float-right" value="기간을 설정하세요">
+                    <input type="text" id = "i_Period" name="i_Period" class="form-control float-right">
+                    
+              </div>
+              
+                    
+                      
                     <input type="hidden" id = "i_Start" name="i_Start" value="">
                     <input type="hidden" id = "i_End" name="i_End" value="">
-                  </div>
+                  
                 </div>
                 <!-- /.캘린더 -->
                 
                 
 
-				<input type="submit" id = "submit" value="이슈 작성" class="btn btn-success float-right" style="margin:3px;">
-          <input type="button" id = "cancel" value="작성 취소" class="btn btn-success float-right" style="margin:3px;" onclick="history.back(-1)">
+				<input type="submit" id = "submit" value="이슈 작성" class="btn btn-danger btn-sm float-right" style="margin:3px;">
+          <input type="button" id = "cancel" value="작성 취소" class="btn btn-danger btn-sm float-right" style="margin:3px;" onclick="history.back(-1)">
               </div>
               
     </section>
