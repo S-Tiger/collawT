@@ -105,9 +105,22 @@
 		document.cookie = name + "= " + "; expires=" + date.toUTCString()
 				+ "; path=/";
 	}
+	
+	
+	
 </script>
 
+<script>
 
+ function move(url){
+
+    $('#content').children().remove();
+
+    $('#content').load(url);
+
+ }
+
+</script>
 
 <script type="text/javascript">
 
@@ -339,7 +352,7 @@
 	<!-- Main Sidebar Container -->
 	<aside class="main-sidebar elevation-4 sidebar-dark-danger">
 		<!-- Brand Logo -->
-		<a href="/main" class="brand-link navbar-danger"> <img
+		<a  href="/main" class="brand-link navbar-danger"> <img
 			src="${contextPath}/resources/dist/img/logocollawT.png" alt="AdminLTE Logo"
 			class="brand-image img-circle elevation-3" style="opacity: .8">
 			<span class="brand-text font-weight-light">Collaw T</span>
@@ -364,7 +377,7 @@
 				</span>
 				
 					<span class="info" style="width: 170px;">
-						<a href="/member/mypage"  style="padding: 0px; margin-right: 0px;">${member.mem_Name} </a>
+						<a href="javascript:move('${contextPath}/member/mypage')"  style="padding: 0px; margin-right: 0px;">${member.mem_Name} </a>
 						<a href="/logout"  style="padding: 0px; margin-top: 3; float:right;"><i class="fas fa-sign-out-alt"></i></a>
 					</span>	
 			</div>
@@ -384,13 +397,13 @@
 							</p>
 					</a>
 						<ul class="nav nav-treeview">
-							<li class="nav-item"><a href="/issue/list" class="nav-link">
+							<li class="nav-item"><a href="javascript:move('${contextPath}/issue/list)" class="nav-link">
 									<i class="nav-icon fas fa-user-secret"></i>
 									<p>프라이빗 공간</p>
 							</a></li>
 							<c:forEach var="coworklist" items="${coworklist}">
 								<li class="nav-item"><a
-									href="/project/main?c_Id=${coworklist.c_Id}" class="nav-link">
+									href="javascript:move('${contextPath}/project/main?c_Id=${coworklist.c_Id}')" class="nav-link">
 										<i class="nav-icon fas fa-sitemap"></i>
 										<p>${coworklist.c_Name}</p>
 								</a></li>
@@ -400,7 +413,7 @@
 									<p>협업공간 생성</p>
 							</a></li>
 						</ul></li>
-					<li class="nav-item"><a href="/news/list"
+					<li class="nav-item"><a href="javascript:move('${contextPath}/news/list')"
 						class="nav-link"> <i class="nav-icon fas fa-book-open"></i>
 							<p>
 								새로운 소식 <span class="badge badge-info right">3</span>
@@ -415,7 +428,7 @@
 							</p>
 					</a></li>
 					
-					<li class="nav-item"><a href="/calendar/list"
+					<li class="nav-item"><a href="javascript:move('${contextPath}/calendar/list')"
 						class="nav-link"> <i class="nav-icon fas fa-calendar-check"></i>
 							<p>
 								전체 캘린더 <span class="badge badge-info right"></span>
@@ -431,88 +444,7 @@
 		</div>
 		<!-- /.sidebar -->
 	</aside>
-<!-- 정보변경 모달 팝업 내용 -->
-<div id='update-popup' class="needpopup">
-	<a href="#"></a>
-	<p>
-	<form id="projectupdate" action="/project/update" method="post">
-		<p class="login-box-msg" style="padding-bottom: 10px">
-			<input type="hidden" id="c_Id" name="c_Id" value="${pjt.c_Id}">
-			<label style="font-family: Recipekorea; padding-bottom: 5px;">이름</label> <input class="form-control" type="text" id="c_Name"
-				name="c_Name" required value="${pjt.c_Name}">
-		</p>
-		<p class="login-box-msg" style="padding-bottom: 10px">
-			<label style="font-family: Recipekorea; padding-bottom: 5px;">설명</label>
-			<textarea class="form-control" rows="3" id="c_Comment"
-				name="c_Comment" required>${pjt.c_Comment}</textarea>
-		</p>
-		<p class="login-box-msg" style="padding-bottom: 10px">
-			<label style="font-family: Recipekorea; padding-bottom: 5px;">관리자 변경</label><br><select name="mem_Id">
-				<option value="${member.mem_Id}">${member.mem_Name}(${member.mem_Id})</option>
-			<c:forEach var="memberList" items="${memberList}" >	
-				<c:if test="${memberList.mem_Id != pjt.mem_Id}">
-				<option value="${memberList.mem_Id}">${memberList.mem_Name}(${memberList.mem_Id})</option>
-				</c:if>
-				</c:forEach>
-			</select>
-		</p>
-		<p class="login-box-msg" style="padding-bottom: 10px">
-			<label style="font-family: Recipekorea; padding-bottom: 5px;">카테고리</label><br> <select name="c_Category">
-			
-				<option value="${pjt.c_Category}">${pjt.c_Category}</option>
-				<option value="0">협업업무관련</option>
-				<option value="1">개인업무관련</option>
-				<option value="2">학업과제관련</option>
-			</select>
-		</p>
-			<button type="submit" class="btn btn-block btn-success">정보변경</button>
-			</form>
-	<span>
-		<form id="projectdelete" action="/project/delete" method="post">
-		<input type="hidden" id="c_Id" name="c_Id" value="${pjt.c_Id}">
-		<button style="background-color: #dc3545;" type="submit" class="btn btn-block btn-success">협업공간삭제</button>
-	</form>
-	</span>
-</div>
-<!-- 맴버초대 모달 팝업 내용 -->
-<div id='add-popup' class="needpopup">
-	<p>
-		<div style="padding-bottom: 25px;">
-			<h4 class="m-0 text-dark"
-				style="font-family: Recipekorea; padding-bottom: 5px;" >파트너 초대</h4>
-			<span style="font-size: 0.9em; line-height: 1.0; color: #a1a1a1;">
-				많은 사람을 초대하여 원활한 의사소통으로 업무를 효율적으로 처리해보세요. 회사 동료뿐만 아니라 외부 협업자도 파트너로
-				초대할 수 있습니다.</span>
-		</div>
 
-		<div style="padding-bottom: 25px;">
-			<h4 class="m-0 text-dark"
-				style="font-family: Recipekorea; padding-bottom: 5px;">파트너 아이디</h4>
-			<input style="margin-bottom: 5px;" class="form-control" type="text" id="mem_Id" name="mem_Id"
-				required> <span id= "id_check"
-				style="font-size: 0.9em; line-height: 1.0; color: #a1a1a1;">
-				이메일 주소를 입력하고 Enter키를 눌러 파트너들을 초대해 보세요.</span>
-		</div>
-
-
-		<div style= "padding-bottom: 25px">
-			<h4 class="m-0 text-dark"
-				style="font-family: Recipekorea; padding-bottom: 5px;">초대 리스트</h4>
-			<div id = "applyList" class = "form-control" style="height: 152px; width: 490px; white-space: pre-line; margin-bottom: 5px;"></div> <span
-				style="font-size: 0.9em; line-height: 1.0; color: #a1a1a1; ">
-			
-				 초대 메세지를 보낼 파트너 아이디를 여기서 확인할 수 있습니다.</span>
-		</div>
-		<div><span style="float: left; padding-right: 50px;">
-		<form action="/news/insert" method="post" id = "applyform">
-			<input type="hidden" name="c_Id" value="${pjt.c_Id}">
-			<button type="submit" id= "insertsubmit" class="btn btn-block btn-success" 
-			style="width: 220px;">초대하기</button></form></span>
-		<span>
-		<button type="reset" class="btn btn-block btn-success" onclick="history.go(0);" style="width: 220px">취소</button>
-		</span>
-		</div>
-</div>
 <!-- 공간생성 모달 팝업 내용 -->
 <div id='createpjt-popup' class="needpopup">
 

@@ -31,14 +31,19 @@
 <link
 	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700"
 	rel="stylesheet">
+<script type="text/javascript">
+var result = '${msg}';
+var mem_Name ='${mem_Name}';
+if (result == 'success') {
+	alert(mem_Name+" 님 콜라우티 회원가입을 축하 합니다.");
+}
+
+</script>	
+	
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
 $(document).ready(function(){
-/* 	var result = '${msg}';
-	var mem_Name ='${mem_Name}';
-	if (result == 'success') {
-		alert(mem_Name+" 님 콜라우티 회원가입을 축하 합니다.");
-	} */
+/*  */
 	var userInputId = getCookie("userInputId");//저장된 쿠기값 가져오기
     $("input[name='mem_Id']").val(userInputId); 
      
@@ -165,9 +170,7 @@ function getCookie(cookieName) {
 				</p>
 				<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 				<script>
-					$("#loginBtn")
-							.click(
-									function() {
+					$("#loginBtn").click(function() {
 										location.href = "https://accounts.google.com/o/oauth2/auth?client_id="
 												+ "332997436138-3g0cj5k952gddaro03grkth547udnh41.apps.googleusercontent.com"
 												+ "&redirect_uri="

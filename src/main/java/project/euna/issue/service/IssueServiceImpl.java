@@ -24,7 +24,7 @@ public class IssueServiceImpl implements IssueService {
 	@Inject
 	NotifyDAOImpl notifyDAO;
 	
-	
+	//
 	
 	//글 등록
 	@Override

@@ -44,7 +44,7 @@
 	</resultMap>
 
 	
-
+<!--  -->
 	<!-- 글 목록 페이징-->
  		<select id="searchList" resultMap="issueResult02" parameterType="project.euna.issue.vo.Criteria"> 
       <![CDATA[

@@ -12,8 +12,9 @@ public interface CoworkController {
 	public String searchList(Model model, HttpServletRequest request, HttpServletResponse responsen) throws Exception;
 	
 	public String searchMain(Model model ,HttpServletRequest request, HttpServletResponse responsen) throws Exception;
+	public String searchMain2(Model model ,HttpServletRequest request, HttpServletResponse responsen) throws Exception;
 	
-	public String updateCowork(HttpServletRequest request, HttpServletResponse responsen) throws Exception;
+	public void updateCowork(HttpServletRequest request, HttpServletResponse responsen) throws Exception;
 	public String insertCowork(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public String deleteCowork(Model model, HttpServletRequest request, HttpServletResponse responsen) throws Exception;
 

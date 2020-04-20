@@ -43,7 +43,7 @@ $(document).ready(function() {
 		if(r_Content==''){
 			return false;
 		
-	
+	//
 		 }else{
 			$.ajax({
 				url:"/reply/insert",

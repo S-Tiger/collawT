@@ -10,7 +10,7 @@ import project.euna.issue.vo.Criteria;
 import project.euna.issue.vo.IssueVO;
 
 public interface IssueDAO {
-
+//
 	public int issueInsert(Map map);
 	public List<Map> searchList(Criteria cri) throws DataAccessException;
 	public Map<String, Object> issueRead(String i_Num);

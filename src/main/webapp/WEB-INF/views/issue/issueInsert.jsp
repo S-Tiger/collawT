@@ -15,6 +15,7 @@ span[name="chargerspan"] {
     display: inline-block;
 }
 
+
 </style>
 
 <script type="text/javascript">

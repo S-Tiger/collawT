@@ -15,7 +15,7 @@
 			 getIg_Checked();
 			 periodSetting();
 			 
-			 
+			 //
 			//이슈상태 라디오버튼 체크 값 가져오기
 			 $('input:radio[name="ig_checked"]').click(function(e){
 				 getIg_Checked();
