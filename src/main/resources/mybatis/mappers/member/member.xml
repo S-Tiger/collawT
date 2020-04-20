@@ -105,8 +105,8 @@
 
 	<insert id="memberJoinApiNaver" parameterType="java.util.Map">
 		<![CDATA[
-		insert into member(mem_id, mem_name, mem_joindate, mem_kind)
-		values(#{mem_Id}, #{mem_Name}, sysdate, '00')
+		insert into member(mem_id, mem_name, mem_imaname, mem_joindate, mem_kind)
+		values(#{mem_Id}, #{mem_Name}, #{mem_Img, sysdate, '00')
 		]]>
 	</insert>
 
