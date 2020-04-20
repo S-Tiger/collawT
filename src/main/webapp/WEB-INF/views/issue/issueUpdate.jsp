@@ -13,6 +13,8 @@
 		 $(document).ready(function(){
 			 getFileList();
 			 getIg_Checked();
+			 periodSetting();
+			 
 			 
 			//이슈상태 라디오버튼 체크 값 가져오기
 			 $('input:radio[name="ig_checked"]').click(function(e){
@@ -21,10 +23,6 @@
 			//document.insertForm.ig_Num.value=ig_Num;
 			
 			
-			 
-			//캘린더 시작일/마감일 구하기
-			var i_Period = $("#i_Start").val()+' - '+ $("#i_End").val();
-			document.updateForm.i_Period.value=i_Period;
 			
 			
 			 var i_Num = $("#i_Num").val();
@@ -55,6 +53,26 @@
 			 $('#i_Period').daterangepicker({
 				locale: { format: 'YYYY/MM/DD'}
 			 })
+			 
+			$("#periodNull").click(function(){
+				
+				periodModify();
+			})
+			
+			$('#i_Period').change(function(){
+				
+				periodModify();
+				
+				
+			})
+			
+			$('#i_Period').click(function(){
+				
+				periodModify();
+				
+				
+			})
+			
 			 
 			//파일첨부 ajax
 			$('#a_File').change(function(e){
@@ -150,11 +168,87 @@
 		  		  }
 		  			  
 		  	  }
-
 		  	   
 		  	  }
-		  	 
+			
+		  //캘린더 시작일/마감일 초기 세팅
+			function periodSetting(){
+				
+				var i_Period = $("#i_Start").val()+' - '+ $("#i_End").val();
+				document.updateForm.i_Period.value=i_Period;
+				
+				if($("#i_Start").val()=="" && $("#i_End").val()==""){
+					
+					$("#i_Period").css('background-color','#e9ecef');
+					$("#i_Period").css('color','#e9ecef');
+					$("#i_Period").attr('disabled',true)
+					$("#periodNull").attr('checked',true)
+					
+					var today = new Date();
+					var dd = today.getDate();
+					var mm = today.getMonth()+1; //January is 0!
+					var yyyy = today.getFullYear();
 
+					if(dd<10) {
+					    dd='0'+dd
+					} 
+
+					if(mm<10) {
+					    mm='0'+mm
+					} 
+
+					today = yyyy+'/'+mm+'/'+dd;
+				
+				
+					var i_Period = today+' - '+ today;
+					document.updateForm.i_Period.value=i_Period;
+			 	}					
+					
+					
+				}
+				
+			
+		  
+		  
+			function periodModify(){
+				if($("#periodNull").is(":checked")==true){
+					
+					var i_Start = "";
+					var i_End="";
+					document.updateForm.i_Start.value=i_Start;
+					document.updateForm.i_End.value=i_End;
+					
+					var i_PeriodCheck = "";
+					document.updateForm.i_PeriodCheck.value=i_PeriodCheck;
+					
+					$("#i_Period").css('background-color','#e9ecef');
+					$("#i_Period").css('color','#e9ecef');
+					$("#i_Period").attr('disabled',true);
+				}else{
+					
+					 $("#i_Period").css('background-color','#fff');
+					$("#i_Period").css('color','#495057');
+					$("#i_Period").attr('disabled',false)
+					
+					var i_Period = $("#i_Period").val();
+					
+					
+						var i_PeriodCheck = $("#i_Period").val();
+						document.updateForm.i_PeriodCheck.value=i_PeriodCheck;
+						
+						var i_Start = $("#i_PeriodCheck").val().substring(0,10);
+						var i_End= $("#i_PeriodCheck").val().substring(13,23);
+						
+						
+						document.updateForm.i_Start.value=i_Start;
+						document.updateForm.i_End.value=i_End;
+					
+					
+				}
+			}
+			
+
+		  	 
 			
 	
 	</script>
@@ -295,7 +389,19 @@
                 
                  <!-- 캘린더 -->
                <div class="form-group">
+                <div class="row">
+                <div class="col-8">
                    <label for="inputStatus">기간</label>
+                   </div>
+                   
+                   <div class="col-4" >
+                   <div class="icheck-danger" style="text-align:right; ">
+                    
+                        <input type="checkbox" value="" id="periodNull" name="periodNull">
+                       <label for="periodNull"><small>기간 미설정</small></label>
+                      </div>
+                      </div>
+                      </div>
 
                   <div class="input-group">
                     <div class="input-group-prepend">
@@ -304,9 +410,12 @@
                       </span>
                     </div>
                     <input type="text" id = "i_Period" name="i_Period" class="form-control float-right">
+                  </div>
+                  
+                    <input type="hidden" id = "i_PeriodCheck" name="i_PeriodCheck" value="">
                     <input type="hidden" id = "i_Start" name="i_Start" value="${issueUpdate.i_Start}">
                     <input type="hidden" id = "i_End" name="i_End" value="${issueUpdate.i_End}">
-                  </div>
+                  
               </div>
                 <!-- /.캘린더 -->
                 
@@ -325,5 +434,3 @@
               
   
   <!-- /.content-wrapper -->
-
-

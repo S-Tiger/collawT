@@ -80,6 +80,15 @@ public class IssueServiceImpl implements IssueService {
 		
 	}
 	
+	
+	//협업공간 내 멤버 조회
+	@Override
+	public List<Map> comemRead(String c_id) {
+		return issueDAO.comemRead(c_id);
+		
+	}
+	
+	
 	//협업공간 조회
 	//@Override
 //	public List<Map> coRead(String mem_id) {

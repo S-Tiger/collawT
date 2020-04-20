@@ -425,7 +425,6 @@
         this.container.find('.drp-buttons')
             .on('click.daterangepicker', 'button.applyBtn', $.proxy(this.clickApply, this))
             .on('click.daterangepicker', 'button.cancelBtn', $.proxy(this.clickCancel, this))
-            
 
         if (this.element.is('input') || this.element.is('button')) {
             this.element.on({

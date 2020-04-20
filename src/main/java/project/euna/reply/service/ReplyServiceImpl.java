@@ -29,6 +29,8 @@ public class ReplyServiceImpl implements ReplyService {
 	//댓글 등록
 	@Override
 	public void  replyInsert(ReplyVO replyVO) {
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!service :"+replyVO.getC_Id());
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!service :"+replyVO.getR_Content());
 		int result = replyDAO.replyInsert(replyVO);
 		
 		if (result == 0) {

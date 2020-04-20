@@ -308,11 +308,11 @@ $(document).ready(function() {
           <!-- /.card -->
           
           <!-- 이거 나중에 기능 넣기 -->
-							<button type="button" class="btn btn-default btn-sm">
+							<button type="button" class="btn btn-default btn-sm" style="color:#444; margin:3px;">
 								<i class="fas fa-share"></i> 공유
 							</button>
 							<!-- 숫자 카운트 넣기 -->
-							<button type="button" class="btn btn-default btn-sm">
+							<button type="button" class="btn btn-default btn-sm" style="color:#444; margin:3px;">
 								<i class="fas fa-bookmark"></i> 북마크
 							</button>
 							

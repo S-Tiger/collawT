@@ -67,6 +67,15 @@ public class IssueDAOImpl implements IssueDAO {
 
 	}
 	
+	//협업공간 내 멤버 조회
+	@Override
+	public List<Map> comemRead(String c_id) {
+		return sqlSession.selectList("issue.comemRead", c_id);
+
+	}
+	
+	
+	
 	// 협업공간 조회
 //	@Override
 //	public List<Map> coRead(String mem_id) {

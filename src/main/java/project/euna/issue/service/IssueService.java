@@ -20,6 +20,7 @@ public interface IssueService {
 	public void issueUpdate(IssueVO issueVO) throws Exception;
 	public int listCount(String c_Id) throws Exception;
 	public List<Map> igRead();
+	public List<Map> comemRead(String c_id);
 	//public List<Map> coRead(String mem_id);
 
 }

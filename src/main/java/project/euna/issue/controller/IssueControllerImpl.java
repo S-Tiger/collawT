@@ -142,9 +142,13 @@ public class IssueControllerImpl implements IssueController {
 		
 		//List<Map> coList = issueService.coRead(mem_Id);
 		
+		List<Map> comemList = issueService.comemRead(c_Id);
+		
 				
 		ModelAndView mav = new ModelAndView("/issue/issueInsert");
 		mav.addObject("c_Id", c_Id);
+		mav.addObject("comemList", comemList);
+
 		//mav.addObject("coList", coList);
 		return mav;
 		

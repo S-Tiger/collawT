@@ -5,28 +5,27 @@
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+<style type="text/css">
 
+span[name="chargerspan"] {
+	background-clip: padding-box;
+    border: 1px solid #17a2b8;
+    padding: 2px;
+    margin: 2px;
+    display: inline-block;
+}
+
+</style>
 
 <script type="text/javascript">
 	$(document).ready(function() {
 		getFileList();
-		 periodCheck();
+		periodSetting();
 		
 		//글쓰기 빈 값 안되게 검사
 		$("#submit").click(function(){
 			var i_Name = $("#i_Name").val();
 		
-		//캘린더 디폴트 빈 값으로 설정~~~~~~~~~~~~~~~~~~~~~~~~~~
-		//	$("#i_Period").val('');
-			
-			
-			
-		//캘린더 시작일/마감일 구하기
-			var i_Start = $("#i_Period").val().substring(0,10);
-			var i_End= $("#i_Period").val().substring(13,23);
-			document.insertForm.i_Start.value=i_Start;
-			document.insertForm.i_End.value=i_End;
-			
 			
 			if(i_Name==''){
 				alert("이슈명을 입력하세요");
@@ -34,13 +33,18 @@
 				return false; 
 			}
 			
-			
-			
-			
+			periodSetting();
 
 			document.insertForm.submit();
 			
 		});
+		
+		
+		//캘린더 시작일/마감일 구하기/기간 미설정 시
+		
+		$("#periodNull").click(function(){
+			periodSetting();
+		})
 		
 		
 		//캘린더 기능
@@ -135,11 +139,31 @@
 			
 	}
 	
-	function periodCheck(){
-		var obj = document.getElementsByName("periodCheck");
-		if(obj.checked==true){
-			alert("!!")
-			$("#periodGroup").remove();
+	function periodSetting(){
+		if($("#periodNull").is(":checked")==true){
+			var i_Start = "";
+			var i_End="";
+			document.insertForm.i_Start.value=i_Start;
+			document.insertForm.i_End.value=i_End;
+			
+			var i_PeriodCheck = "";
+			document.insertForm.i_PeriodCheck.value=i_PeriodCheck;
+			
+			$("#i_Period").css('background-color','#e9ecef');
+			$("#i_Period").css('color','#e9ecef');
+			$("#i_Period").attr('disabled',true)
+		}else{
+			$("#i_Period").css('background-color','#fff');
+			$("#i_Period").css('color','#495057');
+			$("#i_Period").attr('disabled',false)
+			
+			var i_PeriodCheck = $("#i_Period").val();
+			document.insertForm.i_PeriodCheck.value=i_PeriodCheck;
+			
+			var i_Start = $("#i_PeriodCheck").val().substring(0,10);
+			var i_End= $("#i_PeriodCheck").val().substring(13,23);
+			document.insertForm.i_Start.value=i_Start;
+			document.insertForm.i_End.value=i_End;
 		}
 	}
 	
@@ -259,12 +283,55 @@
              <div class="form-group">
               
                 <label for="inputStatus">담당자</label>
-               <select class="form-control custom-select">
-                  <option selected disabled>Select one</option>
-                  <option>나중에 담당자명 리스트로 가져오기</option>
+                
+               <select class="form-control custom-select" id="chargerSelect" name="chargerSelect">
+               	<option selected disabled>담당자를 지정하세요</option>
+                  <c:forEach var="comemList" items="${comemList}" >
+                  <option >${comemList.MEM_NAME}(${comemList.MEM_ID})</option>
+                  </c:forEach>
                 </select>
+                
+                
               </div>
+              <div class="form-group">
+              <span id="id_check" name="id_check"
+				style="font-size: 0.9em; line-height: 1.0; color: #a1a1a1; ">
+			
+				담당자 목록을  확인하세요.</span>
+              <div id="chargerList" class = "form-control" style="height: 100px; width: 100%; white-space: pre-line; margin-bottom: 5px; overflow:scroll;"></div>
              
+				</div>
+				<div id="chargerForm"></div>
+				<script>
+				var chargedArray = new Array();
+				
+				
+				 $('#chargerSelect').change(function(event) {
+					 var mem_Id = $('#chargerSelect').val();
+					 chargedArray.push(mem_Id);
+					 console.log(chargedArray);
+					 var ok = true;
+					 
+						 for(var i=0; i<chargedArray.length-1; i++){
+							 if(mem_Id == chargedArray[i]){
+								 alert("동일한 아이디를 여러 번 초대할 수 없습니다.")
+								 chargedArray.pop();
+								 console.log(chargedArray);
+							  	ok=false;
+							 }
+			
+					 		}
+						 if(ok==true){
+							 $('#chargerList').append("<span id= 'chargerspan["+mem_Id+"]' name='chargerspan'>"+mem_Id+"<a id ='chargerdelete' href='javascript:deleteCharger("+mem_Id+")'> X </a></span>");
+						 }
+				 })
+				 
+				 function deleteCharger(mem_Id){
+					 $("#chargerspan["+mem_Id+"]").remove();
+				 }
+				
+				</script>
+				
              
             
              
@@ -295,14 +362,15 @@
              
                    <div class="col-4" >
                    <div class="icheck-danger" style="text-align:right; ">
-                        <input type="checkbox" value="" id="periodCheck" name="periodCheck">
-                        <label for="periodCheck" ><small>기간 미설정</small></label>
+                    
+                        <input type="checkbox" value="" id="periodNull" name="periodNull">
+                       <label for="periodNull"><small>기간 미설정</small></label>
                       </div>
                       </div>
                       </div>
                       
-
-                  <div class="input-group" id="periodGroup">
+                      
+                      <div class="input-group">
                     <div class="input-group-prepend">
                       <span class="input-group-text">
                         <i class="far fa-calendar-alt"></i>
@@ -311,9 +379,11 @@
                     <input type="text" id = "i_Period" name="i_Period" class="form-control float-right">
                     
               </div>
+
+                 
               
                     
-                      
+                    <input type="hidden" id = "i_PeriodCheck" name="i_PeriodCheck" value="">
                     <input type="hidden" id = "i_Start" name="i_Start" value="">
                     <input type="hidden" id = "i_End" name="i_End" value="">
                   

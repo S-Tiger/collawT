@@ -137,6 +137,18 @@
 	</select> 
 	
 	
+	<!-- 협업공간 내 멤버 조회 -->
+	 <select id="comemRead"  resultType="java.util.HashMap"> 
+      <![CDATA[
+			select m.mem_name, m.mem_id
+			from member m, co_member co
+			where m.mem_id = co.mem_id
+			and c_id = #{c_id}
+      ]]>
+	</select> 
+	
+	
+	
 		<!-- 협업공간 조회 -->
 <!-- 	<select id="coRead"  resultType="java.util.HashMap"> 
       <![CDATA[
