@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -67,22 +68,38 @@ public class CoworkControllerImpl implements CoworkController {
 		searchMap.put("c_Id", c_Id);
 		
 		Map<String, Object>pjt = coworkService.searchMain(searchMap); //vo타입에 list를 생성하고 서비스에서 가져온 데이터를 list에 넣습니다
-		
 		List<Map>memberList = comemberService.memberList(searchMap);
-		
 		model.addAttribute("pjt", pjt); 
 		model.addAttribute("memberList", memberList);
 		
-		return "cowork/main"; //뷰url지정해주세요
+		return "/cowork/main"; //뷰url지정해주세요
+		
+	}
+	
+	
+	@Override
+	@PostMapping("/main")
+	public String searchMain2(Model model ,HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		String c_Id = (String)request.getAttribute("c_Id");
+		
+		searchMap.put("c_Id", c_Id);
+		
+		Map<String, Object>pjt = coworkService.searchMain(searchMap); //vo타입에 list를 생성하고 서비스에서 가져온 데이터를 list에 넣습니다
+		List<Map>memberList = comemberService.memberList(searchMap);
+		model.addAttribute("pjt", pjt); 
+		model.addAttribute("memberList", memberList);
+		
+		return "/cowork/main2"; //뷰url지정해주세요
 		
 	}
 
 	@Override
 	@PostMapping("/update")
-	public String updateCowork(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public void updateCowork(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
 		Map<String, Object> dataMap = new HashMap<String, Object>();
-		
+		String c_Id = request.getParameter("c_Id");
 		Enumeration enu = request.getParameterNames();
 		while (enu.hasMoreElements()) {
 			String name = (String) enu.nextElement();
@@ -90,8 +107,10 @@ public class CoworkControllerImpl implements CoworkController {
 			dataMap.put(name, value);
 		}
 		coworkService.updateCowork(dataMap);
+		request.setAttribute("c_Id",c_Id);
+		RequestDispatcher dis = request.getRequestDispatcher("/project/main");
+		dis.forward(request, response);
 		
-		return "redirect:/project/main?c_Id="+request.getParameter("c_Id");
 		
 	}
 
