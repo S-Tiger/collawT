@@ -10,6 +10,7 @@
 		<result property="mem_Name" column="mem_Name" />
 		<result property="mem_ImgName" column="mem_ImgName" />
 		<result property="mem_File" column="mem_File" javaType="[B"	jdbcType="BLOB" />
+		<result property="mem_LoginApi" column="mem_LoginApi" />
 		<!-- <result property="forgot_Key" column="mem_Imagname" /> -->
 	</resultMap>
 

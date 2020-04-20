@@ -138,6 +138,8 @@ public class MemberControllerImpl implements MemberController {
 		joinMem.put("mem_Id", memberVO.getMem_Id());
 		joinMem.put("mem_Pwd", mem_Pwd);
 		joinMem.put("mem_Name", memberVO.getMem_Name());
+		
+		//회원가입
 		rttr.addFlashAttribute("msg", "success");
 		rttr.addFlashAttribute("mem_Name",joinMem.get("mem_Name"));
 		service.memberJoin(joinMem, memberVO, response); // service에 memberRegister를 실행하는 부분
@@ -153,7 +155,7 @@ public class MemberControllerImpl implements MemberController {
 
 		// https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=sE***************&
 		// redirect_uri=http%3A%2F%2F211.63.89.90%3A8090%2Flogin_project%2Fcallback&state=e68c269c-5ba9-4c31-85da-54c16c658125
-		System.out.println("네이버:" + naverAuthUrl);
+		//System.out.println("네이버:" + naverAuthUrl);
 
 		// 네이버
 		model.addAttribute("naverLoginUrl", naverAuthUrl);
@@ -170,7 +172,7 @@ public class MemberControllerImpl implements MemberController {
 
 		// https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=sE***************&
 		// redirect_uri=http%3A%2F%2F211.63.89.90%3A8090%2Flogin_project%2Fcallback&state=e68c269c-5ba9-4c31-85da-54c16c658125
-		System.out.println("네이버:" + naverAuthUrl);
+		//System.out.println("네이버:" + naverAuthUrl);
 
 		// 네이버
 		model.addAttribute("naverLoginUrl", naverAuthUrl);
@@ -239,7 +241,8 @@ public class MemberControllerImpl implements MemberController {
 		member00.put("mem_Name", memberVO.getMem_Name());
 		service.updateMypage(member00);
 		//일회성이라 리프레시할 경우 데이터가 소멸한다.
-		//rttr.addFlashAttribute("msg", "success");
+		
+		rttr.addFlashAttribute("msg", "success");
 		session.setAttribute("member", member00);
 		return "redirect:/member/mypage";
 	}
@@ -335,6 +338,7 @@ public class MemberControllerImpl implements MemberController {
 			System.out.println("Id: " + memberVO.getMem_Id());
 			service.memberDelete(member, response);
 			session.invalidate();
+			//탈퇴
 			rttr.addFlashAttribute("msg", "success");
 			
 			// 세션초기화
@@ -373,7 +377,7 @@ public class MemberControllerImpl implements MemberController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "/main/index";
+		return "redirect:/member/mypage";
 	}
 
 	// 프로필 사진가져옴 /getByteImage?mem_Id=
@@ -425,7 +429,7 @@ public class MemberControllerImpl implements MemberController {
 			Map<String, Object> member = new HashMap<String, Object>();
 			member.put("mem_Id", mem_Id);
 			member.put("mem_Name", mem_Name);
-			// member.put("mem_ImgName",mem_ImgName);
+			member.put("mem_ImgName",mem_ImgName);
 
 			// 아이디가 없다면.
 			System.out.println(member);
@@ -492,7 +496,7 @@ public class MemberControllerImpl implements MemberController {
 			member.put("mem_Id", mem_Id);
 			// 구글이 이름을 제공하지 않아 아이디로 이름 대체
 			member.put("mem_Name", mem_Id);
-			// member.put("mem_ImgName",mem_ImgName);
+			member.put("mem_ImgName",mem_ImgName);
 			System.out.println("member: " + member);
 
 			int result = service.check_id(mem_Id);
@@ -502,7 +506,7 @@ public class MemberControllerImpl implements MemberController {
 				session.setAttribute("member", member);
 				return "/main/index";
 			} else {
-
+				
 				System.out.println("아이디가 있음");
 				session.setAttribute("member", member);
 

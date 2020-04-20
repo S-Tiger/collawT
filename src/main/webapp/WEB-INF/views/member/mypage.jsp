@@ -42,19 +42,26 @@
 	height: 95px;
 }
 </style>
+<!-- 
+<script>
+if ('${msg}' == 'success') {
+	alert(" 회원정보 변경 되었습니다.");
+	console.log("after:" + '${msg}');
+	}else if(result != null){
+	console.log("dd");
+	} 
+
+</script> -->
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
- if ('${msg}' == 'success') {
-	alert(" 회원정보 변경 되었습니다.");
-	console.log("after:" + '${msg}');
-}else if(result != null){
-	console.log("dd");
-}
+
+
 /* 	if(${msg != null}){
 		alert('${msg}');
 	};  */
 	$(function(){
+		
 	//비밀번호같지 확인하는 자바스크립트 (서브밋할때 작동됨)
 	if($("#pwForm").submit(function(){
 		console.log("11");
@@ -160,10 +167,10 @@
 										class="btn btn-success float-right">
 									</form>
 									<!--이름바꾸는 폼 끝  -->
-									<%-- <p>result: ${result }</p>
+									 <p>result: ${result }</p>
 									<p>member: ${member}</p>
-									<img src="${member.mem_File }"
-										class="user-img img-fluid img-circle"> --%>
+									<img src="${member.mem_ImgName}"
+										class="user-img img-fluid img-circle">
 								</div>
 							</div>
 						</div>
@@ -193,12 +200,10 @@
 										<!-- 변경된이미지 -->
 										<div id="holder" class="user-img img-fluid img-circle">
 											<!-- 아이디 있으면.. -->
-											
 											<c:if test="${member.mem_File != null }">
 												<img src="/member/getByteImage?mem_Id=${member.mem_Id}"
 													class="user-img img-fluid img-circle" alt="User Image" />
 											</c:if>
-
 											<c:if test="${member.mem_File == null }">
 												<img src="../resources/dist/img/profile.jpg"
 													class="user-img img-fluid img-circle" alt="User Image">
@@ -329,7 +334,9 @@
 <!-- ./wrapper -->
 
 <script type="text/javascript">
-	var upload = document.getElementsByTagName('input')[6];
+	
+	//upload변수의 인풋의 순서 header의 인풋까지 포함.. 미포함시 6번째
+	var upload = document.getElementsByTagName('input')[15];
 	var holder = document.getElementById('holder');
 	var state = document.getElementById('status');
 	upload.onchange = function(e) {

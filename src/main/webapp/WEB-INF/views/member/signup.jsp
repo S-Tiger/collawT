@@ -20,73 +20,78 @@
   <link rel="stylesheet" href="../resources/dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
   <script type="text/javascript">
   $(function(){
- 		$("#joinForm").submit(function(){
- 			var mem_Id = $('#mem_Id').val();
-			if($("#pw").val() !== $("#pw2").val()){
+	  
+		$("#joinForm").submit(function(){
+			//console.log("checked: "+$("agreeTerms").is(":checked"));
+			if ($("#agreeTerms").is(":checked")==false){
+				alert("회원가입 동의를 해주세요.");				
+				return false;
+			}
+			else if($("#pw").val() !== $("#pw2").val()){
 				alert("비밀번호가 다릅니다.");
 				$("#pw").val("").focus();
 				$("#pw2").val("");
-				return false;
-			}else if (mem_Id == ""){
-				alert("아이디를 입력해주세요.");
 				return false;
 			}else if ($("#pw").val().length < 4) {
 				alert("비밀번호는 8자 이상으로 설정해야 합니다.");
 				$("#pw").val("").focus();
 				return false;
-			}else if ($("#mem_Name".val()=="")){
-				alert("이름을 입력해주세요.")
+			}else if ($("#mem_Id").val()==""){
+				alert("아이디를 입력해주세요.");
 				return false;
-			}else if ();
+			}else if ($("#mem_Name".val()=="")){
+				alert("이름을 입력해주세요.");
+				return false;
 			}
 		}); 
- 	// 아이디 유효성 검사(1 = 중복 / 0 != 중복)
- 		$("#mem_Id").blur(function() {
- 			var idJ = /^[a-z0-9]{4,12}$/;
- 			var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z]?)*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
- 			var _kor = /[ㄱ-ㅎ가-힣]/g;
- 			var mem_Id = $('#mem_Id').val();
+	// 아이디 유효성 검사(1 = 중복 / 0 != 중복)
+		$("#mem_Id").blur(function() {
+			var idJ = /^[a-z0-9]{4,12}$/;
+			var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z]?)*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+			var _kor = /[ㄱ-ㅎ가-힣]/g;
+			var mem_Id = $('#mem_Id').val();
 			console.log("블러");
- 			$.ajax({
- 				url : '${contextPath}/member/check_id?mem_Id='+ mem_Id,
- 				type : 'get',
- 				success : function(data) {
- 					console.log("1 = 중복o / 0 = 중복x : "+ data);							
- 					
- 					if (data == 1) {
- 							// 1 : 아이디가 중복되는 문구
- 							$("#id_check").text("사용중인 아이디입니다 :p");
- 							$("#id_check").css("color", "red");
- 							$("#joinBtn").attr("disabled", true);
- 						} else {
- 							// 0 : 아이디 사용가능 문구
- 							$("#id_check").text("사용가능한 아이디입니다 :p");
- 							$("#id_check").css("color", "green");
- 							$("#joinBtn").attr("disabled", false);
- 							
- 							//아이디 유효성 검사
- 							if(idJ.test(mem_Id)||_kor.test(mem_Id)){
+			$.ajax({
+				url : '${contextPath}/member/check_id?mem_Id='+ mem_Id,
+				type : 'get',
+				success : function(data) {
+					console.log("1 = 중복o / 0 = 중복x : "+ data);							
+					
+					if (data == 1) {
+							// 1 : 아이디가 중복되는 문구
+							$("#id_check").text("사용중인 아이디입니다 :p");
+							$("#id_check").css("color", "red");
+							$("#joinBtn").attr("disabled", true);
+						} else {
+							// 0 : 아이디 사용가능 문구
+							$("#id_check").text("사용가능한 아이디입니다 :p");
+							$("#id_check").css("color", "green");
+							$("#joinBtn").attr("disabled", false);
+							
+							//아이디 유효성 검사
+							if(idJ.test(mem_Id)||_kor.test(mem_Id)){
 								if(mem_Id == ""){
- 								$('#id_check').text('아이디를 입력해주세요 :)');
- 								$('#id_check').css('color', 'red');
- 								$("#joinBtn").attr("disabled", false);				
- 								
- 							} else {
- 								
- 								$('#id_check').text("잘못된 아이디 형식입니다. 이메일 주소를 입력해 주세요 :)");
- 								$('#id_check').css('color', 'red');
- 								$("#joinBtn").attr("disabled", true);
- 							}
- 							}
- 						}
- 					}, error : function() {
- 							console.log("실패");
- 					}
- 				});
- 			});
+								
+								$('#id_check').text('아이디를 입력해주세요 :)');
+								$('#id_check').css('color', 'red');
+								$("#joinBtn").attr("disabled", false);				
+								
+							} else {
+								
+								$('#id_check').text("잘못된 아이디 형식입니다. 이메일 주소를 입력해 주세요 :)");
+								$('#id_check').css('color', 'red');
+								$("#joinBtn").attr("disabled", true);
+							}
+							}
+						}
+					}, error : function() {
+							console.log("실패");
+					}
+				});
+			});
 	});
 </script>
 </head>
@@ -141,7 +146,7 @@
         <div class="row">
           <div class="col-8">
             <div class="icheck-primary">
-              <input type="checkbox" id="agreeTerms" name="terms" value="agree">
+              <input type="checkbox" id="agreeTerms" name="terms" >
               <label for="agreeTerms">
               회원가입 <a href="#">동의</a>
               <script type="text/javascript">
@@ -150,7 +155,7 @@
             	        if($("#agreeTerms").is(":checked")){
             	            alert("회원가입에 동의해주셔서 감사합니다.");
             	        }else{
-            	            alert("체크박스 체크 해제!");
+            	            alert("회원가입에 동의하시지 않으셔서 회원가입이 불가능 합니다. 회원가입 동의 체크를 해주세요.");
             	        }
             	    });
             	});
