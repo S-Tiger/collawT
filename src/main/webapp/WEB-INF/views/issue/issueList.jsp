@@ -5,7 +5,12 @@
 <c:set var="contextPath"  value="${pageContext.request.contextPath}" />
 
 
+
+
+
 <style>
+
+
 .accent-teal .btn-link, .accent-teal a:not(.dropdown-item):not(.btn-app):not(.nav-link):not(.brand-link) {
     color: #343a40;
 }
@@ -215,7 +220,7 @@
 				<div class="col-sm-6">
 					<div>
 						<h1 class="m-0 text-dark"
-							style="font-family: Recipekorea; max-width: 80%; display: contents;">${pjt.c_Name}</h1>
+							style="font-family: Spoqa Han Sans; max-width: 80%; display: contents;">${pjt.c_Name}</h1>
 							<c:if test="${member.mem_Id == pjt.mem_Id}">
 						<a style="font-size: 20px;  margin: 3px;" href="/#"
 							data-needpopup-show="#update-popup"><i
@@ -247,7 +252,7 @@
 		<div class="card">
 			<div class="card-header p-2">
 			
-				<ol class="nav nav-pills" style="margin:0px; border:none; padding-inline-start: 0px;  width:400px; float:left;">
+				<ol class="nav nav-pills" style="font-family: Spoqa Han Sans; font-size:15px; margin:0px; border:none; padding-inline-start: 0px;  width:400px; float:left;">
 					<li class="nav-item" ><a class="nav-link"
 						href="/project/main?c_Id=${pjt.c_Id}"  id="activityMenu">홈</a></li>
 						
@@ -257,10 +262,12 @@
 						 id= "issueMenu">칸반</a></li>
 					<li class="nav-item" id = "activityMenu"><a class="nav-link" href="#"
 						 id= "issueMenu">캘린더</a></li>
+					<li class="nav-item" id = "activityMenu"><a class="nav-link" href="#"
+						 id= "issueMenu">투표</a></li>
 						
 				</ol>
 				
-				 <button type="button" class="btn btn-success float-right" onclick="location.href='/project/issue/insert?c_Id=${pjt.c_Id}'"style="text-align:center; float:right; background-color:#DC3545; border-color:#DC3545; font-family:고딕;">
+				 <button type="button" class="btn btn-success float-right" onclick="location.href='/project/issue/insert?c_Id=${pjt.c_Id}'"style="text-align:center; float:right; background-color:#DC3545; border-color:#DC3545; font-family: Recipekorea; font-size:13px;">
 								<i class="fas fa-edit"></i> 이슈 작성</button>
 				
 			</div>
@@ -273,40 +280,58 @@
 			       <!-- 리스트 부분 -->
         <div class="card-body p-0">
            
-          <table id="example1" class="table table-striped projects">
+          <table class="table table-striped projects">
               <tbody>
 
                  <c:forEach var="issueList" items="${issueList}" >	
                   <tr>
-                      <td>  ${issueList.mem_Name}    </td>
-                      <td> <a href="/project/issue/read?i_Num=${issueList.i_Num}"> ${issueList.i_Name}</a>    </td>
-                      <td>  ${issueList.i_Date}    </td>
+                  
+                      <td  style="width:10%; vertical-align:top"> 
+                            <span style= "
+							<c:if test="${issueList.ig_Num == 1}">background-color:#6c757d;</c:if>
+							<c:if test="${issueList.ig_Num == 2}">background-color:#007bff;</c:if>
+							<c:if test="${issueList.ig_Num == 3}">background-color:#ffc107;</c:if>
+							<c:if test="${issueList.ig_Num == 4}">background-color:#28a745;</c:if>
+							"
+							id="ig_Name" name="ig_Name" class="badge badge-success"><c:out  value="${issueList.ig_Name}" /></span>
+						
+						</td>
+					  <td style="width:60%">	
+					  <a href="/project/issue/read?i_Num=${issueList.i_Num}"> <font size="3em"><b>${issueList.i_Name}</b></font></a>
+					  <br>
+					  <font size="1em" color="#6c757d">이슈 담당자로 변경 예정</font>    
+					  </td>
+                      
+                      <td style="width:30%; vertical-align:top"> <font size="2em" color="#6c757d"><i class="far fa-calendar-alt"></i>&nbsp;&nbsp;<c:if test="${issueList.i_Start == null}">기간 미설정</c:if>
+                      <c:if test="${issueList.i_Start != null}">${issueList.i_Start} - ${issueList.i_End}</c:if> 
+                        </font>  </td>
+                     
                    </tr>
+                   
                    </c:forEach>
               </tbody>
           </table>
         </div>
         <!-- /리스트 부분 -->
-        
+        <br><br>
         <!-- 페이징 -->
- 
-        
-   <ul>
+ <div class="form-group" style="margin-left:20px">
+   <ul class="pagination pagination-sm m-0">
     <c:if test="${pageMaker.prev}">
-    	<li id="liStyle"><a href="list${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
+    	<li class="page-item" id="liStyle"><a class="page-link" href="list${pageMaker.makeQuery(pageMaker.startPage - 1)}">&laquo;</a></li>
     </c:if> 
 
     <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-    	<li id="liStyle"><a href="list${pageMaker.makeQuery(idx)}">${idx}</a></li>
+    	<li class="page-item" id="liStyle"><a class="page-link" href="list${pageMaker.makeQuery(idx)}">${idx}</a></li>
     </c:forEach>
 
     <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-    	<li id="liStyle"><a href="list${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
+    	<li class="page-item" id="liStyle"><a class="page-link" href="list${pageMaker.makeQuery(pageMaker.endPage + 1)}">&raquo;</a></li>
     </c:if> 
   </ul>
-  
-  
-
+  <br>
+  </div>
+ 
         <!--/페이징  -->
        
 
@@ -332,8 +357,6 @@
     
     
 </script>
-<style type="text/css">
-			#liStyle {list-style: none; float: left; padding: 6px;}
-		</style>
+
 
 
