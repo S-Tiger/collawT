@@ -63,7 +63,7 @@
 			<choose>
 				<when
 					test="c_Id != '' and c_Id != null and mem_Id != ''  and  mem_Id != null">
-					c_Id = #{c_Id} and mem_Id = ${mem_Id}
+					c_Id = #{c_Id} and mem_Id = #{mem_Id}
 				</when>
 				<when test="c_Id != '' and c_Id != null">
 					c_Id = #{c_Id}

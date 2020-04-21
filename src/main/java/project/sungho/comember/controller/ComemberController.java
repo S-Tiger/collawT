@@ -12,8 +12,8 @@ public interface ComemberController {
 
 public String searchList(Model model ,HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
-	public String updateCowork(Model model) throws Exception;
-	public String insertCowork(CoworkVO coworkVO, HttpSession session) throws Exception;
-	public String deleteCowork(Model model) throws Exception;
+	public String updateComember(Model model) throws Exception;
+	public String insertComember(CoworkVO coworkVO, HttpSession session) throws Exception;
+	public String deleteComember(Model model ,HttpServletRequest request, HttpServletResponse responsel) throws Exception;
 	
 }
