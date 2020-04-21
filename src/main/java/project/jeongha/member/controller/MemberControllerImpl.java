@@ -585,11 +585,6 @@ public class MemberControllerImpl implements MemberController {
 		return buffer.toString();
 	}
 
-	@Override
-	@GetMapping("/vote")
-	public String googleDrive() {
-		// TODO Auto-generated method stub
-		return "/member/vote";
-	}
+
 
 }

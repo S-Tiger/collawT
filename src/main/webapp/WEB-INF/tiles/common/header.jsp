@@ -372,7 +372,7 @@
 					</c:if>
 					
 					<c:if test="${member.mem_File == null }">
-							<img src="${contextPath}/resources/dist/img/user2-160x160.jpg" style="width:40px; height:40px"
+							<img src="${contextPath}/resources/dist/img/profile.jpg" style="width:40px; height:40px"
 								class="img-circle elevation-2" alt="User Image">
 					</c:if>
 				</span>

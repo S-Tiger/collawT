@@ -21,7 +21,6 @@ public interface MemberController {
 //	public String getServerTime(Locale locale);
 
 public String signup() ;
-public String googleDrive() ;
 public String loginFrorm();
 public String mypage()throws Exception;
 public String memJoin(MemberVO memberVO,HttpServletRequest request, HttpServletResponse response, RedirectAttributes rttr)throws Exception;
