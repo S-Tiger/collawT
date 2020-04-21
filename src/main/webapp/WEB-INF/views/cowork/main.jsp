@@ -114,7 +114,7 @@ $('#createpjtform').ready(function (){
 				<ul class="nav nav-pills">
 					<li class="nav-item" ><a class="nav-link active"
 						href="#activity" data-toggle="tab" id="activityMenu">홈</a></li>
-					<li class="nav-item" id = "applymenu"><a class="nav-link" href="javascript:move('${contextPath}/project/issue/list?c_Id=${pjt.c_Id}')"
+					<li class="nav-item" id = "applymenu"><a class="nav-link" href="/project/issue/list?c_Id=${pjt.c_Id}"
 						 id= "issueMenu">이슈</a></li>
 					<li class="nav-item"><a class="nav-link" href="#settings"
 						data-toggle="tab">Settings</a></li>

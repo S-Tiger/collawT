@@ -397,13 +397,13 @@
 							</p>
 					</a>
 						<ul class="nav nav-treeview">
-							<li class="nav-item"><a href="javascript:move('${contextPath}/issue/list)" class="nav-link">
+							<li class="nav-item"><a href="issue/list" class="nav-link">
 									<i class="nav-icon fas fa-user-secret"></i>
 									<p>프라이빗 공간</p>
 							</a></li>
 							<c:forEach var="coworklist" items="${coworklist}">
 								<li class="nav-item"><a
-									href="javascript:move('${contextPath}/project/main?c_Id=${coworklist.c_Id}')" class="nav-link">
+									href="/project/main?c_Id=${coworklist.c_Id}" class="nav-link">
 										<i class="nav-icon fas fa-sitemap"></i>
 										<p>${coworklist.c_Name}</p>
 								</a></li>
@@ -413,7 +413,7 @@
 									<p>협업공간 생성</p>
 							</a></li>
 						</ul></li>
-					<li class="nav-item"><a href="javascript:move('${contextPath}/news/list')"
+					<li class="nav-item"><a href="${contextPath}/news/list"
 						class="nav-link"> <i class="nav-icon fas fa-book-open"></i>
 							<p>
 								새로운 소식 <span class="badge badge-info right">3</span>
@@ -428,7 +428,7 @@
 							</p>
 					</a></li>
 					
-					<li class="nav-item"><a href="javascript:move('${contextPath}/calendar/list')"
+					<li class="nav-item"><a href="/calendar/list"
 						class="nav-link"> <i class="nav-icon fas fa-calendar-check"></i>
 							<p>
 								전체 캘린더 <span class="badge badge-info right"></span>

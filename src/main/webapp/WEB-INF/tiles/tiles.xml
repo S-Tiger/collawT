@@ -26,28 +26,18 @@
 		<put-attribute name="content" value="/WEB-INF/views/member/forgotPwd.jsp" />
 	</definition>
 	
-	<definition name="/main/index" extends="mainLayout">
-		<put-attribute name="content"
-			value="/WEB-INF/views/main/index.jsp" />
-	</definition>
-	<definition name="/cowork/main2" extends="mainLayout">
-		<put-attribute name="content"
-			value="/WEB-INF/views/cowork/main.jsp" />
-	</definition>
-	
-	
 	<definition name="contentLayout" template="/WEB-INF/tiles/common/contentLayout.jsp">
  	 <put-attribute name="content" />
 	</definition>
 	
-	<definition name="/*" extends="contentLayout">
+	<definition name="/*" extends="mainLayout">
 		<put-attribute name="content"
 			value="/WEB-INF/views/{1}.jsp" />
 	</definition>
-	<definition name="/*/*" extends="contentLayout"> <put-attribute name="content" 
+	<definition name="/*/*" extends="mainLayout"> <put-attribute name="content" 
 		value="/WEB-INF/views/{1}/{2}.jsp" /> 
 		</definition>
-	<definition name="*/*" extends="contentLayout"> <put-attribute name="content" 
+	<definition name="*/*" extends="mainLayout"> <put-attribute name="content" 
 		value="/WEB-INF/views/{1}/{2}.jsp" /> 
 		</definition>
 </tiles-definitions>
