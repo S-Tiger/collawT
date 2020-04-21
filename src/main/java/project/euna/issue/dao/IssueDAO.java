@@ -19,6 +19,7 @@ public interface IssueDAO {
 	public int listCount(String c_Id) throws Exception;
 	public List<Map> igRead();
 	public List<Map> comemRead(String c_id);
+	public void comemInsert(Map<String, Object> dataMap) throws DataAccessException;
 	//public List<Map> coRead(String mem_id);
 	//public Map<String, Object> get_i_Num();
 

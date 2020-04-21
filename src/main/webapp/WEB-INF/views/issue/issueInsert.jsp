@@ -288,7 +288,7 @@ span[name="chargerspan"] {
                <select class="form-control custom-select" id="chargerSelect" name="chargerSelect">
                	<option selected disabled>담당자를 지정하세요</option>
                   <c:forEach var="comemList" items="${comemList}" >
-                  <option >${comemList.MEM_NAME}-${comemList.MEM_ID}</option>
+                  <option >${comemList.MEM_ID}(${comemList.MEM_NAME})</option>
                   </c:forEach>
                 </select>
                 
@@ -304,6 +304,7 @@ span[name="chargerspan"] {
 				</div>
 				<div id="chargerForm"></div>
 				
+				
 				<script>
 				var chargedArray = new Array();
 				//var returnArray = new Array();
@@ -313,6 +314,10 @@ span[name="chargerspan"] {
 				
 				 $('#chargerSelect').change(function(event) {
 					 var mem_Id = $('#chargerSelect').val();
+					 var idSearch = mem_Id.split("(");
+					 var realmem_Id = idSearch[0];
+					 alert(realmem_Id);
+							 
 					 chargedArray.push(mem_Id);
 					 console.log("chargedArray : "+chargedArray);
 					 
@@ -331,7 +336,7 @@ span[name="chargerspan"] {
 							 chargedCount++;
 							 
 							$('#chargerList').append("<span id= 'chargerspan"+chargedCount+"' name='chargerspan'>"+mem_Id+"<a id ='chargerdelete["+chargedCount+"]' name = 'chargerdelete' onclick='deleteCharger("+chargedCount+")'>X</a></span>");
-							
+							$('#chargerForm').append("<input type='text' id='hidden_Id"+chargedCount+"' name='comem_Id' value='"+realmem_Id+"'>");
 						 }
 				 })
 				 
@@ -343,6 +348,7 @@ span[name="chargerspan"] {
 					 
 					 
 					 $('#chargerspan'+chargedCount).remove();
+					 $('#hidden_Id'+chargedCount).remove();
 					 
 					 var index = chargedArray.indexOf(Realchargerspan);
 					 
@@ -425,6 +431,10 @@ span[name="chargerspan"] {
               
     </section>
     <!-- /.content -->
+    </form>
+    <form action = "/project/issue/insert" method="post" id="chargerForm">
+    <input type="hidden" name="c_Id" value="${c_Id}">
+    
     </form>
   </div>
   <!-- /.content-wrapper -->

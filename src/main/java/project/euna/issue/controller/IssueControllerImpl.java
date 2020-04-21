@@ -95,7 +95,7 @@ public class IssueControllerImpl implements IssueController {
 	//글 쓰기 DB에 넣기
 	@Override
 	@PostMapping("/insert")
-	public String issueInsert(IssueVO issueVO, HttpSession session) throws Exception {
+	public String issueInsert(IssueVO issueVO, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
 	
 		Map<String, Object> member = new HashMap<String,Object>();
 		member = (Map<String, Object>) session.getAttribute("member");
@@ -120,11 +120,29 @@ public class IssueControllerImpl implements IssueController {
 		cmap.put("ig_Num", ig_Num);
 		
 		
-		
-		
 		issueService.issueInsert(cmap);
 		
 		String i_Num = (String) cmap.get("i_Num");
+		
+		
+		Map<String, Object> coMap = new HashMap<String, Object>();
+		String comem_Id[] = request.getParameterValues("comem_Id");
+		
+		
+		for (int i = 0; i < comem_Id.length; i++) {
+			
+			coMap.put("i_Num", i_Num);
+			coMap.put("c_Id", c_Id);
+			coMap.put("mem_Id", comem_Id[i]);
+			coMap.put("cr_Status", "");
+			
+			issueService.comemInsert(coMap);
+			
+			
+		}
+
+		
+		
 		
 		
 		return "redirect:/project/issue/read?i_Num="+i_Num;

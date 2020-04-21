@@ -88,6 +88,14 @@ public class IssueServiceImpl implements IssueService {
 		
 	}
 	
+	//이슈 담당자 삽입
+	@Override
+	public void comemInsert(Map<String, Object> dataMap) throws Exception {
+		// TODO Auto-generated method stub
+		issueDAO.comemInsert(dataMap);
+		System.out.println("!!!!!!!!!!!!!!service"+dataMap);
+	}
+	
 	
 	//협업공간 조회
 	//@Override
