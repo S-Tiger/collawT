@@ -77,7 +77,7 @@ public class ApplyControllerImpl implements ApplyController {
 			applyService.insertApply(dataMap);
 		}
 
-		return "redirect:/project/main2?c_Id="+c_Id;
+		return "redirect:/project/main?c_Id="+c_Id;
 	}
 	
 	

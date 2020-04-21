@@ -40,14 +40,15 @@
 	margin-top: 10px;
 }
 
-#applyspan {
+#applyList span {
 	background-clip: padding-box;
     border: 1px solid #17a2b8;
     padding: 2px;
     margin: 2px;
     display: inline-block;
 }
-#applydelete {
+#applyList a {
+
 	margin: 2px;
 }
 

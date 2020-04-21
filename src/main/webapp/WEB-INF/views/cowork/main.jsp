@@ -24,17 +24,24 @@ function withdrawal() {
 	
 }
 
+	
+
 	$('#applyform').ready(function() {
 		$('#insertsubmit').click(function() {
 			var listnum = $('#applyList').children().length;
 				if (listnum == 0) { alert("초대 리스트가 비어있습니다");
 					return false;}
 					})
+					
+			var applyCount = 0;
+			var check_Id = new Array();
+					
 		$('#item_mem_Id').keydown(function(event) {
+			
+			
 			if (event.keyCode == '13') {
 				var mem_Id = $('#item_mem_Id').val();
-				var hidden_Id = $('#hidden_Id').val();
-				console.log(hidden_Id);
+				var check_stat = true;
 					if (mem_Id == '${member.mem_Id}') {
 						$("#id_check").text("자신을 초대할수 없습니다 :p");
 						$("#id_check").css("color","red");} 
@@ -44,13 +51,20 @@ function withdrawal() {
 							type : 'get',
 							success : function(data) {console.log("1 = 중복o / 0 = 중복x : " + data);
 								if (data == 1) {
-									if (mem_Id == hidden_Id) {
+									for (var i = 0; i < check_Id.length; i++) {
+									if (mem_Id == check_Id[i]) {
 										$("#id_check").text("동일한 아이디를 여러번 초대할수 없습니다. :p");
-										$("#id_check").css("color","red");} 
-									else {
-										$('#applyList').append("<span id= 'applyspan'>"+ mem_Id+ "<a id ='applydelete' href='#'>x</a></span>");
-										$('#applyform').append("<input type='hidden' id='hidden_Id' name='mem_Id' value='"+mem_Id+"'>");
-										$('#mem_Id').val("");}
+										$("#id_check").css("color","red");
+										check_stat = false;
+										} 
+									}
+									if (check_stat){
+										$('#applyList').append("<span id= 'applyspan"+applyCount+"'>"+ mem_Id+ "<a id ='applydelete' onclick = 'delbtn("+applyCount+")' href='#'>X</a></span>");
+										$('#applyform').append("<input type='hidden' id='hidden_Id"+applyCount+"' name='mem_Id' value='"+mem_Id+"'>");
+										$('#item_mem_Id').val("");
+										applyCount++;
+										check_Id.push(mem_Id);
+										}
 								} else {
 									$("#id_check").text("잘못된 아이디 입니다 다시 확인해주세요 :p");
 									$("#id_check").css("color","red");}
@@ -61,6 +75,12 @@ function withdrawal() {
 							$("#id_check").css("color","#a1a1a1");}
 				});
 			});
+	
+	function delbtn(applyCount){
+		$('#applyspan'+applyCount).remove();
+		$('#hidden_Id'+applyCount).remove();
+		
+	}
 
 </script>
 <!-- Content Wrapper. Contains page content -->
