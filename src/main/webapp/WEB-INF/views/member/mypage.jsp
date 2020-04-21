@@ -342,8 +342,8 @@ if ('${msg}' == 'success') {
 <!-- ./wrapper -->
 
 <script type="text/javascript">
-	//upload변수의 인풋의 순서 header의 인풋까지 포함.. 미포함시 6번째
-	var upload = document.getElementsByTagName('input')[15];
+	//upload변수의 인풋의 순서 header의 인풋까지 포함.. 미포함시 6번째 //15
+	var upload = document.getElementsByTagName('input')[10];
 	var holder = document.getElementById('holder');
 	var state = document.getElementById('status');
 	upload.onchange = function(e) {
