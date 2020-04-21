@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="bookmark">
+	<resultMap id="bookmarkResult01" type="java.util.Map">
+		<result property="c_Id" column="c_Id"  />
+		<result property="mem_Id" column="mem_Id" />
+		<result property="i_Num" column="i_Num" />
+		
+	</resultMap>
+	
+	<select id="searchList" resultMap="bookmarkResult01" parameterType="java.util.Map"> 
+      <![CDATA[
+         select a.c_Id, a.mem_Id, a.ap_Date, a.ap_Yn, a.ap_Status,a.invite, b.c_Name, c.mem_Name
+         from apply_mem a, co_work b, member c
+       
+      ]]>
+		<where>
+		a.c_Id = b.c_Id
+		and a.invite = c.mem_Id	
+			<if test=" mem_Id != ''  and  mem_Id != null">
+			and	a.mem_Id = #{mem_Id}
+			</if>
+		</where>
+		  order by ap_Date desc
+	</select>
+	
+	
+	<insert id="insertBookmark" parameterType="java.util.Map" >
+		insert into BOOKMARK(mem_Id, i_Num) 
+		values(#{mem_Id},#{i_Num})
+	</insert>	
+	
+	
+	<delete id="deleteBookmark" parameterType="java.util.Map">
+		delete from BOOKMARK
+		where mem_Id = #{mem_Id}
+		and i_Num = #{i_Num}
+	</delete>
+	
+	<update id="updateBookmark" parameterType="java.util.Map">
+		update co_work
+		set  c_Name = #{c_Name}
+		   , c_Comment = #{c_Comment}
+		   , mem_Id = #{mem_Id}
+		   , c_Category = #{c_Category}
+		where c_Id = #{c_Id}
+	</update>
+	
+	
+	<select id="bookmarkCheck" parameterType="String" resultType="int">
+      <![CDATA[
+		select count(*) from BOOKMARK
+		where mem_Id = #{mem_Id}
+		and i_Num = #{i_Num}
+		
+		]]>
+	</select>
+	
+	<update id="acceptBookmark" parameterType="java.util.Map">
+	 <![CDATA[
+	  UPDATE APPLY_MEM
+	 SET AP_YN = 'yes'
+	 where c_Id = #{c_Id}
+	 and mem_Id = #{mem_Id}
+	 
+	 ]]>
+	</update>
+	
+	<update id="rejectBookmark" parameterType="java.util.Map">
+	 <![CDATA[
+	 DELETE FROM APPLY_MEM
+	 where c_Id = #{c_Id}
+	 and mem_Id = #{mem_Id}
+	 ]]>
+	</update>
+
+</mapper>

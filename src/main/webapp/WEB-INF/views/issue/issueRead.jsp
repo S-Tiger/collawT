@@ -10,12 +10,25 @@
 
 
 $(document).ready(function() {
+	
+	
+	
 	//댓글 목록 항상 호출
 	getReplyList();
 	
 	var formObj = $("form[name='readForm']");
 	var formReply = $("form[name='replyForm']");
 
+	
+	
+	//북마크 체크 변수
+	var checkbook = 0
+	
+	//북마크 체크 확인
+	bookcheck();
+	
+	
+	console.log("22222222222"+checkbook);
 	//수정페이지로 이동 jquery
  	$("#update_btn").on("click", function() {
 		
@@ -64,10 +77,65 @@ $(document).ready(function() {
 	})
 	
 	
+	//북마크 버튼 이벤트
+	$("#bookmarkinsert").on("click", function() {
+		console.log("1121212"+checkbook);
+		if(checkbook == 0){
+		$.ajax({
+			url:"/bookmark/insert",
+			type:'post',
+			data:{
+				i_Num : $("#i_Num").val(),
+			},
+			success:function(data){
+				if(data == 1){
+                    alert("북마크에 등록하셨습니다.");
+				$("#bookmarkinsert").css('color','#f8f9fa');
+				$("#bookmarkinsert").css('background-color', '#dc3545');
+				checkbook = 1;
+				}
+			}
+		})
+		}else if(checkbook == 1){
+			$.ajax({
+				url:"/bookmark/delete",
+				type:'post',
+				data:{
+					i_Num : $("#i_Num").val(),
+				},
+				success:function(data){
+					if(data == 1){
+	                    alert("북마크를 해제하셨습니다.");
+					$("#bookmarkinsert").css('color','#444');
+					$("#bookmarkinsert").css('background-color', '#f8f9fa');
+					checkbook = 0;
+				}
+					}
+				})
+			}
+		})
 	
-
-	
-	
+		
+		//북마크 추가 상태 확인 메소드
+	function bookcheck() {
+		$.ajax({
+			url:"/bookmark/bookmarkCheck",
+			type:'get',
+			data:{
+				i_Num : $("#i_Num").val(),
+			},
+			success:function(data){
+				if(data == 1){
+				$("#bookmarkinsert").css('color','#f8f9fa');
+				$("#bookmarkinsert").css('background-color', '#dc3545');
+				console.log(checkbook);
+				checkbook = 1;
+				console.log(checkbook);
+				}
+				
+			}
+		})
+	}
 	
 })
 
@@ -174,6 +242,7 @@ $(document).ready(function() {
 		$('#replyContent'+r_Num).html(str);	
 	}
 
+	
 	
 </script>
 
@@ -312,7 +381,7 @@ $(document).ready(function() {
 								<i class="fas fa-share"></i> 공유
 							</button>
 							<!-- 숫자 카운트 넣기 -->
-							<button type="button" class="btn btn-default btn-sm" style="color:#444; margin:3px;">
+							<button type="button" class="btn btn-default btn-sm" id = "bookmarkinsert"style="color:#444; margin:3px;">
 								<i class="fas fa-bookmark"></i> 북마크
 							</button>
 							
