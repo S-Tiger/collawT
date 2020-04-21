@@ -21,6 +21,7 @@ public interface IssueService {
 	public int listCount(String c_Id) throws Exception;
 	public List<Map> igRead();
 	public List<Map> comemRead(String c_id);
+	public void comemInsert(Map<String, Object> dataMap) throws Exception;
 	//public List<Map> coRead(String mem_id);
 
 }

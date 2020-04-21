@@ -150,6 +150,11 @@
       ]]>
 	</select> 
 	
+	<!-- 이슈 담당자 삽입 -->
+	<insert id="comemInsert" parameterType="java.util.Map">
+		insert into charger(cr_Num, i_Num, c_Id, cr_Status, mem_Id) 
+		values(CR_NUM_SEQ.nextval, #{i_Num}, #{c_Id}, #{cr_Status}, #{mem_Id})
+	</insert>	
 	
 	
 		<!-- 협업공간 조회 -->

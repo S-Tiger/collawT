@@ -74,6 +74,16 @@ public class IssueDAOImpl implements IssueDAO {
 
 	}
 	
+	//이슈 담당자 삽입
+	@Override
+	public void comemInsert(Map<String, Object> dataMap) throws DataAccessException {
+		
+		sqlSession.update("issue.comemInsert",dataMap);
+		System.out.println("!!!!!!!!!!!!!!dao"+dataMap);
+		// TODO Auto-generated method stub
+		
+	}
+	
 	
 	
 	// 협업공간 조회
