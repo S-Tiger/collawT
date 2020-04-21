@@ -23,4 +23,7 @@ public interface MemberService {
 	public int memberJoin(Map<String,Object> member) throws Exception;
 	public int memberJoinApi(Map<String, Object> member) throws Exception;
 	public int memberJoinApiGoogle(Map<String, Object> member) throws Exception;
+	public MemberVO memberLoginNaver(Map<String, Object> memberVO) throws Exception;
+	public void approvalMember(MemberVO memberVO, HttpServletResponse response) throws Exception ;
+	
 }

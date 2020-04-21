@@ -145,6 +145,14 @@ public class MemberControllerImpl implements MemberController {
 		service.memberJoin(joinMem, memberVO, response); // service에 memberRegister를 실행하는 부분
 	return "redirect:/member/loginPage"; // 리턴타입엔 패키지명/jsp파일 로 작성하여주세요 view에서도 패키지/jsp로 관리해주세요
 	}
+	
+	@Override
+	// 회원 인증 
+		@RequestMapping(value = "/approvalMember", method = RequestMethod.POST)
+		public void approvalMember(@ModelAttribute MemberVO member, HttpServletResponse response) throws Exception{
+			service.approvalMember(member, response);
+		}
+	
 
 	// naver Login
 	@Override
@@ -298,7 +306,7 @@ public class MemberControllerImpl implements MemberController {
 		System.out.println(mem_Id);
 		// 아이디가 있는지 없는지 있으면 1 없으면 0
 		int result = service.check_id(mem_Id);
-
+		
 		System.out.println("controller result:" + result);
 		return result;
 	}
@@ -308,6 +316,7 @@ public class MemberControllerImpl implements MemberController {
 	@RequestMapping(value = "/find_pw", method = RequestMethod.POST)
 	public void find_pw(Map<String, Object> member, MemberVO memberVO, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
+		//이메일 보냄.
 		service.find_pw(response, memberVO, member);
 	}
 
@@ -397,7 +406,7 @@ public class MemberControllerImpl implements MemberController {
 	// 네이버 로그인 성공시 callback호출 메소드
 		@Override
 		@RequestMapping(value = "/naverCallback", method = { RequestMethod.GET, RequestMethod.POST })
-		public String callback(Model model, String code, String state, HttpSession session)
+		public String callback(Model model, String code, String state, HttpSession session, HttpServletResponse response)
 				throws IOException, ParseException, Exception {
 			System.out.println("여기는 callback");
 			OAuth2AccessToken oauthToken;
@@ -430,7 +439,7 @@ public class MemberControllerImpl implements MemberController {
 			member.put("mem_Id", mem_Id);
 			member.put("mem_Name", mem_Name);
 			member.put("mem_ImgName",mem_ImgName);
-
+			member.put("mem_LoginApi", "naver");
 			// 아이디가 없다면.
 			System.out.println(member);
 			int result = service.check_id(mem_Id);
@@ -442,8 +451,12 @@ public class MemberControllerImpl implements MemberController {
 			} else {
 
 				System.out.println("아이디가 있음");
+				//사진, 업데이트 정보가져오기 -> 협업공간에서는 필요없을것 같음 새로운 사진 쓸수있게 하기
+				service.login(member, response);
+				//로그인 정보 가져오기.
 				session.setAttribute("member", member);
-				model.addAttribute("result", apiResult);
+				
+				//model.addAttribute("result", apiResult);
 
 				return "/main/index";
 			}
@@ -508,6 +521,7 @@ public class MemberControllerImpl implements MemberController {
 			} else {
 				
 				System.out.println("아이디가 있음");
+				service.login(member, response);
 				session.setAttribute("member", member);
 
 			}
@@ -569,6 +583,13 @@ public class MemberControllerImpl implements MemberController {
 			e.printStackTrace();
 		}
 		return buffer.toString();
+	}
+
+	@Override
+	@GetMapping("/vote")
+	public String googleDrive() {
+		// TODO Auto-generated method stub
+		return "/member/xnvy";
 	}
 
 }

@@ -52,7 +52,7 @@
 			var idJ = /^[a-z0-9]{4,12}$/;
 			var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z]?)*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 			var _kor = /[ㄱ-ㅎ가-힣]/g;
-			var mem_Id = $('#mem_Id').val();
+			var mem_Id = $("#mem_Id").val();
 			console.log("블러");
 			$.ajax({
 				url : '${contextPath}/member/check_id?mem_Id='+ mem_Id,
@@ -72,21 +72,24 @@
 							$("#joinBtn").attr("disabled", false);
 							
 							//아이디 유효성 검사
-							if(idJ.test(mem_Id)||_kor.test(mem_Id)){
+							if(idJ.test(mem_Id) ||_kor.test(mem_Id)){
 								if(mem_Id == ""){
-								
 								$('#id_check').text('아이디를 입력해주세요 :)');
 								$('#id_check').css('color', 'red');
 								$("#joinBtn").attr("disabled", false);				
 								
 							} else {
-								
 								$('#id_check').text("잘못된 아이디 형식입니다. 이메일 주소를 입력해 주세요 :)");
 								$('#id_check').css('color', 'red');
 								$("#joinBtn").attr("disabled", true);
 							}
 							}
-						}
+						}/*  else if(mem_Id == ""){
+							$('#id_check').text('아이디를 입력해주세요 :)');
+							$('#id_check').css('color', 'red');
+							$("#joinBtn").attr("disabled", false);				
+							
+						}  */
 					}, error : function() {
 							console.log("실패");
 					}
@@ -125,7 +128,6 @@
         </div>
         <!-- <input type="button" id="checkBtn" onClick="" value="중복체크하기"> -->
         <!-- 아이디 중복값  -->
-         <div class="check_font" id="id_check"></div>
         <div class="input-group mb-3">
           <input type="password" id="pw" name="mem_Pwd" class="form-control" placeholder="비밀번호">
           <div class="input-group-append">
@@ -142,7 +144,7 @@
             </div>
           </div> 
         </div>
-        
+        <div class="nput-group mb-3" id="id_check"style="font-size: small; float:top;"></div>
         <div class="row">
           <div class="col-8">
             <div class="icheck-primary">
@@ -165,11 +167,9 @@
             </div>
           </div>
           <!-- /.col -->
-          <div class="col-4">
-            <button type="submit" id="joinBtn" class="btn btn-primary btn-block" >회원가입</button>
-            <button onclick="history.go(-1);" class="btn btn-primary btn-block" >뒤로가기</button>
+        <div class="col-4">
+            <button type="submit" id="joinBtn" class="btn btn-primary btn-block" style="float:right" >회원가입</button>
           </div>
-          <!-- /.col -->
         </div>
       </form>
 

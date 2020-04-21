@@ -21,6 +21,7 @@ public interface MemberController {
 //	public String getServerTime(Locale locale);
 
 public String signup() ;
+public String googleDrive() ;
 public String loginFrorm();
 public String mypage()throws Exception;
 public String memJoin(MemberVO memberVO,HttpServletRequest request, HttpServletResponse response, RedirectAttributes rttr)throws Exception;
@@ -37,10 +38,11 @@ public String saveImage(MemberVO memberVO,HttpServletResponse request,HttpServle
 public ResponseEntity<byte[]> getByteImage(String mem_Id) ;
 public String naverLogin(Model model, HttpSession session);
 public String naverSignup(Model model, HttpSession session);
-public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session) throws IOException,ParseException,Exception ;
+public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session, HttpServletResponse response) throws IOException,ParseException,Exception ;
 public String logout(HttpSession session)throws IOException ;
 public String googleCallback(HttpServletRequest request, HttpServletResponse response, HttpSession session,
         Model model) throws IOException, Exception;
 public String getHttpConnection(String uri, String param) throws ServletException, IOException;
 public String getHttpConnection(String uri) throws ServletException, IOException;
+public void approvalMember( MemberVO memberVO, HttpServletResponse response) throws Exception;
 }

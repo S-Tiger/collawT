@@ -28,6 +28,19 @@ public class MemberDaoImpl implements MemberDao {
 		return stat;
 	}
 
+	//가입 인증키
+	public int approvalMember(MemberVO member) throws Exception{
+		int result =  sqlSession.update("member.approvalMember", member);
+		return result;
+	}
+	
+	//가입상태검사
+	@Override
+	public MemberVO memberStatus(Map<String, Object> mem_id) throws Exception {
+		 MemberVO result = sqlSession.selectOne("member.checkMemStatus", mem_id);
+		return result;
+	}
+	
 	//naver 로그인 유저 데이터 저장
 	@Override
 	public int memberJoinApi(Map<String, Object> memberVO) {
@@ -69,13 +82,13 @@ public class MemberDaoImpl implements MemberDao {
 	}
 	
 	// 아이디 중복 검사
-	public int check_id(String mem_id) throws Exception {
-		int result = sqlSession.selectOne("member.check_id", mem_id);
+	public int checkId(String mem_id) throws Exception {
+		int result = sqlSession.selectOne("member.checkId", mem_id);
 		return result;
 	}
 	//
-	public int check_idMap(Map<String, Object> mem_id) throws Exception {
-		int result = sqlSession.selectOne("member.check_idMap", mem_id);
+	public int checkIdMap(Map<String, Object> mem_id) throws Exception {
+		int result = sqlSession.selectOne("member.checkIdMap", mem_id);
 		return result;
 	}
 
@@ -119,5 +132,13 @@ public class MemberDaoImpl implements MemberDao {
 		int stat = sqlSession.update("member.memberJoinApiGoogle", memberVO);
 		return stat;
 	}
+
+	@Override
+	public int memberLoginNaver(Map<String, Object> memberVO) throws Exception {
+		int result = sqlSession.update("member. ", memberVO);
+		return result;
+	}
+
+	
 
 }

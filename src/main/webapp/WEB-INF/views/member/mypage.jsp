@@ -1,41 +1,42 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <style type="text/css">
 #holder {
 	overflow: hidden;
 	height: auto;
 }
+
 .filebox label {
-  display: inline-block;
-  padding: .375rem .75rem;
-  color: #fff;
-  line-height: normal;
-  vertical-align: middle;
-  background-color: #28a745;
-  cursor: pointer;
-  border: 1px solid #4cae4c;
-  border-radius: .25em;
-  -webkit-transition: background-color 0.2s;
-  transition: background-color 0.2s;
- 
+	display: inline-block;
+	padding: .375rem .75rem;
+	color: #fff;
+	line-height: normal;
+	vertical-align: middle;
+	background-color: #28a745;
+	cursor: pointer;
+	border: 1px solid #4cae4c;
+	border-radius: .25em;
+	-webkit-transition: background-color 0.2s;
+	transition: background-color 0.2s;
 }
 
 .filebox label:hover {
-  background-color: #6ed36e;
+	background-color: #6ed36e;
 }
 
 .filebox label:active {
-  background-color: #367c36;
+	background-color: #367c36;
 }
 
 .filebox input[type="file"] {
-  position: absolute;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
+	position: absolute;
+	padding: 0;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	border: 0;
 }
+
 .user-img {
 	margin: 0 auto;
 	width: 100px;
@@ -55,52 +56,51 @@ if ('${msg}' == 'success') {
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
+	/* 	if(${msg != null}){
+	 alert('${msg}');
+	 };  */
+	$(function() {
 
+		//비밀번호같지 확인하는 자바스크립트 (서브밋할때 작동됨)
+		if ($("#pwForm").submit(function() {
+			console.log("11");
+			if ($("#pw").val() !== $("#pw2").val()) {
+				alert("변경하실 비밀번호가 일치하지 않습니다.");
+				$("#pw").val("").focus();
+				$("#pw2").val("");
+				return false;
+			} else if ($("#pw").val().length < 4) {
+				alert("비밀번호는 8자 이상으로 설정해야 합니다.");
+				$("#pw").val("").focus();
+				return false;
+			} else if ($.trim($("#pw").val()) !== $("#pw").val()) {
+				alert("공백은 입력이 불가능합니다.");
+				return false;
+			} else {
+				alert("비밀번호가 수정되었습니다.");
+			}
+		}))
+			;
 
-/* 	if(${msg != null}){
-		alert('${msg}');
-	};  */
-	$(function(){
-		
-	//비밀번호같지 확인하는 자바스크립트 (서브밋할때 작동됨)
-	if($("#pwForm").submit(function(){
-		console.log("11");
-		if($("#pw").val() !== $("#pw2").val()){
-			alert("변경하실 비밀번호가 일치하지 않습니다.");
-			$("#pw").val("").focus();
-			$("#pw2").val("");
-			return false;
-		}else if ($("#pw").val().length < 4) {
-			alert("비밀번호는 8자 이상으로 설정해야 합니다.");
-			$("#pw").val("").focus();
-			return false;
-		}else if($.trim($("#pw").val()) !== $("#pw").val()){
-			alert("공백은 입력이 불가능합니다.");
-			return false;
-		}else{
-			alert("비밀번호가 수정되었습니다.");
-		}
-	}));
-	
-	//파일 비어잇는거 못들어가게함 서브밋 탈때 작동됨
-	if($("#fileupload").submit(function(){
-		console.log("fileUpload");
-		 var fileCheck = $("#imageFile").val();
-		 if(!fileCheck){
-		        alert("프로필 사진을 첨부해 주세요");
-		   return false;
-		 }else{
-			 alert("프로필사진이 변경 되었습니다.");
-		 }
-	}));
+		//파일 비어잇는거 못들어가게함 서브밋 탈때 작동됨
+		if ($("#fileupload").submit(function() {
+			console.log("fileUpload");
+			var fileCheck = $("#imageFile").val();
+			if (!fileCheck) {
+				alert("프로필 사진을 첨부해 주세요");
+				return false;
+			} else {
+				alert("프로필사진이 변경 되었습니다.");
+			}
+		}))
+			;
 
-}); 
-	
-	
-	function fn_deleteMem(){
-		if(!confirm("정말탈퇴 하시겠습니까?")){
+	});
+
+	function fn_deleteMem() {
+		if (!confirm("정말탈퇴 하시겠습니까?")) {
 			return false;
-		}else{
+		} else {
 			alert(" 탈퇴 되었습니다. 그동안 콜라우티를 이용해주셔서 감사합니다.");
 		}
 	};
@@ -150,33 +150,30 @@ if ('${msg}' == 'success') {
 									<label for="inputEstimatedBudget">ID</label> <input
 										class="form-control" type="email" id="mem_Id" name="mem_Id"
 										readonly value="${member.mem_Id}">
-							</div>
-							<div class="form-group">
+									<div class="form-group">
 
-								<label for="inputSpentBudget">이름</label> <input
-									class="form-control" type="text" id="mem_Name" name="mem_Name"
-									value="${member.mem_Name}" required>
+										<label for="inputSpentBudget">이름</label> <input
+											class="form-control" type="text" id="mem_Name"
+											name="mem_Name" value="${member.mem_Name}" required>
+									</div>
+									<div class="form-group">
+										<label for="inputEstimatedDuration"></label> <input
+											type="hidden" id="inputEstimatedDuration"
+											class="form-control">
+									</div>
+									<div class="row">
+										<div class="col-12">
+											<input type="submit" value="이름변경"
+												class="btn btn-success float-right">
+											<!--이름바꾸는 폼 끝  -->
+										</div>
+									</div>
+								</form>
 							</div>
-							<div class="form-group">
-								<label for="inputEstimatedDuration"></label> <input
-									type="hidden" id="inputEstimatedDuration" class="form-control">
-							</div>
-							<div class="row">
-								<div class="col-12">
-									<input type="submit" value="이름변경"
-										class="btn btn-success float-right">
-									</form>
-									<!--이름바꾸는 폼 끝  -->
-									 <p>result: ${result }</p>
-									<p>member: ${member}</p>
-									<img src="${member.mem_ImgName}"
-										class="user-img img-fluid img-circle">
-								</div>
-							</div>
+							<!-- /.card-body -->
 						</div>
-						<!-- /.card-body -->
+						<!-- /.card -->
 					</div>
-					<!-- /.card -->
 				</div>
 				<!--프로필사진 변경 -->
 				<div class="col-md-6">
@@ -195,7 +192,8 @@ if ('${msg}' == 'success') {
 						</div>
 						<div class="card-body">
 							<div id="left" style="padding: 10px; margin-right: 10px;">
-								<div class="card card-primary card-outline" style="border-top:white ">
+								<div class="card card-primary card-outline"
+									style="border-top: white">
 									<div class="card-body box-profile">
 										<!-- 변경된이미지 -->
 										<div id="holder" class="user-img img-fluid img-circle">
@@ -219,15 +217,16 @@ if ('${msg}' == 'success') {
 								enctype="multipart/form-data" method="post"
 								class="form-horizontal">
 								<input type="hidden" name="mem_Id" value="${member.mem_Id}">
-							<div class="row">
-							<div class="col-12" style="padding: 5px;">	
-								<div class="filebox">
-									<label for="imageFile" style="font-weight:400; height:38px" class="btn btn-success float-right" >프로필 사진 선택</label>
-									<input type="file"  name="mem_File"
-										id="imageFile" accept="image/gif, image/jpeg, image/png" />
+								<div class="row">
+									<div class="col-12" style="padding: 5px;">
+										<div class="filebox">
+											<label for="imageFile" style="font-weight: 400; height: 38px"
+												class="btn btn-success float-right">프로필 사진 선택</label> <input
+												type="file" name="mem_File" id="imageFile"
+												accept="image/gif, image/jpeg, image/png" />
+										</div>
+									</div>
 								</div>
-							</div>	
-							</div>
 								<div class="row">
 									<div class="col-12" style="padding: 5px;">
 										<input type="submit" value="프로필 사진 변경"
@@ -236,105 +235,113 @@ if ('${msg}' == 'success') {
 								</div>
 							</form>
 						</div>
-				<!-- /.card-body -->
-			</div>
-			<!-- /.card -->
-	</div>
-	<div class="col-md-6">
-		<div class="card card-secondary">
-			<div class="card-header">
-				<h3 class="card-title">비밀번호 변경</h3>
-
-				<div class="card-tools">
-					<button type="button" class="btn btn-tool"
-						data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-						<i class="fas fa-minus"></i>
-					</button>
-				</div>
-			</div>
-			<!-- 비밀번호 변경 -->
-			<div class="card-body">
-				<div class="form-group">
-					<form id="pwForm" action="/member/update_pw" method="post">
-						<input type="hidden" name="mem_Id" value="${member.mem_Id}">
-						<label for="inputEstimatedBudget">현재 비밀번호</label> <input
-							class="form-control" id="old_pw" name="old_pw" type="password"
-							required>
-				</div>
-				<div class="form-group">
-					<label for="inputSpentBudget">새로운 비밀번호</label> <input
-						class="form-control" id="pw" name="mem_Pwd" type="password"
-						required>
-				</div>
-				<div class="form-group">
-					<label for="inputEstimatedDuration">새로운 비밀번호 확인</label> <input
-						class="form-control" id="pw2" type="password" type="password"
-						required>
-				</div>
-				<div class="row">
-					<div class="col-12">
-						<input type="submit" value="비밀번호 변경"
-							class="btn btn-success float-right">
+						<!-- /.card-body -->
 					</div>
+					<!-- /.card -->
 				</div>
-				</form>
-			</div>
-			<!-- /.card-body -->
-		</div>
-		<!-- /.card -->
-	</div>
-	<!--  회원탈퇴 변경 -->
-	<div class="col-md-6">
-		<div class="card card card-secondary collapsed-card">
-			<div class="card-header">
-				<h3 class="card-title">회원탈퇴</h3>
+				<c:if test="${member.mem_LoginApi == null }">
+					<div class="col-md-6">
+						<div class="card card-secondary">
+							<div class="card-header">
+								<h3 class="card-title">비밀번호 변경</h3>
 
-				<div class="card-tools">
-					<button type="button" class="btn btn-tool"
-						data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-						<i class="fas fa-plus"></i>
-					</button>
-				</div>
-			</div>
-			<div class="card-body">
-				<div class="form-group">
-					<form id="outMemberForm" action="/member/delete_Member"
-						method="post">
-						<input type="hidden" name="mem_Id" value="${member.mem_Id}" />
-						<p class="login-box-msg">이용해주셔서 감사합니다.</p>
-						<label for="inputEstimatedBudget">현재 비밀번호</label> 
-						<input class="form-control" id="pwd" name="mem_Pwd" type="password" required>
-				</div>
-				<div class="row">
-					<div class="col-12">
-						<input type="submit" value="회원탈퇴"
-							class="btn btn-success float-right" onclick="fn_deleteMem()" />
+								<div class="card-tools">
+									<button type="button" class="btn btn-tool"
+										data-card-widget="collapse" data-toggle="tooltip"
+										title="Collapse">
+										<i class="fas fa-minus"></i>
+									</button>
+								</div>
+							</div>
+							<!-- 비밀번호 변경 -->
+
+							<div class="card-body">
+								<div class="form-group">
+									<form id="pwForm" action="/member/update_pw" method="post">
+										<input type="hidden" name="mem_Id" value="${member.mem_Id}">
+										<label for="inputEstimatedBudget">현재 비밀번호</label> <input
+											class="form-control" id="old_pw" name="old_pw"
+											type="password" required>
+
+										<div class="form-group">
+											<label for="inputSpentBudget">새로운 비밀번호</label> <input
+												class="form-control" id="pw" name="mem_Pwd" type="password"
+												required>
+										</div>
+										<div class="form-group">
+											<label for="inputEstimatedDuration">새로운 비밀번호 확인</label> <input
+												class="form-control" id="pw2" type="password"
+												type="password" required>
+										</div>
+										<div class="row">
+											<div class="col-12">
+												<input type="submit" value="비밀번호 변경"
+													class="btn btn-success float-right">
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+
+
+							<!-- /.card-body -->
+						</div>
+						<!-- /.card -->
 					</div>
-				</div>
-				<!-- 변경폼 -->
+					<!--  회원탈퇴 변경 -->
+					<div class="col-md-6">
+						<div class="card card card-secondary collapsed-card">
+							<div class="card-header">
+								<h3 class="card-title">회원탈퇴</h3>
 
-				</form>
+								<div class="card-tools">
+									<button type="button" class="btn btn-tool"
+										data-card-widget="collapse" data-toggle="tooltip"
+										title="Collapse">
+										<i class="fas fa-plus"></i>
+									</button>
+								</div>
+							</div>
+							<div class="card-body">
+								<div class="form-group">
+									<form id="outMemberForm" action="/member/delete_Member"
+										method="post">
+										<input type="hidden" name="mem_Id" value="${member.mem_Id}" />
+										<p class="login-box-msg">이용해주셔서 감사합니다.</p>
+										<label for="inputEstimatedBudget">현재 비밀번호</label> <input
+											class="form-control" id="pwd" name="mem_Pwd" type="password"
+											required>
+										<div class="row">
+											<div class="col-12">
+												<input type="submit" value="회원탈퇴"
+													class="btn btn-success float-right"
+													onclick="fn_deleteMem()" />
+											</div>
+										</div>
+										<!-- 변경폼 -->
+
+									</form>
+								</div>
+							</div>
+							<!-- /.card-body -->
+						</div>
+						<!-- /.card -->
+					</div>
+				</c:if>
 			</div>
-			<!-- /.card-body -->
-		</div>
-		<!-- /.card -->
+		</section>
+		<!-- /.content -->
 	</div>
-</div>
-
-</section>
-<!-- /.content -->
-</div>
-<!-- /.content-wrapper -->
-<!-- Control Sidebar -->
-<aside class="control-sidebar control-sidebar-dark">
-	<!-- Control sidebar content goes here -->
-</aside>
-<!-- /.control-sidebar -->
+	<!-- /.content-wrapper -->
+	<!-- Control Sidebar -->
+	<aside class="control-sidebar control-sidebar-dark">
+		<!-- Control sidebar content goes here -->
+	</aside>
+	<!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
 
 <script type="text/javascript">
-	
 	//upload변수의 인풋의 순서 header의 인풋까지 포함.. 미포함시 6번째
 	var upload = document.getElementsByTagName('input')[15];
 	var holder = document.getElementById('holder');
@@ -350,7 +357,7 @@ if ('${msg}' == 'success') {
 
 			img.width = 100;
 			img.height = 95;
-			
+
 			holder.innerHTML = '';
 			holder.appendChild(img);
 			holder.width = 100;
@@ -361,5 +368,4 @@ if ('${msg}' == 'success') {
 		return false;
 
 	};
-
-	</script>
+</script>

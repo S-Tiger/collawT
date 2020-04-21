@@ -9,9 +9,21 @@ public class MemberVO {
 	private String mem_Name;
 	private String mem_Imagine;
 	private MultipartFile mem_File;
-	//임
-//	private String forgot_Key;
+	private String mem_Key;
+	private String mem_Status;
 	
+	public String getMem_Status() {
+		return mem_Status;
+	}
+	public void setMem_Status(String mem_Status) {
+		this.mem_Status = mem_Status;
+	}
+	public String getMem_Key() {
+		return mem_Key;
+	}
+	public void setMem_Key(String mem_Key) {
+		this.mem_Key = mem_Key;
+	}
 	public String getMem_Id() {
 		return mem_Id;
 	}
@@ -30,12 +42,6 @@ public class MemberVO {
 	public void setMem_Name(String mem_Name) {
 		this.mem_Name = mem_Name;
 	}
-//	public String getForgot_Key() {
-//		return forgot_Key;
-//	}
-//	public void setForgot_Key(String forgot_Key) {
-//		this.forgot_Key = forgot_Key;
-//	}
 	public String getMem_Imagine() {
 		return mem_Imagine;
 	}
