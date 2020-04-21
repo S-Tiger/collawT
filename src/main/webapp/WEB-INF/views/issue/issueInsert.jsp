@@ -288,7 +288,7 @@ span[name="chargerspan"] {
                <select class="form-control custom-select" id="chargerSelect" name="chargerSelect">
                	<option selected disabled>담당자를 지정하세요</option>
                   <c:forEach var="comemList" items="${comemList}" >
-                  <option >${comemList.MEM_NAME}(${comemList.MEM_ID})</option>
+                  <option >${comemList.MEM_NAME}-${comemList.MEM_ID}</option>
                   </c:forEach>
                 </select>
                 
@@ -303,16 +303,20 @@ span[name="chargerspan"] {
              
 				</div>
 				<div id="chargerForm"></div>
+				
 				<script>
 				var chargedArray = new Array();
+				//var returnArray = new Array();
+				var chargedCount = 0;
+			
 				
 				
 				 $('#chargerSelect').change(function(event) {
 					 var mem_Id = $('#chargerSelect').val();
 					 chargedArray.push(mem_Id);
-					 console.log(chargedArray);
-					 var ok = true;
+					 console.log("chargedArray : "+chargedArray);
 					 
+					 var ok = true;
 						 for(var i=0; i<chargedArray.length-1; i++){
 							 if(mem_Id == chargedArray[i]){
 								 alert("동일한 아이디를 여러 번 초대할 수 없습니다.")
@@ -323,14 +327,36 @@ span[name="chargerspan"] {
 			
 					 		}
 						 if(ok==true){
-							 $('#chargerList').append("<span id= 'chargerspan["+mem_Id+"]' name='chargerspan'>"+mem_Id+"<a id ='chargerdelete' href='javascript:deleteCharger("+mem_Id+")'> X </a></span>");
+							 
+							 chargedCount++;
+							 
+							$('#chargerList').append("<span id= 'chargerspan"+chargedCount+"' name='chargerspan'>"+mem_Id+"<a id ='chargerdelete["+chargedCount+"]' name = 'chargerdelete' onclick='deleteCharger("+chargedCount+")'>X</a></span>");
+							
 						 }
 				 })
 				 
-				 function deleteCharger(mem_Id){
-					 $("#chargerspan["+mem_Id+"]").remove();
+				 function deleteCharger(chargedCount){
+					
+					 var chargerspan = $('#chargerspan'+chargedCount).text();
+					 var splitResult = chargerspan.split("X");
+					 var Realchargerspan = splitResult[0];
+					 
+					 
+					 $('#chargerspan'+chargedCount).remove();
+					 
+					 var index = chargedArray.indexOf(Realchargerspan);
+					 
+					 if (index > -1) {
+						 chargedArray.splice(index,1);
+						}
+					 
+					 console.log("changed : "+ chargedArray);
+					 
+					
 				 }
-				
+				 
+		
+
 				</script>
 				
              

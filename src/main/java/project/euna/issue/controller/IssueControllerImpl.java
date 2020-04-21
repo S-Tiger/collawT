@@ -215,12 +215,11 @@ public class IssueControllerImpl implements IssueController {
 
 	
 	
-	//ckeditor 이미지 파일 업로드
-	@Override
 	@PostMapping("/imageUpload")
 	@ResponseBody
-	public String imageUpload(HttpServletRequest req, HttpServletResponse resp, 
-                 MultipartHttpServletRequest multiFile, HttpSession session) throws Exception {
+	@Override
+	public String fileUpload(HttpServletRequest req, HttpServletResponse resp, 
+                 MultipartHttpServletRequest multiFile) throws Exception {
 		JsonObject json = new JsonObject();
 		PrintWriter printWriter = null;
 		OutputStream out = null;
@@ -231,7 +230,8 @@ public class IssueControllerImpl implements IssueController {
 					try{
 						String fileName = file.getName();
 						byte[] bytes = file.getBytes();
-						String uploadPath = session.getServletContext().getRealPath("/");
+						String uploadPath = req.getServletContext().getRealPath("/img");
+						System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11"+uploadPath);
 						File uploadFile = new File(uploadPath);
 						if(!uploadFile.exists()){
 							uploadFile.mkdirs();
@@ -240,18 +240,18 @@ public class IssueControllerImpl implements IssueController {
 						uploadPath = uploadPath + "/" + fileName;
 						out = new FileOutputStream(new File(uploadPath));
                         out.write(bytes);
-                        
+
                         printWriter = resp.getWriter();
                         resp.setContentType("text/html");
                         String fileUrl = req.getContextPath() + "/img/" + fileName;
-                        
+
                         // json 데이터로 등록
                         // {"uploaded" : 1, "fileName" : "test.jpg", "url" : "/img/test.jpg"}
                         // 이런 형태로 리턴이 나가야함.
                         json.addProperty("uploaded", 1);
                         json.addProperty("fileName", fileName);
                         json.addProperty("url", fileUrl);
-                        
+
                         printWriter.println(json);
                     }catch(IOException e){
                         e.printStackTrace();
@@ -268,10 +268,9 @@ public class IssueControllerImpl implements IssueController {
 		}
 		return null;
 	}	
-	
-	
 
 }
+
 
 
 
