@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="vote">
+	<resultMap id="voteResult01" type="java.util.HashMap">
+		<result property="v_Num" column="v_Num" />
+		<result property="v_Content" column="v_Content" jdbcType="CLOB" javaType="java.lang.String" />
+		<result property="v_Start" column="v_Start" />
+		<result property="v_End" column="v_End" />
+	</resultMap>
+
+
+	<insert id="voteInsert" parameterType="java.util.Map">
+	<![CDATA[
+	insert into vote(v_num, v_content, c_id ,mem_id )
+		values( #{v_Num}, #{v_Content}, 'qq', #{mem_Id} )
+	]]>
+	</insert>
+
+</mapper>

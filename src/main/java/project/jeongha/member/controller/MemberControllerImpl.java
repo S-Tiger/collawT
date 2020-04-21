@@ -589,7 +589,7 @@ public class MemberControllerImpl implements MemberController {
 	@GetMapping("/vote")
 	public String googleDrive() {
 		// TODO Auto-generated method stub
-		return "/member/xnvy";
+		return "/member/vote";
 	}
 
 }

@@ -13,6 +13,7 @@
 	<!-- collaw-T 알리아스 -->
 		<!-- 정하 -->
 		<typeAlias type="project.jeongha.member.vo.MemberVO" alias="MemberVO" />
+		<typeAlias type="project.jeongha.vote.vo.VoteVO" alias="VoteVO" />
 		
 		<!-- 은아 -->
 		<typeAlias type="project.euna.issue.vo.IssueVO" alias="IssueVO" />

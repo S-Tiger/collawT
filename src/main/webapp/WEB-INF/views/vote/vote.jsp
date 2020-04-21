@@ -118,7 +118,7 @@
 							</div>
 							<!-- /.card-header -->
 							<div class="card-body">
-								<form role="form">
+								<form action="/vote/voteInsert" role="form">
 									<div class="row">
 										<div class="col-sm-6">
 											<!-- text input -->
@@ -128,8 +128,8 @@
 										</div>
 										<div class="col-sm-6">
 											<div class="form-group">
-												<input type="text" class="form-control"
-													placeholder="Enter ...">
+												<input type="text" name="v_Num" class="form-control"
+													placeholder="제목을 입력하세요">
 											</div>
 										</div>
 									</div>
@@ -142,8 +142,8 @@
 										</div>
 										<div class="col-sm-6">
 											<div class="form-group">
-												<textarea class="form-control" rows="3"
-													placeholder="Enter ..."></textarea>
+												<textarea name="v_Content" class="form-control" rows="3" maxlength="150"
+													placeholder="설명을 입력해주세요"></textarea>
 											</div>
 										</div>
 									</div>
@@ -159,7 +159,7 @@
 										<div class="col-sm-6">
 											<div class="form-group">
 												<input type="text" class="form-control"
-													placeholder="Enter ...">
+													placeholder="보기를 입력하세요">
 											</div>
 										</div>
 									</div>
@@ -173,7 +173,7 @@
 										<div class="col-sm-6">
 											<div class="form-group">
 												<input type="text" class="form-control"
-													placeholder="Enter ...">
+													placeholder="보기를 입력하세요">
 											</div>
 										</div>
 									</div>

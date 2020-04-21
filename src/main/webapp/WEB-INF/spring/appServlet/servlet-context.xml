@@ -108,6 +108,7 @@
 		<task:scheduler id="scheduler" pool-size="10" /> <task:executor id="executor" 
 		keep-alive="5" pool-size="10-20" queue-capacity="10" rejection-policy="ABORT" 
 		/> -->
+	<!-- 네이버 로그인 -->	
 	<beans:bean id="naverLoginBO"
 		class="project.jeongha.member.vo.NaverLoginBO" />
 

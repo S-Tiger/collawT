@@ -185,9 +185,11 @@ public class MemberServiceImpl implements MemberService {
 		if (div.equals("join")) {
 			// 회원가입 메일 내용
 			subject = "Collaw T 협업 회원가입 인증 메일입니다.";
+			msg +="<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css\"/>";
 			msg += "<div align='center' style='border:1px solid black; font-family:verdana'>";
 			msg += "<h3 style='color: blue;'>";
 			msg += memberVO.getMem_Name() + "님 Collaw T 회원가입을 환영합니다.</h3>";
+			msg += "<i class=\"fas fa-envelope-open-text\"></i>";
 			msg += "<div style='font-size: 130%'>";
 			msg += "하단의 인증 버튼 클릭 시 정상적으로 회원가입이 완료됩니다.</div><br/>";
 			msg += "<form method='post' action='http://localhost:8090/member/approvalMember'>";
@@ -196,6 +198,58 @@ public class MemberServiceImpl implements MemberService {
 			msg += "<input type='hidden' name='mem_Key' value='" + memberVO.getMem_Key() + "'>";
 			msg += "<h1>" + memberVO.getMem_Key() +"<h1>";
 			msg += "<input type='submit' value='인증'></form><br/></div>";
+			msg +=" \"  <html>\"\n" + 
+					"  + \" <head>\"\n" + 
+					"  + \" <link rel=stylesheet type=text/css href=URL/com/yani2.css>\"\n" + 
+					"  + \" </head>\"\n" + 
+					"  + \" <body bgcolor=white background=\\\"URL/images/music_mail/leaf.gif\\\">\"\n" + 
+					"  + \" <table width=100% height=100% style=\\\"line-height:100%; margin-top:0; margin-bottom:0;\\\" border=0 cellpadding=0 cellspacing=0>\"\n" + 
+					"  + \"  <tr>\"\n" + 
+					"  + \"   <td width=100% height=100% align=center valign=center>\"\n" + 
+					"  + \"    <table style=\\\"line-height:100%; margin-top:0; margin-bottom:0;\\\" bgcolor=black border=0 cellpadding=2 cellspacing=0 width=442>\"\n" + 
+					"  + \"     <tr>\"\n" + 
+					"  + \"      <td>\"\n" + 
+					"  + \"       <table style=\\\"line-height:100%; margin-top:0; margin-bottom:0;\\\" border=0 cellpadding=0 cellspacing=0 width=440>\"\n" + 
+					"     + \"        <tr>\"\n" + 
+					"     + \"         <td width=100%><img src=\\\"URL/images/music_mail/70_top.gif\\\" width=440 height=105 border=0></td>\"\n" + 
+					"     + \"        </tr>\"\n" + 
+					"  + \"        <tr>\"\n" + 
+					"  + \"         <td width=100%>\"\n" + 
+					"  + \"          <table border=0 cellpadding=0 cellspacing=0 width=100%>\"\n" + 
+					"  + \"           <tr>\"\n" + 
+					"  + \"            <td width=27 height=188 background=\\\"URL/images/music_mail/70_left.gif\\\"></td>\"\n" + 
+					"        + \"            <td width=383 height=188 bgcolor=#FFEB9C valign=top>to. \" + fc.a2k(name) + \"<br>\"\n" + 
+					"        +              bodys + \"<br><br><br>\"\n" + 
+					"        + \"             ----------------------------------------------------------------------------\"\n" + 
+					"        + \"             <br>\"\n" + 
+					"        + \"             가수 :\" + music_title + \"<br>\"\n" + 
+					"        + \"             제목 :\" + music_name\n" + 
+					"        + \"            </td>\"\n" + 
+					"        + \"            <td width=30 height=188 background=\\\"URL/images/music_mail/70_right.gif\\\"></td>\"\n" + 
+					"        + \"           </tr>\"\n" + 
+					"        + \"          </table>\"\n" + 
+					"        + \"         </td>\"\n" + 
+					"        + \"        </tr>\"\n" + 
+					"  + \"        <tr>\"\n" + 
+					"  + \"         <td width=100%>\"\n" + 
+					"  + \"          <table border=0 cellpadding=0 cellspacing=0 width=100%>\"\n" + 
+					"  + \"           <tr>\"\n" + 
+					"  + \"            <td><img src=\\\"URL/images/music_mail/70_bottom1.gif\\\" width=200 height=160 border=0></td><td><img src=\\\"URL/images/music_mail/70_bottom2.gif\\\" width=240 height=160 border=0></td>\"\n" + 
+					"  + \"           </tr>\"\n" + 
+					"  + \"          </table>\"\n" + 
+					"  + \"         </td>\"\n" + 
+					"  + \"        </tr>\"\n" + 
+					"  + \"       </table>\"\n" + 
+					"  + \"      </td>\"\n" + 
+					"  + \"     </tr>\"\n" + 
+					"  + \"    </table>\"\n" + 
+					"  + \"   </td>\"\n" + 
+					"  + \"  </tr>\"\n" + 
+					"  + \" </table>\"\n" + 
+					"  + \" <div style=\\\"display:none; left:-1000px; top:-1000px\\\">\"\n" + 
+					"  + \" </div>\"\n" + 
+					"  + \" </body>\"\n" + 
+					"  + \" </html>\";";
 
 		} else if (div.equals("find_pw")) {
 			subject = "CollawT 임시 비밀번호 입니다.";
@@ -231,7 +285,7 @@ public class MemberServiceImpl implements MemberService {
 			System.out.println("메일발송 실패 : " + e);
 		}
 	}
-
+	
 	// 비밀번호찾기 이메일 보내기
 	@Override
 	public void find_pw(HttpServletResponse response, MemberVO memberVO, Map<String, Object> member) throws Exception {
