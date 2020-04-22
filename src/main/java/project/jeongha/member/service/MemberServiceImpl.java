@@ -113,7 +113,7 @@ public class MemberServiceImpl implements MemberService {
 			return null;
 		
 			
-		//아이디가 있으면
+		//아이디가 있지만 맴버 상태가 true가 아니라면.
 		} else {
 			MemberVO memStatus = dao.memberStatus(memLogin);
 			if(!memStatus.getMem_Status().equals("true")){
@@ -124,6 +124,7 @@ public class MemberServiceImpl implements MemberService {
 			out.close();
 			return null;
 			}else {
+				//로그인
 				return dao.memberLogin(memLogin);
 			}
 			
@@ -194,9 +195,7 @@ public class MemberServiceImpl implements MemberService {
 			msg += "하단의 인증 버튼 클릭 시 정상적으로 회원가입이 완료됩니다.</div><br/>";
 			msg += "<form method='post' action='http://localhost:8090/member/approvalMember'>";
 			msg += "<input type='hidden' name='mem_Id' value='" + memberVO.getMem_Id() + "'>";
-			msg += "<h1>" + memberVO.getMem_Id() + "<h1>";
 			msg += "<input type='hidden' name='mem_Key' value='" + memberVO.getMem_Key() + "'>";
-			msg += "<h1>" + memberVO.getMem_Key() +"<h1>";
 			msg += "<input type='submit' value='인증'></form><br/></div>";
 			msg +=" \"  <html>\"\n" + 
 					"  + \" <head>\"\n" + 

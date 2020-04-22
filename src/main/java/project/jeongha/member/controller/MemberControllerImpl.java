@@ -438,24 +438,25 @@ public class MemberControllerImpl implements MemberController {
 			Map<String, Object> member = new HashMap<String, Object>();
 			member.put("mem_Id", mem_Id);
 			member.put("mem_Name", mem_Name);
-			member.put("mem_ImgName",mem_ImgName);
+			//member.put("mem_ImgName",mem_ImgName);
 			member.put("mem_LoginApi", "naver");
 			// 아이디가 없다면.
-			System.out.println(member);
+			System.out.println("@@@@@@@@@@@@@@@@@@@@@@@"+member);
 			int result = service.check_id(mem_Id);
 			if (result != 1) {
-				System.out.println("아이디 없음");
+	//			System.out.println("아이디 없음");
 				service.memberJoinApi(member);
 				session.setAttribute("member", member);
 				return "/main/index";
+				
 			} else {
 
-				System.out.println("아이디가 있음");
+//				System.out.println("아이디가 있음");
 				//사진, 업데이트 정보가져오기 -> 협업공간에서는 필요없을것 같음 새로운 사진 쓸수있게 하기
-				service.login(member, response);
+				Map<String, Object> memberVO = service.login(member, response);
 				//로그인 정보 가져오기.
-				session.setAttribute("member", member);
-				
+				System.out.println(member);
+				session.setAttribute("member", memberVO);
 				//model.addAttribute("result", apiResult);
 
 				return "/main/index";
@@ -510,6 +511,7 @@ public class MemberControllerImpl implements MemberController {
 			// 구글이 이름을 제공하지 않아 아이디로 이름 대체
 			member.put("mem_Name", mem_Id);
 			member.put("mem_ImgName",mem_ImgName);
+			member.put("mem_LoginApi", "google");
 			System.out.println("member: " + member);
 
 			int result = service.check_id(mem_Id);
@@ -521,8 +523,9 @@ public class MemberControllerImpl implements MemberController {
 			} else {
 				
 				System.out.println("아이디가 있음");
-				service.login(member, response);
-				session.setAttribute("member", member);
+				Map<String, Object> memberVO = service.login(member, response);
+				System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+memberVO);
+				session.setAttribute("member", memberVO);
 
 			}
 			return "/main/index";
