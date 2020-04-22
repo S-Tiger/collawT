@@ -15,6 +15,8 @@ import project.sungho.apply.vo.ApplyVO;
 public interface BookmarkController {
 
 	public List<Map> searchList(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	public List<Map> deletelist(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 	public String updateBookmark(Model model) throws Exception;
 

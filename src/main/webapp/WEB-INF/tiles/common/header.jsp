@@ -68,17 +68,18 @@
 				var itemcount = data.length;
 				if (data != 0) {
 					for ( var i in data) {
-				itemString += '<tr><td style="width:30%; vertical-align:top"><font size="2em" color="#6c757d"><b>'
+				itemString += '<tr><td style="width:30%;"><font size="3em" color="#6c757d"><b>'
 				itemString +=  data[i].c_Name+'</b></font></td>'
 				itemString += '<td style="width:50%"><a style="color: #20c997" href="/project/issue/read?i_Num='+data[i].i_Num+'">';
 				itemString += '<font size="3em"><b>'+data[i].i_Name+'</b></font></a>'
-				itemString += '<td style="width:20%; vertical-align:top"><font size="2em" color="#6c757d"><b>'
+				itemString += '<a href="#" onclick="bookdelete('+data[i].i_Num+')" style="padding: 0px; margin-top: 3; float:right;">'
+				itemString += '<i class="fas fa-trash-alt"></i></a></td>'
+				itemString += '<td style="width:20%;"><font size="3em" color="#6c757d"><b>'
 				itemString +=  data[i].mem_Name+'</b></font></td></tr>'
 					}
-					$("#bookmarkcount").html(itemcount);
-					console.log($("#bookmarkcount").html());
+				$("#bookmarkcount").html(itemcount);
 				}else{
-				itemString += '<tr><td>등록된 북마크가 없습니다.</td></tr>'  
+				itemString += '<tr><td colspan="3" align="center"><font size="3em"><b>등록된 북마크가 없습니다.</b></font></td></tr>'  
 				}
 				$("#bookmarkitem").html(itemString);
 			}})
@@ -105,10 +106,31 @@
 		
 		
 		
-		
+		//북마크 버튼클릭시 다시 ajax실행
 		$('#bookmarkA').click(function() {
-			console.log('버튼클릭');	
-		
+			$.ajax({
+				url : '${contextPath}/bookmark/list',
+				type : 'get',
+				success : function(data) {
+					var itemString = "";
+					var itemcount = data.length;
+					if (data != 0) {
+						for ( var i in data) {
+							itemString += '<tr><td style="width:30%;"><font size="3em" color="#6c757d"><b>'
+								itemString +=  data[i].c_Name+'</b></font></td>'
+								itemString += '<td style="width:50%"><a style="color: #20c997" href="/project/issue/read?i_Num='+data[i].i_Num+'">';
+								itemString += '<font size="3em"><b>'+data[i].i_Name+'</b></font></a>'
+								itemString += '<a href="#" onclick="bookdelete('+data[i].i_Num+')" style="padding: 0px; margin-top: 3; float:right;">'
+								itemString += '<i class="fas fa-trash-alt"></i></a></td>'
+								itemString += '<td style="width:20%;"><font size="3em" color="#6c757d"><b>'
+								itemString +=  data[i].mem_Name+'</b></font></td></tr>'
+						}
+					$("#bookmarkcount").html(itemcount);
+					}else{
+					itemString += '<tr><td colspan="3" align="center"><font size="3em"><b>등록된 북마크가 없습니다.</b></font></td></tr>'  
+					}
+					$("#bookmarkitem").html(itemString);
+				}})
 	})
 	
 	};
@@ -140,6 +162,34 @@
 				+ "; path=/";
 	}
 	
+	function bookdelete(itemdata) {
+		var i_Num = itemdata;
+		$.ajax({
+			url : '${contextPath}/bookmark/deletelist?i_Num='+i_Num,
+			type : 'get',
+			success : function(data) {
+				var itemString = "";
+				var bookcount = $("#bookmarkcount").html();
+				if (data != 0) {
+					for ( var i in data) {
+						itemString += '<tr><td style="width:30%;"><font size="3em" color="#6c757d"><b>'
+							itemString +=  data[i].c_Name+'</b></font></td>'
+							itemString += '<td style="width:50%"><a style="color: #20c997" href="/project/issue/read?i_Num='+data[i].i_Num+'">';
+							itemString += '<font size="3em"><b>'+data[i].i_Name+'</b></font></a>'
+							itemString += '<a href="#" onclick="bookdelete('+data[i].i_Num+')" style="padding: 0px; margin-top: 3; float:right;">'
+							itemString += '<i class="fas fa-trash-alt"></i></a></td>'
+							itemString += '<td style="width:20%;"><font size="3em" color="#6c757d"><b>'
+							itemString +=  data[i].mem_Name+'</b></font></td></tr>'
+					}
+				$("#bookmarkcount").html(bookcount);
+				}else{
+				itemString += '<tr><td colspan="3" align="center"><font size="3em"><b>등록된 북마크가 없습니다.</b></font></td></tr>'  
+				$("#bookmarkcount").html('');
+				}
+				$("#bookmarkitem").html(itemString);
+			}})
+	}
+	
 </script>
 
 <script>
@@ -155,43 +205,7 @@
 </script>
 
 <script type="text/javascript">
-
-/*  $(function(){
-	
-
-	$('#test00').click(function(){
-		console.log("ddd");
-		$.ajax({
-			url:'/notify/update',
-			dataType : 'Json'
-			type:'get',
-			success: function() {
-		console.log(ee)
-		},
-			error: function(){
-				console.log()
-					alert("erorr");
-				}
-		});
-		})
-	}); */   
   $(function(){
-		
-	/*   $('#test00').click(function(){
-			console.log("ddd");
-			$.ajax({
-				url:'${contextPath}/notify/update',
-				dataType : 'Json',
-				type:'get',
-				success: function() {
-			console.log(ee)
-			},
-				error: function(){
-					console.log()
-						alert("erorr");
-					}
-			});
-			}) */
 		$('#test00').ready(function(){
 			console.log("ddd");
 			$.ajax({
@@ -453,7 +467,7 @@
 							</p>
 					</a></li>
 					<li class="nav-item"><a href="/#" data-needpopup-show="#bookmark-popup"
-						class="nav-link"> <i class="nav-icon fas fa-bookmark"></i>
+						class="nav-link" id="bookmarkA"> <i class="nav-icon fas fa-bookmark"></i>
 							<p>
 								북마크 <span class="badge badge-info right" id="bookmarkcount" style="background-color: #FFC108"></span>
 								<!--  <span class="right badge badge-danger">New</span>-->

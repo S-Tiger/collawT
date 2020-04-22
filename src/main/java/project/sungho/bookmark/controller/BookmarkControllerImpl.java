@@ -41,6 +41,23 @@ public class BookmarkControllerImpl implements BookmarkController {
 
 		return bookmarkList;
 	}
+	
+	
+	@Override
+	@RequestMapping("/deletelist")
+	@ResponseBody
+	public List<Map> deletelist(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		HttpSession session = request.getSession();
+		String i_Num = request.getParameter("i_Num");
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		searchMap = (Map<String, Object>) session.getAttribute("member");
+		searchMap.put("i_Num", i_Num);
+		bookmarService.deleteBookmark(searchMap);
+		
+		List<Map> bookmarkList = bookmarService.searchList(searchMap);
+		
+		return bookmarkList;
+	}
 
 	@Override
 	public String updateBookmark(Model model) throws Exception {
