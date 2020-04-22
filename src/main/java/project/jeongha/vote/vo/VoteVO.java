@@ -3,14 +3,37 @@ package project.jeongha.vote.vo;
 
 public class VoteVO {
 
-	private int v_Num;
+	//투표 번호
+	private String v_Num;
+	//투표 제목
 	private String v_Content;
+	//시작일
 	private String v_Start;
+	//마감일
 	private String v_End;
-	public int getV_Num() {
+	//보기번호
+	private String vd_Num;
+	//보기내용
+	private String vd_Content;
+	
+	
+	public String getVd_Num() {
+		return vd_Num;
+	}
+	public void setVd_Num(String vd_Num) {
+		this.vd_Num = vd_Num;
+	}
+	public String getVd_Content() {
+		return vd_Content;
+	}
+	public void setVd_Content(String vd_Content) {
+		this.vd_Content = vd_Content;
+	}
+	
+	public String getV_Num() {
 		return v_Num;
 	}
-	public void setV_Num(int v_Num) {
+	public void setV_Num(String v_Num) {
 		this.v_Num = v_Num;
 	}
 	public String getV_Content() {

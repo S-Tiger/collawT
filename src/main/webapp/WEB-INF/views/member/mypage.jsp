@@ -194,7 +194,8 @@ if ('${msg}' == 'success') {
 							<div id="left" style="padding: 10px; margin-right: 10px;">
 								<div class="card card-primary card-outline"
 									style="border-top: white">
-									<div class="card-body box-profile">
+									<div class="card-body box-profile"
+										style="padding-top: 5px; padding-bottom: 0px;">
 										<!-- 변경된이미지 -->
 										<div id="holder" class="user-img img-fluid img-circle">
 											<!-- 아이디 있으면.. -->
@@ -255,7 +256,8 @@ if ('${msg}' == 'success') {
 							</div>
 							<!-- 비밀번호 변경 -->
 
-							<div class="card-body">
+							<div class="card-body"
+								style="padding-top: 5px;padding-bottom: 0px;height: 165px;">
 								<div class="form-group">
 									<form id="pwForm" action="/member/update_pw" method="post">
 										<input type="hidden" name="mem_Id" value="${member.mem_Id}">

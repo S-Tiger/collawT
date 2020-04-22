@@ -6,17 +6,39 @@
 <mapper namespace="vote">
 	<resultMap id="voteResult01" type="java.util.HashMap">
 		<result property="v_Num" column="v_Num" />
-		<result property="v_Content" column="v_Content" jdbcType="CLOB" javaType="java.lang.String" />
+		<result property="v_Content" column="v_Content" jdbcType="CLOB" javaType="java.lang.String"/>
 		<result property="v_Start" column="v_Start" />
 		<result property="v_End" column="v_End" />
+		<result property="vd_Num" column="vd_Num" />
+		<result property="vd_Content" column="vd_Content" jdbcType="CLOB" javaType="java.lang.String"/>
+		<result property="mem_Id" column="mem_Id" />
 	</resultMap>
 
-
+	<!-- voteTable 삽입 -->
 	<insert id="voteInsert" parameterType="java.util.Map">
 	<![CDATA[
-	insert into vote(v_num, v_content, c_id ,mem_id )
-		values( #{v_Num}, #{v_Content}, 'qq', #{mem_Id} )
+	insert into vote(v_num, v_content, c_id ,mem_id, v_start )
+		values( #{v_Num}, #{v_Content}, 'test', #{mem_Id},(select to_char(sysdate, 'YYYY/MM/DD/ HH24:MI:SS') from dual))
 	]]>
 	</insert>
+
+	<!--votedTable 삽입 -->
+	<insert id="votedInsert" parameterType="java.util.Map">
+	<![CDATA[
+	insert into voted(v_num, vd_num, vd_content, c_id)
+		values( #{v_Num}, #{vd_Num}, #{vd_Content}, 'test') 
+	]]>
+	</insert>
+
+	<!-- 투표 이름가져오기 -->
+	<select id="voteList" resultMap="voteResult01">
+	<![CDATA[
+	
+	select * from vote v, voted vd where v.v_Num=vd.v_Num
+	
+	]]>
+	</select>
+	
+	
 
 </mapper>
