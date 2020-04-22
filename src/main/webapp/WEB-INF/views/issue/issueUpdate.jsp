@@ -8,12 +8,26 @@
 
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<style type="text/css">
+
+span[name="chargerspan"] {
+	background-clip: padding-box;
+    border: 1px solid #17a2b8;
+    padding: 2px;
+    margin: 2px;
+    display: inline-block;
+}
+
+
+</style>
 	
 <script type="text/javascript">
 		 $(document).ready(function(){
 			 getFileList();
 			 getIg_Checked();
 			 periodSetting();
+			 chargerRead();
 			 
 			 //
 			//이슈상태 라디오버튼 체크 값 가져오기
@@ -103,6 +117,34 @@
 					}
 				});
 			});
+			
+				//이슈담당자 입력
+			 $('#chargerSelect').change(function(event) {
+				 var mem_Id = $('#chargerSelect').val();
+				 var idSearch = mem_Id.split("(");
+				 var realmem_Id = idSearch[0];
+						 
+				 chargedArray.push(mem_Id);
+				 console.log("chargedArray : "+chargedArray);
+				 
+				 var ok = true;
+					 for(var i=0; i<chargedArray.length-1; i++){
+						 if(mem_Id == chargedArray[i]){
+							 alert("동일한 아이디를 여러 번 초대할 수 없습니다.")
+							 chargedArray.pop();
+							 console.log(chargedArray);
+						  	ok=false;
+						 }
+		
+				 		}
+					 if(ok==true){
+						 
+						 chargedCount++;
+						 
+						$('#chargerList').append("<span id= 'chargerspan"+chargedCount+"' name='chargerspan'>"+mem_Id+"<a id ='chargerdelete["+chargedCount+"]' name = 'chargerdelete' onclick='deleteCharger("+chargedCount+")'>X</a></span>");
+						$('#chargerForm').append("<input type='hidden' id='hidden_Id"+chargedCount+"' name='comem_Id' value='"+realmem_Id+"'>");
+					 }
+			 })
 		})
 		
 			//첨부된 파일 리스트
@@ -247,12 +289,60 @@
 				}
 			}
 			
+			//이슈담당자 조회
+			var chargedArray = new Array();
+			var chargedCount = 0;
+			
+			
+			function chargerRead(){
+				$.ajax({
+					type:"get",
+					url : "${path}/project/issue/chargerList?i_Num=${issueUpdate.i_Num}",
+					
+					success:function(result){
+						var str="";
+						if(result!=0){
+							for(chargedCount in result){
+								$('#chargerList').append("<span id= 'chargerspan"+chargedCount+"' name='chargerspan'>"+result[chargedCount].MEM_ID+"("+result[chargedCount].MEM_NAME+")<a id ='chargerdelete["+chargedCount+"]' name = 'chargerdelete' onclick='deleteCharger("+chargedCount+")'>X</a></span>");
+								$('#chargerForm').append("<input type='text' id='hidden_Id"+chargedCount+"' name='comem_Id' value='"+result[chargedCount].MEM_ID+"'>");
+								chargedArray.push(result[chargedCount].MEM_ID+"("+result[chargedCount].MEM_NAME+")");
+							}
+						}
+						
+					}
+					
+				})
+			}
+			
 
+			 
+			 //이슈 담당자 x버튼 누르면 삭제
+			 function deleteCharger(chargedCount){
+				
+				 var chargerspan = $('#chargerspan'+chargedCount).text();
+				 var splitResult = chargerspan.split("X");
+				 var Realchargerspan = splitResult[0];
+				 
+				 
+				 $('#chargerspan'+chargedCount).remove();
+				 $('#hidden_Id'+chargedCount).remove();
+				 
+				 var index = chargedArray.indexOf(Realchargerspan);
+				 
+				 if (index > -1) {
+					 chargedArray.splice(index,1);
+					}
+				 
+				 console.log("changed : "+ chargedArray);
+				 
+				
+			 }
+			 
+	
 		  	 
 			
 	
 	</script>
-	
 	
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -353,11 +443,33 @@
               <div class="form-group">
               
                 <label for="inputStatus">담당자</label>
-               <select class="form-control custom-select">
-                  <option selected disabled>Select one</option>
-                  <option>나중에 담당자명 리스트로 가져오기</option>
+               <select class="form-control custom-select" id="chargerSelect" name="chargerSelect">
+               	<option selected disabled>담당자를 지정하세요</option>
+                  <<c:forEach var="comemList" items="${comemList}" >
+                  <option >${comemList.MEM_ID}(${comemList.MEM_NAME})</option>
+                 </c:forEach>
                 </select>
+                
               </div>
+              
+              <div class="form-group">
+              <span id="id_check" name="id_check"
+				style="font-size: 0.9em; line-height: 1.0; color: #a1a1a1; ">
+			
+				담당자 목록을  확인하세요.</span>
+              <div id="chargerList" class = "form-control" style="height: 100px; width: 100%; white-space: pre-line; margin-bottom: 5px; overflow:scroll;"></div>
+             	
+             	
+				
+				</div>
+				<div id="chargerForm"></div>
+				
+				<div id="chargerList">
+			
+				
+				</div>
+				
+
       <!-- 이슈그룹번호 설정 -->
       <div class="form-group" id="issueStatus">
 		<label for="inputStatus">이슈 상태</label><br>
@@ -418,18 +530,22 @@
                   
               </div>
                 <!-- /.캘린더 -->
+           <br>
                 
-                
-               
-          <input type="submit" id = "submit" value="이슈 수정" class="btn btn-success float-right" style="margin:3px;">
-          <input type="button" id = "cancel" value="수정 취소" class="btn btn-success float-right" style="margin:3px;" onclick="history.back(-1)">
-                </div>
+           <input type="submit" id = "submit" value="이슈 수정" class="btn btn-danger btn-sm float-right" style="margin:3px;">
+          <input type="button" id = "cancel" value="수정 취소" class="btn btn-danger btn-sm float-right" style="margin:3px;" onclick="history.back(-1)">     
+                    
+                 </div>
               </div>
               </section>
              
         
     <!-- /.content -->
      </form>
+    <form action = "/project/issue/update" method="post" id="chargerForm">
+    <input type="hidden" name="c_Id" value="${c_Id}">
+    
+    </form>
               </div>
               
   

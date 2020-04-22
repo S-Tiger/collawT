@@ -26,8 +26,8 @@ public interface IssueController {
 	
 	public String issueDelete(IssueVO issueVO) throws Exception;
 	
-	public String issueUpdate(IssueVO issueVO, Model model) throws Exception;
-	public String issueUpdate(IssueVO issueVO) throws Exception;
+	public String issueUpdate(String c_Id, String i_Num, IssueVO issueVO, Model model) throws Exception;
+	public String issueUpdate(IssueVO issueVO, HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 	public String fileUpload(HttpServletRequest req, HttpServletResponse resp, 
             MultipartHttpServletRequest multiFile) throws Exception;

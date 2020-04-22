@@ -273,6 +273,7 @@ $(document).ready(function() {
 
 				<!-- Box Comment -->
 <!-- 본문 부분~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->				
+			
 				<form name="readForm" role="form">
 
 					<div class="card card-widget">
@@ -307,22 +308,10 @@ $(document).ready(function() {
 								
 								
 							</div>
+							<br><br><br>
 							
-							<br>
-							<!-- 시작일/종료일 : 둘다 null이면 아예 안뜨게-->
-							<c:if test="${not empty issueRead.i_Start&& not empty issueRead.i_End}">
-							<br>
-							<br>
-								<span class="text-muted float-left">
-								<ion-icon name="calendar-outline" style="font-size:24"></ion-icon>
-								&nbsp;
-								</span>
-								
-								<span id="i_Start" name="i_Start" class="text-muted float-left" style="font-size:medium"><c:out value="${issueRead.i_Start}~"/></span>
-								
-								<span id="i_End" name="i_End" class="text-muted float-left" style="font-size:medium"><c:out value="${issueRead.i_End}"/></span>
-								</c:if>
-								<br>
+							
+				
 								<br>
 							
 							<!-- 내용 -->
@@ -337,18 +326,80 @@ $(document).ready(function() {
 								value="${issueRead.i_Num}" /> <br>
 							<br>
 
+<!-- 이슈정보~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<div class="card card-primary collapsed-card">
+            <div class="card-header" style="height:30px; padding-left:13px; padding-right:16px; padding-top:4px; background-color:#e87c87;">
+             <label><small><b>이슈 정보 더 보기</b></small></label>
+                <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                  <i class="fas fa-plus"></i></button>
+              </div>
+            </div>
+            <div class="card-body p-0">
+            
+             <table class="table">
+              <tbody>
+		           <tr>
+		           <td>
+		           <div class="row">
+		           <ion-icon name="calendar-outline" style="font-size:24"></ion-icon>&nbsp;
+					<span style="font-size: 0.8em;"><b>기간</b></span>
+					</div>
+		           		<!-- 시작일/종료일-->
+		           		<div class="row" style="margin-left:9px">
+							<c:if test="${not empty issueRead.i_Start&& not empty issueRead.i_End}">
 							
+								<span id="i_Start" name="i_Start" class="username ">
+								<small><c:out value="${issueRead.i_Start}~"/></small></span>
+								<span id="i_End" name="i_End" class="username">
+								<small><c:out value="${issueRead.i_End}"/></small></span>
+							</c:if>
+							<c:if test="${empty issueRead.i_Start&& empty issueRead.i_End}">
 							
+								<span class="username"><small>기간 미설정</small></span>
+							</c:if>
+							</div>
+		           </td>
+		           </tr>
+		        
+		           <tr>
+					<td>
+					<div class="row">
+					<i class="fas fa-user-friends"></i>&nbsp;
+					<span style="font-size: 0.8em;"><b>이슈 담당자</b></span>
+					</div>
+					<div id="chargerListCheck">
+							<c:forEach var="chargerList" items="${chargerList}" >
+							
+								<div class="row" style="margin:9px">
+								<div class="user-block-sm">	
+								<img alt="프로필사진" width="30" height="30"
+								src="/member/getByteImage?mem_Id=${chargerList.MEM_ID}" class="img-circle"/>
+								<span class="username" id="ch_mem_Name" name="mem_Name">
+								<small><c:out value=" ${chargerList.MEM_NAME}"/></small></span>
+								<span class="description"id="mem_Id" name="mem_Id">
+								<small><c:out	value="(${chargerList.MEM_ID})"/></small></span>
+								</div>
+								</div>
+								
+								</c:forEach>
+					</div>
+				
+							</td>
+							
+							</tr>
+							</tbody>
+              </table>
+            </div></div>				
 <!-- 첨부파일 부분~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->				
+
 
 <!-- 첨부된 파일 없으면 창 아예 안보이게  -->		
 <c:if test="${not empty file}">
 					<div class="card card-info">
-            <div class="card-header">
-             <label for="inputName">첨부파일</label>
-              
-
-              <div class="card-tools">
+                        <div class="card-header" style="height:30px; padding-left:13px; padding-right:16px; padding-top:4px; background-color:#e87c87;">
+             <label><small><b>첨부파일</b></small></label>
+                <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                   <i class="fas fa-minus"></i></button>
               </div>
@@ -360,10 +411,10 @@ $(document).ready(function() {
 
 				  <c:forEach var="file" items="${file}" >
                   <tr>
-                    <td><span id="a_RealName" name="a_RealName">${file.a_RealName}</span></td>
-                    <td><span id="a_Size" name="a_Size">${file.a_Size/1000}kb</span></td>
+                    <td><small><span id="a_RealName" name="a_RealName">${file.a_RealName}</span></small></td>
+                    <td><span id="a_Size" name="a_Size"><small>${file.a_Size/1000}kb</small></span></td>
                     <td class="text-right py-0 align-middle">
-                      <a href="/appendix/download?a_Num=${file.a_Num}"><ion-icon name="arrow-down-circle-outline"  style="font-size:24"></ion-icon></a>
+                      <a href="/appendix/download?a_Num=${file.a_Num}"><i class="fas fa-download"></i></a>
                     </td>
                  </tr>
                  </c:forEach>

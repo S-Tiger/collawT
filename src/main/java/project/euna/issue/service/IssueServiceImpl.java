@@ -93,7 +93,19 @@ public class IssueServiceImpl implements IssueService {
 	public void comemInsert(Map<String, Object> dataMap) throws Exception {
 		// TODO Auto-generated method stub
 		issueDAO.comemInsert(dataMap);
-		System.out.println("!!!!!!!!!!!!!!service"+dataMap);
+	}
+	
+	//협업공간 내 멤버 조회
+	@Override
+	public List<Map> chargerRead(String i_Num) {
+		return issueDAO.chargerRead(i_Num);
+		
+	}
+	
+	//이슈 담당자 수정(삭제 후 다시 삽입)
+	@Override
+	public void chargerDelete(String i_Num) throws Exception {
+		issueDAO.chargerDelete(i_Num);
 	}
 	
 	

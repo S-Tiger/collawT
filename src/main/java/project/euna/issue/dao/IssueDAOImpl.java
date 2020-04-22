@@ -79,11 +79,23 @@ public class IssueDAOImpl implements IssueDAO {
 	public void comemInsert(Map<String, Object> dataMap) throws DataAccessException {
 		
 		sqlSession.update("issue.comemInsert",dataMap);
-		System.out.println("!!!!!!!!!!!!!!dao"+dataMap);
+		
 		// TODO Auto-generated method stub
 		
 	}
 	
+	//이슈 담당자 조회
+	@Override
+	public List<Map> chargerRead(String i_Num) {
+		return sqlSession.selectList("issue.chargerRead", i_Num);
+	}
+	
+	//이슈 담당자 수정(삭제 후 다시 삽입)
+	@Override
+	public void chargerDelete(String i_Num) throws Exception {
+		sqlSession.delete("issue.chargerDelete", i_Num);
+
+	}
 	
 	
 	// 협업공간 조회

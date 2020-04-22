@@ -183,11 +183,14 @@ public class IssueControllerImpl implements IssueController {
 		
 		Map<String, Object> board = issueService.issueRead(i_Num);
 		List<Map> list = appedixService.fileList(i_Num);
+		List<Map> chargerList = issueService.chargerRead(i_Num);
+		System.out.println("!!!!!!!!!!!!!!!11"+chargerList);
 		
 		
 		ModelAndView mav = new ModelAndView("issue/issueRead");
 		mav.addObject("issueRead", board);
 		mav.addObject("file", list);
+		mav.addObject("chargerList", chargerList);
 		return mav;
 	}
 	
@@ -207,21 +210,63 @@ public class IssueControllerImpl implements IssueController {
 	//게시글 수정 페이지로 이동
 	@Override
 	@GetMapping("/update")
-	public String issueUpdate(IssueVO issueVO, Model model) throws Exception {
+	public String issueUpdate(String c_Id, String i_Num, IssueVO issueVO, Model model) throws Exception {
+		
+		
+		
 		List<Map> igRead = issueService.igRead();
+		List<Map> comemList = issueService.comemRead(c_Id);
+		List<Map> chargerList = issueService.chargerRead(i_Num);
 		
 		model.addAttribute("issueUpdate",issueService.issueRead(issueVO.getI_Num()) );
 		model.addAttribute("igRead",igRead);
-				return "/issue/issueUpdate";
+		model.addAttribute("c_Id", c_Id);
+		model.addAttribute("comemList", comemList);
+		model.addAttribute("chargerList", chargerList);
+		
+		return "/issue/issueUpdate";
 	}
+	
+	//이슈 담당자 목록 가져오기
+	@GetMapping("/chargerList")
+	@ResponseBody
+	public List<Map> chargerList(@RequestParam ("i_Num")String i_Num) throws Exception {
+		
+		List<Map> chargerList = issueService.chargerRead(i_Num);
+		
+		return chargerList;
+	}
+	
 	
 	//게시글 수정 db에 넣기
 	@Override
 	@PostMapping("/update")
-	public String issueUpdate(IssueVO issueVO) throws Exception {
+	public String issueUpdate(IssueVO issueVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		issueService.issueUpdate(issueVO);
 		
 		String i_Num = issueVO.getI_Num();
+		String c_Id = issueVO.getC_Id();
+		
+		
+		//이슈담당자 삭제 후 다시 입력
+		issueService.chargerDelete(i_Num);
+		
+		try {
+			Map<String, Object> coMap = new HashMap<String, Object>();
+			String comem_Id[] = request.getParameterValues("comem_Id");
+			for (int i = 0; i < comem_Id.length; i++) {
+					
+					coMap.put("i_Num", i_Num);
+					coMap.put("c_Id", c_Id);
+					coMap.put("mem_Id", comem_Id[i]);
+					coMap.put("cr_Status", "");
+					
+					issueService.comemInsert(coMap);
+			}
+		
+		}catch(NullPointerException e) {
+		}
+		
 		
 		//appedixService.updateFile(issueVO, appendixVO, files, fileNames, mpRequest);
 		

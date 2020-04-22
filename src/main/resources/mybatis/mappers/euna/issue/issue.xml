@@ -75,13 +75,7 @@
 
 	</select>
 	
-	<!-- 글쓰기 화면 전환 시 글번호 먼저 가져오기 -->
-<!-- 	<select id="get_i_Num" resultMap="issueResult02"> 
-      <![CDATA[
-		select  from dual
-      ]]>
 
-	</select> -->
 
 
 	<!-- 글 입력 -->
@@ -101,7 +95,7 @@
 	<!-- 게시글 조회 -->
 	<select id="issueRead"  parameterType="String" resultMap="issueResult02"> 
       <![CDATA[
-        select I.i_Num, I.c_Id, I.i_Name, I.i_Content, I.i_Date, I.mem_Id, M.mem_name, I.i_Start, I.i_End, I.ig_Num, IG.ig_Name
+        select I.i_Num, I.c_Id, I.i_Name, I.i_Content, I.i_Date, I.mem_Id, M.mem_name, I.i_Start, I.i_End, I.ig_Num, IG.ig_Name 
 		from issue I, member M, issue_group IG
 		where I.mem_Id = M.mem_Id
 		and I.ig_Num = IG.ig_Num
@@ -157,6 +151,24 @@
 	</insert>	
 	
 	
+	<!-- 이슈 담당자 조회 -->
+	<select id="chargerRead"  resultType="java.util.HashMap"> 
+      <![CDATA[
+			select m.mem_id, m.mem_name
+			from charger ch, member m
+			where m.mem_id=ch.mem_id
+			and i_Num=#{i_Num}
+      ]]>
+	</select> 
+	
+	<!-- 이슈 담당자 수정(삭제 후 다시 삽입) -->
+	<delete id="chargerDelete" parameterType="String">
+		DELETE
+		FROM charger
+		WHERE i_Num=#{i_Num}
+	</delete>
+	
+	
 		<!-- 협업공간 조회 -->
 <!-- 	<select id="coRead"  resultType="java.util.HashMap"> 
       <![CDATA[
@@ -168,6 +180,12 @@
       ]]>
 	</select> -->
 
- 
+ 	<!-- 글쓰기 화면 전환 시 글번호 먼저 가져오기 -->
+<!-- 	<select id="get_i_Num" resultMap="issueResult02"> 
+      <![CDATA[
+		select  from dual
+      ]]>
+
+	</select> -->
 
 </mapper>
