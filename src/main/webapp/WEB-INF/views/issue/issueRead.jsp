@@ -30,24 +30,9 @@ $(document).ready(function() {
 	
 	
 	console.log("22222222222"+checkbook);
-	//수정페이지로 이동 jquery
- 	$("#update_btn").on("click", function() {
-		
-		formObj.attr("action", "/project/issue/update");
-		formObj.attr("method", "get");
-		formObj.submit();
-	})
 
-	//삭제 jquery
-	$("#delete_btn").on("click", function() {
-		if(confirm("삭제하시겠습니까?")){
-			formObj.attr("action", "/project/issue/delete");
-			formObj.attr("method", "post");
-			formObj.submit();
-			alert("삭제되었습니다.");
-		}
-		
-	})
+
+
 	
 	
 		//댓글 입력 버튼 클릭 시 이벤트
@@ -300,31 +285,20 @@ $(document).ready(function() {
 							
 							
 							<div class="btn-group float-right">
-                          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="border:white;background-color:white;height:20px;padding-top: 0px;">
+                          <button type="button" class="btn btn-default" data-toggle="dropdown" aria-expanded="false" style="border:white;background-color:white;height:20px;padding-top: 0px;color:gray"><i class="fas fa-cog"></i>
                           </button>
                           <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; right: 0px; transform: translate3d(0px, 38px, 0px);">
-                           <c:if test="${member.mem_Id == issueRead.mem_Id}">
-                            <li><a class="dropdown-item" href='/project/issue/update?c_Id=${issueRead.c_Id}&i_Num=${issueRead.i_Num}'><small>수정</small></a></li>
-                            <li><a class="dropdown-item" href="#" id="delete_btn"><small>삭제</small></a></li>
-                            </c:if>
+                            
+                        
                             <li><a class="dropdown-item" href="#"><small>다른 협업공간으로 복사</small></a></li>
                             <li><a class="dropdown-item" href="#"><small>URL 복사</small></a></li>
                           </ul>
                         </div>
-							
-		
-        <!-- 본인만 글 수정, 삭제 가능-->
-						
-						<%-- <c:if test="${member.mem_Id == issueRead.mem_Id}">
-						
-									<a id="delete_btn" class="btn btn-default btn-sm float-right" style="color:#444; margin:3px;"> <i class="fas fa-trash" ></i>&nbsp;삭제</a>
-									<a id="update_btn" class="btn btn-default btn-sm float-right" href='/project/issue/update?c_Id=${issueRead.c_Id}&i_Num=${issueRead.i_Num}' style="color:#444; margin:3px;"> <i class="fas fa-pencil-alt"></i>&nbsp;수정</a>
-                             
-                          
-						</c:if> --%>
-						
-                        
-                        
+                        <!-- 본인만 글 수정, 삭제 가능-->
+                        <c:if test="${member.mem_Id == issueRead.mem_Id}">
+                        <span class="text-muted float-right"><small><a href="/project/issue/update?c_Id=${issueRead.c_Id}&i_Num=${issueRead.i_Num}">수정</a>｜</small>
+						<small><a onclick="if(confirm('삭제하시겠습니까?')){alert('삭제되었습니다.');}else{return false;};" href='/project/issue/delete?c_Id=${issueRead.c_Id}&i_Num=${issueRead.i_Num}'>삭제</a></small></span>
+						</c:if>
 						</div>
 						
 

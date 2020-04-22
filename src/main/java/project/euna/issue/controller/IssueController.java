@@ -24,7 +24,7 @@ public interface IssueController {
 	
 	public ModelAndView issueRead(String i_Num, HttpServletRequest request, HttpServletResponse response) throws Exception ;
 	
-	public String issueDelete(String c_Id, IssueVO issueVO) throws Exception;
+	public String issueDelete(String c_Id, String i_Num, IssueVO issueVO) throws Exception;
 	
 	public String issueUpdate(String c_Id, String i_Num, IssueVO issueVO, Model model) throws Exception;
 	public String issueUpdate(IssueVO issueVO, HttpServletRequest request, HttpServletResponse response) throws Exception;

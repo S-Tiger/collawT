@@ -200,12 +200,12 @@ public class IssueControllerImpl implements IssueController {
 	
 	//게시글 삭제
 	@Override
-	@PostMapping("/delete")
-	public String issueDelete(String c_Id, IssueVO issueVO) throws Exception{
+	@GetMapping("/delete")
+	public String issueDelete(String c_Id, String i_Num, IssueVO issueVO) throws Exception{
 		
 		issueService.chargerDelete(issueVO.getI_Num());
 		issueService.issueDelete(issueVO.getI_Num());
-		//String c_Id = issueVO.getC_Id();
+	
 		
 		
 		return "redirect:/project/issue/list?c_Id="+c_Id;
@@ -227,7 +227,6 @@ public class IssueControllerImpl implements IssueController {
 		model.addAttribute("c_Id", c_Id);
 		model.addAttribute("comemList", comemList);
 		model.addAttribute("chargerList", chargerList);
-		System.out.println("!!!!!!!!!!!!!!!11"+chargerList);
 
 		
 		return "/issue/issueUpdate";
