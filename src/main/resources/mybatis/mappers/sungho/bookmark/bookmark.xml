@@ -11,6 +11,7 @@
 		<result property="mem_Name" column="mem_Name" />
 		<result property="i_Num" column="i_Num" />
 		<result property="i_Name" column="i_Name" />
+		<result property="book_Date" column="book_Date" />
 		
 	</resultMap>
 	
@@ -28,11 +29,12 @@
 			and b.mem_id = #{mem_Id}
 			</if>
 		</where>
+		order by b.book_Date desc
 	</select>
 	
 	<insert id="insertBookmark" parameterType="java.util.Map" >
-		insert into BOOKMARK(mem_Id, i_Num) 
-		values(#{mem_Id},#{i_Num})
+		insert into BOOKMARK(mem_Id, i_Num, book_Date) 
+		values(#{mem_Id},#{i_Num},(select to_char(sysdate, 'YYYY/MM/DD/ HH24:MI:SS') from dual))
 	</insert>	
 	
 	

@@ -59,7 +59,29 @@
 
 
 	window.onload = function() {
-		
+		//북마크 리스트 가져오기 ajax 
+		$.ajax({
+			url : '${contextPath}/bookmark/list',
+			type : 'get',
+			success : function(data) {
+				var itemString = "";
+				var itemcount = data.length;
+				if (data != 0) {
+					for ( var i in data) {
+				itemString += '<tr><td style="width:30%; vertical-align:top"><font size="2em" color="#6c757d"><b>'
+				itemString +=  data[i].c_Name+'</b></font></td>'
+				itemString += '<td style="width:50%"><a style="color: #20c997" href="/project/issue/read?i_Num='+data[i].i_Num+'">';
+				itemString += '<font size="3em"><b>'+data[i].i_Name+'</b></font></a>'
+				itemString += '<td style="width:20%; vertical-align:top"><font size="2em" color="#6c757d"><b>'
+				itemString +=  data[i].mem_Name+'</b></font></td></tr>'
+					}
+					$("#bookmarkcount").html(itemcount);
+					console.log($("#bookmarkcount").html());
+				}else{
+				itemString += '<tr><td>등록된 북마크가 없습니다.</td></tr>'  
+				}
+				$("#bookmarkitem").html(itemString);
+			}})
 		
 		var getmenu = getCookie('menu');
 		var menuId = document.getElementById('menustat');
@@ -82,27 +104,11 @@
 		}
 		
 		
-		//북마크 리스트 가져오기 ajax 통신
+		
 		
 		$('#bookmarkA').click(function() {
 			console.log('버튼클릭');	
-		$.ajax({
-			url : '${contextPath}/bookmark/list',
-			type : 'get',
-			success : function(data) {
-				var itemString = "";
-				if (data != 0) {
-					for ( var i in data) {
-				itemString += '<tr><td style="width:60%"><a href="/project/issue/read?i_Num='+data[i].i_Num+'">';
-				itemString += '<font size="3em"><b>'+data[i].i_Name+'</b></font></a>'
-				itemString += '<td style="width:30%; vertical-align:top"><font size="2em" color="#6c757d"><b>'
-				itemString +=  data[i].mem_Name+'</b></font></td></tr>'
-					}
-				}else{
-				itemString += '<tr><td>등록된 북마크가 없습니다.</td></tr>'  
-				}
-				$("#bookmarkitem").html(itemString);
-			}})
+		
 	})
 	
 	};
@@ -442,14 +448,14 @@
 					<li class="nav-item"><a href="${contextPath}/news/list"
 						class="nav-link"> <i class="nav-icon fas fa-book-open"></i>
 							<p>
-								새로운 소식 <span class="badge badge-info right">3</span>
+								새로운 소식 <span class="badge badge-info right"></span>
 								<!--  <span class="right badge badge-danger">New</span>-->
 							</p>
 					</a></li>
 					<li class="nav-item"><a href="/#" data-needpopup-show="#bookmark-popup"
-						class="nav-link" id = "bookmarkA"> <i class="nav-icon fas fa-bookmark"></i>
+						class="nav-link"> <i class="nav-icon fas fa-bookmark"></i>
 							<p>
-								북마크 <span class="badge badge-info right"></span>
+								북마크 <span class="badge badge-info right" id="bookmarkcount" style="background-color: #FFC108"></span>
 								<!--  <span class="right badge badge-danger">New</span>-->
 							</p>
 					</a></li>
@@ -475,9 +481,8 @@
 <div id='createpjt-popup' class="needpopup">
 
 <form action="/project/insert" method="post" id="createpjtform">
-        <div class="card-body">
               <div class="form-group">
-              <div class="col-md-6" style="max-width: 100%;" >
+              <div class="col-md-6" style="max-width: 100%;">
                 <label for="inputName">협업공간명</label>
                 <input type="text" name="c_Name" id="create_Name" class="form-control">
               </div>
@@ -509,10 +514,15 @@
 
 
 <div id='bookmark-popup' class="needpopup">
-<div class="card-body p-0">
-<table class="table table-striped projects">
- <tbody id = 'bookmarkitem'>
-
+<div class="col-md-6" style="max-width: 100%;">
+<table class="table table-striped projects"><div style="margin-bottom: 10px;">
+<h4 class="m-0 text-dark" style="font-family: Recipekorea; max-width: 80%; display: contents;">북마크</h4></div>
+		<tr style="background-color: #dc3545; color: white;">
+			<td style="width:30%; vertical-align:top"><font size="3em"><b>협업공간명</b></font></td>
+			<td style="width:50%"><font size="3em"><b>글제목</b></font></a>
+			<td style="width:20%; vertical-align:top"><font size="3em"><b>작성자</b></font></td></tr>
+ 		<tbody id = 'bookmarkitem'>
+	
                  
  </tbody>
 </table>

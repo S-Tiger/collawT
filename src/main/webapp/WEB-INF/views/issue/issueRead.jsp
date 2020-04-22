@@ -89,11 +89,16 @@ $(document).ready(function() {
 				i_Num : $("#i_Num").val(),
 			},
 			success:function(data){
+				var bookcount = $("#bookmarkcount").html();
+				console.log(bookcount);
 				if(data == 1){
                     alert("북마크에 등록하셨습니다.");
 				$("#bookmarkinsert").css('color','#f8f9fa');
 				$("#bookmarkinsert").css('background-color', '#dc3545');
 				checkbook = 1;
+				bookcount++;
+				console.log(bookcount);
+				$("#bookmarkcount").html(bookcount);
 				}
 			}
 		})
@@ -105,11 +110,15 @@ $(document).ready(function() {
 					i_Num : $("#i_Num").val(),
 				},
 				success:function(data){
+					var bookcount = $("#bookmarkcount").html();
 					if(data == 1){
 	                    alert("북마크를 해제하셨습니다.");
 					$("#bookmarkinsert").css('color','#444');
 					$("#bookmarkinsert").css('background-color', '#f8f9fa');
 					checkbook = 0;
+					bookcount--;
+					console.log(bookcount);
+					$("#bookmarkcount").html(bookcount);
 				}
 					}
 				})
