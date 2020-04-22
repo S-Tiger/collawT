@@ -146,9 +146,22 @@ $(document).ready(function() {
 				if(result!=0){
 					for(var i in result){
 						str+='<div class="card-footer card-comments">';
-						
 						str+='<div class="card-comment">';
-						str+='<img alt="User Image" width="50" height="50"	src="/member/getByteImage?mem_Id='+result[i].mem_Id+'" class="img-circle elevation-2"/>';
+						
+
+						str+='<c:if test="${'+result[i].mem_File +' != NULL}">';
+						str+='<img alt="Not null" width="50" height="50"src="/member/getByteImage?mem_Id='+result[i].mem_Id+'" class="img-circle elevation-1"/>';
+						str+='</c:if>';
+						
+						str+='<c:if test="${'+result[i].mem_File +'== NULL}">';
+						str+='<img src="${contextPath}/resources/dist/img/profile.jpg" width="50" height="50" class="img-circle elevation-1" alt="Null">';
+						str+='</c:if>';
+						
+
+
+
+
+						
 						str+='<div class="comment-text">';
 						str+='<span class="username">'+result[i].mem_Name;
 						str+='<span class="text-muted float-right">'+result[i].r_Date+'</span>';
@@ -314,12 +327,18 @@ $(document).ready(function() {
 
 								<!-- 멤버이미지 넣기 -->
 								
+								<c:if test="${member.mem_File != null }">
 								<img alt="프로필사진" width="50" height="50"
 								src="/member/getByteImage?mem_Id=${issueRead.mem_Id}" class="img-circle elevation-2"/>
+								</c:if>
+								<c:if test="${member.mem_File == null }">
+								<img src="${contextPath}/resources/dist/img/profile.jpg" width="50" height="50"
+								class="img-circle elevation-2" alt="프로필사진">
+								</c:if>
 								<span class="username" id="mem_Name" name="mem_Name">
 								<c:out value="${issueRead.mem_Name}" /></span>
 								<span class="description"id="mem_Id" name="mem_Id">
-								<c:out	value="${issueRead.mem_Id}" /></span> 
+								<c:out	value="${issueRead.mem_Id}" /></span>  
 								
 								
 							</div>
@@ -388,8 +407,22 @@ $(document).ready(function() {
 							
 								<div class="row" style="margin:9px">
 								<div class="user-block-sm">	
+								
+								
+								<%-- <img alt="프로필사진" width="30" height="30"
+								src="/member/getByteImage?mem_Id=${chargerList.MEM_ID}" class="img-circle"/> --%>
+								
+								
+								<c:if test="${member.mem_File != null }">
 								<img alt="프로필사진" width="30" height="30"
 								src="/member/getByteImage?mem_Id=${chargerList.MEM_ID}" class="img-circle"/>
+								</c:if>
+								<c:if test="${member.mem_File == null }">
+								<img src="${contextPath}/resources/dist/img/profile.jpg" style="width:30px; height:30px"
+								class="img-circle" alt="User Image">
+								</c:if>
+								
+								
 								<span class="username" id="ch_mem_Name" name="mem_Name">
 								<small><c:out value=" ${chargerList.MEM_NAME}"/></small></span>
 								<span class="description"id="mem_Id" name="mem_Id">
@@ -490,9 +523,18 @@ $(document).ready(function() {
 					<div class="card-footer" id="replyInput" name="replyInput">
 
 						
-							<img class="img-fluid img-circle img-sm"
-								src="/member/getByteImage?mem_Id=${member.mem_Id}" alt="Alt Text" width="50" height="50" >
+							<%-- <img class="img-fluid img-circle img-sm"
+								src="/member/getByteImage?mem_Id=${member.mem_Id}" alt="Alt Text" width="50" height="50" > --%>
 							
+								<c:if test="${member.mem_File != null }">
+								<img class="img-fluid img-circle img-sm"
+								src="/member/getByteImage?mem_Id=${member.mem_Id}" alt="Alt Text" width="50" height="50" >
+								</c:if>
+								<c:if test="${member.mem_File == null }">
+								<img class="img-fluid img-circle img-sm"
+								src="${contextPath}/resources/dist/img/profile.jpg" alt="Alt Text" width="50" height="50">
+								</c:if>
+						
 							<div class="img-push">
 								<textarea id="r_Content" name="r_Content" class="form-control"	placeholder="댓글을 입력하세요"></textarea>
 									

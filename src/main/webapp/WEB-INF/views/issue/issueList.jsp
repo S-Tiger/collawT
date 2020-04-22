@@ -2,6 +2,9 @@
 	pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
+
 <c:set var="contextPath"  value="${pageContext.request.contextPath}" />
 
 
@@ -149,7 +152,7 @@
 				<c:if test="${memberList.mem_Id != pjt.mem_Id}">
 				<option value="${memberList.mem_Id}">${memberList.mem_Name}(${memberList.mem_Id})</option>
 				</c:if>
-				</c:forEach>
+			</c:forEach>
 			</select>
 		</p>
 		<p class="login-box-msg" style="padding-bottom: 10px">
@@ -293,7 +296,8 @@
            
           <table class="table table-striped projects">
               <tbody>
-
+			<c:choose>
+			<c:when test="${fn:length(issueList)!=0}">
                  <c:forEach var="issueList" items="${issueList}" >	
                   <tr>
                   
@@ -320,6 +324,11 @@
                    </tr>
                    
                    </c:forEach>
+                 </c:when>
+                 <c:otherwise>
+                 <p style="text-align:center;"><small><br><br>작성된 글이 없습니다.</small></p>
+                 </c:otherwise>
+                 </c:choose>
               </tbody>
           </table>
         </div>

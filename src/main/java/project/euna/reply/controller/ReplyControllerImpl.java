@@ -5,13 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,15 +20,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import project.euna.reply.service.ReplyService;
 import project.euna.reply.vo.ReplyVO;
+import project.jeongha.member.dao.MemberDao;
 
 @Controller
 
 @RequestMapping("/reply/*")
 public class ReplyControllerImpl implements ReplyController {
 	
-	@Autowired
+	@Inject
 	ReplyService replyService;
 	
+	@Inject
+	MemberDao memberDAO;
 	
 	//댓글 쓰기 DB에 넣기
 	@Override
@@ -54,8 +57,10 @@ public class ReplyControllerImpl implements ReplyController {
 	@GetMapping("/list")
 	@ResponseBody
 	public List<Map> searchList(@RequestParam ("i_Num")String i_Num, HttpServletRequest request, HttpServletResponse response) throws Exception{		
-		List<Map> list = replyService.searchList(i_Num);
+		List<Map> list=replyService.searchList(i_Num);
+		
 		return list;
+		
 	}
 
 

@@ -23,6 +23,7 @@
 		<result property="c_Id" column="c_Id" />
 		<result property="mem_Id" column="mem_Id" />
 		<result property="mem_Name" column="mem_Name" />
+		<result property="mem_File" column="mem_File" javaType="[B" jdbcType="BLOB"/>
 		
 	</resultMap>
 
@@ -31,7 +32,7 @@
 	<!-- 댓글 목록 -->
 	<select id="searchList" resultMap="replyResult02"> 
       <![CDATA[
-        select R.r_Num, R.r_Content, R.r_Date, R.i_Num, R.c_Id, R.mem_Id, M.mem_Name
+        select R.r_Num, R.r_Content, R.r_Date, R.i_Num, R.c_Id, R.mem_Id, M.mem_Name, M.mem_File
 		from reply R, member M
 		where M.mem_Id=R.mem_Id
 		and i_Num = #{i_Num}
