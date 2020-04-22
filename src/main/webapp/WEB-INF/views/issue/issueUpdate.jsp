@@ -438,7 +438,7 @@ function chargerRead(){
 			if(result!=0){
 				for(chargedCount in result){
 					$('#chargerList').append("<span id= 'chargerspan"+chargedCount+"' name='chargerspan'>"+result[chargedCount].MEM_ID+"("+result[chargedCount].MEM_NAME+")<a id ='chargerdelete["+chargedCount+"]' name = 'chargerdelete' onclick='deleteCharger("+chargedCount+")'>X</a></span>");
-					$('#chargerForm').append("<input type='text' id='hidden_Id"+chargedCount+"' name='comem_Id' value='"+result[chargedCount].MEM_ID+"'>");
+					$('#chargerForm').append("<input type='hidden' id='hidden_Id"+chargedCount+"' name='comem_Id' value='"+result[chargedCount].MEM_ID+"'>");
 					chargedArray.push(result[chargedCount].MEM_ID+"("+result[chargedCount].MEM_NAME+")");
 				}
 			}

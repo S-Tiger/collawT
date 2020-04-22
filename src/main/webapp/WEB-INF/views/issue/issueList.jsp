@@ -334,9 +334,14 @@
     </c:if> 
 
     <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-    
-    	<li class="page-item" id="liStyle"><a class="page-link" href="list${pageMaker.makeQuery(idx)}">${idx}</a></li>
-    
+    <c:choose>
+    <c:when test="${pageMaker.page==idx}">
+    	<li class="page-item" id="liStyle"><a class="page-link" href="list${pageMaker.makeQuery(idx)}" style="background-color:#DC3545; color:white">${idx}</a></li>
+    </c:when>
+    <c:otherwise>
+    <li class="page-item" id="liStyle"><a class="page-link" href="list${pageMaker.makeQuery(idx)}">${idx}</a></li>
+    </c:otherwise>
+    </c:choose>
     </c:forEach>
 
     <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
@@ -345,7 +350,7 @@
   </ul>
   <br>
   </div>
-  <%-- <c:if test="${pageMaker.page}"></c:if> --%>
+  
  
         <!--/페이징  -->
        
