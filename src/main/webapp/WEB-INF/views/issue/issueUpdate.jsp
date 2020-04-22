@@ -19,6 +19,8 @@ span[name="chargerspan"] {
     display: inline-block;
 }
 
+#row {margin-left:0px !important; margin-right:0px !important}
+
 
 </style>
 	
@@ -118,33 +120,7 @@ span[name="chargerspan"] {
 				});
 			});
 			
-				//이슈담당자 입력
-			 $('#chargerSelect').change(function(event) {
-				 var mem_Id = $('#chargerSelect').val();
-				 var idSearch = mem_Id.split("(");
-				 var realmem_Id = idSearch[0];
-						 
-				 chargedArray.push(mem_Id);
-				 console.log("chargedArray : "+chargedArray);
-				 
-				 var ok = true;
-					 for(var i=0; i<chargedArray.length-1; i++){
-						 if(mem_Id == chargedArray[i]){
-							 alert("동일한 아이디를 여러 번 초대할 수 없습니다.")
-							 chargedArray.pop();
-							 console.log(chargedArray);
-						  	ok=false;
-						 }
-		
-				 		}
-					 if(ok==true){
-						 
-						 chargedCount++;
-						 
-						$('#chargerList').append("<span id= 'chargerspan"+chargedCount+"' name='chargerspan'>"+mem_Id+"<a id ='chargerdelete["+chargedCount+"]' name = 'chargerdelete' onclick='deleteCharger("+chargedCount+")'>X</a></span>");
-						$('#chargerForm').append("<input type='hidden' id='hidden_Id"+chargedCount+"' name='comem_Id' value='"+realmem_Id+"'>");
-					 }
-			 })
+
 		})
 		
 			//첨부된 파일 리스트
@@ -289,59 +265,7 @@ span[name="chargerspan"] {
 				}
 			}
 			
-			//이슈담당자 조회
-			var chargedArray = new Array();
-			var chargedCount = 0;
-			
-			
-			function chargerRead(){
-				$.ajax({
-					type:"get",
-					url : "${path}/project/issue/chargerList?i_Num=${issueUpdate.i_Num}",
-					
-					success:function(result){
-						var str="";
-						if(result!=0){
-							for(chargedCount in result){
-								$('#chargerList').append("<span id= 'chargerspan"+chargedCount+"' name='chargerspan'>"+result[chargedCount].MEM_ID+"("+result[chargedCount].MEM_NAME+")<a id ='chargerdelete["+chargedCount+"]' name = 'chargerdelete' onclick='deleteCharger("+chargedCount+")'>X</a></span>");
-								$('#chargerForm').append("<input type='text' id='hidden_Id"+chargedCount+"' name='comem_Id' value='"+result[chargedCount].MEM_ID+"'>");
-								chargedArray.push(result[chargedCount].MEM_ID+"("+result[chargedCount].MEM_NAME+")");
-							}
-						}
-						
-					}
-					
-				})
-			}
-			
 
-			 
-			 //이슈 담당자 x버튼 누르면 삭제
-			 function deleteCharger(chargedCount){
-				
-				 var chargerspan = $('#chargerspan'+chargedCount).text();
-				 var splitResult = chargerspan.split("X");
-				 var Realchargerspan = splitResult[0];
-				 
-				 
-				 $('#chargerspan'+chargedCount).remove();
-				 $('#hidden_Id'+chargedCount).remove();
-				 
-				 var index = chargedArray.indexOf(Realchargerspan);
-				 
-				 if (index > -1) {
-					 chargedArray.splice(index,1);
-					}
-				 
-				 console.log("changed : "+ chargedArray);
-				 
-				
-			 }
-			 
-	
-		  	 
-			
-	
 	</script>
 	
   <!-- Content Wrapper. Contains page content -->
@@ -364,7 +288,7 @@ span[name="chargerspan"] {
      </section>
      
      <section class="content">
-     <div class="row">
+     <div class="row" id="row">
      <div class="col-md-6">
        <div class="card card-primary">
 			<div class="card-body">
@@ -468,7 +392,88 @@ span[name="chargerspan"] {
 			
 				
 				</div>
-				
+<!-- 이슈 담당자 자바스크립트 따로 만들었어요..... -->
+<script type="text/javascript">
+//이슈담당자 입력
+$('#chargerSelect').change(function(event) {
+	 var mem_Id = $('#chargerSelect').val();
+	 var idSearch = mem_Id.split("(");
+	 var realmem_Id = idSearch[0];
+			 
+	 chargedArray.push(mem_Id);
+	 console.log("chargedArray : "+chargedArray);
+	 
+	 var ok = true;
+		 for(var i=0; i<chargedArray.length-1; i++){
+			 if(mem_Id == chargedArray[i]){
+				 alert("동일한 아이디를 여러 번 초대할 수 없습니다.")
+				 chargedArray.pop();
+				 console.log(chargedArray);
+			  	ok=false;
+			 }
+
+	 		}
+		 if(ok==true){
+			 
+			 chargedCount++;
+			 
+			$('#chargerList').append("<span id= 'chargerspan"+chargedCount+"' name='chargerspan'>"+mem_Id+"<a id ='chargerdelete["+chargedCount+"]' name = 'chargerdelete' onclick='deleteCharger("+chargedCount+")'>X</a></span>");
+			$('#chargerForm').append("<input type='hidden' id='hidden_Id"+chargedCount+"' name='comem_Id' value='"+realmem_Id+"'>");
+		 }
+})
+
+
+//이슈담당자 조회
+var chargedArray = new Array();
+var chargedCount = 0;
+
+
+function chargerRead(){
+	$.ajax({
+		type:"get",
+		url : "${path}/project/issue/chargerList?i_Num=${issueUpdate.i_Num}",
+		
+		success:function(result){
+			var str="";
+			if(result!=0){
+				for(chargedCount in result){
+					$('#chargerList').append("<span id= 'chargerspan"+chargedCount+"' name='chargerspan'>"+result[chargedCount].MEM_ID+"("+result[chargedCount].MEM_NAME+")<a id ='chargerdelete["+chargedCount+"]' name = 'chargerdelete' onclick='deleteCharger("+chargedCount+")'>X</a></span>");
+					$('#chargerForm').append("<input type='text' id='hidden_Id"+chargedCount+"' name='comem_Id' value='"+result[chargedCount].MEM_ID+"'>");
+					chargedArray.push(result[chargedCount].MEM_ID+"("+result[chargedCount].MEM_NAME+")");
+				}
+			}
+			
+		}
+		
+	})
+}
+
+
+
+//이슈 담당자 x버튼 누르면 삭제
+function deleteCharger(chargedCount){
+	
+	 var chargerspan = $('#chargerspan'+chargedCount).text();
+	 var splitResult = chargerspan.split("X");
+	 var Realchargerspan = splitResult[0];
+	 
+	 
+	 $('#chargerspan'+chargedCount).remove();
+	 $('#hidden_Id'+chargedCount).remove();
+	 
+	 var index = chargedArray.indexOf(Realchargerspan);
+	 
+	 if (index > -1) {
+		 chargedArray.splice(index,1);
+		}
+	 
+	 console.log("changed : "+ chargedArray);
+	 
+	
+}
+
+
+</script>
 
       <!-- 이슈그룹번호 설정 -->
       <div class="form-group" id="issueStatus">

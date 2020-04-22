@@ -5,6 +5,8 @@
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+
+
 <style type="text/css">
 
 span[name="chargerspan"] {
@@ -14,7 +16,7 @@ span[name="chargerspan"] {
     margin: 2px;
     display: inline-block;
 }
-
+#row {margin-left:0px !important; margin-right:0px !important}
 
 </style>
 
@@ -82,38 +84,8 @@ span[name="chargerspan"] {
 				}
 			});
 		});
-		
-		//이슈 담당자 부분
-		var chargedArray = new Array();
-		var chargedCount = 0;
-	
-		 $('#chargerSelect').change(function(event) {
-			 var mem_Id = $('#chargerSelect').val();
-			 var idSearch = mem_Id.split("(");
-			 var realmem_Id = idSearch[0];
-					 
-			 chargedArray.push(mem_Id);
-			 console.log("chargedArray : "+chargedArray);
-			 
-			 var ok = true;
-				 for(var i=0; i<chargedArray.length-1; i++){
-					 if(mem_Id == chargedArray[i]){
-						 alert("동일한 아이디를 여러 번 초대할 수 없습니다.")
-						 chargedArray.pop();
-						 console.log(chargedArray);
-					  	ok=false;
-					 }
-	
-			 		}
-				 if(ok==true){
-					 
-					 chargedCount++;
-					 
-					$('#chargerList').append("<span id= 'chargerspan"+chargedCount+"' name='chargerspan'>"+mem_Id+"<a id ='chargerdelete["+chargedCount+"]' name = 'chargerdelete' onclick='deleteCharger("+chargedCount+")'>X</a></span>");
-					$('#chargerForm').append("<input type='hidden' id='hidden_Id"+chargedCount+"' name='comem_Id' value='"+realmem_Id+"'>");
-				 }
-		 })
 	})
+
 	
 	//첨부된 파일 리스트
 		 function getFileList(){
@@ -198,30 +170,6 @@ span[name="chargerspan"] {
 	}
 	
   	
-
-	 //이슈 담당자 x버튼 누르면 삭제
-	 function deleteCharger(chargedCount){
-		
-		 var chargerspan = $('#chargerspan'+chargedCount).text();
-		 var splitResult = chargerspan.split("X");
-		 var Realchargerspan = splitResult[0];
-		 
-		 
-		 $('#chargerspan'+chargedCount).remove();
-		 $('#hidden_Id'+chargedCount).remove();
-		 
-		 var index = chargedArray.indexOf(Realchargerspan);
-		 
-		 if (index > -1) {
-			 chargedArray.splice(index,1);
-			}
-		 
-		 console.log("changed : "+ chargedArray);
-		 
-		
-	 }
-	 
-	
 </script>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -244,7 +192,7 @@ span[name="chargerspan"] {
 
     <!-- Main content -->
     <section class="content">
-    <div class="row">
+    <div class="row" id="row">
      <div class="col-md-6">
       <div class="card card-primary">
         
@@ -352,7 +300,63 @@ span[name="chargerspan"] {
              
 				</div>
 				<div id="chargerForm"></div>
-				
+			<!-- 이슈 담당자 관련 스크립트 따로 놨어요 -->
+			<script type="text/javascript">
+			//이슈 담당자 부분
+			var chargedArray = new Array();
+			var chargedCount = 0;
+			
+			 $('#chargerSelect').change(function(event) {
+				 var mem_Id = $('#chargerSelect').val();
+				 var idSearch = mem_Id.split("(");
+				 var realmem_Id = idSearch[0];
+						 
+				 chargedArray.push(mem_Id);
+				 console.log("chargedArray : "+chargedArray);
+				 
+				 var ok = true;
+					 for(var i=0; i<chargedArray.length-1; i++){
+						 if(mem_Id == chargedArray[i]){
+							 alert("동일한 아이디를 여러 번 초대할 수 없습니다.")
+							 chargedArray.pop();
+							 console.log(chargedArray);
+						  	ok=false;
+						 }
+			
+				 		}
+					 if(ok==true){
+						 
+						 chargedCount++;
+						 
+						$('#chargerList').append("<span id= 'chargerspan"+chargedCount+"' name='chargerspan'>"+mem_Id+"<a id ='chargerdelete["+chargedCount+"]' name = 'chargerdelete' onclick='deleteCharger("+chargedCount+")'>X</a></span>");
+						$('#chargerForm').append("<input type='hidden' id='hidden_Id"+chargedCount+"' name='comem_Id' value='"+realmem_Id+"'>");
+					 }
+			 })
+			
+			
+			//이슈 담당자 x버튼 누르면 삭제
+			function deleteCharger(chargedCount){
+			
+			 var chargerspan = $('#chargerspan'+chargedCount).text();
+			 var splitResult = chargerspan.split("X");
+			 var Realchargerspan = splitResult[0];
+			 
+			 
+			 $('#chargerspan'+chargedCount).remove();
+			 $('#hidden_Id'+chargedCount).remove();
+			 
+			 var index = chargedArray.indexOf(Realchargerspan);
+			 
+			 if (index > -1) {
+				 chargedArray.splice(index,1);
+				}
+			 
+			 console.log("changed : "+ chargedArray);
+			 
+			
+			}
+					
+			</script>
 				
 
 				

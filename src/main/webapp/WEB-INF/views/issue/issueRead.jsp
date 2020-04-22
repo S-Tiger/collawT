@@ -5,6 +5,7 @@
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+
 <script type="text/javascript">
 
 
@@ -268,7 +269,7 @@ $(document).ready(function() {
 
 	<section class="content">
 
-		<div class="row">
+		<div class="row" id="row">
 			<div class="col-md-6">
 
 				<!-- Box Comment -->
@@ -441,7 +442,7 @@ $(document).ready(function() {
 						<c:if test="${member.mem_Id == issueRead.mem_Id}">
 						
 									<a id="delete_btn" class="btn btn-default btn-sm float-right" style="color:#444; margin:3px;"> <i class="fas fa-trash" ></i>&nbsp;삭제</a>
-									<a id="update_btn" class="btn btn-default btn-sm float-right" href='/project/issue/update?i_Num=${issueRead.i_Num}' style="color:#444; margin:3px;"> <i class="fas fa-pencil-alt"></i>&nbsp;수정</a>
+									<a id="update_btn" class="btn btn-default btn-sm float-right" href='/project/issue/update?c_Id=${issueRead.c_Id}&i_Num=${issueRead.i_Num}' style="color:#444; margin:3px;"> <i class="fas fa-pencil-alt"></i>&nbsp;수정</a>
                              
                           
 						</c:if>
@@ -495,7 +496,7 @@ $(document).ready(function() {
 									<small><a href="#" id="replyInsert_btn" name="replyInsert_btn">입력</a></small>
 																		
 									<input type="hidden" id="i_Num" name="i_Num" value="${issueRead.i_Num}" />
-									<input type="text" id="c_Id" name="c_Id" value="${issueRead.c_Id}" />
+									<input type="hidden" id="c_Id" name="c_Id" value="${issueRead.c_Id}" />
 									
 								
 							</div>
@@ -506,6 +507,7 @@ $(document).ready(function() {
 			</div>
 			<div class="row">
 				<div class="col-12"></div>
+			</div>
 			</div>
 	</section>
 	<!-- /.content -->

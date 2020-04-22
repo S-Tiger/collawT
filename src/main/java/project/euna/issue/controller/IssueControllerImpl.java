@@ -124,21 +124,23 @@ public class IssueControllerImpl implements IssueController {
 		
 		String i_Num = (String) cmap.get("i_Num");
 		
-		
-		Map<String, Object> coMap = new HashMap<String, Object>();
-		String comem_Id[] = request.getParameterValues("comem_Id");
-		
-		
-		for (int i = 0; i < comem_Id.length; i++) {
-			
-			coMap.put("i_Num", i_Num);
-			coMap.put("c_Id", c_Id);
-			coMap.put("mem_Id", comem_Id[i]);
-			coMap.put("cr_Status", "");
-			
-			issueService.comemInsert(coMap);
+		try {
+			Map<String, Object> coMap = new HashMap<String, Object>();
+			String comem_Id[] = request.getParameterValues("comem_Id");
 			
 			
+			for (int i = 0; i < comem_Id.length; i++) {
+				
+				coMap.put("i_Num", i_Num);
+				coMap.put("c_Id", c_Id);
+				coMap.put("mem_Id", comem_Id[i]);
+				coMap.put("cr_Status", "");
+				
+				issueService.comemInsert(coMap);
+				
+				
+			}
+		}catch(NullPointerException e) {
 		}
 
 		
@@ -184,7 +186,6 @@ public class IssueControllerImpl implements IssueController {
 		Map<String, Object> board = issueService.issueRead(i_Num);
 		List<Map> list = appedixService.fileList(i_Num);
 		List<Map> chargerList = issueService.chargerRead(i_Num);
-		System.out.println("!!!!!!!!!!!!!!!11"+chargerList);
 		
 		
 		ModelAndView mav = new ModelAndView("issue/issueRead");
@@ -223,6 +224,8 @@ public class IssueControllerImpl implements IssueController {
 		model.addAttribute("c_Id", c_Id);
 		model.addAttribute("comemList", comemList);
 		model.addAttribute("chargerList", chargerList);
+		System.out.println("!!!!!!!!!!!!!!!11"+chargerList);
+
 		
 		return "/issue/issueUpdate";
 	}
