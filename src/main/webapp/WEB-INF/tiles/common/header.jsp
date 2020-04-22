@@ -59,6 +59,8 @@
 
 
 	window.onload = function() {
+		
+		
 		var getmenu = getCookie('menu');
 		var menuId = document.getElementById('menustat');
 		if (getmenu != null) {
@@ -78,6 +80,31 @@
 			menuId4.className = 'nav-link active';
 			deleteCookie('apply');
 		}
+		
+		
+		//북마크 리스트 가져오기 ajax 통신
+		
+		$('#bookmarkA').click(function() {
+			console.log('버튼클릭');	
+		$.ajax({
+			url : '${contextPath}/bookmark/list',
+			type : 'get',
+			success : function(data) {
+				var itemString = "";
+				if (data != 0) {
+					for ( var i in data) {
+				itemString += '<tr><td style="width:60%"><a href="/project/issue/read?i_Num='+data[i].i_Num+'">';
+				itemString += '<font size="3em"><b>'+data[i].i_Name+'</b></font></a>'
+				itemString += '<td style="width:30%; vertical-align:top"><font size="2em" color="#6c757d"><b>'
+				itemString +=  data[i].mem_Name+'</b></font></td></tr>'
+					}
+				}else{
+				itemString += '<tr><td>등록된 북마크가 없습니다.</td></tr>'  
+				}
+				$("#bookmarkitem").html(itemString);
+			}})
+	})
+	
 	};
 	function menuclick() {
 		deleteCookie('menu');
@@ -106,8 +133,6 @@
 		document.cookie = name + "= " + "; expires=" + date.toUTCString()
 				+ "; path=/";
 	}
-	
-	
 	
 </script>
 
@@ -421,8 +446,8 @@
 								<!--  <span class="right badge badge-danger">New</span>-->
 							</p>
 					</a></li>
-					<li class="nav-item"><a href="/news/list"
-						class="nav-link"> <i class="nav-icon fas fa-bookmark"></i>
+					<li class="nav-item"><a href="/#" data-needpopup-show="#bookmark-popup"
+						class="nav-link" id = "bookmarkA"> <i class="nav-icon fas fa-bookmark"></i>
 							<p>
 								북마크 <span class="badge badge-info right"></span>
 								<!--  <span class="right badge badge-danger">New</span>-->
@@ -480,4 +505,16 @@
           <input type="reset" class="btn btn-block btn-success" onclick="history.go(0);" value = "취소" style="background-color: #dc3545; width: 100px;">
           </div>
       </form>
+</div>
+
+
+<div id='bookmark-popup' class="needpopup">
+<div class="card-body p-0">
+<table class="table table-striped projects">
+ <tbody id = 'bookmarkitem'>
+
+                 
+ </tbody>
+</table>
+        </div>
 </div>

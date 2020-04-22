@@ -1,5 +1,8 @@
 package project.sungho.bookmark.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -11,7 +14,7 @@ import project.sungho.apply.vo.ApplyVO;
 
 public interface BookmarkController {
 
-	public String searchList(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public List<Map> searchList(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 	public String updateBookmark(Model model) throws Exception;
 

@@ -6,27 +6,29 @@
 <mapper namespace="bookmark">
 	<resultMap id="bookmarkResult01" type="java.util.Map">
 		<result property="c_Id" column="c_Id"  />
+		<result property="c_Name" column="c_Name" />
 		<result property="mem_Id" column="mem_Id" />
+		<result property="mem_Name" column="mem_Name" />
 		<result property="i_Num" column="i_Num" />
+		<result property="i_Name" column="i_Name" />
 		
 	</resultMap>
 	
 	<select id="searchList" resultMap="bookmarkResult01" parameterType="java.util.Map"> 
       <![CDATA[
-         select a.c_Id, a.mem_Id, a.ap_Date, a.ap_Yn, a.ap_Status,a.invite, b.c_Name, c.mem_Name
-         from apply_mem a, co_work b, member c
+         	select i.i_Name , i.i_Num, i.mem_Id , m.mem_Name, c.c_Name 
+			from issue i, bookmark b, member m , co_work c
        
       ]]>
 		<where>
-		a.c_Id = b.c_Id
-		and a.invite = c.mem_Id	
+			i.i_Num = b.i_Num
+			and m.mem_Id = i.mem_Id
+			and c.c_Id =  i.c_Id
 			<if test=" mem_Id != ''  and  mem_Id != null">
-			and	a.mem_Id = #{mem_Id}
+			and b.mem_id = #{mem_Id}
 			</if>
 		</where>
-		  order by ap_Date desc
 	</select>
-	
 	
 	<insert id="insertBookmark" parameterType="java.util.Map" >
 		insert into BOOKMARK(mem_Id, i_Num) 

@@ -32,18 +32,14 @@ public class BookmarkControllerImpl implements BookmarkController {
 
 	@Override
 	@RequestMapping("/list")
-	public String searchList(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
-
+	@ResponseBody
+	public List<Map> searchList(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
-
 		Map<String, Object> searchMap = new HashMap<String, Object>();
-
 		searchMap = (Map<String, Object>) session.getAttribute("member");
+		List<Map> bookmarkList = bookmarService.searchList(searchMap);
 
-		List<Map> list = bookmarService.searchList(searchMap);
-		model.addAttribute("bookmarklist", list);
-
-		return "newspeed/newspeedList3";
+		return bookmarkList;
 	}
 
 	@Override
