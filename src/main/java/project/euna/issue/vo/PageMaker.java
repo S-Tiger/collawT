@@ -5,6 +5,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 public class PageMaker {
 	private int totalCount;
+	private int page;
 	private int startPage;
 	private int endPage;
 	private boolean prev;
@@ -57,7 +58,16 @@ public class PageMaker {
 		this.cri = cri;
 	}
 	
+	public int getPage() {
+		return page;
+	}
+	public void setPage(int page) {
+		this.page = page;
+	}
+	
 	private void calcData() {
+		page = cri.getPage();
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!1getPage :"+page);
 		endPage = (int) (Math.ceil(cri.getPage() / (double)displayPageNum) * displayPageNum);
 		startPage = (endPage - displayPageNum) + 1;
 	  

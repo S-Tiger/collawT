@@ -279,7 +279,8 @@ $(document).ready(function() {
 
 					<div class="card card-widget">
 						<div class="card-header">
-						<span style= "
+						
+						<span style= "vertical-align:text-top;
 							<c:if test="${issueRead.ig_Num == 1}">background-color:#6c757d;</c:if>
 							<c:if test="${issueRead.ig_Num == 2}">background-color:#007bff;</c:if>
 							<c:if test="${issueRead.ig_Num == 3}">background-color:#ffc107;</c:if>
@@ -287,8 +288,38 @@ $(document).ready(function() {
 							"
 							id="ig_Name" name="ig_Name" class="badge badge-success"><c:out  value="${issueRead.ig_Name}" /></span>&nbsp;&nbsp;
 							<span id="i_Name" name="i_Name"><b><c:out	value="${issueRead.i_Name}" /></b></span>
-
+							
+							
+							<div class="btn-group float-right">
+                          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="border:white;background-color:white;height:20px;padding-top: 0px;">
+                          </button>
+                          <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; right: 0px; transform: translate3d(0px, 38px, 0px);">
+                           <c:if test="${member.mem_Id == issueRead.mem_Id}">
+                            <li><a class="dropdown-item" href='/project/issue/update?c_Id=${issueRead.c_Id}&i_Num=${issueRead.i_Num}'><small>수정</small></a></li>
+                            <li><a class="dropdown-item" href="#" id="delete_btn"><small>삭제</small></a></li>
+                            </c:if>
+                            <li><a class="dropdown-item" href="#"><small>다른 협업공간으로 복사</small></a></li>
+                            <li><a class="dropdown-item" href="#"><small>URL 복사</small></a></li>
+                          </ul>
+                        </div>
+							
+		
+        <!-- 본인만 글 수정, 삭제 가능-->
+						
+						<%-- <c:if test="${member.mem_Id == issueRead.mem_Id}">
+						
+									<a id="delete_btn" class="btn btn-default btn-sm float-right" style="color:#444; margin:3px;"> <i class="fas fa-trash" ></i>&nbsp;삭제</a>
+									<a id="update_btn" class="btn btn-default btn-sm float-right" href='/project/issue/update?c_Id=${issueRead.c_Id}&i_Num=${issueRead.i_Num}' style="color:#444; margin:3px;"> <i class="fas fa-pencil-alt"></i>&nbsp;수정</a>
+                             
+                          
+						</c:if> --%>
+						
+                        
+                        
 						</div>
+						
+
+						
 						<!-- /.card-header -->
 						<div class="card-body">
 						<span class="text-muted float-right"id="i_Date" name="i_Date" style="font-size:small">
@@ -429,25 +460,15 @@ $(document).ready(function() {
           <!-- /.card -->
           
           <!-- 이거 나중에 기능 넣기 -->
-							<button type="button" class="btn btn-default btn-sm" style="color:#444; margin:3px;">
-								<i class="fas fa-share"></i> 공유
-							</button>
+							
 							<!-- 숫자 카운트 넣기 -->
 							<button type="button" class="btn btn-default btn-sm" id = "bookmarkinsert"style="color:#444; margin:3px;">
 								<i class="fas fa-bookmark"></i> 북마크
 							</button>
 							
-<!-- 본인만 글 수정, 삭제 가능-->
+
 						
-						<c:if test="${member.mem_Id == issueRead.mem_Id}">
-						
-									<a id="delete_btn" class="btn btn-default btn-sm float-right" style="color:#444; margin:3px;"> <i class="fas fa-trash" ></i>&nbsp;삭제</a>
-									<a id="update_btn" class="btn btn-default btn-sm float-right" href='/project/issue/update?c_Id=${issueRead.c_Id}&i_Num=${issueRead.i_Num}' style="color:#444; margin:3px;"> <i class="fas fa-pencil-alt"></i>&nbsp;수정</a>
-                             
-                          
-						</c:if>
-						
-						<a id="list_btn" class="btn btn-default btn-sm float-right" href='list?c_Id=${issueRead.c_Id}' style="color:#444; margin:3px;"> <i class="fas fa-list"></i>&nbsp;목록</a>
+						<a id="list_btn" class="btn btn-default btn-sm" href='list?c_Id=${issueRead.c_Id}' style="color:#444; margin:3px;"> <i class="fas fa-list"></i>&nbsp;목록</a>
 
 								
 								<br><br>

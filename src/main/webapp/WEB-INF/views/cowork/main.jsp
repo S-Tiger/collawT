@@ -131,22 +131,29 @@ function withdrawal() {
 		<!-- /.container-fluid -->
 	</div>
 	<!-- /.content-header -->
-	<div class="col-md-9" style="max-width: 100%;">
+<div class="col-md-9" style="max-width: 100%;">
 		<div class="card">
 			<div class="card-header p-2">
-				<ul class="nav nav-pills">
-					<li class="nav-item"><a class="nav-link active"
-						href="#activity" data-toggle="tab" id="activityMenu">홈</a></li>
-					<li class="nav-item" id="applymenu"><a class="nav-link"
-						href="/project/issue/list?c_Id=${pjt.c_Id}" id="issueMenu">이슈</a></li>
-					<li class="nav-item"><a class="nav-link" href="#settings"
-						data-toggle="tab">Settings</a></li>
-				</ul>
+			
+				<ol class="nav nav-pills" style="font-family: Spoqa Han Sans; font-size:15px; margin:0px; border:none; padding-inline-start: 0px;  width:400px; float:left;">
+					<li class="nav-item" ><a
+						href="/project/main?c_Id=${pjt.c_Id}"  id="activityMenu" class="nav-link active" ><b>홈</b></a></li>
+						
+					<li class="nav-item" id = "activityMenu"><a class="nav-link " href="/project/issue/list?c_Id=${pjt.c_Id}"
+						 id= "issueMenu">이슈</a></li>
+					<li class="nav-item" id = "activityMenu"><a class="nav-link" href="#"
+						 id= "issueMenu">칸반</a></li>
+					<li class="nav-item" id = "activityMenu"><a class="nav-link" href="#"
+						 id= "issueMenu">캘린더</a></li>
+					<li class="nav-item" id = "activityMenu"><a class="nav-link" href="#"
+						 id= "issueMenu">투표</a></li>
+						
+				</ol>
+				
+				 <button type="button" class="btn btn-success float-right" onclick="location.href='/project/issue/insert?c_Id=${pjt.c_Id}'"style="text-align:center; float:right; background-color:#DC3545; border-color:#DC3545; font-family: Spoqa Han Sans; font-size:13px;">
+								<i class="fas fa-edit"></i> <b>이슈 작성</b></button>
+				
 			</div>
-
-			<div class="card-body">
-				<div class="tab-content">
-					<div class="active tab-pane" id="activity">
 						<!-- Main content -->
 						<section class="content">
 							<div class="container-fluid">

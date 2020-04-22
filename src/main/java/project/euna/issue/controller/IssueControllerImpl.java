@@ -85,7 +85,9 @@ public class IssueControllerImpl implements IssueController {
 		ModelAndView mav = new ModelAndView("issue/issueList");
 		mav.addObject("issueList", list);
 		mav.addObject("pageMaker", pageMaker);
+		
 		mav.addObject("pjt", pjt); 
+		
 		
 		return mav;
 		
@@ -199,11 +201,12 @@ public class IssueControllerImpl implements IssueController {
 	//게시글 삭제
 	@Override
 	@PostMapping("/delete")
-	public String issueDelete(IssueVO issueVO) throws Exception{
-	
-		issueService.issueDelete(issueVO.getI_Num());
+	public String issueDelete(String c_Id, IssueVO issueVO) throws Exception{
 		
-		String c_Id = issueVO.getC_Id();
+		issueService.chargerDelete(issueVO.getI_Num());
+		issueService.issueDelete(issueVO.getI_Num());
+		//String c_Id = issueVO.getC_Id();
+		
 		
 		return "redirect:/project/issue/list?c_Id="+c_Id;
 	}

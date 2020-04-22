@@ -220,22 +220,33 @@
 				<div class="col-sm-6">
 					<div>
 						<h1 class="m-0 text-dark"
-							style="font-family: Spoqa Han Sans; max-width: 80%; display: contents;">${pjt.c_Name}</h1>
-							<c:if test="${member.mem_Id == pjt.mem_Id}">
-						<a style="font-size: 20px;  margin: 3px;" href="/#"
-							data-needpopup-show="#update-popup"><i
-							class="nav-icon fas fa-cogs"> </i></a>
-							</c:if>
+							style="font-family: Recipekorea; max-width: 80%; display: contents;">${pjt.c_Name}</h1>
+						<c:choose>
+							<c:when test="${member.mem_Id == pjt.mem_Id}">
+								<a style="font-size: 20px; margin: 3px;" href="/#"
+									data-needpopup-show="#update-popup"><i
+									class="nav-icon fas fa-cogs"> </i>
+									</a>
+							</c:when>
+							<c:otherwise>
+							<a style="font-size: 20px; margin: 3px;" href="/pjtmember/delete?c_Id=${pjt.c_Id}&mem_Id=${member.mem_Id}"
+									onclick="return withdrawal()"><i
+									class="nav-icon fas fa-door-open"> </i>
+									</a>
+							</c:otherwise>
+						</c:choose>
+
 					</div>
 					<div>
-					<p class="breadcrumb float-sm-left" style="position: absolute; margin-top: 10px">${pjt.c_Comment}</p>
+						<p class="breadcrumb float-sm-left"
+							style="position: absolute; margin-top: 10px">${pjt.c_Comment}</p>
 					</div>
 				</div>
 				<!-- /.col -->
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
 
-						<li class="breadcrumb-item"><a style="font-size: 30px; "
+						<li class="breadcrumb-item"><a style="font-size: 30px;"
 							href="/#" data-needpopup-show="#add-popup"> <i
 								style="width: 25px; height: 25px;" class="ion ion-person-add"></i></a></li>
 						<li class="breadcrumb-item active">파트너 추가</li>
@@ -257,7 +268,7 @@
 						href="/project/main?c_Id=${pjt.c_Id}"  id="activityMenu">홈</a></li>
 						
 					<li class="nav-item" id = "activityMenu"><a class="nav-link active" href="/project/issue/list?c_Id=${pjt.c_Id}"
-						 id= "issueMenu">이슈</a></li>
+						 id= "issueMenu"><b>이슈</b></a></li>
 					<li class="nav-item" id = "activityMenu"><a class="nav-link" href="#"
 						 id= "issueMenu">칸반</a></li>
 					<li class="nav-item" id = "activityMenu"><a class="nav-link" href="#"
@@ -267,8 +278,8 @@
 						
 				</ol>
 				
-				 <button type="button" class="btn btn-success float-right" onclick="location.href='/project/issue/insert?c_Id=${pjt.c_Id}'"style="text-align:center; float:right; background-color:#DC3545; border-color:#DC3545; font-family: Recipekorea; font-size:13px;">
-								<i class="fas fa-edit"></i> 이슈 작성</button>
+				 <button type="button" class="btn btn-success float-right" onclick="location.href='/project/issue/insert?c_Id=${pjt.c_Id}'"style="text-align:center; float:right; background-color:#DC3545; border-color:#DC3545; font-family: Spoqa Han Sans; font-size:13px;">
+								<i class="fas fa-edit"></i> <b>이슈 작성</b></button>
 				
 			</div>
 			
@@ -297,7 +308,7 @@
 						
 						</td>
 					  <td style="width:60%">	
-					  <a href="/project/issue/read?i_Num=${issueList.i_Num}"> <font size="3em"><b>${issueList.i_Name}</b></font></a>
+					  <a href="/project/issue/read?c_Id=${issueList.c_Id}&i_Num=${issueList.i_Num}"> <font size="3em"><b>${issueList.i_Name}</b></font></a>
 					  <br>
 					  <font size="1em" color="#6c757d">이슈 담당자로 변경 예정</font>    
 					  </td>
@@ -316,13 +327,16 @@
         <br><br>
         <!-- 페이징 -->
  <div class="form-group" style="margin-left:20px">
+
    <ul class="pagination pagination-sm m-0">
     <c:if test="${pageMaker.prev}">
     	<li class="page-item" id="liStyle"><a class="page-link" href="list${pageMaker.makeQuery(pageMaker.startPage - 1)}">&laquo;</a></li>
     </c:if> 
 
     <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+    
     	<li class="page-item" id="liStyle"><a class="page-link" href="list${pageMaker.makeQuery(idx)}">${idx}</a></li>
+    
     </c:forEach>
 
     <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
@@ -331,6 +345,7 @@
   </ul>
   <br>
   </div>
+  <%-- <c:if test="${pageMaker.page}"></c:if> --%>
  
         <!--/페이징  -->
        
