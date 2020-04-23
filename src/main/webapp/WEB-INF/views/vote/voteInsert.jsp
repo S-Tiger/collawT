@@ -113,7 +113,6 @@ span[name="chargerspan"] {
       <div class="card card-primary">
         
         <div class="card-body">
-        	<div class="form-group">
           
               <div class="form-group">
                 <label for="inputName">제목</label>
@@ -240,12 +239,6 @@ span[name="chargerspan"] {
                 </div>
                
            
-          <!-- 참여자 답변 공개/비공개 여부 -->
-       <div class="form-group" id="issueStatus">
-			<label for="inputStatus">참여자 공개 여부</label><br>
-			공개 <input type="radio"  value="공개" checked><br>
-			비공개<input type="radio"  value="비공개">
-          </div>    
 				<input type="submit" id = "submit" value="작성" class="btn btn-danger btn-sm float-right" style="margin:3px;">
           <input type="button" id = "cancel" value="취소" class="btn btn-danger btn-sm float-right" style="margin:3px;" onclick="history.back(-1)">
               </div>

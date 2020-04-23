@@ -49,7 +49,7 @@ $(document).ready(function() {
 				type:'post',
 				data:{
 					r_Content: $("#r_Content").val(),
-					i_Num : $("#i_Num").val(),
+					v_Num : $("#v_Num").val(),
 					c_Id : $("#c_Id").val()
 				},
 				success:function(data){
@@ -71,7 +71,7 @@ $(document).ready(function() {
 			url:"/bookmark/insert",
 			type:'post',
 			data:{
-				i_Num : $("#i_Num").val(),
+				v_Num : $("#v_Num").val(),
 			},
 			success:function(data){
 				var bookcount = $("#bookmarkcount").html();
@@ -92,7 +92,7 @@ $(document).ready(function() {
 				url:"/bookmark/delete",
 				type:'post',
 				data:{
-					i_Num : $("#i_Num").val(),
+					v_Num : $("#v_Num").val(),
 				},
 				success:function(data){
 					var bookcount = $("#bookmarkcount").html();
@@ -117,7 +117,7 @@ $(document).ready(function() {
 			url:"/bookmark/bookmarkCheck",
 			type:'get',
 			data:{
-				i_Num : $("#i_Num").val(),
+				v_Num : $("#v_Num").val(),
 			},
 			success:function(data){
 				if(data == 1){
@@ -138,7 +138,7 @@ $(document).ready(function() {
 	function getReplyList(){
 		$.ajax({
 			type:"get",
-			url : "${path}/reply/list?i_Num=${issueRead.i_Num}",
+			url : "${path}/reply/list?v_Num=${voteRead.v_Num}",
 			
 			success:function(result){
 				
@@ -149,18 +149,9 @@ $(document).ready(function() {
 						str+='<div class="card-comment">';
 						
 
-						str+='<c:if test="${'+result[i].mem_File +' != NULL}">';
+						
 						str+='<img alt="Not null" width="50" height="50"src="/member/getByteImage?mem_Id='+result[i].mem_Id+'" class="img-circle elevation-1"/>';
-						str+='</c:if>';
-						
-						str+='<c:if test="${'+result[i].mem_File +'== NULL}">';
-						str+='<img src="${contextPath}/resources/dist/img/profile.jpg" width="50" height="50" class="img-circle elevation-1" alt="Null">';
-						str+='</c:if>';
-						
-
-
-
-
+					
 						
 						str+='<div class="comment-text">';
 						str+='<span class="username">'+result[i].mem_Name;
@@ -288,17 +279,15 @@ $(document).ready(function() {
 						<div class="card-header">
 						
 						<span style= "vertical-align:text-top;
-							<c:if test="${issueRead.ig_Num == 1}">background-color:#6c757d;</c:if>
-							<c:if test="${issueRead.ig_Num == 2}">background-color:#007bff;</c:if>
-							<c:if test="${issueRead.ig_Num == 3}">background-color:#ffc107;</c:if>
-							<c:if test="${issueRead.ig_Num == 4}">background-color:#28a745;</c:if>
+							<c:if test="${voteRead.ig_Num == 1}">background-color:#28a745;</c:if>
+							<c:if test="${voteRead.ig_Num == 2}">background-color:#6c757d;</c:if>
 							"
-							id="ig_Name" name="ig_Name" class="badge badge-success"><c:out  value="${issueRead.ig_Name}" /></span>&nbsp;&nbsp;
-							<span id="i_Name" name="i_Name"><b><c:out	value="${issueRead.i_Name}" /></b></span>
+							id="vs_Name" name="vs_Name" class="badge badge-success"><c:out  value="${voteRead.vs_Name}" /></span>&nbsp;&nbsp;
+							<span id="v_Name" name="v_Name"><b><c:out	value="${voteRead.v_Name}" /></b></span>
 							
 							
 							<div class="btn-group float-right">
-                          <button type="button" class="btn btn-default" data-toggle="dropdown" aria-expanded="false" style="border:white;background-color:white;height:20px;padding-top: 0px;color:gray"><i class="fas fa-cog"></i>
+                          <button type="button" class="btn btn-default" data-toggle="dropdown" aria-expanded="false" style="border:white;background-color:white;height:20px;padding-top: 0px;color:gray"><i class="fas fa-ellipsis-h"></i>
                           </button>
                           <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; right: 0px; transform: translate3d(0px, 38px, 0px);">
                             
@@ -307,10 +296,12 @@ $(document).ready(function() {
                             <li><a class="dropdown-item" href="#"><small>URL 복사</small></a></li>
                           </ul>
                         </div>
+                        
+                        
                         <!-- 본인만 글 수정, 삭제 가능-->
-                        <c:if test="${member.mem_Id == issueRead.mem_Id}">
-                        <span class="text-muted float-right"><small><a href="/project/issue/update?c_Id=${issueRead.c_Id}&i_Num=${issueRead.i_Num}">수정</a>｜</small>
-						<small><a onclick="if(confirm('삭제하시겠습니까?')){alert('삭제되었습니다.');}else{return false;};" href='/project/issue/delete?c_Id=${issueRead.c_Id}&i_Num=${issueRead.i_Num}'>삭제</a></small></span>
+                        <c:if test="${member.mem_Id == voteRead.mem_Id}">
+                        <span class="text-muted float-right"><small><a href="/project/issue/update?c_Id=${voteRead.c_Id}&v_Num=${voteRead.v_Num}">수정</a>｜</small>
+						<small><a onclick="if(confirm('삭제하시겠습니까?')){alert('삭제되었습니다.');}else{return false;};" href='/project/issue/delete?c_Id=${voteRead.c_Id}&v_Num=${voteRead.v_Num}'>삭제</a></small></span>
 						</c:if>
 						</div>
 						
@@ -318,8 +309,8 @@ $(document).ready(function() {
 						
 						<!-- /.card-header -->
 						<div class="card-body">
-						<span class="text-muted float-right"id="i_Date" name="i_Date" style="font-size:small">
-								<c:out	value="${issueRead.i_Date}" /></span>
+						<span class="text-muted float-right"id="v_Date" name="v_Date" style="font-size:small">
+								<c:out	value="${voteRead.v_Date}" /></span>
 							<div class="user-block">
 							
 							
@@ -329,16 +320,16 @@ $(document).ready(function() {
 								
 								<c:if test="${member.mem_File != null }">
 								<img alt="프로필사진" width="50" height="50"
-								src="/member/getByteImage?mem_Id=${issueRead.mem_Id}" class="img-circle elevation-2"/>
+								src="/member/getByteImage?mem_Id=${voteRead.mem_Id}" class="img-circle elevation-2"/>
 								</c:if>
 								<c:if test="${member.mem_File == null }">
 								<img src="${contextPath}/resources/dist/img/profile.jpg" width="50" height="50"
 								class="img-circle elevation-2" alt="프로필사진">
 								</c:if>
 								<span class="username" id="mem_Name" name="mem_Name">
-								<c:out value="${issueRead.mem_Name}" /></span>
+								<c:out value="${voteRead.mem_Name}" /></span>
 								<span class="description"id="mem_Id" name="mem_Id">
-								<c:out	value="${issueRead.mem_Id}" /></span>  
+								<c:out	value="${voteRead.mem_Id}" /></span>  
 								
 								
 							</div>
@@ -349,21 +340,21 @@ $(document).ready(function() {
 								<br>
 							
 							<!-- 내용 -->
-								<p id="i_Content" name="i_Content"><c:out value="${issueRead.i_Content}" escapeXml="false"/></p>
+								<p id="v_Content" name="v_Content"><c:out value="${voteRead.v_Content}" escapeXml="false"/></p>
 						
 							
 							
 							<br>
 							<br>
 							<br>
-							 <input type="hidden" id="i_Num" name="i_Num"
-								value="${issueRead.i_Num}" /> <br>
+							 <input type="hidden" id="v_Num" name="v_Num"
+								value="${voteRead.v_Num}" /> <br>
 							<br>
 
-<!-- 이슈정보~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<!-- 투표 view~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 <div class="card card-primary collapsed-card">
             <div class="card-header" style="height:30px; padding-left:13px; padding-right:16px; padding-top:4px; background-color:#e87c87;">
-             <label><small><b>이슈 정보 더 보기</b></small></label>
+             <label><small><b>"${voteRead.v_Subject}"</b></small></label>
                 <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                   <i class="fas fa-plus"></i></button>
@@ -381,14 +372,14 @@ $(document).ready(function() {
 					</div>
 		           		<!-- 시작일/종료일-->
 		           		<div class="row" style="margin-left:9px">
-							<c:if test="${not empty issueRead.i_Start&& not empty issueRead.i_End}">
+							<c:if test="${not empty voteRead.v_Start&& not empty voteRead.v_End}">
 							
-								<span id="i_Start" name="i_Start" class="username ">
-								<small><c:out value="${issueRead.i_Start}~"/></small></span>
-								<span id="i_End" name="i_End" class="username">
-								<small><c:out value="${issueRead.i_End}"/></small></span>
+								<span id="v_Start" name="v_Start" class="username ">
+								<small><c:out value="${voteRead.v_Start}~"/></small></span>
+								<span id="v_End" name="v_End" class="username">
+								<small><c:out value="${voteRead.v_End}"/></small></span>
 							</c:if>
-							<c:if test="${empty issueRead.i_Start&& empty issueRead.i_End}">
+							<c:if test="${empty voteRead.v_Start&& empty voteRead.v_End}">
 							
 								<span class="username"><small>기간 미설정</small></span>
 							</c:if>
@@ -396,95 +387,18 @@ $(document).ready(function() {
 		           </td>
 		           </tr>
 		        
-		           <tr>
-					<td>
-					<div class="row">
-					<i class="fas fa-user-friends"></i>&nbsp;
-					<span style="font-size: 0.8em;"><b>이슈 담당자</b></span>
-					</div>
-					<div id="chargerListCheck">
-							<c:forEach var="chargerList" items="${chargerList}" >
-							
-								<div class="row" style="margin:9px">
-								<div class="user-block-sm">	
-								
-								
-								<%-- <img alt="프로필사진" width="30" height="30"
-								src="/member/getByteImage?mem_Id=${chargerList.MEM_ID}" class="img-circle"/> --%>
-								
-								
-								<c:if test="${member.mem_File != null }">
-								<img alt="프로필사진" width="30" height="30"
-								src="/member/getByteImage?mem_Id=${chargerList.MEM_ID}" class="img-circle"/>
-								</c:if>
-								<c:if test="${member.mem_File == null }">
-								<img src="${contextPath}/resources/dist/img/profile.jpg" style="width:30px; height:30px"
-								class="img-circle" alt="User Image">
-								</c:if>
-								
-								
-								<span class="username" id="ch_mem_Name" name="mem_Name">
-								<small><c:out value=" ${chargerList.MEM_NAME}"/></small></span>
-								<span class="description"id="mem_Id" name="mem_Id">
-								<small><c:out	value="(${chargerList.MEM_ID})"/></small></span>
-								</div>
-								</div>
-								
-								</c:forEach>
-					</div>
-				
-							</td>
-							
-							</tr>
 							</tbody>
               </table>
             </div></div>				
-<!-- 첨부파일 부분~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->				
+<!-- 북마크 부분~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->				
 
-
-<!-- 첨부된 파일 없으면 창 아예 안보이게  -->		
-<c:if test="${not empty file}">
-					<div class="card card-info">
-                        <div class="card-header" style="height:30px; padding-left:13px; padding-right:16px; padding-top:4px; background-color:#e87c87;">
-             <label><small><b>첨부파일</b></small></label>
-                <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                  <i class="fas fa-minus"></i></button>
-              </div>
-            </div>
-            <div class="card-body p-0">
-              <table class="table">
-
-                <tbody>
-
-				  <c:forEach var="file" items="${file}" >
-                  <tr>
-                    <td><small><span id="a_RealName" name="a_RealName">${file.a_RealName}</span></small></td>
-                    <td><span id="a_Size" name="a_Size"><small>${file.a_Size/1000}kb</small></span></td>
-                    <td class="text-right py-0 align-middle">
-                      <a href="/appendix/download?a_Num=${file.a_Num}"><i class="fas fa-download"></i></a>
-                    </td>
-                 </tr>
-                 </c:forEach>
-                </tbody>
-              </table>
-            </div>
-           <!--  /.card-body -->
-          </div>
-          <br>
-          </c:if>
-          <!-- /.card -->
-          
-          <!-- 이거 나중에 기능 넣기 -->
-							
-							<!-- 숫자 카운트 넣기 -->
 							<button type="button" class="btn btn-default btn-sm" id = "bookmarkinsert"style="color:#444; margin:3px;">
 								<i class="fas fa-bookmark"></i> 북마크
 							</button>
 							
 
 						
-						<a id="list_btn" class="btn btn-default btn-sm" href='list?c_Id=${issueRead.c_Id}' style="color:#444; margin:3px;"> <i class="fas fa-list"></i>&nbsp;목록</a>
+						<a id="list_btn" class="btn btn-default btn-sm" href='list?c_Id=${voteRead.c_Id}' style="color:#444; margin:3px;"> <i class="fas fa-list"></i>&nbsp;목록</a>
 
 								
 								<br><br>
@@ -523,8 +437,6 @@ $(document).ready(function() {
 					<div class="card-footer" id="replyInput" name="replyInput">
 
 						
-							<%-- <img class="img-fluid img-circle img-sm"
-								src="/member/getByteImage?mem_Id=${member.mem_Id}" alt="Alt Text" width="50" height="50" > --%>
 							
 								<c:if test="${member.mem_File != null }">
 								<img class="img-fluid img-circle img-sm"
@@ -541,8 +453,8 @@ $(document).ready(function() {
 									
 									<small><a href="#" id="replyInsert_btn" name="replyInsert_btn">입력</a></small>
 																		
-									<input type="hidden" id="i_Num" name="i_Num" value="${issueRead.i_Num}" />
-									<input type="hidden" id="c_Id" name="c_Id" value="${issueRead.c_Id}" />
+									<input type="hidden" id="v_Num" name="v_Num" value="${voteRead.v_Num}" />
+									<input type="hidden" id="c_Id" name="c_Id" value="${voteRead.c_Id}" />
 									
 								
 							</div>
