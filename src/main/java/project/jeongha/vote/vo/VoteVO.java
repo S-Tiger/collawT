@@ -15,6 +15,19 @@ public class VoteVO {
 	private String vd_Num;
 	//보기내용
 	private String vd_Content;
+	//협업공간ID
+	private String c_Id;
+	//회원아이디
+	private String mem_Id;
+	//투표제목
+	private String v_Name;
+	//작성일
+	private String v_Date;
+	//투표상태
+	private String vs_Num;
+	//투표 주제
+	private String v_Subject;
+	
 	
 	
 	public String getVd_Num() {
@@ -53,6 +66,42 @@ public class VoteVO {
 	}
 	public void setV_End(String v_End) {
 		this.v_End = v_End;
+	}
+	public String getC_Id() {
+		return c_Id;
+	}
+	public void setC_Id(String c_Id) {
+		this.c_Id = c_Id;
+	}
+	public String getMem_Id() {
+		return mem_Id;
+	}
+	public void setMem_Id(String mem_Id) {
+		this.mem_Id = mem_Id;
+	}
+	public String getV_Name() {
+		return v_Name;
+	}
+	public void setV_Name(String v_Name) {
+		this.v_Name = v_Name;
+	}
+	public String getV_Date() {
+		return v_Date;
+	}
+	public void setV_Date(String v_Date) {
+		this.v_Date = v_Date;
+	}
+	public String getVs_Num() {
+		return vs_Num;
+	}
+	public void setVs_Num(String vs_Num) {
+		this.vs_Num = vs_Num;
+	}
+	public String getV_Subject() {
+		return v_Subject;
+	}
+	public void setV_Subject(String v_Subject) {
+		this.v_Subject = v_Subject;
 	}
 	
 	
