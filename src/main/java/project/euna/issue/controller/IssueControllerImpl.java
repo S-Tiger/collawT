@@ -109,6 +109,7 @@ public class IssueControllerImpl implements IssueController {
 		String i_Start = issueVO.getI_Start();
 		String i_End = issueVO.getI_End();
 		String ig_Num = issueVO.getig_Num();
+		String i_Num = issueVO.getI_Num();
 		
 		
 		Map<String, Object> cmap = new HashMap<String,Object>();
@@ -120,11 +121,11 @@ public class IssueControllerImpl implements IssueController {
 		cmap.put("i_Start", i_Start);
 		cmap.put("i_End", i_End);
 		cmap.put("ig_Num", ig_Num);
-		
+		cmap.put("i_Num", i_Num);
+
 		
 		issueService.issueInsert(cmap);
 		
-		String i_Num = (String) cmap.get("i_Num");
 		
 		try {
 			Map<String, Object> coMap = new HashMap<String, Object>();
@@ -157,7 +158,7 @@ public class IssueControllerImpl implements IssueController {
 	@Override
 	@GetMapping("/insert")
 	public ModelAndView issueInsert(String c_Id, HttpSession session) {
-		
+		Map<String, Object> i_Num = issueDAO.get_i_Num();
 //		Map<String, Object> member = new HashMap<String,Object>();
 //		member = (Map<String, Object>) session.getAttribute("member");
 //		String mem_Id = (String) member.get("mem_Id");
@@ -170,8 +171,7 @@ public class IssueControllerImpl implements IssueController {
 		ModelAndView mav = new ModelAndView("/issue/issueInsert");
 		mav.addObject("c_Id", c_Id);
 		mav.addObject("comemList", comemList);
-
-		//mav.addObject("coList", coList);
+		mav.addObject("i_Num", i_Num);
 		return mav;
 		
 	}

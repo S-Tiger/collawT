@@ -79,7 +79,13 @@
 
 
 	<!-- 글 입력 -->
-	<insert id="issueInsert" parameterType="java.util.HashMap">
+	<insert id="issueInsert" parameterType="IssueVO">
+		insert into issue(i_Num, c_Id, i_Name, i_Content, i_Date, ig_Num , mem_Id, i_Start, i_End)
+		values(#{i_Num}, #{c_Id}, #{i_Name}, #{i_Content} ,  
+		(select to_char(sysdate, 'YYYY/MM/DD/ HH24:MI:SS') from dual)
+		, #{ig_Num} , #{mem_Id}, #{i_Start}, #{i_End})
+	</insert>
+<!-- 	<insert id="issueInsert" parameterType="java.util.HashMap">
 		<selectKey resultType="string" keyProperty="i_Num" order="BEFORE">
         SELECT issue_i_Num.nextval as i_Num FROM dual        
     	</selectKey>   
@@ -87,9 +93,15 @@
 		values(#{i_Num}, #{c_Id}, #{i_Name}, #{i_Content} ,  
 		(select to_char(sysdate, 'YYYY/MM/DD/ HH24:MI:SS') from dual)
 		, #{ig_Num} , #{mem_Id}, #{i_Start}, #{i_End})
-	</insert>
+	</insert> -->
 	
-	
+ 	<!-- 글쓰기 화면 전환 시 글번호 먼저 가져오기 -->
+	<select id="get_i_Num" resultMap="issueResult02"> 
+      <![CDATA[
+		select issue_i_Num.nextval from dual
+      ]]>
+
+	</select>	
 
 
 	<!-- 게시글 조회 -->
@@ -180,12 +192,6 @@
       ]]>
 	</select> -->
 
- 	<!-- 글쓰기 화면 전환 시 글번호 먼저 가져오기 -->
-<!-- 	<select id="get_i_Num" resultMap="issueResult02"> 
-      <![CDATA[
-		select  from dual
-      ]]>
 
-	</select> -->
 
 </mapper>

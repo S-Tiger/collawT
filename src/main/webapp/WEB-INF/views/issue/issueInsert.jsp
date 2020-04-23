@@ -127,11 +127,10 @@ span[name="chargerspan"] {
   	function fileDelete(a_Num){
 	
 			$.ajax({
-				url : "/appendix/filedelete",
+				url : "/appendix/fileUpdate",
 				data : {"a_Num" : a_Num},
 				type : 'post',
 				success:function(){
-					
 					getFileList();
 					
 				}
@@ -200,7 +199,7 @@ span[name="chargerspan"] {
         	<div class="form-group">
           
               <div class="form-group">
-             	<%-- <input type="hidden" id = "i_Num" name="i_Num" value="${i_Num.NEXTVAL}"> --%>
+             	<input type="hidden" id = "i_Num" name="i_Num" value="${i_Num.NEXTVAL}">
                 <label for="inputName">이슈명</label>
                 <input type="text" id = "i_Name" name="i_Name" class="form-control">
               </div>

@@ -163,11 +163,10 @@ span[name="chargerspan"] {
 		  	function fileDelete(a_Num){
 			
 					$.ajax({
-						url : "/appendix/filedelete",
+						url : "/appendix/fileUpdate",
 						data : {"a_Num" : a_Num},
 						type : 'post',
 						success:function(){
-							
 							getFileList();
 							
 						}
@@ -176,6 +175,7 @@ span[name="chargerspan"] {
 				
 					
 			}
+			
 			
 			//라디오버튼 값 가져오기
 		  	function getIg_Checked() {
@@ -538,7 +538,7 @@ function deleteCharger(chargedCount){
            <br>
                 
            <input type="submit" id = "submit" value="이슈 수정" class="btn btn-danger btn-sm float-right" style="margin:3px;">
-          <input type="button" id = "cancel" value="수정 취소" class="btn btn-danger btn-sm float-right" style="margin:3px;" onclick="history.back(-1)">     
+          <input type="button" id = "cancel" value="수정 취소" class="btn btn-danger btn-sm float-right" style="margin:3px;" onclick="location.href='/project/issue/read?i_Num=${issueUpdate.i_Num}'">     
                     
                  </div>
               </div>

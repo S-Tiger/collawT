@@ -107,10 +107,10 @@ public class IssueDAOImpl implements IssueDAO {
 
 	
 	//글쓰기 화면 전환 시 글번호 가져오기
-//	@Override
-//	public Map<String, Object> get_i_Num() {
-//		return sqlSession.selectOne("issue.get_i_Num");
-//	}
+	@Override
+	public Map<String, Object> get_i_Num() {
+		return sqlSession.selectOne("issue.get_i_Num");
+	}
 	
 
 
