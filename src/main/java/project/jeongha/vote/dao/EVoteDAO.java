@@ -26,4 +26,5 @@ public interface EVoteDAO {
 	//public List<Map> coRead(String mem_id);
 	//public Map<String, Object> get_i_Num();
 	public Map<String, Object> voteInfo(Map<String, Object> voteInfo) throws Exception;
+	public List<Map> votedRead(String v_Num) ;
 }

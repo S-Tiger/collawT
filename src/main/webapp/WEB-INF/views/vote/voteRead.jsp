@@ -276,7 +276,8 @@ $(document).ready(function() {
 				<form name="readForm" role="form">
 
 					<div class="card card-widget">
-						${voteRead }
+						
+						 
 						<div class="card-header">
 						<span style= "vertical-align:text-top;
 							<c:if test="${voteRead.v_Num == 1}">background-color:#28a745;</c:if>
@@ -339,7 +340,9 @@ $(document).ready(function() {
 				
 								<br>
 							
-							<!-- 내용 -->
+							<!-- 내용 --><c:forEach var="votedRead" items="${votedRead}" >
+						<p> ${votedRead.vd_Num}. ${votedRead.vd_Content}</p><br>
+						 </c:forEach>	
 								<p id="v_Content" name="v_Content"><c:out value="${voteRead.v_Content}" escapeXml="false"/>투표내용</p>
 								<p id="v_Content" name="v_Content"><c:out value="${voteRead.v_Subject}" escapeXml="false"/>서브젝트 명</p>
 							

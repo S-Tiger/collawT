@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 
 import project.jeongha.vote.vo.Criteria;
 
-
 @Repository
 public class EVoteDAOImpl implements EVoteDAO {
 //
@@ -25,14 +24,14 @@ public class EVoteDAOImpl implements EVoteDAO {
 //		 sqlSession.selectOne("voteResult.voteInsert", map);
 		return result;
 	}
-	//항목들 입력
+
+	// 항목들 입력
 	@Override
 	public int votedInsert(Map map) {
 		int result = sqlSession.insert("voteResult.votedInsert", map);
 		return result;
 	}
-	
-	
+
 	// 글 목록 페이징
 	@Override
 	public List<Map> searchList(Criteria cri) throws DataAccessException {
@@ -48,11 +47,16 @@ public class EVoteDAOImpl implements EVoteDAO {
 		return sqlSession.selectOne("voteResult.listCount", c_Id);
 	}
 
-	// 게시글 조회
+	// 투표 조회
 	@Override
 	public Map<String, Object> voteRead(String v_Num) {
 		return sqlSession.selectOne("voteResult.voteRead", v_Num);
+	}
 
+	// 투표 내용 조회
+	@Override
+	public List<Map> votedRead(String v_Num) {
+		return sqlSession.selectList("voteResult.votedRead", v_Num);
 	}
 
 	// 글 삭제
@@ -67,53 +71,51 @@ public class EVoteDAOImpl implements EVoteDAO {
 //	public void issueUpdate(IssueVO issueVO) throws Exception {
 //		sqlSession.update("voteResult.issueUpdate", issueVO);
 //	}
-	
+
 	// 이슈그룹 조회
 	@Override
 	public List<Map> igRead() {
 		return sqlSession.selectList("voteResult.igRead");
 
 	}
-	
-	//협업공간 내 멤버 조회
+
+	// 협업공간 내 멤버 조회
 	@Override
 	public List<Map> comemRead(String c_id) {
 		return sqlSession.selectList("voteResult.comemRead", c_id);
 
 	}
-	
-	//이슈 담당자 삽입
+
+	// 이슈 담당자 삽입
 	@Override
 	public void comemInsert(Map<String, Object> dataMap) throws DataAccessException {
-		
-		sqlSession.update("voteResult.comemInsert",dataMap);
-		
+
+		sqlSession.update("voteResult.comemInsert", dataMap);
+
 		// TODO Auto-generated method stub
-		
+
 	}
-	
-	//이슈 담당자 조회
+
+	// 이슈 담당자 조회
 	@Override
 	public List<Map> chargerRead(String i_Num) {
 		return sqlSession.selectList("issue.chargerRead", i_Num);
 	}
-	
-	//이슈 담당자 수정(삭제 후 다시 삽입)
+
+	// 이슈 담당자 수정(삭제 후 다시 삽입)
 	@Override
 	public void chargerDelete(String i_Num) throws Exception {
 		sqlSession.delete("issue.chargerDelete", i_Num);
 
 	}
-	//v_num가져오기
+
+	// v_num가져오기
 	@Override
 	public Map<String, Object> voteInfo(Map<String, Object> voteInfo) throws Exception {
 		Map<String, Object> result = sqlSession.selectOne("voteResult.v_num", voteInfo);
 		return result;
 	}
 
-
-	
-	
 	// 협업공간 조회
 //	@Override
 //	public List<Map> coRead(String mem_id) {
@@ -121,18 +123,14 @@ public class EVoteDAOImpl implements EVoteDAO {
 //
 //	}
 
-	
-	//글쓰기 화면 전환 시 글번호 가져오기
+	// 글쓰기 화면 전환 시 글번호 가져오기
 //	@Override
 //	public Map<String, Object> get_i_Num() {
 //		return sqlSession.selectOne("issue.get_i_Num");
 //	}
-	
 
-
-	//이미지 불러오기
+	// 이미지 불러오기
 //	public Map<String, Object> getByteImage(String mem_Id) { return
 //	sqlSession.selectOne("member.getByteImage", mem_Id); }
-	 
 
 }

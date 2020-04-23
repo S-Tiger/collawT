@@ -29,4 +29,5 @@ public interface EVoteService {
 	public void chargerDelete(String v_Num) throws Exception;
 	//public List<Map> coRead(String mem_id);
 	public Map<String, Object> voteInfo(Map<String, Object> voteVO)throws Exception;
+	public List<Map> votedRead(String v_Num);
 }

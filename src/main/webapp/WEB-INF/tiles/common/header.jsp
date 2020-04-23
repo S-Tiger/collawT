@@ -407,7 +407,7 @@
 		<!-- Sidebar -->
 		<div class="sidebar">
 			<!-- Sidebar user panel (optional) -->
-			<div class="user-panel mt-3 pb-3 mb-3 d-flex" >
+			<div class="user-panel mt-3 pb-3 mb-3 d-flex"style="padding-bottom: 0px !important;margin-bottom: 0px !important;margin-top: 10px !important;height: 65px;">
 				<span class="image" style="padding-left: .6rem;">
 					<c:if test="${member.mem_File != null }">
 						<div class="profile">
@@ -424,10 +424,12 @@
 				
 					<span class="info" style="width: 170px;">
 						<a href="/member/mypage"  style="padding: 0px; margin-right: 0px;">${member.mem_Name} </a>
-						<a href="/logout"  style="padding: 0px; margin-top: 3; float:right;"><i class="fas fa-sign-out-alt"></i></a>
-					</span>	
+						<a href="/logout"  style="padding: 0px; margin-top: 3; float:right;"><i class="fas fa-sign-out-alt"></i></a><br>
+						<p style="padding: 0px; margin-right: 0px; color:#C2C7D1"><font size="2">(${member.mem_Id})</font></p>
+					</span>
+		
 			</div>
-
+			
 			<!-- Sidebar Menu -->
 			<nav class="mt-2">
 				<ul class="nav nav-pills nav-sidebar flex-column"

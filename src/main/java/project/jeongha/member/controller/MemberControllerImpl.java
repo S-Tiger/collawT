@@ -116,7 +116,7 @@ public class MemberControllerImpl implements MemberController {
 
 	// 마이페이지
 	@Override
-	@GetMapping("/mypage")
+	@RequestMapping(value = "/mypage")
 	public String mypage() throws Exception {
 
 		System.out.println("마이페이지");

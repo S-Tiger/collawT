@@ -164,13 +164,15 @@ public class EVoteControllerImpl implements EVoteController {
 	public ModelAndView voteRead(String v_Num, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		
-		Map<String, Object> board = evoteService.voteRead(v_Num);
+		Map<String, Object> vote = evoteService.voteRead(v_Num);
+		List<Map> voted = evoteService.votedRead(v_Num);
 		//List<Map> list = appedixService.fileList(i_Num);
 		//List<Map> chargerList = evoteService.chargerRead(v_Num);
 		
 		
 		ModelAndView mav = new ModelAndView("/vote/voteRead");
-		mav.addObject("voteRead", board);
+		mav.addObject("voteRead", vote);
+		mav.addObject("votedRead", voted);
 		//mav.addObject("file", list);
 		//mav.addObject("chargerList", chargerList);
 		return mav;

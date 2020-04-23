@@ -54,12 +54,18 @@ public class EVoteServiceImpl implements EVoteService {
 		return evoteDAO.listCount(c_Id);
 	}
 	
-	//게시글 조회
+	//투표 조회
 	@Override
 	public Map<String, Object> voteRead(String v_Num) {
 		return evoteDAO.voteRead(v_Num);
 		
 	}
+	//투표내용 조회
+		@Override
+		public List<Map> votedRead(String v_Num) {
+			return evoteDAO.votedRead(v_Num);
+			
+		}
 
 	//글 삭제
 	@Override
