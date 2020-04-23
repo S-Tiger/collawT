@@ -276,11 +276,11 @@ $(document).ready(function() {
 				<form name="readForm" role="form">
 
 					<div class="card card-widget">
+						${voteRead }
 						<div class="card-header">
-						
 						<span style= "vertical-align:text-top;
-							<c:if test="${voteRead.ig_Num == 1}">background-color:#28a745;</c:if>
-							<c:if test="${voteRead.ig_Num == 2}">background-color:#6c757d;</c:if>
+							<c:if test="${voteRead.v_Num == 1}">background-color:#28a745;</c:if>
+							<c:if test="${voteRead.v_Num == 2}">background-color:#6c757d;</c:if>
 							"
 							id="vs_Name" name="vs_Name" class="badge badge-success"><c:out  value="${voteRead.vs_Name}" /></span>&nbsp;&nbsp;
 							<span id="v_Name" name="v_Name"><b><c:out	value="${voteRead.v_Name}" /></b></span>
@@ -327,7 +327,7 @@ $(document).ready(function() {
 								class="img-circle elevation-2" alt="프로필사진">
 								</c:if>
 								<span class="username" id="mem_Name" name="mem_Name">
-								<c:out value="${voteRead.mem_Name}" /></span>
+								<c:out value="${member.mem_Name}" /></span>
 								<span class="description"id="mem_Id" name="mem_Id">
 								<c:out	value="${voteRead.mem_Id}" /></span>  
 								
@@ -340,8 +340,8 @@ $(document).ready(function() {
 								<br>
 							
 							<!-- 내용 -->
-								<p id="v_Content" name="v_Content"><c:out value="${voteRead.v_Content}" escapeXml="false"/></p>
-						
+								<p id="v_Content" name="v_Content"><c:out value="${voteRead.v_Content}" escapeXml="false"/>투표내용</p>
+								<p id="v_Content" name="v_Content"><c:out value="${voteRead.v_Subject}" escapeXml="false"/>서브젝트 명</p>
 							
 							
 							<br>

@@ -310,9 +310,9 @@
 						
 						</td>
 					  <td style="width:60%">	
-					  <a href="/project/issue/read?c_Id=${voteList.c_Id}&i_Num=${voteList.i_Num}"> <font size="3em"><b>${voteList.i_Name}</b></font></a>
+					  <a href="/project/vote/read?c_Id=${voteList.c_Id}&v_Num=${voteList.v_Num}"> <font size="3em"><b>${voteList.v_Name}</b></font></a>
 					  <br>
-					  <font size="1em" color="#6c757d">투표글 작성자로 변경 예정</font>    
+					  <font size="1em" color="#6c757d">${voteList.mem_Id}</font>    
 					  </td>
                       
                       <td style="width:30%; vertical-align:top"> <font size="2em" color="#6c757d"><i class="far fa-calendar-alt"></i>&nbsp;&nbsp;<c:if test="${voteList.v_Start == null}">기간 미설정</c:if>

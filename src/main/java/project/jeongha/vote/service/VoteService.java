@@ -9,5 +9,6 @@ public interface VoteService {
 
 	public void voteInsert(Map<String, Object> v_Info);
 	public void votedInsert(Map<String, Object> vd_Info);
-	public List<VoteVO> voteList() throws Exception;
+	public List<Map> voteList() throws Exception;
+	public List<Map> votedList() throws Exception;
 }

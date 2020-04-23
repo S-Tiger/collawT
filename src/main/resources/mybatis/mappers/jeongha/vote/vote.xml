@@ -34,11 +34,20 @@
 	<select id="voteList" resultMap="voteResult01">
 	<![CDATA[
 	
-	select * from vote v, voted vd where v.v_Num=vd.v_Num
+	select * from vote
 	
 	]]>
 	</select>
 	
+	<!--투표 이름의 보기들을 가져오기 -->
+	<select id="votedList" resultMap="voteResult01">
+	<![CDATA[
+	
+	select* from voted
+	
+	]]>
+	
+	</select>
 	
 
 </mapper>

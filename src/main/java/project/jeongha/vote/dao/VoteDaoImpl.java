@@ -32,8 +32,17 @@ public class VoteDaoImpl implements VoteDao{
 	
 	//투표 리스트
 	@Override
-	public List<VoteVO> voteList() throws Exception {
+	public List<Map> voteList() throws Exception {
 		return sqlSession.selectList("vote.voteList");
 	}
+
+	//투표 보기 리스트
+	@Override
+	public List<Map> votedList() throws Exception {
+		List<Map> votedList = sqlSession.selectList("vote.votedList");
+		return votedList;
+	}
+	
+	
 
 }

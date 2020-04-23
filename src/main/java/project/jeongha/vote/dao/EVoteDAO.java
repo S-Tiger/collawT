@@ -12,10 +12,11 @@ import project.jeongha.vote.vo.Criteria;
 public interface EVoteDAO {
 //
 	public int voteInsert(Map map);
+	public int votedInsert(Map map);
 	public List<Map> searchList(Criteria cri) throws DataAccessException;
-	public Map<String, Object> issueRead(String i_Num);
-	public void issueDelete(String i_Num) throws Exception;
-	//public void issueUpdate(IssueVO issueVO) throws Exception;
+	public Map<String, Object> voteRead(String v_Num);
+	public void voteDelete(String i_Num) throws Exception;
+	//public void voteUpdate(IssueVO issueVO) throws Exception;
 	public int listCount(String c_Id) throws Exception;
 	public List<Map> igRead();
 	public List<Map> comemRead(String c_id);
@@ -24,5 +25,5 @@ public interface EVoteDAO {
 	public void chargerDelete(String i_Num) throws Exception;
 	//public List<Map> coRead(String mem_id);
 	//public Map<String, Object> get_i_Num();
-
+	public Map<String, Object> voteInfo(Map<String, Object> voteInfo) throws Exception;
 }

@@ -18,5 +18,6 @@ public interface VoteController {
 	public String voteInsert(VoteVO voteVO,HttpServletRequest request, HttpServletResponse response, RedirectAttributes rttr,HttpSession session )throws Exception ;
 	public String voteDelete();
 	public ModelAndView voteList(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception ;
+	//public ModelAndView votedList(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 }

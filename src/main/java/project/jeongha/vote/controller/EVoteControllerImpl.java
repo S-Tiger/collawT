@@ -48,8 +48,6 @@ public class EVoteControllerImpl implements EVoteController {
 	@Inject
 	EVoteService evoteService;
 	
-
-	
 	@Inject
 	EVoteDAO evoteDAO;
 	
@@ -97,27 +95,47 @@ public class EVoteControllerImpl implements EVoteController {
 		String c_Id = voteVO.getC_Id();
 		String v_Name = voteVO.getV_Name();
 		String v_Content = voteVO.getV_Content();
-		String v_Date = voteVO.getV_Date();
 		String v_Start = voteVO.getV_Start();
 		String v_End = voteVO.getV_End();
 		String vs_Num = voteVO.getVs_Num();
-		
+		String v_Subject = voteVO.getV_Subject();
+		String v_Count = voteVO.getV_Count();
 		
 		Map<String, Object> cmap = new HashMap<String,Object>();
-		cmap.put("mem_Id", mem_Id);
-		cmap.put("c_Id", c_Id);
-		cmap.put("v_Name", v_Name);
-		cmap.put("v_Content",v_Content);
-		cmap.put("v_Date", v_Date);
-		cmap.put("v_Start", v_Start);
-		cmap.put("v_End", v_End);
-		cmap.put("vs_Num", vs_Num);
-		
-		
+		cmap.put("mem_Id", mem_Id);///
+		cmap.put("c_Id", c_Id);///
+		cmap.put("v_Name", v_Name);///
+		cmap.put("v_Content",v_Content);///
+		cmap.put("v_Start", v_Start);///
+		cmap.put("v_End", v_End);///
+		cmap.put("vs_Num", vs_Num);///
+		cmap.put("v_Subject",v_Subject);
+		cmap.put("v_Count",v_Count);
+		System.out.println("!222222222222ddddcccccccccc!!11cmapcontroller"+cmap);
 		evoteService.voteInsert(cmap);
-		System.out.println("!!!!!!!!!!!!!!!!!11cmapcontroller"+cmap);
 		
+		//v_Num가져오기
+		//Map<String, Object> voteVODb = evoteService.voteInfo(cmap);
 		String v_Num = (String) cmap.get("v_Num");
+		//보기항목 넣기
+		String vd_Num[] = request.getParameterValues("vd_Num");
+		String vd_Content[] = request.getParameterValues("vd_Content");
+		// boted 테이블에 들어갈 정보
+		System.out.println("@@@"+vd_Num+"@@@@@"+vd_Content);
+		Map<String, Object> vd_Info = new HashMap<String, Object>();
+		for (int i = 0; i < vd_Num.length; i++) {
+			vd_Info.put("v_Num", v_Num);
+			vd_Info.put("vd_Num", vd_Num[i]);
+			vd_Info.put("vd_Content", vd_Content[i]);
+			vd_Info.put("c_Id", c_Id);
+		System.out.println("vd_Info @@@@@@@@:"+vd_Info);
+			evoteService.votedInsert(vd_Info);
+			
+		}
+		
+		
+		
+		System.out.println("!!!!!!!!!!!!!!!!!11cmapcontroller"+cmap);
 		
 		
 		
@@ -131,6 +149,7 @@ public class EVoteControllerImpl implements EVoteController {
 	public ModelAndView voteInsert(String c_Id, HttpSession session) {
 			
 		ModelAndView mav = new ModelAndView("/vote/voteInsert");
+		
 		mav.addObject("c_Id", c_Id);
 		return mav;
 		
@@ -139,106 +158,106 @@ public class EVoteControllerImpl implements EVoteController {
 
 	
 	
-//	//개별 글 조회
-//	@Override
-//	@GetMapping("/read")
-//	public ModelAndView issueRead(String i_Num, HttpServletRequest request, HttpServletResponse response) throws Exception {
-//		
-//		
-//		Map<String, Object> board = evoteService.issueRead(i_Num);
-//		List<Map> list = appedixService.fileList(i_Num);
-//		List<Map> chargerList = evoteService.chargerRead(i_Num);
-//		
-//		
-//		ModelAndView mav = new ModelAndView("issue/issueRead");
-//		mav.addObject("issueRead", board);
-//		mav.addObject("file", list);
-//		mav.addObject("chargerList", chargerList);
-//		return mav;
-//	}
+	//개별 글 조회
+	@Override
+	@GetMapping("/read")
+	public ModelAndView voteRead(String v_Num, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		
+		Map<String, Object> board = evoteService.voteRead(v_Num);
+		//List<Map> list = appedixService.fileList(i_Num);
+		//List<Map> chargerList = evoteService.chargerRead(v_Num);
+		
+		
+		ModelAndView mav = new ModelAndView("/vote/voteRead");
+		mav.addObject("voteRead", board);
+		//mav.addObject("file", list);
+		//mav.addObject("chargerList", chargerList);
+		return mav;
+	}
 //	
 //	
-//	//게시글 삭제
-//	@Override
-//	@GetMapping("/delete")
-//	public String issueDelete(String c_Id, String i_Num, IssueVO issueVO) throws Exception{
-//		
-//		evoteService.chargerDelete(issueVO.getI_Num());
-//		evoteService.issueDelete(issueVO.getI_Num());
+	//게시글 삭제
+	@Override
+	@GetMapping("/delete")
+	public String voteDelete(String c_Id, String i_Num, VoteVO voteVO) throws Exception{
+		
+		evoteService.chargerDelete(voteVO.getV_Num());
+		evoteService.voteDelete(voteVO.getV_Num());
+	
+		
+		
+		return "redirect:/project/vote/list?c_Id="+c_Id;
+	}
 //	
-//		
-//		
-//		return "redirect:/project/issue/list?c_Id="+c_Id;
-//	}
+	//게시글 수정 페이지로 이동
+	@Override
+	@GetMapping("/update")
+	public String voteUpdate(String c_Id, String i_Num, VoteVO voteVO, Model model) throws Exception {
+		
+		
+		
+		List<Map> igRead = evoteService.igRead();
+		List<Map> comemList = evoteService.comemRead(c_Id);
+		List<Map> chargerList = evoteService.chargerRead(i_Num);
+		
+		model.addAttribute("issueUpdate",evoteService.voteRead(voteVO.getV_Num()) );
+		model.addAttribute("igRead",igRead);
+		model.addAttribute("c_Id", c_Id);
+		model.addAttribute("comemList", comemList);
+		model.addAttribute("chargerList", chargerList);
+
+		
+		return "/vote/issueUpdate";
+	}
 //	
-//	//게시글 수정 페이지로 이동
-//	@Override
-//	@GetMapping("/update")
-//	public String issueUpdate(String c_Id, String i_Num, IssueVO issueVO, Model model) throws Exception {
-//		
-//		
-//		
-//		List<Map> igRead = evoteService.igRead();
-//		List<Map> comemList = evoteService.comemRead(c_Id);
-//		List<Map> chargerList = evoteService.chargerRead(i_Num);
-//		
-//		model.addAttribute("issueUpdate",evoteService.issueRead(issueVO.getI_Num()) );
-//		model.addAttribute("igRead",igRead);
-//		model.addAttribute("c_Id", c_Id);
-//		model.addAttribute("comemList", comemList);
-//		model.addAttribute("chargerList", chargerList);
-//
-//		
-//		return "/issue/issueUpdate";
-//	}
-//	
-//	//이슈 담당자 목록 가져오기
-//	@GetMapping("/chargerList")
-//	@ResponseBody
-//	public List<Map> chargerList(@RequestParam ("i_Num")String i_Num) throws Exception {
-//		
-//		List<Map> chargerList = evoteService.chargerRead(i_Num);
-//		
-//		return chargerList;
-//	}
+	//이슈 담당자 목록 가져오기
+	@GetMapping("/chargerList")
+	@ResponseBody
+	public List<Map> chargerList(@RequestParam ("i_Num")String i_Num) throws Exception {
+		
+		List<Map> chargerList = evoteService.chargerRead(i_Num);
+		
+		return chargerList;
+	}
 //	
 //	
-//	//게시글 수정 db에 넣기
-//	@Override
-//	@PostMapping("/update")
-//	public String issueUpdate(IssueVO issueVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
-//		evoteService.issueUpdate(issueVO);
-//		
-//		String i_Num = issueVO.getI_Num();
-//		String c_Id = issueVO.getC_Id();
-//		
-//		
-//		//이슈담당자 삭제 후 다시 입력
-//		evoteService.chargerDelete(i_Num);
-//		
-//		try {
-//			Map<String, Object> coMap = new HashMap<String, Object>();
-//			String comem_Id[] = request.getParameterValues("comem_Id");
-//			for (int i = 0; i < comem_Id.length; i++) {
-//					
-//					coMap.put("i_Num", i_Num);
-//					coMap.put("c_Id", c_Id);
-//					coMap.put("mem_Id", comem_Id[i]);
-//					coMap.put("cr_Status", "");
-//					
-//					evoteService.comemInsert(coMap);
-//			}
-//		
-//		}catch(NullPointerException e) {
-//		}
-//		
-//		
-//		//appedixService.updateFile(issueVO, appendixVO, files, fileNames, mpRequest);
-//		
-//		
-//		//수정한 게시물로 리턴
-//		return "redirect:/project/issue/read?i_Num="+i_Num;
-//	}
+	//게시글 수정 db에 넣기
+	@Override
+	@PostMapping("/update")
+	public String voteUpdate(VoteVO voteVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		//evoteService.voteUpdate(voteVO);
+		
+		String v_Num = voteVO.getV_Num();
+		String c_Id = voteVO.getC_Id();
+		
+		
+		//이슈담당자 삭제 후 다시 입력
+		evoteService.chargerDelete(v_Num);
+		
+		try {
+			Map<String, Object> coMap = new HashMap<String, Object>();
+			String comem_Id[] = request.getParameterValues("comem_Id");
+			for (int i = 0; i < comem_Id.length; i++) {
+					
+					coMap.put("v_Num", v_Num);
+					coMap.put("c_Id", c_Id);
+					coMap.put("mem_Id", comem_Id[i]);
+					coMap.put("cr_Status", "");
+					
+					evoteService.comemInsert(coMap);
+			}
+		
+		}catch(NullPointerException e) {
+		}
+		
+		
+		//appedixService.updateFile(issueVO, appendixVO, files, fileNames, mpRequest);
+		
+		
+		//수정한 게시물로 리턴
+		return "redirect:/project/vote/read?i_Num="+v_Num;
+	}
 //	
 //
 //	

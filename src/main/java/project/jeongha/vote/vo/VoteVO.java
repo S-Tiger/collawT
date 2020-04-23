@@ -4,32 +4,32 @@ package project.jeongha.vote.vo;
 public class VoteVO {
 
 	//투표 번호
-	private String v_Num;
-	//투표 제목
-	private String v_Content;
-	//시작일
-	private String v_Start;
-	//마감일
-	private String v_End;
-	//보기번호
-	private String vd_Num;
-	//보기내용
-	private String vd_Content;
-	//협업공간ID
 	private String c_Id;
-	//회원아이디
+	private String v_Num;
+	private String v_Content;
+	private String v_Start;
+	private String v_End;
 	private String mem_Id;
-	//투표제목
-	private String v_Name;
-	//작성일
 	private String v_Date;
-	//투표상태
+	private String v_Name;
 	private String vs_Num;
-	//투표 주제
 	private String v_Subject;
+	private String v_Count;
 	
 	
 	
+	
+	private String vd_Num;
+	private String vd_Content;
+	
+	
+	
+	public String getV_Count() {
+		return v_Count;
+	}
+	public void setV_Count(String v_Count) {
+		this.v_Count = v_Count;
+	}
 	public String getVd_Num() {
 		return vd_Num;
 	}

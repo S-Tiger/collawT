@@ -447,7 +447,7 @@ public class MemberControllerImpl implements MemberController {
 	//			System.out.println("아이디 없음");
 				service.memberJoinApi(member);
 				session.setAttribute("member", member);
-				return "/main/index";
+				return "redirect:/main";
 				
 			} else {
 
@@ -459,7 +459,7 @@ public class MemberControllerImpl implements MemberController {
 				session.setAttribute("member", memberVO);
 				//model.addAttribute("result", apiResult);
 
-				return "/main/index";
+				return "redirect:/main";
 			}
 		}
 
@@ -519,7 +519,7 @@ public class MemberControllerImpl implements MemberController {
 				System.out.println("아이디 없음");
 				service.memberJoinApiGoogle(member);
 				session.setAttribute("member", member);
-				return "/main/index";
+				return "redirect:/main";
 			} else {
 				
 				System.out.println("아이디가 있음");
@@ -528,7 +528,7 @@ public class MemberControllerImpl implements MemberController {
 				session.setAttribute("member", memberVO);
 
 			}
-			return "/main/index";
+			return "redirect:/main";
 		}
 
 	

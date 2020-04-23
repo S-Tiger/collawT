@@ -197,58 +197,58 @@ public class MemberServiceImpl implements MemberService {
 			msg += "<input type='hidden' name='mem_Id' value='" + memberVO.getMem_Id() + "'>";
 			msg += "<input type='hidden' name='mem_Key' value='" + memberVO.getMem_Key() + "'>";
 			msg += "<input type='submit' value='인증'></form><br/></div>";
-			msg +=" \"  <html>\"\n" + 
-					"  + \" <head>\"\n" + 
-					"  + \" <link rel=stylesheet type=text/css href=URL/com/yani2.css>\"\n" + 
-					"  + \" </head>\"\n" + 
-					"  + \" <body bgcolor=white background=\\\"URL/images/music_mail/leaf.gif\\\">\"\n" + 
-					"  + \" <table width=100% height=100% style=\\\"line-height:100%; margin-top:0; margin-bottom:0;\\\" border=0 cellpadding=0 cellspacing=0>\"\n" + 
-					"  + \"  <tr>\"\n" + 
-					"  + \"   <td width=100% height=100% align=center valign=center>\"\n" + 
-					"  + \"    <table style=\\\"line-height:100%; margin-top:0; margin-bottom:0;\\\" bgcolor=black border=0 cellpadding=2 cellspacing=0 width=442>\"\n" + 
-					"  + \"     <tr>\"\n" + 
-					"  + \"      <td>\"\n" + 
-					"  + \"       <table style=\\\"line-height:100%; margin-top:0; margin-bottom:0;\\\" border=0 cellpadding=0 cellspacing=0 width=440>\"\n" + 
-					"     + \"        <tr>\"\n" + 
-					"     + \"         <td width=100%><img src=\\\"URL/images/music_mail/70_top.gif\\\" width=440 height=105 border=0></td>\"\n" + 
-					"     + \"        </tr>\"\n" + 
-					"  + \"        <tr>\"\n" + 
-					"  + \"         <td width=100%>\"\n" + 
-					"  + \"          <table border=0 cellpadding=0 cellspacing=0 width=100%>\"\n" + 
-					"  + \"           <tr>\"\n" + 
-					"  + \"            <td width=27 height=188 background=\\\"URL/images/music_mail/70_left.gif\\\"></td>\"\n" + 
-					"        + \"            <td width=383 height=188 bgcolor=#FFEB9C valign=top>to. \" + fc.a2k(name) + \"<br>\"\n" + 
-					"        +              bodys + \"<br><br><br>\"\n" + 
-					"        + \"             ----------------------------------------------------------------------------\"\n" + 
-					"        + \"             <br>\"\n" + 
-					"        + \"             가수 :\" + music_title + \"<br>\"\n" + 
-					"        + \"             제목 :\" + music_name\n" + 
-					"        + \"            </td>\"\n" + 
-					"        + \"            <td width=30 height=188 background=\\\"URL/images/music_mail/70_right.gif\\\"></td>\"\n" + 
-					"        + \"           </tr>\"\n" + 
-					"        + \"          </table>\"\n" + 
-					"        + \"         </td>\"\n" + 
-					"        + \"        </tr>\"\n" + 
-					"  + \"        <tr>\"\n" + 
-					"  + \"         <td width=100%>\"\n" + 
-					"  + \"          <table border=0 cellpadding=0 cellspacing=0 width=100%>\"\n" + 
-					"  + \"           <tr>\"\n" + 
-					"  + \"            <td><img src=\\\"URL/images/music_mail/70_bottom1.gif\\\" width=200 height=160 border=0></td><td><img src=\\\"URL/images/music_mail/70_bottom2.gif\\\" width=240 height=160 border=0></td>\"\n" + 
-					"  + \"           </tr>\"\n" + 
-					"  + \"          </table>\"\n" + 
-					"  + \"         </td>\"\n" + 
-					"  + \"        </tr>\"\n" + 
-					"  + \"       </table>\"\n" + 
-					"  + \"      </td>\"\n" + 
-					"  + \"     </tr>\"\n" + 
-					"  + \"    </table>\"\n" + 
-					"  + \"   </td>\"\n" + 
-					"  + \"  </tr>\"\n" + 
-					"  + \" </table>\"\n" + 
-					"  + \" <div style=\\\"display:none; left:-1000px; top:-1000px\\\">\"\n" + 
-					"  + \" </div>\"\n" + 
-					"  + \" </body>\"\n" + 
-					"  + \" </html>\";";
+//			msg +=" \"  <html>\"\n" + 
+//					"  + \" <head>\"\n" + 
+//					"  + \" <link rel=stylesheet type=text/css href=URL/com/yani2.css>\"\n" + 
+//					"  + \" </head>\"\n" + 
+//					"  + \" <body bgcolor=white background=\\\"URL/images/music_mail/leaf.gif\\\">\"\n" + 
+//					"  + \" <table width=100% height=100% style=\\\"line-height:100%; margin-top:0; margin-bottom:0;\\\" border=0 cellpadding=0 cellspacing=0>\"\n" + 
+//					"  + \"  <tr>\"\n" + 
+//					"  + \"   <td width=100% height=100% align=center valign=center>\"\n" + 
+//					"  + \"    <table style=\\\"line-height:100%; margin-top:0; margin-bottom:0;\\\" bgcolor=black border=0 cellpadding=2 cellspacing=0 width=442>\"\n" + 
+//					"  + \"     <tr>\"\n" + 
+//					"  + \"      <td>\"\n" + 
+//					"  + \"       <table style=\\\"line-height:100%; margin-top:0; margin-bottom:0;\\\" border=0 cellpadding=0 cellspacing=0 width=440>\"\n" + 
+//					"     + \"        <tr>\"\n" + 
+//					"     + \"         <td width=100%><img src=\\\"URL/images/music_mail/70_top.gif\\\" width=440 height=105 border=0></td>\"\n" + 
+//					"     + \"        </tr>\"\n" + 
+//					"  + \"        <tr>\"\n" + 
+//					"  + \"         <td width=100%>\"\n" + 
+//					"  + \"          <table border=0 cellpadding=0 cellspacing=0 width=100%>\"\n" + 
+//					"  + \"           <tr>\"\n" + 
+//					"  + \"            <td width=27 height=188 background=\\\"URL/images/music_mail/70_left.gif\\\"></td>\"\n" + 
+//					"        + \"            <td width=383 height=188 bgcolor=#FFEB9C valign=top>to. \" + fc.a2k(name) + \"<br>\"\n" + 
+//					"        +              bodys + \"<br><br><br>\"\n" + 
+//					"        + \"             ----------------------------------------------------------------------------\"\n" + 
+//					"        + \"             <br>\"\n" + 
+//					"        + \"             가수 :\" + music_title + \"<br>\"\n" + 
+//					"        + \"             제목 :\" + music_name\n" + 
+//					"        + \"            </td>\"\n" + 
+//					"        + \"            <td width=30 height=188 background=\\\"URL/images/music_mail/70_right.gif\\\"></td>\"\n" + 
+//					"        + \"           </tr>\"\n" + 
+//					"        + \"          </table>\"\n" + 
+//					"        + \"         </td>\"\n" + 
+//					"        + \"        </tr>\"\n" + 
+//					"  + \"        <tr>\"\n" + 
+//					"  + \"         <td width=100%>\"\n" + 
+//					"  + \"          <table border=0 cellpadding=0 cellspacing=0 width=100%>\"\n" + 
+//					"  + \"           <tr>\"\n" + 
+//					"  + \"            <td><img src=\\\"URL/images/music_mail/70_bottom1.gif\\\" width=200 height=160 border=0></td><td><img src=\\\"URL/images/music_mail/70_bottom2.gif\\\" width=240 height=160 border=0></td>\"\n" + 
+//					"  + \"           </tr>\"\n" + 
+//					"  + \"          </table>\"\n" + 
+//					"  + \"         </td>\"\n" + 
+//					"  + \"        </tr>\"\n" + 
+//					"  + \"       </table>\"\n" + 
+//					"  + \"      </td>\"\n" + 
+//					"  + \"     </tr>\"\n" + 
+//					"  + \"    </table>\"\n" + 
+//					"  + \"   </td>\"\n" + 
+//					"  + \"  </tr>\"\n" + 
+//					"  + \" </table>\"\n" + 
+//					"  + \" <div style=\\\"display:none; left:-1000px; top:-1000px\\\">\"\n" + 
+//					"  + \" </div>\"\n" + 
+//					"  + \" </body>\"\n" + 
+//					"  + \" </html>\";";
 
 		} else if (div.equals("find_pw")) {
 			subject = "CollawT 임시 비밀번호 입니다.";

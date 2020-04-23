@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import project.jeongha.vote.dao.EVoteDAO;
 import project.jeongha.vote.dao.EVoteDAOImpl;
 import project.jeongha.vote.vo.Criteria;
+import project.jeongha.vote.vo.VoteVO;
 import project.notify.dao.NotifyDAOImpl;
 
 
@@ -25,14 +26,19 @@ public class EVoteServiceImpl implements EVoteService {
 	
 	//
 	
-	//글 등록
+	//투표 제목 및 
 	@Override
 	public void  voteInsert(Map map) {
 		int result = evoteDAO.voteInsert(map);
 		System.out.println("!!!!!!!!!!!!!!!!!11cmap service"+map);
 		
 	}
-	
+	//항목 
+	@Override
+	public void votedInsert(Map map) {
+		evoteDAO.votedInsert(map);
+		
+	}
 	
 	
 	//목록 조회 페이징
@@ -50,21 +56,21 @@ public class EVoteServiceImpl implements EVoteService {
 	
 	//게시글 조회
 	@Override
-	public Map<String, Object> issueRead(String i_Num) {
-		return evoteDAO.issueRead(i_Num);
+	public Map<String, Object> voteRead(String v_Num) {
+		return evoteDAO.voteRead(v_Num);
 		
 	}
 
 	//글 삭제
 	@Override
-	public void issueDelete(String i_Num) throws Exception {
-		evoteDAO.issueDelete(i_Num);
+	public void voteDelete(String v_Num) throws Exception {
+		evoteDAO.voteDelete(v_Num);
 	}
 
-	//글 수정
+//	//글 수정
 //	@Override
-//	public void issueUpdate(IssueVO issueVO) throws Exception {
-//		evoteDAO.issueUpdate(issueVO);
+//	public void voteUpdate(VoteVO voteVO) throws Exception {
+//		evoteDAO.voteUpdate(voteVO);
 //	}
 	
 	//이슈그룹 조회
@@ -91,16 +97,25 @@ public class EVoteServiceImpl implements EVoteService {
 	
 	//협업공간 내 멤버 조회
 	@Override
-	public List<Map> chargerRead(String i_Num) {
-		return evoteDAO.chargerRead(i_Num);
+	public List<Map> chargerRead(String v_Num) {
+		return evoteDAO.chargerRead(v_Num);
 		
 	}
 	
 	//이슈 담당자 수정(삭제 후 다시 삽입)
 	@Override
-	public void chargerDelete(String i_Num) throws Exception {
-		evoteDAO.chargerDelete(i_Num);
+	public void chargerDelete(String v_Num) throws Exception {
+		evoteDAO.chargerDelete(v_Num);
 	}
+	@Override
+	public Map<String, Object> voteInfo(Map<String, Object> voteVO) throws Exception {
+		Map<String, Object> voteInfo = evoteDAO.voteInfo(voteVO);
+		return voteInfo;
+	}
+
+
+
+
 	
 	
 	//협업공간 조회

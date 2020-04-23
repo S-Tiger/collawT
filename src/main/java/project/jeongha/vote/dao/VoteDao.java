@@ -8,5 +8,6 @@ import project.jeongha.vote.vo.VoteVO;
 public interface VoteDao {
 	public int voteInsert(Map<String,Object> v_Info);
 	public int votedInsert(Map<String,Object> vd_Info);
-	public List<VoteVO> voteList() throws Exception;
+	public List<Map> voteList() throws Exception ;
+	public List<Map> votedList() throws Exception ;
 }

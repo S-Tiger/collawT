@@ -79,9 +79,13 @@ public class VoteControllerImpl implements VoteController {
 	public ModelAndView voteList(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView("/vote/vote");
 		//c_Id 협업공간 아이디 필요
-		List<VoteVO> voteList =voteService.voteList();
-//		List<VoteVO> votedList 
+		//투표 제목
+		List<Map> voteList =voteService.voteList();
+		//투표보기 리스트
+		List<Map> votedList =voteService.votedList(); 
+		
 		mav.addObject("voteList", voteList);
+		mav.addObject("votedList",votedList);
 		
 		return mav;
 	}

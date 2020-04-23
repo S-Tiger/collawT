@@ -15,6 +15,8 @@
 		<result property="v_Date" column="v_Date" />		
 		<result property="v_Name" column="v_Name" />
 		<result property="vs_Num" column="vs_Num" />
+		<result property="v_Subject" column="v_Subject" />
+		<result property="v_Count" column="v_Count" />
 	</resultMap>
 	
 	<resultMap id="voteResult02" type="java.util.HashMap">
@@ -29,6 +31,8 @@
 		<result property="v_Name" column="v_Name" />
 		<result property="vs_Num" column="vs_Num" />
 		<result property="vs_Name" column="vs_Name" />
+		<result property="v_Subject" column="v_Subject" />
+		<result property="v_Count" column="v_Count" />
 	</resultMap>
 	
 	
@@ -70,26 +74,30 @@
 		<selectKey resultType="string" keyProperty="v_Num" order="BEFORE">
         SELECT vote_seq.nextval as vote_seq FROM dual        
     	</selectKey>   
-		insert into issue(v_Num, c_Id, v_Name, v_Content, v_Date, mem_Id, v_Start, v_End, vs_Num)
+		insert into vote(v_Num, c_Id, v_Name, v_Content, v_Date, mem_Id, v_Start, v_End, vs_Num, v_Subject, v_Count)
 		values(#{v_Num}, #{c_Id}, #{v_Name}, #{v_Content} ,  
 		(select to_char(sysdate, 'YYYY/MM/DD/ HH24:MI:SS') from dual)
-		 , #{mem_Id}, #{v_Start}, #{v_End}, #{vs_Num})
+		 , #{mem_Id}, #{v_Start}, #{v_End}, #{vs_Num},#{v_Subject}, #{v_Count} )
+	</insert>
+	
+	
+	<insert id="votedInsert" parameterType="java.util.Map">
+	insert into voted(v_num, vd_num, vd_content, c_id)
+		values( #{v_Num}, #{vd_Num}, #{vd_Content}, #{c_Id}) 
 	</insert>
 	
 	
 
 
 	<!-- 게시글 조회 -->
-	<select id="issueRead"  parameterType="String" resultMap="voteResult02"> 
+	<select id="voteRead"  parameterType="String" resultMap="voteResult02"> 
       <![CDATA[
-        select I.i_Num, I.c_Id, I.i_Name, I.i_Content, I.i_Date, I.mem_Id, M.mem_name, I.i_Start, I.i_End, I.ig_Num, IG.ig_Name 
-		from issue I, member M, issue_group IG
-		where I.mem_Id = M.mem_Id
-		and I.ig_Num = IG.ig_Num
-        and I.i_Num=#{i_Num}
+        select V.v_Num, V.c_Id, V.v_Name, V.v_Content, V.v_Date, V.mem_Id, V.v_Start, V.v_End, V.v_Subject, v.vs_num, v.v_count
+		from vote V
+		where V.v_Num=#{v_Num}
       ]]>
 	</select>
-
+<!-- where and V.v_Num=#{v_Num} -->
 	<!-- 게시물 삭제 -->
 	<delete id="issueDelete" parameterType="String">
 		DELETE

@@ -130,6 +130,9 @@
 													<p style="font-size: small;margin-bottom: 0px;">  ${voteList.mem_Id }</p>
 													<p style="font-size: xx-small;margin-bottom: 0px;">${voteList.v_Start }</p>
 													<p style="font-size: xx-small;margin-bottom: 0px;">${voteList.vd_Content }</p>
+													<c:forEach var="votedList" items="${votedList}">
+													<p> ${votedList.vd_Content }</p>
+													</c:forEach>
 												</div>
 											</div>
 										</c:forEach>

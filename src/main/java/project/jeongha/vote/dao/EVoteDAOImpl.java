@@ -22,10 +22,17 @@ public class EVoteDAOImpl implements EVoteDAO {
 	public int voteInsert(Map map) {
 		int result;
 		result = sqlSession.update("voteResult.voteInsert", map);
-		System.out.println("!!!!!!!!!!!!!!!!!11cmap dao"+map);
+//		 sqlSession.selectOne("voteResult.voteInsert", map);
 		return result;
 	}
-
+	//항목들 입력
+	@Override
+	public int votedInsert(Map map) {
+		int result = sqlSession.insert("voteResult.votedInsert", map);
+		return result;
+	}
+	
+	
 	// 글 목록 페이징
 	@Override
 	public List<Map> searchList(Criteria cri) throws DataAccessException {
@@ -43,14 +50,14 @@ public class EVoteDAOImpl implements EVoteDAO {
 
 	// 게시글 조회
 	@Override
-	public Map<String, Object> issueRead(String i_Num) {
-		return sqlSession.selectOne("voteResult.issueRead", i_Num);
+	public Map<String, Object> voteRead(String v_Num) {
+		return sqlSession.selectOne("voteResult.voteRead", v_Num);
 
 	}
 
 	// 글 삭제
 	@Override
-	public void issueDelete(String i_Num) throws Exception {
+	public void voteDelete(String i_Num) throws Exception {
 		sqlSession.delete("voteResult.issueDelete", i_Num);
 
 	}
@@ -97,6 +104,14 @@ public class EVoteDAOImpl implements EVoteDAO {
 		sqlSession.delete("issue.chargerDelete", i_Num);
 
 	}
+	//v_num가져오기
+	@Override
+	public Map<String, Object> voteInfo(Map<String, Object> voteInfo) throws Exception {
+		Map<String, Object> result = sqlSession.selectOne("voteResult.v_num", voteInfo);
+		return result;
+	}
+
+
 	
 	
 	// 협업공간 조회

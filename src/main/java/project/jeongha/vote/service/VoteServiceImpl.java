@@ -28,9 +28,15 @@ public class VoteServiceImpl implements VoteService{
 	}
 	//투표목록
 	@Override
-	public List<VoteVO> voteList() throws Exception {
-		List<VoteVO> result =voteDao.voteList(); 
+	public List<Map> voteList() throws Exception {
+		List<Map> result =voteDao.voteList(); 
 		return result;
+	}
+	//투표 보기들 리스트
+	@Override
+	public List<Map> votedList() throws Exception {
+		List<Map> votedList =voteDao.votedList();
+		return votedList;
 	}
 
 	

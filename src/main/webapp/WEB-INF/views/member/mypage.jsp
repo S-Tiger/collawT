@@ -190,8 +190,8 @@ if ('${msg}' == 'success') {
 							</div>
 
 						</div>
-						<div class="card-body">
-							<div id="left" style="padding: 10px; margin-right: 10px;">
+						<div class="card-body" style="padding-top: 0px;padding-bottom: 0px;">
+							<div id="left" style="padding: 10px;margin-right: 10px;height: 194px;">
 								<div class="card card-primary card-outline"
 									style="border-top: white">
 									<div class="card-body box-profile"
@@ -219,7 +219,7 @@ if ('${msg}' == 'success') {
 								class="form-horizontal">
 								<input type="hidden" name="mem_Id" value="${member.mem_Id}">
 								<div class="row">
-									<div class="col-12" style="padding: 5px;">
+									<div class="col-12" style="padding: 5px;height: 48px;">
 										<div class="filebox">
 											<label for="imageFile" style="font-weight: 400; height: 38px"
 												class="btn btn-success float-right">프로필 사진 선택</label> <input
@@ -257,7 +257,7 @@ if ('${msg}' == 'success') {
 							<!-- 비밀번호 변경 -->
 
 							<div class="card-body"
-								style="padding-top: 5px;padding-bottom: 0px;height: 165px;">
+								style="padding-top: 5px; padding-bottom: 0px; height: 165px;">
 								<div class="form-group">
 									<form id="pwForm" action="/member/update_pw" method="post">
 										<input type="hidden" name="mem_Id" value="${member.mem_Id}">
