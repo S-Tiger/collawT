@@ -111,12 +111,12 @@ public class MemberControllerImpl implements MemberController {
 		return "/member/forgotPwd";
 	}
 
-	// 비밀번호 찾기 페이지
+	//테스트중!
 	@Override
-	@GetMapping("/outMember")
+	@GetMapping("/signupTest")
 	public String outMember() {
 		System.out.println("회원탈퇴 찾기 페이지");
-		return "/member/outMember";
+		return "/member/signupTest";
 	}
 
 	// 마이페이지

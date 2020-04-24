@@ -105,7 +105,7 @@
 	});
 </script>
 </head>
-<body class="hold-transition register-page" style="background:white">
+<body class="hold-transition register-page" >
 <div class="register-box">
   <div class="register-logo">
     <a href="/"><b>Collaw</b>T</a>
@@ -117,26 +117,23 @@
 
       <form action="/member/join" method="post" id="joinForm">
         <div class="input-group mb-3">
-          <input type="text" name="mem_Name" class="form-control" placeholder="콜라우티에서 사용할 이름 또는 닉네임">
+          <input type="text" name="mem_Name" class="form-control" placeholder="이름 또는 닉네임">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
             </div>
           </div>
         </div>
-        
         <div class="input-group mb-3">
-          <input type="email" name="mem_Id" id="mem_Id" class="form-control" placeholder="아이디는 이메일 형식입니다">
+          <input type="email" name="mem_Id" id="mem_Id" class="form-control" placeholder="이메일 형식 아이디">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
              </div>
           </div>
         </div>
-        <!-- <input type="button" id="checkBtn" onClick="" value="중복체크하기"> -->
-        <!-- 아이디 중복값  -->
         <div class="input-group mb-3">
-          <input type="password" id="pw" name="mem_Pwd" class="form-control" placeholder="비밀번호">
+          <input type="password" id="mem_Pwd0" name="mem_Pwd" class="form-control" placeholder="비밀번호">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -144,7 +141,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" id="pw2" class="form-control" placeholder="비밀번호 확인">
+          <input type="password" id="mem_Pwd1" class="form-control" placeholder="비밀번호 확인">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -158,25 +155,14 @@
               <input type="checkbox" id="agreeTerms" name="terms" >
               <label for="agreeTerms">
               회원가입 <a href="#">동의</a>
-              <script type="text/javascript">
-              $(document).ready(function(){
-            	    $("#agreeTerms").change(function(){
-            	        if($("#agreeTerms").is(":checked")){
-            	            alert("회원가입에 동의해주셔서 감사합니다.");
-            	        }else{
-            	            alert("회원가입에 동의하시지 않으셔서 회원가입이 불가능 합니다. 회원가입 동의 체크를 해주세요.");
-            	        }
-            	    });
-            	});
-              
-              </script>
               </label>
             </div>
           </div>
           <!-- /.col -->
         <div class="col-4">
-            <button type="submit" id="joinBtn" class="btn btn-primary btn-block" style="float:right" >회원가입</button>
+            <button type="submit" class="btn btn-primary btn-block">회원가입</button>
           </div>
+          <!-- /.col -->
         </div>
       </form>
 
