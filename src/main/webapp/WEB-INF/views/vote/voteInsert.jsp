@@ -51,11 +51,9 @@ span[name="chargerspan"] {
 		
 		
 		//캘린더 기능
-		 $('#v_Period').daterangepicker({
-			locale: { format: 'YYYY/MM/DD'}
-		 })
-		 
-	})
+          $('#v_Period').daterangepicker({
+            locale: { format: 'YYYY-MM-DD'}
+          })
 	
 	function periodSetting(){
 		if($("#periodNull").is(":checked")==true){

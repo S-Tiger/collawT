@@ -190,7 +190,7 @@ span[name="chargerspan"] {
               
                 <div class="form-group">
                 <label for="inputName">제목</label>
-                <input type="text" id = "v_Name" name="v_Name" class="form-control">
+                <input type="text" id = "v_Name" name="v_Name" class="form-control" value="${voteRead.v_Subject}">
               </div>
               
               <div class="form-group">
@@ -252,13 +252,19 @@ span[name="chargerspan"] {
               </div>
               
                <!-- 투표 항목 -->
-              <div class="form-group">
-                <label for="inputName">투표 항목</label>
+             <div class="form-group">
+                <label for="inputName">투표 항목1</label>
                 <a href="#"><button type="button" class="btn btn-block btn-default btn-xs float-right" style="width:80px; margin:1px">항목 추가</button></a>
-                <input type="text" id = "vd_Content" name="vd_Content" class="form-control" value="${voteUpdate.v_Subject}">
+                 <input type="hidden" id = "vd_Num" name="vd_Num" class="form-control" value="1">
+                <input type="text" id = "vd_Content" name="vd_Content" class="form-control">
                 
               </div>
-            
+              <div class="form-group">
+                <label for="inputName">투표 항목2</label>
+                <input type="hidden" id = "vd_Num" name="vd_Num" class="form-control" value="2">
+                <input type="text" id = "vd_Content" name="vd_Content" class="form-control">
+                
+              </div>
             
             <!-- 답변 선택 수 -->
             <div class="form-group">

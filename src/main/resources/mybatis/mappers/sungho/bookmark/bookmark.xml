@@ -58,7 +58,7 @@
       <![CDATA[
 		select count(*) from BOOKMARK
 		where mem_Id = #{mem_Id}
-		and i_Num = #{i_Num}
+		
 		
 		]]>
 	</select>

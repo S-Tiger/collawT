@@ -23,10 +23,10 @@ public interface EVoteController {
 	public String issueInsert(VoteVO voteVO, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView voteInsert(String c_Id, HttpSession session);
 	public ModelAndView voteRead(String i_Num, HttpServletRequest request, HttpServletResponse response) throws Exception ;
-	public String voteDelete(String c_Id, String i_Num, VoteVO voteVO) throws Exception;
-	public String voteUpdate(String c_Id, String i_Num, VoteVO voteVO, Model model)  throws Exception ;
+	public String voteDelete(String c_Id, String v_Num, VoteVO voteVO) throws Exception;
+	public String voteUpdate(String c_Id, String v_Num, VoteVO voteVO, Model model)  throws Exception ;
 	public String voteUpdate(VoteVO voteVO, HttpServletRequest request, HttpServletResponse response) throws Exception;
-
+	public String voter(String v_Num, String c_Id, String vd_Num, VoteVO voteVO, HttpSession session ) ;
 	
 }
 

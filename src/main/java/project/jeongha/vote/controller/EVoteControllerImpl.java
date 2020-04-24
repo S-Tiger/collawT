@@ -135,7 +135,7 @@ public class EVoteControllerImpl implements EVoteController {
 		
 		
 		
-		System.out.println("!!!!!!!!!!!!!!!!!11cmapcontroller"+cmap);
+		//System.out.println("!!!!!!!!!!!!!!!!!11cmapcontroller"+cmap);
 		
 		
 		
@@ -195,22 +195,23 @@ public class EVoteControllerImpl implements EVoteController {
 	//게시글 수정 페이지로 이동
 	@Override
 	@GetMapping("/update")
-	public String voteUpdate(String c_Id, String i_Num, VoteVO voteVO, Model model) throws Exception {
-		
-		
-		
+	public String voteUpdate(String c_Id, String v_Num, VoteVO voteVO, Model model) throws Exception {
+		System.out.println("================controller===============");
+		System.out.println("c_Id: "+c_Id);
+		System.out.println("c"+v_Num);
+		System.out.println("=========================================");
 		List<Map> igRead = evoteService.igRead();
 		List<Map> comemList = evoteService.comemRead(c_Id);
-		List<Map> chargerList = evoteService.chargerRead(i_Num);
+		//List<Map> chargerList = evoteService.chargerRead(v_Num);
 		
-		model.addAttribute("issueUpdate",evoteService.voteRead(voteVO.getV_Num()) );
+		model.addAttribute("voteUpdate",evoteService.voteRead(voteVO.getV_Num()) );
 		model.addAttribute("igRead",igRead);
 		model.addAttribute("c_Id", c_Id);
 		model.addAttribute("comemList", comemList);
-		model.addAttribute("chargerList", chargerList);
+		//model.addAttribute("chargerList", chargerList);
 
 		
-		return "/vote/issueUpdate";
+		return "/vote/voteUpdate";
 	}
 //	
 	//이슈 담당자 목록 가져오기
@@ -317,6 +318,23 @@ public class EVoteControllerImpl implements EVoteController {
 //		}
 //		return null;
 //	}	
+
+
+	@Override
+	@GetMapping("/insertVoter")
+	public String voter(String v_Num, String c_Id, String vd_Num, VoteVO voteVO, HttpSession session) {
+		Map<String, Object> member = new HashMap<String,Object>();
+		member = (Map<String, Object>) session.getAttribute("member");
+		System.out.println("=====controller insertVoter=====");
+		System.out.println("c_Id: "+c_Id);
+		System.out.println("vd_Num: "+vd_Num);
+		System.out.println("v_Num: "+v_Num);
+		System.out.println("member: "+member);
+		System.out.println("================================");
+		
+		
+		return "project:/vote/voteRead";
+	}
 
 }
 
