@@ -121,7 +121,6 @@
 				type : 'get',
 				success : function(data) {
 					successCallback(data);
-					console.log(data)
 				}
       });  
       }
