@@ -30,7 +30,7 @@ $(document).ready(function() {
 	bookcheck();
 	
 	
-	console.log("22222222222"+checkbook);
+	//console.log("22222222222"+checkbook);
 
 
 
@@ -250,6 +250,21 @@ $(document).ready(function() {
 			
 		$('#replyContent'+r_Num).html(str);	
 	}
+	
+	//클립보드로 url 복사
+
+
+	function urlClipCopy() {
+		var tempElem = document.createElement('textarea');
+		  tempElem.value = window.document.location.href; 
+		  document.body.appendChild(tempElem);
+
+		  tempElem.select();
+		  document.execCommand("copy");
+		  document.body.removeChild(tempElem);
+		  alert("URL이 클립보드에 복사되었습니다. CTRL+V하시면 URL이 입력됩니다");
+
+	}
 
 	
 	
@@ -305,7 +320,7 @@ $(document).ready(function() {
                             
                         
                             <li><a class="dropdown-item" data-needpopup-show="#add-popup"><small>다른 협업공간으로 글 복사</small></a></li>
-                            <li><a class="dropdown-item" href="#"><small>URL 복사</small></a></li>
+                            <li><a class="dropdown-item" href="javascript:urlClipCopy()"><small>URL 복사</small></a></li>
                           </ul>
                         </div>
                         <!-- 본인만 글 수정, 삭제 가능-->
