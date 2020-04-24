@@ -113,10 +113,10 @@ public class MemberControllerImpl implements MemberController {
 
 	//테스트중!
 	@Override
-	@GetMapping("/signupTest")
+	@GetMapping("/signupTest1")
 	public String outMember() {
 		System.out.println("회원탈퇴 찾기 페이지");
-		return "/member/signupTest";
+		return "/member/signupTest1";
 	}
 
 	// 마이페이지

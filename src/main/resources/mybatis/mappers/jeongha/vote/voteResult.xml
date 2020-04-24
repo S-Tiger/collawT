@@ -95,13 +95,18 @@
 		#{vs_Num},#{v_Subject}, #{v_Count} )
 	</insert>
 
-
+	<!-- 투표보기란 입력 -->
 	<insert id="votedInsert" parameterType="java.util.Map">
-		insert into voted(v_num,
-		vd_num, vd_content, c_id)
-		values( #{v_Num},
-		#{vd_Num}, #{vd_Content},
-		#{c_Id})
+		insert into voted(v_num, vd_num, vd_content, c_id)
+		values( #{v_Num}, #{vd_Num}, #{vd_Content}, #{c_Id})
+	</insert>
+	
+	<!-- 투표자 입력 -->
+	<insert id="voterInsert" parameterType="java.util.Map">
+	   <![CDATA[
+		insert into voter(v_num, vd_num, mem_Id, c_id)
+		values( #{v_Num}, #{vd_Num}, #{mem_Id},	#{c_Id} )
+		]]>
 	</insert>
 
 

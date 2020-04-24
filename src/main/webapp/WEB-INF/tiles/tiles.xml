@@ -22,9 +22,10 @@
 	<definition name="/member/signup" extends="defaultLayout">
 		<put-attribute name="content" value="/WEB-INF/views/member/signup.jsp" />
 	</definition>
-	<definition name="/member/signupTest" extends="defaultLayout">
-		<put-attribute name="content" value="/WEB-INF/views/member/signupTest.jsp" />
+	<definition name="/member/signupTest1" extends="defaultLayout">
+		<put-attribute name="content" value="/WEB-INF/views/member/signupTest1.jsp" />
 	</definition>
+	
 	<definition name="/member/forgotPwd" extends="defaultLayout">
 		<put-attribute name="content" value="/WEB-INF/views/member/forgotPwd.jsp" />
 	</definition>

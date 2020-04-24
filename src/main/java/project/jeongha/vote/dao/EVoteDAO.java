@@ -13,6 +13,7 @@ public interface EVoteDAO {
 //
 	public int voteInsert(Map map);
 	public int votedInsert(Map map);
+	public int voterInsert(Map map);
 	public List<Map> searchList(Criteria cri) throws DataAccessException;
 	public Map<String, Object> voteRead(String v_Num);
 	public void voteDelete(String i_Num) throws Exception;

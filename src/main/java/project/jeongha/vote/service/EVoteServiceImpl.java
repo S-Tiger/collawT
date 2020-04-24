@@ -30,7 +30,7 @@ public class EVoteServiceImpl implements EVoteService {
 	@Override
 	public void  voteInsert(Map map) {
 		int result = evoteDAO.voteInsert(map);
-		System.out.println("!!!!!!!!!!!!!!!!!11cmap service"+map);
+		//System.out.println("!!!!!!!!!!!!!!!!!11cmap service"+map);
 		
 	}
 	//항목 
@@ -117,6 +117,14 @@ public class EVoteServiceImpl implements EVoteService {
 	public Map<String, Object> voteInfo(Map<String, Object> voteVO) throws Exception {
 		Map<String, Object> voteInfo = evoteDAO.voteInfo(voteVO);
 		return voteInfo;
+	}
+	//투표자 입력
+	@Override
+	public void voterInsert(Map map) {
+		
+		int result = evoteDAO.voterInsert(map);
+		System.out.println("!!!!!!!!!!!!!!!!!11cmap service"+map);
+		
 	}
 
 

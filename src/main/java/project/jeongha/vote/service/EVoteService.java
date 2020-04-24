@@ -16,7 +16,7 @@ public interface EVoteService {
 //
 	public void  voteInsert(Map map);
 	public void  votedInsert(Map map);
-	
+	public void  voterInsert(Map map);
 	public List<Map> searchList(Criteria cri) throws Exception;
 	public Map<String, Object> voteRead(String v_Num);	
 	public void voteDelete(String v_Num) throws Exception;

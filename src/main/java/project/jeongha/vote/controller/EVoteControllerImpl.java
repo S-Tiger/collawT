@@ -322,18 +322,51 @@ public class EVoteControllerImpl implements EVoteController {
 
 	@Override
 	@GetMapping("/insertVoter")
-	public String voter(String v_Num, String c_Id, String vd_Num, VoteVO voteVO, HttpSession session) {
-		Map<String, Object> member = new HashMap<String,Object>();
-		member = (Map<String, Object>) session.getAttribute("member");
+	public ModelAndView voter(String v_Num, String c_Idd, String vd_Num, VoteVO voteVO, HttpSession session, Model model) throws Exception{
+		ModelAndView mav = new ModelAndView("redirect:/project/vote/read");
+		Map<String, Object> vote = evoteService.voteRead(v_Num);
+		List<Map> voted = evoteService.votedRead(v_Num);
+		//List<Map> list = appedixService.fileList(i_Num);
+		//List<Map> chargerList = evoteService.chargerRead(v_Num);
+		Map<String, Object> cowork = new HashMap<String,Object>();
+		cowork = (Map<String, Object>) session.getAttribute("pjt");
+		
+		String c_Id = (String) cowork.get("c_Id");
 		System.out.println("=====controller insertVoter=====");
-		System.out.println("c_Id: "+c_Id);
 		System.out.println("vd_Num: "+vd_Num);
 		System.out.println("v_Num: "+v_Num);
-		System.out.println("member: "+member);
+		System.out.println("c_Id: "+c_Id);
+		System.out.println("Model: "+voteVO.getMem_Id());
+		//System.out.println("member: "+member);
 		System.out.println("================================");
+		Map<String, Object> member = new HashMap<String,Object>();
+		member = (Map<String, Object>) session.getAttribute("member");
+	
+		String mem_Id = (String) member.get("mem_Id");
+		//String v_Name = voteVO.getV_Name();
+		//String v_Content = voteVO.getV_Content();
+		//String v_Start = voteVO.getV_Start();
+		//String v_End = voteVO.getV_End();
+		//String vs_Num = voteVO.getVs_Num();
+		//String v_Subject = voteVO.getV_Subject();
+		//String v_Count = voteVO.getV_Count();
+		Map<String, Object> cmap = new HashMap<String,Object>();
+		cmap.put("mem_Id", mem_Id);///
+		cmap.put("c_Id", c_Id);///
+		//cmap.put("v_Name", v_Name);///
+		cmap.put("v_Num",v_Num);///
+		//cmap.put("v_Start", v_Start);///
+		//cmap.put("v_End", v_End);///
+		cmap.put("vs_Num", vd_Num);///
+		//cmap.put("v_Subject",v_Subject);
+		//cmap.put("v_Count",v_Count);
 		
+		evoteService.voterInsert(cmap);
 		
-		return "project:/vote/voteRead";
+		mav.addObject("voteRead", vote);
+		mav.addObject("votedRead", voted);
+		
+		return mav;
 	}
 
 }

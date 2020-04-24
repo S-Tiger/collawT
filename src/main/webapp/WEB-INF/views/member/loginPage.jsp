@@ -147,7 +147,7 @@
 						</div>
 						<!-- /.col -->
 						<div class="col-4">
-							<button type="submit" class="btn btn-primary btn-block">로그인</button>
+							<button type="submit" class="btn btn-primary btn-block" style="white-space: nowrap; overflow: hidden; text-align: center">로그인</button>
 						</div>
 						<!-- /.col -->
 					</div>
@@ -162,7 +162,7 @@
 					<button type="button" id="loginBtn"
 						class="btn btn-block btn-danger">
 						<i class="fab fa-google-plus mr-2"></i>구글 로그인
-					</button>
+					</button> 
 				</div>
 				<!-- /.social-auth-links -->
 

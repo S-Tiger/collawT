@@ -26,7 +26,7 @@ public interface EVoteController {
 	public String voteDelete(String c_Id, String v_Num, VoteVO voteVO) throws Exception;
 	public String voteUpdate(String c_Id, String v_Num, VoteVO voteVO, Model model)  throws Exception ;
 	public String voteUpdate(VoteVO voteVO, HttpServletRequest request, HttpServletResponse response) throws Exception;
-	public String voter(String v_Num, String c_Id, String vd_Num, VoteVO voteVO, HttpSession session ) ;
+	public ModelAndView voter(String v_Num, String c_Id, String vd_Num, VoteVO voteVO, HttpSession session,Model model ) throws Exception;
 	
 }
 

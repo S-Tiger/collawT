@@ -16,7 +16,7 @@ public class EVoteDAOImpl implements EVoteDAO {
 	@Autowired
 	private SqlSession sqlSession;
 
-	// 글 입력
+	// 투표 입력
 	@Override
 	public int voteInsert(Map map) {
 		int result;
@@ -32,7 +32,7 @@ public class EVoteDAOImpl implements EVoteDAO {
 		return result;
 	}
 
-	// 글 목록 페이징
+	// 목록 페이징
 	@Override
 	public List<Map> searchList(Criteria cri) throws DataAccessException {
 
@@ -113,6 +113,15 @@ public class EVoteDAOImpl implements EVoteDAO {
 	@Override
 	public Map<String, Object> voteInfo(Map<String, Object> voteInfo) throws Exception {
 		Map<String, Object> result = sqlSession.selectOne("voteResult.v_num", voteInfo);
+		return result;
+	}
+	
+	//투표자 넣기
+	@Override
+	public int voterInsert(Map map) {
+		int result;
+		result = sqlSession.update("voteResult.voterInsert", map);
+		
 		return result;
 	}
 

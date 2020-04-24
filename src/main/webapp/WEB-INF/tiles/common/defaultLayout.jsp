@@ -9,11 +9,9 @@
 <title>협업툴 Collaw T - 간단하고 쉬운협업</title>
 </head>
 <body>
-<div id="container">
 		<div id="content">
 			<tiles:insertAttribute name="content" />
 		</div>
 
-	</div>
 </body>
 </html>

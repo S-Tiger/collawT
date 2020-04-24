@@ -315,7 +315,7 @@
 				<!-- Box Comment -->
 				<!-- 본문 부분~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-				<form name="readForm" role="form">
+				<form name="insertVoterForm" action="/project/vote/insertVoter" method="get" encType="UTF-8">
 
 					<div class="card card-widget">
 
@@ -425,7 +425,7 @@
 											<tr>
 												<td>
 													<!-- 투표 내용 --> <!--  상태 index -->
-													<form name="/project/vote/insertVoter" role="form">
+													
 														<c:forEach var="votedRead" items="${votedRead}" varStatus="status">
 															<div class="col-sm-6">
 																<!-- radio -->
@@ -438,7 +438,6 @@
 															</div>
 														</c:forEach>
 														<input type="submit" value="제출">
-													</form>
 												</td>
 											</tr>
 											<tr>
@@ -532,10 +531,9 @@
 								placeholder="댓글을 입력하세요"></textarea>
 
 
-							<small><a href="#" id="replyInsert_btn"
-								name="replyInsert_btn">입력</a></small> <input type="hidden" id="v_Num"
-								name="v_Num" value="${voteRead.v_Num}" /> <input type="hidden"
-								id="c_Id" name="c_Id" value="${voteRead.c_Id}" />
+							<small><a href="#" id="replyInsert_btn" name="replyInsert_btn">입력</a></small> 
+							<input type="hidden" id="v_Num" name="v_Num" value="${voteRead.v_Num}" /> 
+								<input type="hidden" id="c_Id" name="c_Id" value="${voteRead.c_Id}" />
 
 
 						</div>
