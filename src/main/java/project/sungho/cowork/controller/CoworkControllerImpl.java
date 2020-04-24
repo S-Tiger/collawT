@@ -50,6 +50,8 @@ public class CoworkControllerImpl implements CoworkController {
 		searchMap.put("mem_Id", mem_Id);	
 		
 		
+		System.out.println("공간------------------------------------------------------------------"+mem_Id);
+		
 		List<CoworkVO> list = coworkService.searchList(searchMap); //vo타입에 list를 생성하고 서비스에서 가져온 데이터를 list에 넣습니다
 		
 		model.addAttribute("coworklist", list); 

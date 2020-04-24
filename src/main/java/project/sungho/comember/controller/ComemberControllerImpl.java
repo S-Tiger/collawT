@@ -38,7 +38,7 @@ public class ComemberControllerImpl implements ComemberController {
 		HttpSession session = request.getSession();
 		
 		String mem_Id = (String)session.getAttribute("mem_Id");
-				
+		
 		searchMap.put("mem_Id", mem_Id);	
 		
 		List<Map> list = comemberService.searchList(searchMap); 

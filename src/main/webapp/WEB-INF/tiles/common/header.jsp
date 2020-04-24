@@ -476,7 +476,7 @@
 							</p>
 					</a></li>
 					
-					<li class="nav-item"><a href="/calendar/list"
+					<li class="nav-item"><a href="/calendar/main"
 						class="nav-link"> <i class="nav-icon fas fa-calendar-check"></i>
 							<p>
 								전체 캘린더 <span class="badge badge-info right"></span>
@@ -531,7 +531,7 @@
 
 <div id='bookmark-popup' class="needpopup">
 <div class="col-md-6" style="max-width: 100%;">
-<table class="table table-striped projects"><div style="margin-bottom: 10px;">
+<table class="table table-striped projects" style="white-space: nowrap; overflow: hidden;"><div style="margin-bottom: 10px;">
 <h4 class="m-0 text-dark" style="font-family: Recipekorea; max-width: 80%; display: contents;">북마크</h4></div>
 		<tr style="background-color: #dc3545; color: white;">
 			<td style="width:30%; vertical-align:top"><font size="3em"><b>협업공간명</b></font></td>
