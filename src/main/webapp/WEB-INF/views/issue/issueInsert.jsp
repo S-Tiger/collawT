@@ -56,7 +56,7 @@ span[name="chargerspan"] {
 		
 		//캘린더 기능
 		 $('#i_Period').daterangepicker({
-			locale: { format: 'YYYY/MM/DD'}
+			locale: { format: 'YYYY-MM-DD'}
 		 })
 		 
 		//파일첨부 ajax

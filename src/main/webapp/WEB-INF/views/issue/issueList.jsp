@@ -301,7 +301,7 @@
                  <c:forEach var="issueList" items="${issueList}" >	
                   <tr>
                   
-                      <td  style="width:10%; vertical-align:top"> 
+                      <td  style="width:5%; vertical-align:top"> 
                             <span style= "
 							<c:if test="${issueList.ig_Num == 1}">background-color:#6c757d;</c:if>
 							<c:if test="${issueList.ig_Num == 2}">background-color:#007bff;</c:if>
@@ -311,14 +311,26 @@
 							id="ig_Name" name="ig_Name" class="badge badge-success"><c:out  value="${issueList.ig_Name}" /></span>
 						
 						</td>
-					  <td style="width:60%">	
+						<td style="width:10%; vertical-align:top; text-align:center;"><font size="2em" color="#6c757d">${issueList.mem_Name}</font></td>
+					  <td style="width:50%">	
 					  <a href="/project/issue/read?c_Id=${issueList.c_Id}&i_Num=${issueList.i_Num}"> <font size="3em"><b>${issueList.i_Name}</b></font></a>
 					  <br>
-					  <font size="1em" color="#6c757d">이슈 담당자로 변경 예정</font>    
-					  </td>
+					  <c:set var="loop_flag" value="false" />
+ 					  <font size="1em" color="#6c757d"><i class="fas fa-user-friends"></i>&nbsp;&nbsp;담당자  : 
+ 					  <c:forEach var="chargerList" items="${chargerList}" >
+ 					 	 <c:if test="${not loop_flag }">
+		 					  <c:if test="${issueList.i_Num == chargerList.i_Num}">${chargerList.mem_Name} / </c:if>
+		 					  <c:if test="${issueList.i_Num != chargerList.i_Num}"> 미지정
+		 					 	 <c:set var="loop_flag" value="true" />
+		 					  </c:if>
+		 					  </c:if>
+ 					  </c:forEach>
+ 					  </font>    
+				  	  
+				  </td>
                       
                       <td style="width:30%; vertical-align:top"> <font size="2em" color="#6c757d"><i class="far fa-calendar-alt"></i>&nbsp;&nbsp;<c:if test="${issueList.i_Start == null}">기간 미설정</c:if>
-                      <c:if test="${issueList.i_Start != null}">${issueList.i_Start} - ${issueList.i_End}</c:if> 
+                      <c:if test="${issueList.i_Start != null}">${issueList.i_Start} ~ ${issueList.i_End}</c:if> 
                         </font>  </td>
                      
                    </tr>

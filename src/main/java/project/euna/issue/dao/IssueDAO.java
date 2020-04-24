@@ -25,5 +25,6 @@ public interface IssueDAO {
 	public List<Map> coRead(String mem_id);
 	public Map<String, Object> get_i_Num();
 	public int issueCopy(Map map) ;
+	public List<Map> chargerList(String c_Id);
 
 }

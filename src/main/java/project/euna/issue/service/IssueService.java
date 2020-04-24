@@ -26,5 +26,6 @@ public interface IssueService {
 	public void chargerDelete(String i_Num) throws Exception;
 	public List<Map> coRead(String mem_id);
 	public void  issueCopy(Map map);
+	public List<Map> chargerList(String c_Id);
 
 }

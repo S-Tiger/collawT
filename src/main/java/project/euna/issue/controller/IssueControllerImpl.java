@@ -72,11 +72,11 @@ public class IssueControllerImpl implements IssueController {
 	//글 목록 조회 페이징
 	@Override
 	@GetMapping("/list")
-	public ModelAndView searchList(Criteria cri, String c_Id, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView searchList(IssueVO issueVO, Criteria cri, String c_Id, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		
-		List<Map> list = issueService.searchList(cri);
-		PageMaker pageMaker = new PageMaker();
+		String i_Num = issueVO.getI_Num();
+			List<Map> list = issueService.searchList(cri);
+			PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(issueService.listCount(c_Id));
 		
@@ -84,11 +84,15 @@ public class IssueControllerImpl implements IssueController {
 		searchMap.put("c_Id", c_Id);
 		Map<String, Object>pjt = coworkService.searchMain(searchMap);
 		
+		List<Map> chargerList = issueService.chargerList(c_Id);
+		
+		
 		ModelAndView mav = new ModelAndView("issue/issueList");
 		mav.addObject("issueList", list);
 		mav.addObject("pageMaker", pageMaker);
 		
-		mav.addObject("pjt", pjt); 
+		 mav.addObject("chargerList", chargerList);
+		 mav.addObject("pjt", pjt); 
 		
 		
 		return mav;

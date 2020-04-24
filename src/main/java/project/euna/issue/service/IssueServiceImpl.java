@@ -119,5 +119,11 @@ public class IssueServiceImpl implements IssueService {
 		
 	}
 	
+	//글 목록 조회 시  이슈 담당자 화면에 뿌리기 용
+	@Override
+	public List<Map> chargerList(String c_Id) {
+		return issueDAO.chargerList(c_Id);
+	}
+	
 
 }
