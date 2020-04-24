@@ -4,7 +4,9 @@
 
 <!-- <script type="text/javascript" src="/ckeditor/ckeditor.js"></script> -->
 
-<script src = "${path}/ckeditor/ckeditor.js"></script>
+<script src = "${path}/resources/ckeditor/ckeditor.js"></script>
+<c:set var="contextPath"  value="${pageContext.request.contextPath}" />
+
 
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -369,7 +371,7 @@ span[name="chargerspan"] {
                 <label for="inputStatus">담당자</label>
                <select class="form-control custom-select" id="chargerSelect" name="chargerSelect">
                	<option selected disabled>담당자를 지정하세요</option>
-                  <<c:forEach var="comemList" items="${comemList}" >
+                  <c:forEach var="comemList" items="${comemList}" >
                   <option >${comemList.MEM_ID}(${comemList.MEM_NAME})</option>
                  </c:forEach>
                 </select>

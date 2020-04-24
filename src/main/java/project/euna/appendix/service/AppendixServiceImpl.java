@@ -26,7 +26,11 @@ public class AppendixServiceImpl implements AppendixService {
 			return list;
 		}
 		
-
+	//파일 첨부
+	@Override
+	public void uploadFile(Map<String, Object> hmap) throws Exception {
+		appendixDAO.uploadFile(hmap);
+	}
 	
 	//첨부파일 수정
 		@Override
@@ -45,6 +49,13 @@ public class AppendixServiceImpl implements AppendixService {
 //				}
 //			}
 		}
+		
+		//협업공간 첨부파일 복사
+		@Override
+		public void copyFile(Map<String, Object> hmap) throws Exception {
+			appendixDAO.copyFile(hmap);
+		}
+
 
 }
 

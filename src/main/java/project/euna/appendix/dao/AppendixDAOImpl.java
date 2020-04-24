@@ -50,5 +50,12 @@ public class AppendixDAOImpl implements AppendixDAO {
 		public void updateFile(AppendixVO appendixVO) throws Exception {
 			sqlSession.update("appendix.fileUpdate", appendixVO);
 		}
+		
+	//협업공간 첨부파일 복사
+	@Override
+	public void copyFile(Map<String, Object> hmap) throws Exception {
+		sqlSession.insert("appendix.copyFile", hmap);
+	}
+		
 
 }

@@ -22,7 +22,8 @@ public interface IssueDAO {
 	public void comemInsert(Map<String, Object> dataMap) throws DataAccessException;
 	public List<Map> chargerRead(String i_Num);
 	public void chargerDelete(String i_Num) throws Exception;
-	//public List<Map> coRead(String mem_id);
+	public List<Map> coRead(String mem_id);
 	public Map<String, Object> get_i_Num();
+	public int issueCopy(Map map) ;
 
 }

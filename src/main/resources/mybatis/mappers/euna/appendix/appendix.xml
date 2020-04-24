@@ -55,6 +55,15 @@
 		WHERE a_Num=#{a_Num}
 	</update>
 	
+	
+	<!-- 협업공간 첨부파일 복사 -->
+	 <insert id="copyFile" parameterType="java.util.HashMap">
+		insert into appendix(a_realname, a_file, a_nameex, i_num, a_num, a_size, a_del)
+	    select a_realname, a_file, a_nameex, #{redirecti_Num}, appendix_seq.nextval as a_num, a_size, a_del
+	    from appendix
+	    where i_num = #{i_Num}
+	    and a_del = 'N'
+	</insert>
  
 
 </mapper>

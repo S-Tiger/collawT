@@ -52,7 +52,7 @@ public class IssueControllerImpl implements IssueController {
 	IssueService issueService;
 	
 	@Inject
-	AppendixService appedixService;
+	AppendixService appendixService;
 	
 	@Inject
 	ReplyService replyService;
@@ -65,6 +65,8 @@ public class IssueControllerImpl implements IssueController {
 	
 	@Inject
 	ComemberService comemberService;
+	
+
 
 	
 	//글 목록 조회 페이징
@@ -105,7 +107,6 @@ public class IssueControllerImpl implements IssueController {
 		String c_Id = issueVO.getC_Id();
 		String i_Name = issueVO.getI_Name();
 		String i_Content = issueVO.getI_Content();
-		String i_Date = issueVO.getI_Date();
 		String i_Start = issueVO.getI_Start();
 		String i_End = issueVO.getI_End();
 		String ig_Num = issueVO.getig_Num();
@@ -117,7 +118,6 @@ public class IssueControllerImpl implements IssueController {
 		cmap.put("c_Id", c_Id);
 		cmap.put("i_Name", i_Name);
 		cmap.put("i_Content",i_Content);
-		cmap.put("i_Date", i_Date);
 		cmap.put("i_Start", i_Start);
 		cmap.put("i_End", i_End);
 		cmap.put("ig_Num", ig_Num);
@@ -159,11 +159,7 @@ public class IssueControllerImpl implements IssueController {
 	@GetMapping("/insert")
 	public ModelAndView issueInsert(String c_Id, HttpSession session) {
 		Map<String, Object> i_Num = issueDAO.get_i_Num();
-//		Map<String, Object> member = new HashMap<String,Object>();
-//		member = (Map<String, Object>) session.getAttribute("member");
-//		String mem_Id = (String) member.get("mem_Id");
-		
-		//List<Map> coList = issueService.coRead(mem_Id);
+
 		
 		List<Map> comemList = issueService.comemRead(c_Id);
 		
@@ -183,10 +179,14 @@ public class IssueControllerImpl implements IssueController {
 	@Override
 	@GetMapping("/read")
 	public ModelAndView issueRead(String i_Num, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		HttpSession session = request.getSession();
+		Map<String, Object> member = new HashMap<String,Object>();
+		member = (Map<String, Object>) session.getAttribute("member");
+		String mem_Id = (String) member.get("mem_Id");
 		
-		
+		List<Map> coworkList = issueService.coRead(mem_Id);
 		Map<String, Object> board = issueService.issueRead(i_Num);
-		List<Map> list = appedixService.fileList(i_Num);
+		List<Map> list = appendixService.fileList(i_Num);
 		List<Map> chargerList = issueService.chargerRead(i_Num);
 		
 		
@@ -194,9 +194,10 @@ public class IssueControllerImpl implements IssueController {
 		mav.addObject("issueRead", board);
 		mav.addObject("file", list);
 		mav.addObject("chargerList", chargerList);
+		mav.addObject("coworkList", coworkList);
 		return mav;
 	}
-	
+
 	
 	//게시글 삭제
 	@Override
@@ -280,62 +281,104 @@ public class IssueControllerImpl implements IssueController {
 		return "redirect:/project/issue/read?i_Num="+i_Num;
 	}
 	
+	
+	//다른 협업공간으로 복제 글 쓰기 DB에 넣기
+	@Override
+	@PostMapping("/copy")
+	public String issueCopy(IssueVO issueVO, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	
+		Map<String, Object> member = new HashMap<String,Object>();
+		member = (Map<String, Object>) session.getAttribute("member");
+		String mem_Id = (String) member.get("mem_Id");
+		
+		String c_Id = issueVO.getC_Id();
+		String i_Name = issueVO.getI_Name();
+		String i_Content = issueVO.getI_Content();
+		String i_Start = issueVO.getI_Start();
+		String i_End = issueVO.getI_End();
+		String ig_Num = issueVO.getig_Num();
+		String i_Num = issueVO.getI_Num();
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!"+i_Num);
+		
+		Map<String, Object> cmap = new HashMap<String,Object>();
+		cmap.put("mem_Id", mem_Id);
+		cmap.put("c_Id", c_Id);
+		cmap.put("i_Name", i_Name);
+		cmap.put("i_Content",i_Content);
+		cmap.put("i_Start", i_Start);
+		cmap.put("i_End", i_End);
+		cmap.put("ig_Num", ig_Num);
+		
+		
+		issueService.issueCopy(cmap);
+		String redirecti_Num = (String) cmap.get("i_Num");
+		
+		Map<String, Object> hmap = new HashMap<String,Object>();
+		hmap.put("i_Num", i_Num);
+		hmap.put("redirecti_Num", redirecti_Num);
+
+		appendixService.copyFile(hmap);
+
+		
+		
+
+		return "redirect:/project/issue/read?c_Id="+c_Id+"&i_Num="+redirecti_Num;
+	
+	}
+
+	
 
 	
 	
 	@PostMapping("/imageUpload")
 	@ResponseBody
 	@Override
-	public String fileUpload(HttpServletRequest req, HttpServletResponse resp, 
-                 MultipartHttpServletRequest multiFile) throws Exception {
-		JsonObject json = new JsonObject();
-		PrintWriter printWriter = null;
-		OutputStream out = null;
-		MultipartFile file = multiFile.getFile("upload");
-		if(file != null){
-			if(file.getSize() > 0 && StringUtils.isNotBlank(file.getName())){
-				if(file.getContentType().toLowerCase().startsWith("image/")){
-					try{
-						String fileName = file.getName();
-						byte[] bytes = file.getBytes();
-						String uploadPath = req.getServletContext().getRealPath("/img");
-						System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11"+uploadPath);
-						File uploadFile = new File(uploadPath);
-						if(!uploadFile.exists()){
-							uploadFile.mkdirs();
-						}
-						fileName = UUID.randomUUID().toString();
-						uploadPath = uploadPath + "/" + fileName;
-						out = new FileOutputStream(new File(uploadPath));
-                        out.write(bytes);
-
-                        printWriter = resp.getWriter();
-                        resp.setContentType("text/html");
-                        String fileUrl = req.getContextPath() + "/img/" + fileName;
-
-                        // json 데이터로 등록
-                        // {"uploaded" : 1, "fileName" : "test.jpg", "url" : "/img/test.jpg"}
-                        // 이런 형태로 리턴이 나가야함.
-                        json.addProperty("uploaded", 1);
-                        json.addProperty("fileName", fileName);
-                        json.addProperty("url", fileUrl);
-
-                        printWriter.println(json);
-                    }catch(IOException e){
-                        e.printStackTrace();
-                    }finally{
-                        if(out != null){
-                            out.close();
-                        }
-                        if(printWriter != null){
-                            printWriter.close();
-                        }		
-					}
-				}
-			}
-		}
-		return null;
-	}	
+	public void communityImageUpload(HttpServletRequest request, HttpServletResponse response, @RequestParam MultipartFile upload) {
+		HttpSession session = request.getSession();
+	    OutputStream out = null;
+	    PrintWriter printWriter = null;
+	    response.setCharacterEncoding("utf-8");
+	    response.setContentType("text/html;charset=utf-8");
+	 
+	    try{
+	 
+	        String fileName = upload.getOriginalFilename();
+	        byte[] bytes = upload.getBytes();
+	        String uploadPath = session.getServletContext().getRealPath("/") + fileName;//저장경로
+	        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+uploadPath);
+	 
+	        out = new FileOutputStream(new File(uploadPath));
+	        out.write(bytes);
+	        String callback = request.getParameter("CKEditorFuncNum");
+	 
+	        printWriter = response.getWriter();
+	        String fileUrl = uploadPath+("/") + fileName;//url경로
+	 
+	        printWriter.println("<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction("
+	                + callback
+	                + ",'"
+	                + fileUrl
+	                + "','이미지를 업로드 하였습니다.'"
+	                + ")</script>");
+	        printWriter.flush();
+	 
+	    }catch(IOException e){
+	        e.printStackTrace();
+	    } finally {
+	        try {
+	            if (out != null) {
+	                out.close();
+	            }
+	            if (printWriter != null) {
+	                printWriter.close();
+	            }
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	 
+	    return;
+	}
 
 }
 

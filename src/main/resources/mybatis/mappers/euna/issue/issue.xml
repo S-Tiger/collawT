@@ -181,16 +181,31 @@
 	</delete>
 	
 	
+	
+	
 		<!-- 협업공간 조회 -->
-<!-- 	<select id="coRead"  resultType="java.util.HashMap"> 
+ 	<select id="coRead"  resultType="java.util.HashMap"> 
       <![CDATA[
-			select c.c_name,c.c_id
-			from co_work c, member m
-			where c.mem_id=m.mem_id
-			and m.mem_id=#{mem_id}
-			order by c_id asc
+      
+     		select c.c_name, c.c_id
+            from co_member co, co_work c
+            where c.c_id=co.c_id
+            and co.mem_id=#{mem_id}
+            
       ]]>
-	</select> -->
+	</select>
+	
+		<!-- 다른협업공간으로 복제 입력 -->
+		
+	<insert id="issueCopy" parameterType="IssueVO">
+	<selectKey resultType="string" keyProperty="i_Num" order="BEFORE">
+        SELECT issue_i_Num.nextval as i_Num FROM dual        
+    	</selectKey>   
+		insert into issue(i_Num, c_Id, i_Name, i_Content, i_Date, ig_Num , mem_Id, i_Start, i_End)
+		values(#{i_Num}, #{c_Id}, #{i_Name}, #{i_Content} ,  
+		(select to_char(sysdate, 'YYYY/MM/DD/ HH24:MI:SS') from dual)
+		, #{ig_Num} , #{mem_Id}, #{i_Start}, #{i_End})
+	</insert>
 
 
 

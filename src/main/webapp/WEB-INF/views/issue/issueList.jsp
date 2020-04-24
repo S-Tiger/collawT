@@ -272,7 +272,7 @@
 						
 					<li class="nav-item" id = "activityMenu"><a class="nav-link active" href="/project/issue/list?c_Id=${pjt.c_Id}"
 						 id= "issueMenu"><b>이슈</b></a></li>
-					<li class="nav-item" id = "activityMenu"><a class="nav-link" href="#"
+					<li class="nav-item" id = "activityMenu"><a class="nav-link" href="/project/vote/list?c_Id=${pjt.c_Id}"
 						 id= "issueMenu">칸반</a></li>
 					<li class="nav-item" id = "activityMenu"><a class="nav-link" href="#"
 						 id= "issueMenu">캘린더</a></li>

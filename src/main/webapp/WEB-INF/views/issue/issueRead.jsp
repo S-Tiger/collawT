@@ -5,6 +5,7 @@
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+<link rel="stylesheet" href="/SRC2/modal/dist/needpopup.min.css">
 
 <script type="text/javascript">
 
@@ -303,7 +304,7 @@ $(document).ready(function() {
                           <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; right: 0px; transform: translate3d(0px, 38px, 0px);">
                             
                         
-                            <li><a class="dropdown-item" href="#"><small>다른 협업공간으로 복사</small></a></li>
+                            <li><a class="dropdown-item" data-needpopup-show="#add-popup"><small>다른 협업공간으로 글 복사</small></a></li>
                             <li><a class="dropdown-item" href="#"><small>URL 복사</small></a></li>
                           </ul>
                         </div>
@@ -559,3 +560,52 @@ $(document).ready(function() {
 	<!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
+
+
+<!-- 다른협업공간으로 글 복제 모달 팝업 내용 -->
+<div id='add-popup' class="needpopup">
+	<p>
+	<div style="padding-bottom: 25px;">
+		<h6 class="m-0 text-dark"
+			style="font-family: Spoqa Han Sans; padding-bottom: 5px;">협업공간 선택</h6>
+		<span style="font-size: 0.9em; line-height: 1.0; color: #a1a1a1;">
+			복사한 글을 게시할 협업공간을 선택하세요.</span>
+	</div>
+	
+	<form action="/project/issue/copy" method="post" id="applyform">
+      <select class="form-control custom-select" id="coworkSelect" name="coworkSelect">
+      	<option selected disabled>협업공간을 선택하세요</option>
+         <c:forEach var="coworkList" items="${coworkList}" >
+         <option id="copyc_Id" name="copyc_Id" value="${coworkList.C_ID}">${coworkList.C_ID}</option>
+        </c:forEach>
+       </select>	
+		<input type="hidden" value="${issueRead.i_Name}" id="i_Name" name="i_Name">
+		<input type="hidden" value="${issueRead.i_Content}" id="i_Content" name="i_Content">
+		<input type="hidden" value="${issueRead.ig_Num}" id="ig_Num" name="ig_Num">
+		<input type="hidden" value="${issueRead.i_Start}" id="i_Start" name="i_Start">
+		<input type="hidden" value="${issueRead.i_End}" id="i_End" name="i_End">
+		<input type="hidden" value="${issueRead.i_Num}" id="i_Num" name="i_Num">
+ 		<input type="hidden" value="" id="changedc_Id" name="c_Id">
+		
+	
+		<br><br>
+		<span style="float: left; padding-right: 50px;">
+			
+		<button type="submit" id="insertsubmit"
+					class="btn btn-block btn-success" style="width: 220px;">복사</button>
+			
+		</span> <span>
+			<button type="reset" class="btn btn-block btn-success"
+				onclick="history.go(0);" style="width: 220px">취소</button>
+		</span>
+		</form>
+	</div>
+	<script>
+ 	$("#coworkSelect").change(function(event) {
+ 		var copyc_Id = $("#coworkSelect option:selected").val();
+ 		alert(copyc_Id)
+		$("#changedc_Id").val(copyc_Id);
+	})
+	
+	</script>
+

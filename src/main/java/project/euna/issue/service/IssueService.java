@@ -24,6 +24,7 @@ public interface IssueService {
 	public void comemInsert(Map<String, Object> dataMap) throws Exception;
 	public List<Map> chargerRead(String i_Num);
 	public void chargerDelete(String i_Num) throws Exception;
-	//public List<Map> coRead(String mem_id);
+	public List<Map> coRead(String mem_id);
+	public void  issueCopy(Map map);
 
 }

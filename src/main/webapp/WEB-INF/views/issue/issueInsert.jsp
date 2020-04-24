@@ -1,10 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<script src = "${path}/ckeditor/ckeditor.js"></script>
+<script src = "${path}/resources/ckeditor/ckeditor.js"></script>
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+<c:set var="contextPath"  value="${pageContext.request.contextPath}" />
+    <script type = "text/javascript">
+        window.parent.CKEDITOR.tools.callFunction('${CKEditorFuncNum}','${filePath}', '업로드완료');
+    </script>
 
 
 <style type="text/css">
@@ -219,7 +223,7 @@ span[name="chargerspan"] {
 					'JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','Outdent','Indent','HorizontalRule','Link','Unlink','-',
 					'Find','Replace','SelectAll','Image','Youtube','Table','SpecialChar'],
 					'/',['Styles','Format','Font','FontSize','Undo','Redo'],['TextColor','BGColor'],['Cut','Copy','Paste','PasteText'],['Source']],
-					filebrowserImageUploadUrl: '/issue/imageUpload'
+					filebrowserImageUploadUrl: '${pageContext.request.contextPath}/issue/imageUpload'
 					});
                 
 			 	 CKEDITOR.on('dialogDefinition', function( ev ){

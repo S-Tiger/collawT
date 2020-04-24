@@ -1,6 +1,7 @@
 package project.euna.issue.controller;
 
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -28,8 +30,7 @@ public interface IssueController {
 	
 	public String issueUpdate(String c_Id, String i_Num, IssueVO issueVO, Model model) throws Exception;
 	public String issueUpdate(IssueVO issueVO, HttpServletRequest request, HttpServletResponse response) throws Exception;
-
-	public String fileUpload(HttpServletRequest req, HttpServletResponse resp, 
-            MultipartHttpServletRequest multiFile) throws Exception;
+	public void communityImageUpload(HttpServletRequest request, HttpServletResponse response, @RequestParam MultipartFile upload);
+	public String issueCopy(IssueVO issueVO, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception;
 }
 

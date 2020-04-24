@@ -32,11 +32,6 @@ public class IssueServiceImpl implements IssueService {
 		int result = issueDAO.issueInsert(map);
 		//notifyDAO.notifyInsert(map);
 		
-		if (result == 0) {
-			System.out.println("Join Fail!!");
-		} else {
-			System.out.println("Join Success!!");
-		}
 	}
 	
 	
@@ -111,10 +106,18 @@ public class IssueServiceImpl implements IssueService {
 	
 	//협업공간 조회
 	//@Override
-//	public List<Map> coRead(String mem_id) {
-//		return issueDAO.coRead(mem_id);
-//		
-//	}
+	public List<Map> coRead(String mem_id) {
+		return issueDAO.coRead(mem_id);
+		
+	}
+	
+	//다른 협업공간으로 복사
+	@Override
+	public void  issueCopy(Map map) {
+		int result = issueDAO.issueCopy(map);
+		//notifyDAO.notifyInsert(map);
+		
+	}
 	
 
 }
