@@ -30,6 +30,7 @@
 		<result property="mem_Id" column="mem_Id" />
 		<result property="mem_Name" column="mem_Name" />
 		<result property="ig_Name" column="ig_Name" />
+		<result property="charger" column="charger" />
 	</resultMap>
 	
 		<resultMap id="fileResult01" type="java.util.HashMap">
@@ -46,7 +47,7 @@
 	
 
 	<!-- 글 목록 페이징-->
- 		<select id="searchList" resultMap="issueResult02" parameterType="project.euna.issue.vo.Criteria"> 
+<!--  		<select id="searchList" resultMap="issueResult02" parameterType="project.euna.issue.vo.Criteria"> 
       <![CDATA[
 		select i_Num, c_Id, i_Name, i_Content, i_Date, mem_Id, mem_name, ig_Name, ig_Num, i_Start, i_End
         from (
@@ -62,7 +63,22 @@
         order by to_number(i_Num) desc
       ]]>
 
+	</select> -->
+	
+	<!-- 글 목록 페이징+이슈담당자-->
+	<select id="searchList" resultMap="issueResult02" parameterType="project.euna.issue.vo.Criteria"> 
+	<![CDATA[
+        select *
+        from V_IssueList
+        where c_Id=#{c_Id}
+        and rnum between #{rowStart} and #{rowEnd}
+        order by to_number(i_Num) desc 
+	
+	]]>
+
 	</select>
+	
+	
 	
 	<!-- 게시물 총 갯수 -->
 	<select id="listCount" resultType="int" parameterType="project.euna.issue.vo.Criteria"> 
@@ -78,10 +94,11 @@
 	<!-- 글 목록 조회 시  이슈 담당자 화면에 뿌리기 용-->
 	<select id="chargerList" resultMap="issueResult02"> 
       <![CDATA[
-    		select i_Num, m.mem_name
-			from charger ch, member m
-			where m.mem_id=ch.mem_id
-			and c_id=#{c_Id}
+			 SELECT c.i_Num , LISTAGG(m.mem_name,',') WITHIN GROUP (ORDER BY m.mem_name)
+			  FROM charger c, member m
+			  where c.mem_id=m.mem_id
+			  and c_id=#{c_Id}
+			 GROUP BY c.i_Num
       ]]>
 
 	</select>

@@ -12,13 +12,9 @@
 
 
 <style>
-
-
 .accent-teal .btn-link, .accent-teal a:not(.dropdown-item):not(.btn-app):not(.nav-link):not(.brand-link) {
     color: #343a40;
 }
-
-
 @font-face {
 	font-family: 'Recipekorea';
 	src:
@@ -27,7 +23,6 @@
 	font-weight: normal;
 	font-style: normal;
 }
-
 .nav-pills .nav-link.active{
 		    background-color: #dc3545;
  
@@ -35,7 +30,6 @@
 	border-radius: 6px;
 	box-shadow: 0 1px 5px 1px rgba(0, 0, 0, 1);
 }
-
 .needpopup p {
 	font-size: 1.2em;
 	line-height: 1.4;
@@ -43,11 +37,9 @@
 	margin: 15px 0;
 	margin: 0;
 }
-
 .needpopup p+p {
 	margin-top: 10px;
 }
-
 #applyspan {
 	background-clip: padding-box;
     border: 1px solid #17a2b8;
@@ -58,7 +50,6 @@
 #applydelete {
 	margin: 2px;
 }
-
 </style>
 
 
@@ -69,7 +60,6 @@
 <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="${contextPath}/resources/modal/dist/needpopup.min.js"></script>
 <script>
-
 	needPopup.config.custom = {
 		'removerPlace' : 'outside',
 		'closeOnOutside' : false,
@@ -81,8 +71,6 @@
 		}
 	};
 	needPopup.init();
-
-
 	$('#update-popup').ready(function (){
 				$('#insertsubmit').click(function() {
 					var listnum = $('#applyList').children().length;
@@ -125,8 +113,6 @@
 			    	
 			    });
 			});
-
-
 			
 			
 </script>
@@ -272,11 +258,11 @@
 						
 					<li class="nav-item" id = "activityMenu"><a class="nav-link active" href="/project/issue/list?c_Id=${pjt.c_Id}"
 						 id= "issueMenu"><b>이슈</b></a></li>
-					<li class="nav-item" id = "activityMenu"><a class="nav-link" href="/project/vote/list?c_Id=${pjt.c_Id}"
+					<li class="nav-item" id = "activityMenu"><a class="nav-link" href="#"
 						 id= "issueMenu">칸반</a></li>
 					<li class="nav-item" id = "activityMenu"><a class="nav-link" href="#"
 						 id= "issueMenu">캘린더</a></li>
-					<li class="nav-item" id = "activityMenu"><a class="nav-link" href="#"
+					<li class="nav-item" id = "activityMenu"><a class="nav-link" href="/project/vote/list?c_Id=${pjt.c_Id}"
 						 id= "issueMenu">투표</a></li>
 						
 				</ol>
@@ -315,16 +301,11 @@
 					  <td style="width:50%">	
 					  <a href="/project/issue/read?c_Id=${issueList.c_Id}&i_Num=${issueList.i_Num}"> <font size="3em"><b>${issueList.i_Name}</b></font></a>
 					  <br>
-					  <c:set var="loop_flag" value="false" />
+					  
  					  <font size="1em" color="#6c757d"><i class="fas fa-user-friends"></i>&nbsp;&nbsp;담당자  : 
- 					  <c:forEach var="chargerList" items="${chargerList}" >
- 					 	 <c:if test="${not loop_flag }">
-		 					  <c:if test="${issueList.i_Num == chargerList.i_Num}">${chargerList.mem_Name} / </c:if>
-		 					  <c:if test="${issueList.i_Num != chargerList.i_Num}"> 미지정
-		 					 	 <c:set var="loop_flag" value="true" />
-		 					  </c:if>
-		 					  </c:if>
- 					  </c:forEach>
+ 					 <c:if test="${issueList.charger != null}">${issueList.charger}</c:if>
+ 					 <c:if test="${issueList.charger == null}">미지정</c:if>
+ 					  
  					  </font>    
 				  	  
 				  </td>
@@ -392,12 +373,8 @@
     $("#example1").DataTable({
       "responsive": true,
       "autoWidth": false,
-
     })
   });
     
     
 </script>
-
-
-

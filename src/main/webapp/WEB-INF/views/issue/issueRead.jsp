@@ -8,6 +8,24 @@
 <link rel="stylesheet" href="/SRC2/modal/dist/needpopup.min.css">
 
 <script type="text/javascript">
+	var result = '${msg}';
+	if (result == 'success') {
+		if(confirm("복사가 완료되었습니다. 복사한 글로 이동하시겠습니까?")){
+		
+		}else{
+			window.history.back();
+		}
+	
+	
+<%
+		//msg 세션 지우기.
+		session.removeAttribute("msg");
+%>
+}
+</script>
+
+
+<script type="text/javascript">
 
 
 
@@ -591,9 +609,13 @@ $(document).ready(function() {
       <select class="form-control custom-select" id="coworkSelect" name="coworkSelect">
       	<option selected disabled>협업공간을 선택하세요</option>
          <c:forEach var="coworkList" items="${coworkList}" >
-         <option id="copyc_Id" name="copyc_Id" value="${coworkList.C_ID}">${coworkList.C_ID}</option>
+         
+         <c:if test="${coworkList.C_ID != issueRead.c_Id}">
+         <option id="copyc_Id" name="copyc_Id" value="${coworkList.C_ID}">${coworkList.C_NAME}</option>
+       </c:if>
         </c:forEach>
        </select>	
+		
 		<input type="hidden" value="${issueRead.i_Name}" id="i_Name" name="i_Name">
 		<input type="hidden" value="${issueRead.i_Content}" id="i_Content" name="i_Content">
 		<input type="hidden" value="${issueRead.ig_Num}" id="ig_Num" name="ig_Num">
@@ -618,9 +640,11 @@ $(document).ready(function() {
 	<script>
  	$("#coworkSelect").change(function(event) {
  		var copyc_Id = $("#coworkSelect option:selected").val();
- 		alert(copyc_Id)
 		$("#changedc_Id").val(copyc_Id);
+	
 	})
 	
+	
+
 	</script>
 

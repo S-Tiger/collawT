@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.JsonObject;
 
@@ -84,14 +85,11 @@ public class IssueControllerImpl implements IssueController {
 		searchMap.put("c_Id", c_Id);
 		Map<String, Object>pjt = coworkService.searchMain(searchMap);
 		
-		List<Map> chargerList = issueService.chargerList(c_Id);
-		
-		
+	
 		ModelAndView mav = new ModelAndView("issue/issueList");
 		mav.addObject("issueList", list);
 		mav.addObject("pageMaker", pageMaker);
 		
-		 mav.addObject("chargerList", chargerList);
 		 mav.addObject("pjt", pjt); 
 		
 		
@@ -289,7 +287,7 @@ public class IssueControllerImpl implements IssueController {
 	//다른 협업공간으로 복제 글 쓰기 DB에 넣기
 	@Override
 	@PostMapping("/copy")
-	public String issueCopy(IssueVO issueVO, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public String issueCopy(IssueVO issueVO, HttpSession session, HttpServletRequest request, HttpServletResponse response, RedirectAttributes rttr) throws Exception {
 	
 		Map<String, Object> member = new HashMap<String,Object>();
 		member = (Map<String, Object>) session.getAttribute("member");
@@ -324,7 +322,7 @@ public class IssueControllerImpl implements IssueController {
 		appendixService.copyFile(hmap);
 
 		
-		
+		rttr.addFlashAttribute("msg", "success");
 
 		return "redirect:/project/issue/read?c_Id="+c_Id+"&i_Num="+redirecti_Num;
 	
@@ -343,7 +341,8 @@ public class IssueControllerImpl implements IssueController {
 	    PrintWriter printWriter = null;
 	    response.setCharacterEncoding("utf-8");
 	    response.setContentType("text/html;charset=utf-8");
-	 
+        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+
 	    try{
 	 
 	        String fileName = upload.getOriginalFilename();
@@ -383,6 +382,7 @@ public class IssueControllerImpl implements IssueController {
 	 
 	    return;
 	}
+
 
 }
 
