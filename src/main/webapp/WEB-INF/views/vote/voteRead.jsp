@@ -321,8 +321,7 @@
 
 
 						<div class="card-header">
-							<span
-								style="vertical-align:text-top;
+							<span style="vertical-align:text-top;
 							<c:if test="${voteRead.v_Num == 1}">background-color:#28a745;</c:if>
 							<c:if test="${voteRead.v_Num == 2}">background-color:#6c757d;</c:if>
 							"
@@ -397,7 +396,7 @@
 							<p id="v_Content" name="v_Content">
 								<c:out value="${voteRead.v_Content}" escapeXml="false" />
 							</p>
-							<p id="v_Content" name="v_Content">
+							<p id="v_Subject" name="v_Subject">
 								<c:out value="${voteRead.v_Subject}" escapeXml="false" />
 							</p>
 
@@ -437,6 +436,7 @@
 																</div>
 															</div>
 														</c:forEach>
+													<input type="hidden" id="c_Id" name="c_Id" value="${voteRead.c_Id}" />
 														<input type="submit" value="제출">
 												</td>
 											</tr>
@@ -448,10 +448,10 @@
 													</div> <!-- 시작일/종료일-->
 													<div class="row" style="margin-left: 9px">
 														<c:if test="${not empty voteRead.v_Start&& not empty voteRead.v_End}">
-															<span id="v_Start" name="v_Start" class="username ">
+															<span id="v_Start" class="username ">
 																<small><c:out value="${voteRead.v_Start}~" /></small>
 															</span>
-															<span id="v_End" name="v_End" class="username"> <small><c:out
+															<span id="v_End"  class="username"> <small><c:out
 																		value="${voteRead.v_End}" /></small>
 															</span>
 														</c:if>
