@@ -19,23 +19,16 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang3.StringUtils;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.google.gson.JsonObject;
-
-import project.euna.appendix.service.AppendixService;
-import project.euna.appendix.vo.AppendixVO;
+import project.euna.issue.service.IssueService;
 import project.euna.personal.dao.PersonalDAO;
 import project.euna.personal.service.PersonalService;
+import project.euna.personal.service.Personal_appendixService;
 import project.euna.personal.vo.Criteria;
 import project.euna.personal.vo.PersonalVO;
 import project.euna.personal.vo.PageMaker;
@@ -52,21 +45,17 @@ public class PersonalControllerImpl implements PersonalController {
 	@Inject
 	PersonalService personalService;
 	
-	@Inject
-	AppendixService appendixService;
-	
-	@Inject
-	ReplyService replyService;
+
 	
 	@Inject
 	PersonalDAO personalDAO;
 	
-	@Inject
-	CoworkService coworkService;
 	
 	@Inject
-	ComemberService comemberService;
+	Personal_appendixService personal_appendixService;
 	
+	@Inject
+	IssueService issueService;
 
 
 	
@@ -93,115 +82,85 @@ public class PersonalControllerImpl implements PersonalController {
 
 	
 	//글 쓰기 DB에 넣기
-//	@Override
-//	@PostMapping("/insert")
-//	public String personalInsert(personalVO personalVO, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
-//	
-//		Map<String, Object> member = new HashMap<String,Object>();
-//		member = (Map<String, Object>) session.getAttribute("member");
-//		String mem_Id = (String) member.get("mem_Id");
-//		String c_Id = personalVO.getC_Id();
-//		String i_Name = personalVO.getI_Name();
-//		String i_Content = personalVO.getI_Content();
-//		String i_Start = personalVO.getI_Start();
-//		String i_End = personalVO.getI_End();
-//		String ig_Num = personalVO.getig_Num();
-//		String i_Num = personalVO.getI_Num();
-//		
-//		
-//		Map<String, Object> cmap = new HashMap<String,Object>();
-//		cmap.put("mem_Id", mem_Id);
-//		cmap.put("c_Id", c_Id);
-//		cmap.put("i_Name", i_Name);
-//		cmap.put("i_Content",i_Content);
-//		cmap.put("i_Start", i_Start);
-//		cmap.put("i_End", i_End);
-//		cmap.put("ig_Num", ig_Num);
-//		cmap.put("i_Num", i_Num);
-//
-//		
-//		personalService.personalInsert(cmap);
-//		
-//		
-//		try {
-//			Map<String, Object> coMap = new HashMap<String, Object>();
-//			String comem_Id[] = request.getParameterValues("comem_Id");
-//			
-//			
-//			for (int i = 0; i < comem_Id.length; i++) {
-//				
-//				coMap.put("i_Num", i_Num);
-//				coMap.put("c_Id", c_Id);
-//				coMap.put("mem_Id", comem_Id[i]);
-//				coMap.put("cr_Status", "");
-//				
-//				personalService.comemInsert(coMap);
-//				
-//				
-//			}
-//		}catch(NullPointerException e) {
-//		}
-//
-//		
-//		
-//		
-//		
-//		return "redirect:/project/personal/read?i_Num="+i_Num;
-//	
-//	}
-//	
-//	//글 쓰기 화면
-//	@Override
-//	@GetMapping("/insert")
-//	public ModelAndView personalInsert(String c_Id, HttpSession session) {
-//		Map<String, Object> i_Num = personalDAO.get_i_Num();
-//
-//		
-//		List<Map> comemList = personalService.comemRead(c_Id);
-//		
-//				
-//		ModelAndView mav = new ModelAndView("/personal/personalInsert");
-//		mav.addObject("c_Id", c_Id);
-//		mav.addObject("comemList", comemList);
-//		mav.addObject("i_Num", i_Num);
-//		return mav;
-//		
-//	}
+	@Override
+	@PostMapping("/insert")
+	public String personalInsert(PersonalVO personalVO, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	
+		Map<String, Object> member = new HashMap<String,Object>();
+		member = (Map<String, Object>) session.getAttribute("member");
+		String p_Num = personalVO.getP_Num();
+		String mem_Id = (String) member.get("mem_Id");
+		String p_i_Name = personalVO.getP_i_Name();
+		String p_i_Content = personalVO.getP_i_Content();
+		String p_i_Date = personalVO.getP_i_Date();
+		String p_i_Start = personalVO.getP_i_Start();
+		String p_i_End = personalVO.getP_i_End();
+		
+		
+		Map<String, Object> cmap = new HashMap<String,Object>();
+		cmap.put("p_Num", p_Num);
+		cmap.put("mem_Id", mem_Id);
+		cmap.put("p_i_Name", p_i_Name);
+		cmap.put("p_i_Content",p_i_Content);
+		cmap.put("p_i_Date", p_i_Date);
+		cmap.put("p_i_Start", p_i_Start);
+		cmap.put("p_i_End", p_i_End);
+
+		
+		personalService.personalInsert(cmap);
+		
+		
+
+		
+		return "redirect:/project/personal/read?mem_Id="+mem_Id+"p_Num="+p_Num;
+	
+	}
+	
+	//글 쓰기 화면
+	@Override
+	@GetMapping("/insert")
+	public ModelAndView personalInsert(String mem_Id, HttpSession session) {
+		Map<String, Object> p_Num = personalDAO.get_p_Num();
+			
+		ModelAndView mav = new ModelAndView("/personal/personalInsert");
+		mav.addObject("mem_Id", mem_Id);
+		mav.addObject("p_Num", p_Num);
+		return mav;
+		
+	}
 //	
 //
 //	
 //	
-//	//개별 글 조회
-//	@Override
-//	@GetMapping("/read")
-//	public ModelAndView personalRead(String i_Num, HttpServletRequest request, HttpServletResponse response) throws Exception {
-//		HttpSession session = request.getSession();
-//		Map<String, Object> member = new HashMap<String,Object>();
-//		member = (Map<String, Object>) session.getAttribute("member");
-//		String mem_Id = (String) member.get("mem_Id");
-//		
-//		List<Map> coworkList = personalService.coRead(mem_Id);
-//		Map<String, Object> board = personalService.personalRead(i_Num);
-//		List<Map> list = appendixService.fileList(i_Num);
-//		List<Map> chargerList = personalService.chargerRead(i_Num);
-//		
-//		
-//		ModelAndView mav = new ModelAndView("personal/personalRead");
-//		mav.addObject("personalRead", board);
-//		mav.addObject("file", list);
-//		mav.addObject("chargerList", chargerList);
-//		mav.addObject("coworkList", coworkList);
-//		return mav;
-//	}
+	//개별 글 조회
+	@Override
+	@GetMapping("/read")
+	public ModelAndView personalRead(String p_Num, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		HttpSession session = request.getSession();
+		Map<String, Object> member = new HashMap<String,Object>();
+		member = (Map<String, Object>) session.getAttribute("member");
+		String mem_Id = (String) member.get("mem_Id");
+		
+		List<Map> coworkList = issueService.coRead(mem_Id);
+		Map<String, Object> board = personalService.personalRead(p_Num);
+		List<Map> list = personal_appendixService.fileList(p_Num);		
+		
+		ModelAndView mav = new ModelAndView("personal/personalRead");
+		mav.addObject("personalRead", board);
+		mav.addObject("file", list);
+		mav.addObject("coworkList", coworkList);
+
+		return mav;
+	}
 //
 //	
 //	//게시글 삭제
 //	@Override
 //	@GetMapping("/delete")
-//	public String personalDelete(String c_Id, String i_Num, personalVO personalVO) throws Exception{
+//	public String personalDelete(String c_Id, String p_Num, personalVO personalVO) throws Exception{
 //		
-//		personalService.chargerDelete(personalVO.getI_Num());
-//		personalService.personalDelete(personalVO.getI_Num());
+//		personalService.chargerDelete(personalVO.getp_Num());
+//		personalService.personalDelete(personalVO.getp_Num());
 //	
 //		
 //		
@@ -211,15 +170,15 @@ public class PersonalControllerImpl implements PersonalController {
 //	//게시글 수정 페이지로 이동
 //	@Override
 //	@GetMapping("/update")
-//	public String personalUpdate(String c_Id, String i_Num, personalVO personalVO, Model model) throws Exception {
+//	public String personalUpdate(String c_Id, String p_Num, personalVO personalVO, Model model) throws Exception {
 //		
 //		
 //		
 //		List<Map> igRead = personalService.igRead();
 //		List<Map> comemList = personalService.comemRead(c_Id);
-//		List<Map> chargerList = personalService.chargerRead(i_Num);
+//		List<Map> chargerList = personalService.chargerRead(p_Num);
 //		
-//		model.addAttribute("personalUpdate",personalService.personalRead(personalVO.getI_Num()) );
+//		model.addAttribute("personalUpdate",personalService.personalRead(personalVO.getp_Num()) );
 //		model.addAttribute("igRead",igRead);
 //		model.addAttribute("c_Id", c_Id);
 //		model.addAttribute("comemList", comemList);
@@ -232,9 +191,9 @@ public class PersonalControllerImpl implements PersonalController {
 //	//이슈 담당자 목록 가져오기
 //	@GetMapping("/chargerList")
 //	@ResponseBody
-//	public List<Map> chargerList(@RequestParam ("i_Num")String i_Num) throws Exception {
+//	public List<Map> chargerList(@RequestParam ("p_Num")String p_Num) throws Exception {
 //		
-//		List<Map> chargerList = personalService.chargerRead(i_Num);
+//		List<Map> chargerList = personalService.chargerRead(p_Num);
 //		
 //		return chargerList;
 //	}
@@ -246,19 +205,19 @@ public class PersonalControllerImpl implements PersonalController {
 //	public String personalUpdate(personalVO personalVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
 //		personalService.personalUpdate(personalVO);
 //		
-//		String i_Num = personalVO.getI_Num();
+//		String p_Num = personalVO.getp_Num();
 //		String c_Id = personalVO.getC_Id();
 //		
 //		
 //		//이슈담당자 삭제 후 다시 입력
-//		personalService.chargerDelete(i_Num);
+//		personalService.chargerDelete(p_Num);
 //		
 //		try {
 //			Map<String, Object> coMap = new HashMap<String, Object>();
 //			String comem_Id[] = request.getParameterValues("comem_Id");
 //			for (int i = 0; i < comem_Id.length; i++) {
 //					
-//					coMap.put("i_Num", i_Num);
+//					coMap.put("p_Num", p_Num);
 //					coMap.put("c_Id", c_Id);
 //					coMap.put("mem_Id", comem_Id[i]);
 //					coMap.put("cr_Status", "");
@@ -274,7 +233,7 @@ public class PersonalControllerImpl implements PersonalController {
 //		
 //		
 //		//수정한 게시물로 리턴
-//		return "redirect:/project/personal/read?i_Num="+i_Num;
+//		return "redirect:/project/personal/read?p_Num="+p_Num;
 //	}
 //	
 //	
@@ -293,8 +252,8 @@ public class PersonalControllerImpl implements PersonalController {
 //		String i_Start = personalVO.getI_Start();
 //		String i_End = personalVO.getI_End();
 //		String ig_Num = personalVO.getig_Num();
-//		String i_Num = personalVO.getI_Num();
-//		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!"+i_Num);
+//		String p_Num = personalVO.getp_Num();
+//		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!"+p_Num);
 //		
 //		Map<String, Object> cmap = new HashMap<String,Object>();
 //		cmap.put("mem_Id", mem_Id);
@@ -307,18 +266,18 @@ public class PersonalControllerImpl implements PersonalController {
 //		
 //		
 //		personalService.personalCopy(cmap);
-//		String redirecti_Num = (String) cmap.get("i_Num");
+//		String redirectp_Num = (String) cmap.get("p_Num");
 //		
 //		Map<String, Object> hmap = new HashMap<String,Object>();
-//		hmap.put("i_Num", i_Num);
-//		hmap.put("redirecti_Num", redirecti_Num);
+//		hmap.put("p_Num", p_Num);
+//		hmap.put("redirectp_Num", redirectp_Num);
 //
 //		appendixService.copyFile(hmap);
 //
 //		
 //		rttr.addFlashAttribute("msg", "success");
 //
-//		return "redirect:/project/personal/read?c_Id="+c_Id+"&i_Num="+redirecti_Num;
+//		return "redirect:/project/personal/read?c_Id="+c_Id+"&p_Num="+redirectp_Num;
 //	
 //	}
 //

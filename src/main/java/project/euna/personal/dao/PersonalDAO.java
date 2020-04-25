@@ -13,7 +13,7 @@ public interface PersonalDAO {
 //
 	public int personalInsert(Map map);
 	public List<Map> searchList(Criteria cri) throws DataAccessException;
-	public Map<String, Object> personalRead(String i_Num);
+	public Map<String, Object> personalRead(String p_Num);
 	public void personalDelete(String i_Num) throws Exception;
 	public void personalUpdate(PersonalVO personalVO) throws Exception;
 	public int listCount(String c_Id) throws Exception;
@@ -23,7 +23,7 @@ public interface PersonalDAO {
 	public List<Map> chargerRead(String i_Num);
 	public void chargerDelete(String i_Num) throws Exception;
 	public List<Map> coRead(String mem_id);
-	public Map<String, Object> get_i_Num();
+	public Map<String, Object> get_p_Num();
 	public int personalCopy(Map map) ;
 	public List<Map> chargerList(String c_Id);
 

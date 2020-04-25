@@ -45,21 +45,21 @@ public class PersonalServiceImpl implements PersonalService {
 	
 	//게시물 총 갯수
 	@Override
-	public int listCount(String c_Id) throws Exception{
-		return personalDAO.listCount(c_Id);
+	public int listCount(String mem_Id) throws Exception{
+		return personalDAO.listCount(mem_Id);
 	}
 	
 	//게시글 조회
 	@Override
-	public Map<String, Object> personalRead(String i_Num) {
-		return personalDAO.personalRead(i_Num);
+	public Map<String, Object> personalRead(String p_Num) {
+		return personalDAO.personalRead(p_Num);
 		
 	}
 
 	//글 삭제
 	@Override
-	public void personalDelete(String i_Num) throws Exception {
-		personalDAO.personalDelete(i_Num);
+	public void personalDelete(String p_Num) throws Exception {
+		personalDAO.personalDelete(p_Num);
 	}
 
 	//글 수정
@@ -78,8 +78,8 @@ public class PersonalServiceImpl implements PersonalService {
 	
 	//협업공간 내 멤버 조회
 	@Override
-	public List<Map> comemRead(String c_id) {
-		return personalDAO.comemRead(c_id);
+	public List<Map> comemRead(String mem_Id) {
+		return personalDAO.comemRead(mem_Id);
 		
 	}
 	
@@ -92,15 +92,15 @@ public class PersonalServiceImpl implements PersonalService {
 	
 	//협업공간 내 멤버 조회
 	@Override
-	public List<Map> chargerRead(String i_Num) {
-		return personalDAO.chargerRead(i_Num);
+	public List<Map> chargerRead(String p_Num) {
+		return personalDAO.chargerRead(p_Num);
 		
 	}
 	
 	//이슈 담당자 수정(삭제 후 다시 삽입)
 	@Override
-	public void chargerDelete(String i_Num) throws Exception {
-		personalDAO.chargerDelete(i_Num);
+	public void chargerDelete(String p_Num) throws Exception {
+		personalDAO.chargerDelete(p_Num);
 	}
 	
 	
@@ -121,8 +121,8 @@ public class PersonalServiceImpl implements PersonalService {
 	
 	//글 목록 조회 시  이슈 담당자 화면에 뿌리기 용
 	@Override
-	public List<Map> chargerList(String c_Id) {
-		return personalDAO.chargerList(c_Id);
+	public List<Map> chargerList(String mem_Id) {
+		return personalDAO.chargerList(mem_Id);
 	}
 	
 

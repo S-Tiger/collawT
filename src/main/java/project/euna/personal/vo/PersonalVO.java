@@ -7,7 +7,7 @@ public class PersonalVO {
 	private String mem_Id;
 	private String p_i_Name;
 	private String p_i_Content;
-	private String i_Date;
+	private String p_i_Date;
 	private String p_i_Start;
 	private String p_i_End;
 	public String getP_Num() {
@@ -34,11 +34,12 @@ public class PersonalVO {
 	public void setP_i_Content(String p_i_Content) {
 		this.p_i_Content = p_i_Content;
 	}
-	public String getI_Date() {
-		return i_Date;
+
+	public String getP_i_Date() {
+		return p_i_Date;
 	}
-	public void setI_Date(String i_Date) {
-		this.i_Date = i_Date;
+	public void setP_i_Date(String p_i_Date) {
+		this.p_i_Date = p_i_Date;
 	}
 	public String getP_i_Start() {
 		return p_i_Start;

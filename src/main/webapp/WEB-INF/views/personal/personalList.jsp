@@ -26,7 +26,7 @@
 </script>
 
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
+<div class="content-wrapper" style="background-color: #ffeded">
 	<div class="content-header" style="height: 100px">
 		<div class="container-fluid">
 			<div class="row mb-2">
@@ -36,7 +36,7 @@
 							style="font-family: Recipekorea; max-width: 80%; display: contents;">내 공간</h1>
 					</div>
 					<div>
-					<p class="breadcrumb float-sm-left" style="position: absolute; margin-top: 10px">나만의 이슈와 내가 쓴 댓글을 한번에 관리하세요 :D</p>
+					<p class="breadcrumb float-sm-left" style="position: absolute; margin-top: 10px">나만의 이슈와 내가 쓴 글을 한번에 관리하세요 :D</p>
 					</div>
 					</div>
 			</div>
@@ -45,9 +45,9 @@
 	<div class="col-md-9" style="max-width: 100%;">
 		<div class="card">
 			<div class="card-header p-2">
-				<ol class="nav nav-pills" style="font-family: Spoqa Han Sans; font-size:15px; margin:0px; border:none; padding-inline-start: 0px;  width:400px; float:left;">
+				<ol class="nav nav-pills" style="font-family: Spoqa Han Sans; font-size:15px; margin:0px; border:none; padding-inline-start: 0px;  width:400px; float:left;  ">
 					<li class="nav-item" ><a class="nav-link active"
-						href="/personal/list?mem_Id=${member.mem_Id}"  id="activityMenu">내 이슈</a></li>
+						href="/personal/list?mem_Id=${member.mem_Id}"  id="activityMenu" style="background-color:#DC3545;">내 이슈</a></li>
 					<li class="nav-item" ><a class="nav-link"
 						href="#" data-toggle="tab" id="activityMenu">내가 쓴 글</a></li>
 					<li class="nav-item" ><a class="nav-link"
@@ -56,7 +56,7 @@
 						href="#" data-toggle="tab" id="activityMenu">파일함</a></li>
 				</ol>
 				
-				<button type="button" class="btn btn-success float-right" onclick="location.href='/project/issue/insert?c_Id=${pjt.c_Id}'"style="text-align:center; float:right; background-color:#DC3545; border-color:#DC3545; font-family: Spoqa Han Sans; font-size:13px;">
+				<button type="button" class="btn btn-success float-right" onclick="location.href='/personal/insert?mem_Id=${member.mem_Id}'"style="text-align:center; float:right; background-color:#DC3545; border-color:#DC3545; font-family: Spoqa Han Sans; font-size:13px;">
 								<i class="fas fa-edit"></i> <b>이슈 작성</b></button>
 								
 			</div>
@@ -83,14 +83,14 @@
 						
 						</td>
 					  <td style="width:50%">	
-					  <a href="/project/personal/read?mem_Id=${personalList.mem_Id}&p_Num=${personalList.p_Num}"> <font size="3em"><b>${personalList.P_Name}</b></font></a>
+					  <a href="/personal/read?mem_Id=${personalList.mem_Id}&p_Num=${personalList.p_Num}"> <font size="3em"><b>${personalList.p_i_Name}</b></font></a>
 					  <br>
 			
 				  	  
 				  </td>
                       
-                      <td style="width:30%; vertical-align:top"> <font size="2em" color="#6c757d"><i class="far fa-calendar-alt"></i>&nbsp;&nbsp;<c:if test="${personalList.i_Start == null}">기간 미설정</c:if>
-                      <c:if test="${personalList.i_Start != null}">${personalList.i_Start} ~ ${personalList.i_End}</c:if> 
+                      <td style="width:30%; vertical-align:top"> <font size="2em" color="#6c757d"><i class="far fa-calendar-alt"></i>&nbsp;&nbsp;<c:if test="${personalList.p_i_Start == null}">기간 미설정</c:if>
+                      <c:if test="${personalList.p_i_Start != null}">${personalList.p_i_Start} ~ ${personalList.p_i_End}</c:if> 
                         </font>  </td>
                      
                    </tr>

@@ -31,12 +31,12 @@ span[name="chargerspan"] {
 		
 		//글쓰기 빈 값 안되게 검사
 		$("#submit").click(function(){
-			var i_Name = $("#i_Name").val();
+			var p_i_Name = $("#p_i_Name").val();
 		
 			
-			if(i_Name==''){
+			if(p_i_Name==''){
 				alert("이슈명을 입력하세요");
-				document.insertForm.i_Name.focus();
+				document.insertForm.p_i_Name.focus();
 				return false; 
 			}
 			
@@ -55,29 +55,29 @@ span[name="chargerspan"] {
 		
 		
 		//캘린더 기능
-		 $('#i_Period').daterangepicker({
+		 $('#p_i_Period').daterangepicker({
 			locale: { format: 'YYYY-MM-DD'}
 		 })
 		 
 		//파일첨부 ajax
-		$('#a_File').change(function(e){
+		$('#p_a_File').change(function(e){
 			var formData = new FormData();
-			var inputFile = $("input[name='a_File']");
+			var inputFile = $("input[name='p_a_File']");
 			var files = inputFile[0].files;
-			var i_Num = $("#i_Num").val();
+			var p_Num = $("#p_Num").val();
 			
 			console.log(files);
 		
 			
 			for(var i=0; i<files.length; i++){
-				formData.append("a_File", files[i]);
+				formData.append("p_a_File", files[i]);
 				
 			}
-			formData.append("i_Num", i_Num)
+			formData.append("p_Num", p_Num)
 			console.log(formData);
 			
 			$.ajax({
-				url:'/appendix/fileUpload',
+				url:'/personal/appendix/fileUpload',
 				processData:false,
 				contentType:false,
 				data:formData,
@@ -95,7 +95,7 @@ span[name="chargerspan"] {
 		 function getFileList(){
 			$.ajax({
 				type:"get",
-				url : "${path}/appendix/fileread?i_Num=${i_Num.NEXTVAL}",
+				url : "${path}/personal/appendix/fileread?p_Num=${p_Num.NEXTVAL}",
 						
 				success:function(result){
 					var str="";
@@ -104,11 +104,11 @@ span[name="chargerspan"] {
 						
 		                    
 						for(var i in result){
-							str+='<tr><td><span id="a_RealName" name="a_RealName">'+result[i].a_RealName+'</span></td>';
-							str+='<td><span id="a_Size" name="a_Size">'+(result[i].a_Size/1000)+'kb</span></td>';
-							str+='<td><input type="hidden" id="a_Num" name="a_Num" value="'+result[i].a_Num+'"/></td>';
+							str+='<tr><td><span id="p_a_RealName" name="p_a_RealName">'+result[i].p_a_RealName+'</span></td>';
+							str+='<td><span id="p_a_Size" name="p_a_Size">'+(result[i].p_a_Size/1000)+'kb</span></td>';
+							str+='<td><input type="hidden" id="p_a_Num" name="p_a_Num" value="'+result[i].p_a_Num+'"/></td>';
 							str+='<td class="text-right py-0 align-middle">';
-							str+='<div class="btn-group btn-group-sm" ><a href="javascript:fileDelete('+result[i].a_Num+')" class="btn btn-danger" ><i class="fas fa-trash" ></i></a></div>';
+							str+='<div class="btn-group btn-group-sm" ><a href="javascript:fileDelete('+result[i].p_a_Num+')" class="btn btn-danger" ><i class="fas fa-trash" ></i></a></div>';
 							str+='</td></tr>'
 						}
 						
@@ -128,11 +128,11 @@ span[name="chargerspan"] {
 		}
 	
 	//첨부파일 삭제
-  	function fileDelete(a_Num){
+  	function fileDelete(p_a_Num){
 	
 			$.ajax({
-				url : "/appendix/fileUpdate",
-				data : {"a_Num" : a_Num},
+				url : "/personal/appendix/fileUpdate",
+				data : {"p_a_Num" : p_a_Num},
 				type : 'post',
 				success:function(){
 					getFileList();
@@ -146,29 +146,29 @@ span[name="chargerspan"] {
 	
 	function periodSetting(){
 		if($("#periodNull").is(":checked")==true){
-			var i_Start = "";
-			var i_End="";
-			document.insertForm.i_Start.value=i_Start;
-			document.insertForm.i_End.value=i_End;
+			var p_i_Start = "";
+			var p_i_End="";
+			document.insertForm.p_i_Start.value=p_i_Start;
+			document.insertForm.p_i_End.value=p_i_End;
 			
-			var i_PeriodCheck = "";
-			document.insertForm.i_PeriodCheck.value=i_PeriodCheck;
+			var p_p_i_PeriodCheck = "";
+			document.insertForm.p_p_i_PeriodCheck.value=p_p_i_PeriodCheck;
 			
-			$("#i_Period").css('background-color','#e9ecef');
-			$("#i_Period").css('color','#e9ecef');
-			$("#i_Period").attr('disabled',true)
+			$("#p_i_Period").css('background-color','#e9ecef');
+			$("#p_i_Period").css('color','#e9ecef');
+			$("#p_i_Period").attr('disabled',true)
 		}else{
-			$("#i_Period").css('background-color','#fff');
-			$("#i_Period").css('color','#495057');
-			$("#i_Period").attr('disabled',false)
+			$("#p_i_Period").css('background-color','#fff');
+			$("#p_i_Period").css('color','#495057');
+			$("#p_i_Period").attr('disabled',false)
 			
-			var i_PeriodCheck = $("#i_Period").val();
-			document.insertForm.i_PeriodCheck.value=i_PeriodCheck;
+			var p_p_i_PeriodCheck = $("#p_i_Period").val();
+			document.insertForm.p_p_i_PeriodCheck.value=p_p_i_PeriodCheck;
 			
-			var i_Start = $("#i_PeriodCheck").val().substring(0,10);
-			var i_End= $("#i_PeriodCheck").val().substring(13,23);
-			document.insertForm.i_Start.value=i_Start;
-			document.insertForm.i_End.value=i_End;
+			var p_i_Start = $("#p_p_i_PeriodCheck").val().substring(0,10);
+			var p_i_End= $("#p_p_i_PeriodCheck").val().substring(13,23);
+			document.insertForm.p_i_Start.value=p_i_Start;
+			document.insertForm.p_i_End.value=p_i_End;
 		}
 	}
 	
@@ -177,7 +177,7 @@ span[name="chargerspan"] {
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <form name = insertForm action="/project/issue/insert" method="post" encType="UTF-8">
+        <form name = insertForm action="/personal/insert" method="post" encType="UTF-8">
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
@@ -203,20 +203,20 @@ span[name="chargerspan"] {
         	<div class="form-group">
           
               <div class="form-group">
-             	<input type="hidden" id = "i_Num" name="i_Num" value="${i_Num.NEXTVAL}">
+             	<input type="hidden" id = "p_Num" name="p_Num" value="${p_Num.NEXTVAL}">
                 <label for="inputName">이슈명</label>
-                <input type="text" id = "i_Name" name="i_Name" class="form-control">
+                <input type="text" id = "p_i_Name" name="p_i_Name" class="form-control">
               </div>
               
               <div class="form-group">
              
                 <label for="inputDescription">이슈 내용</label>
                 
-                <textarea name="i_Content" id="i_Content" class="form-control" style="width:100px;">              </textarea>
+                <textarea name="p_i_Content" id="p_i_Content" class="form-control" style="width:100px;">              </textarea>
                 <script>
            
                 //CK에디터 적용
-					CKEDITOR.replace( 'i_Content', {
+					CKEDITOR.replace( 'p_i_Content', {
 						allowedContent:true,
 	
 					toolbar :[['NewPage','Preview','Bold','Italic','Underline','Strike','-','Subscript','Superscript','-','-',
@@ -264,8 +264,8 @@ span[name="chargerspan"] {
             <div class="card-body">
             <label for="inputName">첨부파일</label>
             
-            <a href="#"><button type="button" class="btn btn-block btn-default btn-xs float-right" onclick="oncilck=document.all.a_File.click()" style="width:50px; margin:1px">추가</button></a>
-            <input type="file" id="a_File" name="a_File" style="display:none" multiple="multiple"/>
+            <a href="#"><button type="button" class="btn btn-block btn-default btn-xs float-right" onclick="oncilck=document.all.p_a_File.click()" style="width:50px; margin:1px">추가</button></a>
+            <input type="file" id="p_a_File" name="p_a_File" style="display:none" multiple="multiple"/>
            <br>
                
 				<div id="fileList"></div>
@@ -281,106 +281,12 @@ span[name="chargerspan"] {
          <div class="card card-info" >
           
             <div class="card-body">
-             <div class="form-group">
-              
-                <label for="inputStatus">담당자</label>
-                
-               <select class="form-control custom-select" id="chargerSelect" name="chargerSelect">
-               	<option selected disabled>담당자를 지정하세요</option>
-                  <c:forEach var="comemList" items="${comemList}" >
-                  <option >${comemList.MEM_ID}(${comemList.MEM_NAME})</option>
-                  </c:forEach>
-                </select>
-                
-                
-              </div>
-              <div class="form-group">
-              <span id="id_check" name="id_check"
-				style="font-size: 0.9em; line-height: 1.0; color: #a1a1a1; ">
-			
-				담당자 목록을  확인하세요.</span>
-              <div id="chargerList" class = "form-control" style="height: 100px; width: 100%; white-space: pre-line; margin-bottom: 5px; overflow:scroll;"></div>
-             
-				</div>
-				<div id="chargerForm"></div>
-			<!-- 이슈 담당자 관련 스크립트 따로 놨어요 -->
-			<script type="text/javascript">
-			//이슈 담당자 부분
-			var chargedArray = new Array();
-			var chargedCount = 0;
-			
-			 $('#chargerSelect').change(function(event) {
-				 var mem_Id = $('#chargerSelect').val();
-				 var idSearch = mem_Id.split("(");
-				 var realmem_Id = idSearch[0];
-						 
-				 chargedArray.push(mem_Id);
-				 console.log("chargedArray : "+chargedArray);
-				 
-				 var ok = true;
-					 for(var i=0; i<chargedArray.length-1; i++){
-						 if(mem_Id == chargedArray[i]){
-							 alert("동일한 아이디를 여러 번 초대할 수 없습니다.")
-							 chargedArray.pop();
-							 console.log(chargedArray);
-						  	ok=false;
-						 }
-			
-				 		}
-					 if(ok==true){
-						 
-						 chargedCount++;
-						 
-						$('#chargerList').append("<span id= 'chargerspan"+chargedCount+"' name='chargerspan'>"+mem_Id+"<a id ='chargerdelete["+chargedCount+"]' name = 'chargerdelete' onclick='deleteCharger("+chargedCount+")'>X</a></span>");
-						$('#chargerForm').append("<input type='hidden' id='hidden_Id"+chargedCount+"' name='comem_Id' value='"+realmem_Id+"'>");
-					 }
-			 })
-			
-			
-			//이슈 담당자 x버튼 누르면 삭제
-			function deleteCharger(chargedCount){
-			
-			 var chargerspan = $('#chargerspan'+chargedCount).text();
-			 var splitResult = chargerspan.split("X");
-			 var Realchargerspan = splitResult[0];
-			 
-			 
-			 $('#chargerspan'+chargedCount).remove();
-			 $('#hidden_Id'+chargedCount).remove();
-			 
-			 var index = chargedArray.indexOf(Realchargerspan);
-			 
-			 if (index > -1) {
-				 chargedArray.splice(index,1);
-				}
-			 
-			 console.log("changed : "+ chargedArray);
-			 
-			
-			}
-					
-			</script>
-				
-
-				
-             
             
-             
-                <%-- <label for="inputStatus">협업공간명</label>
-               <select class="form-control custom-select">
-               	<option selected value="${c_Id}" label="${c_Id}"></option>
-                 <c:forEach var="coList" items="${coList}" >
-                 <option id="c_Id" value="${coList.C_ID}" label="${coList.C_NAME}"></option>
-               </c:forEach> --%>
-                  
+ 
                 
         <!--협업공간ID -->
-             <input id="c_Id" name="c_Id" type="hidden" value="${c_Id}"/>
-		<!-- 이슈그룹번호는 디폴트로 '1'으로 설정 -->
-			<input name="ig_Num" id="ig_Num" type="hidden" value="1"><br>     
-               
-               
-               
+             <input id="mem_Id" name="mem_Id" type="hidden" value="${mem_Id}"/>
+
              
                
                 
@@ -407,16 +313,16 @@ span[name="chargerspan"] {
                         <i class="far fa-calendar-alt"></i>
                       </span>
                     </div>
-                    <input type="text" id = "i_Period" name="i_Period" class="form-control float-right">
+                    <input type="text" id = "p_i_Period" name="p_i_Period" class="form-control float-right">
                     
               </div>
 
                  
               
                     
-                    <input type="hidden" id = "i_PeriodCheck" name="i_PeriodCheck" value="">
-                    <input type="hidden" id = "i_Start" name="i_Start" value="">
-                    <input type="hidden" id = "i_End" name="i_End" value="">
+                    <input type="hidden" id = "p_p_i_PeriodCheck" name="p_p_i_PeriodCheck" value="">
+                    <input type="hidden" id = "p_i_Start" name="p_i_Start" value="">
+                    <input type="hidden" id = "p_i_End" name="p_i_End" value="">
                   
                 </div>
                 <!-- /.캘린더 -->
@@ -430,10 +336,7 @@ span[name="chargerspan"] {
     </section>
     <!-- /.content -->
     </form>
-    <form action = "/project/issue/insert" method="post" id="chargerForm">
-    <input type="hidden" name="c_Id" value="${c_Id}">
-    
-    </form>
+
   </div>
   <!-- /.content-wrapper -->
 

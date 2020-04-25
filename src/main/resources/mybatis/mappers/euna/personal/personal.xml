@@ -9,7 +9,7 @@
 		<result property="p_Num" column="p_Num" />
 		<result property="mem_Id" column="mem_Id" />
 		<result property="p_i_Name" column="p_i_Name" />
-		<result property="p_i_Content" column="p_i_Content" />
+		<result property="p_i_Content" column="p_i_Content" jdbcType="CLOB" javaType="java.lang.String"/>
 		<result property="p_i_Date" column="p_i_Date" />
 		<result property="p_i_Start" column="p_i_Start" />
 		<result property="p_i_End" column="p_i_End" />
@@ -20,7 +20,7 @@
 		<result property="p_Num" column="p_Num" />
 		<result property="mem_Id" column="mem_Id" />
 		<result property="p_i_Name" column="p_i_Name" />
-		<result property="p_i_Content" column="p_i_Content" />
+		<result property="p_i_Content" column="p_i_Content" jdbcType="CLOB" javaType="java.lang.String"/>
 		<result property="p_i_Date" column="p_i_Date" />
 		<result property="p_i_Start" column="p_i_Start" />
 		<result property="p_i_End" column="p_i_End" />
@@ -64,25 +64,17 @@
 
 	<!-- 글 입력 -->
 	<insert id="personalInsert" parameterType="PersonalVO">
-		insert into personal(i_Num, c_Id, i_Name, i_Content, i_Date, ig_Num , mem_Id, i_Start, i_End)
-		values(#{i_Num}, #{c_Id}, #{i_Name}, #{i_Content} ,  
+		insert into personal(p_Num, mem_Id, p_i_Name, p_i_Content, p_i_Date, p_i_Start , p_i_End)
+		values(#{p_Num}, #{mem_Id}, #{p_i_Name}, #{p_i_Content} ,  
 		(select to_char(sysdate, 'YYYY/MM/DD/ HH24:MI:SS') from dual)
-		, #{ig_Num} , #{mem_Id}, #{i_Start}, #{i_End})
+		, #{p_i_Start} , #{p_i_End})
 	</insert>
-<!-- 	<insert id="personalInsert" parameterType="java.util.HashMap">
-		<selectKey resultType="string" keyProperty="i_Num" order="BEFORE">
-        SELECT personal_i_Num.nextval as i_Num FROM dual        
-    	</selectKey>   
-		insert into personal(i_Num, c_Id, i_Name, i_Content, i_Date, ig_Num , mem_Id, i_Start, i_End)
-		values(#{i_Num}, #{c_Id}, #{i_Name}, #{i_Content} ,  
-		(select to_char(sysdate, 'YYYY/MM/DD/ HH24:MI:SS') from dual)
-		, #{ig_Num} , #{mem_Id}, #{i_Start}, #{i_End})
-	</insert> -->
+
 	
  	<!-- 글쓰기 화면 전환 시 글번호 먼저 가져오기 -->
-	<select id="get_i_Num" resultMap="personalResult02"> 
+	<select id="get_p_Num" resultMap="personalResult02"> 
       <![CDATA[
-		select personal_i_Num.nextval from dual
+		select PERSONAL_SEQ.nextval from dual
       ]]>
 
 	</select>	
@@ -91,11 +83,9 @@
 	<!-- 게시글 조회 -->
 	<select id="personalRead"  parameterType="String" resultMap="personalResult02"> 
       <![CDATA[
-        select I.i_Num, I.c_Id, I.i_Name, I.i_Content, I.i_Date, I.mem_Id, M.mem_name, I.i_Start, I.i_End, I.ig_Num, IG.ig_Name 
-		from personal I, member M, personal_group IG
-		where I.mem_Id = M.mem_Id
-		and I.ig_Num = IG.ig_Num
-        and I.i_Num=#{i_Num}
+        select p_Num, p_i_Name, p_i_Content, p_i_Date, p_i_Start, p_i_End
+		from personal
+        where p_Num=#{p_Num}
       ]]>
 	</select>
 

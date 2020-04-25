@@ -24,6 +24,12 @@ public class PersonalDAOImpl implements PersonalDAO {
 		result = sqlSession.update("personal.personalInsert", map);
 		return result;
 	}
+	
+	//글쓰기 화면 전환 시 글번호 가져오기
+	@Override
+	public Map<String, Object> get_p_Num() {
+		return sqlSession.selectOne("personal.get_p_Num");
+	}
 
 	// 글 목록 페이징
 	@Override
@@ -36,21 +42,21 @@ public class PersonalDAOImpl implements PersonalDAO {
 
 	// 게시물 총 갯수
 	@Override
-	public int listCount(String c_Id) throws Exception {
-		return sqlSession.selectOne("personal.listCount", c_Id);
+	public int listCount(String mem_Id) throws Exception {
+		return sqlSession.selectOne("personal.listCount", mem_Id);
 	}
 
 	// 게시글 조회
 	@Override
-	public Map<String, Object> personalRead(String i_Num) {
-		return sqlSession.selectOne("personal.personalRead", i_Num);
+	public Map<String, Object> personalRead(String p_Num) {
+		return sqlSession.selectOne("personal.personalRead", p_Num);
 
 	}
 
 	// 글 삭제
 	@Override
-	public void personalDelete(String i_Num) throws Exception {
-		sqlSession.delete("personal.personalDelete", i_Num);
+	public void personalDelete(String p_Num) throws Exception {
+		sqlSession.delete("personal.personalDelete", p_Num);
 
 	}
 
@@ -69,8 +75,8 @@ public class PersonalDAOImpl implements PersonalDAO {
 	
 	//협업공간 내 멤버 조회
 	@Override
-	public List<Map> comemRead(String c_id) {
-		return sqlSession.selectList("personal.comemRead", c_id);
+	public List<Map> comemRead(String mem_Id) {
+		return sqlSession.selectList("personal.comemRead", mem_Id);
 
 	}
 	
@@ -86,23 +92,19 @@ public class PersonalDAOImpl implements PersonalDAO {
 	
 	//이슈 담당자 조회
 	@Override
-	public List<Map> chargerRead(String i_Num) {
-		return sqlSession.selectList("personal.chargerRead", i_Num);
+	public List<Map> chargerRead(String p_Num) {
+		return sqlSession.selectList("personal.chargerRead", p_Num);
 	}
 	
 	//이슈 담당자 수정(삭제 후 다시 삽입)
 	@Override
-	public void chargerDelete(String i_Num) throws Exception {
-		sqlSession.delete("personal.chargerDelete", i_Num);
+	public void chargerDelete(String p_Num) throws Exception {
+		sqlSession.delete("personal.chargerDelete", p_Num);
 
 	}
 	
 	
-	//글쓰기 화면 전환 시 글번호 가져오기
-	@Override
-	public Map<String, Object> get_i_Num() {
-		return sqlSession.selectOne("personal.get_i_Num");
-	}
+
 
 	
 
@@ -128,8 +130,8 @@ public class PersonalDAOImpl implements PersonalDAO {
 	
 	//글 목록 조회 시  이슈 담당자 화면에 뿌리기 용
 	@Override
-	public List<Map> chargerList(String c_Id) {
-		return sqlSession.selectList("personal.chargerList", c_Id);
+	public List<Map> chargerList(String mem_Id) {
+		return sqlSession.selectList("personal.chargerList", mem_Id);
 	}
 	
 }
