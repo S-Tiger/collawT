@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="personal">
+	<resultMap id="personalResult01" type="PersonalVO">
+		<!-- property는 화면단에서 쓸 이름, column은 데이터컬럼명이랑 동일 -->
+		<result property="p_Num" column="p_Num" />
+		<result property="mem_Id" column="mem_Id" />
+		<result property="p_i_Name" column="p_i_Name" />
+		<result property="p_i_Content" column="p_i_Content" />
+		<result property="p_i_Date" column="p_i_Date" />
+		<result property="p_i_Start" column="p_i_Start" />
+		<result property="p_i_End" column="p_i_End" />
+	</resultMap>
+	
+	<resultMap id="personalResult02" type="java.util.HashMap">
+		<!-- property는 화면단에서 쓸 이름, column은 데이터컬럼명이랑 동일 -->
+		<result property="p_Num" column="p_Num" />
+		<result property="mem_Id" column="mem_Id" />
+		<result property="p_i_Name" column="p_i_Name" />
+		<result property="p_i_Content" column="p_i_Content" />
+		<result property="p_i_Date" column="p_i_Date" />
+		<result property="p_i_Start" column="p_i_Start" />
+		<result property="p_i_End" column="p_i_End" />
+	</resultMap>
+
+
+	
+
+	<!-- 글 목록 페이징-->
+  		<select id="searchList" resultMap="personalResult02" parameterType="project.euna.personal.vo.Criteria"> 
+      <![CDATA[
+		select p_Num, mem_Id, p_i_Name, p_i_Content, p_i_Date, p_i_Start, p_i_End
+        from (
+            select p_Num, mem_Id, p_i_Name, p_i_Content, p_i_Date, p_i_Start, p_i_End, row_number() over(order by p_Num desc) as rnum
+            from personal
+            )
+        where rnum between #{rowStart} and #{rowEnd}
+        and mem_id = #{mem_Id}
+        order by to_number(p_Num) desc
+      ]]>
+
+	</select>
+	
+	
+	
+	
+	<!-- 게시물 총 갯수 -->
+	<select id="listCount" resultType="int" parameterType="project.euna.personal.vo.Criteria"> 
+      <![CDATA[
+        select count(p_Num)
+        from personal
+        where p_Num>0
+        and mem_Id=#{mem_Id}
+      ]]>
+
+	</select>
+
+	
+
+
+
+	<!-- 글 입력 -->
+	<insert id="personalInsert" parameterType="PersonalVO">
+		insert into personal(i_Num, c_Id, i_Name, i_Content, i_Date, ig_Num , mem_Id, i_Start, i_End)
+		values(#{i_Num}, #{c_Id}, #{i_Name}, #{i_Content} ,  
+		(select to_char(sysdate, 'YYYY/MM/DD/ HH24:MI:SS') from dual)
+		, #{ig_Num} , #{mem_Id}, #{i_Start}, #{i_End})
+	</insert>
+<!-- 	<insert id="personalInsert" parameterType="java.util.HashMap">
+		<selectKey resultType="string" keyProperty="i_Num" order="BEFORE">
+        SELECT personal_i_Num.nextval as i_Num FROM dual        
+    	</selectKey>   
+		insert into personal(i_Num, c_Id, i_Name, i_Content, i_Date, ig_Num , mem_Id, i_Start, i_End)
+		values(#{i_Num}, #{c_Id}, #{i_Name}, #{i_Content} ,  
+		(select to_char(sysdate, 'YYYY/MM/DD/ HH24:MI:SS') from dual)
+		, #{ig_Num} , #{mem_Id}, #{i_Start}, #{i_End})
+	</insert> -->
+	
+ 	<!-- 글쓰기 화면 전환 시 글번호 먼저 가져오기 -->
+	<select id="get_i_Num" resultMap="personalResult02"> 
+      <![CDATA[
+		select personal_i_Num.nextval from dual
+      ]]>
+
+	</select>	
+
+
+	<!-- 게시글 조회 -->
+	<select id="personalRead"  parameterType="String" resultMap="personalResult02"> 
+      <![CDATA[
+        select I.i_Num, I.c_Id, I.i_Name, I.i_Content, I.i_Date, I.mem_Id, M.mem_name, I.i_Start, I.i_End, I.ig_Num, IG.ig_Name 
+		from personal I, member M, personal_group IG
+		where I.mem_Id = M.mem_Id
+		and I.ig_Num = IG.ig_Num
+        and I.i_Num=#{i_Num}
+      ]]>
+	</select>
+
+	<!-- 게시물 삭제 -->
+	<delete id="personalDelete" parameterType="String">
+		DELETE
+		FROM personal
+		WHERE i_Num=#{i_Num}
+	</delete>
+
+	<!-- 게시물 수정 -->
+	<update id="personalUpdate"
+		parameterType="java.util.HashMap">
+		UPDATE personal
+		SET i_Name = #{i_Name},
+		i_Content = #{i_Content},
+		i_Date = (select to_char(sysdate, 'YYYY/MM/DD/ HH24:MI:SS') from dual),
+		i_Start = #{i_Start},
+		i_End = #{i_End},
+		ig_Num = #{ig_Num}
+		WHERE i_Num=#{i_Num}
+	</update>
+	
+	
+			<!-- 협업공간 조회 -->
+ 	<select id="igRead"  resultType="java.util.HashMap"> 
+      <![CDATA[
+			select *
+			from personal_group
+			order by ig_Num asc
+      ]]>
+	</select> 
+	
+	
+	<!-- 협업공간 내 멤버 조회 -->
+	 <select id="comemRead"  resultType="java.util.HashMap"> 
+      <![CDATA[
+			select m.mem_name, m.mem_id
+			from member m, co_member co
+			where m.mem_id = co.mem_id
+			and c_id = #{c_id}
+      ]]>
+	</select> 
+	
+	<!-- 이슈 담당자 삽입 -->
+	<insert id="comemInsert" parameterType="java.util.Map">
+		insert into charger(cr_Num, i_Num, c_Id, cr_Status, mem_Id) 
+		values(CR_NUM_SEQ.nextval, #{i_Num}, #{c_Id}, #{cr_Status}, #{mem_Id})
+	</insert>	
+	
+	
+	<!-- 이슈 담당자 조회 -->
+	<select id="chargerRead"  resultType="java.util.HashMap"> 
+      <![CDATA[
+			select m.mem_id, m.mem_name
+			from charger ch, member m
+			where m.mem_id=ch.mem_id
+			and i_Num=#{i_Num}
+      ]]>
+	</select> 
+	
+	<!-- 이슈 담당자 수정(삭제 후 다시 삽입) -->
+	<delete id="chargerDelete" parameterType="String">
+		DELETE
+		FROM charger
+		WHERE i_Num=#{i_Num}
+	</delete>
+	
+	
+	
+	
+		<!-- 협업공간 조회 -->
+ 	<select id="coRead"  resultType="java.util.HashMap"> 
+      <![CDATA[
+      
+     		select c.c_name, c.c_id
+            from co_member co, co_work c
+            where c.c_id=co.c_id
+            and co.mem_id=#{mem_id}
+            
+      ]]>
+	</select>
+	
+		<!-- 다른협업공간으로 복제 입력 -->
+		
+	<insert id="personalCopy" parameterType="PersonalVO">
+	<selectKey resultType="string" keyProperty="i_Num" order="BEFORE">
+        SELECT personal_i_Num.nextval as i_Num FROM dual        
+    	</selectKey>   
+		insert into personal(i_Num, c_Id, i_Name, i_Content, i_Date, ig_Num , mem_Id, i_Start, i_End)
+		values(#{i_Num}, #{c_Id}, #{i_Name}, #{i_Content} ,  
+		(select to_char(sysdate, 'YYYY/MM/DD/ HH24:MI:SS') from dual)
+		, #{ig_Num} , #{mem_Id}, #{i_Start}, #{i_End})
+	</insert>
+
+
+
+</mapper>
