@@ -418,40 +418,18 @@
 			<nav class="mt-2">
 				<ul class="nav nav-pills nav-sidebar flex-column"
 					data-widget="treeview" role="menu" data-accordion="false">
-					<!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-					<li class="nav-item has-treeview" id="menustat"
-						style="border-bottom: 1px solid #4f5962;"><a href="#"
-						class="nav-link active" onclick="menuclick()"> <i
-							class="nav-icon far fa-handshake"></i>
-							<p>
-								등록된 협업공간 <i class="right fas fa-angle-left"></i>
-							</p>
-					</a>
-						<ul class="nav nav-treeview">
-							<li class="nav-item"><a href="#" class="nav-link">
-									<i class="nav-icon fas fa-user-secret"></i>
-									<p>프라이빗 공간</p>
-							</a></li>
-							<c:forEach var="coworklist" items="${coworklist}">
-								<li class="nav-item"><a
-									href="/project/main?c_Id=${coworklist.c_Id}" class="nav-link">
-										<i class="nav-icon fas fa-sitemap"></i>
-										<p>${coworklist.c_Name}</p>
-								</a></li>
-							</c:forEach>
-							<li class="nav-item"><a href="/#" data-needpopup-show="#createpjt-popup"
-								class="nav-link"> <i class="nav-icon fas fa-folder-plus"></i>
-									<p>협업공간 생성</p>
-							</a></li>
-						</ul></li>
-					<li class="nav-item"><a href="${contextPath}/news/list"
+						<li class="nav-item"><a href="${contextPath}/news/list"
 						class="nav-link"> <i class="nav-icon fas fa-book-open"></i>
 							<p>
 								새로운 소식 <span class="badge badge-info right"></span>
 								<!--  <span class="right badge badge-danger">New</span>-->
 							</p>
 					</a></li>
+						<li class="nav-item"><a href="/personal/list?mem_Id=${member.mem_Id}" class="nav-link">
+									<i class="nav-icon fas fa-user-secret"></i>
+									<p>내 공간</p>
+							</a></li>
+
 					<li class="nav-item"><a href="/#" data-needpopup-show="#bookmark-popup"
 						class="nav-link" id="bookmarkA"> <i class="nav-icon fas fa-bookmark"></i>
 							<p>
@@ -460,13 +438,38 @@
 							</p>
 					</a></li>
 					
-					<li class="nav-item"><a href="/calendar/main"
+					<li class="nav-item" style="border-bottom: 1px solid #4f5962;"><a href="/calendar/main"
 						class="nav-link"> <i class="nav-icon fas fa-calendar-check"></i>
 							<p>
 								전체 캘린더 <span class="badge badge-info right"></span>
 								<!--  <span class="right badge badge-danger">New</span>-->
 							</p>
 					</a></li>
+												<li class="nav-item"><a href="/#" data-needpopup-show="#createpjt-popup"
+								class="nav-link"> <i class="nav-icon fas fa-folder-plus"></i>
+									<p>협업공간 생성</p>
+							</a></li>
+					<!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+					<li class="nav-item has-treeview" id="menustat"><a href="#"
+						class="nav-link active" onclick="menuclick()"> <i
+							class="nav-icon far fa-handshake"></i>
+							<p>
+								등록된 협업공간 <i class="right fas fa-angle-left"></i>
+							</p>
+					</a>
+						<ul class="nav nav-treeview">
+
+							<c:forEach var="coworklist" items="${coworklist}">
+								<li class="nav-item"><a
+									href="/project/main?c_Id=${coworklist.c_Id}" class="nav-link">
+										<i class="nav-icon fas fa-sitemap"></i>
+										<p>${coworklist.c_Name}</p>
+								</a></li>
+							</c:forEach>
+
+						</ul></li>
+					
 					
 					
 						
