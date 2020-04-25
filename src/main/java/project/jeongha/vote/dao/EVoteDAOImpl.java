@@ -16,6 +16,12 @@ public class EVoteDAOImpl implements EVoteDAO {
 	@Autowired
 	private SqlSession sqlSession;
 
+	
+	// 아이디 중복 검사
+		public int checkId(Map<String, Object> mem_Id) throws Exception {
+			int result = sqlSession.selectOne("voteResult.checkId", mem_Id);
+			return result;
+		}
 	// 투표 입력
 	@Override
 	public int voteInsert(Map map) {
@@ -58,6 +64,13 @@ public class EVoteDAOImpl implements EVoteDAO {
 	public List<Map> votedRead(String v_Num) {
 		return sqlSession.selectList("voteResult.votedRead", v_Num);
 	}
+	
+	//카운트
+	@Override
+	public List<Map> voteCount(Map<String, Object> voteCount)throws Exception {
+		List<Map> result = sqlSession.selectList("voteResult.voteCount", voteCount );
+		return result;
+	}
 
 	// 글 삭제
 	@Override
@@ -65,7 +78,9 @@ public class EVoteDAOImpl implements EVoteDAO {
 		sqlSession.delete("voteResult.issueDelete", i_Num);
 
 	}
-
+	
+	//투표 카운트
+	
 	// 글 수정
 //	@Override
 //	public void issueUpdate(IssueVO issueVO) throws Exception {
@@ -124,6 +139,8 @@ public class EVoteDAOImpl implements EVoteDAO {
 		
 		return result;
 	}
+	
+	
 
 	// 협업공간 조회
 //	@Override

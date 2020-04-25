@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.ui.Model;
@@ -16,7 +17,7 @@ public interface EVoteService {
 //
 	public void  voteInsert(Map map);
 	public void  votedInsert(Map map);
-	public void  voterInsert(Map map);
+	public void  voterInsert(Map map, HttpServletResponse response ,VoteVO voteVO )throws Exception;
 	public List<Map> searchList(Criteria cri) throws Exception;
 	public Map<String, Object> voteRead(String v_Num);	
 	public void voteDelete(String v_Num) throws Exception;
@@ -30,4 +31,5 @@ public interface EVoteService {
 	//public List<Map> coRead(String mem_id);
 	public Map<String, Object> voteInfo(Map<String, Object> voteVO)throws Exception;
 	public List<Map> votedRead(String v_Num);
+	public List<Map> voteCount(Map<String, Object> voteCount)throws Exception;
 }

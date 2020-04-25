@@ -51,12 +51,12 @@
       <![CDATA[
 		select v_Num, c_Id, v_Name, v_Content, v_Date, mem_Id, mem_name, v_Start, v_End, vs_Num, vs_Name
         from (
-            select V.v_Num, V.c_Id, V.v_Name, V.v_Content, V.v_Date, V.mem_Id, V.v_Start, V.v_End, V.vs_Num, VS.vs_Name,
+            Select V.v_Num, V.c_Id, V.v_Name, V.v_Content, V.v_Date, V.mem_Id, V.v_Start, V.v_End, V.vs_Num, VS.vs_Name,
             M.mem_name, row_number() over(order by V.v_Num desc) as rnum
-            from vote V, member M, vote_status VS
-            where V.mem_Id = M.mem_Id
-            and V.vs_Num = VS.vs_Num
-            and V.c_Id=#{c_Id}
+            From vote V, member M, vote_status VS
+            Where V.mem_Id = M.mem_Id
+            And V.vs_Num = VS.vs_Num
+            And V.c_Id=#{c_Id}
             )
         where rnum between #{rowStart} and #{rowEnd}
         order by to_number(v_Num) desc
@@ -108,9 +108,15 @@
 		values( #{v_Num}, #{vd_Num}, #{mem_Id},	#{c_Id} )
 		]]>
 	</insert>
-
-
-
+	
+	<!-- 투표 카운팅 -->
+	<select id="voteCount" parameterType="java.util.Map" resultMap="voteResult02"> 
+      <![CDATA[
+		select count(vd_num) as v_Count 
+		from voter 
+		where v_num=#{v_Num} and vd_Num=#{vd_Num}
+      ]]>
+	</select>
 
 	<!-- 투표 조회 -->
 	<select id="voteRead" parameterType="String" resultMap="voteResult02"> 
@@ -201,6 +207,12 @@
 		WHERE i_Num=#{i_Num}
 	</delete>
 
+	<!-- 투표 중복확인검사 -->
+	<select id="checkId" parameterType="java.util.HashMap" resultType="int">
+		<![CDATA[
+		select count(*) from voter where mem_Id = #{mem_Id} and v_Num=#{v_Num}
+		]]>
+	</select>
 
 	<!-- 협업공간 조회 -->
 	<!-- <select id="coRead" resultType="java.util.HashMap"> <![CDATA[ select 

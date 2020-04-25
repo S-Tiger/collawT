@@ -3,6 +3,19 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<style>
+.btn-app {
+	border-radius: 3px;
+	color: #6c757d;
+	font-size: 12px;
+	height: 60px;
+	margin: 0 0 0px 0px;
+	min-width: 80px;
+	padding: 0px 5px;
+	position: relative;
+	text-align: center;
+}
+</style>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
 
@@ -52,92 +65,7 @@
 							}
 						})
 
-						//북마크 버튼 이벤트
-						$("#bookmarkinsert")
-								.on(
-										"click",
-										function() {
-											console.log("1121212" + checkbook);
-											if (checkbook == 0) {
-												$
-														.ajax({
-															url : "/bookmark/insert",
-															type : 'post',
-															data : {
-																v_Num : $(
-																		"#v_Num")
-																		.val(),
-															},
-															success : function(
-																	data) {
-																var bookcount = $(
-																		"#bookmarkcount")
-																		.html();
-																console
-																		.log(bookcount);
-																if (data == 1) {
-																	alert("북마크에 등록하셨습니다.");
-																	$(
-																			"#bookmarkinsert")
-																			.css(
-																					'color',
-																					'#f8f9fa');
-																	$(
-																			"#bookmarkinsert")
-																			.css(
-																					'background-color',
-																					'#dc3545');
-																	checkbook = 1;
-																	bookcount++;
-																	console
-																			.log(bookcount);
-																	$(
-																			"#bookmarkcount")
-																			.html(
-																					bookcount);
-																}
-															}
-														})
-											} else if (checkbook == 1) {
-												$
-														.ajax({
-															url : "/bookmark/delete",
-															type : 'post',
-															data : {
-																v_Num : $(
-																		"#v_Num")
-																		.val(),
-															},
-															success : function(
-																	data) {
-																var bookcount = $(
-																		"#bookmarkcount")
-																		.html();
-																if (data == 1) {
-																	alert("북마크를 해제하셨습니다.");
-																	$(
-																			"#bookmarkinsert")
-																			.css(
-																					'color',
-																					'#444');
-																	$(
-																			"#bookmarkinsert")
-																			.css(
-																					'background-color',
-																					'#f8f9fa');
-																	checkbook = 0;
-																	bookcount--;
-																	console
-																			.log(bookcount);
-																	$(
-																			"#bookmarkcount")
-																			.html(
-																					bookcount);
-																}
-															}
-														})
-											}
-										})
+					
 
 						//북마크 추가 상태 확인 메소드
 						function bookcheck() {
@@ -149,8 +77,7 @@
 								},
 								success : function(data) {
 									if (data == 1) {
-										$("#bookmarkinsert").css('color',
-												'#f8f9fa');
+										$("#bookmarkinsert").css('color','#f8f9fa');
 										$("#bookmarkinsert").css(
 												'background-color', '#dc3545');
 										console.log(checkbook);
@@ -178,11 +105,9 @@
 							for ( var i in result) {
 								str += '<div class="card-footer card-comments">';
 								str += '<div class="card-comment">';
-
 								str += '<img alt="Not null" width="50" height="50"src="/member/getByteImage?mem_Id='
 										+ result[i].mem_Id
 										+ '" class="img-circle elevation-1"/>';
-
 								str += '<div class="comment-text">';
 								str += '<span class="username">'
 										+ result[i].mem_Name;
@@ -199,7 +124,6 @@
 										+ ('${member.mem_Id}' == result[i].mem_Id ? "&nbsp;&nbsp;&nbsp;<a href='javascript:replyDelete("
 												+ result[i].r_Num + ")'>삭제</a>"
 												: "") + '</small></span>';
-
 								str += '<p id="replyContent'+result[i].r_Num+'" name="replyContent">'
 										+ result[i].r_Content + '</p>';
 								str += '</div></div></div>';
@@ -315,19 +239,21 @@
 				<!-- Box Comment -->
 				<!-- 본문 부분~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-				<form name="insertVoterForm" action="/project/vote/insertVoter" method="get" encType="UTF-8">
+				<form name="insertVoterForm" action="/project/vote/insertVoter"
+					method="get" encType="UTF-8">
 
 					<div class="card card-widget">
 
 
 						<div class="card-header">
-							<span style="vertical-align:text-top;
+							<span
+								style="vertical-align:text-top;
 							<c:if test="${voteRead.v_Num == 1}">background-color:#28a745;</c:if>
 							<c:if test="${voteRead.v_Num == 2}">background-color:#6c757d;</c:if>
 							"
-								id="vs_Name" name="vs_Name" class="badge badge-success"><c:out
+								id="vs_Name" class="badge badge-success"><c:out
 									value="${voteRead.vs_Name}" /></span>&nbsp;&nbsp; <span id="v_Name"
-								name="v_Name"><b><c:out value="${voteRead.v_Name}" /></b></span>
+								><b><c:out value="${voteRead.v_Name}" /></b></span>
 
 
 							<div class="btn-group float-right">
@@ -348,7 +274,6 @@
 								</ul>
 							</div>
 
-
 							<!-- 본인만 글 수정, 삭제 가능-->
 							<c:if test="${member.mem_Id == voteRead.mem_Id}">
 								<span class="text-muted float-right"><small><a
@@ -363,7 +288,7 @@
 
 						<!-- /.card-header -->
 						<div class="card-body">
-							<span class="text-muted float-right" id="v_Date" name="v_Date"
+							<span class="text-muted float-right" id="v_Date"
 								style="font-size: small"> <c:out
 									value="${voteRead.v_Date}" /></span>
 							<div class="user-block">
@@ -383,20 +308,21 @@
 										width="50" height="50" class="img-circle elevation-2"
 										alt="프로필사진">
 								</c:if>
-								<span class="username" id="mem_Name" name="mem_Name"> <c:out
-										value="${member.mem_Name}" /></span> <span class="description"
-									id="mem_Id" name="mem_Id"> <c:out
-										value="${voteRead.mem_Id}" /></span>
+								<span class="username" id="mem_Name" > 
+								<c:out value="${member.mem_Name}" />
+								</span> 
+								<span class="description" id="mem_Id" > 
+								<c:out value="${voteRead.mem_Id}" /></span>
 
 
 							</div>
 							<br> <br> <br> <br>
 
 
-							<p id="v_Content" name="v_Content">
+							<p id="v_Content" >
 								<c:out value="${voteRead.v_Content}" escapeXml="false" />
 							</p>
-							<p id="v_Subject" name="v_Subject">
+							<p id="v_Subject" >
 								<c:out value="${voteRead.v_Subject}" escapeXml="false" />
 							</p>
 
@@ -421,46 +347,60 @@
 
 									<table class="table">
 										<tbody>
-											<tr>
-												<td>
-													<!-- 투표 내용 --> <!--  상태 index -->
-													
-														<c:forEach var="votedRead" items="${votedRead}" varStatus="status">
-															<div class="col-sm-6">
-																<!-- radio -->
-																<div class="form-group">
-																	<div class="form-check">
-																		<input class="form-check-input" type="radio" name="vd_Num" value="${votedRead.vd_Num}">
-																		<label class="form-check-label">${votedRead.vd_Num}.${votedRead.vd_Content}</label>
-																	</div>
-																</div>
+
+											<!-- 투표 내용 -->
+											<!--  상태 index -->
+											${voteCount0}
+											<c:forEach var="votedRead" items="${votedRead}"
+												varStatus="status">
+												<tr>		${voteCount0}
+													<div class="col-sm-6">
+														<!-- radio -->
+														<div class="form-group">
+															<div class="form-check">
+																<td style="border-top: 0px solid #dee2e6;"><input
+																	class="form-check-input" type="radio" name="vd_Num"
+																	value="${votedRead.vd_Num}" style="margin-left: 10px;">
+																	<label class="form-check-label"
+																	style="margin-left: 40px;">${votedRead.vd_Num}.&nbsp;&nbsp;&nbsp;${votedRead.vd_Content}
+																</label> &nbsp;&nbsp;&nbsp;</td>
+																<td style="border-top: 0px solid #dee2e6;padding-top: 6px;height: 38px;"><a
+																	class="btn "> <i class="fas fa-users" style="color:black;"></i> <span
+																		class="badge bg-gray">0</span>
+																</a></td>
 															</div>
-														</c:forEach>
-													<input type="hidden" id="c_Id" name="c_Id" value="${voteRead.c_Id}" />
-														<input type="submit" value="제출">
-												</td>
-											</tr>
+														</div>
+													</div>
+												</tr>
+											</c:forEach>
+
 											<tr>
-												<td>
+												<td style="border-top: 0px solid #dee2e6;"><input
+													type="hidden" id="c_Id" name="c_Id"
+													value="${voteRead.c_Id}" style="" />
+													<input type="submit"
+													value="제출"
+													style="padding-bottom: 1px; border-bottom-width: 1px; margin-bottom: 30px;">
 													<div class="row">
 														<ion-icon name="calendar-outline" style="font-size:24"></ion-icon>
 														&nbsp; <span style="font-size: 0.8em;"><b>기간</b></span>
 													</div> <!-- 시작일/종료일-->
 													<div class="row" style="margin-left: 9px">
-														<c:if test="${not empty voteRead.v_Start&& not empty voteRead.v_End}">
-															<span id="v_Start" class="username ">
-																<small><c:out value="${voteRead.v_Start}~" /></small>
+														<c:if
+															test="${not empty voteRead.v_Start&& not empty voteRead.v_End}">
+															<span id="v_Start" class="username "> <small><c:out
+																		value="${voteRead.v_Start}~" /></small>
 															</span>
-															<span id="v_End"  class="username"> <small><c:out
+															<span id="v_End" class="username"> <small><c:out
 																		value="${voteRead.v_End}" /></small>
 															</span>
 														</c:if>
-														<c:if test="${empty voteRead.v_Start&& empty voteRead.v_End}">
+														<c:if
+															test="${empty voteRead.v_Start&& empty voteRead.v_End}">
 															<span class="username"> <small>기간 미설정</small>
 															</span>
 														</c:if>
-													</div>
-												</td>
+													</div></td>
 											</tr>
 										</tbody>
 									</table>
@@ -473,7 +413,7 @@
 								<i class="fas fa-bookmark"></i> 북마크
 							</button>
 
-
+							<input type="hidden" name="mem_Id" value="${voteRead.mem_Id}">
 
 							<a id="list_btn" class="btn btn-default btn-sm"
 								href='list?c_Id=${voteRead.c_Id}'
@@ -531,9 +471,10 @@
 								placeholder="댓글을 입력하세요"></textarea>
 
 
-							<small><a href="#" id="replyInsert_btn" name="replyInsert_btn">입력</a></small> 
-							<input type="hidden" id="v_Num" name="v_Num" value="${voteRead.v_Num}" /> 
-								<input type="hidden" id="c_Id" name="c_Id" value="${voteRead.c_Id}" />
+							<small><a href="#" id="replyInsert_btn"
+								name="replyInsert_btn">입력</a></small> <input type="hidden" id="v_Num"
+								name="v_Num" value="${voteRead.v_Num}" /> <input type="hidden"
+								id="c_Id" name="c_Id" value="${voteRead.c_Id}" />
 
 
 						</div>

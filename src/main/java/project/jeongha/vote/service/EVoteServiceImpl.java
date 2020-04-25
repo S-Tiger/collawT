@@ -1,9 +1,11 @@
 package project.jeongha.vote.service;
 
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -61,11 +63,21 @@ public class EVoteServiceImpl implements EVoteService {
 		
 	}
 	//투표내용 조회
-		@Override
-		public List<Map> votedRead(String v_Num) {
-			return evoteDAO.votedRead(v_Num);
-			
-		}
+	@Override
+	public List<Map> votedRead(String v_Num) {
+		
+		return evoteDAO.votedRead(v_Num);
+		
+	}
+	
+	//투표 카운팅
+	@Override
+	public List<Map> voteCount(Map<String, Object> voteCount) throws Exception {
+		List<Map> result = evoteDAO.voteCount(voteCount);
+		return result;
+	}
+		
+		
 
 	//글 삭제
 	@Override
@@ -120,13 +132,29 @@ public class EVoteServiceImpl implements EVoteService {
 	}
 	//투표자 입력
 	@Override
-	public void voterInsert(Map map) {
+	public void voterInsert(Map map,HttpServletResponse response,VoteVO voteVO) throws Exception{
+		response.setContentType("text/html;charset=utf-8");
+			// 아이디 중복을확인하여 1이면 투표를 못하게 막는다.
+			if (evoteDAO.checkId(map) == 1) {
+				System.out.println("동일한 아이디");
+				PrintWriter out = response.getWriter();
+				response.setCharacterEncoding("utf-8");
+				out.println("<script type=\"text/javascript\">");
+				out.println("alert('이미 투표를 하셨습니다..');");
+				out.println("history.go(-1);");
+				out.println("</script>");
+				out.close();
+		}else {
+			
+			 	evoteDAO.voterInsert(map);
+		}
 		
-		int result = evoteDAO.voterInsert(map);
-		System.out.println("!!!!!!!!!!!!!!!!!11cmap service"+map);
 		
 	}
+	
 
+	
+	
 
 
 
