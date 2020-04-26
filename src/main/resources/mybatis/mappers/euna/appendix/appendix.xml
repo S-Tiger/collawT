@@ -64,6 +64,12 @@
 	    where i_num = #{i_Num}
 	    and a_del = 'N'
 	</insert>
+	
+	<!-- 작성 취소 시 파일 없애기 -->
+	<delete id="fileDelete" parameterType="String">
+		DELETE
+		FROM appendix
+		WHERE i_Num=#{i_Num}
+	</delete>
  
-
 </mapper>

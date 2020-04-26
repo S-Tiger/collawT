@@ -28,6 +28,8 @@ span[name="chargerspan"] {
 	$(document).ready(function() {
 		getFileList();
 		periodSetting();
+		var i_Num = $("#i_Num").val();
+		var c_Id = $("#c_Id").val();
 		
 		//글쓰기 빈 값 안되게 검사
 		$("#submit").click(function(){
@@ -46,6 +48,11 @@ span[name="chargerspan"] {
 			
 		});
 		
+		//작성 취소 시 첨부된 파일 지우기
+		/* $("#cancel").click(function(){
+			fileDelete(i_Num);
+		});
+		 */
 		
 		//캘린더 시작일/마감일 구하기/기간 미설정 시
 		
@@ -64,17 +71,12 @@ span[name="chargerspan"] {
 			var formData = new FormData();
 			var inputFile = $("input[name='a_File']");
 			var files = inputFile[0].files;
-			var i_Num = $("#i_Num").val();
-			
-			console.log(files);
-		
-			
+	
 			for(var i=0; i<files.length; i++){
 				formData.append("a_File", files[i]);
 				
 			}
 			formData.append("i_Num", i_Num)
-			console.log(formData);
 			
 			$.ajax({
 				url:'/appendix/fileUpload',
@@ -108,7 +110,7 @@ span[name="chargerspan"] {
 							str+='<td><span id="a_Size" name="a_Size">'+(result[i].a_Size/1000)+'kb</span></td>';
 							str+='<td><input type="hidden" id="a_Num" name="a_Num" value="'+result[i].a_Num+'"/></td>';
 							str+='<td class="text-right py-0 align-middle">';
-							str+='<div class="btn-group btn-group-sm" ><a href="javascript:fileDelete('+result[i].a_Num+')" class="btn btn-danger" ><i class="fas fa-trash" ></i></a></div>';
+							str+='<div class="btn-group btn-group-sm" ><a href="javascript:fileUpdate('+result[i].a_Num+')" class="btn btn-danger" ><i class="fas fa-trash" ></i></a></div>';
 							str+='</td></tr>'
 						}
 						
@@ -127,8 +129,8 @@ span[name="chargerspan"] {
 			
 		}
 	
-	//첨부파일 삭제
-  	function fileDelete(a_Num){
+	//첨부파일 리스트에서 삭제
+  	function fileUpdate(a_Num){
 	
 			$.ajax({
 				url : "/appendix/fileUpdate",
@@ -140,9 +142,24 @@ span[name="chargerspan"] {
 				}
 			})
 			
-		
-			
 	}
+	
+  	function fileDelete(i_Num){
+  		
+		$.ajax({
+			url : "/appendix/fileDelete",
+			data : {
+				"i_Num" : i_Num
+				},
+			type : 'post',
+			success:function(){
+				window.history.back();
+			}
+		})
+		
+}
+	
+	
 	
 	function periodSetting(){
 		if($("#periodNull").is(":checked")==true){
@@ -424,16 +441,25 @@ span[name="chargerspan"] {
                 
 
 				<input type="submit" id = "submit" value="이슈 작성" class="btn btn-danger btn-sm float-right" style="margin:3px;">
-          <input type="button" id = "cancel" value="작성 취소" class="btn btn-danger btn-sm float-right" style="margin:3px;" onclick="history.back(-1)">
+          
+         		<input type="button" id = "cancel" value="작성 취소" class="btn btn-danger btn-sm float-right" onclick="javascript:fileDelete(${i_Num.NEXTVAL})" style="margin:3px;">
+          
+          </form>
               </div>
               
     </section>
     <!-- /.content -->
+   
+    <form action = "/project/issue/insert" method="post" id="cancelForm">
+    <input type="hidden" name="c_Id" value="${c_Id}">
+    <input type="hidden" id = "i_Num" name="i_Num" value="${i_Num.NEXTVAL}">
     </form>
-    <form action = "/project/issue/insert" method="post" id="chargerForm">
+    
+    
     <input type="hidden" name="c_Id" value="${c_Id}">
     
-    </form>
+   
+
   </div>
   <!-- /.content-wrapper -->
 

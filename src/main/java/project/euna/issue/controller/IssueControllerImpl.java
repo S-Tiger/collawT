@@ -210,7 +210,6 @@ public class IssueControllerImpl implements IssueController {
 		issueService.issueDelete(issueVO.getI_Num());
 	
 		
-		
 		return "redirect:/project/issue/list?c_Id="+c_Id;
 	}
 	

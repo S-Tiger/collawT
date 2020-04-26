@@ -55,6 +55,13 @@ public class AppendixServiceImpl implements AppendixService {
 		public void copyFile(Map<String, Object> hmap) throws Exception {
 			appendixDAO.copyFile(hmap);
 		}
+		
+		//작성 취소 시 파일 없애기
+		@Override
+		public void fileDelete(String i_Num) throws Exception {
+			appendixDAO.fileDelete(i_Num);
+
+		}
 
 
 }

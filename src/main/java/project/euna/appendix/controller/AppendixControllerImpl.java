@@ -142,6 +142,20 @@ public class AppendixControllerImpl implements AppendixController {
 		
 	}
 	
+	//작성 취소 시 파일 없애기
+	@Override
+	@PostMapping("/fileDelete")
+	@ResponseBody
+	public String fileDelete(String c_Id, String i_Num) throws Exception{
+		//request.getAttribute("hobby", strHobby);
+		
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"+i_Num);
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"+c_Id);
+		appendixService.fileDelete(i_Num);	
+		
+		
+		return "redirect:/project/issue/list?c_Id="+c_Id;
+	}
 	
 
 	
