@@ -48,11 +48,7 @@ span[name="chargerspan"] {
 			
 		});
 		
-		//작성 취소 시 첨부된 파일 지우기
-		/* $("#cancel").click(function(){
-			fileDelete(i_Num);
-		});
-		 */
+
 		
 		//캘린더 시작일/마감일 구하기/기간 미설정 시
 		
@@ -144,6 +140,7 @@ span[name="chargerspan"] {
 			
 	}
 	
+	//작성 취소 시 파일 DB에서 지우기
   	function fileDelete(i_Num){
   		
 		$.ajax({
@@ -153,9 +150,12 @@ span[name="chargerspan"] {
 				},
 			type : 'post',
 			success:function(){
-				window.history.back();
+			
+				window.history.go(-2);
 			}
+				
 		})
+		
 		
 }
 	

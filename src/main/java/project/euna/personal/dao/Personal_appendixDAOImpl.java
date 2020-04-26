@@ -57,6 +57,13 @@ public class Personal_appendixDAOImpl implements Personal_appendixDAO {
 	public void copyFile(Map<String, Object> hmap) throws Exception {
 		sqlSession.insert("personal_appendix.copyFile", hmap);
 	}
+	
+	//작성 취소 시 파일 없애기
+	@Override
+	public void fileDelete(String p_Num) throws Exception {
+		sqlSession.delete("personal_appendix.fileDelete", p_Num);
+
+	}
 		
 
 }

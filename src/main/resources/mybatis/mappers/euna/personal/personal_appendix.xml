@@ -64,6 +64,14 @@
 	    where p_Num = #{p_Num}
 	    and p_a_Del = 'N'
 	</insert>
+	
+	
+		<!-- 작성 취소 시 파일 없애기 -->
+	<delete id="fileDelete" parameterType="String">
+		DELETE
+		FROM personal_appendix
+		WHERE p_Num=#{p_Num}
+	</delete>
  
 
 </mapper>

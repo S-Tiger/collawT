@@ -55,6 +55,13 @@ public class Personal_appendixServiceImpl implements Personal_appendixService {
 		public void copyFile(Map<String, Object> hmap) throws Exception {
 			personal_appendixDAO.copyFile(hmap);
 		}
+		
+		//작성 취소 시 파일 없애기
+		@Override
+		public void fileDelete(String p_Num) throws Exception {
+			personal_appendixDAO.fileDelete(p_Num);
+
+		}
 
 
 }

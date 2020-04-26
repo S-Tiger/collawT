@@ -18,4 +18,5 @@ public interface AppendixDAO {
 	public void updateFile(AppendixVO appendixVO) throws Exception;
 	public void copyFile(Map<String, Object> hmap) throws Exception;
 	public void fileDelete(String i_Num) throws Exception;
+	
 	}

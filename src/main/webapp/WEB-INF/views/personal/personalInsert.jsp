@@ -140,10 +140,25 @@ span[name="chargerspan"] {
 				}
 			})
 			
-		
+	}
+	
+	//작성 취소 시 파일 DB에서 지우기
+  	function fileDelete(p_Num){
+  		
+		$.ajax({
+			url : "/personal/appendix/fileDelete",
+			data : {
+				"p_Num" : p_Num
+				},
+			type : 'post',
+			success:function(){
+				window.history.go(-2);
+			}
+		})
 			
 	}
 	
+	//기간 미설정 세팅
 	function periodSetting(){
 		if($("#periodNull").is(":checked")==true){
 			var p_i_Start = "";
@@ -330,7 +345,7 @@ span[name="chargerspan"] {
                 
 
 				<input type="submit" id = "submit" value="이슈 작성" class="btn btn-danger btn-sm float-right" style="margin:3px;">
-          <input type="button" id = "cancel" value="작성 취소" class="btn btn-danger btn-sm float-right" style="margin:3px;" onclick="history.back(-1)">
+          <input type="button" id = "cancel" value="작성 취소" class="btn btn-danger btn-sm float-right" onclick="javascript:fileDelete(${p_Num.NEXTVAL})" style="margin:3px;">
               </div>
               
     </section>

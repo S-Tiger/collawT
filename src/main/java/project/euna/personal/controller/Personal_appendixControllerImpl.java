@@ -140,6 +140,19 @@ public class Personal_appendixControllerImpl implements Personal_appendixControl
 	}
 	
 	
+	//작성 취소 시 파일 없애기
+	@Override
+	@PostMapping("/fileDelete")
+	@ResponseBody
+	public String fileDelete(String p_Num) throws Exception{
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~"+p_Num);
+		personal_appendixService.fileDelete(p_Num);	
+		
+		
+		return "redirect:/project/issue/list?c_Id=";
+	}
+	
+	
 
 	
 }

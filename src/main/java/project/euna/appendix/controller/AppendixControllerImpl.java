@@ -147,10 +147,7 @@ public class AppendixControllerImpl implements AppendixController {
 	@PostMapping("/fileDelete")
 	@ResponseBody
 	public String fileDelete(String c_Id, String i_Num) throws Exception{
-		//request.getAttribute("hobby", strHobby);
 		
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"+i_Num);
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"+c_Id);
 		appendixService.fileDelete(i_Num);	
 		
 		
