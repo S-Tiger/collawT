@@ -170,12 +170,16 @@ public class PersonalControllerImpl implements PersonalController {
 	//게시글 수정 페이지로 이동
 	@Override
 	@GetMapping("/update")
-	public String personalUpdate(String mem_Id, String p_Num, PersonalVO personalVO, Model model) throws Exception {
+	public String personalUpdate(String mem_Id, String p_Num, PersonalVO personalVO, Model model, HttpSession session) throws Exception {
 		
 		
 		
 		model.addAttribute("personalUpdate",personalService.personalRead(personalVO.getP_Num()) );
 		model.addAttribute("mem_Id", mem_Id);
+		
+		//세션에 수정 전 파일 던지기
+		List<Map> list = personal_appendixService.fileList(p_Num);
+		session.setAttribute("personalfileList", list);
 
 		
 		return "/personal/personalUpdate";

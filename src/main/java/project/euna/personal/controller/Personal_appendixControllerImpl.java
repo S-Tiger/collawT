@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -145,13 +146,55 @@ public class Personal_appendixControllerImpl implements Personal_appendixControl
 	@PostMapping("/fileDelete")
 	@ResponseBody
 	public String fileDelete(String p_Num) throws Exception{
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~"+p_Num);
 		personal_appendixService.fileDelete(p_Num);	
 		
 		
 		return "redirect:/project/issue/list?c_Id=";
 	}
 	
+	
+	//수정 취소 시 파일 없애고 다시 입히기
+	@Override
+	@PostMapping("/fileCancel")
+	@ResponseBody
+	public String fileCancel(String p_Num, HttpServletRequest request) throws Exception{
+		
+		//세션에서 파일리스트 가져오기
+		HttpSession session = request.getSession();
+		List<Map> personalfileList = null;
+		personalfileList = (List<Map>) session.getAttribute("personalfileList");
+		System.out.println("~~~~~~~~~~~~~~~~personalfileList"+personalfileList);
+		
+		
+		
+	
+		//DB에서 파일 지우기
+		personal_appendixService.fileDelete(p_Num);	
+		
+
+		for(int i=0; i<personalfileList.size(); i++) {
+			try {
+				Map<String, Object> file = new HashMap<String, Object>();
+				file.put("p_a_RealName", (String) personalfileList.get(i).get("p_a_RealName"));
+				file.put("p_a_File", (personalfileList.get(i).get("p_a_File")));
+				file.put("p_a_NameEx", (String) personalfileList.get(i).get("p_a_NameEx"));
+				file.put("p_a_Size", (String) personalfileList.get(i).get("p_a_Size"));
+				file.put("p_Num", p_Num);
+				
+				personal_appendixService.uploadFile(file);
+				
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		 session.removeAttribute("personalfileList");
+		
+		return "redirect:/project/issue/list?c_Id=";
+	}
 	
 
 	

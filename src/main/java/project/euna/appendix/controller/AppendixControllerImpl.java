@@ -164,9 +164,7 @@ public class AppendixControllerImpl implements AppendixController {
 		//세션에서 파일리스트 가져오기
 		HttpSession session = request.getSession();
 		List<Map> fileList = null;
-		fileList = (List<Map>) session.getAttribute("fileList");
-		System.out.println("~~~~~~~~~~~~~~~~fileList"+fileList);
-		
+		fileList = (List<Map>) session.getAttribute("fileList");		
 		
 		
 	

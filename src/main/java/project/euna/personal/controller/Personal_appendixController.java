@@ -23,6 +23,7 @@ public interface Personal_appendixController {
 	public List<Map> fileRead(@RequestParam ("p_Num")String p_Num, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public void updateFile(Personal_appendixVO personal_appendixVO) throws Exception;	
 	public String fileDelete(String p_Num) throws Exception;
+	public String fileCancel(String p_Num, HttpServletRequest request) throws Exception;
 
 }
 

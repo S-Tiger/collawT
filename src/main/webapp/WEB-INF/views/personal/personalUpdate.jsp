@@ -130,7 +130,7 @@ span[name="chargerspan"] {
 							str+='<td><span id="p_a_Size" name="p_a_Size">'+(result[i].p_a_Size/1000)+'kb</span></td>';
 							str+='<td><input type="hidden" id="p_a_Num" name="p_a_Num" value="'+result[i].p_a_Num+'"/></td>';
 							str+='<td class="text-right py-0 align-middle">';
-							str+='<div class="btn-group btn-group-sm" ><a href="javascript:fileDelete('+result[i].p_a_Num+')" class="btn btn-danger" ><i class="fas fa-trash" ></i></a></div>';
+							str+='<div class="btn-group btn-group-sm" ><a href="javascript:fileUpdate('+result[i].p_a_Num+')" class="btn btn-danger" ><i class="fas fa-trash" ></i></a></div>';
 							str+='</td></tr>'
 						}
 						
@@ -150,7 +150,7 @@ span[name="chargerspan"] {
 		}
 		 
 			//첨부파일 삭제
-		  	function fileDelete(p_a_Num){
+		  	function fileUpdate(p_a_Num){
 			
 					$.ajax({
 						url : "/personal/appendix/fileUpdate",
@@ -167,6 +167,24 @@ span[name="chargerspan"] {
 			}
 			
 			
+			//수정 취소 시 파일 DB에서 지우기
+		  	function fileDelete(p_Num){
+		  		
+				$.ajax({
+					url : "/personal/appendix/fileCancel",
+					data : {
+						"p_Num" : p_Num
+						},
+					type : 'post',
+					success:function(){
+					
+						window.history.go(-2);
+					}
+						
+				})
+				
+				
+		}
 
 			
 		  //캘린더 시작일/마감일 초기 세팅
@@ -382,7 +400,7 @@ span[name="chargerspan"] {
            <br>
                 
            <input type="submit" id = "submit" value="이슈 수정" class="btn btn-danger btn-sm float-right" style="margin:3px;">
-          <input type="button" id = "cancel" value="수정 취소" class="btn btn-danger btn-sm float-right" style="margin:3px;" onclick="location.href='/personal/read?mem_Id=${member.mem_Id}&p_Num=${personalUpdate.p_Num}'">     
+           <input type="button" id = "cancel" value="작성 취소" class="btn btn-danger btn-sm float-right" onclick="javascript:fileDelete(${personalUpdate.p_Num})" style="margin:3px;">     
                     
                  </div>
               </div>
