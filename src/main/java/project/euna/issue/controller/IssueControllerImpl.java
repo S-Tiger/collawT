@@ -66,6 +66,7 @@ public class IssueControllerImpl implements IssueController {
 	
 	@Inject
 	ComemberService comemberService;
+
 	
 
 
@@ -208,7 +209,7 @@ public class IssueControllerImpl implements IssueController {
 		
 		issueService.chargerDelete(issueVO.getI_Num());
 		issueService.issueDelete(issueVO.getI_Num());
-	
+		appendixService.fileDelete(i_Num);
 		
 		return "redirect:/project/issue/list?c_Id="+c_Id;
 	}

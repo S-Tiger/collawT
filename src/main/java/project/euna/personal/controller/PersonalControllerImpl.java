@@ -161,7 +161,7 @@ public class PersonalControllerImpl implements PersonalController {
 	public String personalDelete(String mem_Id, String p_Num, PersonalVO personalVO) throws Exception{
 		
 		personalService.personalDelete(personalVO.getP_Num());
-	
+		personal_appendixService.fileDelete(p_Num);
 		
 		
 		return "redirect:/personal/list?mem_Id="+mem_Id;
