@@ -36,9 +36,9 @@
         from (
             select p_Num, mem_Id, p_i_Name, p_i_Content, p_i_Date, p_i_Start, p_i_End, row_number() over(order by p_Num desc) as rnum
             from personal
+            where mem_id = #{mem_Id}
             )
         where rnum between #{rowStart} and #{rowEnd}
-        and mem_id = #{mem_Id}
         order by to_number(p_Num) desc
       ]]>
 

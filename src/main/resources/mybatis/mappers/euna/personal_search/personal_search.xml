@@ -19,7 +19,7 @@
 		<result property="mem_Id" column="mem_Id" />
 		<result property="mem_Name" column="mem_Name" />
 		<result property="rnum" column="rnum" />
-		<result property="boardtype" column="rnum" />
+		<result property="boardtype" column="boardtype" />
 	</resultMap>
 	
 	<resultMap id="fileResult01" type="java.util.HashMap">
@@ -38,7 +38,7 @@
 	<!-- 내가 쓴 글 확인-->
 	<select id="myBoardlist" resultMap="personal_searchResult01" parameterType="project.euna.personal_search.vo.Criteria"> 
 	<![CDATA[
-        select c_Id, c_Name, i_Name, i_Date, mem_Id, rnum, boardtype, i_Num
+        select c_Id, c_Name, i_Name, i_Date, mem_Id, rnum, boardtype, i_Num, rnum
 		from(
 		    select c_Id, c_Name, i_Name, i_Date, mem_Id, row_number() over(order by i_date desc) as rnum, boardtype, i_Num
 		    from v_allboard

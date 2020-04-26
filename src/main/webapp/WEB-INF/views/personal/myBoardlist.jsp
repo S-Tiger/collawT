@@ -68,26 +68,44 @@
         <div class="card-body p-0">
            
           <table class="table table-striped projects">
+              <thead style="text-align:center">
+              <th></th>
+              <th>협업공간명</th>
+              <th>글 제목</th>
+              <th>작성일</th>
+              </thead>
               <tbody>
+              
 			<c:choose>
 			<c:when test="${fn:length(myBoardlist)!=0}">
                  <c:forEach var="myBoardlist" items="${myBoardlist}" >	
                   <tr>
                   <!-- 체크박스 -->
-                  	 <td style="width:10%">	
-						체크박스				  	  
+                  	 <td style="width:5%">	
+                        <input type="checkbox" value="" id="${myBoardlist.rnum}" name="${myBoardlist.rnum}">
 				  </td>
 				  <!-- 협업공간명 -->
-				  <td style="width:10%">
-					  <font size="3em"><b>${myBoardlist.c_Name}</b></font>
+				  <td style="width:10%; text-align:center">
+				   <font size="3em">
+				  <c:if test="${myBoardlist.c_Name==null}">내 공간</c:if>
+				  <c:if test="${myBoardlist.c_Name!=null}"> ${myBoardlist.c_Name}</c:if></font>
 					 
 				  </td>
                	<!-- 링크 -->
 				<td style="width:60%">	
-					  <a href="/personal/read?mem_Id=${myBoardlist.mem_Id}&p_Num=${myBoardlist.i_Num}"> <font size="3em"><b>${myBoardlist.i_Name}</b></font></a>
+				<c:if test="${myBoardlist.boardtype==1}">
+				<a href="/project/issue/read?c_Id=${myBoardlist.c_Id}&i_Num=${myBoardlist.i_Num}"> <font size="3em"><b>${myBoardlist.i_Name}</b></font></a>
+				</c:if>
+				<c:if test="${myBoardlist.boardtype==2}">
+				<a href="/project/vote/read?c_Id=${myBoardlist.c_Id}&v_Num=${myBoardlist.i_Num}"> <font size="3em"><b>${myBoardlist.i_Name}</b></font></a>
+				</c:if>
+				<c:if test="${myBoardlist.boardtype==3}">
+				<a href="/personal/read?mem_Id=${myBoardlist.mem_Id}&p_Num=${myBoardlist.i_Num}"> <font size="3em"><b>${myBoardlist.i_Name}</b></font></a>
+				</c:if>
+					  
 					  <br>
 				  </td>
-				  <td style="width:20%">	
+				  <td style="width:25%; text-align:center">	
 					  <font size="3em"><b>${myBoardlist.i_Date}</b></font>
 					  <br>
 				  </td>
@@ -105,8 +123,18 @@
           </table>
         </div>
         <!-- /리스트 부분 -->
-        <br><br>
-        <!-- 페이징 -->
+       
+         <br>
+        <input type="checkbox" value="" id="chackAll" name="chackAll">전체선택
+		<br>
+       
+
+	</section>
+	<!-- /.content -->
+					
+				
+				</div>
+				        <!-- 페이징 -->
  <div class="form-group" style="margin-left:20px">
 
    <ul class="pagination pagination-sm m-0">
@@ -134,13 +162,6 @@
   
  
         <!--/페이징  -->
-       
-
-	</section>
-	<!-- /.content -->
-					
-				
-				</div>
 			</div>
 			<!-- /.card-body -->
 		

@@ -100,7 +100,15 @@
         </div>
         <!-- /리스트 부분 -->
         <br><br>
-        <!-- 페이징 -->
+
+       
+
+	</section>
+	<!-- /.content -->
+					
+				
+				</div>
+				        <!-- 페이징 -->
  <div class="form-group" style="margin-left:20px">
 
    <ul class="pagination pagination-sm m-0">
@@ -128,13 +136,6 @@
   
  
         <!--/페이징  -->
-       
-
-	</section>
-	<!-- /.content -->
-					
-				
-				</div>
 			</div>
 			<!-- /.card-body -->
 		

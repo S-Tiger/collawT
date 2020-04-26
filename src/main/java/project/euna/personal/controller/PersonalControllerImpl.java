@@ -74,6 +74,7 @@ public class PersonalControllerImpl implements PersonalController {
 	
 		ModelAndView mav = new ModelAndView("personal/personalList");
 		mav.addObject("personalList", list);
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!personalList"+list);
 		mav.addObject("pageMaker", pageMaker);
 	
 		return mav;

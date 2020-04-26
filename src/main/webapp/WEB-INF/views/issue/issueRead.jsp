@@ -518,7 +518,7 @@ $(document).ready(function() {
 							
 
 						
-						<a id="list_btn" class="btn btn-default btn-sm" href="javascript:history.back(-1);" style="color:#444; margin:3px;"> <i class="fas fa-list"></i>&nbsp;목록</a>
+						<a id="list_btn" class="btn btn-default btn-sm" href='list?c_Id=${issueRead.c_Id}' style="color:#444; margin:3px;"> <i class="fas fa-list"></i>&nbsp;목록</a>
 
 								
 								<br><br>
