@@ -89,8 +89,7 @@
 		v_Start, v_End, vs_Num, v_Subject, v_Count)
 		values(#{v_Num}, #{c_Id},
 		#{v_Name}, #{v_Content} ,
-		(select to_char(sysdate, 'YYYY/MM/DD/
-		HH24:MI:SS') from dual)
+		(select to_char(sysdate, 'YYYY/MM/DD/ HH24:MI:SS') from dual)
 		, #{mem_Id}, #{v_Start}, #{v_End},
 		#{vs_Num},#{v_Subject}, #{v_Count} )
 	</insert>

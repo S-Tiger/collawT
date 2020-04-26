@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="personal_search">
+
+	
+	<resultMap id="personal_searchResult01" type="java.util.HashMap">
+		<!-- property는 화면단에서 쓸 이름, column은 데이터컬럼명이랑 동일 -->
+		<result property="i_Num" column="i_Num" />
+		<result property="c_Id" column="c_Id" />
+		<result property="c_Name" column="c_Name" />
+		<result property="i_Name" column="i_Name" />
+		<result property="i_Content" column="i_Content" jdbcType="CLOB" javaType="java.lang.String"/>
+		<result property="i_Date" column="i_Date" />
+		<result property="i_Start" column="i_Start" />
+		<result property="i_End" column="i_End" />
+		<result property="mem_Id" column="mem_Id" />
+		<result property="mem_Name" column="mem_Name" />
+		<result property="rnum" column="rnum" />
+		<result property="boardtype" column="rnum" />
+	</resultMap>
+	
+	<resultMap id="fileResult01" type="java.util.HashMap">
+		<!-- property는 화면단에서 쓸 이름, column은 데이터컬럼명이랑 동일 -->
+		<result property="a_RealName" column="a_RealName" />
+		<result property="a_File" column="a_File" javaType="[B" jdbcType="BLOB"/>
+		<result property="a_NameEx" column="a_NameEx" />
+		<result property="i_Num" column="i_Num"/>
+		<result property="a_Num" column="a_Num" />
+		<result property="a_Size" column="a_Size" />
+
+	</resultMap>
+
+
+	
+	<!-- 내가 쓴 글 확인-->
+	<select id="myBoardlist" resultMap="personal_searchResult01" parameterType="project.euna.personal_search.vo.Criteria"> 
+	<![CDATA[
+        select c_Id, c_Name, i_Name, i_Date, mem_Id, rnum, boardtype, i_Num
+		from(
+		    select c_Id, c_Name, i_Name, i_Date, mem_Id, row_number() over(order by i_date desc) as rnum, boardtype, i_Num
+		    from v_allboard
+		    where mem_Id=#{mem_Id}
+		    )
+		where rnum between #{rowStart} and #{rowEnd}
+	
+	]]>
+
+	</select>
+	
+	
+	
+	<!-- 내가 쓴 글 게시물 총 갯수 -->
+	<select id="listCount" resultType="int" parameterType="project.euna.personal_search.vo.Criteria"> 
+      <![CDATA[
+		select count(*)
+		from v_allboard
+        where mem_Id=#{mem_Id}
+      ]]>
+
+	</select>
+	
+	
+	<!-- 게시물 삭제 -->
+	<delete id="issueDelete" parameterType="String">
+		DELETE
+		FROM issue
+		WHERE i_Num=#{i_Num}
+	</delete>
+
+
+
+
+</mapper>

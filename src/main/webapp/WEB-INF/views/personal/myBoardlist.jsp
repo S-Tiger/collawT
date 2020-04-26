@@ -46,9 +46,9 @@
 		<div class="card">
 			<div class="card-header p-2">
 				<ol class="nav nav-pills" style="font-family: Spoqa Han Sans; font-size:15px; margin:0px; border:none; padding-inline-start: 0px;  width:400px; float:left;  ">
-					<li class="nav-item" ><a class="nav-link active"
-						href="/personal/list?mem_Id=${member.mem_Id}"  id="activityMenu" style="background-color:#DC3545;">내 이슈</a></li>
 					<li class="nav-item" ><a class="nav-link"
+						href="/personal/list?mem_Id=${member.mem_Id}"  id="activityMenu" >내 이슈</a></li>
+					<li class="nav-item" ><a class="nav-link active" style="background-color:#DC3545;"
 						href="/personal/search/myBoardlist?mem_Id=${member.mem_Id}" id="activityMenu">내가 쓴 글</a></li>
 					<li class="nav-item" ><a class="nav-link"
 						href="#" data-toggle="tab" id="activityMenu">내가 쓴 댓글</a></li>
@@ -56,8 +56,6 @@
 						href="#" data-toggle="tab" id="activityMenu">파일함</a></li>
 				</ol>
 				
-				<button type="button" class="btn btn-success float-right" onclick="location.href='/personal/insert?mem_Id=${member.mem_Id}'"style="text-align:center; float:right; background-color:#DC3545; border-color:#DC3545; font-family: Spoqa Han Sans; font-size:13px;">
-								<i class="fas fa-edit"></i> <b>이슈 작성</b></button>
 								
 			</div>
 			
@@ -72,27 +70,35 @@
           <table class="table table-striped projects">
               <tbody>
 			<c:choose>
-			<c:when test="${fn:length(personalList)!=0}">
-                 <c:forEach var="personalList" items="${personalList}" >	
+			<c:when test="${fn:length(myBoardlist)!=0}">
+                 <c:forEach var="myBoardlist" items="${myBoardlist}" >	
                   <tr>
-               
-					  <td style="width:70%">	
-					  <a href="/personal/read?mem_Id=${personalList.mem_Id}&p_Num=${personalList.p_Num}"> <font size="3em"><b>${personalList.p_i_Name}</b></font></a>
-					  <br>
-			
-				  	  
+                  <!-- 체크박스 -->
+                  	 <td style="width:10%">	
+						체크박스				  	  
 				  </td>
-                      
-                      <td style="width:30%; vertical-align:top"> <font size="2em" color="#6c757d"><i class="far fa-calendar-alt"></i>&nbsp;&nbsp;<c:if test="${personalList.p_i_Start == null}">기간 미설정</c:if>
-                      <c:if test="${personalList.p_i_Start != null}">${personalList.p_i_Start} ~ ${personalList.p_i_End}</c:if> 
-                        </font>  </td>
+				  <!-- 협업공간명 -->
+				  <td style="width:10%">
+					  <font size="3em"><b>${myBoardlist.c_Name}</b></font>
+					 
+				  </td>
+               	<!-- 링크 -->
+				<td style="width:60%">	
+					  <a href="/personal/read?mem_Id=${myBoardlist.mem_Id}&p_Num=${myBoardlist.i_Num}"> <font size="3em"><b>${myBoardlist.i_Name}</b></font></a>
+					  <br>
+				  </td>
+				  <td style="width:20%">	
+					  <font size="3em"><b>${myBoardlist.i_Date}</b></font>
+					  <br>
+				  </td>
+                    
                      
                    </tr>
                    
                    </c:forEach>
                  </c:when>
                  <c:otherwise>
-                 <p style="text-align:center;"><small><br><br>작성된 글이 없습니다.</small></p>
+                 <p style="text-align:center;"><small><br><br>작성한 글이 없습니다.</small></p>
                  </c:otherwise>
                  </c:choose>
               </tbody>
@@ -105,22 +111,22 @@
 
    <ul class="pagination pagination-sm m-0">
     <c:if test="${pageMaker.prev}">
-    	<li class="page-item" id="liStyle"><a class="page-link" href="list${pageMaker.makeQuery(pageMaker.startPage - 1)}">&laquo;</a></li>
+    	<li class="page-item" id="liStyle"><a class="page-link" href="myBoardlist${pageMaker.makeQuery(pageMaker.startPage - 1)}">&laquo;</a></li>
     </c:if> 
 
     <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
     <c:choose>
     <c:when test="${pageMaker.page==idx}">
-    	<li class="page-item" id="liStyle"><a class="page-link" href="list${pageMaker.makeQuery(idx)}" style="background-color:#DC3545; color:white">${idx}</a></li>
+    	<li class="page-item" id="liStyle"><a class="page-link" href="myBoardlist${pageMaker.makeQuery(idx)}" style="background-color:#DC3545; color:white">${idx}</a></li>
     </c:when>
     <c:otherwise>
-    <li class="page-item" id="liStyle"><a class="page-link" href="list${pageMaker.makeQuery(idx)}">${idx}</a></li>
+    <li class="page-item" id="liStyle"><a class="page-link" href="myBoardlist${pageMaker.makeQuery(idx)}">${idx}</a></li>
     </c:otherwise>
     </c:choose>
     </c:forEach>
 
     <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-    	<li class="page-item" id="liStyle"><a class="page-link" href="list${pageMaker.makeQuery(pageMaker.endPage + 1)}">&raquo;</a></li>
+    	<li class="page-item" id="liStyle"><a class="page-link" href="myBoardlist${pageMaker.makeQuery(pageMaker.endPage + 1)}">&raquo;</a></li>
     </c:if> 
   </ul>
   <br>
