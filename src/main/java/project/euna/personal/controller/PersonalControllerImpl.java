@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang3.StringUtils;
 
 import org.springframework.stereotype.Controller;
-
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -112,7 +112,7 @@ public class PersonalControllerImpl implements PersonalController {
 		
 
 		
-		return "redirect:/project/personal/read?mem_Id="+mem_Id+"p_Num="+p_Num;
+		return "redirect:/personal/read?mem_Id="+mem_Id+"&p_Num="+p_Num;
 	
 	}
 	
@@ -155,86 +155,47 @@ public class PersonalControllerImpl implements PersonalController {
 //
 //	
 //	//게시글 삭제
-//	@Override
-//	@GetMapping("/delete")
-//	public String personalDelete(String c_Id, String p_Num, personalVO personalVO) throws Exception{
-//		
-//		personalService.chargerDelete(personalVO.getp_Num());
-//		personalService.personalDelete(personalVO.getp_Num());
-//	
-//		
-//		
-//		return "redirect:/project/personal/list?c_Id="+c_Id;
-//	}
-//	
-//	//게시글 수정 페이지로 이동
-//	@Override
-//	@GetMapping("/update")
-//	public String personalUpdate(String c_Id, String p_Num, personalVO personalVO, Model model) throws Exception {
-//		
-//		
-//		
-//		List<Map> igRead = personalService.igRead();
-//		List<Map> comemList = personalService.comemRead(c_Id);
-//		List<Map> chargerList = personalService.chargerRead(p_Num);
-//		
-//		model.addAttribute("personalUpdate",personalService.personalRead(personalVO.getp_Num()) );
-//		model.addAttribute("igRead",igRead);
-//		model.addAttribute("c_Id", c_Id);
-//		model.addAttribute("comemList", comemList);
-//		model.addAttribute("chargerList", chargerList);
-//
-//		
-//		return "/personal/personalUpdate";
-//	}
-//	
-//	//이슈 담당자 목록 가져오기
-//	@GetMapping("/chargerList")
-//	@ResponseBody
-//	public List<Map> chargerList(@RequestParam ("p_Num")String p_Num) throws Exception {
-//		
-//		List<Map> chargerList = personalService.chargerRead(p_Num);
-//		
-//		return chargerList;
-//	}
+	@Override
+	@GetMapping("/delete")
+	public String personalDelete(String mem_Id, String p_Num, PersonalVO personalVO) throws Exception{
+		
+		personalService.personalDelete(personalVO.getP_Num());
+	
+		
+		
+		return "redirect:/personal/list?mem_Id="+mem_Id;
+	}
+	
+	//게시글 수정 페이지로 이동
+	@Override
+	@GetMapping("/update")
+	public String personalUpdate(String mem_Id, String p_Num, PersonalVO personalVO, Model model) throws Exception {
+		
+		
+		
+		model.addAttribute("personalUpdate",personalService.personalRead(personalVO.getP_Num()) );
+		model.addAttribute("mem_Id", mem_Id);
+
+		
+		return "/personal/personalUpdate";
+	}
+
 //	
 //	
-//	//게시글 수정 db에 넣기
-//	@Override
-//	@PostMapping("/update")
-//	public String personalUpdate(personalVO personalVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
-//		personalService.personalUpdate(personalVO);
-//		
-//		String p_Num = personalVO.getp_Num();
-//		String c_Id = personalVO.getC_Id();
-//		
-//		
-//		//이슈담당자 삭제 후 다시 입력
-//		personalService.chargerDelete(p_Num);
-//		
-//		try {
-//			Map<String, Object> coMap = new HashMap<String, Object>();
-//			String comem_Id[] = request.getParameterValues("comem_Id");
-//			for (int i = 0; i < comem_Id.length; i++) {
-//					
-//					coMap.put("p_Num", p_Num);
-//					coMap.put("c_Id", c_Id);
-//					coMap.put("mem_Id", comem_Id[i]);
-//					coMap.put("cr_Status", "");
-//					
-//					personalService.comemInsert(coMap);
-//			}
-//		
-//		}catch(NullPointerException e) {
-//		}
-//		
-//		
-//		//appedixService.updateFile(personalVO, appendixVO, files, fileNames, mpRequest);
-//		
-//		
-//		//수정한 게시물로 리턴
-//		return "redirect:/project/personal/read?p_Num="+p_Num;
-//	}
+	//게시글 수정 db에 넣기
+	@Override
+	@PostMapping("/update")
+	public String personalUpdate(PersonalVO personalVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		personalService.personalUpdate(personalVO);
+		
+		String p_Num = personalVO.getP_Num();
+		String mem_Id = personalVO.getMem_Id();
+		
+
+		
+		//수정한 게시물로 리턴
+		return "redirect:/personal/read?mem_Id="+mem_Id+"&p_Num="+p_Num;
+	}
 //	
 //	
 //	//다른 협업공간으로 복제 글 쓰기 DB에 넣기

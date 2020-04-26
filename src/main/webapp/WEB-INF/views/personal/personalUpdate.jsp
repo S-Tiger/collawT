@@ -29,35 +29,23 @@ span[name="chargerspan"] {
 <script type="text/javascript">
 		 $(document).ready(function(){
 			 getFileList();
-			 getIg_Checked();
 			 periodSetting();
-			 chargerRead();
+			 var p_Num = $("#p_Num").val();
+			 var mem_Id = $("#mem_Id").val();
 			 
-			 //
-			//이슈상태 라디오버튼 체크 값 가져오기
-			 $('input:radio[name="ig_checked"]').click(function(e){
-				 getIg_Checked();
-			 })
-			//document.insertForm.ig_Num.value=ig_Num;
-			
-			
-			
-			
-			 var i_Num = $("#i_Num").val();
-			 
-			 //취소버튼 클릭시 리스트로 화면으로 이동
+			 //취소버튼 클릭시 해당 게시글로 화면으로 이동
 			$("#cancel_btn").on("click", function(){
 				event.preventDefault();
-				location.href = "/issue/read?i_Num="+i_Num;
+				location.href = "/personal/read?mem_Id="+mem_Id&"+p_Num="+p_Num;
 			})
 			
 			//글쓰기 빈 값 안되게 검사
 			$("#submit").click(function(){
-				var i_Name = $("#i_Name").val();
+				var p_i_Name = $("#p_i_Name").val();
 			
-				if(i_Name==''){
+				if(p_i_Name==''){
 					alert("이슈명을 입력하세요");
-					document.updateForm.i_Name.focus();
+					document.updateForm.p_i_Name.focus();
 					return false; 
 				}
 				
@@ -68,7 +56,7 @@ span[name="chargerspan"] {
 			
 			 
 			//캘린더 기능
-			 $('#i_Period').daterangepicker({
+			 $('#p_i_Period').daterangepicker({
 				locale: { format: 'YYYY-MM-DD'}
 			 })
 			 
@@ -77,14 +65,14 @@ span[name="chargerspan"] {
 				periodModify();
 			})
 			
-			$('#i_Period').change(function(){
+			$('#p_i_Period').change(function(){
 				
 				periodModify();
 				
 				
 			})
 			
-			$('#i_Period').click(function(){
+			$('#p_i_Period').click(function(){
 				
 				periodModify();
 				
@@ -93,24 +81,24 @@ span[name="chargerspan"] {
 			
 			 
 			//파일첨부 ajax
-			$('#a_File').change(function(e){
+			$('#p_a_File').change(function(e){
 				var formData = new FormData();
-				var inputFile = $("input[name='a_File']");
+				var inputFile = $("input[name='p_a_File']");
 				var files = inputFile[0].files;
-				var i_Num = $("#i_Num").val();
+				var p_Num = $("#p_Num").val();
 				
 				console.log(files);
 			
 				
 				for(var i=0; i<files.length; i++){
-					formData.append("a_File", files[i]);
+					formData.append("p_a_File", files[i]);
 					
 				}
-				formData.append("i_Num", i_Num)
+				formData.append("p_Num", p_Num)
 				console.log(formData);
 				
 				$.ajax({
-					url:'/appendix/fileUpload',
+					url:'/personal/appendix/fileUpload',
 					processData:false,
 					contentType:false,
 					data:formData,
@@ -129,7 +117,7 @@ span[name="chargerspan"] {
 		 function getFileList(){
 			$.ajax({
 				type:"get",
-				url : "${path}/appendix/fileread?i_Num=${issueUpdate.i_Num}",
+				url : "${path}/personal/appendix/fileread?p_Num=${personalUpdate.p_Num}",
 						
 				success:function(result){
 					var str="";
@@ -138,11 +126,11 @@ span[name="chargerspan"] {
 						
 		                    
 						for(var i in result){
-							str+='<tr><td><span id="a_RealName" name="a_RealName">'+result[i].a_RealName+'</span></td>';
-							str+='<td><span id="a_Size" name="a_Size">'+(result[i].a_Size/1000)+'kb</span></td>';
-							str+='<td><input type="hidden" id="a_Num" name="a_Num" value="'+result[i].a_Num+'"/></td>';
+							str+='<tr><td><span id="p_a_RealName" name="p_a_RealName">'+result[i].p_a_RealName+'</span></td>';
+							str+='<td><span id="p_a_Size" name="p_a_Size">'+(result[i].p_a_Size/1000)+'kb</span></td>';
+							str+='<td><input type="hidden" id="p_a_Num" name="p_a_Num" value="'+result[i].p_a_Num+'"/></td>';
 							str+='<td class="text-right py-0 align-middle">';
-							str+='<div class="btn-group btn-group-sm" ><a href="javascript:fileDelete('+result[i].a_Num+')" class="btn btn-danger" ><i class="fas fa-trash" ></i></a></div>';
+							str+='<div class="btn-group btn-group-sm" ><a href="javascript:fileDelete('+result[i].p_a_Num+')" class="btn btn-danger" ><i class="fas fa-trash" ></i></a></div>';
 							str+='</td></tr>'
 						}
 						
@@ -162,11 +150,11 @@ span[name="chargerspan"] {
 		}
 		 
 			//첨부파일 삭제
-		  	function fileDelete(a_Num){
+		  	function fileDelete(p_a_Num){
 			
 					$.ajax({
-						url : "/appendix/fileUpdate",
-						data : {"a_Num" : a_Num},
+						url : "/personal/appendix/fileUpdate",
+						data : {"p_a_Num" : p_a_Num},
 						type : 'post',
 						success:function(){
 							getFileList();
@@ -179,29 +167,19 @@ span[name="chargerspan"] {
 			}
 			
 			
-			//라디오버튼 값 가져오기
-		  	function getIg_Checked() {
-		  	  var obj = document.getElementsByName("ig_checked");
-		  	  for(var i=0; i<obj.length;i++){ 
-		  		  if(obj[i].checked==true){
-		  			  $("#ig_Num").val(obj[i].value)
-		  		  }
-		  			  
-		  	  }
-		  	   
-		  	  }
+
 			
 		  //캘린더 시작일/마감일 초기 세팅
 			function periodSetting(){
 				
-				var i_Period = $("#i_Start").val()+' - '+ $("#i_End").val();
-				document.updateForm.i_Period.value=i_Period;
+				var p_i_Period = $("#p_i_Start").val()+' - '+ $("#p_i_End").val();
+				document.updateForm.p_i_Period.value=p_i_Period;
 				
-				if($("#i_Start").val()=="" && $("#i_End").val()==""){
+				if($("#p_i_Start").val()=="" && $("#p_i_End").val()==""){
 					
-					$("#i_Period").css('background-color','#e9ecef');
-					$("#i_Period").css('color','#e9ecef');
-					$("#i_Period").attr('disabled',true)
+					$("#p_i_Period").css('background-color','#e9ecef');
+					$("#p_i_Period").css('color','#e9ecef');
+					$("#p_i_Period").attr('disabled',true)
 					$("#periodNull").attr('checked',true)
 					
 					var today = new Date();
@@ -220,8 +198,8 @@ span[name="chargerspan"] {
 					today = yyyy+'/'+mm+'/'+dd;
 				
 				
-					var i_Period = today+' - '+ today;
-					document.updateForm.i_Period.value=i_Period;
+					var p_i_Period = today+' - '+ today;
+					document.updateForm.p_i_Period.value=p_i_Period;
 			 	}					
 					
 					
@@ -233,35 +211,35 @@ span[name="chargerspan"] {
 			function periodModify(){
 				if($("#periodNull").is(":checked")==true){
 					
-					var i_Start = "";
-					var i_End="";
-					document.updateForm.i_Start.value=i_Start;
-					document.updateForm.i_End.value=i_End;
+					var p_i_Start = "";
+					var p_i_End="";
+					document.updateForm.p_i_Start.value=p_i_Start;
+					document.updateForm.p_i_End.value=p_i_End;
 					
-					var i_PeriodCheck = "";
-					document.updateForm.i_PeriodCheck.value=i_PeriodCheck;
+					var p_i_PeriodCheck = "";
+					document.updateForm.p_i_PeriodCheck.value=p_i_PeriodCheck;
 					
-					$("#i_Period").css('background-color','#e9ecef');
-					$("#i_Period").css('color','#e9ecef');
-					$("#i_Period").attr('disabled',true);
+					$("#p_i_Period").css('background-color','#e9ecef');
+					$("#p_i_Period").css('color','#e9ecef');
+					$("#p_i_Period").attr('disabled',true);
 				}else{
 					
-					 $("#i_Period").css('background-color','#fff');
-					$("#i_Period").css('color','#495057');
-					$("#i_Period").attr('disabled',false)
+					 $("#p_i_Period").css('background-color','#fff');
+					$("#p_i_Period").css('color','#495057');
+					$("#p_i_Period").attr('disabled',false)
 					
-					var i_Period = $("#i_Period").val();
+					var p_i_Period = $("#p_i_Period").val();
 					
 					
-						var i_PeriodCheck = $("#i_Period").val();
-						document.updateForm.i_PeriodCheck.value=i_PeriodCheck;
+						var p_i_PeriodCheck = $("#p_i_Period").val();
+						document.updateForm.p_i_PeriodCheck.value=p_i_PeriodCheck;
 						
-						var i_Start = $("#i_PeriodCheck").val().substring(0,10);
-						var i_End= $("#i_PeriodCheck").val().substring(13,23);
+						var p_i_Start = $("#p_i_PeriodCheck").val().substring(0,10);
+						var p_i_End= $("#p_i_PeriodCheck").val().substring(13,23);
 						
 						
-						document.updateForm.i_Start.value=i_Start;
-						document.updateForm.i_End.value=i_End;
+						document.updateForm.p_i_Start.value=p_i_Start;
+						document.updateForm.p_i_End.value=p_i_End;
 					
 					
 				}
@@ -276,7 +254,7 @@ span[name="chargerspan"] {
     
 
     <!-- Main content -->
-    <form action="/project/issue/update" method="post" encType="UTF-8" name="updateForm">
+    <form action="/personal/update" method="post" encType="UTF-8" name="updateForm">
     <section class="content-header">
 	 <div class="container-fluid">
 	  <div class="row mb-2">
@@ -298,20 +276,20 @@ span[name="chargerspan"] {
           		
           		<div class="form-group">
            
-          <input type="hidden" id = "i_Num" name="i_Num" value="${issueUpdate.i_Num}"/>
+          <input type="hidden" id = "p_Num" name="p_Num" value="${personalUpdate.p_Num}"/>
               
-                <label for="i_Name">이슈명</label>
-                <input type="text" id="i_Name" name="i_Name" value="${issueUpdate.i_Name}" class="form-control"/>
+                <label for="p_i_Name">이슈명</label>
+                <input type="text" id="p_i_Name" name="p_i_Name" value="${personalUpdate.p_i_Name}" class="form-control"/>
               </div>
               
               <div class="form-group">
              
-                <label for="i_Content">이슈 내용</label>
+                <label for="p_i_Content">이슈 내용</label>
                 
-                <textarea id="i_Content" name="i_Content" class="form-control" rows="4">
-                <c:out value="${issueUpdate.i_Content}" /></textarea>
+                <textarea id="p_i_Content" name="p_i_Content" class="form-control" rows="4">
+                <c:out value="${personalUpdate.p_i_Content}" /></textarea>
                 <script>
-                CKEDITOR.replace( 'i_Content', {
+                CKEDITOR.replace( 'p_i_Content', {
                 	allowedContent:true,
                 	toolbar :[['NewPage','Preview','Bold','Italic','Underline','Strike','-','Subscript','Superscript','-','-',
                 	'JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','Outdent','Indent','HorizontalRule','Link','Unlink','-',
@@ -351,8 +329,8 @@ span[name="chargerspan"] {
             <div class="card-body">
             <label for="inputName">첨부파일</label>
             
-            <a href="#"><button type="button" class="btn btn-block btn-default btn-xs float-right" onclick="oncilck=document.all.a_File.click()" style="width:50px; margin:1px">추가</button></a>
-            <input type="file" id="a_File" name="a_File" style="display:none" multiple="multiple"/>
+            <a href="#"><button type="button" class="btn btn-block btn-default btn-xs float-right" onclick="oncilck=document.all.p_a_File.click()" style="width:50px; margin:1px">추가</button></a>
+            <input type="file" id="p_a_File" name="p_a_File" style="display:none" multiple="multiple"/>
            <br>
                
 				<div id="fileList"></div>
@@ -366,146 +344,10 @@ span[name="chargerspan"] {
               <div class="card card-info" >
               <div class="card-body">
               
-              <div class="form-group">
+ 
               
-                <label for="inputStatus">담당자</label>
-               <select class="form-control custom-select" id="chargerSelect" name="chargerSelect">
-               	<option selected disabled>담당자를 지정하세요</option>
-                  <c:forEach var="comemList" items="${comemList}" >
-                  <option >${comemList.MEM_ID}(${comemList.MEM_NAME})</option>
-                 </c:forEach>
-                </select>
-                
-              </div>
               
-              <div class="form-group">
-              <span id="id_check" name="id_check"
-				style="font-size: 0.9em; line-height: 1.0; color: #a1a1a1; ">
-			
-				담당자 목록을  확인하세요.</span>
-              <div id="chargerList" class = "form-control" style="height: 100px; width: 100%; white-space: pre-line; margin-bottom: 5px; overflow:scroll;"></div>
-             	
-             	
-				
-				</div>
-				<div id="chargerForm"></div>
-				
-				<div id="chargerList">
-			
-				
-				</div>
-<!-- 이슈 담당자 자바스크립트 따로 만들었어요..... -->
-<script type="text/javascript">
-//이슈담당자 입력
-$('#chargerSelect').change(function(event) {
-	 var mem_Id = $('#chargerSelect').val();
-	 var idSearch = mem_Id.split("(");
-	 var realmem_Id = idSearch[0];
-			 
-	 chargedArray.push(mem_Id);
-	 console.log("chargedArray : "+chargedArray);
-	 
-	 var ok = true;
-		 for(var i=0; i<chargedArray.length-1; i++){
-			 if(mem_Id == chargedArray[i]){
-				 alert("동일한 아이디를 여러 번 초대할 수 없습니다.")
-				 chargedArray.pop();
-				 console.log(chargedArray);
-			  	ok=false;
-			 }
-
-	 		}
-		 if(ok==true){
-			 
-			 chargedCount++;
-			 
-			$('#chargerList').append("<span id= 'chargerspan"+chargedCount+"' name='chargerspan'>"+mem_Id+"<a id ='chargerdelete["+chargedCount+"]' name = 'chargerdelete' onclick='deleteCharger("+chargedCount+")'>X</a></span>");
-			$('#chargerForm').append("<input type='hidden' id='hidden_Id"+chargedCount+"' name='comem_Id' value='"+realmem_Id+"'>");
-		 }
-})
-
-
-//이슈담당자 조회
-var chargedArray = new Array();
-var chargedCount = 0;
-
-
-function chargerRead(){
-	$.ajax({
-		type:"get",
-		url : "${path}/project/issue/chargerList?i_Num=${issueUpdate.i_Num}",
-		
-		success:function(result){
-			var str="";
-			if(result!=0){
-				for(chargedCount in result){
-					$('#chargerList').append("<span id= 'chargerspan"+chargedCount+"' name='chargerspan'>"+result[chargedCount].MEM_ID+"("+result[chargedCount].MEM_NAME+")<a id ='chargerdelete["+chargedCount+"]' name = 'chargerdelete' onclick='deleteCharger("+chargedCount+")'>X</a></span>");
-					$('#chargerForm').append("<input type='hidden' id='hidden_Id"+chargedCount+"' name='comem_Id' value='"+result[chargedCount].MEM_ID+"'>");
-					chargedArray.push(result[chargedCount].MEM_ID+"("+result[chargedCount].MEM_NAME+")");
-				}
-			}
-			
-		}
-		
-	})
-}
-
-
-
-//이슈 담당자 x버튼 누르면 삭제
-function deleteCharger(chargedCount){
-	
-	 var chargerspan = $('#chargerspan'+chargedCount).text();
-	 var splitResult = chargerspan.split("X");
-	 var Realchargerspan = splitResult[0];
-	 
-	 
-	 $('#chargerspan'+chargedCount).remove();
-	 $('#hidden_Id'+chargedCount).remove();
-	 
-	 var index = chargedArray.indexOf(Realchargerspan);
-	 
-	 if (index > -1) {
-		 chargedArray.splice(index,1);
-		}
-	 
-	 console.log("changed : "+ chargedArray);
-	 
-	
-}
-
-
-</script>
-
-      <!-- 이슈그룹번호 설정 -->
-      <div class="form-group" id="issueStatus">
-		<label for="inputStatus">이슈 상태</label><br>
-		
-		<c:forEach var="igRead" items="${igRead}" >
-		<label>
-		<input type="radio" id="ig_checked" name="ig_checked" value="${igRead.IG_NUM}"
-		
-		
-		<c:if test="${igRead.IG_NUM == issueUpdate.ig_Num}">checked</c:if>> 
-		<span style= "
-		<c:if test="${igRead.IG_NUM == 1}">background-color:#6c757d;</c:if>
-		<c:if test="${igRead.IG_NUM == 2}">background-color:#007bff;</c:if>
-		<c:if test="${igRead.IG_NUM == 3}">background-color:#ffc107;</c:if>
-		<c:if test="${igRead.IG_NUM == 4}">background-color:#28a745;</c:if>
-		"
-		id="ig_Name" name="ig_Name" class="badge badge-success" >${igRead.IG_NAME}</span>&nbsp;&nbsp;</label>
-		</c:forEach>
-		<input type="hidden" id="ig_Num" name="ig_Num" value="">
-		
-		
-
-         </div>
-              
-        <!--협업공간ID -->
-         <input id="c_Id" name="c_Id" type="hidden" value="${issueUpdate.c_Id}"/>
-
-		
-                
+    
                  <!-- 캘린더 -->
                <div class="form-group">
                 <div class="row">
@@ -528,19 +370,19 @@ function deleteCharger(chargedCount){
                         <i class="far fa-calendar-alt"></i>
                       </span>
                     </div>
-                    <input type="text" id = "i_Period" name="i_Period" class="form-control float-right">
+                    <input type="text" id = "p_i_Period" name="p_i_Period" class="form-control float-right">
                   </div>
                   
-                    <input type="hidden" id = "i_PeriodCheck" name="i_PeriodCheck" value="">
-                    <input type="hidden" id = "i_Start" name="i_Start" value="${issueUpdate.i_Start}">
-                    <input type="hidden" id = "i_End" name="i_End" value="${issueUpdate.i_End}">
+                    <input type="hidden" id = "p_i_PeriodCheck" name="p_i_PeriodCheck" value="">
+                    <input type="hidden" id = "p_i_Start" name="p_i_Start" value="${personalUpdate.p_i_Start}">
+                    <input type="hidden" id = "p_i_End" name="p_i_End" value="${personalUpdate.p_i_End}">
                   
               </div>
                 <!-- /.캘린더 -->
            <br>
                 
            <input type="submit" id = "submit" value="이슈 수정" class="btn btn-danger btn-sm float-right" style="margin:3px;">
-          <input type="button" id = "cancel" value="수정 취소" class="btn btn-danger btn-sm float-right" style="margin:3px;" onclick="location.href='/project/issue/read?i_Num=${issueUpdate.i_Num}'">     
+          <input type="button" id = "cancel" value="수정 취소" class="btn btn-danger btn-sm float-right" style="margin:3px;" onclick="location.href='/personal/read?mem_Id=${member.mem_Id}&p_Num=${personalUpdate.p_Num}'">     
                     
                  </div>
               </div>
@@ -549,10 +391,7 @@ function deleteCharger(chargedCount){
         
     <!-- /.content -->
      </form>
-    <form action = "/project/issue/update" method="post" id="chargerForm">
-    <input type="hidden" name="c_Id" value="${c_Id}">
-    
-    </form>
+ 
               </div>
               
   

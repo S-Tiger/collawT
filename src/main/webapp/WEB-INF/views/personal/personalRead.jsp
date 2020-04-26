@@ -290,8 +290,8 @@ function urlClipCopy() {
                             <li><a class="dropdown-item" href="javascript:urlClipCopy()"><small>URL 복사</small></a></li>
                           </ul>
                         </div>
-                        <span class="text-muted float-right"><small><a href="/project/issue/update?c_Id=${personalRead.mem_Id}&p_Num=${personalRead.p_Num}">수정</a></small>
-						<small><a onclick="if(confirm('삭제하시겠습니까?')){alert('삭제되었습니다.');}else{return false;};" href='/project/issue/delete?c_Id=${personalRead.mem_Id}&p_Num=${personalRead.p_Num}'>삭제</a></small></span>
+                        <span class="text-muted float-right"><small><a href="/personal/update?mem_Id=${personalRead.mem_Id}&p_Num=${personalRead.p_Num}">수정</a></small>
+						<small><a onclick="if(confirm('삭제하시겠습니까?')){alert('삭제되었습니다.');}else{return false;};" href='/personal/delete?mem_Id=${member.mem_Id}&p_Num=${personalRead.p_Num}'>삭제</a></small></span>
 					
 						</div>
 						

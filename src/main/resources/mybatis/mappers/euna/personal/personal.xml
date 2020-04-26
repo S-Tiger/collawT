@@ -93,20 +93,19 @@
 	<delete id="personalDelete" parameterType="String">
 		DELETE
 		FROM personal
-		WHERE i_Num=#{i_Num}
+		WHERE p_Num=#{p_Num}
 	</delete>
 
 	<!-- 게시물 수정 -->
 	<update id="personalUpdate"
 		parameterType="java.util.HashMap">
 		UPDATE personal
-		SET i_Name = #{i_Name},
-		i_Content = #{i_Content},
-		i_Date = (select to_char(sysdate, 'YYYY/MM/DD/ HH24:MI:SS') from dual),
-		i_Start = #{i_Start},
-		i_End = #{i_End},
-		ig_Num = #{ig_Num}
-		WHERE i_Num=#{i_Num}
+		SET p_i_Name = #{p_i_Name},
+		p_i_Content = #{p_i_Content},
+		p_i_Date = (select to_char(sysdate, 'YYYY/MM/DD/ HH24:MI:SS') from dual),
+		p_i_Start = #{p_i_Start},
+		p_i_End = #{p_i_End}
+		WHERE p_Num=#{p_Num}
 	</update>
 	
 	

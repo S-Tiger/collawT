@@ -26,10 +26,9 @@ public interface PersonalController {
 	public ModelAndView personalInsert(String mem_Id, HttpSession session);
 //	
 	public ModelAndView personalRead(String p_Num, HttpServletRequest request, HttpServletResponse response) throws Exception;//	
-//	public String personalDelete(String c_Id, String i_Num, personalVO personalVO) throws Exception;
-//	
-//	public String personalUpdate(String c_Id, String i_Num, personalVO personalVO, Model model) throws Exception;
-//	public String personalUpdate(personalVO personalVO, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public String personalDelete(String mem_Id, String p_Num, PersonalVO personalVO) throws Exception;//	
+	public String personalUpdate(String mem_Id, String p_Num, PersonalVO personalVO, Model model) throws Exception;
+	public String personalUpdate(PersonalVO personalVO, HttpServletRequest request, HttpServletResponse response) throws Exception ;
 //	public void communityImageUpload(HttpServletRequest request, HttpServletResponse response, @RequestParam MultipartFile upload);
 //	public String personalCopy(personalVO personalVO, HttpSession session, HttpServletRequest request, HttpServletResponse response, RedirectAttributes rttr) throws Exception;
 }
