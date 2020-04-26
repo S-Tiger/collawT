@@ -38,7 +38,7 @@ $(document).ready(function() {
 	
 	
 	//댓글 목록 항상 호출
-	//getReplyList();
+	getReplyList();
 	
 	var formObj = $("form[name='readForm']");
 	var formReply = $("form[name='replyForm']");
@@ -48,24 +48,23 @@ $(document).ready(function() {
 	
 		//댓글 입력 버튼 클릭 시 이벤트
 	$("#replyInsert_btn").on("click", function() {
-		var r_Content = $("#r_Content").val();
+		var p_m_Content = $("#p_m_Content").val();
 		//댓글 입력 비어있으면 아무 이벤트도 일어나지 않게 하기
-		if(r_Content==''){
+		if(p_m_Content==''){
 			return false;
 		
 	//
 		 }else{
 			$.ajax({
-				url:"/reply/insert",
+				url:"/personal/memo/insert",
 				type:'post',
 				data:{
-					r_Content: $("#r_Content").val(),
+					p_m_Content: $("#p_m_Content").val(),
 					p_Num : $("#p_Num").val(),
-					c_Id : $("#c_Id").val()
 				},
 				success:function(data){
 					
-                        $("#r_Content").val("");
+                        $("#p_m_Content").val("");
                         getReplyList();
 					
 				}
@@ -81,7 +80,7 @@ $(document).ready(function() {
 	function getReplyList(){
 		$.ajax({
 			type:"get",
-			url : "${path}/reply/list?p_Num=${personalRead.p_Num}",
+			url : "${path}/personal/memo/list?p_Num=${personalRead.p_Num}",
 			
 			success:function(result){
 				
@@ -90,25 +89,16 @@ $(document).ready(function() {
 					for(var i in result){
 						str+='<div class="card-footer card-comments">';
 						str+='<div class="card-comment">';
-						
-
-						str+='<c:if test="${'+result[i].mem_File +' != NULL}">';
-						str+='<img alt="Not null" width="50" height="50"src="/member/getByteImage?mem_Id='+result[i].mem_Id+'" class="img-circle elevation-1"/>';
-						str+='</c:if>';
-						
-						str+='<c:if test="${'+result[i].mem_File +'== NULL}">';
-						str+='<img src="${contextPath}/resources/dist/img/profile.jpg" width="50" height="50" class="img-circle elevation-1" alt="Null">';
-						str+='</c:if>';
 	
 						str+='<div class="comment-text">';
-						str+='<span class="username">'+result[i].mem_Name;
-						str+='<span class="text-muted float-right">'+result[i].r_Date+'</span>';
-						str+='<small>'+('${member.mem_Id}'==result[i].mem_Id ? "&nbsp;&nbsp;&nbsp;<a href='javascript:replyModifyForm("+result[i].r_Num+",\""+result[i].r_Content+"\")'>수정</a>" : "")+'</small>';
-						str+='<small>'+('${member.mem_Id}'==result[i].mem_Id ? "&nbsp;&nbsp;&nbsp;<a href='javascript:replyDelete("+result[i].r_Num+")'>삭제</a>" : "")+'</small></span>';
+				
+						str+='<span class="text-muted float-right">'+result[i].p_m_Date+'</span>';
+						str+='<small>'+('${member.mem_Id}'==result[i].mem_Id ? "&nbsp;&nbsp;&nbsp;<a href='javascript:replyModifyForm("+result[i].p_m_Num+",\""+result[i].p_m_Content+"\")'>수정</a>" : "")+'</small>';
+						str+='<small>'+('${member.mem_Id}'==result[i].mem_Id ? "&nbsp;&nbsp;&nbsp;<a href='javascript:replyDelete("+result[i].p_m_Num+")'>삭제</a>" : "")+'</small>';
 						
-						str+='<p id="replyContent'+result[i].r_Num+'" name="replyContent">'+result[i].r_Content+'</p>';
+						str+='<p id="replyContent'+result[i].p_m_Num+'" name="replyContent">'+result[i].p_m_Content+'</p>';
 						str+='</div></div></div>';
-						str+='<input type="hidden" id="r_Num" name="r_Num" value="'+result[i].r_Num+'" />';
+						str+='<input type="hidden" id="p_m_Num" name="p_m_Num" value="'+result[i].p_m_Num+'" />';
 					}
 					
 				}else{
@@ -128,13 +118,13 @@ $(document).ready(function() {
 
 
 	//댓글 삭제
-  	function replyDelete(r_Num){
+  	function replyDelete(p_m_Num){
 	
 		if(confirm("삭제하시겠습니까?")){
 			
 			$.ajax({
-				url : "/reply/delete",
-				data : {"r_Num" : r_Num},
+				url : "/personal/memo/delete",
+				data : {"p_m_Num" : p_m_Num},
 				type : 'post',
 				success:function(){
 					alert("삭제되었습니다.");
@@ -150,29 +140,29 @@ $(document).ready(function() {
 	
 	
 	//댓글 수정창 열기
-  	function replyModifyForm(r_Num, r_Content){
+  	function replyModifyForm(p_m_Num, p_m_Content){
 		
 		var str="";
 		
-		str+='<div><textarea id="r_Content'+r_Num+'" name="r_Content'+r_Num+'" class="form-control">'+r_Content+'</textarea></div>';
-		str+='<small><a href="javascript:replyUpdate('+r_Num+')" id="replyInsert_btn" name="replyInsert_btn">입력</span></small>&nbsp;&nbsp;';
-		str+='<small><a href="javascript:replyCancle('+r_Num+',\''+r_Content+'\')" id="replyCancel_btn" name="replyCancel_btn">취소</span></small>';
+		str+='<div><textarea id="p_m_Content'+p_m_Num+'" name="p_m_Content'+p_m_Num+'" class="form-control">'+p_m_Content+'</textarea></div>';
+		str+='<small><a href="javascript:replyUpdate('+p_m_Num+')" id="replyInsert_btn" name="replyInsert_btn">입력</span></small>&nbsp;&nbsp;';
+		str+='<small><a href="javascript:replyCancle('+p_m_Num+',\''+p_m_Content+'\')" id="replyCancel_btn" name="replyCancel_btn">취소</span></small>';
 	
 		
-		$('#replyContent'+r_Num).html(str);	
+		$('#replyContent'+p_m_Num).html(str);	
 			
 	} 
 
   
 	
 	//댓글 수정 db
-	function replyUpdate(r_Num){
-		var updateContent = $('[name=r_Content'+r_Num+']').val();
+	function replyUpdate(p_m_Num){
+		var updateContent = $('[name=p_m_Content'+p_m_Num+']').val();
 	    
 	    $.ajax({
-	        url : '/reply/update',
+	        url : '/personal/memo/update',
 	        type : 'post',
-	        data : {'r_Content' : updateContent, 'r_Num' : r_Num},
+	        data : {'p_m_Content' : updateContent, 'p_m_Num' : p_m_Num},
 	        success : function(data){
 	           
 	        	getReplyList();
@@ -181,11 +171,11 @@ $(document).ready(function() {
 	}
 	
 	//댓글 입력 취소 버튼 클릭시
-	function replyCancle(r_Num, r_Content){
+	function replyCancle(p_m_Num, p_m_Content){
 		var str="";
-		str+='<p id="replyContent'+r_Num+'" name="replyContent">'+r_Content+'</p>';
+		str+='<p id="replyContent'+p_m_Num+'" name="replyContent">'+p_m_Content+'</p>';
 			
-		$('#replyContent'+r_Num).html(str);	
+		$('#replyContent'+p_m_Num).html(str);	
 	}
 	
 	//클립보드로 url 복사
@@ -447,7 +437,7 @@ function urlClipCopy() {
 
 <!-- 댓글 부분~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->				
 
-			<%-- <div class="col-md-6">
+			 <div class="col-md-6">
 				<div class="card">
 
 					
@@ -456,27 +446,15 @@ function urlClipCopy() {
 					<!-- 댓글  입력-->
 					<div class="card-footer" id="replyInput" name="replyInput">
 
-						
-							<img class="img-fluid img-circle img-sm"
-								src="/member/getByteImage?mem_Id=${member.mem_Id}" alt="Alt Text" width="50" height="50" >
-							
-								<c:if test="${member.mem_File != null }">
-								<img class="img-fluid img-circle img-sm"
-								src="/member/getByteImage?mem_Id=${member.mem_Id}" alt="Alt Text" width="50" height="50" >
-								</c:if>
-								<c:if test="${member.mem_File == null }">
-								<img class="img-fluid img-circle img-sm"
-								src="${contextPath}/resources/dist/img/profile.jpg" alt="Alt Text" width="50" height="50">
-								</c:if>
+			
 						
 							<div class="img-push">
-								<textarea id="r_Content" name="r_Content" class="form-control"	placeholder="댓글을 입력하세요"></textarea>
+								<textarea id="p_m_Content" name="p_m_Content" class="form-control"	placeholder="댓글을 입력하세요"></textarea>
 									
 									
 									<small><a href="#" id="replyInsert_btn" name="replyInsert_btn">입력</a></small>
 																		
 									<input type="hidden" id="p_Num" name="p_Num" value="${personalRead.p_Num}" />
-									<input type="hidden" id="c_Id" name="c_Id" value="${personalRead.c_Id}" />
 									
 								
 							</div>
@@ -484,7 +462,7 @@ function urlClipCopy() {
 					</div>
 					<!-- /댓글 입력 -->
 				</div>
-			</div> --%>
+			</div>
 			<div class="row">
 				<div class="col-12"></div>
 			</div>
