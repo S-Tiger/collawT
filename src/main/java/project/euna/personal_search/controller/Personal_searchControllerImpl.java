@@ -1,5 +1,6 @@
 package project.euna.personal_search.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -70,7 +71,24 @@ public class Personal_searchControllerImpl implements Personal_searchController 
 //		return "redirect:/project/issue/list?c_Id="+c_Id;
 //	}
 	
-
+	//글 목록 조회 페이징
+	@Override
+	@GetMapping("/myFile")
+	public ModelAndView myFile(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		Map<String, Object> member = new HashMap<String,Object>();
+		member = (Map<String, Object>) session.getAttribute("member");
+		String mem_Id = (String) member.get("mem_Id");
+				
+		List<Map> list = personal_searchService.myFile(mem_Id);
+		
+		
+		ModelAndView mav = new ModelAndView("/personal/myFile");
+		mav.addObject("myFile", list);
+		
+		return mav;
+		
+	}
 
 
 }

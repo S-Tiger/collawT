@@ -13,6 +13,6 @@ import project.euna.personal_search.vo.Criteria;
 
 public interface Personal_searchController {
 	public ModelAndView myBoardlist(Criteria cri, String mem_Id, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception;
-
+	public ModelAndView myFile(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception;
 }
 

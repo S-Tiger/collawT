@@ -43,6 +43,16 @@ public class Personal_searchDAOImpl implements Personal_searchDAO {
 //		sqlSession.delete("issue.issueDelete", i_Num);
 //
 //	}
+	
+	
+	//전체 파일
+	@Override
+	public List<Map> myFile(String mem_Id) throws DataAccessException {
+
+		List<Map> list = sqlSession.selectList("personal_search.myFile", mem_Id);
+		return list;
+
+	}
 
 
 	

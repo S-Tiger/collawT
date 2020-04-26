@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import project.euna.personal_search.dao.Personal_searchDAOImpl;
@@ -45,6 +46,10 @@ public class Personal_searchServiceImpl implements Personal_searchService {
 //		issueDAO.issueDelete(i_Num);
 //	}
 
-	
+	//전체 파일
+	@Override
+	public List<Map> myFile(String mem_Id) throws DataAccessException {
+		return personal_searchDAO.myFile(mem_Id);
 
+}
 }
