@@ -10,7 +10,7 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -97,7 +97,7 @@ public class AppendixControllerImpl implements AppendixController {
 	@ResponseBody
 	public List<Map> fileRead(@RequestParam ("i_Num")String i_Num, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		List<Map> list = appendixService.fileList(i_Num);
-		
+
 		return list;
 	}
 
@@ -150,6 +150,50 @@ public class AppendixControllerImpl implements AppendixController {
 		
 		appendixService.fileDelete(i_Num);	
 		
+		
+		return "redirect:/project/issue/list?c_Id="+c_Id;
+	}
+	
+	
+	//수정 취소 시 파일 없애고 다시 입히기
+	@Override
+	@PostMapping("/fileCancel")
+	@ResponseBody
+	public String fileCancel(String c_Id, String i_Num, HttpServletRequest request) throws Exception{
+		
+		//세션에서 파일리스트 가져오기
+		HttpSession session = request.getSession();
+		List<Map> fileList = null;
+		fileList = (List<Map>) session.getAttribute("fileList");
+		System.out.println("~~~~~~~~~~~~~~~~fileList"+fileList);
+		
+		
+		
+	
+		//DB에서 파일 지우기
+		appendixService.fileDelete(i_Num);	
+		
+
+		for(int i=0; i<fileList.size(); i++) {
+			try {
+				Map<String, Object> file = new HashMap<String, Object>();
+				file.put("a_RealName", (String) fileList.get(i).get("a_RealName"));
+				file.put("a_File", (fileList.get(i).get("a_File")));
+				file.put("a_NameEx", (String) fileList.get(i).get("a_NameEx"));
+				file.put("a_Size", (String) fileList.get(i).get("a_Size"));
+				file.put("i_Num", i_Num);
+				
+				appendixDAO.uploadFile(file);
+				
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		 session.removeAttribute("fileList");
 		
 		return "redirect:/project/issue/list?c_Id="+c_Id;
 	}

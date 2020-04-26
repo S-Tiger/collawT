@@ -142,7 +142,7 @@ span[name="chargerspan"] {
 							str+='<td><span id="a_Size" name="a_Size">'+(result[i].a_Size/1000)+'kb</span></td>';
 							str+='<td><input type="hidden" id="a_Num" name="a_Num" value="'+result[i].a_Num+'"/></td>';
 							str+='<td class="text-right py-0 align-middle">';
-							str+='<div class="btn-group btn-group-sm" ><a href="javascript:fileDelete('+result[i].a_Num+')" class="btn btn-danger" ><i class="fas fa-trash" ></i></a></div>';
+							str+='<div class="btn-group btn-group-sm" ><a href="javascript:fileUpdate('+result[i].a_Num+')" class="btn btn-danger" ><i class="fas fa-trash" ></i></a></div>';
 							str+='</td></tr>'
 						}
 						
@@ -162,7 +162,7 @@ span[name="chargerspan"] {
 		}
 		 
 			//첨부파일 삭제
-		  	function fileDelete(a_Num){
+		  	function fileUpdate(a_Num){
 			
 					$.ajax({
 						url : "/appendix/fileUpdate",
@@ -177,6 +177,25 @@ span[name="chargerspan"] {
 				
 					
 			}
+			
+			//수정 취소 시 파일 DB에서 지우기
+		  	function fileDelete(i_Num){
+		  		
+				$.ajax({
+					url : "/appendix/fileCancel",
+					data : {
+						"i_Num" : i_Num
+						},
+					type : 'post',
+					success:function(){
+					
+						window.history.go(-2);
+					}
+						
+				})
+				
+				
+		}
 			
 			
 			//라디오버튼 값 가져오기
@@ -540,7 +559,7 @@ function deleteCharger(chargedCount){
            <br>
                 
            <input type="submit" id = "submit" value="이슈 수정" class="btn btn-danger btn-sm float-right" style="margin:3px;">
-          <input type="button" id = "cancel" value="수정 취소" class="btn btn-danger btn-sm float-right" style="margin:3px;" onclick="location.href='/project/issue/read?i_Num=${issueUpdate.i_Num}'">     
+          <input type="button" id = "cancel" value="작성 취소" class="btn btn-danger btn-sm float-right" onclick="javascript:fileDelete(${issueUpdate.i_Num})" style="margin:3px;">     
                     
                  </div>
               </div>

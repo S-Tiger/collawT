@@ -21,6 +21,6 @@ public interface AppendixController {
 	public List<Map> fileRead(@RequestParam ("i_Num")String i_Num, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public void updateFile(AppendixVO appendixVO) throws Exception;
 	public String fileDelete(@RequestParam ("i_Num")String i_Num, @RequestParam ("c_Id")String c_Id) throws Exception;
-	
+	public String fileCancel(String c_Id, String i_Num, HttpServletRequest request) throws Exception;
 }
 

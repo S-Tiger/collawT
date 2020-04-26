@@ -216,7 +216,7 @@ public class IssueControllerImpl implements IssueController {
 	//게시글 수정 페이지로 이동
 	@Override
 	@GetMapping("/update")
-	public String issueUpdate(String c_Id, String i_Num, IssueVO issueVO, Model model) throws Exception {
+	public String issueUpdate(String c_Id, String i_Num, IssueVO issueVO, Model model, HttpSession session) throws Exception {
 		
 		
 		
@@ -229,6 +229,10 @@ public class IssueControllerImpl implements IssueController {
 		model.addAttribute("c_Id", c_Id);
 		model.addAttribute("comemList", comemList);
 		model.addAttribute("chargerList", chargerList);
+		
+		//세션에 수정 전 파일 던지기
+		List<Map> list = appendixService.fileList(i_Num);
+		session.setAttribute("fileList", list);
 
 		
 		return "/issue/issueUpdate";
