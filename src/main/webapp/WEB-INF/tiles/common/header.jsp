@@ -438,13 +438,24 @@
 							</p>
 					</a></li>
 					
-					<li class="nav-item" style="border-bottom: 1px solid #4f5962;"><a href="/calendar/main"
+					
+					
+					<li class="nav-item" ><a href="/calendar/main"
 						class="nav-link"> <i class="nav-icon fas fa-calendar-check"></i>
 							<p>
 								전체 캘린더 <span class="badge badge-info right"></span>
 								<!--  <span class="right badge badge-danger">New</span>-->
 							</p>
 					</a></li>
+					
+					<li class="nav-item" style="border-bottom: 1px solid #4f5962;"><a href="/personal/search/myFile"
+						class="nav-link"> <i class="nav-icon fas fa-archive"></i>
+							<p>
+								전체 파일함 <span class="badge badge-info right"></span>
+								<!--  <span class="right badge badge-danger">New</span>-->
+							</p>
+					</a></li>
+					
 												<li class="nav-item"><a href="/#" data-needpopup-show="#createpjt-popup"
 								class="nav-link"> <i class="nav-icon fas fa-folder-plus"></i>
 									<p>협업공간 생성</p>
