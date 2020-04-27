@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import project.euna.whole_search.dao.Whole_searchDAOImpl;
 import project.euna.whole_search.vo.Criteria;
+import project.euna.whole_search.vo.SearchVO;
 
 
 
@@ -22,10 +23,10 @@ public class Whole_searchServiceImpl implements Whole_searchService {
 	
 
 
-	//전체 파일
+	// 이슈 페이징
 	@Override
-	public List<Map> search(String mem_Id) throws DataAccessException  {
-		return whole_searchDAO.search(mem_Id);
+	public List<Map> searchIssue(SearchVO searchVO) throws DataAccessException  {
+		return whole_searchDAO.searchIssue(searchVO);
 
 }
 }

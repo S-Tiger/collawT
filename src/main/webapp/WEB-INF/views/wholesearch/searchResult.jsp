@@ -21,7 +21,13 @@
 </style>
 
 <script type="text/javascript">
-
+/* $(document).ready(function() {
+	$("#submit").click(function(){
+		var searchLevel1 = $("#searchLevel1").val();
+		alert(searchLevel1);
+	
+	});
+}) */
 				
 </script>
 
@@ -40,7 +46,7 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
-			
+
 						<!-- Main content -->
 	<section class="content">
 		
@@ -49,34 +55,40 @@
 			       <!-- 리스트 부분 -->
         <div class="card-body p-0">
            
+           이슈
           <table class="table table-striped projects">
-              <thead style="text-align:center">
+              
              
-              <th>제목</th>
+
+              
+			<c:choose>
+			<c:when test="${fn:length(issueList)!=0}">
+			  <thead style="text-align:center">
+			  <th>제목</th>
               <th>작성자</th>
               <th>작성일</th>
               <th>협업공간명</th>
               </thead>
               <tbody>
-              
-			<c:choose>
-			<c:when test="${fn:length(issueSearch)!=0}">
-                 <c:forEach var="issueSearch" items="${issueSearch}" >	
+                 <c:forEach var="item" items="${issueList}" >	
                   <tr>
-                     <td>${issueSearch.i_Name}</td>
-                  	 <td>${issueSearch.mem_Name}</td>
-                  	 <td>${issueSearch.i_Date}</td>
-                  	 <td>${issueSearch.c_Name}</td>
+                     <td>${item.i_Name}</td>
+                  	 <td>${item.mem_Name}</td>
+                  	 <td>${item.i_Date}</td>
+                  	 <td>${item.c_Name}</td>
                    </tr>
                    
                    </c:forEach>
-                 </c:when>
+                </c:when>
                  <c:otherwise>
-                 <p style="text-align:center;"><small><br><br>파일이 없습니다.</small></p>
+                 <p style="text-align:center;"><small><br><br>검색결과가 없습니다.</small></p>
                  </c:otherwise>
-                 </c:choose>
+                </c:choose>
               </tbody>
           </table>
+          
+          
+  
         </div>
         <!-- /리스트 부분 -->
        

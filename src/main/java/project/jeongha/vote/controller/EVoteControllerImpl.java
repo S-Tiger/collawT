@@ -166,9 +166,9 @@ public class EVoteControllerImpl implements EVoteController {
 	// 게시글 삭제
 	@Override
 	@GetMapping("/delete")
-	public String voteDelete(String c_Id, String i_Num, VoteVO voteVO) throws Exception {
+	public String voteDelete(String c_Id, String v_Num, VoteVO voteVO) throws Exception {
 
-		evoteService.chargerDelete(voteVO.getV_Num());
+		//evoteService.chargerDelete(voteVO.getV_Num());
 		evoteService.voteDelete(voteVO.getV_Num());
 
 		return "redirect:/project/vote/list?c_Id=" + c_Id;
@@ -187,10 +187,19 @@ public class EVoteControllerImpl implements EVoteController {
 		List<Map> comemList = evoteService.comemRead(c_Id);
 		// List<Map> chargerList = evoteService.chargerRead(v_Num);
 
+		Map<String, Object> vote = evoteService.voteRead(v_Num);
+		List<Map> voted = evoteService.votedRead(v_Num);
+		// List<Map> list = appedixService.fileList(i_Num);
+		// List<Map> chargerList = evoteService.chargerRead(v_Num);
+
+		
 		model.addAttribute("voteUpdate", evoteService.voteRead(voteVO.getV_Num()));
 		model.addAttribute("igRead", igRead);
 		model.addAttribute("c_Id", c_Id);
 		model.addAttribute("comemList", comemList);
+		model.addAttribute("voteRead", vote);
+		model.addAttribute("votedRead", voted);
+		
 		// model.addAttribute("chargerList", chargerList);
 
 		return "/vote/voteUpdate";
@@ -209,7 +218,7 @@ public class EVoteControllerImpl implements EVoteController {
 
 	//
 //	
-	// 게시글 수정 db에 넣기
+	// 투표 수정 db에 넣기
 	@Override
 	@PostMapping("/update")
 	public String voteUpdate(VoteVO voteVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -217,25 +226,29 @@ public class EVoteControllerImpl implements EVoteController {
 
 		String v_Num = voteVO.getV_Num();
 		String c_Id = voteVO.getC_Id();
-
+		String v_Name= voteVO.getV_Name();
+		String v_Content=voteVO.getV_Content();
+		String v_Subject = voteVO.getV_Subject();
+	
+		
+		
 		// 이슈담당자 삭제 후 다시 입력
-		evoteService.chargerDelete(v_Num);
-
-		try {
-			Map<String, Object> coMap = new HashMap<String, Object>();
-			String comem_Id[] = request.getParameterValues("comem_Id");
-			for (int i = 0; i < comem_Id.length; i++) {
-
-				coMap.put("v_Num", v_Num);
-				coMap.put("c_Id", c_Id);
-				coMap.put("mem_Id", comem_Id[i]);
-				coMap.put("cr_Status", "");
-
-				evoteService.comemInsert(coMap);
-			}
-
-		} catch (NullPointerException e) {
-		}
+//		evoteService.chargerDelete(v_Num);
+//		try {
+//			Map<String, Object> coMap = new HashMap<String, Object>();
+//			String comem_Id[] = request.getParameterValues("comem_Id");
+//			for (int i = 0; i < comem_Id.length; i++) {
+//
+//				coMap.put("v_Num", v_Num);
+//				coMap.put("c_Id", c_Id);
+//				coMap.put("mem_Id", comem_Id[i]);
+//				coMap.put("cr_Status", "");
+//
+//				evoteService.comemInsert(coMap);
+//			}
+//
+//		} catch (NullPointerException e) {
+//		}
 
 		// appedixService.updateFile(issueVO, appendixVO, files, fileNames, mpRequest);
 
@@ -339,24 +352,31 @@ public class EVoteControllerImpl implements EVoteController {
 		evoteService.voterInsert(cmap, response, voteVO);
 
 		// 보트카운트
-		String vd_arr[] = request.getParameterValues("vd_Num");
+		String vd_arr[] = request.getParameterValues("getVsNum");
 		Map<String, Object> voteCount = new HashMap<String, Object>();
 		System.out.println("vd_arr: " + vd_arr);
-		List<Map> voteCount0 = new ArrayList<Map>();
-
+		Map<String, Object> voteCount0 = new HashMap<String, Object>();
+		ArrayList<String> arrayList = new ArrayList<>();
 		
-			for (int i = 0; i < vd_arr.length; i++) {
-				voteCount.put("v_Num", v_Num);
-				voteCount.put("vd_Num", vd_arr[i]);
-				System.out.println(v_Num + "dddddddddddd" + vd_arr[i]);
-
-				voteCount0 = evoteService.voteCount(voteCount);
-			}
+		
+		
+		
+		for (int i = 0; i < vd_arr.length; i++) {
+			voteCount.put("v_Num", v_Num);
+			voteCount.put("vd_Num", vd_arr[i]);
+			System.out.println(v_Num + "dddddddddddd" + vd_arr[i]);
+			System.out.println(voteCount+"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+			voteCount0.put("v_Count",evoteService.voteCount(voteCount));
+			//arrayList.add(voteCount0);
+		}
+		
+		
 
 		System.out.println("172093847120983471209834" + voteCount0);
 		mav.addObject("voteRead", vote);
 		mav.addObject("votedRead", voted);
 		mav.addObject("voteCount", voteCount0);
+		
 		return mav;
 	}
 

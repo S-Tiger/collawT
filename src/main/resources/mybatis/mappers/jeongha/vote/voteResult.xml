@@ -140,11 +140,11 @@
 
 	<!-- where and V.v_Num=#{v_Num} -->
 	<!-- 게시물 삭제 -->
-	<delete id="issueDelete" parameterType="String">
+	<delete id="voteDelete" parameterType="String">
 		DELETE
-		FROM issue
+		FROM vote
 		WHERE
-		i_Num=#{i_Num}
+		v_Num=#{v_Num}
 	</delete>
 
 	<!-- 게시물 수정 -->

@@ -17,28 +17,67 @@
 		<result property="c_Name" column="c_Name" />
 		<result property="mem_Name" column="mem_Name" />
 		<result property="ig_Name" column="ig_Name" />
+		<result property="wr_mem_Id" column="wr_mem_Id" />
+		<result property="rnum" column="rnum" />
+		<result property="i_Content" column="i_Content" />
+	</resultMap>
+	
+	<resultMap id="whole_searchResult02" type="SearchVO">
+		<!-- property는 화면단에서 쓸 이름, column은 데이터컬럼명이랑 동일 -->
+		<result property="searchType" column="searchType"/>
+		<result property="keyword" column="keyword" />
 	</resultMap>
 
-<!-- 이슈검색 전체 뷰 -->
-<select id="searchIssue" resultMap="whole_searchResult01" parameterType="String"> 
+<!-- 이슈검색 뷰 -->
+<select id="searchIssue" resultMap="whole_searchResult01" parameterType="java.util.HashMap"> 
       <![CDATA[
-          select i_Num, c_Id, i_Name, i_Date, ig_Num, mem_Id, c_Name, mem_Name, ig_Name, row_number() over(order by i_date desc) as rnum
+          select i_Num, c_Id, i_Name, i_Date, ig_Num, wr_mem_Id, c_Name, mem_Name, ig_Name, row_number() over(order by i_date desc) as rnum, i_content
           from
               (
-              (select i.i_Num as i_Num, i.c_Id as c_Id, i.i_Name as i_Name, i.i_Date as i_Date, i.ig_Num as ig_Num, i.mem_Id as mem_Id,
-                      c.c_Name as c_Name,
-                      m.mem_Name as mem_Name,
-                      ig.ig_Name as ig_Name
-               from issue i, co_work c, member m, issue_group ig
-               where c.c_id=i.c_id
-               and m.mem_id=i.mem_id
-               and i.ig_num = i.ig_num
-               and c.c_Id in
+              (select I.I_NUM as i_Num, I.C_ID as c_Id, I.I_NAME as i_Name, I.I_DATE as i_Date, I.IG_NUM as ig_Num, I.MEM_ID as wr_mem_Id, I.I_CONTENT as i_Content,
+                      C.C_NAME as c_Name,
+                      M.MEM_NAME as mem_Name,
+                      IG.IG_NAME as ig_Name
+               from ISSUE I, CO_WORK C, MEMBER M, ISSUE_GROUP IG
+               where C.C_ID=I.C_ID
+               and M.MEM_ID=I.MEM_ID
+               and I.IG_NUM = IG.IG_NUM
+               
+               and C.C_ID IN
                   (
-                  select c_id from co_member where mem_id=#{mem_Id}
+                  select C_ID from CO_MEMBER where MEM_ID='dmsdk@dmsdk.com'
                   )
+                
                )
               union all
+              (select P.P_NUM as i_Num, P.MEM_ID as c_Id, P.P_I_NAME as i_Name, P.P_I_DATE as i_Date, null as ig_Num, P.MEM_ID as wr_mem_Id, P.P_I_CONTENT as i_content,
+                      null as c_Name,
+                      M.MEM_NAME as mem_Name,
+                      '내 공간' as ig_Name
+                  from PERSONAL P, MEMBER M
+                  where M.MEM_ID=P.MEM_ID
+              )
+          )
+               	]]>
+           <trim prefix="WHERE" prefixOverrides="AND|OR">
+				<if test="searchType=='i_Name' and keyword != null and keyword != '' ">
+					AND I_NAME like CONCAT('%' || #{keyword}, '%')
+				</if>
+				<if test="searchType=='i_Content' and keyword != null and keyword != '' ">
+					AND I_CONTENT like CONCAT('%' || #{keyword}, '%')
+				</if>
+				<if test="searchType=='wr_mem_Id' and keyword != null and keyword != '' ">
+					AND WR_MEM_ID like CONCAT('%' || #{keyword}, '%')
+				</if>	
+				<if test="searchType=='mem_Name' and keyword != null and keyword != '' ">
+					AND MEM_NAME like CONCAT('%' || #{keyword}, '%')
+				</if>
+		</trim>
+
+
+	</select>
+	
+<!-- 	              union all
               (select p.p_Num as i_Num, p.mem_Id as c_Id, p.p_i_Name as p_i_Name, p.p_i_Date as i_Date, null as ig_Num, p.mem_Id as mem_Id,
                       null as c_Name,
                       m.mem_Name as mem_Name,
@@ -46,15 +85,7 @@
                   from personal p, member m
                   where m.mem_id=p.mem_id
                   and m.mem_id = #{mem_Id}
-              )
-          )
-
-        
-		
-      ]]>
-
-	</select>
-	
+              ) -->
 	
 
 	
