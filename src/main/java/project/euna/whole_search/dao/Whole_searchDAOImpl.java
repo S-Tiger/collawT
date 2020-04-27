@@ -11,6 +11,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import project.euna.whole_search.vo.Criteria;
+import project.euna.whole_search.vo.SearchVO;
 
 
 
@@ -24,9 +25,9 @@ public class Whole_searchDAOImpl implements Whole_searchDAO {
 	
 	//전체 이슈 페이징
 	@Override
-	public List<Map> search(String mem_Id) throws DataAccessException {
+	public List<Map> searchIssue(SearchVO searchVO) throws DataAccessException {
 
-		List<Map> list = sqlSession.selectList("whole_search.searchIssue", mem_Id);
+		List<Map> list = sqlSession.selectList("whole_search.searchIssue", searchVO);
 		return list;
 
 	}

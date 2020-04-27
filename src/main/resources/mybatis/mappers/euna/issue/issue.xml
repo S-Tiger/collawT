@@ -70,7 +70,7 @@
 	<![CDATA[
 	
 	        
-        select rnum, i_Num, c_Id, i_Name, i_Content, i_Date, mem_Id, i_Start, i_End
+        select rnum, i_Num, c_Id, i_Name, i_Content, i_Date, mem_Id, i_Start, i_End, mem_name, ig_Num, ig_Name, charger
         from
         (
           select row_number() over(order by I.i_Num desc) as rnum, I.i_Num, I.c_Id, I.i_Name, I.i_Content, I.i_Date, I.mem_Id, I.i_Start, I.i_End, 

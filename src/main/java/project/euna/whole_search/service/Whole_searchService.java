@@ -7,11 +7,12 @@ import java.util.Map;
 import org.springframework.dao.DataAccessException;
 
 import project.euna.whole_search.vo.Criteria;
+import project.euna.whole_search.vo.SearchVO;
 
 
 
 public interface Whole_searchService {
 
-	public List<Map> search(String mem_Id) throws DataAccessException;
-
+	public List<Map> searchIssue(SearchVO searchVO) throws DataAccessException;
+	
 }
