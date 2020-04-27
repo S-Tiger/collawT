@@ -13,7 +13,7 @@ import project.sungho.apply.vo.ApplyVO;
 
 public interface ApplyService {
 	public List<Map> searchList(Map<String, Object> searchMap) throws DataAccessException;
-	 
+	 public List<Map> viewCount(Map<String,Object>searchMap) throws DataAccessException;
 	 public void updateApply(Map<String, Object> dataMap) throws Exception;
 	 public void insertApply(Map<String, Object> dataMap) throws Exception;
 	 public void deleteApply(Map<String, Object> dataMap) throws Exception;

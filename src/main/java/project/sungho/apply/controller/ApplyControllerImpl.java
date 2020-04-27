@@ -36,6 +36,16 @@ public class ApplyControllerImpl implements ApplyController {
 	
 	@Autowired
 	ComemberService comemberService;
+	//알림마크에서 초대요청 개수를 파악하기 위한 서블릿
+	@RequestMapping("/view")
+	@ResponseBody
+	public List<Map> viewCount(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception{
+		HttpSession session = request.getSession();
+		Map<String,Object> searchMap = new HashMap<String,Object>();
+		searchMap = (Map<String,Object>) session.getAttribute("member");
+		List<Map> viewCount = applyService.viewCount(searchMap);
+		return viewCount;
+	}
 
 	@Override
 	@RequestMapping("/list")
@@ -49,7 +59,7 @@ public class ApplyControllerImpl implements ApplyController {
 
 		List<Map> list = applyService.searchList(searchMap);
 		model.addAttribute("applylist", list);
-
+		System.out.println("applyList에 얼마나 들어있나~~~~:");
 		return "newspeed/newspeedList3";
 	}
 

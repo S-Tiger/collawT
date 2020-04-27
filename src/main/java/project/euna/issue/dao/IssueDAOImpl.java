@@ -22,6 +22,7 @@ public class IssueDAOImpl implements IssueDAO {
 	public int issueInsert(Map map) {
 		int result;
 		result = sqlSession.update("issue.issueInsert", map);
+		sqlSession.update("notify.notifyInsert", map);
 		return result;
 	}
 

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import project.euna.issue.vo.IssueVO;
@@ -30,24 +31,27 @@ public class NotifyServiceImpl implements NotifyService{
 	}
 
 	@Override
-	public List<NotifyVO> searchNotify(Map<String, Object> searchMap) {
+	public List<Map> searchNotify(Map<String, Object> searchMap) {
 		// TODO Auto-generated method stub
-		List<NotifyVO> list = notifyDAO.searchNotify(searchMap);
+		List<Map> list = notifyDAO.searchNotify(searchMap);
 		return list;
 	}
 
-	public void notifyUpdate(NotifyVO notifyVO) {
+	public void notifyUpdate(Map<String,Object> searchMap) {
 		// TODO Auto-generated method stub
-		int result = notifyDAO.notifyUpdate(notifyVO);
+		 notifyDAO.notifyUpdate(searchMap);
 		
 		
 	}
 
 	@Override
-	public int viewNotify(int str) {
-		int ccview = notifyDAO.viewNotify(str);
-		return ccview;
+	public List<Map> viewNotify(Map<String, Object> searchMap) throws DataAccessException {
+		List<Map> list = notifyDAO.viewNotify(searchMap);
+		return list;
 	}
 
+	
+
+	
 	
 }

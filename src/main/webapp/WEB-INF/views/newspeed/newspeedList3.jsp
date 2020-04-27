@@ -18,7 +18,12 @@
 </style>
 
 <script type="text/javascript">
+
+
+
 	$(document).ready(function(){
+		
+		
 		$('#myform').click(function(event) {
 			
 			var button_Id = event.target.getAttribute('id');
@@ -100,40 +105,27 @@
 				<div class="tab-content">
 					<div class="active tab-pane" id="activity">
 						<!-- Post -->
-						<div class="post">
+						<c:forEach var="item" items = "${notifyList}">
+						<div class="post">						
 							<div class="user-block">
-								<img class="img-circle img-bordered-sm"
-									src="${contextPath}/resources/dist/img/user1-128x128.jpg" alt="user image">
-								<span class="username"> <a href="#">Jonathan Burke
-										Jr.</a> <a href="#" class="float-right btn-tool"><i
+								<%-- <img class="img-circle img-bordered-sm"
+									src="${contextPath}/resources/dist/img/user1-128x128.jpg" alt="user image"> --%>	
+								
+								<span class="username"  id = "test11" > <a href="/notify/update?c_Id=${item.c_Id}&i_Num=${item.i_Num}">${item.mem_Id}
+										</a> <a href="#" class="float-right btn-tool"><i
 										class="fas fa-times"></i></a>
-								</span> <span class="description">Shared publicly - 7:30 PM
-									today</span>
+								</span> <span class="description">${item.i_Date}
+									</span>
 							</div>
 							<!-- /.user-block -->
-							<p>Lorem ipsum represents a long-held tradition for
-								designers, typographers and the like. Some people hate it and
-								argue for its demise, but others ignore the hate as they create
-								awesome tools to help create filler text for everyone from bacon
-								lovers to Charlie Sheen fans.</p>
+							<p>${item.i_Content}</p>
 
-							<p>
-								<a href="#" class="link-black text-sm mr-2"><i
-									class="fas fa-share mr-1"></i> Share</a> <a href="#"
-									class="link-black text-sm"><i class="far fa-thumbs-up mr-1"></i>
-									Like</a> <span class="float-right"> <a href="#"
-									class="link-black text-sm"> <i class="far fa-comments mr-1"></i>
-										Comments (5)
-								</a>
-								</span>
-							</p>
-
-							<input class="form-control form-control-sm" type="text"
-								placeholder="Type a comment">
+							
 						</div>
+						</c:forEach>
 						<!-- /.post -->
 
-						<!-- Post -->
+						<%-- <!-- Post -->
 						<div class="post clearfix">
 							<div class="user-block">
 								<img class="img-circle img-bordered-sm"
@@ -217,35 +209,35 @@
 							<input class="form-control form-control-sm" type="text"
 								placeholder="Type a comment">
 						</div>
-						<!-- /.post -->
+						<!-- /.post --> --%>
 					</div>
 					<!-- /.tab-pane -->
 					<div class="tab-pane" id="timeline">
 						<!-- The timeline -->
 						<div class="timeline timeline-inverse">
 							<!-- timeline time label -->
-							<div class="time-label">
+							<!-- <div class="time-label">
 								<span class="bg-danger"> 10 Feb. 2014 </span>
-							</div>
+							</div> -->
 							<!-- /.timeline-label -->
 							<!-- timeline item -->
-							 <c:forEach var="applylist" items="${applylist}">
+							 <c:forEach var="applylist1" items="${applylist}">
 							 <c:choose>
-							 <c:when  test= "${applylist.ap_Yn eq 'waiting'}">
+							 <c:when  test= "${applylist1.ap_Yn eq 'waiting'}">
 							<div>
 								<i class="fas fa-envelope bg-primary"></i>
 
 								<div class="timeline-item">
-									<span class="time"><i class="far fa-clock"></i> ${applylist.ap_Date}</span>
+									<span class="time"><i class="far fa-clock"></i> ${applylist1.ap_Date}</span>
 
 									<h3 class="timeline-header">
-										<a href="#">${applylist.c_Name}</a>에서 가입요청이 왔습니다
+										<a href="#">${applylist1.c_Name}</a>에서 가입요청이 왔습니다
 									</h3>
-									<div class="timeline-body">${applylist.mem_Name}님께서 회원님을  ${applylist.c_Name}에 초대하셨습니다. </div>
+									<div class="timeline-body">${applylist1.mem_Name}님께서 회원님을  ${applylist1.c_Name}에 초대하셨습니다. </div>
 									<div class="timeline-footer" id="timeline-footer">
 									<form  id = "myform" action="/news/accept" method="post" style="display: inline;  margin: 5;">
-									<input type="hidden" name="c_Id" id="c_Id" value="${applylist.c_Id}">
-									<input type="hidden" name="mem_Id" id="mem_Id" value="${applylist.mem_Id}">
+									<input type="hidden" name="c_Id" id="c_Id" value="${applylist1.c_Id}">
+									<input type="hidden" name="mem_Id" id="mem_Id" value="${applylist1.mem_Id}">
 										<a id = "acceptsubmit" href="#" class="btn btn-primary btn-sm" style="color: white;">수락</a>
 										<a id = "rejectsubmit" href="#" class="btn btn-danger btn-sm" style="color: white;">거절</a>
 										</form>
@@ -257,7 +249,7 @@
 							  </c:forEach>
 							<!-- END timeline item -->
 							<!-- timeline item -->
-							<div>
+							<!-- <div>
 								<i class="fas fa-user bg-info"></i>
 
 								<div class="timeline-item">
@@ -268,10 +260,10 @@
 										<a href="#">Sarah Young</a> accepted your friend request
 									</h3>
 								</div>
-							</div>
+							</div> -->
 							<!-- END timeline item -->
 							<!-- timeline item -->
-							<div>
+							<!-- <div>
 								<i class="fas fa-comments bg-warning"></i>
 
 								<div class="timeline-item">
@@ -291,13 +283,13 @@
 									</div>
 								</div>
 							</div>
-							<!-- END timeline item -->
-							<!-- timeline time label -->
+							END timeline item
+							timeline time label
 							<div class="time-label">
 								<span class="bg-success"> 3 Jan. 2014 </span>
 							</div>
-							<!-- /.timeline-label -->
-							<!-- timeline item -->
+							/.timeline-label
+							timeline item
 							<div>
 								<i class="fas fa-camera bg-purple"></i>
 
@@ -316,11 +308,11 @@
 											src="http://placehold.it/150x100" alt="...">
 									</div>
 								</div>
-							</div>
+							</div> -->
 							<!-- END timeline item -->
-							<div>
+							<!-- <div>
 								<i class="far fa-clock bg-gray"></i>
-							</div>
+							</div> -->
 						</div>
 					</div>
 					<!-- /.tab-pane -->

@@ -68,11 +68,22 @@
 	<!-- 글 목록 페이징+이슈담당자-->
 	<select id="searchList" resultMap="issueResult02" parameterType="project.euna.issue.vo.Criteria"> 
 	<![CDATA[
-        select *
-        from V_IssueList
-        where c_Id=#{c_Id}
-        and rnum between #{rowStart} and #{rowEnd}
-        order by to_number(i_Num) desc 
+	
+	        
+        select rnum, i_Num, c_Id, i_Name, i_Content, i_Date, mem_Id, i_Start, i_End
+        from
+        (
+          select row_number() over(order by I.i_Num desc) as rnum, I.i_Num, I.c_Id, I.i_Name, I.i_Content, I.i_Date, I.mem_Id, I.i_Start, I.i_End, 
+            M.mem_name, IG.ig_Num, IG.ig_Name, c.charger
+            
+            from issue I, member M, Issue_Group IG, V_CHARGERLIST c
+            where I.mem_Id = M.mem_Id
+            and I.ig_Num= IG.ig_Num
+            and c.i_num = i.i_num
+            and c_id=#{c_Id}
+         )
+         where rnum between #{rowStart} and #{rowEnd}
+        order by to_number(i_Num) desc
 	
 	]]>
 
