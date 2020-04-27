@@ -178,7 +178,7 @@ function withdrawal() {
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
-          </div>
+          </div><!-- ㅇㅇ -->
           <!-- /.col -->
             <div class="col-md-3">
             <div class="sticky-top mb-3">
