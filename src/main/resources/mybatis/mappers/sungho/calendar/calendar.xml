@@ -10,12 +10,13 @@
 		<result property="start" column="i_start" />
 		<result property="end" column="i_end" />
 		<result property="url" column="i_Num" />
+		<result property="c_Id" column="c_Id" />
 		
 	</resultMap>
 	
 	<select id="searchList" resultMap="calendarResult01" parameterType="java.util.Map"> 
       <![CDATA[
-         	select i.i_Name , i.i_Num  , i.i_start , i.i_end
+         	select i.i_Name , i.i_Num  , i.i_start , i.i_end, c.c_Id
 			from issue i, co_member c
       ]]>
 		<where>
@@ -24,6 +25,20 @@
 			and c.mem_Id = #{mem_Id}
 			</if>
 		</where>
+	</select>
+	
+	<!-- 컬러지정을 위한 쿼리문 -->
+	<select id="colorList" resultMap="calendarResult01" parameterType="java.util.Map"> 
+      <![CDATA[
+         select c_Id
+       		  from co_member 
+      ]]>
+		<where>
+			<if test=" mem_Id != ''  and  mem_Id != null">
+				mem_Id = #{mem_Id}
+			</if>
+		</where>
+		order by to_number(c_Id) asc
 	</select>
 	
 	<update id="acceptBookmark" parameterType="java.util.Map">

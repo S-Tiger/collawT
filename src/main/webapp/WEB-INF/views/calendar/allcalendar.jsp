@@ -3,6 +3,11 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
 
+<style type="text/css">
+    .fc-day-top.fc-sat { color:#0000FF; }     /* 토요일 */
+    .fc-day-top.fc-sun { color:#FF0000; }    /* 일요일 */
+</style>
+
  <!-- fullCalendar -->
   <link rel="stylesheet" href="${contextPath}/resources/plugins/fullcalendar/main.min.css">
   <link rel="stylesheet" href="${contextPath}/resources/plugins/fullcalendar-daygrid/main.min.css">
@@ -46,16 +51,15 @@
             <div class="sticky-top mb-3">
               <div class="card">
                 <div class="card-header">
-                  <h4 class="card-title">Draggable Events</h4>
+                  <h4 class="card-title">칼라</h4>
                 </div>
                 <div class="card-body">
                   <!-- the events -->
+							
                   <div id="external-events">
-                    <div class="external-event bg-success">Lunch</div>
-                    <div class="external-event bg-warning">Go home</div>
-                    <div class="external-event bg-info">Do homework</div>
-                    <div class="external-event bg-primary">Work on UI design</div>
-                    <div class="external-event bg-danger">Sleep tight</div>
+                  <c:forEach var="coitemlist" items="${coworklist}">
+                    <div class="external-event" style="background-color: ${coitemlist.color}; color: white; cursor: auto;">${coitemlist.c_Name}</div>
+                    </c:forEach>
                   </div>
                 </div>
                 <!-- /.card-body -->
@@ -122,9 +126,18 @@
 				success : function(data) {
 					successCallback(data);
 				}
-      });  
-      }
-      ,
+       });  
+       },
+       eventClick:function(event) {
+           if(event.url) {
+               
+        	   alert(event.url)
+               return false;
+           }
+       } ,
+
+
+       
       editable  : true,
       droppable : true, // this allows things to be dropped onto the calendar !!!
       drop      : function(info) {

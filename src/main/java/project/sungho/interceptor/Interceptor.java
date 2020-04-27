@@ -37,6 +37,23 @@ public class Interceptor extends HandlerInterceptorAdapter {
 			
 			List<Map> list = comemberService.searchList(member);
 			
+			for (int i = 0; i < list.size(); i++) {
+				switch (i) {
+				case 0: list.get(i).put("color", "#28a745");
+				break;
+				case 1: list.get(i).put("color", "#ffc107");
+				break;
+				case 2: list.get(i).put("color", "#6f42c1");
+				break;
+				case 3: list.get(i).put("color", "#dc3545");
+				break;
+				case 4: list.get(i).put("color", "#007bff");
+				break;
+				default:
+				break;
+				}
+			}
+			
 			request.setAttribute("coworklist", list);
 
 			return true;

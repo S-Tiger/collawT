@@ -42,6 +42,10 @@ public class ComemberControllerImpl implements ComemberController {
 		searchMap.put("mem_Id", mem_Id);	
 		
 		List<Map> list = comemberService.searchList(searchMap); 
+		System.out.println("---------------------------------");
+		
+		
+		System.out.println(list);
 		
 		model.addAttribute("coworklist", list); 
 		

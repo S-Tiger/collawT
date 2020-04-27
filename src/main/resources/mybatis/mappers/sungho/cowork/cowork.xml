@@ -10,8 +10,6 @@
 		<result property="c_Comment" column="c_Comment" jdbcType="CLOB" javaType="java.lang.String" />
 		<result property="mem_Id" column="mem_Id" />
 		<result property="c_Category" column="c_Category" />
-
-		
 	</resultMap>
 	
 	<resultMap id="coworkResult02" type="java.util.Map">
@@ -20,8 +18,13 @@
 		<result property="c_Comment" column="c_Comment" jdbcType="CLOB" javaType="java.lang.String" />
 		<result property="mem_Id" column="mem_Id" />
 		<result property="c_Category" column="c_Category" />
-
-		
+	</resultMap>
+	
+	<resultMap id="calendarResult01" type="java.util.Map">
+		<result property="title" column="i_Name"  />
+		<result property="start" column="i_Start" />
+		<result property="end" column="i_End" />
+		<result property="url" column="i_Num" />
 	</resultMap>
 
 	<select id="searchList" resultMap="coworkResult01" parameterType="coworkVO"> 
@@ -78,5 +81,15 @@
 		   , c_Category = #{c_Category}
 		where c_Id = #{c_Id}
 	</update>
+
+	<select id="calendarlist" resultMap="calendarResult01" parameterType="java.util.Map"> 
+         	select i_Name , i_Num  , i_Start , i_End
+			from issue
+      <where>
+			<if test=" c_Id != ''  and  c_Id != null">
+			c_Id = #{c_Id}
+			</if>
+		</where>
+	</select>
 
 </mapper>

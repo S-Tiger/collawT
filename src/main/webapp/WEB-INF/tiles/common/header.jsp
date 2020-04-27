@@ -423,7 +423,7 @@
 												
 					<!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-					<li class="nav-item has-treeview" id="menustat"><a href="#"
+					<li class="nav-item has-treeview" id="menustat" style="border-bottom: 1px solid #4f5962;"><a href="#"
 						class="nav-link active" onclick="menuclick()"> <i
 							class="nav-icon far fa-handshake"></i>
 							<p>
@@ -441,7 +441,7 @@
 								</a></li>
 							</c:forEach>
 						<li class="nav-item"><a href="/#" data-needpopup-show="#createpjt-popup"
-								class="nav-link" style="border-bottom: 1px solid #4f5962;"> <i class="nav-icon fas fa-folder-plus"></i>
+								class="nav-link" > <i class="nav-icon fas fa-folder-plus"></i>
 									<p>협업공간 생성</p>
 							</a></li>
 						</ul></li>

@@ -16,6 +16,8 @@ public interface CoworkDAO {
 	 
 	 public String selectSqc() throws DataAccessException;
 
-	Map<String, Object> searchMain(Map<String, Object> searchMap) throws DataAccessException;;
+	 Map<String, Object> searchMain(Map<String, Object> searchMap) throws DataAccessException;;
+	 
+	 public List<Map> calendarlist(Map<String, Object> searchMap)throws DataAccessException;
 
 }

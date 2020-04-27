@@ -21,6 +21,12 @@ public class CalendarDAOImpl implements CalendarDAO{
 	public List<Map> searchList(Map<String, Object> searchMap)throws Exception {
 		List<Map> list = sqlSession.selectList("calendar.searchList", searchMap); 
 		
+		return list;
+	}
+
+	@Override
+	public List<Map> colorList(Map<String, Object> searchMap) throws Exception {
+		List<Map> list = sqlSession.selectList("calendar.colorList", searchMap); 
 		
 		return list;
 	}

@@ -143,7 +143,7 @@ function withdrawal() {
 						 id= "issueMenu">이슈</a></li>
 					<li class="nav-item" id = "activityMenu"><a class="nav-link" href="#"
 						 id= "issueMenu">칸반</a></li>
-					<li class="nav-item" id = "activityMenu"><a class="nav-link" href="#"
+					<li class="nav-item" id = "activityMenu"><a class="nav-link" href="/project/calendar?c_Id=${pjt.c_Id}"
 						 id= "issueMenu">캘린더</a></li>
 					<li class="nav-item" id = "activityMenu"><a class="nav-link" href="/project/vote/list?c_Id=${pjt.c_Id}"
 						 id= "issueMenu">투표</a></li>

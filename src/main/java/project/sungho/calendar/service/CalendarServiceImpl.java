@@ -26,4 +26,11 @@ public class CalendarServiceImpl implements CalendarService{
 		return list;
 	}
 
+	@Override
+	public List<Map> colorList(Map<String, Object> searchMap) throws Exception {
+		List<Map>list = calendarDAO.colorList(searchMap);		
+		
+		return list;
+	}
+
 }
