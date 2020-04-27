@@ -67,8 +67,8 @@ public class EVoteDAOImpl implements EVoteDAO {
 	
 	//카운트
 	@Override
-	public List<Map> voteCount(Map<String, Object> voteCount)throws Exception {
-		List<Map> result = sqlSession.selectList("voteResult.voteCount", voteCount );
+	public Map<String, Object> voteCount(Map<String, Object> voteCount)throws Exception {
+		Map<String, Object> result = sqlSession.selectOne("voteResult.voteCount", voteCount );
 		return result;
 	}
 
