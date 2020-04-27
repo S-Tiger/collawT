@@ -18,6 +18,13 @@ public class ApplyServiceImpl implements ApplyService{
 	@Autowired
 	ApplyDAO applyDAO;
 
+
+	@Override
+	public List<Map> viewCount(Map<String, Object> searchMap) throws DataAccessException {
+		List<Map> list = applyDAO.viewCount(searchMap);
+		return list;
+	}
+	
 	@Override
 	public List<Map> searchList(Map<String, Object> searchMap) throws DataAccessException {
 

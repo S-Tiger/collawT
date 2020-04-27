@@ -60,15 +60,40 @@
 
 	window.onload = function() {
 		//알림개수 가져오기
+		var total = 0;		
 		$.ajax({
 			url : '${contextPath}/notify/view',
 			type : 'get',
 			success : function(data){
 				var itemcount = data.length;
+				var count =parseInt(itemcount);
+				total += count;
 				console.log(itemcount);
-				$("#test03").html(itemcount);
-				$("#test22").html(itemcount);
+				$("#test03").html(itemcount);				
 				$("#test00").html(itemcount);
+			}
+		})
+		
+		$.ajax({
+			url : '${contextPath}/news/view',
+			type : 'get',
+			success : function(data){
+				var itemString =[];
+				if(data != 0){
+					for(var i in data){
+						if(data[i].ap_Yn === 'waiting'){
+							itemString.push(data[i].ap_Yn)
+						}
+					}
+				}
+				console.log(itemString);
+				var itemcount1 = itemString.length;
+				var count1 =parseInt(itemcount1);
+				total += count1;
+				console.log(total);
+				$("#test33").html(itemcount1);
+				$("#test00").html(total);
+				$("#test22").html(total);
 			}
 		})
 		//북마크 리스트 가져오기 ajax 
@@ -301,25 +326,23 @@
 						class="badge badge-warning navbar-badge" id ="test00"></span>
 				</a>
 					<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" >
-						<span class="dropdown-item dropdown-header" id = "test22" >15 Notifications</span>
+						<span class="dropdown-item dropdown-header" id = "test22" ></span>
 						<div class="dropdown-divider"></div>
 						<a href="/notify/list" class="dropdown-item"> <i
 							class="fas fa-envelope mr-2" id = "test01"></i> <span
-							class="float-right text-muted text-sm">3 mins</span>
+							class="float-right text-muted text-sm"></span>
 						</a>
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-users mr-2"></i> 
-            <span class="float-right text-muted text-sm">12 hours</span>
+          <a href="/notify/list" class="dropdown-item">
+            <i class="fas fa-users mr-2" id="test33"></i> 
+            <span class="float-right text-muted text-sm"></span>
           </a>
           <div class="dropdown-divider"></div>
           <a href="/notify/list" class="dropdown-item">
-            <i class="fas fa-file mr-2" id = "test03"></i> 
-            <span class="float-right text-muted text-sm">2 days</span>
+            <i class="fas fa-file mr-2" id="test03"></i> 
+            <span class="float-right text-muted text-sm"></span>
           </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-        </div>
+          
       </li>
        <!-- 검색 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
             <li class="nav-item dropdown">
