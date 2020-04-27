@@ -63,22 +63,36 @@
 </style>
 
 <script type="text/javascript">
-$(function () {
-    $("#example1").DataTable({
-      "responsive": true,
-      "autoWidth": false,
-    });
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
+$(document).ready(function() {
+	
+
+    
+	$("#checkAll").click(function(){
+		if($("#checkAll").is(":checked")==true){
+			
+			$("input[name='checkbox']").prop("checked", true); 
+	
+		}else{
+			$("input[name='checkbox']").prop("checked", false); 
+		}		
+	})
+
   });
-				
+  
+  function fileDelete(){
+	  
+	//체크박스 중 체크된 체크박스만 가져와서 Loop 합니다.
+	  $("input:checkbox[name=checkbox]:checked").each(function(i,elements){
+	      //해당 index(순서)값을 가져옵니다.
+	      index = $(elements).index("input:checkbox[name=checkbox]");                
+	      //해당 index에 해당하는 체크박스의 ID 속성을 가져옵니다.        
+	      alert($("input:checkbox[name=checkbox]").eq(index).attr("id"));
+	     
+	  });
+  }
+  
+
+		
 </script>
 
 <!-- Content Wrapper. Contains page content -->
@@ -108,8 +122,7 @@ $(function () {
 						href="/personal/search/myBoardlist?mem_Id=${member.mem_Id}" id="activityMenu"><b>내가 쓴 글</b></a></li>
 					<li class="nav-item" ><a class="nav-link"
 						href="#" data-toggle="tab" id="activityMenu">내가 쓴 댓글</a></li>
-					<li class="nav-item" ><a class="nav-link"
-						href="#" data-toggle="tab" id="activityMenu">파일함</a></li>
+					
 				</ol>
 				
 								
@@ -122,11 +135,12 @@ $(function () {
 			
 			       <!-- 리스트 부분 -->
         <div class="card-body p-0">
+           <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
            
-         <table id="example2" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example2_info">
+           <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
               <thead style="font-size:13px;">
                 <tr role="row">
-                <th><input type="checkbox" value="" id="chackAll" name="chackAll"></th>
+                <th><input type="checkbox" value="" id="checkAll" name="checkAll"></th>
                 <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending" style="width: 203.4px;">협업공간명</th>
                 <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 262.6px;">글 제목</th>
                 <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 233px;">작성일</th>
@@ -138,20 +152,21 @@ $(function () {
 			<c:choose>
 			<c:when test="${fn:length(myBoardlist)!=0}">
                  <c:forEach var="myBoardlist" items="${myBoardlist}" >	
-                  <tr>
+                  <tr role="row" class="odd">
                   <!-- 체크박스 -->
-                  	 <td style="width:5%">	
-                        <input type="checkbox" value="" id="${myBoardlist.rnum}" name="${myBoardlist.rnum}">
+                  	 <td style="width:5%" class="sorting_1">	
+                        <input type="checkbox" value="" id="checkbox${myBoardlist.rnum}" name="checkbox">
+                        <input type="text" value="${myBoardlist.rnum}" id="text${myBoardlist.rnum}" name="checkbox">
 				  </td>
 				  <!-- 협업공간명 -->
-				  <td style="width:10%;">
+				  <td class="sorting_1" style="width:10%;">
 				   <font size="3em">
 				  <c:if test="${myBoardlist.c_Name==null}">내 공간</c:if>
 				  <c:if test="${myBoardlist.c_Name!=null}"> ${myBoardlist.c_Name}</c:if></font>
 					 
 				  </td>
                	<!-- 링크 -->
-				<td style="width:60%">	
+				<td class="sorting_1" style="width:60%">	
 				<c:if test="${myBoardlist.boardtype==1}">
 				<a href="/project/issue/read?c_Id=${myBoardlist.c_Id}&i_Num=${myBoardlist.i_Num}"> <font size="3em"><b>${myBoardlist.i_Name}</b></font></a>
 				</c:if>
@@ -164,7 +179,7 @@ $(function () {
 					  
 					  <br>
 				  </td>
-				  <td style="width:25%; text-align:center">	
+				  <td class="sorting_1" style="width:25%; text-align:center">	
 					  <font size="3em"><b>${myBoardlist.i_Date}</b></font>
 					  <br>
 				  </td>
@@ -180,6 +195,12 @@ $(function () {
                  </c:choose>
               </tbody>
           </table>
+                  <button type="button" class="btn btn-danger" onclick="javascript:fileDelete()" style="text-align:center; float:right; font-family: Spoqa Han Sans; font-size:13px;">
+								<b>삭제</b></button>
+          </div>
+
+        
+        
         </div>
         <!-- /리스트 부분 -->
        
@@ -224,13 +245,4 @@ $(function () {
 		
 <!-- /.content-wrapper -->
 
-  <script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true,
-      "autoWidth": false,
-    })
-  });
-    
-    
-</script>
+  

@@ -418,8 +418,35 @@
 			<nav class="mt-2">
 				<ul class="nav nav-pills nav-sidebar flex-column"
 					data-widget="treeview" role="menu" data-accordion="false">
-						<li class="nav-item"><a href="${contextPath}/news/list"
-						class="nav-link"> <i class="nav-icon fas fa-book-open"></i>
+
+					
+												
+					<!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+					<li class="nav-item has-treeview" id="menustat"><a href="#"
+						class="nav-link active" onclick="menuclick()"> <i
+							class="nav-icon far fa-handshake"></i>
+							<p>
+								등록된 협업공간 <i class="right fas fa-angle-left"></i>
+							</p>
+					</a>
+						<ul class="nav nav-treeview" >
+
+
+							<c:forEach var="coworklist" items="${coworklist}">
+								<li class="nav-item"><a
+									href="/project/main?c_Id=${coworklist.c_Id}" class="nav-link">
+										<i class="nav-icon fas fa-sitemap"></i>
+										<p>${coworklist.c_Name}</p>
+								</a></li>
+							</c:forEach>
+						<li class="nav-item"><a href="/#" data-needpopup-show="#createpjt-popup"
+								class="nav-link"> <i class="nav-icon fas fa-folder-plus"></i>
+									<p>협업공간 생성</p>
+							</a></li>
+						</ul></li>
+												<li class="nav-item" style="border-top: 1px solid #4f5962;"><a href="${contextPath}/news/list"
+						class="nav-link" > <i class="nav-icon fas fa-book-open" ></i>
 							<p>
 								새로운 소식 <span class="badge badge-info right"></span>
 								<!--  <span class="right badge badge-danger">New</span>-->
@@ -448,38 +475,13 @@
 							</p>
 					</a></li>
 					
-					<li class="nav-item" style="border-bottom: 1px solid #4f5962;"><a href="/personal/search/myFile"
+					<li class="nav-item" ><a href="/personal/search/myFile"
 						class="nav-link"> <i class="nav-icon fas fa-archive"></i>
 							<p>
 								전체 파일함 <span class="badge badge-info right"></span>
 								<!--  <span class="right badge badge-danger">New</span>-->
 							</p>
 					</a></li>
-					
-												<li class="nav-item"><a href="/#" data-needpopup-show="#createpjt-popup"
-								class="nav-link"> <i class="nav-icon fas fa-folder-plus"></i>
-									<p>협업공간 생성</p>
-							</a></li>
-					<!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-					<li class="nav-item has-treeview" id="menustat"><a href="#"
-						class="nav-link active" onclick="menuclick()"> <i
-							class="nav-icon far fa-handshake"></i>
-							<p>
-								등록된 협업공간 <i class="right fas fa-angle-left"></i>
-							</p>
-					</a>
-						<ul class="nav nav-treeview">
-
-							<c:forEach var="coworklist" items="${coworklist}">
-								<li class="nav-item"><a
-									href="/project/main?c_Id=${coworklist.c_Id}" class="nav-link">
-										<i class="nav-icon fas fa-sitemap"></i>
-										<p>${coworklist.c_Name}</p>
-								</a></li>
-							</c:forEach>
-
-						</ul></li>
 					
 					
 					
