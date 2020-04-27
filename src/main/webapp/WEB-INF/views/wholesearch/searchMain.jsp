@@ -53,7 +53,7 @@ $(document).ready(function() {
 
 		<option id="i_Name" name="i_Name" value="i_Name">제목</option>
 		<option id="i_Content" name="i_Content" value="i_Content">내용</option>
-		<option id="mem_Id" name="mem_Id" value="mem_Id">작성자 아이디</option>
+		<option id="wr_mem_Id" name="wr_mem_Id" value="wr_mem_Id">작성자 아이디</option>
 		<option id="mem_Name" name="mem_Name" value="mem_Name">작성자 닉네임</option>
 
 		</select>

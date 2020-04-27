@@ -67,9 +67,11 @@ public class Whole_searchControllerImpl implements Whole_searchController {
 		searchVO.setKeyword(keyword);
 		searchVO.setMem_Id(mem_Id);
 		
+		List<Map> issueList = whole_searchService.searchIssue(searchVO);
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"+issueList);
 	
 		ModelAndView mav = new ModelAndView("wholesearch/searchResult");
-		mav.addObject("issueList", whole_searchService.searchIssue(searchVO));		
+		mav.addObject("issueList", issueList);		
 		return mav;
 		
 	}
