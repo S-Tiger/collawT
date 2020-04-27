@@ -72,8 +72,8 @@ public class EVoteServiceImpl implements EVoteService {
 	
 	//투표 카운팅
 	@Override
-	public List<Map> voteCount(Map<String, Object> voteCount) throws Exception {
-		List<Map> result = evoteDAO.voteCount(voteCount);
+	public Map<String, Object> voteCount(Map<String, Object> voteCount) throws Exception {
+		Map<String, Object> result = evoteDAO.voteCount(voteCount);
 		return result;
 	}
 		

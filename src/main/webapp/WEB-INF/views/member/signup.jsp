@@ -11,13 +11,13 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="../resources/plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="${contextPath}/resources/plugins/fontawesome-free/css/all.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- icheck bootstrap -->
-  <link rel="stylesheet" href="../resources/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <link rel="stylesheet" href="${contextPath}/resources/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="../resources/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="${contextPath}/resources/dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
@@ -105,7 +105,7 @@
 	});
 </script>
 </head>
-<body class="hold-transition register-page" style="background:white">
+<body class="register-page" style="background:white">
 <div class="register-box">
   <div class="register-logo">
     <a href="/"><b>Collaw</b>T</a>
@@ -204,10 +204,10 @@
 <!-- /.register-box -->
 
 <!-- jQuery -->
-<script src="../resources/plugins/jquery/jquery.min.js"></script>
+<script src="${contextPath}/resources/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
-<script src="../resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="${contextPath}/resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
-<script src="../resources/dist/js/adminlte.min.js"></script>
+<script src="${contextPath}/resources/dist/js/adminlte.min.js"></script>
 </body>
 </html>

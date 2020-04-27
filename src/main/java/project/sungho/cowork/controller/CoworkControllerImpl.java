@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -136,4 +137,36 @@ public class CoworkControllerImpl implements CoworkController {
 		return "cowork/coworkinsert";
 	}
 
-}
+
+	@Override
+	@GetMapping("/calendarlist")
+	@ResponseBody
+	public List<Map> calendarlist(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		String c_Id = (String)request.getParameter("c_Id");
+		searchMap.put("c_Id", c_Id);
+		System.out.println(c_Id);
+		List<Map> eventlist = coworkService.calendarlist(searchMap);
+		
+		String itemurl = "/project/issue/read?i_Num=";
+		for (int i = 0; i < eventlist.size(); i++) {
+			eventlist.get(i).put("url", itemurl + eventlist.get(i).get("url"));
+			eventlist.get(i).put("color", "#28a745");
+			eventlist.get(i).put("textColor", "#FFF");
+			}
+		return eventlist;
+	}
+
+
+	@Override
+	@GetMapping("/calendar")
+	public String calendar(Model model, HttpServletRequest request, HttpServletResponse responsen) throws Exception {
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		String c_Id = (String)request.getParameter("c_Id");
+		searchMap.put("c_Id", c_Id);
+		
+		Map<String, Object>pjt = coworkService.searchMain(searchMap);
+		
+		model.addAttribute("pjt", pjt); 
+		return "cowork/calendar";
+	}}

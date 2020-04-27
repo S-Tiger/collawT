@@ -12,4 +12,6 @@ public interface CalendarService {
 
 	public List<Map> searchList(Map<String, Object> searchMap) throws Exception;
 	
+	public List<Map> colorList(Map<String, Object> searchMap) throws Exception;
+	
 }

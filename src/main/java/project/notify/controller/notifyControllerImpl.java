@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import project.notify.service.NotifyService;
+import project.sungho.apply.service.ApplyService;
 
 @Controller
 
@@ -30,6 +31,9 @@ public class notifyControllerImpl implements NotifyController {
 	
 	@Autowired
 	NotifyService notifyService;
+	
+	@Autowired
+	ApplyService applyService;
 	
 	
 	
@@ -76,7 +80,7 @@ public class notifyControllerImpl implements NotifyController {
 		Map<String,Object> searchMap = new HashMap<String,Object>();
 		searchMap = (Map<String,Object>) session.getAttribute("member");
 		List<Map> notifyView = notifyService.viewNotify(searchMap);
-		System.out.println("view 타나??==:"+notifyView);
+		System.out.println("view 타나??==:"+notifyView.toString());
 		return notifyView;
 	}
 	@GetMapping("/list")
@@ -87,8 +91,10 @@ public class notifyControllerImpl implements NotifyController {
 		HttpSession session = request.getSession();
 		searchMap = (Map<String,Object>)session.getAttribute("member");
 		List<Map> notifyList = notifyService.searchNotify(searchMap);
+		List<Map> list = applyService.searchList(searchMap);
 		ModelAndView mav = new ModelAndView("/newspeed/newspeedList3");
 		mav.addObject("notifyList", notifyList);
+		mav.addObject("applylist", list);
 		System.out.println("notifyList값=="+notifyList);
 		return mav;
 		

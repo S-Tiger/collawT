@@ -31,5 +31,5 @@ public interface EVoteService {
 	//public List<Map> coRead(String mem_id);
 	public Map<String, Object> voteInfo(Map<String, Object> voteVO)throws Exception;
 	public List<Map> votedRead(String v_Num);
-	public List<Map> voteCount(Map<String, Object> voteCount)throws Exception;
+	public Map<String, Object> voteCount(Map<String, Object> voteCount)throws Exception;
 }
