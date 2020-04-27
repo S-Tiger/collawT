@@ -32,6 +32,7 @@
 		<result property="v_Start" column="v_Start" />
 		<result property="v_End" column="v_End" />
 		<result property="mem_Id" column="mem_Id" />
+		<result property="mem_Name" column="mem_Name" />
 		<result property="v_Date" column="v_Date" />
 		<result property="v_Name" column="v_Name" />
 		<result property="vs_Num" column="vs_Num" />
@@ -111,9 +112,10 @@
 	<!-- 투표 카운팅 -->
 	<select id="voteCount" parameterType="java.util.Map" resultMap="voteResult02"> 
       <![CDATA[
-		select count(vd_num) as v_Count 
-		from voter 
-		where v_num=#{v_Num} and vd_Num=#{vd_Num}
+		select v.v_Num, v.c_Id, v.vd_Num, v.mem_Id, m.mem_Name
+		from voter v, member m
+		where v.mem_Id = m.mem_Id
+		and v_num= #{v_Num} 
       ]]>
 	</select>
 

@@ -406,6 +406,10 @@
 									</table>
 								</div>
 							</div>
+							
+							<c:forEach var="voterItem" items="${voterList}" >
+							<p>${voterItem.vd_Num}번 투표자 ${voterItem.mem_Name}(${voterItem.mem_Id})</p>
+							</c:forEach>
 							<!-- 북마크 부분~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 							<button type="button" class="btn btn-default btn-sm"

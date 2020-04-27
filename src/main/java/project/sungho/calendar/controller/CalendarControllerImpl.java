@@ -38,10 +38,13 @@ public class CalendarControllerImpl implements CalendarController {
 		Map<String, Object> searchMap = new HashMap<String, Object>();
 		HttpSession session = request.getSession();
 		searchMap = (Map<String, Object>) session.getAttribute("member");
+		
 		//캘린더에 뿌려지기 위한 이슈데이터
 		List<Map> eventlist = calendarService.searchList(searchMap);
+		
 		//color 지정을 위한 내가 가입한 공간리스트
 		List<Map> colorlist = calendarService.colorList(searchMap);
+		//list url 추가
 		String itemurl = "/project/issue/read?i_Num=";
 		//이슈리스트와 협업공간크기만큼 돌리는 2중 for문
 		for (int i = 0; i < eventlist.size(); i++) {

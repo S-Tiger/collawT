@@ -193,28 +193,12 @@ function withdrawal() {
 										</div>
 									</div>
 									<!-- ./col -->
-									<div class="col-lg-3 col-6">
-										<!-- small box -->
-										<div class="small-box bg-warning">
-											<div class="inner">
-												<h3>44</h3>
-
-												<p>User Registrations</p>
-											</div>
-											<div class="icon">
-												<i class="ion ion-person-add"></i>
-											</div>
-											<a href="#" class="small-box-footer">More info <i
-												class="fas fa-arrow-circle-right"></i></a>
-										</div>
-									</div>
 									<!-- ./col -->
 									<div class="col-lg-3 col-6">
 										<!-- small box -->
 										<div class="small-box bg-danger">
 											<div class="inner">
 												<h3>65</h3>
-
 												<p>Unique Visitors</p>
 											</div>
 											<div class="icon">
@@ -225,6 +209,20 @@ function withdrawal() {
 										</div>
 									</div>
 									<!-- ./col -->
+									<div class="col-lg-3 col-6">
+										<!-- small box -->
+										<div class="small-box bg-teal">
+											<div class="inner">
+												<h3>${memberList.size()}</h3>
+												<p>등록된 공간맴버</p>
+											</div>
+											<div class="icon">
+												<i class="ion ion-person"></i>
+											</div>
+											<a href="#" class="small-box-footer" data-needpopup-show="#memberlist-popup">자세히 보기<i
+												class="fas fa-arrow-circle-right"></i></a>
+										</div>
+									</div>
 								</div>
 								<!-- /.row -->
 								<!-- Main row -->
@@ -237,31 +235,14 @@ function withdrawal() {
 										<div class="card">
 											<div class="card-header">
 												<h3 class="card-title">
-													<i class="ion ion-clipboard mr-1"></i> To Do List
+													<i class="ion ion-clipboard mr-1"></i> 최근 등록한 이슈
 												</h3>
-
-												<div class="card-tools">
-													<ul class="pagination pagination-sm">
-														<li class="page-item"><a href="#" class="page-link">&laquo;</a></li>
-														<li class="page-item"><a href="#" class="page-link">1</a></li>
-														<li class="page-item"><a href="#" class="page-link">2</a></li>
-														<li class="page-item"><a href="#" class="page-link">3</a></li>
-														<li class="page-item"><a href="#" class="page-link">&raquo;</a></li>
-													</ul>
-												</div>
 											</div>
 											<!-- /.card-header -->
 											<div class="card-body">
 												<ul class="todo-list" data-widget="todo-list">
 													<li>
-														<!-- drag handle --> <span class="handle"> <i
-															class="fas fa-ellipsis-v"></i> <i
-															class="fas fa-ellipsis-v"></i>
-													</span> <!-- checkbox -->
-														<div class="icheck-primary d-inline ml-2">
-															<input type="checkbox" value="" name="todo1"
-																id="todoCheck1"> <label for="todoCheck1"></label>
-														</div> <!-- todo text --> <span class="text">Design a
+														 <span class="text">Design a
 															nice theme</span> <!-- Emphasis label --> <small
 														class="badge badge-danger"><i class="far fa-clock"></i>
 															2 mins</small> <!-- General tools such as edit or delete-->
@@ -269,78 +250,8 @@ function withdrawal() {
 															<i class="fas fa-edit"></i> <i class="fas fa-trash-o"></i>
 														</div>
 													</li>
-													<li><span class="handle"> <i
-															class="fas fa-ellipsis-v"></i> <i
-															class="fas fa-ellipsis-v"></i>
-													</span>
-														<div class="icheck-primary d-inline ml-2">
-															<input type="checkbox" value="" name="todo2"
-																id="todoCheck2" checked> <label for="todoCheck2"></label>
-														</div> <span class="text">Make the theme responsive</span> <small
-														class="badge badge-info"><i class="far fa-clock"></i>
-															4 hours</small>
-														<div class="tools">
-															<i class="fas fa-edit"></i> <i class="fas fa-trash-o"></i>
-														</div></li>
-													<li><span class="handle"> <i
-															class="fas fa-ellipsis-v"></i> <i
-															class="fas fa-ellipsis-v"></i>
-													</span>
-														<div class="icheck-primary d-inline ml-2">
-															<input type="checkbox" value="" name="todo3"
-																id="todoCheck3"> <label for="todoCheck3"></label>
-														</div> <span class="text">Let theme shine like a star</span> <small
-														class="badge badge-warning"><i
-															class="far fa-clock"></i> 1 day</small>
-														<div class="tools">
-															<i class="fas fa-edit"></i> <i class="fas fa-trash-o"></i>
-														</div></li>
-													<li><span class="handle"> <i
-															class="fas fa-ellipsis-v"></i> <i
-															class="fas fa-ellipsis-v"></i>
-													</span>
-														<div class="icheck-primary d-inline ml-2">
-															<input type="checkbox" value="" name="todo4"
-																id="todoCheck4"> <label for="todoCheck4"></label>
-														</div> <span class="text">Let theme shine like a star</span> <small
-														class="badge badge-success"><i
-															class="far fa-clock"></i> 3 days</small>
-														<div class="tools">
-															<i class="fas fa-edit"></i> <i class="fas fa-trash-o"></i>
-														</div></li>
-													<li><span class="handle"> <i
-															class="fas fa-ellipsis-v"></i> <i
-															class="fas fa-ellipsis-v"></i>
-													</span>
-														<div class="icheck-primary d-inline ml-2">
-															<input type="checkbox" value="" name="todo5"
-																id="todoCheck5"> <label for="todoCheck5"></label>
-														</div> <span class="text">Check your messages and
-															notifications</span> <small class="badge badge-primary"><i
-															class="far fa-clock"></i> 1 week</small>
-														<div class="tools">
-															<i class="fas fa-edit"></i> <i class="fas fa-trash-o"></i>
-														</div></li>
-													<li><span class="handle"> <i
-															class="fas fa-ellipsis-v"></i> <i
-															class="fas fa-ellipsis-v"></i>
-													</span>
-														<div class="icheck-primary d-inline ml-2">
-															<input type="checkbox" value="" name="todo6"
-																id="todoCheck6"> <label for="todoCheck6"></label>
-														</div> <span class="text">Let theme shine like a star</span> <small
-														class="badge badge-secondary"><i
-															class="far fa-clock"></i> 1 month</small>
-														<div class="tools">
-															<i class="fas fa-edit"></i> <i class="fas fa-trash-o"></i>
-														</div></li>
+													
 												</ul>
-											</div>
-											<!-- /.card-body -->
-											<div class="card-footer clearfix">
-												<button type="button" class="btn btn-info float-right">
-													<i class="fas fa-plus"></i> Add item
-												</button>
 											</div>
 										</div>
 										<!-- /.card -->
@@ -386,19 +297,6 @@ function withdrawal() {
 												<!-- tools card -->
 												<div class="card-tools">
 													<!-- button with a dropdown -->
-													<div class="btn-group">
-														<button type="button"
-															class="btn btn-success btn-sm dropdown-toggle"
-															data-toggle="dropdown">
-															<i class="fas fa-bars"></i>
-														</button>
-														<div class="dropdown-menu float-right" role="menu">
-															<a href="#" class="dropdown-item">Add new event</a> <a
-																href="#" class="dropdown-item">Clear events</a>
-															<div class="dropdown-divider"></div>
-															<a href="#" class="dropdown-item">View calendar</a>
-														</div>
-													</div>
 													<button type="button" class="btn btn-success btn-sm"
 														data-card-widget="collapse">
 														<i class="fas fa-minus"></i>
@@ -428,180 +326,11 @@ function withdrawal() {
 						<!-- /.content -->
 					</div>
 					<!-- /.tab-pane -->
-					<div class="tab-pane" id="timeline">
-						<!-- The timeline -->
-						<div class="timeline timeline-inverse">
-							<!-- timeline time label -->
-							<div class="time-label">
-								<span class="bg-danger"> 10 Feb. 2014 </span>
-							</div>
-							<!-- /.timeline-label -->
-							<!-- timeline item -->
-							<c:forEach var="applylist" items="${applylist}">
-								<c:choose>
-									<c:when test="${applylist.ap_Yn eq 'waiting'}">
-										<div>
-											<i class="fas fa-envelope bg-primary"></i>
-
-											<div class="timeline-item">
-												<span class="time"><i class="far fa-clock"></i>
-													${applylist.ap_Date}</span>
-
-												<h3 class="timeline-header">
-													<a href="#">${applylist.c_Name}</a>에서 가입요청이 왔습니다
-												</h3>
-												<div class="timeline-body">${applylist.mem_Name}님께서
-													회원님을 ${applylist.c_Name}에 초대하셨습니다.</div>
-												<div class="timeline-footer" id="timeline-footer">
-													<form action="/news/accept" method="post"
-														style="display: inline; margin: 5;">
-														<input type="hidden" name="c_Id" id="c_Id"
-															value="${applylist.c_Id}"> <input type="hidden"
-															name="mem_Id" id="mem_Id" value="${applylist.mem_Id}">
-														<a id="acceptsubmit" href="#"
-															class="btn btn-primary btn-sm" style="color: white;">수락</a>
-														<a id="rejectsubmit" href="#"
-															class="btn btn-danger btn-sm" style="color: white;">거절</a>
-													</form>
-												</div>
-											</div>
-										</div>
-									</c:when>
-								</c:choose>
-							</c:forEach>
-							<!-- END timeline item -->
-							<!-- timeline item -->
-							<div>
-								<i class="fas fa-user bg-info"></i>
-
-								<div class="timeline-item">
-									<span class="time"><i class="far fa-clock"></i> 5 mins
-										ago</span>
-
-									<h3 class="timeline-header border-0">
-										<a href="#">Sarah Young</a> accepted your friend request
-									</h3>
-								</div>
-							</div>
-							<!-- END timeline item -->
-							<!-- timeline item -->
-							<div>
-								<i class="fas fa-comments bg-warning"></i>
-
-								<div class="timeline-item">
-									<span class="time"><i class="far fa-clock"></i> 27 mins
-										ago</span>
-
-									<h3 class="timeline-header">
-										<a href="#">Jay White</a> commented on your post
-									</h3>
-
-									<div class="timeline-body">Take me to your leader!
-										Switzerland is small and neutral! We are more like Germany,
-										ambitious and misunderstood!</div>
-									<div class="timeline-footer">
-										<a href="#" class="btn btn-warning btn-flat btn-sm">View
-											comment</a>
-									</div>
-								</div>
-							</div>
-							<!-- END timeline item -->
-							<!-- timeline time label -->
-							<div class="time-label">
-								<span class="bg-success"> 3 Jan. 2014 </span>
-							</div>
-							<!-- /.timeline-label -->
-							<!-- timeline item -->
-							<div>
-								<i class="fas fa-camera bg-purple"></i>
-
-								<div class="timeline-item">
-									<span class="time"><i class="far fa-clock"></i> 2 days
-										ago</span>
-
-									<h3 class="timeline-header">
-										<a href="#">Mina Lee</a> uploaded new photos
-									</h3>
-
-									<div class="timeline-body">
-										<img src="http://placehold.it/150x100" alt="..."> <img
-											src="http://placehold.it/150x100" alt="..."> <img
-											src="http://placehold.it/150x100" alt="..."> <img
-											src="http://placehold.it/150x100" alt="...">
-									</div>
-								</div>
-							</div>
-							<!-- END timeline item -->
-							<div>
-								<i class="far fa-clock bg-gray"></i>
-							</div>
+					
 						</div>
 					</div>
-					<!-- /.tab-pane -->
-
-					<div class="tab-pane" id="settings">
-						<form class="form-horizontal">
-							<div class="form-group row">
-								<label for="inputName" class="col-sm-2 col-form-label">Name</label>
-								<div class="col-sm-10">
-									<input type="email" class="form-control" id="inputName"
-										placeholder="Name">
-								</div>
-							</div>
-							<div class="form-group row">
-								<label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
-								<div class="col-sm-10">
-									<input type="email" class="form-control" id="inputEmail"
-										placeholder="Email">
-								</div>
-							</div>
-							<div class="form-group row">
-								<label for="inputName2" class="col-sm-2 col-form-label">Name</label>
-								<div class="col-sm-10">
-									<input type="text" class="form-control" id="inputName2"
-										placeholder="Name">
-								</div>
-							</div>
-							<div class="form-group row">
-								<label for="inputExperience" class="col-sm-2 col-form-label">Experience</label>
-								<div class="col-sm-10">
-									<textarea class="form-control" id="inputExperience"
-										placeholder="Experience"></textarea>
-								</div>
-							</div>
-							<div class="form-group row">
-								<label for="inputSkills" class="col-sm-2 col-form-label">Skills</label>
-								<div class="col-sm-10">
-									<input type="text" class="form-control" id="inputSkills"
-										placeholder="Skills">
-								</div>
-							</div>
-							<div class="form-group row">
-								<div class="offset-sm-2 col-sm-10">
-									<div class="checkbox">
-										<label> <input type="checkbox"> I agree to the
-											<a href="#">terms and conditions</a>
-										</label>
-									</div>
-								</div>
-							</div>
-							<div class="form-group row">
-								<div class="offset-sm-2 col-sm-10">
-									<button type="submit" class="btn btn-danger">Submit</button>
-								</div>
-							</div>
-						</form>
-					</div>
-					<!-- /.tab-pane -->
-				</div>
-				<!-- /.tab-content -->
-			</div>
-			<!-- /.card-body -->
-		</div>
 		<!-- /.nav-tabs-custom -->
-	</div>
 
-</div>
 <!-- /.content-wrapper -->
 <!-- 정보변경 모달 팝업 내용 -->
 <div id='update-popup' class="needpopup">
@@ -652,7 +381,6 @@ function withdrawal() {
 </div>
 <!-- 맴버초대 모달 팝업 내용 -->
 <div id='add-popup' class="needpopup">
-	<p>
 	<div style="padding-bottom: 25px;">
 		<h4 class="m-0 text-dark"
 			style="font-family: Recipekorea; padding-bottom: 5px;">파트너 초대</h4>
@@ -692,6 +420,27 @@ function withdrawal() {
 				onclick="history.go(0);" style="width: 220px">취소</button>
 		</span>
 	</div>
+</div>
+
+<!-- 공간맴버 리스트 모달 팝업 내용 -->
+<div id='memberlist-popup' class="needpopup">
+	<div class="col-md-6" style="max-width: 100%;">
+<table class="table table-striped projects" style="white-space: nowrap; overflow: hidden;"><div style="margin-bottom: 10px;">
+<h4 class="m-0 text-dark" style="font-family: Recipekorea; max-width: 80%; display: contents;">공간맴버 리스트</h4></div>
+		<tr style="background-color: #dc3545; color: white;">
+			<td style="width:70%; vertical-align:top"><font size="3em"><b>회원정보</b></font></td>
+			<td style="width:20%"><font size="3em"><b>등급</b></font></a>
+			<td style="width:10%; vertical-align:top"><font size="3em"><b>추가</b></font></td></tr>
+	<c:forEach var="memberItem" items="${memberList}" >
+			<tr>
+			<td style="width:70%; vertical-align:top"><font size="3em">
+			<span>${memberItem.mem_Name}(${memberItem.mem_Id})</span></font></td>
+			<td style="width:20%"><font size="3em"><b>${memberItem.grade}</b></font></td>
+			<td style="width:10%; vertical-align:top"><font size="3em"><b>추가</b></font></td>
+			</tr>
+			</c:forEach>
+</table>
+</div>
 </div>
 
 
