@@ -59,6 +59,18 @@
 
 
 	window.onload = function() {
+		//알림개수 가져오기
+		$.ajax({
+			url : '${contextPath}/notify/view',
+			type : 'get',
+			success : function(data){
+				var itemcount = data.length;
+				console.log(itemcount);
+				$("#test03").html(itemcount);
+				$("#test22").html(itemcount);
+				$("#test00").html(itemcount);
+			}
+		})
 		//북마크 리스트 가져오기 ajax 
 		$.ajax({
 			url : '${contextPath}/bookmark/list',
@@ -204,28 +216,7 @@
 
 </script>
 
-<script type="text/javascript">
-  $(function(){
-		$('#test00').ready(function(){
-			console.log("ddd");
-			$.ajax({
-				url:'${contextPath}/notify/view',
-				
-				type:'get',
-				success: function(data) {
-			
-			$('#test01').text(data);
-			console.log(data)
-			$('#test00').text(data);
-			},
-				error: function(){
-					console.log()
-						alert("erorr");
-					}
-			});
-			})
-		}); 
-</script>
+
 
 <head>
 <meta charset="utf-8">
@@ -309,21 +300,21 @@
 					data-toggle="dropdown" href="#"> <i class="fas fa-bell"></i> <span
 						class="badge badge-warning navbar-badge" id ="test00"></span>
 				</a>
-					<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-						<span class="dropdown-item dropdown-header" >15 Notifications</span>
+					<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" >
+						<span class="dropdown-item dropdown-header" id = "test22" >15 Notifications</span>
 						<div class="dropdown-divider"></div>
-						<a href="/notify/update" class="dropdown-item"> <i
+						<a href="/notify/list" class="dropdown-item"> <i
 							class="fas fa-envelope mr-2" id = "test01"></i> <span
 							class="float-right text-muted text-sm">3 mins</span>
 						</a>
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item">
-            <i class="fas fa-users mr-2"></i> 8 friend requests
+            <i class="fas fa-users mr-2"></i> 
             <span class="float-right text-muted text-sm">12 hours</span>
           </a>
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-file mr-2"></i> 3 new reports
+          <a href="/notify/list" class="dropdown-item">
+            <i class="fas fa-file mr-2" id = "test03"></i> 
             <span class="float-right text-muted text-sm">2 days</span>
           </a>
           <div class="dropdown-divider"></div>
