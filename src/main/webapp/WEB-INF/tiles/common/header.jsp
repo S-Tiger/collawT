@@ -441,11 +441,11 @@
 								</a></li>
 							</c:forEach>
 						<li class="nav-item"><a href="/#" data-needpopup-show="#createpjt-popup"
-								class="nav-link"> <i class="nav-icon fas fa-folder-plus"></i>
+								class="nav-link" style="border-bottom: 1px solid #4f5962;"> <i class="nav-icon fas fa-folder-plus"></i>
 									<p>협업공간 생성</p>
 							</a></li>
 						</ul></li>
-												<li class="nav-item" style="border-top: 1px solid #4f5962;"><a href="${contextPath}/news/list"
+												<li class="nav-item" ><a href="${contextPath}/news/list"
 						class="nav-link" > <i class="nav-icon fas fa-book-open" ></i>
 							<p>
 								새로운 소식 <span class="badge badge-info right"></span>
