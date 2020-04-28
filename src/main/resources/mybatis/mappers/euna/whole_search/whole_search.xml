@@ -6,7 +6,7 @@
 <mapper namespace="whole_search">
 
 	
-	<resultMap id="whole_searchResult01" type="java.util.HashMap">
+	<resultMap id="issueResult" type="java.util.HashMap">
 		<!-- property는 화면단에서 쓸 이름, column은 데이터컬럼명이랑 동일 -->
 		<result property="i_Num" column="i_Num"/>
 		<result property="c_Id" column="c_Id" />
@@ -23,13 +23,44 @@
 		<result property="keyword" column="keyword" />
 	</resultMap>
 	
-	<resultMap id="whole_searchResult02" type="SearchVO">
+	<resultMap id="fileResult" type="java.util.HashMap">
 		<!-- property는 화면단에서 쓸 이름, column은 데이터컬럼명이랑 동일 -->
-		<result property="searchType" column="searchType"/>
-		<result property="keyword" column="keyword" />
+		<result property="a_File" column="a_File"/>
+		<result property="a_Realname" column="a_Realname" />
+		<result property="a_NameEx" column="a_NameEx" />
+		<result property="a_Num" column="a_Num" />
+		<result property="a_Del" column="a_Del" />
+		<result property="a_Size" column="a_Size" />
+		<result property="i_Num" column="i_Num" />
+		<result property="c_Id" column="c_Id" />
+		<result property="i_Name" column="i_Name" />
+		<result property="i_Date" column="i_Date" />
+		<result property="wr_mem_Id" column="wr_mem_Id" />
+		<result property="c_Name" column="c_Name" />
+		<result property="mem_name" column="mem_name" />
+		<result property="rnum" column="rnum" />
+		<result property="i_Content" column="i_Content" />
+		<result property="ig_Num" column="ig_Num" />
+		<result property="ig_Name" column="ig_Name" />
+		
 	</resultMap>
 
-<!-- 이슈검색 뷰 -->
+
+	<resultMap id="voteResult" type="java.util.HashMap">
+		<!-- property는 화면단에서 쓸 이름, column은 데이터컬럼명이랑 동일 -->
+		<result property="c_Id" column="c_Id"/>
+		<result property="v_Num" column="v_Num" />
+		<result property="v_Content" column="v_Content" />
+		<result property="wr_mem_Id" column="wr_mem_Id" />
+		<result property="v_Date" column="v_Date" />
+		<result property="v_Name" column="v_Name" />
+		<result property="vs_Num" column="vs_Num" />
+		<result property="v_Subject" column="v_Subject" />
+		<result property="mem_Name" column="mem_Name" />
+		<result property="rnum" column="rnum" />
+		<result property="c_Name" column="c_Name" />
+	</resultMap>
+
 <!-- <select id="searchIssue" resultMap="whole_searchResult01" parameterType="java.util.HashMap"> 
       <![CDATA[
     	select i_Num, c_Id, i_Name, i_Date, ig_Num, wr_mem_Id, c_Name, mem_Name, ig_Name, row_number() over(order by i_date desc) as rnum, i_Content
@@ -79,8 +110,8 @@
 	</select> -->
 	
 	
-	
-	<select id="searchIssue" resultMap="whole_searchResult01" parameterType="project.euna.whole_search.vo.Criteria"> 
+	<!-- 이슈검색 뷰 -->
+	<select id="searchIssue" resultMap="issueResult" parameterType="project.euna.whole_search.vo.Criteria"> 
       <![CDATA[
  
  select rnum, i_Num, c_Id, i_Name, i_Date, ig_Num, wr_mem_Id, c_Name, mem_Name, ig_Name, i_Content
@@ -111,6 +142,7 @@
                               null as ig_Name
                           from PERSONAL P, MEMBER M
                           where M.MEM_ID=P.MEM_ID
+                          and M.MEM_ID = #{mem_Id}
                       )
                   )
                        ]]>
@@ -123,7 +155,7 @@
      <![CDATA[
      )
     where rnum between #{rowStart} and #{rowEnd}
-    order by to_number(i_Num) desc
+    order by i_date desc
      ]]>
 
 
@@ -136,7 +168,7 @@
 	<!-- 이슈 검색결과 총 갯수 -->
 	<select id="issueCount" resultType="int" parameterType="project.euna.whole_search.vo.Criteria"> 
       <![CDATA[
-           select count(i_Num)
+            select count(*)
                   from
                       (
                       (select I.I_NUM as i_Num, I.C_ID as c_Id, I.I_NAME as i_Name, I.I_DATE as i_Date, I.IG_NUM as ig_Num, I.MEM_ID as wr_mem_Id, I.I_CONTENT as i_Content,
@@ -150,7 +182,7 @@
                        
                        and C.C_ID IN
                           (
-                          select C_ID from CO_MEMBER where MEM_ID='dmsdk@dmsdk.com'
+                          select C_ID from CO_MEMBER where MEM_ID=#{mem_Id}
                           )
                         
                        )
@@ -161,6 +193,7 @@
                               null as ig_Name
                           from PERSONAL P, MEMBER M
                           where M.MEM_ID=P.MEM_ID
+                          and M.MEM_ID = #{mem_Id}
                       )
                   )
       ]]>
@@ -175,6 +208,164 @@
 	
 	
 	
+		<!-- 파일 검색결과 -->
+		<select id="searchFile" resultMap="fileResult" parameterType="project.euna.whole_search.vo.Criteria"> 
+      <![CDATA[
+ 
+select a_File, a_Realname, a_NameEx, a_Num, a_Del, a_Size, i_Num, c_Id, i_Name, i_Date, wr_mem_Id, c_Name, mem_name, rnum, i_Content, ig_Num, ig_Name
+   from (         
+            select a_File, a_Realname, a_NameEx, a_Num, a_Del, a_Size, i_Num, c_Id, i_Name, i_Date, wr_mem_Id, i_Content, c_Name, mem_name, row_number() over(order by i_date desc) as rnum, ig_Num, ig_Name
+            from (
+                 (select a.a_File as a_File, a.a_Realname as a_Realname, a.a_NameEx as a_NameEx, a.a_Num as a_Num, a.a_Del as a_Del, a.a_Size as a_Size,
+                        i.i_Num as i_Num, i.c_Id as c_Id, i.I_Name as I_Name, i.I_Date as I_Date, i.mem_Id as wr_mem_Id, i.i_Content as i_Content, ig.ig_Num as ig_Num,
+                        c.c_Name as c_Name,
+                        m.mem_Name as mem_Name,
+                        ig.ig_Name as ig_Name
+                 from appendix a, issue i, co_work c, member m, issue_group ig
+                 where i.i_Num = a.i_Num
+                 and c.c_id=i.c_id
+                 and m.mem_id=i.mem_id
+                 and i.ig_Num = ig.ig_Num
+                 and a.a_Del = 'N'
+                 and c.c_Id in
+                    (
+                    select c_id from co_member where mem_id=#{mem_Id}
+                    )
+                 )
+                union all
+                (select pa.p_a_File as a_File, pa.p_a_Realname as a_Realname, pa.p_a_NameEx as a_NameEx, pa.p_a_Num as a_Num, pa.p_a_Del as a_Del, pa.p_a_Size as a_Size,
+                        p.p_Num as i_Num, p.mem_Id as c_Id, p.p_i_Name as I_Name, p.p_i_Date as I_Date, p.mem_Id as wr_mem_Id, p.p_i_Content as i_Content, null as ig_Num,
+                        null as c_name,
+                        m.mem_name as mem_name,
+                        null as ig_Name
+                    from personal_appendix pa, personal p, member m
+                    where pa.p_Num = p.p_Num
+                    and m.mem_id=p.mem_id
+                    and pa.p_a_Del = 'N'
+                    and m.mem_id = #{mem_Id}
+                )
+            )
+           
+       ]]>
+       
+       <where>
+				<if test="keyword != null and keyword != '' ">
+					AND (i_Name || i_Content || a_Realname) like CONCAT('%' || #{keyword}, '%')
+				</if>
+		</where>
+              
+     <![CDATA[
+     )
+    where rnum between #{rowStart} and #{rowEnd}
+    order by i_date desc
+     ]]>
+</select>
 	
+	
+	<!-- 파일 검색결과 총 갯수 -->
+	<select id="fileCount" resultType="int" parameterType="project.euna.whole_search.vo.Criteria"> 
+      <![CDATA[
+ select count(*)
+  from (
+            select a_File, a_Realname, a_NameEx, a_Num, a_Del, a_Size, i_Num, c_Id, i_Name, i_Date, wr_mem_Id, i_Content, c_Name, mem_name, row_number() over(order by i_date desc) as rnum, ig_Num, ig_Name
+            from (
+                 (select a.a_File as a_File, a.a_Realname as a_Realname, a.a_NameEx as a_NameEx, a.a_Num as a_Num, a.a_Del as a_Del, a.a_Size as a_Size,
+                        i.i_Num as i_Num, i.c_Id as c_Id, i.I_Name as I_Name, i.I_Date as I_Date, i.mem_Id as wr_mem_Id, i.i_Content as i_Content, ig.ig_Num as ig_Num,
+                        c.c_Name as c_Name,
+                        m.mem_Name as mem_Name,
+                        ig.ig_Name as ig_Name
+                 from appendix a, issue i, co_work c, member m, issue_group ig
+                 where i.i_Num = a.i_Num
+                 and c.c_id=i.c_id
+                 and m.mem_id=i.mem_id
+                 and i.ig_Num = ig.ig_Num
+                 and a.a_Del = 'N'
+                 and c.c_Id in
+                    (
+                    select c_id from co_member where mem_id=#{mem_Id}
+                    )
+                 )
+                union all
+                (select pa.p_a_File as a_File, pa.p_a_Realname as a_Realname, pa.p_a_NameEx as a_NameEx, pa.p_a_Num as a_Num, pa.p_a_Del as a_Del, pa.p_a_Size as a_Size,
+                        p.p_Num as i_Num, p.mem_Id as c_Id, p.p_i_Name as I_Name, p.p_i_Date as I_Date, p.mem_Id as wr_mem_Id, p.p_i_Content as i_Content, null as ig_Num,
+                        null as c_name,
+                        m.mem_name as mem_name,
+                        null as ig_Name
+                    from personal_appendix pa, personal p, member m
+                    where pa.p_Num = p.p_Num
+                    and m.mem_id=p.mem_id
+                    and pa.p_a_Del = 'N'
+                    and m.mem_id = #{mem_Id}
+                )
+            )
+            )
+          
+        ]]>
+       <where>
+				<if test="keyword != null and keyword != '' ">
+					AND (i_Name || i_Content || a_Realname) like CONCAT('%' || #{keyword}, '%')
+				</if>
+		</where>
+
+
+	</select>
+	
+	
+			<!-- 투표 검색결과 -->
+		<select id="searchVote" resultMap="voteResult" parameterType="project.euna.whole_search.vo.Criteria"> 
+      <![CDATA[
+ 
+select c_Id, v_Num, v_Content, wr_mem_Id, v_Date, v_Name, vs_Num, v_Subject, mem_Name, rnum, c_Name
+from(
+        select v.c_Id as c_Id, v.v_Num as v_Num, v.v_Content as v_Content, v.mem_Id as wr_mem_Id, v.v_Date as v_Date, v.v_Name as v_Name, v.vs_Num as vs_Num, v.v_Subject as v_Subject, v.mem_Name as mem_Name, row_number() over(order by v_Date desc) as rnum,
+                c.c_Name as c_Name
+        from vote v, co_work c
+        where v.c_Id=c.c_Id
+        and c.c_Id in
+            (
+            select c_id from co_member where mem_id=#{mem_Id}
+            )
+       
+       ]]>
+       
+       <where>
+				<if test="keyword != null and keyword != '' ">
+					AND (v_Name || v_Content || v_subject) like CONCAT('%' || #{keyword}, '%')
+				</if>
+		</where>
+              
+     <![CDATA[
+     )
+    where rnum between #{rowStart} and #{rowEnd}
+    order by v_Date desc
+     ]]>
+</select>
+	
+	
+	
+		<!-- 투표 검색결과 총 갯수 -->
+	<select id="voteCount" resultType="int" parameterType="project.euna.whole_search.vo.Criteria"> 
+      <![CDATA[
+ select count(*)
+  from (
+        select v.c_Id as c_Id, v.v_Num as v_Num, v.v_Content as v_Content, v.mem_Id as wr_mem_Id, v.v_Date as v_Date, v.v_Name as v_Name, v.vs_Num as vs_Num, v.v_Subject as v_Subject, v.mem_Name as mem_Name, row_number() over(order by v_Date desc) as rnum,
+                c.c_Name as c_Name
+        from vote v, co_work c
+        where v.c_Id=c.c_Id
+        and c.c_Id in
+            (
+            select c_id from co_member where mem_id=#{mem_Id}
+            )
+         )
+          
+        ]]>
+       <where>
+				<if test="keyword != null and keyword != '' ">
+					AND (v_Name || v_Content || v_subject) like CONCAT('%' || #{keyword}, '%')
+				</if>
+		</where>
+
+
+	</select>
 	
 </mapper>

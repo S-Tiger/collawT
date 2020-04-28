@@ -112,7 +112,7 @@
         <div class="col-md-9">
           <div class="card card-danger card-outline">
             <div class="card-header">
-              <h4 class="card-title"><b>검색 결과 총 ${issueCount}건</b></h4>
+              <h4 class="card-title"><b>검색 결과 총 ${fileCount}건</b></h4>
 
               <div class="card-tools">
                 <div class="input-group input-group-sm">
@@ -131,13 +131,43 @@
                   <tbody>
                   <c:forEach var="item" items="${issueList}" >
                   <tr>
-              
+                  
+                 	<td class="mailbox-name" style="width:20%">
+                 	<div style="padding-left:10px">
+                 	<c:choose>
+                 	<c:when test="${item.a_NameEx == '7z' || item.a_NameEx == 'apk' || item.a_NameEx == 'app' || item.a_NameEx == 'avi' 
+                 	|| item.a_NameEx == 'css' || item.a_NameEx == 'csv' || item.a_NameEx == 'doc' || item.a_NameEx == 'docx' 
+                 	|| item.a_NameEx == 'exe' || item.a_NameEx == 'gif' || item.a_NameEx == 'html' || item.a_NameEx == 'jar' 
+                 	|| item.a_NameEx == 'jpg' || item.a_NameEx == 'js' || item.a_NameEx == 'jsp' || item.a_NameEx == 'm4a'
+                 	|| item.a_NameEx == 'mp3' || item.a_NameEx == 'mp4' || item.a_NameEx == 'mpa' || item.a_NameEx == 'mpg' 
+                 	|| item.a_NameEx == 'otf' || item.a_NameEx == 'pdf' || item.a_NameEx == 'png' || item.a_NameEx == 'pps' 
+                 	|| item.a_NameEx == 'ppt' || item.a_NameEx == 'pptx' || item.a_NameEx == 'rar' || item.a_NameEx ==	'tiff' 
+                 	|| item.a_NameEx == 'ttf' || item.a_NameEx == 'txt' || item.a_NameEx == 'wav' || item.a_NameEx == 'wma' 
+                 	|| item.a_NameEx == 'wmv' || item.a_NameEx == 'xhtml' || item.a_NameEx == 'xlr' || item.a_NameEx == 'xls' 
+                 	|| item.a_NameEx == 'xlsx' || item.a_NameEx == 'xml' || item.a_NameEx == 'zip'}">
+                 		<img src="${contextPath}/resources/fileimage/${item.a_NameEx}.png" style="width:40px; height:40px"
+								 alt="User Image">
+					 </c:when>
+					 <c:otherwise>
+					 <img src="${contextPath}/resources/fileimage/blank.png" style="width:40px; height:40px"
+								 alt="User Image">
+					 </c:otherwise>
+					 </c:choose>
+					
+					 </div>
+					
+                 	<small>
+                 	<a href="/appendix/download?a_Num=${item.a_Num}"><i class="fas fa-download"></i>&nbsp;&nbsp;<b>${item.a_Realname}</b></a>
+              		</small>
+              		
+              		</td>
                     <td class="mailbox-name">
                     <div class="row" style="padding-bottom:10px;">
                      <span>
 	                    <c:if test="${item.c_Name == null}">
 						<a  style="color:black;" href="/personal/read?mem_Id=${member.mem_Id}&p_Num=${item.i_Num}">
-	                   <b>${item.i_Name}</b>
+	                   <b>${item.i_Name}</b><br>
+	                   
 	                    </a>
 	                    </c:if>
 	                    <c:if test="${item.c_Name != null}">
@@ -147,12 +177,12 @@
 	                    </c:if>
 	                   
 	                   &nbsp;&nbsp;
-	                   <c:if test="${item.ig_Num != null}">
+	                   <c:if test="${item.ig_Name != null}">
 			                   <span style= "height : 17px; font-size : 10px; vertical-align : text-bottom; padding: .4em .4em;
 									<c:if test="${item.ig_Name == '발의됨'}">background-color:#6c757d;</c:if>
-									<c:if test="${item.ig_Num == '진행중'}">background-color:#007bff;</c:if>
-									<c:if test="${item.ig_Num == '일시정지'}">background-color:#ffc107;</c:if>
-									<c:if test="${item.ig_Num == '완료'}">background-color:#28a745;</c:if>
+									<c:if test="${item.ig_Name == '진행중'}">background-color:#007bff;</c:if>
+									<c:if test="${item.ig_Name == '일시정지'}">background-color:#ffc107;</c:if>
+									<c:if test="${item.ig_Name == '완료'}">background-color:#28a745;</c:if>
 									"
 									id="ig_Name" name="ig_Name" class="badge badge-success"><c:out  value="${item.ig_Name}" />
 									
@@ -163,7 +193,7 @@
 
 								
                     </div>
-                      <div class="row" style= "vertical-align:text-bottom;">
+                      <div class="row" style= "vertical-align:text-bottom; height : 34px">
                     
                   
                     <span>
@@ -214,22 +244,22 @@
 
    <ul class="pagination pagination-sm m-0">
     <c:if test="${pageMaker.prev}">
-    	<li class="page-item" id="liStyle"><a class="page-link" href="issueresult?${pageMaker.makeQuery(pageMaker.startPage - 1)}">&laquo;</a></li>
+    	<li class="page-item" id="liStyle"><a class="page-link" href="fileresult?${pageMaker.makeQuery(pageMaker.startPage - 1)}">&laquo;</a></li>
     </c:if> 
 
     <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
     <c:choose>
     <c:when test="${pageMaker.page==idx}">
-    	<li class="page-item" id="liStyle"><a class="page-link" href="issueresult${pageMaker.makeQuery(idx)}" style="background-color:#DC3545; color:white">${idx}</a></li>
+    	<li class="page-item" id="liStyle"><a class="page-link" href="fileresult${pageMaker.makeQuery(idx)}" style="background-color:#DC3545; color:white">${idx}</a></li>
     </c:when>
     <c:otherwise>
-    <li class="page-item" id="liStyle"><a class="page-link" href="issueresult${pageMaker.makeQuery(idx)}">${idx}</a></li>
+    <li class="page-item" id="liStyle"><a class="page-link" href="fileresult${pageMaker.makeQuery(idx)}">${idx}</a></li>
     </c:otherwise>
     </c:choose>
     </c:forEach>
 
     <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-    	<li class="page-item" id="liStyle"><a class="page-link" href="issueresult${pageMaker.makeQuery(pageMaker.endPage + 1)}">&raquo;</a></li>
+    	<li class="page-item" id="liStyle"><a class="page-link" href="fileresult${pageMaker.makeQuery(pageMaker.endPage + 1)}">&raquo;</a></li>
     </c:if> 
   </ul>
   

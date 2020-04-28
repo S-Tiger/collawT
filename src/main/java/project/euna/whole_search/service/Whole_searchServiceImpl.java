@@ -22,18 +22,44 @@ public class Whole_searchServiceImpl implements Whole_searchService {
 	
 
 
-	// 이슈 페이징
+	// 이슈 검색결과  페이징
 	@Override
 	public List<Map> searchIssue(Criteria cri) throws DataAccessException  {
 		return whole_searchDAO.searchIssue(cri);
 	
 	}
 	
-	//게시물 총 갯수
+	//이슈 검색결과 게시물 총 갯수
 	@Override
 	public int issueCount(Criteria cri) throws Exception{
 		return whole_searchDAO.issueCount(cri);
 	}
 	
+	
+	// 파일 검색결과 페이징
+	@Override
+	public List<Map> searchFile(Criteria cri) throws DataAccessException  {
+		return whole_searchDAO.searchFile(cri);
+	
+	}
+	
+	//파일 검색결과 게시물 총 갯수
+	@Override
+	public int fileCount(Criteria cri) throws Exception{
+		return whole_searchDAO.fileCount(cri);
+	}
+	
+	// 투표 검색결과 페이징
+	@Override
+	public List<Map> searchVote(Criteria cri) throws DataAccessException  {
+		return whole_searchDAO.searchVote(cri);
+	
+	}
+	
+	//투표 검색결과 게시물 총 갯수
+	@Override
+	public int voteCount(Criteria cri) throws Exception{
+		return whole_searchDAO.voteCount(cri);
+	}
 	
 }

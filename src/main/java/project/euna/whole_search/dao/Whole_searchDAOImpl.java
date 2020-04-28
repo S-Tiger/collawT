@@ -21,7 +21,7 @@ public class Whole_searchDAOImpl implements Whole_searchDAO {
 
 
 	
-	//전체 이슈 페이징
+	//전체 이슈 검색결과 페이징
 	@Override
 	public List<Map> searchIssue(Criteria cri) throws DataAccessException {
 
@@ -34,6 +34,37 @@ public class Whole_searchDAOImpl implements Whole_searchDAO {
 	@Override
 	public int issueCount(Criteria cri) throws Exception {
 		return sqlSession.selectOne("whole_search.issueCount", cri);
+	}
+	
+	//전체 파일 검색결과 페이징
+	@Override
+	public List<Map> searchFile(Criteria cri) throws DataAccessException {
+
+		List<Map> list = sqlSession.selectList("whole_search.searchFile", cri);
+		return list;
+
+	}
+	
+	//파일 검색결과 총 갯수
+	@Override
+	public int fileCount(Criteria cri) throws Exception {
+		return sqlSession.selectOne("whole_search.fileCount", cri);
+	}
+	
+	
+	//전체 투표 검색결과 페이징
+	@Override
+	public List<Map> searchVote(Criteria cri) throws DataAccessException {
+
+		List<Map> list = sqlSession.selectList("whole_search.searchVote", cri);
+		return list;
+
+	}
+	
+	//파일 검색결과 총 갯수
+	@Override
+	public int voteCount(Criteria cri) throws Exception {
+		return sqlSession.selectOne("whole_search.voteCount", cri);
 	}
 
 	

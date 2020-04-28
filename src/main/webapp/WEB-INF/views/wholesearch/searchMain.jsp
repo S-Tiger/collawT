@@ -23,7 +23,7 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	$("#search").click(function(){
-		var url = "${contextPath}/search/issueresult";
+		var url = "${contextPath}/search/fileresult";
 		url = url + "?keyword="+$('#keyword').val();
 		alert(url);
 		location.href=url;
@@ -54,6 +54,9 @@ $(document).ready(function() {
         
 		
 		<input type="search" id = "search" name = "search" value="검색" on class="btn btn-danger btn-sm float-right" style="margin:3px;">
+		
+		<div style="border-width:3px; width:40px; height:50px; border-color:white; border-style:outset; text-align:center; ">
+		<span class="badge badge-success"  style= "height : 17px; width : 100%; font-size : 13px; vertical-align : text-bottom;">txt</span></div>
 		
 						<!-- Main content -->
 

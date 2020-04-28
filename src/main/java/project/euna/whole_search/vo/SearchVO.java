@@ -3,16 +3,10 @@ package project.euna.whole_search.vo;
 public class SearchVO {
 
 	
-	private String searchType;
 	private String keyword;
 	private String mem_Id;
 	
-	public String getSearchType() {
-		return searchType;
-	}
-	public void setSearchType(String searchType) {
-		this.searchType = searchType;
-	}
+
 	public String getKeyword() {
 		return keyword;
 	}
