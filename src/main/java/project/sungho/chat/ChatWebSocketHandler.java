@@ -35,7 +35,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 		log(session.getId() + "로부터 메시지 수신: " + message.getPayload());
 		
 		Map<String,Object> map = session.getAttributes();
-		String name = (String)map.get("nickname");
+		String name = (String)map.get("name");
 		System.out.println("================>> name:"+name);
 	    for (WebSocketSession s : users.values()) { 
 	  	    s.sendMessage(message);
