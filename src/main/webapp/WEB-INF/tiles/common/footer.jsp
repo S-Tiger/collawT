@@ -32,7 +32,7 @@
 	}
 	
 	function send() {
-		var name = '${member.mem_Name}';
+		var nickname = '${member.mem_Name}';
 		var msg = $("#message").val();
 		wsocket.send("msg:"+name+":" + msg);
 		$("#message").val("");

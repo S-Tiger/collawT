@@ -39,7 +39,7 @@
 	<mvc:view-controller path="/smartEditor2"
 		view-name="editor/SmartEditor2" />
 	<mvc:view-controller path="/chat"
-		view-name="chat/chat-ws" />
+		view-name="tiles/common/footer" />
 
 	<context:component-scan
 		base-package="home, project" />
