@@ -33,6 +33,7 @@ public class ReplyDAOImpl implements ReplyDAO {
 	public int replyInsert(ReplyVO replyVO) {
 		int result;
 		result = sqlSession.update("reply.replyInsert", replyVO);
+		sqlSession.update("notify.replyInsertNotify",replyVO);
 		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!dao :"+replyVO.getC_Id());
 		return result;
 	}

@@ -65,10 +65,22 @@ public class notifyControllerImpl implements NotifyController {
 		request.setAttribute("i_Num", i_Num);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/project/issue/read"); 
         dispatcher.forward(request, response);
-
-
 	}
-	
+	@RequestMapping("/replyupdate")
+	public void replyUpdate(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		String i_Num = request.getParameter("i_Num");
+		String c_Id = request.getParameter("c_Id");
+		HttpSession session = request.getSession();
+		Map<String,Object> searchMap = new HashMap<String,Object>();
+		searchMap = (Map<String,Object>)session.getAttribute("member");
+		searchMap.put("c_Id", c_Id);
+		searchMap.put("i_Num", i_Num);
+		notifyService.replyUpdate(searchMap);
+		request.setAttribute("c_Id", c_Id);
+		request.setAttribute("i_Num", i_Num);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/project/issue/read");
+		dispatcher.forward(request, response);
+	}
 	@GetMapping("/insert")
 	public String test() {
 		return "/notify/notifyadd";
@@ -83,6 +95,17 @@ public class notifyControllerImpl implements NotifyController {
 		System.out.println("view 타나??==:"+notifyView.toString());
 		return notifyView;
 	}
+	
+	@RequestMapping("/viewReply")
+	@ResponseBody
+	public List<Map> viewReply(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception{
+		HttpSession session = request.getSession();
+		Map<String,Object> searchMap = new HashMap<String,Object>();
+		searchMap = (Map<String,Object>)session.getAttribute("member");
+		List<Map> viewReply = notifyService.viewReply(searchMap);
+		System.out.println("viewReply~~~~~~~:"+viewReply.toString());
+		return viewReply;
+	}
 	@GetMapping("/list")
 	@ResponseBody
 	public ModelAndView searchList(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -96,6 +119,20 @@ public class notifyControllerImpl implements NotifyController {
 		mav.addObject("notifyList", notifyList);
 		mav.addObject("applylist", list);
 		System.out.println("notifyList값=="+notifyList);
+		return mav;
+		
+	}
+	@GetMapping("/replyList")
+	@ResponseBody
+	public ModelAndView replyList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		//searchMap.put("p_id", p_id);	 
+		HttpSession session = request.getSession();
+		searchMap = (Map<String,Object>)session.getAttribute("member");
+		List<Map> replyList = notifyService.replyList(searchMap);
+		ModelAndView mav = new ModelAndView("/newspeed/newspeedList3");
+		mav.addObject("replyList", replyList);
+		System.out.println("replyList=="+replyList);
 		return mav;
 		
 	}

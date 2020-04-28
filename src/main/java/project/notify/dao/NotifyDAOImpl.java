@@ -33,10 +33,21 @@ public class NotifyDAOImpl implements NotifyDAO {
 		System.out.println("서치타고 나와서 i_Content 어떻게 돼있는지=="+list.toString());
 		return list;
 	}
+	
+	@Override
+	public List<Map> replyList(Map<String,Object> searchMap){
+		List<Map> list = sqlSession.selectList("notify.replyList", searchMap);
+		return list;
+	}
 
 	@Override
 	public void notifyUpdate(Map<String,Object>searchMap) {
 		 sqlSession.update("notify.notifyUpdate",searchMap);
+	}
+	
+	@Override
+	public void replyUpdate(Map<String,Object> searchMap) {
+		sqlSession.update("notify.replyUpdate", searchMap);
 	}
 
 	@Override
@@ -45,7 +56,12 @@ public class NotifyDAOImpl implements NotifyDAO {
 		return list;
 	}
 
-	
+	@Override
+	public List<Map> viewReply(Map<String, Object> searchMap) throws DataAccessException{
+		List<Map> list = sqlSession.selectList("notify.viewReply",searchMap);
+		System.out.println("viewReply타냐~~~~~~~~~~~~~~~~~"+list.toString());
+		return list;
+	}
 
 
 }

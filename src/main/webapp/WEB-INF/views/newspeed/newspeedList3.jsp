@@ -89,7 +89,7 @@
 					<li class="nav-item" id = "applymenu"><a class="nav-link" href="#timeline"
 						data-toggle="tab" id= "timelineMenu">내가 받은 초대</a></li>
 					<li class="nav-item"><a class="nav-link" href="#settings"
-						data-toggle="tab">Settings</a></li>
+						data-toggle="tab">댓글</a></li>
 				</ul>
 			</div>
 			<!-- /.card-header -->
@@ -318,7 +318,25 @@
 					<!-- /.tab-pane -->
 
 					<div class="tab-pane" id="settings">
-						<form class="form-horizontal">
+					<c:forEach var="reply" items = "${replyList}">
+						<div class="post">						
+							<div class="user-block">
+								<img class="img-circle img-bordered-sm"
+									src="${contextPath}/resources/dist/img/user1-128x128.jpg" alt="user image">	
+								
+								<span class="username"  id = "test44" > <a href="/notify/replyupdate?c_Id=${reply.c_Id}&i_Num=${reply.i_Num}">${reply.mem_Id}
+										</a> <a href="#" class="float-right btn-tool"><i
+										class="fas fa-times"></i></a>
+								</span> <span class="description">
+									</span>
+							</div>
+							<!-- /.user-block -->
+							<p>${reply.i_Content}</p>
+
+							
+						</div>
+						</c:forEach> 
+						<%-- <form class="form-horizontal">
 							<div class="form-group row">
 								<label for="inputName" class="col-sm-2 col-form-label">Name</label>
 								<div class="col-sm-10">
@@ -368,7 +386,7 @@
 									<button type="submit" class="btn btn-danger">Submit</button>
 								</div>
 							</div>
-						</form>
+						</form> --%>
 					</div>
 					<!-- /.tab-pane -->
 				</div>

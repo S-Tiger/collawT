@@ -62,6 +62,18 @@
 		//알림개수 가져오기
 		var total = 0;		
 		$.ajax({
+			url : '${contextPath}/notify/viewReply',
+			type : 'get',
+			success : function(data){
+				var itemcount = data.length;
+				var count =parseInt(itemcount);
+				total += count;
+				console.log(itemcount);
+				$("#test01").html(itemcount);				
+				$("#test00").html(itemcount);
+			}
+		})
+		$.ajax({
 			url : '${contextPath}/notify/view',
 			type : 'get',
 			success : function(data){
