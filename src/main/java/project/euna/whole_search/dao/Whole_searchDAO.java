@@ -5,11 +5,11 @@ import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
-import project.euna.whole_search.vo.SearchVO;
+import project.euna.whole_search.vo.Criteria;
 
 
 public interface Whole_searchDAO {
 //
-	public List<Map> searchIssue(SearchVO searchVO) throws DataAccessException;
-
+	public List<Map> searchIssue(Criteria cri) throws DataAccessException;
+	public int issueCount(Criteria cri) throws Exception;
 }

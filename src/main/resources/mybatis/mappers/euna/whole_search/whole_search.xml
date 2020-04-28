@@ -20,6 +20,7 @@
 		<result property="wr_mem_Id" column="wr_mem_Id" />
 		<result property="rnum" column="rnum" />
 		<result property="i_Content" column="i_Content" />
+		<result property="keyword" column="keyword" />
 	</resultMap>
 	
 	<resultMap id="whole_searchResult02" type="SearchVO">
@@ -29,9 +30,9 @@
 	</resultMap>
 
 <!-- 이슈검색 뷰 -->
-<select id="searchIssue" resultMap="whole_searchResult01" parameterType="java.util.HashMap"> 
+<!-- <select id="searchIssue" resultMap="whole_searchResult01" parameterType="java.util.HashMap"> 
       <![CDATA[
-          select i_Num, c_Id, i_Name, i_Date, ig_Num, wr_mem_Id, c_Name, mem_Name, ig_Name, row_number() over(order by i_date desc) as rnum, i_content
+    	select i_Num, c_Id, i_Name, i_Date, ig_Num, wr_mem_Id, c_Name, mem_Name, ig_Name, row_number() over(order by i_date desc) as rnum, i_Content
           from
               (
               (select I.I_NUM as i_Num, I.C_ID as c_Id, I.I_NAME as i_Name, I.I_DATE as i_Date, I.IG_NUM as ig_Num, I.MEM_ID as wr_mem_Id, I.I_CONTENT as i_Content,
@@ -45,7 +46,7 @@
                
                and C.C_ID IN
                   (
-                  select C_ID from CO_MEMBER where MEM_ID='dmsdk@dmsdk.com'
+                  select C_ID from CO_MEMBER where MEM_ID=#{mem_Id}
                   )
                 
                )
@@ -75,23 +76,105 @@
 		</trim>
 
 
+	</select> -->
+	
+	
+	
+	<select id="searchIssue" resultMap="whole_searchResult01" parameterType="project.euna.whole_search.vo.Criteria"> 
+      <![CDATA[
+ 
+ select rnum, i_Num, c_Id, i_Name, i_Date, ig_Num, wr_mem_Id, c_Name, mem_Name, ig_Name, i_Content
+ from
+ (
+        select i_Num, c_Id, i_Name, i_Date, ig_Num, wr_mem_Id, c_Name, mem_Name, ig_Name, row_number() over(order by i_date desc) as rnum, i_Content
+                  from
+                      (
+                      (select I.I_NUM as i_Num, I.C_ID as c_Id, I.I_NAME as i_Name, I.I_DATE as i_Date, I.IG_NUM as ig_Num, I.MEM_ID as wr_mem_Id, I.I_CONTENT as i_Content,
+                              C.C_NAME as c_Name,
+                              M.MEM_NAME as mem_Name,
+                              IG.IG_NAME as ig_Name
+                       from ISSUE I, CO_WORK C, MEMBER M, ISSUE_GROUP IG
+                       where C.C_ID=I.C_ID
+                       and M.MEM_ID=I.MEM_ID
+                       and I.IG_NUM = IG.IG_NUM
+                       
+                       and C.C_ID IN
+                          (
+                          select C_ID from CO_MEMBER where MEM_ID=#{mem_Id}
+                          )
+                        
+                       )
+                      union all
+                      (select P.P_NUM as i_Num, P.MEM_ID as c_Id, P.P_I_NAME as i_Name, P.P_I_DATE as i_Date, null as ig_Num, P.MEM_ID as wr_mem_Id, P.P_I_CONTENT as i_content,
+                              null as c_Name,
+                              M.MEM_NAME as mem_Name,
+                              null as ig_Name
+                          from PERSONAL P, MEMBER M
+                          where M.MEM_ID=P.MEM_ID
+                      )
+                  )
+                       ]]>
+       <where>
+				<if test="keyword != null and keyword != '' ">
+					AND (I_NAME || I_CONTENT) like CONCAT('%' || #{keyword}, '%')
+				</if>
+		</where>
+              
+     <![CDATA[
+     )
+    where rnum between #{rowStart} and #{rowEnd}
+    order by to_number(i_Num) desc
+     ]]>
+
+
+    
+
+
 	</select>
 	
-<!-- 	              union all
-              (select p.p_Num as i_Num, p.mem_Id as c_Id, p.p_i_Name as p_i_Name, p.p_i_Date as i_Date, null as ig_Num, p.mem_Id as mem_Id,
-                      null as c_Name,
-                      m.mem_Name as mem_Name,
-                      '내 공간' as ig_Name
-                  from personal p, member m
-                  where m.mem_id=p.mem_id
-                  and m.mem_id = #{mem_Id}
-              ) -->
 	
+	<!-- 이슈 검색결과 총 갯수 -->
+	<select id="issueCount" resultType="int" parameterType="project.euna.whole_search.vo.Criteria"> 
+      <![CDATA[
+           select count(i_Num)
+                  from
+                      (
+                      (select I.I_NUM as i_Num, I.C_ID as c_Id, I.I_NAME as i_Name, I.I_DATE as i_Date, I.IG_NUM as ig_Num, I.MEM_ID as wr_mem_Id, I.I_CONTENT as i_Content,
+                              C.C_NAME as c_Name,
+                              M.MEM_NAME as mem_Name,
+                              IG.IG_NAME as ig_Name
+                       from ISSUE I, CO_WORK C, MEMBER M, ISSUE_GROUP IG
+                       where C.C_ID=I.C_ID
+                       and M.MEM_ID=I.MEM_ID
+                       and I.IG_NUM = IG.IG_NUM
+                       
+                       and C.C_ID IN
+                          (
+                          select C_ID from CO_MEMBER where MEM_ID='dmsdk@dmsdk.com'
+                          )
+                        
+                       )
+                      union all
+                      (select P.P_NUM as i_Num, P.MEM_ID as c_Id, P.P_I_NAME as i_Name, P.P_I_DATE as i_Date, null as ig_Num, P.MEM_ID as wr_mem_Id, P.P_I_CONTENT as i_content,
+                              null as c_Name,
+                              M.MEM_NAME as mem_Name,
+                              null as ig_Name
+                          from PERSONAL P, MEMBER M
+                          where M.MEM_ID=P.MEM_ID
+                      )
+                  )
+      ]]>
+       <where>
+				<if test="keyword != null and keyword != '' ">
+					AND (I_NAME || I_CONTENT) like CONCAT('%' || #{keyword}, '%')
+				</if>
+		</where>
 
+	</select>
 	
 	
-
-
-
-
+	
+	
+	
+	
 </mapper>

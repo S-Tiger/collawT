@@ -13,6 +13,6 @@ import project.euna.whole_search.vo.SearchVO;
 
 public interface Whole_searchService {
 
-	public List<Map> searchIssue(SearchVO searchVO) throws DataAccessException;
-	
+	public List<Map> searchIssue(Criteria cri) throws DataAccessException;
+	public int issueCount(Criteria cri) throws Exception;
 }

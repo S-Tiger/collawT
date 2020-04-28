@@ -7,6 +7,8 @@ public class Criteria {
 	private int rowStart;
 	private int rowEnd;
 	private String mem_Id;
+	private String searchType;
+	private String keyword;
 	
 	public Criteria() {
 		this.page = 1;
@@ -53,7 +55,7 @@ public class Criteria {
 
 	@Override
 	public String toString() {
-		return "Criteria [c_Id="+mem_Id+"page=" + page + ", perPageNum=" + perPageNum + ", rowStart=" + rowStart + ", rowEnd=" + rowEnd
+		return "Criteria [keyword="+ keyword + "page=" + page + ", perPageNum=" + perPageNum + ", rowStart=" + rowStart + ", rowEnd=" + rowEnd
 				+ "]";
 	}
 
@@ -65,6 +67,21 @@ public class Criteria {
 		this.mem_Id = mem_Id;
 	}
 
+	public String getSearchType() {
+		return searchType;
+	}
+
+	public void setSearchType(String searchType) {
+		this.searchType = searchType;
+	}
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
 
 	
 	

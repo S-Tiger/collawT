@@ -5,7 +5,6 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -25,8 +24,16 @@ public class Whole_searchServiceImpl implements Whole_searchService {
 
 	// 이슈 페이징
 	@Override
-	public List<Map> searchIssue(SearchVO searchVO) throws DataAccessException  {
-		return whole_searchDAO.searchIssue(searchVO);
-
-}
+	public List<Map> searchIssue(Criteria cri) throws DataAccessException  {
+		return whole_searchDAO.searchIssue(cri);
+	
+	}
+	
+	//게시물 총 갯수
+	@Override
+	public int issueCount(Criteria cri) throws Exception{
+		return whole_searchDAO.issueCount(cri);
+	}
+	
+	
 }
