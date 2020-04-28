@@ -317,6 +317,9 @@ select a_File, a_Realname, a_NameEx, a_Num, a_Del, a_Size, i_Num, c_Id, i_Name, 
  
 select c_Id, v_Num, v_Content, wr_mem_Id, v_Date, v_Name, vs_Num, v_Subject, mem_Name, rnum, c_Name
 from(
+	select c_Id, v_Num, v_Content, wr_mem_Id, v_Date, v_Name, vs_Num, v_Subject, mem_Name, rnum, c_Name
+	from
+	(
         select v.c_Id as c_Id, v.v_Num as v_Num, v.v_Content as v_Content, v.mem_Id as wr_mem_Id, v.v_Date as v_Date, v.v_Name as v_Name, v.vs_Num as vs_Num, v.v_Subject as v_Subject, v.mem_Name as mem_Name, row_number() over(order by v_Date desc) as rnum,
                 c.c_Name as c_Name
         from vote v, co_work c
@@ -325,7 +328,7 @@ from(
             (
             select c_id from co_member where mem_id=#{mem_Id}
             )
-       
+       )
        ]]>
        
        <where>
@@ -335,7 +338,7 @@ from(
 		</where>
               
      <![CDATA[
-     )
+    )
     where rnum between #{rowStart} and #{rowEnd}
     order by v_Date desc
      ]]>
@@ -357,6 +360,7 @@ from(
             select c_id from co_member where mem_id=#{mem_Id}
             )
          )
+         
           
         ]]>
        <where>

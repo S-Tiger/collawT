@@ -141,7 +141,7 @@ public class Whole_searchControllerImpl implements Whole_searchController {
 		ModelAndView mav = new ModelAndView("wholesearch/voteResult");
 		mav.addObject("pageMaker", pageMaker);
 		mav.addObject("issueList", issueList);
-		mav.addObject("fileCount", voteCount);
+		mav.addObject("voteCount", voteCount);
 		return mav;
 		
 	}
