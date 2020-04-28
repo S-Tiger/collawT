@@ -79,8 +79,7 @@
 		class="project.sungho.chat.ChatWebSocketHandler" />
 
 	<websocket:handlers>
-		<websocket:mapping handler="chatHandler"
-			path="/chat-ws" />
+		<websocket:mapping handler="chatHandler" path="/chat-ws" />
 		<websocket:handshake-interceptors>
 			<beans:bean
 				class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor" />

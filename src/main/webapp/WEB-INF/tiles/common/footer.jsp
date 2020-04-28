@@ -78,19 +78,23 @@
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
- <div class="sidebar"><nav class="mt-2">
+ <div class="sidebar" style ="margin-bottom: 150px;">
+ <nav class="mt-2">
+ <li class="nav-item has-treeview" style="margin: 10px;">파트너 채팅</li>
 					<c:forEach var="partnerList" items="${coworklist}">
 				<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-					<li class="nav-item has-treeview" id="menustat" style="border-bottom: 1px solid #4f5962;">
-					<a href="#" class="nav-link active"> <i class="nav-icon far fa-handshake"></i>
+					<li class="nav-item has-treeview" style="border-bottom: 1px solid #4f5962;">
+					<a href="#" class="nav-link active" style="background-color: ${partnerList.color};"> <i class="nav-icon far fa-address-book"></i>
 					<b>${partnerList.c_Name}</b><i class="right fas fa-angle-left"></i>
 					</a>
 						<ul class="nav nav-treeview" >
 					
 						<c:forEach var="partnermember" items="${partnerList.memberList}">
-								<li class="nav-item"><a href="#" data-needpopup-show="#chatroom-popup" class="nav-link">
-										<i class="nav-icon fas fa-sitemap"></i>
-										<b>${partnermember.mem_Name}</b>
+								<li class="nav-item"><a href="#" data-needpopup-show="#chatroom-popup" class="nav-link" data- 
+								 style="padding-top: 5px; padding-bottom: 5px; padding-left: 10px; white-space: none;">
+										<b style="font-size: 14px;">
+										${partnermember.mem_Name}<font size="2">
+										(${partnermember.mem_Id})</font></b>
 								</a></li>	
 							</c:forEach>
 							</ul>

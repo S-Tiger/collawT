@@ -58,7 +58,7 @@
 <script type="text/javascript">
 
 
-	window.onload = function() {
+	document.ready = function() {
 		//알림개수 가져오기
 		var total = 0;		
 		$.ajax({
@@ -68,7 +68,6 @@
 				var itemcount = data.length;
 				var count =parseInt(itemcount);
 				total += count;
-				console.log(itemcount);
 				$("#test01").html(itemcount);				
 				$("#test00").html(itemcount);
 			}
@@ -80,7 +79,6 @@
 				var itemcount = data.length;
 				var count =parseInt(itemcount);
 				total += count;
-				console.log(itemcount);
 				$("#test03").html(itemcount);				
 				$("#test00").html(itemcount);
 			}
@@ -98,11 +96,9 @@
 						}
 					}
 				}
-				console.log(itemString);
 				var itemcount1 = itemString.length;
 				var count1 =parseInt(itemcount1);
 				total += count1;
-				console.log(total);
 				$("#test33").html(itemcount1);
 				$("#test00").html(total);
 				$("#test22").html(total);
@@ -191,7 +187,6 @@
 		} else if (stat == 'nav-item has-treeview') {
 			setCookie('menu', 'nav-item has-treeview menu-open', 1);
 		}
-		console.log(getCookie('menu'));
 	}
 	function setCookie(name, value, exp) {
 		var date = new Date();
@@ -311,9 +306,6 @@
       <li class="nav-item d-none d-sm-inline-block">
         <a href="/main" class="nav-link">Home</a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contact</a>
-      </li>
     </ul>
 
     <!-- SEARCH FORM -->
@@ -356,43 +348,6 @@
           </a>
           
       </li>
-       <!-- 검색 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-            <li class="nav-item dropdown">
-            <a class="nav-link" data-toggle="dropdown" href="#">
-            
-         <i class="fas fa-search"></i></a>
-         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-						<span class="dropdown-item dropdown-header" >15 Notifications</span>
-						<div class="dropdown-divider"></div>
-						<a href="/notify/update" class="dropdown-item"> <i
-							class="fas fa-envelope mr-2" id = "test01"></i> <span
-							class="float-right text-muted text-sm">3 mins</span>
-						</a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-users mr-2"></i> 8 friend requests
-            <span class="float-right text-muted text-sm">12 hours</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-file mr-2"></i> 3 new reports
-            <span class="float-right text-muted text-sm">2 days</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-        </div>
-      </li>
-      
-      
-             <!-- 검색 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-            <li class="nav-item dropdown">
-            <a class="nav-link" href="#menu-toggle" id="menu-toggle" class="navbar-brand">
-            
-         <i class="fas fa-search"></i></a>
-         
-      </li>
-      
-      
       
       
       <!-- 채팅 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
