@@ -1,5 +1,69 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/SRC2/modal/dist/needpopup.min.css">
+
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script type="text/javascript">
+	var wsocket;
+	
+	function connect() {
+		wsocket = new WebSocket("ws://localhost:8090/chat-ws");
+		wsocket.onopen = onOpen;
+		wsocket.onmessage = onMessage;
+		wsocket.onclose = onClose;
+	}
+	function disconnect() {
+		wsocket.close();
+	}
+	function onOpen(evt) {
+		appendMessage("연결되었습니다.");
+	}
+	function onMessage(evt) {
+		var data = evt.data;
+		if (data.substring(0, 4) == "msg:") {
+			appendMessage(data.substring(4));
+		}
+	}
+	function onClose(evt) {
+		appendMessage("연결을 끊었습니다.");
+	}
+	
+	function send() {
+		var name = '${member.mem_Name}';
+		var msg = $("#message").val();
+		wsocket.send("msg:"+name+":" + msg);
+		$("#message").val("");
+	}
+
+	function appendMessage(msg) {
+		$("#chatMessageArea").append(msg+"<br>");
+		var chatAreaHeight = $("#chatArea").height();
+		var maxScroll = $("#chatMessageArea").height() - chatAreaHeight;
+		$("#chatArea").scrollTop(maxScroll);
+	}
+
+	$(document).ready(function() {
+		$('#message').keypress(function(event){
+			var keycode = (event.keyCode ? event.keyCode : event.which);
+			if(keycode == '13'){
+				send();	
+			}
+			event.stopPropagation();
+		});
+		$('#sendBtn').click(function() { send(); });
+		$('#enterBtn').click(function() { connect(); });
+		$('#exitBtn').click(function() { disconnect(); });
+	});
+</script>
+
+<style>
+#chatArea {
+	width: 200px; height: 100px; overflow-y: auto; border: 1px solid black;
+}
+</style>
 	
 	<footer class="main-footer">
     <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
@@ -12,217 +76,54 @@
     reserved.
   </footer>
 
-<!-- 채팅 여기에~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
   <!-- Control Sidebar -->
-   <aside class="control-sidebar control-sidebar-light control-sidebar-open">
-   여기 채팅하면 되어여 footer.jsp입니다!!!!!!!!!!!!!
-    <!-- Create the tabs -->
-    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-      <li class="active">
-      	<i class="fa fa-wrench"></i></a></li>
-      	<li class=""><a href="#control-sidebar-home-tab" data-toggle="tab" aria-expanded="false"><i class="fa fa-home"></i></a></li>
-      <li class=""><a href="#control-sidebar-settings-tab" data-toggle="tab" aria-expanded="false"><i class="fa fa-gears"></i></a></li>
-    </ul>
-    <!-- Tab panes -->
-    
-    <div class="tab-content">
-    
-      <!-- Home tab content -->
-      <div class="tab-pane" id="control-sidebar-home-tab">
-			      <!-- Construct the card with style you want. Here we are using card-danger -->
-			<!-- Then add the class direct-chat and choose the direct-chat-* contexual class -->
-			<!-- The contextual class should match the card, so we are using direct-chat-danger -->
-			<div class="card direct-chat direct-chat-primary">
-			
-			  <div class="card-header">
-			    <h3 class="card-title">채팅 상대</h3>
-			
-			  </div>
-			  <!-- /.card-header -->
-			  <div class="card-body">
-			    <!-- Conversations are loaded here -->
-			    <div class="direct-chat-messages">
-			      <!-- Message. Default to the left -->
-			      <div class="direct-chat-msg">
-			        <div class="direct-chat-infos clearfix">
-			          <span class="direct-chat-name float-left">Alexander Pierce</span>
-			          <span class="direct-chat-timestamp float-right">23 Jan 2:00 pm</span>
-			        </div>
-			        <!-- /.direct-chat-infos -->
-			       <img class="direct-chat-img" src="${contextPath}/resources/dist/img/profile.jpg" width="30" height="30"
-											class="img-circle elevation-2" alt="프로필사진">
-			        <!-- /.direct-chat-img -->
-			        <div class="direct-chat-text">
-			          Is this template really for free? That's unbelievable!
-			        </div>
-			        <!-- /.direct-chat-text -->
-			      </div>
-			      <!-- /.direct-chat-msg -->
-			      <!-- Message to the right -->
-			      <div class="direct-chat-msg right">
-			        <div class="direct-chat-infos clearfix">
-			          <span class="direct-chat-name float-right">Sarah Bullock</span>
-			          <span class="direct-chat-timestamp float-left">23 Jan 2:05 pm</span>
-			        </div>
-			        <!-- /.direct-chat-infos -->
-			       <img class="direct-chat-img" src="${contextPath}/resources/dist/img/profile.jpg" width="30" height="30"
-											class="img-circle elevation-2" alt="프로필사진">        <!-- /.direct-chat-img -->
-			        <div class="direct-chat-text">
-			          You better believe it!
-			        </div>
-			        <!-- /.direct-chat-text -->
-			      </div>
-			      <!-- /.direct-chat-msg -->
-			      <!-- Message. Default to the left -->
-			      <div class="direct-chat-msg">
-			        <div class="direct-chat-infos clearfix">
-			          <span class="direct-chat-name float-left">Alexander Pierce</span>
-			          <span class="direct-chat-timestamp float-right">23 Jan 5:37 pm</span>
-			        </div>
-			        <!-- /.direct-chat-infos -->
-			       <img class="direct-chat-img" src="${contextPath}/resources/dist/img/profile.jpg" width="30" height="30"
-											class="img-circle elevation-2" alt="프로필사진">        <!-- /.direct-chat-img -->
-			        <div class="direct-chat-text">
-			          Working with AdminLTE on a great new app! Wanna join?
-			        </div>
-			        <!-- /.direct-chat-text -->
-			      </div>
-			      <!-- /.direct-chat-msg -->
-			      <!-- Message to the right -->
-			      <div class="direct-chat-msg right">
-			        <div class="direct-chat-infos clearfix">
-			          <span class="direct-chat-name float-right">Sarah Bullock</span>
-			          <span class="direct-chat-timestamp float-left">23 Jan 6:10 pm</span>
-			        </div>
-			        <!-- /.direct-chat-infos -->
-			       <img class="direct-chat-img" src="${contextPath}/resources/dist/img/profile.jpg" width="30" height="30"
-											class="img-circle elevation-2" alt="프로필사진">        <!-- /.direct-chat-img -->
-			        <div class="direct-chat-text">
-			          I would love to.
-			        </div>
-			        <!-- /.direct-chat-text -->
-			      </div>
-			      <!-- /.direct-chat-msg -->
-			    </div>
-			    <!--/.direct-chat-messages-->
-			    <!-- Contacts are loaded here -->
-			    <div class="direct-chat-contacts">
-			      <ul class="contacts-list">
-			        <li>
-			          <a href="#">
-			       <img class="direct-chat-img" src="${contextPath}/resources/dist/img/profile.jpg" width="30" height="30"
-											class="img-circle elevation-2" alt="프로필사진">            <div class="contacts-list-info">
-			              <span class="contacts-list-name">
-			                Count Dracula
-			                <small class="contacts-list-date float-right">2/28/2015</small>
-			              </span>
-			              <span class="contacts-list-msg">How have you been? I was...</span>
-			            </div>
-			            <!-- /.contacts-list-info -->
-			          </a>
-			        </li>
-			        <!-- End Contact Item -->
-			        <li>
-			          <a href="#">
-			       <img class="direct-chat-img" src="${contextPath}/resources/dist/img/profile.jpg" width="30" height="30"
-											class="img-circle elevation-2" alt="프로필사진">            <div class="contacts-list-info">
-			              <span class="contacts-list-name">
-			                Sarah Doe
-			                <small class="contacts-list-date float-right">2/23/2015</small>
-			              </span>
-			              <span class="contacts-list-msg">I will be waiting for...</span>
-			            </div>
-			            <!-- /.contacts-list-info -->
-			          </a>
-			        </li>
-			        <!-- End Contact Item -->
-			        <li>
-			          <a href="#">
-			       <img class="direct-chat-img" src="${contextPath}/resources/dist/img/profile.jpg" width="30" height="30"
-											class="img-circle elevation-2" alt="프로필사진">            <div class="contacts-list-info">
-			              <span class="contacts-list-name">
-			                Nadia Jolie
-			                <small class="contacts-list-date float-right">2/20/2015</small>
-			              </span>
-			              <span class="contacts-list-msg">I'll call you back at...</span>
-			            </div>
-			            <!-- /.contacts-list-info -->
-			          </a>
-			        </li>
-			        <!-- End Contact Item -->
-			        <li>
-			          <a href="#">
-			       <img class="direct-chat-img" src="${contextPath}/resources/dist/img/profile.jpg" width="30" height="30"
-											class="img-circle elevation-2" alt="프로필사진">            <div class="contacts-list-info">
-			              <span class="contacts-list-name">
-			                Nora S. Vans
-			                <small class="contacts-list-date float-right">2/10/2015</small>
-			              </span>
-			              <span class="contacts-list-msg">Where is your new...</span>
-			            </div>
-			            <!-- /.contacts-list-info -->
-			          </a>
-			        </li>
-			        <!-- End Contact Item -->
-			        <li>
-			          <a href="#">
-			       <img class="direct-chat-img" src="${contextPath}/resources/dist/img/profile.jpg" width="30" height="30"
-											class="img-circle elevation-2" alt="프로필사진">            <div class="contacts-list-info">
-			              <span class="contacts-list-name">
-			                John K.
-			                <small class="contacts-list-date float-right">1/27/2015</small>
-			              </span>
-			              <span class="contacts-list-msg">Can I take a look at...</span>
-			            </div>
-			            <!-- /.contacts-list-info -->
-			          </a>
-			        </li>
-			        <!-- End Contact Item -->
-			        <li>
-			          <a href="#">
-			       <img class="direct-chat-img" src="${contextPath}/resources/dist/img/profile.jpg" width="30" height="30"
-											class="img-circle elevation-2" alt="프로필사진">            <div class="contacts-list-info">
-			              <span class="contacts-list-name">
-			                Kenneth M.
-			                <small class="contacts-list-date float-right">1/4/2015</small>
-			              </span>
-			              <span class="contacts-list-msg">Never mind I found...</span>
-			            </div>
-			            <!-- /.contacts-list-info -->
-			          </a>
-			        </li>
-			        <!-- End Contact Item -->
-			      </ul>
-			      <!-- /.contacts-list -->
-			    </div>
-			    <!-- /.direct-chat-pane -->
-			  </div>
-			  <!-- /.card-body -->
-			  <div class="card-footer">
-			    <form action="#" method="post">
-			      <div class="input-group">
-			        <input type="text" name="message" placeholder="Type Message ..." class="form-control">
-			        <span class="input-group-append">
-			          <button type="button" class="btn btn-primary">Send</button>
-			        </span>
-			      </div>
-			    </form>
-			  </div>
-			  <!-- /.card-footer-->
-</div>
-</div>
-<!--/.direct-chat -->
-
-
-      </div>
-      <!-- /.tab-pane -->
-
-      <!-- /.tab-pane -->
-    
+  <aside class="control-sidebar control-sidebar-dark">
+ <div class="sidebar"><nav class="mt-2">
+					<c:forEach var="partnerList" items="${coworklist}">
+				<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+					<li class="nav-item has-treeview" id="menustat" style="border-bottom: 1px solid #4f5962;">
+					<a href="#" class="nav-link active"> <i class="nav-icon far fa-handshake"></i>
+					<b>${partnerList.c_Name}</b><i class="right fas fa-angle-left"></i>
+					</a>
+						<ul class="nav nav-treeview" >
+					
+						<c:forEach var="partnermember" items="${partnerList.memberList}">
+								<li class="nav-item"><a href="#" data-needpopup-show="#chatroom-popup" class="nav-link">
+										<i class="nav-icon fas fa-sitemap"></i>
+										<b>${partnermember.mem_Name}</b>
+								</a></li>	
+							</c:forEach>
+							</ul>
+				</li></ul>
+							</c:forEach>
+						
+				</nav>
+ </div>
+    <!-- Control sidebar content goes here -->
   </aside>
   <!-- /.control-sidebar -->
+</div>
 <!-- ./wrapper -->
-<script>
+
+
+
+<div id='chatroom-popup' class="needpopup">
+
+	<div class="col-md-6" style="max-width: 100%;">
+	
+	<input type="button" id="enterBtn" value="입장">
+	<input type="button" id="exitBtn" value="나가기">
+    
+    <h1>대화 영역</h1>
+    <div id="chatArea"><div id="chatMessageArea"></div></div>
+    <br/>
+    <input type="text" id="message">
+    <input type="button" id="sendBtn" value="전송">
+
+	</div>
+</div>
+
+<script type="text/javascript">
 needPopup.config.custom = {
 		'removerPlace' : 'outside',
 		'closeOnOutside' : false,
@@ -234,8 +135,50 @@ needPopup.config.custom = {
 		}
 	};
 	needPopup.init();
-	</script>
-	<script type="text/javascript">
+	$('#applyform').ready(function (){
+		
+				$('#insertsubmit').click(function() {
+					var listnum = $('#applyList').children().length;
+					if (listnum == 0) {
+					alert("초대 리스트가 비어있습니다");
+						return false;
+					}
+				})
+			    $('#mem_Id').keydown(function(event) {
+			    	if(event.keyCode == '13'){
+			    		var mem_Id = $('.form-control#mem_Id').val();
+			    		var hidden_Id = $('#hidden_Id').val();
+			    		console.log(hidden_Id);
+			    		if(mem_Id == '${member.mem_Id}'){
+			    			$("#id_check").text("자신을 초대할수 없습니다 :p");
+							$("#id_check").css("color", "red");
+			    		}else{
+			    		$.ajax({
+							url : '${contextPath}/news/memberCheck?mem_Id=' + mem_Id,
+							type : 'get',
+							success : function(data) {
+								console.log("1 = 중복o / 0 = 중복x : " + data);
+								if (data == 1) {
+									if (mem_Id == hidden_Id) {
+										$("#id_check").text("동일한 아이디를 여러번 초대할수 없습니다. :p");
+										$("#id_check").css("color", "red");
+									}else {
+									$('#applyList').append("<span id= 'applyspan'>"+mem_Id+"<a id ='applydelete' href='#'>x</a></span>");
+									$('#applyform').append("<input type='hidden' id='hidden_Id' name='mem_Id' value='"+mem_Id+"'>");
+									$('#mem_Id').val("");}
+								} else {
+									$("#id_check").text("잘못된 아이디 입니다 다시 확인해주세요 :p");
+									$("#id_check").css("color", "red");
+								}
+							}
+						})}
+			    	}else{
+			    		$("#id_check").text("이메일 주소를 입력하고 Enter키를 눌러 파트너들을 초대해 보세요.");
+						$("#id_check").css("color", "#a1a1a1");
+			    	}
+			    });
+			});
+	
 	$('#createpjtform').ready(function (){
  	$("#projectInsert").click(function(){
  			if ($('#create_Name').val() == ''){

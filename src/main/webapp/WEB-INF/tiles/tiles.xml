@@ -25,6 +25,9 @@
 	<definition name="/member/signupTest1" extends="defaultLayout">
 		<put-attribute name="content" value="/WEB-INF/views/member/signupTest1.jsp" />
 	</definition>
+	<definition name="/chat/chat-ws" extends="defaultLayout">
+		<put-attribute name="content" value="/WEB-INF/views/chat/chat-ws.jsp" />
+	</definition>
 	
 	<definition name="/member/forgotPwd" extends="defaultLayout">
 		<put-attribute name="content" value="/WEB-INF/views/member/forgotPwd.jsp" />

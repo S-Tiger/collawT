@@ -65,4 +65,10 @@ public class HomeController {
 	}
 	
 	
+	@RequestMapping("/chat")
+	public String chat(Model model) {
+		return "/chat/chat-ws";
+	}
+	
+	
 }

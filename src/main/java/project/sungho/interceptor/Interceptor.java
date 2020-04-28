@@ -36,8 +36,10 @@ public class Interceptor extends HandlerInterceptorAdapter {
 			System.out.println(uri);
 			
 			List<Map> list = comemberService.searchList(member);
-			
 			for (int i = 0; i < list.size(); i++) {
+				Map<String, Object> memberSearch = list.get(i);
+				List<Map>memberList = comemberService.memberList(memberSearch);
+				list.get(i).put("memberList", memberList);
 				switch (i) {
 				case 0: list.get(i).put("color", "#28a745");
 				break;

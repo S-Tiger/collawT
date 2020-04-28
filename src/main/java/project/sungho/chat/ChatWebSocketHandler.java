@@ -1,8 +1,6 @@
-package project.chat;
+package project.sungho.chat;
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -12,16 +10,11 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
-import project.hm.hmp001_d001.service.Hmp001_d001Service;
 
 public class ChatWebSocketHandler extends TextWebSocketHandler {
 
 	private Map<String, WebSocketSession> users = new ConcurrentHashMap<String, WebSocketSession>();
 
-	@Autowired
-	Hmp001_d001Service p0001Service;	
-	
-	
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		log(session.getId() + " 연결 됨");

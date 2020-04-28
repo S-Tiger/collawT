@@ -1,4 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!-- <script src="http://code.jquery.com/jquery-latest.js"></script> -->
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +13,7 @@
 	var wsocket;
 	
 	function connect() {
-		wsocket = new WebSocket("ws://localhost:8090/devFw/chat-ws");
+		wsocket = new WebSocket("ws://localhost:8090/chat-ws");
 		wsocket.onopen = onOpen;
 		wsocket.onmessage = onMessage;
 		wsocket.onclose = onClose;
@@ -31,9 +35,9 @@
 	}
 	
 	function send() {
-		var nickname = $("#nickname").val();
+		var name = '${member.mem_Name}';
 		var msg = $("#message").val();
-		wsocket.send("msg:"+nickname+":" + msg);
+		wsocket.send("msg:"+name+":" + msg);
 		$("#message").val("");
 	}
 
@@ -64,7 +68,6 @@
 </style>
 </head>
 <body>
-	이름:<input type="text" id="nickname">
 	<input type="button" id="enterBtn" value="입장">
 	<input type="button" id="exitBtn" value="나가기">
     
