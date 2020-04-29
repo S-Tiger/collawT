@@ -133,7 +133,7 @@ public class EVoteControllerImpl implements EVoteController {
 
 		// System.out.println("!!!!!!!!!!!!!!!!!11cmapcontroller"+cmap);
 
-		return "redirect:/project/vote/read?v_Num=" + v_Num;
+		return "redirect:/project/vote/read?c_Id="+c_Id+"&v_Num=" + v_Num;
 
 	}
 
@@ -154,9 +154,14 @@ public class EVoteControllerImpl implements EVoteController {
 	@GetMapping("/read")
 	public ModelAndView voteRead(String c_Id,String v_Num, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		Map<String, Object> vote = evoteService.voteRead(v_Num);
+		System.out.println("read c_Id: "+c_Id);
 		Map<String, Object> searchMap = new HashMap<String, Object>();
-		searchMap.put("v_Num",v_Num);
+		searchMap.put("v_Num", v_Num);
+		searchMap.put("c_Id", c_Id);
+		
+		Map<String, Object> vote = evoteService.voteRead(searchMap);
+		//Map<String, Object> searchMap = new HashMap<String, Object>();
+		//searchMap.put("v_Num",v_Num);
 		
 		List<Map> voted = evoteService.votedRead(v_Num);
 		// List<Map> list = appedixService.fileList(i_Num);
@@ -198,6 +203,7 @@ public class EVoteControllerImpl implements EVoteController {
 		mav.addObject("voteRead", vote);
 		mav.addObject("votedRead", voted);
 		mav.addObject("voterList",voterlist);
+		mav.addObject("voteTotal",voteTotal);
 		// mav.addObject("file", list);
 		// mav.addObject("chargerList", chargerList);
 		return mav;
@@ -228,14 +234,19 @@ public class EVoteControllerImpl implements EVoteController {
 		List<Map> igRead = evoteService.igRead();
 		List<Map> comemList = evoteService.comemRead(c_Id);
 		// List<Map> chargerList = evoteService.chargerRead(v_Num);
-
-		Map<String, Object> vote = evoteService.voteRead(v_Num);
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		searchMap.put("v_Num", v_Num);
+		searchMap.put("c_Id", c_Id);
+		
+		Map<String, Object> vote = evoteService.voteRead(searchMap);
+		
+		//Map<String, Object> vote = evoteService.voteRead(v_Num);
 		List<Map> voted = evoteService.votedRead(v_Num);
 		// List<Map> list = appedixService.fileList(i_Num);
 		// List<Map> chargerList = evoteService.chargerRead(v_Num);
 
-		
-		model.addAttribute("voteUpdate", evoteService.voteRead(voteVO.getV_Num()));
+		//model.addAttribute("voteUpdate", evoteService.voteRead(voteVO.getV_Num()));
+		model.addAttribute("voteUpdate", evoteService.voteRead(searchMap));
 		model.addAttribute("igRead", igRead);
 		model.addAttribute("c_Id", c_Id);
 		model.addAttribute("comemList", comemList);
@@ -359,8 +370,11 @@ public class EVoteControllerImpl implements EVoteController {
 	@GetMapping("/insertVoter")
 	public ModelAndView voter(String v_Num, String c_Id, String vd_Num, VoteVO voteVO, HttpSession session, Model model,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
-
-		Map<String, Object> vote = evoteService.voteRead(v_Num);
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		searchMap.put("v_Num", v_Num);
+		searchMap.put("c_Id", c_Id);
+		
+		Map<String, Object> vote = evoteService.voteRead(searchMap);
 		List<Map> voted = evoteService.votedRead(v_Num);
 		// List<Map> list = appedixService.fileList(i_Num);
 		// List<Map> chargerList = evoteService.chargerRead(v_Num);

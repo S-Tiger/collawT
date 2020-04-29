@@ -19,7 +19,7 @@ public interface EVoteService {
 	public void  votedInsert(Map map);
 	public void  voterInsert(Map map, HttpServletResponse response ,VoteVO voteVO )throws Exception;
 	public List<Map> searchList(Criteria cri) throws Exception;
-	public Map<String, Object> voteRead(String v_Num);	
+	public Map<String, Object> voteRead(Map<String, Object> v_Num);	
 	public void voteDelete(String v_Num) throws Exception;
 	//public void voteUpdate(VoteVO issueVO) throws Exception;
 	public int listCount(String c_Id) throws Exception;

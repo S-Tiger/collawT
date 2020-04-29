@@ -215,7 +215,7 @@
 											<!-- for each -->
 											<tr>
 												<td style="padding-left: 0px; padding-right: 0px; width: 190px;"><c:forEach var="votedReadItem" items="${votedRead}" varStatus="status">
-														<!-- radio -->
+														<!-- 투표 리스트 -->
 														<input type="hidden" name="getVsNum" value="${status.index+1 }">
 														<input class="form-check-input" type="radio" name="vd_Num" value="${votedReadItem.vd_Num}" style="margin-left: 10px;">
 														<label class="form-check-label" style="margin-left: 40px;">${votedReadItem.vd_Num}.&nbsp;&nbsp;&nbsp;${votedReadItem.vd_Content}</label>
@@ -293,8 +293,8 @@
 							</div>
 
 						</c:forEach>
-						<!-- 댓글  입력-->
-						qwefqwefqwefqwef
+						<!-- 차트 넣을곳-->
+				
 						<c:forEach var="voterItem" items="${voterList}">
 							<p>${voterItem.vd_Num}번투표자${voterItem.mem_Name}(${voterItem.mem_Id})</p>
 							<i class="fas fa-users" style="color: black;"></i>

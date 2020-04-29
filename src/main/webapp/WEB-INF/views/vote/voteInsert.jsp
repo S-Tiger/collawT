@@ -201,7 +201,7 @@ function Del_poll()
 				
 				<!--협업공간ID -->
 				<input id="c_Id" name="c_Id" type="hidden" value="${c_Id}" />
-				<c:out value="${c_Id}"></c:out>asdasd 12341234
+				<c:out value="${c_Id}"></c:out>   asdasd 12341234
 				<!-- 투표상태는 디폴트로 '1'으로 설정 (진행중)-->
 				<input name="vs_Num" id="vs_Num" type="hidden" value="1"><br>
 				<!--  여기부터 투표기능 만드세여~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~` -->

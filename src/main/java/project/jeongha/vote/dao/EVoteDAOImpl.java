@@ -55,7 +55,7 @@ public class EVoteDAOImpl implements EVoteDAO {
 
 	// 투표 조회
 	@Override
-	public Map<String, Object> voteRead(String v_Num) {
+	public Map<String, Object> voteRead(Map<String, Object> v_Num) {
 		return sqlSession.selectOne("voteResult.voteRead", v_Num);
 	}
 

@@ -58,7 +58,7 @@ public class EVoteServiceImpl implements EVoteService {
 	
 	//투표 조회
 	@Override
-	public Map<String, Object> voteRead(String v_Num) {
+	public Map<String, Object> voteRead(Map<String, Object> v_Num) {
 		return evoteDAO.voteRead(v_Num);
 		
 	}
