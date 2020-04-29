@@ -23,7 +23,7 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	$("#search").click(function(){
-		var url = "${contextPath}/search/voteresult";
+		var url = "${contextPath}/search/replyresult";
 		url = url + "?keyword="+$('#keyword').val();
 		alert(url);
 		location.href=url;

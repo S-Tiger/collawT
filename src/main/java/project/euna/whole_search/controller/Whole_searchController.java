@@ -26,5 +26,9 @@ public interface Whole_searchController {
 	public ModelAndView voteResult(
 			@RequestParam(required=false) String keyword,
 			Criteria cri, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	public ModelAndView replyResult(
+			@RequestParam(required=false) String keyword,
+			Criteria cri, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception;
 }
 

@@ -62,4 +62,17 @@ public class Whole_searchServiceImpl implements Whole_searchService {
 		return whole_searchDAO.voteCount(cri);
 	}
 	
+	// 댓글 검색결과 페이징
+	@Override
+	public List<Map> searchReply(Criteria cri) throws DataAccessException  {
+		return whole_searchDAO.searchReply(cri);
+	
+	}
+	
+	//댓글 검색결과 게시물 총 갯수
+	@Override
+	public int replyCount(Criteria cri) throws Exception{
+		return whole_searchDAO.replyCount(cri);
+	}
+	
 }

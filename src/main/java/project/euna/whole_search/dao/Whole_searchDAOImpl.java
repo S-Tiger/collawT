@@ -66,6 +66,22 @@ public class Whole_searchDAOImpl implements Whole_searchDAO {
 	public int voteCount(Criteria cri) throws Exception {
 		return sqlSession.selectOne("whole_search.voteCount", cri);
 	}
+	
+	
+	//전체 투표 검색결과 페이징
+	@Override
+	public List<Map> searchReply(Criteria cri) throws DataAccessException {
+
+		List<Map> list = sqlSession.selectList("whole_search.searchReply", cri);
+		return list;
+
+	}
+	
+	//파일 검색결과 총 갯수
+	@Override
+	public int replyCount(Criteria cri) throws Exception {
+		return sqlSession.selectOne("whole_search.replyCount", cri);
+	}
 
 	
 }

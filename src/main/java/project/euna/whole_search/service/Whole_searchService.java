@@ -19,5 +19,7 @@ public interface Whole_searchService {
 	public int fileCount(Criteria cri) throws Exception;
 	public List<Map> searchVote(Criteria cri) throws DataAccessException;
 	public int voteCount(Criteria cri) throws Exception;
+	public List<Map> searchReply(Criteria cri) throws DataAccessException;
+	public int replyCount(Criteria cri) throws Exception;
 
 }

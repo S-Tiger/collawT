@@ -19,7 +19,7 @@
 		<result property="ig_Name" column="ig_Name" />
 		<result property="wr_mem_Id" column="wr_mem_Id" />
 		<result property="rnum" column="rnum" />
-		<result property="i_Content" column="i_Content" />
+		<result property="i_Content" column="i_Content" jdbcType="CLOB" javaType="java.lang.String"/>
 		<result property="keyword" column="keyword" />
 	</resultMap>
 	
@@ -39,7 +39,7 @@
 		<result property="c_Name" column="c_Name" />
 		<result property="mem_name" column="mem_name" />
 		<result property="rnum" column="rnum" />
-		<result property="i_Content" column="i_Content" />
+		<result property="i_Content" column="i_Content" jdbcType="CLOB" javaType="java.lang.String"/>
 		<result property="ig_Num" column="ig_Num" />
 		<result property="ig_Name" column="ig_Name" />
 		
@@ -50,7 +50,7 @@
 		<!-- property는 화면단에서 쓸 이름, column은 데이터컬럼명이랑 동일 -->
 		<result property="c_Id" column="c_Id"/>
 		<result property="v_Num" column="v_Num" />
-		<result property="v_Content" column="v_Content" />
+		<result property="v_Content" column="v_Content" jdbcType="CLOB" javaType="java.lang.String"/>
 		<result property="wr_mem_Id" column="wr_mem_Id" />
 		<result property="v_Date" column="v_Date" />
 		<result property="v_Name" column="v_Name" />
@@ -59,6 +59,20 @@
 		<result property="mem_Name" column="mem_Name" />
 		<result property="rnum" column="rnum" />
 		<result property="c_Name" column="c_Name" />
+	</resultMap>
+	
+	<resultMap id="replyResult" type="java.util.HashMap">
+		<!-- property는 화면단에서 쓸 이름, column은 데이터컬럼명이랑 동일 -->
+		<result property="r_Num" column="r_Num"/>
+		<result property="r_Content" column="r_Content" jdbcType="CLOB" javaType="java.lang.String"/>
+		<result property="r_Date" column="r_Date" />
+		<result property="i_Num" column="i_Num" />
+		<result property="c_Id" column="c_Id" />
+		<result property="wr_mem_Id" column="wr_mem_Id" />
+		<result property="mem_Name" column="mem_Name" />
+		<result property="c_Name" column="c_Name" />
+		<result property="i_Name" column="i_Name" />
+		<result property="rnum" column="rnum" />
 	</resultMap>
 
 <!-- <select id="searchIssue" resultMap="whole_searchResult01" parameterType="java.util.HashMap"> 
@@ -155,7 +169,7 @@
      <![CDATA[
      )
     where rnum between #{rowStart} and #{rowEnd}
-    order by i_date desc
+    order by i_Date desc
      ]]>
 
 
@@ -369,6 +383,103 @@ from(
 				</if>
 		</where>
 
+
+	</select>
+	
+	
+	
+		<!-- 댓글검색 뷰 -->
+	<select id="searchReply" resultMap="replyResult" parameterType="project.euna.whole_search.vo.Criteria"> 
+      <![CDATA[
+ 
+      select r_Num, r_Content, r_Date, i_Num, c_Id, wr_mem_Id, mem_Name, c_Name, i_Name,rnum
+      from(
+        select r_Num, r_Content, r_Date, i_Num, c_Id, wr_mem_Id, mem_Name, c_Name, i_Name, row_number() over(order by r_date desc) as rnum
+        from(
+            select r.r_Num as r_Num, r.r_Content as r_Content, r.r_Date as r_Date, r.i_Num as i_Num, r.c_Id as c_Id, r. mem_Id as wr_mem_Id,
+            m.mem_Name as mem_Name,
+            c.c_Name as c_Name,
+            i.i_Name as i_Name
+            
+            from reply r, member m, co_work c, issue i
+            
+            where r.mem_Id = m.mem_Id
+            and r.c_Id = c.c_Id
+            and r.i_Num = i.i_Num
+            and c.c_Id IN
+                (
+                 select c_Id from CO_MEMBER where mem_Id=#{mem_Id}
+                  )
+            
+            union all
+            
+            select pm.p_m_Num as r_Num, pm.p_m_Content as r_Contentm, pm.p_m_Date as r_Date, pm.p_Num as i_Num, null as c_Id, pm.mem_Id as wr_mem_Id,
+            m.mem_Name as mem_Name,
+            null as c_Name,
+            p.p_i_Name as i_Name
+            
+            from personal_memo pm, member m, personal p
+            
+            where pm.mem_Id=m.mem_Id
+            and pm.p_Num=p.p_Num
+            and m.mem_Id = #{mem_Id}
+            )
+
+	 ]]>
+       <where>
+				<if test="keyword != null and keyword != '' ">
+					AND r_CONTENT like CONCAT('%' || #{keyword}, '%')
+				</if>
+		</where>
+              
+     <![CDATA[
+     )
+    where rnum between #{rowStart} and #{rowEnd}
+    order by r_Date desc
+     ]]>
+	</select>
+	
+	
+	
+		<!-- 댓글 검색결과 총 갯수 -->
+	<select id="replyCount" resultType="int" parameterType="project.euna.whole_search.vo.Criteria"> 
+	      <![CDATA[
+        select count(*)
+        from(
+            select r.r_Num as r_Num, r.r_Content as r_Content, r.r_Date as r_Date, r.i_Num as i_Num, r.c_Id as c_Id, r. mem_Id as wr_mem_Id,
+            m.mem_Name as mem_Name,
+            c.c_Name as c_Name,
+            i.i_Name as i_Name
+            
+            from reply r, member m, co_work c, issue i
+            
+            where r.mem_Id = m.mem_Id
+            and r.c_Id = c.c_Id
+            and r.i_Num = i.i_Num
+            and c.c_Id IN
+                (
+                 select c_Id from CO_MEMBER where mem_Id=#{mem_Id}
+                  )
+            
+            union all
+            
+            select pm.p_m_Num as r_Num, pm.p_m_Content as r_Contentm, pm.p_m_Date as r_Date, pm.p_Num as i_Num, null as c_Id, pm.mem_Id as wr_mem_Id,
+            m.mem_Name as mem_Name,
+            null as c_Name,
+            p.p_i_Name as i_Name
+            
+            from personal_memo pm, member m, personal p
+            
+            where pm.mem_Id=m.mem_Id
+            and pm.p_Num=p.p_Num
+            and m.mem_Id = #{mem_Id}
+            )
+                       ]]>
+       <where>
+				<if test="keyword != null and keyword != '' ">
+					AND r_CONTENT like CONCAT('%' || #{keyword}, '%')
+				</if>
+		</where>
 
 	</select>
 	
