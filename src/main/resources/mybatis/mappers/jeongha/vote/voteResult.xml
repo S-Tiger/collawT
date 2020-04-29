@@ -36,6 +36,8 @@
 		<result property="v_Name" column="v_Name" />
 		<result property="vs_Num" column="vs_Num" />
 		<result property="vs_Name" column="vs_Name" />
+		<result property="mem_Name" column="mem_Name" />
+		<result property="mem_File" column="mem_File" javaType="[B"	jdbcType="BLOB" />
 		<result property="v_Subject" column="v_Subject" />
 		<result property="v_Count" column="v_Count" />
 		<result property="vd_Content" column="vd_Content" jdbcType="CLOB"
@@ -86,12 +88,12 @@
 			SELECT vote_seq.nextval as vote_seq FROM dual
 		</selectKey>
 		insert into vote(v_Num, c_Id, v_Name, v_Content, v_Date, mem_Id,
-		v_Start, v_End, vs_Num, v_Subject, v_Count)
+		v_Start, v_End, vs_Num, v_Subject, v_Count, mem_Name)
 		values(#{v_Num}, #{c_Id},
 		#{v_Name}, #{v_Content} ,
 		(select to_char(sysdate, 'YYYY/MM/DD/ HH24:MI:SS') from dual)
 		, #{mem_Id}, #{v_Start}, #{v_End},
-		#{vs_Num},#{v_Subject}, #{v_Count} )
+		#{vs_Num},#{v_Subject}, #{v_Count}, #{mem_Name} )
 	</insert>
 
 	<!-- 투표보기란 입력 -->
@@ -115,18 +117,30 @@
 		from voter v ,member m
 		where v.mem_Id = m.mem_Id
 		and v.v_Num = #{v_Num}
+		order by v.vd_num
       ]]>
 	</select>
 
 	<!-- 투표 조회 -->
 	<select id="voteRead" parameterType="String" resultMap="voteResult02"> 
       <![CDATA[
-        select V.v_Num, V.c_Id, V.v_Name, V.v_Content, V.v_Date, V.mem_Id, V.v_Start, V.v_End, V.v_Subject, v.vs_num, v.v_count
-		from vote V
-		where V.v_Num=#{v_Num}
+		select V.v_Num, V.c_Id, V.v_Name, V.v_Content, V.v_Date, V.mem_Id, V.v_Start, V.v_End, V.v_Subject,vs.vs_name, v.vs_num, v.v_count, v.mem_Name
+		from vote V , vote_status vs
+		where v.vs_num = vs.vs_num 
+        and v.v_Num=#{v_Num}
       ]]>
 	</select>
-
+	
+	<!-- 토탈 -->
+	<select id="voteTotal" parameterType="java.util.Map" resultMap="voteResult02"> 
+      <![CDATA[
+        SELECT count(*) AS v_Count, vr.vd_Num
+		FROM voter vr, vote v
+		WHERE vr.v_num=v.V_NUM
+		AND v.V_NUM = #{v_Num}
+		GROUP BY vr.vd_num
+      ]]>
+	</select>
 
 	<!-- 투표 조회 -->
 	<select id="votedRead" parameterType="String" resultMap="voteResult02"> 
@@ -181,6 +195,16 @@
 			and c_id = #{c_id}
       ]]>
 	</select>
+	
+	<!-- 협업공간 내 멤버 조회 -->
+	<select id="countCowork" resultType="java.util.HashMap" resultMap="voteResult02"> 
+      <![CDATA[
+		select count(*) as coworker
+		from co_member
+		where c_id=#{c_Id}
+      ]]>
+	</select>
+	
 
 	<!-- 이슈 담당자 삽입 -->
 	<insert id="comemInsert" parameterType="java.util.Map">

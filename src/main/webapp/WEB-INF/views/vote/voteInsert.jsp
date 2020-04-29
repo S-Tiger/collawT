@@ -160,6 +160,7 @@ function Del_poll()
 			<!-- /.container-fluid -->
 		</section>
 
+		<%-- <input id="c_Id" name="c_Id" type="hidden" value="${c_Id}" /> --%>
 		<!-- Main content -->
 		<section class="content">
 			<div class="row" id="row">
@@ -197,9 +198,10 @@ function Del_poll()
 					<!-- /.card -->
 				</div>
 
-
+				
 				<!--협업공간ID -->
 				<input id="c_Id" name="c_Id" type="hidden" value="${c_Id}" />
+				<c:out value="${c_Id}"></c:out>asdasd 12341234
 				<!-- 투표상태는 디폴트로 '1'으로 설정 (진행중)-->
 				<input name="vs_Num" id="vs_Num" type="hidden" value="1"><br>
 				<!--  여기부터 투표기능 만드세여~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~` -->
@@ -213,7 +215,7 @@ function Del_poll()
 
 							<!-- 투표 주제 -->
 							<div class="form-group">
-								<label for="inputName">투표ßÏ 주제</label> <input type="text" id="v_Subject" name="v_Subject" class="form-control">
+								<label for="inputName">투표 주제</label> <input type="text" id="v_Subject" name="v_Subject" class="form-control">
 							</div>
 
 							<!-- 투표 항목 -->
@@ -276,9 +278,12 @@ function Del_poll()
 
 							</div>
 
-
 							<input type="submit" id="submit" value="작성" class="btn btn-danger btn-sm float-right" style="margin: 3px;"> <input type="button" id="cancel" value="취소" class="btn btn-danger btn-sm float-right" style="margin: 3px;" onclick="history.back(-1)">
 						</div>
+						</div>
+						</div>
+						</div>
+						</form>
 		</section>
 		<!-- /.content -->
 </div>

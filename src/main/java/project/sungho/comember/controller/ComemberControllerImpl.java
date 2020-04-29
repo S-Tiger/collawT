@@ -43,8 +43,6 @@ public class ComemberControllerImpl implements ComemberController {
 		
 		List<Map> list = comemberService.searchList(searchMap); 
 		
-		
-		
 		System.out.println(list);
 		
 		model.addAttribute("coworklist", list); 

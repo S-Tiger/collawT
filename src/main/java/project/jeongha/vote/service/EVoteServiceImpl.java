@@ -72,9 +72,18 @@ public class EVoteServiceImpl implements EVoteService {
 	
 	//투표 카운팅
 	@Override
-	public List<Map> voteCount(Map<String, Object> searchMap) throws Exception {
-		List<Map>result = evoteDAO.voteCount(searchMap);
+	public List<Map> voteCount(Map<String, Object> voteCount) throws Exception {
+		List<Map>result = evoteDAO.voteCount(voteCount);
 		return result;
+	}
+	
+	//투표 토탈
+	@Override
+	public List<Map> voteTotal (Map<String, Object> voteCount) throws Exception {
+		List<Map>result = evoteDAO.voteTotal(voteCount);
+		
+		return result;
+				
 	}
 		
 		
@@ -150,6 +159,11 @@ public class EVoteServiceImpl implements EVoteService {
 		}
 		
 		
+	}
+	@Override
+	public Map<String, Object> countCowork(Map<String, Object> searchC_Id) throws Exception {
+		 
+		return evoteDAO.countCowork(searchC_Id);
 	}
 	
 

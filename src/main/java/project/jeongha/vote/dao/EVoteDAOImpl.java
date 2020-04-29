@@ -71,11 +71,19 @@ public class EVoteDAOImpl implements EVoteDAO {
 		List<Map>result  = sqlSession.selectList("voteResult.voteCount", voteCount );
 		return result;
 	}
+	
+	//카운트
+	@Override
+	public  List<Map> voteTotal(Map<String, Object> searchMap)throws Exception {
+		List<Map>result  = sqlSession.selectList("voteResult.voteTotal", searchMap );
+		return result;
+	}
+	
 
 	// 글 삭제
 	@Override
 	public void voteDelete(String i_Num) throws Exception {
-		sqlSession.delete("voteResult.issueDelete", i_Num);
+		sqlSession.delete("voteResult.voteDelete", i_Num);
 
 	}
 	
@@ -138,6 +146,11 @@ public class EVoteDAOImpl implements EVoteDAO {
 		result = sqlSession.update("voteResult.voterInsert", map);
 		
 		return result;
+	}
+	@Override
+	public Map<String, Object> countCowork(Map<String, Object> searchC_Id) throws Exception {
+		
+		return sqlSession.selectOne("voteResult.countCowork", searchC_Id);
 	}
 	
 	

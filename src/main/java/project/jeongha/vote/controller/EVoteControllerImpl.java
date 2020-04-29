@@ -78,8 +78,10 @@ public class EVoteControllerImpl implements EVoteController {
 
 		Map<String, Object> member = new HashMap<String, Object>();
 		member = (Map<String, Object>) session.getAttribute("member");
+		String mem_Name =(String)member.get("mem_Name");
 		String mem_Id = (String) member.get("mem_Id");
-		String c_Id = voteVO.getC_Id();
+		String c_Id = request.getParameter("c_Id");
+		System.out.println(c_Id+"123123123123123123123123112312@@@!@#!@#!@#");
 		String v_Name = voteVO.getV_Name();
 		String v_Content = voteVO.getV_Content();
 		String v_Start = voteVO.getV_Start();
@@ -88,6 +90,8 @@ public class EVoteControllerImpl implements EVoteController {
 		String v_Subject = voteVO.getV_Subject();
 		String v_Count = voteVO.getV_Count();
 
+		
+		
 		Map<String, Object> cmap = new HashMap<String, Object>();
 		cmap.put("mem_Id", mem_Id);///
 		cmap.put("c_Id", c_Id);///
@@ -98,9 +102,16 @@ public class EVoteControllerImpl implements EVoteController {
 		cmap.put("vs_Num", vs_Num);///
 		cmap.put("v_Subject", v_Subject);
 		cmap.put("v_Count", v_Count);
+		cmap.put("mem_Name", mem_Name);
 		System.out.println("!222222222222ddddcccccccccc!!11cmapcontroller" + cmap);
 		evoteService.voteInsert(cmap);
-
+		
+		Map<String,Object> searchC_Id = new HashMap<String, Object>();
+		searchC_Id.put("c_Id", c_Id);
+		//인원수
+		Map<String,Object> coworker= evoteService.countCowork(searchC_Id);
+		
+		
 		// v_Num가져오기
 		// Map<String, Object> voteVODb = evoteService.voteInfo(cmap);
 		String v_Num = (String) cmap.get("v_Num");
@@ -141,9 +152,8 @@ public class EVoteControllerImpl implements EVoteController {
 	// 개별 글 조회
 	@Override
 	@GetMapping("/read")
-	public ModelAndView voteRead(String v_Num, HttpServletRequest request, HttpServletResponse response)
+	public ModelAndView voteRead(String c_Id,String v_Num, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-
 		Map<String, Object> vote = evoteService.voteRead(v_Num);
 		Map<String, Object> searchMap = new HashMap<String, Object>();
 		searchMap.put("v_Num",v_Num);
@@ -151,8 +161,40 @@ public class EVoteControllerImpl implements EVoteController {
 		List<Map> voted = evoteService.votedRead(v_Num);
 		// List<Map> list = appedixService.fileList(i_Num);
 		// List<Map> chargerList = evoteService.chargerRead(v_Num);
-		List<Map>voterlist = evoteService.voteCount(searchMap);
+		System.out.println(c_Id+"@@@@@@@@@@@@@@@@!!!!@@@###$$");
+		String cdd= request.getParameter("c_Id");
+		System.out.println(cdd+"@#!@#!@#!@#!@#!@#!@#!@#!@#");
+		Map<String,Object> searchC_Id = new HashMap<String, Object>();
+		searchC_Id.put("c_Id", c_Id);
+		//Map<String,Object> coworker= evoteService.countCowork(searchC_Id);
 		ModelAndView mav = new ModelAndView("/vote/voteRead");
+		//mav.addObject("countMember",coworker);
+		
+		//투표자들 명단
+		List<Map>voterlist = evoteService.voteCount(searchMap);
+		//투표 count
+		List<Map> voteTotal = evoteService.voteTotal(searchMap);
+		
+		for (int i = 0; i < voted.size(); i++) {
+			for (int j = 0; j < voteTotal.size() ; j++) {
+				if(voted.get(i).get("vd_Num").equals(voteTotal.get(j).get("vd_Num"))) {
+					//List v_Num, c_Id, vd_Content, vd_Num
+					//Total vd_Num, v_Count
+					voted.get(i).put("v_Count", voteTotal.get(j).get("v_Count"));
+					
+					
+					System.out.println();
+				}else {
+					voted.get(i).put("v_Count","0");
+					
+				}
+				
+			}
+			
+		}
+		
+		System.out.println(voted+"@@@@@@@@@@@@@@@@@@@@@lsit@@@@@@@@@@@@@@@@");
+		//System.out.println("$$$$$$$$$$$$$$$$"+coworker);
 		mav.addObject("voteRead", vote);
 		mav.addObject("votedRead", voted);
 		mav.addObject("voterList",voterlist);
@@ -229,7 +271,6 @@ public class EVoteControllerImpl implements EVoteController {
 		String v_Name= voteVO.getV_Name();
 		String v_Content=voteVO.getV_Content();
 		String v_Subject = voteVO.getV_Subject();
-	
 		
 		
 		// 이슈담당자 삭제 후 다시 입력
@@ -358,7 +399,10 @@ public class EVoteControllerImpl implements EVoteController {
 		Map<String, Object> voteCount0 = new HashMap<String, Object>();
 		ArrayList<String> arrayList = new ArrayList<>();
 		
-		
+		Map<String,Object> searchC_Id = new HashMap<String, Object>();
+		searchC_Id.put("c_Id", c_Id);
+		Map<String,Object> coworker= evoteService.countCowork(searchC_Id);
+
 		
 		
 		for (int i = 0; i < vd_arr.length; i++) {
@@ -370,12 +414,12 @@ public class EVoteControllerImpl implements EVoteController {
 			//arrayList.add(voteCount0);
 		}
 		
-		
-
+		System.out.println(coworker+"123123123asdasd");
 		System.out.println("172093847120983471209834" + voteCount0);
 		mav.addObject("voteRead", vote);
 		mav.addObject("votedRead", voted);
 		mav.addObject("voteCount", voteCount0);
+		mav.addObject("countMember",coworker);
 		
 		return mav;
 	}

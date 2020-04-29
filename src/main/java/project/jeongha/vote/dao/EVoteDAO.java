@@ -28,7 +28,9 @@ public interface EVoteDAO {
 	//public Map<String, Object> get_i_Num();
 	public Map<String, Object> voteInfo(Map<String, Object> voteInfo) throws Exception;
 	public List<Map> votedRead(String v_Num) ;
-	public List<Map> voteCount(Map<String, Object> voteCount)throws Exception;
+	public  List<Map>  voteCount(Map<String, Object> voteCount)throws Exception;
+	public  List<Map>  voteTotal(Map<String, Object> voteCount)throws Exception;
 	public int checkId(Map<String, Object> mem_Id) throws Exception ;
+	public Map<String, Object> countCowork(Map<String, Object> searchC_Id) throws Exception; 
 	
 }
