@@ -284,9 +284,9 @@
 						<c:forEach var="voteTotalItem" items="${voteTotal}">
 							<p>${voteTotalItem.vd_Num}번&nbsp;&nbsp;${voteTotalItem.v_Count}명</p>
 							<div>
-								<progress value="${voteTotalItem.v_Count}" max="${countMember.COWORKER }"></progress>
-								<label>${voteTotalItem.v_Count}/${countMember.COWORKER }*100%</label>
-								<c:out value="${voteTotalItem.v_Count}x${countMember.COWORKER }"></c:out>
+								<progress value="${voteTotalItem.v_Count}" max="${voteRead.CO_MEM_TOTAL }"></progress>
+								<label>${voteTotalItem.v_Count}/${voteRead.CO_MEM_TOTAL }*100%</label>
+								<c:out value="${voteTotalItem.v_Count}x${voteRead.CO_MEM_TOTAL }"></c:out>
 
 								<i class="fas fa-users" style="color: black;"></i> <span class="badge bg-gray">${voteTotalItem.v_Count}</span> <br>
 

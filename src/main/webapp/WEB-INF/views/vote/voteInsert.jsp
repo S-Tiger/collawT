@@ -107,6 +107,7 @@ span[name="chargerspan"] {
   	
 </script>
 <script language="javascript">
+//항목 추가 텍스트 박스
 var flen = 3;
 function Insert_poll()
 {    
@@ -136,7 +137,7 @@ function Insert_poll()
 
 function Del_poll()
 {
- // file_length 이하로는 필드가 삭제되지 않아야 합니다.
+ // file_length 이하로는 필드가 삭제되지 않게
  var file_length = 0;
  var table = document.getElementById("poll_item");
  if (table.rows.length - 1 > file_length)
@@ -201,7 +202,7 @@ function Del_poll()
 				
 				<!--협업공간ID -->
 				<input id="c_Id" name="c_Id" type="hidden" value="${c_Id}" />
-				<c:out value="${c_Id}"></c:out>   asdasd 12341234
+				
 				<!-- 투표상태는 디폴트로 '1'으로 설정 (진행중)-->
 				<input name="vs_Num" id="vs_Num" type="hidden" value="1"><br>
 				<!--  여기부터 투표기능 만드세여~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~` -->
