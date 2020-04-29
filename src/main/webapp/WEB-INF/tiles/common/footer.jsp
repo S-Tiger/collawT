@@ -8,33 +8,46 @@
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script type="text/javascript">
 	var wsocket;
-	
-	function connect() {
-		wsocket = new WebSocket("ws://localhost:8090/chat-ws");
+	var userId = '${member.mem_Id}';
+	var userName = '${member.mem_Name}';
+	var target_Id
+	function connect(obj) {
+		wsocket = new WebSocket("ws://192.168.0.77:8090/chat-ws");
 		wsocket.onopen = onOpen;
 		wsocket.onmessage = onMessage;
 		wsocket.onclose = onClose;
+		target_Id =$(obj).data('targetmember');
 	}
 	function disconnect() {
 		wsocket.close();
 	}
 	function onOpen(evt) {
-		appendMessage("연결되었습니다.");
+		appendMessage(userName+"연결되었습니다.");
 	}
 	function onMessage(evt) {
 		var data = evt.data;
+		
 		if (data.substring(0, 4) == "msg:") {
 			appendMessage(data.substring(4));
 		}
+			appendMessage(data);
 	}
 	function onClose(evt) {
-		appendMessage("연결을 끊었습니다.");
+		appendMessage(userName+"연결을 끊었습니다.");
 	}
 	
 	function send() {
-		var name = '${member.mem_Name}';
+		/* var name = '${member.mem_Name}';
 		var msg = $("#message").val();
-		wsocket.send("msg:"+name+":" + msg);
+		wsocket.send("msg:"+name+":" + msg); */
+		
+		var msg = {
+				inId : userId,
+				name : userName,
+				target : target_Id,
+				message : $("#message").val()
+		};
+		wsocket.send(JSON.stringify(msg));
 		$("#message").val("");
 	}
 
@@ -54,14 +67,16 @@
 			event.stopPropagation();
 		});
 		$('#sendBtn').click(function() { send(); });
-		$('#enterBtn').click(function() { connect(); });
+
+		$(document).on("click","#enterBtn",function(){connect(this);});
+		//$('#enterBtn').click(function(event) { connect(event); }); 이벤트 버블링때문에 안됨
 		$('#exitBtn').click(function() { disconnect(); });
 	});
 </script>
 
 <style>
 #chatArea {
-	width: 200px; height: 100px; overflow-y: auto; border: 1px solid black;
+	width: 100%; height: 200px; overflow-y: auto; border: 1px solid black;
 }
 </style>
 	
@@ -77,7 +92,7 @@
   </footer>
 
   <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
+  <aside class="control-sidebar control-sidebar-dark" style="width: 350px;">
  <div class="sidebar" style ="margin-bottom: 150px;">
  <nav class="mt-2">
  <li class="nav-item has-treeview" style="margin: 10px;">파트너 채팅</li>
@@ -90,7 +105,7 @@
 						<ul class="nav nav-treeview" >
 					
 						<c:forEach var="partnermember" items="${partnerList.memberList}">
-								<li class="nav-item"><a href="#" data-needpopup-show="#chatroom-popup" class="nav-link" data- 
+								<li class="nav-item"><a href="#" class="nav-link" data-targetmember="${partnermember.mem_Id}" id="enterBtn"
 								 style="padding-top: 5px; padding-bottom: 5px; padding-left: 10px; white-space: none;">
 										<b style="font-size: 14px;">
 										${partnermember.mem_Name}<font size="2">
@@ -102,6 +117,18 @@
 							</c:forEach>
 						
 				</nav>
+				
+				<div class="col-md-6" style="max-width: 100%;">
+	
+    
+    <h3>대화 영역</h3>
+    <div id="chatArea"><div id="chatMessageArea"></div></div>
+    <br/>
+    <input type="text" id="message">
+    <input type="button" id="sendBtn" value="전송">
+	<input type="button" id="exitBtn" value="나가기">
+
+	</div>
  </div>
     <!-- Control sidebar content goes here -->
   </aside>
@@ -113,18 +140,7 @@
 
 <div id='chatroom-popup' class="needpopup">
 
-	<div class="col-md-6" style="max-width: 100%;">
 	
-	<input type="button" id="enterBtn" value="입장">
-	<input type="button" id="exitBtn" value="나가기">
-    
-    <h1>대화 영역</h1>
-    <div id="chatArea"><div id="chatMessageArea"></div></div>
-    <br/>
-    <input type="text" id="message">
-    <input type="button" id="sendBtn" value="전송">
-
-	</div>
 </div>
 
 <script type="text/javascript">
