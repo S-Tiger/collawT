@@ -48,29 +48,29 @@
             <div class="card-body p-0">
               <ul class="nav nav-pills flex-column">
                   <li class="nav-item active">
-                  <a href="#" class="nav-link">
+                  <a href="/search/wholeresult?keyword=${keyword}" class="nav-link">
                     <i class="fas fa-th-large"></i> 전체
                     <span class="badge bg-primary float-right">12</span>
                   </a>
                 </li>
                 <li class="nav-item active">
-                  <a href="#" class="nav-link">
+                  <a href="/search/issueresult?keyword=${keyword}" class="nav-link">
                      <i class="far fa-file-alt"></i> 이슈
                     <span class="badge bg-primary float-right">12</span>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="/search/voteresult?keyword=${keyword}" class="nav-link">
                     <i class="fas fa-vote-yea"></i> 투표
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="/search/fileresult?keyword=${keyword}" class="nav-link">
                     <i class="fas fa-inbox"></i> 파일
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="/search/replyresult?keyword=${keyword}" class="nav-link">
                     <i class="fas fa-comment-dots"></i> 댓글 및 메모
                     <span class="badge bg-warning float-right">65</span>
                   </a>
@@ -213,23 +213,23 @@
                  	      <div class="form-group" style="margin-left:20px">
 
    <ul class="pagination pagination-sm m-0">
-    <c:if test="${pageMaker.prev}">
-    	<li class="page-item" id="liStyle"><a class="page-link" href="issueresult?${pageMaker.makeQuery(pageMaker.startPage - 1)}">&laquo;</a></li>
+    <c:if test="${issuepageMaker.prev}">
+    	<li class="page-item" id="liStyle"><a class="page-link" href="issueresult?${issuepageMaker.makeQuery(issuepageMaker.startPage - 1)}">&laquo;</a></li>
     </c:if> 
 
-    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+    <c:forEach begin="${issuepageMaker.startPage}" end="${issuepageMaker.endPage}" var="idx">
     <c:choose>
-    <c:when test="${pageMaker.page==idx}">
-    	<li class="page-item" id="liStyle"><a class="page-link" href="issueresult${pageMaker.makeQuery(idx)}" style="background-color:#DC3545; color:white">${idx}</a></li>
+    <c:when test="${issuepageMaker.page==idx}">
+    	<li class="page-item" id="liStyle"><a class="page-link" href="issueresult${issuepageMaker.makeQuery(idx)}" style="background-color:#DC3545; color:white">${idx}</a></li>
     </c:when>
     <c:otherwise>
-    <li class="page-item" id="liStyle"><a class="page-link" href="issueresult${pageMaker.makeQuery(idx)}">${idx}</a></li>
+    <li class="page-item" id="liStyle"><a class="page-link" href="issueresult${issuepageMaker.makeQuery(idx)}">${idx}</a></li>
     </c:otherwise>
     </c:choose>
     </c:forEach>
 
-    <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-    	<li class="page-item" id="liStyle"><a class="page-link" href="issueresult${pageMaker.makeQuery(pageMaker.endPage + 1)}">&raquo;</a></li>
+    <c:if test="${issuepageMaker.next && issuepageMaker.endPage > 0}">
+    	<li class="page-item" id="liStyle"><a class="page-link" href="issueresult${issuepageMaker.makeQuery(issuepageMaker.endPage + 1)}">&raquo;</a></li>
     </c:if> 
   </ul>
   

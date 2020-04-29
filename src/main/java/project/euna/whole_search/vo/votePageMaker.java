@@ -3,7 +3,7 @@ package project.euna.whole_search.vo;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-public class PageMaker {
+public class votePageMaker {
 	private int totalCount;
 	private int page;
 	private int startPage;
@@ -11,7 +11,7 @@ public class PageMaker {
 	private boolean prev;
 	private boolean next;
 	private int displayPageNum = 10;
-	private Criteria cri;
+	private voteCriteria cri;
 	
 	
 	public int getTotalCount() {
@@ -51,11 +51,11 @@ public class PageMaker {
 	public void setDisplayPageNum(int displayPageNum) {
 		this.displayPageNum = displayPageNum;
 	}
-	public Criteria getCri() {
+	public voteCriteria getCri() {
 		return cri;
 	}
-	public void setCri(Criteria cri) {
-		this.cri = cri;
+	public void setCri(voteCriteria votecri) {
+		this.cri = votecri;
 	}
 	
 	public int getPage() {

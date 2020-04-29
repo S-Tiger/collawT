@@ -8,27 +8,42 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import project.euna.whole_search.vo.Criteria;
+import project.euna.whole_search.vo.fileCriteria;
+import project.euna.whole_search.vo.issueCriteria;
+import project.euna.whole_search.vo.replyCriteria;
+import project.euna.whole_search.vo.voteCriteria;
 
 
 
 
 public interface Whole_searchController {
 	public String issueMain(HttpSession session);
+	
 	public ModelAndView issueResult(
 			@RequestParam(required=false) String keyword,
-			Criteria cri, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception;
-
+			issueCriteria issuecri, HttpSession session, HttpServletRequest request, 
+			HttpServletResponse response) throws Exception;
+	
 	public ModelAndView fileResult(
 			@RequestParam(required=false) String keyword,
-			Criteria cri, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception;
+			fileCriteria filecri, HttpSession session, HttpServletRequest request, 
+			HttpServletResponse response) throws Exception;
 	
 	public ModelAndView voteResult(
 			@RequestParam(required=false) String keyword,
-			Criteria cri, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception;
+			voteCriteria votecri, HttpSession session, HttpServletRequest request, 
+			HttpServletResponse response) throws Exception;
 	
 	public ModelAndView replyResult(
 			@RequestParam(required=false) String keyword,
-			Criteria cri, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception;
+			replyCriteria replycri, HttpSession session, HttpServletRequest request, 
+			HttpServletResponse response) throws Exception;
+	
+	public ModelAndView wholeresult(
+			@RequestParam(required=false) String keyword,
+			issueCriteria issuecri, voteCriteria votecri,
+			fileCriteria filecri, replyCriteria replycri,
+			HttpSession session, HttpServletRequest request, 
+			HttpServletResponse response) throws Exception;
 }
 

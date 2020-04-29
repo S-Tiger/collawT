@@ -37,11 +37,12 @@
 		<result property="i_Date" column="i_Date" />
 		<result property="wr_mem_Id" column="wr_mem_Id" />
 		<result property="c_Name" column="c_Name" />
-		<result property="mem_name" column="mem_name" />
+		<result property="mem_Name" column="mem_Name" />
 		<result property="rnum" column="rnum" />
 		<result property="i_Content" column="i_Content" jdbcType="CLOB" javaType="java.lang.String"/>
 		<result property="ig_Num" column="ig_Num" />
 		<result property="ig_Name" column="ig_Name" />
+		<result property="wr_mem_Id" column="wr_mem_Id" />
 		
 	</resultMap>
 
@@ -73,6 +74,8 @@
 		<result property="c_Name" column="c_Name" />
 		<result property="i_Name" column="i_Name" />
 		<result property="rnum" column="rnum" />
+		<result property="ig_Num" column="ig_Num" />
+		<result property="ig_Name" column="ig_Name" />
 	</resultMap>
 
 <!-- <select id="searchIssue" resultMap="whole_searchResult01" parameterType="java.util.HashMap"> 
@@ -125,7 +128,7 @@
 	
 	
 	<!-- 이슈검색 뷰 -->
-	<select id="searchIssue" resultMap="issueResult" parameterType="project.euna.whole_search.vo.Criteria"> 
+	<select id="searchIssue" resultMap="issueResult" parameterType="project.euna.whole_search.vo.issueCriteria"> 
       <![CDATA[
  
  select rnum, i_Num, c_Id, i_Name, i_Date, ig_Num, wr_mem_Id, c_Name, mem_Name, ig_Name, i_Content
@@ -180,7 +183,7 @@
 	
 	
 	<!-- 이슈 검색결과 총 갯수 -->
-	<select id="issueCount" resultType="int" parameterType="project.euna.whole_search.vo.Criteria"> 
+	<select id="issueCount" resultType="int" parameterType="project.euna.whole_search.vo.issueCriteria"> 
       <![CDATA[
             select count(*)
                   from
@@ -223,7 +226,7 @@
 	
 	
 		<!-- 파일 검색결과 -->
-		<select id="searchFile" resultMap="fileResult" parameterType="project.euna.whole_search.vo.Criteria"> 
+		<select id="searchFile" resultMap="fileResult" parameterType="project.euna.whole_search.vo.fileCriteria"> 
       <![CDATA[
  
 select a_File, a_Realname, a_NameEx, a_Num, a_Del, a_Size, i_Num, c_Id, i_Name, i_Date, wr_mem_Id, c_Name, mem_name, rnum, i_Content, ig_Num, ig_Name
@@ -277,7 +280,7 @@ select a_File, a_Realname, a_NameEx, a_Num, a_Del, a_Size, i_Num, c_Id, i_Name, 
 	
 	
 	<!-- 파일 검색결과 총 갯수 -->
-	<select id="fileCount" resultType="int" parameterType="project.euna.whole_search.vo.Criteria"> 
+	<select id="fileCount" resultType="int" parameterType="project.euna.whole_search.vo.fileCriteria"> 
       <![CDATA[
  select count(*)
   from (
@@ -326,7 +329,7 @@ select a_File, a_Realname, a_NameEx, a_Num, a_Del, a_Size, i_Num, c_Id, i_Name, 
 	
 	
 			<!-- 투표 검색결과 -->
-		<select id="searchVote" resultMap="voteResult" parameterType="project.euna.whole_search.vo.Criteria"> 
+		<select id="searchVote" resultMap="voteResult" parameterType="project.euna.whole_search.vo.voteCriteria"> 
       <![CDATA[
  
 select c_Id, v_Num, v_Content, wr_mem_Id, v_Date, v_Name, vs_Num, v_Subject, mem_Name, rnum, c_Name
@@ -361,7 +364,7 @@ from(
 	
 	
 		<!-- 투표 검색결과 총 갯수 -->
-	<select id="voteCount" resultType="int" parameterType="project.euna.whole_search.vo.Criteria"> 
+	<select id="voteCount" resultType="int" parameterType="project.euna.whole_search.vo.voteCriteria"> 
       <![CDATA[
  select count(*)
   from (
@@ -389,23 +392,25 @@ from(
 	
 	
 		<!-- 댓글검색 뷰 -->
-	<select id="searchReply" resultMap="replyResult" parameterType="project.euna.whole_search.vo.Criteria"> 
+	<select id="searchReply" resultMap="replyResult" parameterType="project.euna.whole_search.vo.replyCriteria"> 
       <![CDATA[
  
-      select r_Num, r_Content, r_Date, i_Num, c_Id, wr_mem_Id, mem_Name, c_Name, i_Name,rnum
+      select r_Num, r_Content, r_Date, i_Num, c_Id, wr_mem_Id, mem_Name, c_Name, i_Name,rnum, ig_Num, ig_Name
       from(
-        select r_Num, r_Content, r_Date, i_Num, c_Id, wr_mem_Id, mem_Name, c_Name, i_Name, row_number() over(order by r_date desc) as rnum
+        select r_Num, r_Content, r_Date, i_Num, c_Id, wr_mem_Id, mem_Name, c_Name, i_Name, row_number() over(order by r_date desc) as rnum, ig_Num, ig_Name
         from(
             select r.r_Num as r_Num, r.r_Content as r_Content, r.r_Date as r_Date, r.i_Num as i_Num, r.c_Id as c_Id, r. mem_Id as wr_mem_Id,
             m.mem_Name as mem_Name,
             c.c_Name as c_Name,
-            i.i_Name as i_Name
+            i.i_Name as i_Name, i.ig_Num as ig_Num,
+            ig.ig_Name as ig_Name
             
-            from reply r, member m, co_work c, issue i
+            from reply r, member m, co_work c, issue i, issue_group ig
             
             where r.mem_Id = m.mem_Id
             and r.c_Id = c.c_Id
             and r.i_Num = i.i_Num
+            and ig.ig_Num = i.ig_Num
             and c.c_Id IN
                 (
                  select c_Id from CO_MEMBER where mem_Id=#{mem_Id}
@@ -416,7 +421,8 @@ from(
             select pm.p_m_Num as r_Num, pm.p_m_Content as r_Contentm, pm.p_m_Date as r_Date, pm.p_Num as i_Num, null as c_Id, pm.mem_Id as wr_mem_Id,
             m.mem_Name as mem_Name,
             null as c_Name,
-            p.p_i_Name as i_Name
+            p.p_i_Name as i_Name,  null as ig_Num,
+           	null as ig_Name
             
             from personal_memo pm, member m, personal p
             
@@ -442,20 +448,22 @@ from(
 	
 	
 		<!-- 댓글 검색결과 총 갯수 -->
-	<select id="replyCount" resultType="int" parameterType="project.euna.whole_search.vo.Criteria"> 
+	<select id="replyCount" resultType="int" parameterType="project.euna.whole_search.vo.replyCriteria"> 
 	      <![CDATA[
         select count(*)
         from(
             select r.r_Num as r_Num, r.r_Content as r_Content, r.r_Date as r_Date, r.i_Num as i_Num, r.c_Id as c_Id, r. mem_Id as wr_mem_Id,
             m.mem_Name as mem_Name,
             c.c_Name as c_Name,
-            i.i_Name as i_Name
+            i.i_Name as i_Name, i.ig_Num as ig_Num,
+            ig.ig_Name as ig_Name
             
-            from reply r, member m, co_work c, issue i
+            from reply r, member m, co_work c, issue i, issue_group ig
             
             where r.mem_Id = m.mem_Id
             and r.c_Id = c.c_Id
             and r.i_Num = i.i_Num
+            and ig.ig_Num= i.ig_Num
             and c.c_Id IN
                 (
                  select c_Id from CO_MEMBER where mem_Id=#{mem_Id}
@@ -466,7 +474,8 @@ from(
             select pm.p_m_Num as r_Num, pm.p_m_Content as r_Contentm, pm.p_m_Date as r_Date, pm.p_Num as i_Num, null as c_Id, pm.mem_Id as wr_mem_Id,
             m.mem_Name as mem_Name,
             null as c_Name,
-            p.p_i_Name as i_Name
+            p.p_i_Name as i_Name, null as ig_Num,
+            null as ig_Name
             
             from personal_memo pm, member m, personal p
             

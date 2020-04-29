@@ -19,8 +19,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import project.euna.issue.service.IssueServiceImpl;
 import project.euna.whole_search.service.Whole_searchService;
-import project.euna.whole_search.vo.Criteria;
-import project.euna.whole_search.vo.PageMaker;
+import project.euna.whole_search.vo.fileCriteria;
+import project.euna.whole_search.vo.filePageMaker;
+import project.euna.whole_search.vo.issueCriteria;
+import project.euna.whole_search.vo.issuePageMaker;
+import project.euna.whole_search.vo.replyCriteria;
+import project.euna.whole_search.vo.replyPageMaker;
+import project.euna.whole_search.vo.voteCriteria;
+import project.euna.whole_search.vo.votePageMaker;
 
 
 
@@ -56,28 +62,30 @@ public class Whole_searchControllerImpl implements Whole_searchController {
 	@GetMapping("/issueresult")
 	public ModelAndView issueResult(
 			@RequestParam(required=false) String keyword,
-			Criteria cri, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
+			issueCriteria issuecri, HttpSession session, HttpServletRequest request, 
+			HttpServletResponse response) throws Exception {
 		
 		Map<String, Object> member = new HashMap<String,Object>();
 		member = (Map<String, Object>) session.getAttribute("member");
 		String mem_Id = (String) member.get("mem_Id");
 		
 		
-		cri.setKeyword(keyword);
-		cri.setMem_Id(mem_Id);
+		issuecri.setKeyword(keyword);
+		issuecri.setMem_Id(mem_Id);
 		
-		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(whole_searchService.issueCount(cri));
+		issuePageMaker issuepageMaker = new issuePageMaker();
+		issuepageMaker.setCri(issuecri);
+		issuepageMaker.setTotalCount(whole_searchService.issueCount(issuecri));
 		
-		List<Map> issueList = whole_searchService.searchIssue(cri);
+		List<Map> issueList = whole_searchService.searchIssue(issuecri);
 		
-		int issueCount = whole_searchService.issueCount(cri);
+		int issueCount = whole_searchService.issueCount(issuecri);
 	
 		ModelAndView mav = new ModelAndView("wholesearch/issueResult");
-		mav.addObject("pageMaker", pageMaker);
+		mav.addObject("issuepageMaker", issuepageMaker);
 		mav.addObject("issueList", issueList);
 		mav.addObject("issueCount", issueCount);
+		mav.addObject("keyword", keyword);
 		return mav;
 		
 	}
@@ -88,28 +96,30 @@ public class Whole_searchControllerImpl implements Whole_searchController {
 	@GetMapping("/fileresult")
 	public ModelAndView fileResult(
 			@RequestParam(required=false) String keyword,
-			Criteria cri, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
+			fileCriteria filecri, HttpSession session, HttpServletRequest request, 
+			HttpServletResponse response) throws Exception {
 		
 		Map<String, Object> member = new HashMap<String,Object>();
 		member = (Map<String, Object>) session.getAttribute("member");
 		String mem_Id = (String) member.get("mem_Id");
 		
 		
-		cri.setKeyword(keyword);
-		cri.setMem_Id(mem_Id);
+		filecri.setKeyword(keyword);
+		filecri.setMem_Id(mem_Id);
 		
-		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(whole_searchService.fileCount(cri));
+		filePageMaker filepageMaker = new filePageMaker();
+		filepageMaker.setCri(filecri);
+		filepageMaker.setTotalCount(whole_searchService.fileCount(filecri));
 		
-		List<Map> issueList = whole_searchService.searchFile(cri);
+		List<Map> fileList = whole_searchService.searchFile(filecri);
 		
-		int fileCount = whole_searchService.fileCount(cri);
+		int fileCount = whole_searchService.fileCount(filecri);
 	
 		ModelAndView mav = new ModelAndView("wholesearch/fileResult");
-		mav.addObject("pageMaker", pageMaker);
-		mav.addObject("issueList", issueList);
+		mav.addObject("filepageMaker", filepageMaker);
+		mav.addObject("fileList", fileList);
 		mav.addObject("fileCount", fileCount);
+		mav.addObject("keyword", keyword);
 		return mav;
 		
 	}
@@ -120,28 +130,30 @@ public class Whole_searchControllerImpl implements Whole_searchController {
 	@GetMapping("/voteresult")
 	public ModelAndView voteResult(
 			@RequestParam(required=false) String keyword,
-			Criteria cri, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
+			voteCriteria votecri, HttpSession session, HttpServletRequest request, 
+			HttpServletResponse response) throws Exception {
 		
 		Map<String, Object> member = new HashMap<String,Object>();
 		member = (Map<String, Object>) session.getAttribute("member");
 		String mem_Id = (String) member.get("mem_Id");
 		
 		
-		cri.setKeyword(keyword);
-		cri.setMem_Id(mem_Id);
+		votecri.setKeyword(keyword);
+		votecri.setMem_Id(mem_Id);
 		
-		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(whole_searchService.voteCount(cri));
+		votePageMaker votepageMaker = new votePageMaker();
+		votepageMaker.setCri(votecri);
+		votepageMaker.setTotalCount(whole_searchService.voteCount(votecri));
 		
-		List<Map> issueList = whole_searchService.searchVote(cri);
+		List<Map> voteList = whole_searchService.searchVote(votecri);
 		
-		int voteCount = whole_searchService.voteCount(cri);
+		int voteCount = whole_searchService.voteCount(votecri);
 	
 		ModelAndView mav = new ModelAndView("wholesearch/voteResult");
-		mav.addObject("pageMaker", pageMaker);
-		mav.addObject("issueList", issueList);
+		mav.addObject("votepageMaker", votepageMaker);
+		mav.addObject("voteList", voteList);
 		mav.addObject("voteCount", voteCount);
+		mav.addObject("keyword", keyword);
 		return mav;
 		
 	}
@@ -151,32 +163,104 @@ public class Whole_searchControllerImpl implements Whole_searchController {
 	@GetMapping("/replyresult")
 	public ModelAndView replyResult(
 			@RequestParam(required=false) String keyword,
-			Criteria cri, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
+			replyCriteria replycri, HttpSession session, HttpServletRequest request, 
+			HttpServletResponse response) throws Exception {
 		
 		Map<String, Object> member = new HashMap<String,Object>();
 		member = (Map<String, Object>) session.getAttribute("member");
 		String mem_Id = (String) member.get("mem_Id");
 		
 		
-		cri.setKeyword(keyword);
-		cri.setMem_Id(mem_Id);
+		replycri.setKeyword(keyword);
+		replycri.setMem_Id(mem_Id);
 		
-		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(whole_searchService.replyCount(cri));
+		replyPageMaker replypageMaker = new replyPageMaker();
+		replypageMaker.setCri(replycri);
+		replypageMaker.setTotalCount(whole_searchService.replyCount(replycri));
 		
-		List<Map> issueList = whole_searchService.searchReply(cri);
+		List<Map> replyList = whole_searchService.searchReply(replycri);
 		
-		int replyCount = whole_searchService.replyCount(cri);
+		int replyCount = whole_searchService.replyCount(replycri);
 	
 		ModelAndView mav = new ModelAndView("wholesearch/replyResult");
-		mav.addObject("pageMaker", pageMaker);
-		mav.addObject("issueList", issueList);
+		mav.addObject("replypageMaker", replypageMaker);
+		mav.addObject("replyList", replyList);
 		mav.addObject("replyCount", replyCount);
+		mav.addObject("keyword", keyword);
 		return mav;
 		
 	}
 	
+	//통합검색 목록 조회 페이징
+	@Override
+	@GetMapping("/wholeresult")
+	public ModelAndView wholeresult(
+			@RequestParam(required=false) String keyword,
+			issueCriteria issuecri, voteCriteria votecri,
+			fileCriteria filecri, replyCriteria replycri,
+			HttpSession session, HttpServletRequest request, 
+			HttpServletResponse response) throws Exception {
+		
+		Map<String, Object> member = new HashMap<String,Object>();
+		member = (Map<String, Object>) session.getAttribute("member");
+		String mem_Id = (String) member.get("mem_Id");
+		
+		
+		issuecri.setKeyword(keyword);
+		votecri.setKeyword(keyword);
+		filecri.setKeyword(keyword);
+		replycri.setKeyword(keyword);
+		issuecri.setMem_Id(mem_Id);
+		votecri.setMem_Id(mem_Id);
+		filecri.setMem_Id(mem_Id);
+		replycri.setMem_Id(mem_Id);
+		
+		issuePageMaker issuepageMaker = new issuePageMaker();
+		issuepageMaker.setCri(issuecri);
+		issuepageMaker.setTotalCount(whole_searchService.issueCount(issuecri));
+		
+		votePageMaker votepageMaker = new votePageMaker();
+		votepageMaker.setCri(votecri);
+		votepageMaker.setTotalCount(whole_searchService.voteCount(votecri));
+//		
+		filePageMaker filepageMaker = new filePageMaker();
+		filepageMaker.setCri(filecri);
+		filepageMaker.setTotalCount(whole_searchService.fileCount(filecri));
+//		
+		replyPageMaker replypageMaker = new replyPageMaker();
+		replypageMaker.setCri(replycri);
+		replypageMaker.setTotalCount(whole_searchService.replyCount(replycri));
+		
+		
+		List<Map> issueList = whole_searchService.searchIssue(issuecri);
+		int issueCount = whole_searchService.issueCount(issuecri);
+		List<Map> fileList = whole_searchService.searchFile(filecri);
+		int fileCount = whole_searchService.fileCount(filecri);
+		List<Map> voteList = whole_searchService.searchVote(votecri);
+		int voteCount = whole_searchService.voteCount(votecri);
+		List<Map> replyList = whole_searchService.searchReply(replycri);
+		int replyCount = whole_searchService.replyCount(replycri);
+
+	
+		ModelAndView mav = new ModelAndView("wholesearch/wholeResult");
+		mav.addObject("issuepageMaker", issuepageMaker);
+		mav.addObject("votepageMaker", votepageMaker);
+		mav.addObject("filepageMaker", filepageMaker);
+		mav.addObject("replypageMaker", replypageMaker);
+		
+		mav.addObject("issueList", issueList);
+		mav.addObject("issueCount", issueCount);
+		mav.addObject("fileList", fileList);
+		mav.addObject("fileCount", fileCount);
+		mav.addObject("voteList", voteList);
+		mav.addObject("voteCount", voteCount);
+		mav.addObject("replyList", replyList);
+		mav.addObject("replyCount", replyCount);
+		
+		mav.addObject("keyword", keyword);
+		return mav;
+		
+	}
 
 
 

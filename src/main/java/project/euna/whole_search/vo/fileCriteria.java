@@ -1,6 +1,6 @@
 package project.euna.whole_search.vo;
 //
-public class Criteria {
+public class fileCriteria {
 	
 	private int page;
 	private int perPageNum;
@@ -10,7 +10,7 @@ public class Criteria {
 	private String searchType;
 	private String keyword;
 	
-	public Criteria() {
+	public fileCriteria() {
 		this.page = 1;
 		this.perPageNum = 10;
 	}
@@ -55,7 +55,7 @@ public class Criteria {
 
 	@Override
 	public String toString() {
-		return "Criteria [keyword="+ keyword + "page=" + page + ", perPageNum=" + perPageNum + ", rowStart=" + rowStart + ", rowEnd=" + rowEnd
+		return "fileCriteria [keyword="+ keyword + "page=" + page + ", perPageNum=" + perPageNum + ", rowStart=" + rowStart + ", rowEnd=" + rowEnd
 				+ "]";
 	}
 

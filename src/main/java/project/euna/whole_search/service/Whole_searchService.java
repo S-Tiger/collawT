@@ -6,20 +6,23 @@ import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
-import project.euna.whole_search.vo.Criteria;
+import project.euna.whole_search.vo.issueCriteria;
+import project.euna.whole_search.vo.replyCriteria;
+import project.euna.whole_search.vo.voteCriteria;
 import project.euna.whole_search.vo.SearchVO;
+import project.euna.whole_search.vo.fileCriteria;
 
 
 
 public interface Whole_searchService {
 
-	public List<Map> searchIssue(Criteria cri) throws DataAccessException;
-	public int issueCount(Criteria cri) throws Exception;
-	public List<Map> searchFile(Criteria cri) throws DataAccessException;
-	public int fileCount(Criteria cri) throws Exception;
-	public List<Map> searchVote(Criteria cri) throws DataAccessException;
-	public int voteCount(Criteria cri) throws Exception;
-	public List<Map> searchReply(Criteria cri) throws DataAccessException;
-	public int replyCount(Criteria cri) throws Exception;
+	public List<Map> searchIssue(issueCriteria cri) throws DataAccessException;
+	public int issueCount(issueCriteria cri) throws Exception;
+	public List<Map> searchFile(fileCriteria cri) throws DataAccessException;
+	public int fileCount(fileCriteria cri) throws Exception;
+	public List<Map> searchVote(voteCriteria cri) throws DataAccessException;
+	public int voteCount(voteCriteria cri) throws Exception;
+	public List<Map> searchReply(replyCriteria cri) throws DataAccessException;
+	public int replyCount(replyCriteria cri) throws Exception;
 
 }
