@@ -12,7 +12,7 @@
 	var userName = '${member.mem_Name}';
 	var target_Id
 	function connect(obj) {
-		wsocket = new WebSocket("ws://192.168.0.77:8090/chat-ws");
+		wsocket = new WebSocket("ws://localhost:8090/chat-ws");
 		wsocket.onopen = onOpen;
 		wsocket.onmessage = onMessage;
 		wsocket.onclose = onClose;

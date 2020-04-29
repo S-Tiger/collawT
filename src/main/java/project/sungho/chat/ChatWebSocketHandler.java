@@ -6,16 +6,21 @@ import java.util.Map;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
-
+import project.sungho.chat.dao.ChatDAO;
 
 public class ChatWebSocketHandler extends TextWebSocketHandler {
 
 	private Map<String, WebSocketSession> usersMap = new HashMap<String,WebSocketSession>();
+	
+	@Autowired
+	ChatDAO chatDAO;
+	
 
 	@Override //연결이 성사 되고 나서 해야할 일들.
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
@@ -57,19 +62,27 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 		String msgName = (String) obj.get("name");
 		String msg = (String) obj.get("message");
 		
+		//DB저장을 위한 데이터맵
+		Map<String, Object>dataMap = new HashMap<String, Object>();
+		dataMap.put("mem_Id",my_Id);
+		dataMap.put("target_Id",target_Id);
+		dataMap.put("message",msg);
+		
 		//나 자신에게 메세지를 보냄
 		myws.sendMessage(new TextMessage("나:"+msg));
 		
-		
 		//대상이 접속해 있을 경우 대상에게 메세지를 보냄
 		if (ws != null) {
+			chatDAO.insertChat(dataMap);
 			ws.sendMessage(new TextMessage(msgName+":"+msg));
+		}else {
+			chatDAO.logoutinsertChat(dataMap);
 		}
 	}
 
 	@Override
 	public void handleTransportError(
-			WebSocketSession session, Throwable exception) throws Exception {
+		WebSocketSession session, Throwable exception) throws Exception {
 		log(session.getId() + " 익셉션 발생: " + exception.getMessage());
 	}
 
