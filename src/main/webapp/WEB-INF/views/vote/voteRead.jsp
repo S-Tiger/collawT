@@ -214,7 +214,8 @@
 											<!--  상태 index -->
 											<!-- for each -->
 											<tr>
-												<td style="padding-left: 0px; padding-right: 0px; width: 190px;"><c:forEach var="votedReadItem" items="${votedRead}" varStatus="status">
+												<td style="padding-left: 0px; padding-right: 0px; width: 190px;">
+												<c:forEach var="votedReadItem" items="${votedRead}" varStatus="status">
 														<!-- 투표 리스트 -->
 														<input type="hidden" name="getVsNum" value="${status.index+1 }">
 														<input class="form-check-input" type="radio" name="vd_Num" value="${votedReadItem.vd_Num}" style="margin-left: 10px;">
@@ -222,7 +223,7 @@
 														<i class="fas fa-users float-rignt" style="color: black;"></i>
 														<span class="badge bg-gray">${votedReadItem.v_Count}</span>
 														<br>
-													</c:forEach></td>
+												</c:forEach></td>
 												
 											</tr>
 											<tr>
@@ -288,7 +289,7 @@
 								<label>${voteTotalItem.v_Count}/${voteRead.CO_MEM_TOTAL }*100%</label>
 								<c:out value="${voteTotalItem.v_Count}x${voteRead.CO_MEM_TOTAL }"></c:out>
 
-								<i class="fas fa-users" style="color: black;"></i> <span class="badge bg-gray">${voteTotalItem.v_Count}</span> <br>
+							
 
 							</div>
 
@@ -297,10 +298,6 @@
 				
 						<c:forEach var="voterItem" items="${voterList}">
 							<p>${voterItem.vd_Num}번투표자${voterItem.mem_Name}(${voterItem.mem_Id})</p>
-							<i class="fas fa-users" style="color: black;"></i>
-							<span class="badge bg-gray">${voterItem.v_Count}</span>
-							<br>
-
 						</c:forEach>
 
 					</div>

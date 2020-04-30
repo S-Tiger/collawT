@@ -21,7 +21,8 @@ public interface EVoteService {
 	public List<Map> searchList(Criteria cri) throws Exception;
 	public Map<String, Object> voteRead(Map<String, Object> v_Num);	
 	public void voteDelete(String v_Num) throws Exception;
-	//public void voteUpdate(VoteVO issueVO) throws Exception;
+	public void voteUpdate(Map<String, Object> cmap) throws Exception;
+	public void votedUpdate(Map<String, Object> cmap) throws Exception;
 	public int listCount(String c_Id) throws Exception;
 	public List<Map> igRead();
 	public List<Map> comemRead(String c_id);

@@ -163,19 +163,25 @@
 		v_Num=#{v_Num}
 	</delete>
 
-	<!-- 게시물 수정 -->
-	<update id="issueUpdate" parameterType="java.util.HashMap">
-		UPDATE issue
-		SET i_Name =
-		#{i_Name},
-		i_Content = #{i_Content},
-		i_Date = (select to_char(sysdate,
-		'YYYY/MM/DD/ HH24:MI:SS') from dual),
-		i_Start = #{i_Start},
-		i_End =
-		#{i_End},
-		ig_Num = #{ig_Num}
-		WHERE i_Num=#{i_Num}
+	<!-- vote 수정 -->
+	<update id="voteUpdate" parameterType="java.util.HashMap">
+		UPDATE vote
+		SET v_Name = #{v_Name},
+			v_Content = #{v_Content},
+			v_Subject = #{v_Subject},
+			v_Date = (select to_char(sysdate,'YYYY/MM/DD/ HH24:MI:SS') from dual),
+			v_Start = #{v_Start},
+			v_End =	#{v_End}
+		WHERE v_Num=#{v_Num}
+	</update>
+	
+	
+	<!-- voted 수정 -->
+	<update id="votedUpdate" parameterType="java.util.HashMap">
+		UPDATE voted
+		SET vd_Content = #{vd_Content}
+		WHERE v_Num = #{v_Num}
+		AND vd_Num = #{vd_Num}
 	</update>
 
 

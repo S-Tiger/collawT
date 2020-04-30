@@ -150,7 +150,8 @@ function Del_poll()
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
-	<form name=insertForm action="/project/vote/insert" method="post" encType="UTF-8">
+	<form name=insertForm action="/project/vote/update" method="post" encType="UTF-8">
+		<input type="hidden" id="v_Num" name="v_Num" value="${voteRead.v_Num}">
 		<section class="content-header">
 			<div class="container-fluid">
 				<div class="row mb-2">
@@ -171,27 +172,19 @@ function Del_poll()
 						<div class="card-body">
 							<div class="form-group">
 								<div class="form-group">
-									<label for="inputName">제목</label> <input type="text" id="v_Name" name="v_Name" class="form-control">
+									<label for="inputName">제목</label> 
+									<input type="text" id="v_Name" name="v_Name" class="form-control" value="${voteRead.v_Subject}">
 								</div>
 								<div class="form-group">
 									<label for="inputDescription">내용</label>
-									<textarea name="v_Content" id="v_Content" class="form-control" style="width: 100%;"></textarea>
+									<textarea name="v_Content" id="v_Content" class="form-control" style="width: 100%;">${voteRead.v_Subject}</textarea>
 								</div>
-   
        
 								<div class="form-group">
-
-
-	
-
 								</div>
 
-
-
 								<small></small>
-
 							</div>
-
 						</div>
 
 						<!-- /.card-body -->
@@ -216,21 +209,21 @@ function Del_poll()
 
 							<!-- 투표 주제 -->
 							<div class="form-group">
-								<label for="inputName">투표 주제</label> <input type="text" id="v_Subject" name="v_Subject" class="form-control">
+								<label for="inputName">투표 주제</label> <input type="text" id="v_Subject" name="v_Subject" class="form-control"value="${voteRead.v_Subject }">
 							</div>
 
 							<!-- 투표 항목 -->
 							<div class="form-group">
 								
-								<label for="inputName">투표 항목1</label>
 								<button type="button" class="btn btn-block btn-default btn-xs float-right" style="width: 80px; margin: 1px" onClick="Insert_poll()" onfocus='this.blur()'>항목 추가</button>
 								<button type="button" class="btn btn-block btn-default btn-xs float-right" style="width: 80px; margin: 1px" onClick="Del_poll()" onfocus='this.blur()' > 삭제</button>
-								<input type="hidden" id="vd_Num" name="vd_Num" class="form-control" value="1"> 
-								<input type="text" id="vd_Content" name="vd_Content" class="form-control">
-								<label for="inputName">투표 항목2</label> 
-								<input type="hidden" id="vd_Num" name="vd_Num" class="form-control" value="2"> 
-								<input type="text" id="vd_Content" name="vd_Content" class="form-control">
+								<c:forEach var="votedReadItem" items="${votedRead}" varStatus="status">
+								<label for="inputName">투표 항목${status.index+1} </label>
+								<input type="hidden" id="vd_Num" name="vd_Num" class="form-control" value="${status.index+1}"> 
+								<input type="text" id="vd_Content" name="vd_Content" class="form-control" value="${ votedReadItem.vd_Content}">
+								
 								<!--추가되는. -->
+								</c:forEach>
 								<table width="100%" cellpadding="0" cellspacing="0" id="poll_item"></table>
 							</div>
 
@@ -261,26 +254,41 @@ function Del_poll()
 										</div>
 									</div>
 								</div>
-
-
+								<tr>
+												<td><ion-icon name="calendar-outline" style="font-size:24"></ion-icon>&nbsp; <span style="font-size: 0.8em;"><b>기간</b></span><br> 
+													<c:if test="${not empty voteRead.v_Start&& not empty voteRead.v_End}">
+														<span id="v_Start" class="username "> 
+														<small><c:out value="${voteRead.v_Start}~" /></small>
+														</span>
+														<span id="v_End" class="username"> 
+														<small><c:out value="${voteRead.v_End}" /></small>
+														</span>
+													</c:if> <c:if test="${empty voteRead.v_Start&& empty voteRead.v_End}">
+														<span class="username"> <small>기간 미설정</small></span>
+													</c:if></td>
+												<td></td>
+											</tr>
+							
 								<div class="input-group">
 									<div class="input-group-prepend">
 										<span class="input-group-text"> <i class="far fa-calendar-alt"></i>
 										</span>
 									</div>
 
-									<input type="text" id="v_Period" name="v_Period" class="form-control float-right">
+									<input type="text" id="v_Period" name="v_Period" class="form-control float-right" value="${voteRead.v_Start}">
 
 
 
 
 								</div>
-								<input type="hidden" id="v_PeriodCheck" name="v_PeriodCheck" value=""> <input type="hidden" id="v_Start" name="v_Start" value=""> <input type="hidden" id="v_End" name="v_End" value="">
+								<input type="hidden" id="v_PeriodCheck" name="v_PeriodCheck" value=""> 
+								<input type="hidden" id="v_Start" name="v_Start" value=""> 
+								<input type="hidden" id="v_End" name="v_End" value="">
 
 							</div>
 
 							<br> 
-							<input type="submit" id="submit" value="이슈 수정" class="btn btn-danger btn-sm float-right" style="margin: 3px;"> 
+							<input type="submit" id="submit" value="항목 수정" class="btn btn-danger btn-sm float-right" style="margin: 3px;"> 
 							<input type="button" id="cancel" value="수정 취소" class="btn btn-danger btn-sm float-right" style="margin: 3px;" onclick="history.back(-1)">
 
 						</div>

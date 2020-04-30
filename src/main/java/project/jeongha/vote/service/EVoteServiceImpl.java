@@ -94,11 +94,11 @@ public class EVoteServiceImpl implements EVoteService {
 		evoteDAO.voteDelete(v_Num);
 	}
 
-//	//글 수정
-//	@Override
-//	public void voteUpdate(VoteVO voteVO) throws Exception {
-//		evoteDAO.voteUpdate(voteVO);
-//	}
+	//글 수정
+	@Override
+	public void voteUpdate(Map<String, Object> cmap) throws Exception {
+		evoteDAO.voteUpdate(cmap);
+	}
 	
 	//이슈그룹 조회
 	@Override
@@ -164,6 +164,13 @@ public class EVoteServiceImpl implements EVoteService {
 	public Map<String, Object> countCowork(Map<String, Object> searchC_Id) throws Exception {
 		 
 		return evoteDAO.countCowork(searchC_Id);
+	}
+	
+	
+	@Override
+	public void votedUpdate(Map<String, Object> cmap) throws Exception {
+		evoteDAO.votedUpdate(cmap);
+		
 	}
 	
 

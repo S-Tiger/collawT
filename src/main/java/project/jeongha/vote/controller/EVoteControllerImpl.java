@@ -81,7 +81,6 @@ public class EVoteControllerImpl implements EVoteController {
 		String mem_Name =(String)member.get("mem_Name");
 		String mem_Id = (String) member.get("mem_Id");
 		String c_Id = request.getParameter("c_Id");
-		System.out.println(c_Id+"123123123123123123123123112312@@@!@#!@#!@#");
 		String v_Name = voteVO.getV_Name();
 		String v_Content = voteVO.getV_Content();
 		String v_Start = voteVO.getV_Start();
@@ -93,45 +92,37 @@ public class EVoteControllerImpl implements EVoteController {
 		
 		
 		Map<String, Object> cmap = new HashMap<String, Object>();
-		cmap.put("mem_Id", mem_Id);///
-		cmap.put("c_Id", c_Id);///
-		cmap.put("v_Name", v_Name);///
-		cmap.put("v_Content", v_Content);///
-		cmap.put("v_Start", v_Start);///
-		cmap.put("v_End", v_End);///
-		cmap.put("vs_Num", vs_Num);///
+		cmap.put("mem_Id", mem_Id);
+		cmap.put("c_Id", c_Id);
+		cmap.put("v_Name", v_Name);
+		cmap.put("v_Content", v_Content);
+		cmap.put("v_Start", v_Start);
+		cmap.put("v_End", v_End);
+		cmap.put("vs_Num", vs_Num);
 		cmap.put("v_Subject", v_Subject);
 		cmap.put("v_Count", v_Count);
 		cmap.put("mem_Name", mem_Name);
-		System.out.println("!222222222222ddddcccccccccc!!11cmapcontroller" + cmap);
 		evoteService.voteInsert(cmap);
 		
-		Map<String,Object> searchC_Id = new HashMap<String, Object>();
-		searchC_Id.put("c_Id", c_Id);
-		//인원수
-		Map<String,Object> coworker= evoteService.countCowork(searchC_Id);
 		
 		
 		// v_Num가져오기
-		// Map<String, Object> voteVODb = evoteService.voteInfo(cmap);
 		String v_Num = (String) cmap.get("v_Num");
 		// 보기항목 넣기
 		String vd_Num[] = request.getParameterValues("vd_Num");
 		String vd_Content[] = request.getParameterValues("vd_Content");
-		// boted 테이블에 들어갈 정보
-		System.out.println("@@@" + vd_Num + "@@@@@" + vd_Content);
+		// voted 테이블에 들어갈 정보
+		
 		Map<String, Object> vd_Info = new HashMap<String, Object>();
 		for (int i = 0; i < vd_Num.length; i++) {
 			vd_Info.put("v_Num", v_Num);
 			vd_Info.put("vd_Num", vd_Num[i]);
 			vd_Info.put("vd_Content", vd_Content[i]);
 			vd_Info.put("c_Id", c_Id);
-			System.out.println("vd_Info @@@@@@@@:" + vd_Info);
 			evoteService.votedInsert(vd_Info);
 
 		}
 
-		// System.out.println("!!!!!!!!!!!!!!!!!11cmapcontroller"+cmap);
 
 		return "redirect:/project/vote/read?c_Id="+c_Id+"&v_Num=" + v_Num;
 
@@ -160,18 +151,11 @@ public class EVoteControllerImpl implements EVoteController {
 		searchMap.put("c_Id", c_Id);
 		
 		Map<String, Object> vote = evoteService.voteRead(searchMap);
-		//Map<String, Object> searchMap = new HashMap<String, Object>();
-		//searchMap.put("v_Num",v_Num);
 		
 		List<Map> voted = evoteService.votedRead(v_Num);
-		// List<Map> list = appedixService.fileList(i_Num);
-		// List<Map> chargerList = evoteService.chargerRead(v_Num);
-		String cdd= request.getParameter("c_Id");
 		Map<String,Object> searchC_Id = new HashMap<String, Object>();
 		searchC_Id.put("c_Id", c_Id);
-		//Map<String,Object> coworker= evoteService.countCowork(searchC_Id);
 		ModelAndView mav = new ModelAndView("/vote/voteRead");
-		//mav.addObject("countMember",coworker);
 		
 		//투표자들 명단
 		List<Map>voterlist = evoteService.voteCount(searchMap);
@@ -213,44 +197,35 @@ public class EVoteControllerImpl implements EVoteController {
 	@GetMapping("/delete")
 	public String voteDelete(String c_Id, String v_Num, VoteVO voteVO) throws Exception {
 
-		//evoteService.chargerDelete(voteVO.getV_Num());
 		evoteService.voteDelete(voteVO.getV_Num());
 
 		return "redirect:/project/vote/list?c_Id=" + c_Id;
 	}
 
 
-	// 게시글 수정 페이지로 이동
+	// 게시글 수정 페이지로 이동 GET
 	@Override
 	@GetMapping("/update")
 	public String voteUpdate(String c_Id, String v_Num, VoteVO voteVO, Model model) throws Exception {
-//		System.out.println("================controller===============");
-//		System.out.println("c_Id: " + c_Id);
-//		System.out.println("c" + v_Num);
-//		System.out.println("=========================================");
-		List<Map> igRead = evoteService.igRead();
-		List<Map> comemList = evoteService.comemRead(c_Id);
-		// List<Map> chargerList = evoteService.chargerRead(v_Num);
+		System.out.println("================UpdateController===============");
+		System.out.println("c_Id: " + c_Id);
+		System.out.println("c" + v_Num);
+		
+		System.out.println("===============================================");
 		Map<String, Object> searchMap = new HashMap<String, Object>();
 		searchMap.put("v_Num", v_Num);
 		searchMap.put("c_Id", c_Id);
 		
 		Map<String, Object> vote = evoteService.voteRead(searchMap);
 		
-		//Map<String, Object> vote = evoteService.voteRead(v_Num);
 		List<Map> voted = evoteService.votedRead(v_Num);
-		// List<Map> list = appedixService.fileList(i_Num);
-		// List<Map> chargerList = evoteService.chargerRead(v_Num);
 
 		//model.addAttribute("voteUpdate", evoteService.voteRead(voteVO.getV_Num()));
 		model.addAttribute("voteUpdate", evoteService.voteRead(searchMap));
-		model.addAttribute("igRead", igRead);
 		model.addAttribute("c_Id", c_Id);
-		model.addAttribute("comemList", comemList);
 		model.addAttribute("voteRead", vote);
 		model.addAttribute("votedRead", voted);
 		
-		// model.addAttribute("chargerList", chargerList);
 
 		return "/vote/voteUpdate";
 	}
@@ -270,96 +245,61 @@ public class EVoteControllerImpl implements EVoteController {
 	// 투표 수정 
 	@Override
 	@PostMapping("/update")
-	public String voteUpdate(VoteVO voteVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public String voteUpdate(VoteVO voteVO, HttpServletRequest request, HttpServletResponse response,HttpSession session) throws Exception {
 		// evoteService.voteUpdate(voteVO);
 
-		String v_Num = voteVO.getV_Num();
-		String c_Id = voteVO.getC_Id();
-		String v_Name= voteVO.getV_Name();
-		String v_Content=voteVO.getV_Content();
+		Map<String, Object> member = new HashMap<String, Object>();
+		member = (Map<String, Object>) session.getAttribute("member");
+		String mem_Name =(String)member.get("mem_Name");
+		String mem_Id = (String) member.get("mem_Id");
+		String c_Id = request.getParameter("c_Id");
+		String v_Name = voteVO.getV_Name();
+		String v_Content = voteVO.getV_Content();
+		String v_Start = voteVO.getV_Start();
+		String v_End = voteVO.getV_End();
+		String vs_Num = voteVO.getVs_Num();
 		String v_Subject = voteVO.getV_Subject();
+		String v_Count = voteVO.getV_Count();
+		// v_Num가져오기
+		String v_Num = (String)request.getParameter("v_Num");
+
+		System.out.println("@@@@@@@@@@@@@@@@CCCCCCCCCCCCC"+v_Num);
+		
+		Map<String, Object> cmap = new HashMap<String, Object>();
+		//cmap.put("mem_Id", mem_Id);
+		cmap.put("v_Num", v_Num);
+		cmap.put("v_Name", v_Name);
+		cmap.put("v_Content", v_Content);
+		cmap.put("v_Subject", v_Subject);
+		cmap.put("v_Start", v_Start);
+		cmap.put("v_End", v_End);
+		cmap.put("vs_Num", vs_Num);
+		//cmap.put("v_Count", v_Count);
+		//cmap.put("mem_Name", mem_Name);
+		evoteService.voteUpdate(cmap);
 		
 		
-		// 이슈담당자 삭제 후 다시 입력
-//		evoteService.chargerDelete(v_Num);
-//		try {
-//			Map<String, Object> coMap = new HashMap<String, Object>();
-//			String comem_Id[] = request.getParameterValues("comem_Id");
-//			for (int i = 0; i < comem_Id.length; i++) {
-//
-//				coMap.put("v_Num", v_Num);
-//				coMap.put("c_Id", c_Id);
-//				coMap.put("mem_Id", comem_Id[i]);
-//				coMap.put("cr_Status", "");
-//
-//				evoteService.comemInsert(coMap);
-//			}
-//
-//		} catch (NullPointerException e) {
-//		}
+		// 보기항목 넣기
+		String vd_Num[] = request.getParameterValues("vd_Num");
+		String vd_Content[] = request.getParameterValues("vd_Content");
+		// voted 테이블에 들어갈 정보
+			
+		Map<String, Object> vd_Info = new HashMap<String, Object>();
+		for (int i = 0; i < vd_Num.length; i++) {
+			vd_Info.put("v_Num", v_Num);
+			vd_Info.put("vd_Num", vd_Num[i]);
+			vd_Info.put("vd_Content", vd_Content[i]);
+			vd_Info.put("c_Id", c_Id);
+			evoteService.votedUpdate(vd_Info);
 
-		// appedixService.updateFile(issueVO, appendixVO, files, fileNames, mpRequest);
-
-		// 수정한 게시물로 리턴
-		return "redirect:/project/vote/read?i_Num=" + v_Num;
+				}
+		
+		
+		
+		return	"redirect:/project/vote/read?c_Id="+c_Id+"&v_Num=" + v_Num;
+		//return "redirect:/project/vote/read?i_Num=" + v_Num;
 	}
-//	
-//
-//	
-//	
-//	@PostMapping("/imageUpload")
-//	@ResponseBody
-//	@Override
-//	public String fileUpload(HttpServletRequest req, HttpServletResponse resp, 
-//                 MultipartHttpServletRequest multiFile) throws Exception {
-//		JsonObject json = new JsonObject();
-//		PrintWriter printWriter = null;
-//		OutputStream out = null;
-//		MultipartFile file = multiFile.getFile("upload");
-//		if(file != null){
-//			if(file.getSize() > 0 && StringUtils.isNotBlank(file.getName())){
-//				if(file.getContentType().toLowerCase().startsWith("image/")){
-//					try{
-//						String fileName = file.getName();
-//						byte[] bytes = file.getBytes();
-//						String uploadPath = req.getServletContext().getRealPath("/img");
-//						System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11"+uploadPath);
-//						File uploadFile = new File(uploadPath);
-//						if(!uploadFile.exists()){
-//							uploadFile.mkdirs();
-//						}
-//						fileName = UUID.randomUUID().toString();
-//						uploadPath = uploadPath + "/" + fileName;
-//						out = new FileOutputStream(new File(uploadPath));
-//                        out.write(bytes);
-//
-//                        printWriter = resp.getWriter();
-//                        resp.setContentType("text/html");
-//                        String fileUrl = req.getContextPath() + "/img/" + fileName;
-//
-//                        // json 데이터로 등록
-//                        // {"uploaded" : 1, "fileName" : "test.jpg", "url" : "/img/test.jpg"}
-//                        // 이런 형태로 리턴이 나가야함.
-//                        json.addProperty("uploaded", 1);
-//                        json.addProperty("fileName", fileName);
-//                        json.addProperty("url", fileUrl);
-//
-//                        printWriter.println(json);
-//                    }catch(IOException e){
-//                        e.printStackTrace();
-//                    }finally{
-//                        if(out != null){
-//                            out.close();
-//                        }
-//                        if(printWriter != null){
-//                            printWriter.close();
-//                        }		
-//					}
-//				}
-//			}
-//		}
-//		return null;
-//	}	
+
 
 	// 투표하기
 	@Override
@@ -372,18 +312,7 @@ public class EVoteControllerImpl implements EVoteController {
 		
 		Map<String, Object> vote = evoteService.voteRead(searchMap);
 		List<Map> voted = evoteService.votedRead(v_Num);
-// 		List<Map> list = appedixService.fileList(i_Num);
-// 		List<Map> chargerList = evoteService.chargerRead(v_Num);
-//		Map<String, Object> cowork = new HashMap<String,Object>();
-//		cowork = (Map<String, Object>) session.getAttribute("coworklist");
-//		String c_Id = (String) cowork.get("c_Id");
-//		System.out.println("=====controller insertVoter=====");
-//		System.out.println("vd_Num: " + vd_Num);
-//		System.out.println("v_Num: " + v_Num);
-//		System.out.println("c_Id: " + c_Id);
-//		System.out.println("Model: " + voteVO.getMem_Id());
-//		System.out.println("member: "+vote);
-//		System.out.println("================================");
+
 		Map<String, Object> member = new HashMap<String, Object>();
 		member = (Map<String, Object>) session.getAttribute("member");
 
@@ -415,16 +344,11 @@ public class EVoteControllerImpl implements EVoteController {
 		for (int i = 0; i < vd_arr.length; i++) {
 			voteCount.put("v_Num", v_Num);
 			voteCount.put("vd_Num", vd_arr[i]);
-			//voteCount0.put("v_Count",evoteService.voteCount(voteCount));
-			//arrayList.add(voteCount0);
+	
 		}
 		
-		System.out.println(coworker+"123123123asdasd");
-		System.out.println("172093847120983471209834" + voteCount0);
 		mav.addObject("voteRead", vote);
 		mav.addObject("votedRead", voted);
-		//mav.addObject("voteCount", voteCount0);
-		//mav.addObject("countMember",coworker);
 		
 		return mav;
 	}

@@ -90,10 +90,10 @@ public class EVoteDAOImpl implements EVoteDAO {
 	//투표 카운트
 	
 	// 글 수정
-//	@Override
-//	public void issueUpdate(IssueVO issueVO) throws Exception {
-//		sqlSession.update("voteResult.issueUpdate", issueVO);
-//	}
+	@Override
+	public void voteUpdate(Map<String, Object> cmap) throws Exception {
+		sqlSession.update("voteResult.voteUpdate", cmap);
+	}
 
 	// 이슈그룹 조회
 	@Override
@@ -151,6 +151,11 @@ public class EVoteDAOImpl implements EVoteDAO {
 	public Map<String, Object> countCowork(Map<String, Object> searchC_Id) throws Exception {
 		
 		return sqlSession.selectOne("voteResult.countCowork", searchC_Id);
+	}
+	@Override
+	public void votedUpdate(Map<String, Object> cmap) throws Exception {
+		sqlSession.update("voteResult.votedUpdate", cmap);
+		
 	}
 	
 	
