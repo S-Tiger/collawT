@@ -165,7 +165,11 @@
                        ]]>
        <trim prefix="WHERE" prefixOverrides="AND|OR">
 				<if test="keyword != null and keyword != '' ">
-					AND (I_NAME || I_CONTENT) like CONCAT('%' || #{keyword}, '%')
+				 <![CDATA[
+				 	(REPLACE(upper( REGEXP_REPLACE( I_NAME,'<[^>]*>|\&([^;])*;', '') ),' ','')
+					|| REPLACE(upper(REGEXP_REPLACE( i_Content,'<[^>]*>|\&([^;])*;', '')),' ','')) 
+					like CONCAT('%' || REPLACE(upper(#{keyword}),' ',''), '%')
+					 ]]>
 				</if>
 				<if test="c_Id != null and c_Id != '' and c_Id != 'myspace' ">
 					AND c_Id = #{c_Id}
@@ -234,7 +238,11 @@
       ]]>
        <trim prefix="WHERE" prefixOverrides="AND|OR">
 				<if test="keyword != null and keyword != '' ">
-					AND (I_NAME || I_CONTENT) like CONCAT('%' || #{keyword}, '%')
+				 <![CDATA[
+				 	(REPLACE(upper( REGEXP_REPLACE( I_NAME,'<[^>]*>|\&([^;])*;', '') ),' ','')
+					|| REPLACE(upper(REGEXP_REPLACE( i_Content,'<[^>]*>|\&([^;])*;', '')),' ','')) 
+					like CONCAT('%' || REPLACE(upper(#{keyword}),' ',''), '%')
+					 ]]>
 				</if>
 				<if test="c_Id != null and c_Id != '' and c_Id != 'myspace' ">
 					AND c_Id = #{c_Id}
@@ -287,7 +295,11 @@
                        ]]>
        <trim prefix="WHERE" prefixOverrides="AND|OR">
 				<if test="keyword != null and keyword != '' ">
-					AND (I_NAME || I_CONTENT) like CONCAT('%' || #{keyword}, '%')
+				 <![CDATA[
+				 	(REPLACE(upper( REGEXP_REPLACE( I_NAME,'<[^>]*>|\&([^;])*;', '') ),' ','')
+					|| REPLACE(upper(REGEXP_REPLACE( i_Content,'<[^>]*>|\&([^;])*;', '')),' ','')) 
+					like CONCAT('%' || REPLACE(upper(#{keyword}),' ',''), '%')
+					 ]]>
 				</if>
 				<if test="c_Id != null and c_Id != '' and c_Id != 'myspace' ">
 					AND c_Id = #{c_Id}
