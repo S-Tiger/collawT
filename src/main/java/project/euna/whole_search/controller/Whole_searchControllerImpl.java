@@ -43,25 +43,15 @@ public class Whole_searchControllerImpl implements Whole_searchController {
 	IssueServiceImpl issueService;
 	
 	
-	//검색 페이지로 이동
-	@Override
-	@GetMapping("/main")
-	public String issueMain(HttpSession session) {
-		
-		Map<String, Object> member = new HashMap<String,Object>();
-		member = (Map<String, Object>) session.getAttribute("member");
-		String mem_Id = (String) member.get("mem_Id");
-
-		
-		return "wholesearch/searchMain";
-		
-	}
-	
 	//이슈 목록 조회 페이징
 	@Override
 	@GetMapping("/issueresult")
 	public ModelAndView issueResult(
 			@RequestParam(required=false) String keyword,
+			@RequestParam(required=false) String c_Id,
+			@RequestParam(required=false) String order,
+			@RequestParam(required=false) String ig_Num,
+			@RequestParam(required=false) String wr_mem_Id,
 			issueCriteria issuecri, HttpSession session, HttpServletRequest request, 
 			HttpServletResponse response) throws Exception {
 		
@@ -80,12 +70,23 @@ public class Whole_searchControllerImpl implements Whole_searchController {
 		List<Map> issueList = whole_searchService.searchIssue(issuecri);
 		
 		int issueCount = whole_searchService.issueCount(issuecri);
+		
+		List<Map> coworkList = issueService.coRead(mem_Id);
+		
+		List<Map> issueWriter = whole_searchService.issueWriter(issuecri);
+
 	
 		ModelAndView mav = new ModelAndView("wholesearch/issueResult");
 		mav.addObject("issuepageMaker", issuepageMaker);
 		mav.addObject("issueList", issueList);
 		mav.addObject("issueCount", issueCount);
+		mav.addObject("coworkList", coworkList);
+		mav.addObject("issueWriter", issueWriter);
 		mav.addObject("keyword", keyword);
+		mav.addObject("c_Id", c_Id);
+		mav.addObject("order", order);
+		mav.addObject("wr_mem_Id", wr_mem_Id);
+		mav.addObject("ig_Num", ig_Num);
 		return mav;
 		
 	}

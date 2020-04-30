@@ -9,6 +9,10 @@ public class issueCriteria {
 	private String mem_Id;
 	private String searchType;
 	private String keyword;
+	private String c_Id;
+	private String order;
+	private String wr_mem_Id;
+	private String ig_Num;
 	
 	public issueCriteria() {
 		this.page = 1;
@@ -55,7 +59,9 @@ public class issueCriteria {
 
 	@Override
 	public String toString() {
-		return "issueCriteria [keyword="+ keyword + "page=" + page + ", perPageNum=" + perPageNum + ", rowStart=" + rowStart + ", rowEnd=" + rowEnd
+		return "issueCriteria [keyword="+ keyword + ", c_Id="+c_Id+", order="+order+
+				", wr_mem_Id"+wr_mem_Id+", ig_Num"+ig_Num+
+				", page=" + page + ", perPageNum=" + perPageNum + ", rowStart=" + rowStart + ", rowEnd=" + rowEnd
 				+ "]";
 	}
 
@@ -81,6 +87,38 @@ public class issueCriteria {
 
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
+	}
+
+	public String getC_Id() {
+		return c_Id;
+	}
+
+	public void setC_Id(String c_Id) {
+		this.c_Id = c_Id;
+	}
+
+	public String getOrder() {
+		return order;
+	}
+
+	public void setOrder(String order) {
+		this.order = order;
+	}
+
+	public String getWr_mem_Id() {
+		return wr_mem_Id;
+	}
+
+	public void setWr_mem_Id(String wr_mem_Id) {
+		this.wr_mem_Id = wr_mem_Id;
+	}
+
+	public String getIg_Num() {
+		return ig_Num;
+	}
+
+	public void setIg_Num(String ig_Num) {
+		this.ig_Num = ig_Num;
 	}
 
 	

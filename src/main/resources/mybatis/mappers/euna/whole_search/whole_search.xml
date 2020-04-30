@@ -163,22 +163,40 @@
                       )
                   )
                        ]]>
-       <where>
+       <trim prefix="WHERE" prefixOverrides="AND|OR">
 				<if test="keyword != null and keyword != '' ">
 					AND (I_NAME || I_CONTENT) like CONCAT('%' || #{keyword}, '%')
 				</if>
-		</where>
+				<if test="c_Id != null and c_Id != '' and c_Id != 'myspace' ">
+					AND c_Id = #{c_Id}
+				</if>
+				<if test="c_Id == 'myspace' ">
+					AND c_Id = #{mem_Id}
+				</if>
+				<if test="wr_mem_Id != null and wr_mem_Id != '' ">
+					AND wr_mem_Id = #{wr_mem_Id}
+				</if>
+				<if test="ig_Num != null and ig_Num != '' ">
+					AND ig_Num = #{ig_Num}
+				</if>
+		</trim>
               
      <![CDATA[
      )
     where rnum between #{rowStart} and #{rowEnd}
-    order by i_Date desc
-     ]]>
-
-
     
-
-
+    ]]>
+      	
+	      	<choose>
+	      		<when test="order == 'asc'">
+	      			order by i_Date asc
+	      		</when>
+	      		<otherwise>
+	      			order by i_Date desc
+	      		</otherwise>
+	      	</choose>
+		
+    
 	</select>
 	
 	
@@ -214,13 +232,82 @@
                       )
                   )
       ]]>
-       <where>
+       <trim prefix="WHERE" prefixOverrides="AND|OR">
 				<if test="keyword != null and keyword != '' ">
 					AND (I_NAME || I_CONTENT) like CONCAT('%' || #{keyword}, '%')
 				</if>
-		</where>
+				<if test="c_Id != null and c_Id != '' and c_Id != 'myspace' ">
+					AND c_Id = #{c_Id}
+				</if>
+				<if test="c_Id == 'myspace' ">
+					AND c_Id = #{mem_Id}
+				</if>
+				<if test="wr_mem_Id != null and wr_mem_Id != '' ">
+					AND wr_mem_Id = #{wr_mem_Id}
+				</if>
+				<if test="ig_Num != null and ig_Num != '' ">
+					AND ig_Num = #{ig_Num}
+				</if>
+		</trim>
 
 	</select>
+	
+	
+	<!-- 협업공간 별 이슈 작성자 필터링 -->
+	<select id="issueWriter" resultMap="issueResult" parameterType="project.euna.whole_search.vo.issueCriteria"> 
+      <![CDATA[
+	select distinct wr_mem_Id, mem_Name
+                  from
+                      (
+                      (select I.I_NUM as i_Num, I.C_ID as c_Id, I.I_NAME as i_Name, I.I_DATE as i_Date, I.IG_NUM as ig_Num, I.MEM_ID as wr_mem_Id, I.I_CONTENT as i_Content,
+                              C.C_NAME as c_Name,
+                              M.MEM_NAME as mem_Name,
+                              IG.IG_NAME as ig_Name
+                       from ISSUE I, CO_WORK C, MEMBER M, ISSUE_GROUP IG
+                       where C.C_ID=I.C_ID
+                       and M.MEM_ID=I.MEM_ID
+                       and I.IG_NUM = IG.IG_NUM
+                       
+                       and C.C_ID IN
+                          (
+                          select C_ID from CO_MEMBER where MEM_ID=#{mem_Id}
+                          )
+                        
+                       )
+                      union all
+                      (select P.P_NUM as i_Num, P.MEM_ID as c_Id, P.P_I_NAME as i_Name, P.P_I_DATE as i_Date, null as ig_Num, P.MEM_ID as wr_mem_Id, P.P_I_CONTENT as i_content,
+                              null as c_Name,
+                              M.MEM_NAME as mem_Name,
+                              null as ig_Name
+                          from PERSONAL P, MEMBER M
+                          where M.MEM_ID=P.MEM_ID
+                          and M.MEM_ID = #{mem_Id}
+                      )
+                  )
+                       ]]>
+       <trim prefix="WHERE" prefixOverrides="AND|OR">
+				<if test="keyword != null and keyword != '' ">
+					AND (I_NAME || I_CONTENT) like CONCAT('%' || #{keyword}, '%')
+				</if>
+				<if test="c_Id != null and c_Id != '' and c_Id != 'myspace' ">
+					AND c_Id = #{c_Id}
+				</if>
+				<if test="c_Id == 'myspace' ">
+					AND c_Id = #{mem_Id}
+				</if>
+				<if test="wr_mem_Id != null and wr_mem_Id != '' ">
+					AND wr_mem_Id = #{wr_mem_Id}
+				</if>
+				<if test="ig_Num != null and ig_Num != '' ">
+					AND ig_Num = #{ig_Num}
+				</if>
+		</trim>
+	
+	</select>
+	
+	
+	
+	
 	
 	
 	
@@ -491,5 +578,27 @@ from(
 		</where>
 
 	</select>
+	
+		<!-- 협업공간 내 멤버 조회 -->
+	 <select id="comemRead"  resultType="java.util.HashMap"> 
+      <![CDATA[
+            select distinct m.mem_id, m.mem_name
+			from member m, co_member co
+			where m.mem_Id = co.mem_Id
+		]]>
+		
+			<choose>
+	      		<when test="c_Id != null and c_Id != '' ">
+	      			AND c_Id = #{c_Id}
+	      		</when>
+	      		<otherwise>
+	      			AND c_Id in (
+                			select c_Id from CO_MEMBER where mem_Id=#{mem_Id}
+                			)
+	      		</otherwise>
+	      	</choose>
+      	
+	</select> 
+	
 	
 </mapper>

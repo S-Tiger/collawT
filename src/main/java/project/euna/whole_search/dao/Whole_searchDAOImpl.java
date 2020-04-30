@@ -39,6 +39,16 @@ public class Whole_searchDAOImpl implements Whole_searchDAO {
 		return sqlSession.selectOne("whole_search.issueCount", cri);
 	}
 	
+	//이슈 검색결과 작성자 필터링
+	@Override
+	public List<Map> issueWriter(issueCriteria cri) throws DataAccessException {
+
+		List<Map> list = sqlSession.selectList("whole_search.issueWriter", cri);
+		return list;
+
+	}
+	
+	
 	//전체 파일 검색결과 페이징
 	@Override
 	public List<Map> searchFile(fileCriteria cri) throws DataAccessException {
@@ -84,6 +94,14 @@ public class Whole_searchDAOImpl implements Whole_searchDAO {
 	@Override
 	public int replyCount(replyCriteria cri) throws Exception {
 		return sqlSession.selectOne("whole_search.replyCount", cri);
+	}
+	
+	
+	//협업공간 내 멤버 조회
+	@Override
+	public List<Map> comemRead(issueCriteria cri) {
+		return sqlSession.selectList("whole_search.comemRead", cri);
+
 	}
 
 	

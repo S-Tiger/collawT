@@ -106,8 +106,8 @@ public class IssueServiceImpl implements IssueService {
 	
 	//협업공간 조회
 	//@Override
-	public List<Map> coRead(String mem_id) {
-		return issueDAO.coRead(mem_id);
+	public List<Map> coRead(String mem_Id) {
+		return issueDAO.coRead(mem_Id);
 		
 	}
 	

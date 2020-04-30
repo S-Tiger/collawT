@@ -39,6 +39,14 @@ public class Whole_searchServiceImpl implements Whole_searchService {
 	}
 	
 	
+	//이슈 검색결과 작성자 필터링
+	@Override
+	public List<Map> issueWriter(issueCriteria cri) throws Exception{
+		return whole_searchDAO.issueWriter(cri);
+	}
+	
+	
+	
 	// 파일 검색결과 페이징
 	@Override
 	public List<Map> searchFile(fileCriteria cri) throws DataAccessException  {
@@ -76,6 +84,13 @@ public class Whole_searchServiceImpl implements Whole_searchService {
 	@Override
 	public int replyCount(replyCriteria cri) throws Exception{
 		return whole_searchDAO.replyCount(cri);
+	}
+	
+	//협업공간 내 멤버 조회
+	@Override
+	public List<Map> comemRead(issueCriteria cri) {
+		return whole_searchDAO.comemRead(cri);
+
 	}
 	
 }

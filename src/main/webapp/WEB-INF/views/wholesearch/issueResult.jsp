@@ -21,13 +21,86 @@
 </style>
 
 <script type="text/javascript">
-/* $(document).ready(function() {
-	$("#submit").click(function(){
-		var searchLevel1 = $("#searchLevel1").val();
-		alert(searchLevel1);
-	
+ $(document).ready(function() {
+	 var c_Id_1 = $("#c_Id_1").val();
+	 $("#c_Id").val(c_Id_1).prop("selected",true);
+	 
+	 var order_1 = $("#order_1").val();
+	 $("#order").val(order_1).prop("selected",true);
+	 
+	 var wr_mem_Id_1 = $("#wr_mem_Id_1").val();
+	 $("#wr_mem_Id").val(wr_mem_Id_1).prop("selected",true);
+	 
+	 var ig_Num_1 = $("#ig_Num_1").val();
+	 $("#ig_Num").val(ig_Num_1).prop("selected",true);
+	 
+
+	$("#c_Id").change(function(){
+		var c_Id = $("#c_Id").val();
+		var keyword = $("#keyword_1").val();
+		
+		var url = "${contextPath}/search/issueresult";
+		url = url + "?keyword="+keyword;
+		url = url + "&c_Id="+c_Id;
+
+		location.href=url;
+
 	});
-}) */
+	
+	$("#order").change(function(){
+		var c_Id = $("#c_Id").val();
+		var keyword = $("#keyword_1").val();
+		var order = $("#order").val();
+		var wr_mem_Id = $("#wr_mem_Id").val();
+		var ig_Num = $("#ig_Num").val();
+
+		var url = "${contextPath}/search/issueresult";
+		url = url + "?keyword="+keyword;
+		url = url + "&c_Id="+c_Id;
+		url = url + "&order="+order;
+		url = url + "&wr_mem_Id="+wr_mem_Id;
+		url = url + "&ig_Num="+ig_Num;
+
+		location.href=url;
+
+	});
+	
+	$("#wr_mem_Id").change(function(){
+		var c_Id = $("#c_Id").val();
+		var keyword = $("#keyword_1").val();
+		var order = $("#order").val();
+		var wr_mem_Id = $("#wr_mem_Id").val();
+		var ig_Num = $("#ig_Num").val();
+		
+		var url = "${contextPath}/search/issueresult";
+		url = url + "?keyword="+keyword;
+		url = url + "&c_Id="+c_Id;
+		url = url + "&order="+order;
+		url = url + "&wr_mem_Id="+wr_mem_Id;
+		url = url + "&ig_Num="+ig_Num;
+
+		location.href=url;
+
+	});
+	
+	
+	$("#ig_Num").change(function(){
+		var c_Id = $("#c_Id").val();
+		var keyword = $("#keyword_1").val();
+		var order = $("#order").val();
+		var ig_Num = $("#ig_Num").val();
+
+		
+		var url = "${contextPath}/search/issueresult";
+		url = url + "?keyword="+keyword;
+		url = url + "&c_Id="+c_Id;
+		url = url + "&order="+order;
+		url = url + "&ig_Num="+ig_Num;
+
+		location.href=url;
+
+	});
+})
 				
 </script>
 
@@ -40,23 +113,26 @@
 
 	<!-- Main content -->
     <section class="content">
+    <input type="hidden" value="${keyword}" id="keyword_1" name="keyword_1">
+     <input type="hidden" value="${c_Id}" id="c_Id_1" name="c_Id_1">
+    <input type="hidden" value="${order}" id="order_1" name="order_1">
+   <input type="hidden" value="${ig_Num}" id="ig_Num_1" name="ig_Num_1">
+    <input type="hidden" value="${wr_mem_Id}" id="wr_mem_Id_1" name="wr_mem_Id_1">
       <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-2">
 
           <div class="card">
             
             <div class="card-body p-0">
               <ul class="nav nav-pills flex-column">
-                  <li class="nav-item active">
+                  <li class="nav-item">
                   <a href="/search/wholeresult?keyword=${keyword}" class="nav-link">
                     <i class="fas fa-th-large"></i> 전체
-                    <span class="badge bg-primary float-right">12</span>
                   </a>
                 </li>
-                <li class="nav-item active">
-                  <a href="/search/issueresult?keyword=${keyword}" class="nav-link">
-                     <i class="far fa-file-alt"></i> 이슈
-                    <span class="badge bg-primary float-right">12</span>
+                <li class="nav-item active" style="background-color:#dc3545;">
+                  <a href="/search/issueresult?keyword=${keyword}" class="nav-link" style="color:white">
+                     <i class="far fa-file-alt"></i> <b>이슈</b>
                   </a>
                 </li>
                 <li class="nav-item">
@@ -72,7 +148,6 @@
                 <li class="nav-item">
                   <a href="/search/replyresult?keyword=${keyword}" class="nav-link">
                     <i class="fas fa-comment-dots"></i> 댓글 및 메모
-                    <span class="badge bg-warning float-right">65</span>
                   </a>
                 </li>
                
@@ -84,32 +159,41 @@
           <div class="card">
             
             <div class="card-body p-0">
-              <ul class="nav nav-pills flex-column">
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="far fa-circle text-danger"></i>
-                    	전체 협업공간
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="far fa-circle text-warning"></i> 전체 작성자
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="far fa-circle text-primary"></i>
-                    	최신 순
-                  </a>
-                </li>
-              </ul>
+         
+            <select class="form-control custom-select" id="c_Id" name="c_Id">
+		      	<option value="">전체 협업공간</option>
+		      	<option value="myspace">내 공간</option>
+		         <c:forEach var="coworkitem" items="${coworkList}" >
+		         <option id="${coworkitem.C_ID}" name="${coworkitem.C_ID}" value="${coworkitem.C_ID}">${coworkitem.C_NAME}</option>
+		        </c:forEach>
+		      </select>	
+     		
+     			<select class="form-control custom-select" id="wr_mem_Id" name="wr_mem_Id">
+			         <option value="">전체 작성자</option>
+			         <c:forEach var="issueitem" items="${issueWriter}" >
+			         <option id="${issueitem.wr_mem_Id}" name="${issueitem.wr_mem_Id}" value="${issueitem.wr_mem_Id}">${issueitem.mem_Name}(${issueitem.wr_mem_Id})</option>
+			        </c:forEach>
+		      </select>	
+
+				<select class="form-control custom-select" id="order" name="order">
+			         <option id="" name="" value="">최신 등록 순</option>
+			       	 <option id="asc" name="asc" value="asc">오래된 등록 순</option>
+			     </select>
+			    <select class="form-control custom-select" id="ig_Num" name="ig_Num">
+			         <option id="" name="" value="">전체 상태</option>
+			         <option id="1" name="1" value="1">발의됨</option>
+			         <option id="2" name="2" value="2">진행중</option>
+			         <option id="3" name="3" value="3">일시정지</option>
+			         <option id="4" name="4" value="4">완료</option>
+			     </select>
+
             </div>
             <!-- /.card-body -->
           </div>
           <!-- /.card -->
         </div>
         <!-- /.col -->
-        <div class="col-md-9">
+        <div class="col-md-10">
           <div class="card card-danger card-outline">
             <div class="card-header">
               <h4 class="card-title"><b>검색 결과 총 ${issueCount}건</b></h4>

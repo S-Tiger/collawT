@@ -41,39 +41,46 @@
 	<!-- Main content -->
     <section class="content">
       <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-2">
 
           <div class="card">
             
             <div class="card-body p-0">
               <ul class="nav nav-pills flex-column">
                   <li class="nav-item active">
+                  
                   <a href="/search/wholeresult?keyword=${keyword}" class="nav-link">
-                    <i class="fas fa-th-large"></i> 전체
-                    <span class="badge bg-primary float-right">12</span>
+                    <span style="width:22px !important"><i class="fas fa-th-large"></i></span> 전체
                   </a>
+                  
                 </li>
                 <li class="nav-item active">
+                
                   <a href="/search/issueresult?keyword=${keyword}" class="nav-link">
-                     <i class="far fa-file-alt"></i> 이슈
-                    <span class="badge bg-primary float-right">12</span>
+                     <span style="width:22px"><i class="far fa-file-alt"></i></span> 이슈
                   </a>
+                  
                 </li>
                 <li class="nav-item">
+                
                   <a href="/search/voteresult?keyword=${keyword}" class="nav-link">
-                    <i class="fas fa-vote-yea"></i> 투표
+                    <span style="width:22px"><i class="fas fa-vote-yea"></i></span> 투표
                   </a>
+                  
                 </li>
                 <li class="nav-item">
+                
                   <a href="/search/fileresult?keyword=${keyword}" class="nav-link">
-                    <i class="fas fa-inbox"></i> 파일
+                    <span style="width:22px"><i class="fas fa-inbox"></i></span> 파일
                   </a>
+                  
                 </li>
                 <li class="nav-item">
+                
                   <a href="/search/replyresult?keyword=${keyword}" class="nav-link">
-                    <i class="fas fa-comment-dots"></i> 댓글 및 메모
-                    <span class="badge bg-warning float-right">65</span>
+                   <span style="width:22px"> <i class="fas fa-comment-dots"></i></span> 댓글 및 메모
                   </a>
+                  
                 </li>
                
               </ul>
@@ -109,7 +116,7 @@
           <!-- /.card -->
         </div>
         <!-- /.col -->
-        <div class="col-md-9">
+        <div class="col-md-10">
           <div class="card card-danger card-outline">
             <div class="card-header">
               <h4 class="card-title"><b>이슈 검색 결과 총 ${issueCount}건</b></h4>
@@ -582,7 +589,7 @@
 						<a  style="color:black;" href="/project/issue/read?c_Id=${replyitem.c_Id}&i_Num=${replyitem.i_Num}">
 	                   <b>${replyitem.i_Name}</b>
 	                   	                   &nbsp;&nbsp;
-	                   <c:if test="${item.ig_Num != null}">
+	                   <c:if test="${replyitem.ig_Num != null}">
 			                   <span style= "height : 17px; font-size : 10px; vertical-align : text-bottom; padding: .4em .4em;
 									<c:if test="${replyitem.ig_Name == '발의됨'}">background-color:#6c757d;</c:if>
 									<c:if test="${replyitem.ig_Name == '진행중'}">background-color:#007bff;</c:if>

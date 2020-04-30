@@ -41,7 +41,7 @@
 	<!-- Main content -->
     <section class="content">
       <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-2">
 
           <div class="card">
             
@@ -109,7 +109,7 @@
           <!-- /.card -->
         </div>
         <!-- /.col -->
-        <div class="col-md-9">
+        <div class="col-md-10">
           <div class="card card-danger card-outline">
             <div class="card-header">
               <h4 class="card-title"><b>검색 결과 총 ${voteCount}건</b></h4>

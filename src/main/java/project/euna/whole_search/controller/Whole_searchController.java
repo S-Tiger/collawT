@@ -17,10 +17,13 @@ import project.euna.whole_search.vo.voteCriteria;
 
 
 public interface Whole_searchController {
-	public String issueMain(HttpSession session);
 	
 	public ModelAndView issueResult(
 			@RequestParam(required=false) String keyword,
+			@RequestParam(required=false) String c_Id,
+			@RequestParam(required=false) String order,
+			@RequestParam(required=false) String ig_Num,
+			@RequestParam(required=false) String wr_mem_Id,
 			issueCriteria issuecri, HttpSession session, HttpServletRequest request, 
 			HttpServletResponse response) throws Exception;
 	

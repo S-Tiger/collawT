@@ -21,4 +21,6 @@ public interface Whole_searchDAO {
 	public int voteCount(voteCriteria cri) throws Exception;
 	public List<Map> searchReply(replyCriteria cri) throws DataAccessException;
 	public int replyCount(replyCriteria cri) throws Exception;
+	public List<Map> comemRead(issueCriteria cri);
+	public List<Map> issueWriter(issueCriteria cri) throws DataAccessException;
 }
