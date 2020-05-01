@@ -213,6 +213,8 @@
               <div class="table-responsive mailbox-messages">
                 <table class="table table-hover table-striped">
                   <tbody>
+             <c:choose>
+			<c:when test="${fn:length(issueList)!=0}">
                   <c:forEach var="item" items="${issueList}" >
                   <tr>
               
@@ -277,7 +279,12 @@
                     <span><small>${item.i_Date}</small></span>
                     <!-- 5 mins ago --></td>
                   </tr>
-              </c:forEach>
+                   </c:forEach>
+                 </c:when>
+                 <c:otherwise>
+                 <p style="text-align:center;"><small><br><br>검색 결과가 없습니다.<br><br></small></p>
+                 </c:otherwise>
+                 </c:choose>
                   </tbody>
                 </table>
                 <!-- /.table -->

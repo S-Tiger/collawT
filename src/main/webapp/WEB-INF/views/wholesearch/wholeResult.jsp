@@ -41,35 +41,39 @@
                   <li class="nav-item active" style="background-color:#dc3545;">
                   
                   <a href="/search/wholeresult?keyword=${keyword}" class="nav-link"  style="color:white">
-                    <span style="width:22px" ><i class="fas fa-th-large"></i>&nbsp;<b>전체</b></span> 
+                    <i class="fas fa-th-large"></i>&nbsp;<b>전체</b>
+                     <span class="badge bg-warning float-right" style="margin-top:3px"> ${issueCount+voteCount+fileCount+replyCount}</span>
                   </a>
-                  
-                </li>
+         </li>
                 <li class="nav-item active">
                 
                   <a href="/search/issueresult?keyword=${keyword}" class="nav-link">
-                     <span style="width:22px"><i class="far fa-file-alt"></i>&nbsp;</span> 이슈
+                     <i class="far fa-file-alt"></i>&nbsp; 이슈
+                     <span class="badge bg-success float-right" style="margin-top:3px"> ${issueCount}</span>
                   </a>
                   
                 </li>
                 <li class="nav-item">
                 
                   <a href="/search/voteresult?keyword=${keyword}" class="nav-link">
-                    <span style="width:22px"><i class="fas fa-vote-yea"></i>&nbsp;</span> 투표
+                    <i class="fas fa-vote-yea"></i>&nbsp; 투표
+                    <span class="badge bg-success float-right" style="margin-top:3px"> ${voteCount}</span>
                   </a>
                   
                 </li>
                 <li class="nav-item">
                 
                   <a href="/search/fileresult?keyword=${keyword}" class="nav-link">
-                    <span style="width:22px"><i class="fas fa-inbox"></i>&nbsp;</span> 파일
+                    <i class="fas fa-inbox"></i>&nbsp; 파일
+                    <span class="badge bg-success float-right" style="margin-top:3px"> ${fileCount}</span>
                   </a>
                   
                 </li>
                 <li class="nav-item">
                 
                   <a href="/search/replyresult?keyword=${keyword}" class="nav-link">
-                   <span style="width:22px"> <i class="fas fa-comment-dots"></i>&nbsp;</span> 댓글 및 메모
+                    <i class="fas fa-comment-dots"></i>&nbsp;댓글 및 메모
+                    <span class="badge bg-success float-right" style="margin-top:3px"> ${replyCount}</span>
                   </a>
                   
                 </li>
@@ -90,7 +94,6 @@
         <!-- /.col -->
        
         <div class="col-md-10">
-         <c:if test="${issueCount != '0'}">
           <div class="card card-danger card-outline">
             <div class="card-header">
               <h4 class="card-title"><b>이슈 검색 결과 총 ${issueCount}건</b></h4>
@@ -110,6 +113,8 @@
               <div class="table-responsive mailbox-messages">
                 <table class="table table-hover table-striped">
                   <tbody>
+             <c:choose>
+			<c:when test="${fn:length(issueList)!=0}">
                   <c:forEach var="issueitem" items="${issueList}" >
                   <tr>
               
@@ -174,7 +179,12 @@
                     <span><small>${issueitem.i_Date}</small></span>
                     <!-- 5 mins ago --></td>
                   </tr>
-              </c:forEach>
+                   </c:forEach>
+                 </c:when>
+                 <c:otherwise>
+                 <p style="text-align:center;"><small><br><br>검색 결과가 없습니다.<br><br></small></p>
+                 </c:otherwise>
+                 </c:choose>
                   </tbody>
                 </table>
                 <!-- /.table -->
@@ -193,9 +203,9 @@
                 <div class="float-left">
                  	      <div class="form-group" style="margin-left:10px">
                  	      
-
+<c:if test="${fn:length(issueList)!=0}">
 <a href="/search/issueresult?keyword=${keyword}" class="nav-link"><b>이슈 검색 결과 더 보기</b> </a> 
-  </div>
+</c:if>  </div>
                 </div>
                 <!-- /.float-right -->
               </div>
@@ -203,8 +213,7 @@
           </div>
           <!-- /.card -->
           
-</c:if>          
-              <c:if test="${voteCount != '0'}">
+         
           
                     <div class="card card-danger card-outline">
             <div class="card-header">
@@ -225,6 +234,8 @@
               <div class="table-responsive mailbox-messages">
                 <table class="table table-hover table-striped">
                   <tbody>
+                    <c:choose>
+			<c:when test="${fn:length(voteList)!=0}">
                   <c:forEach var="voteitem" items="${voteList}" >
                   <tr>
               
@@ -283,6 +294,11 @@
                     <!-- 5 mins ago --></td>
                   </tr>
               </c:forEach>
+                 </c:when>
+                 <c:otherwise>
+                 <p style="text-align:center;"><small><br><br>검색 결과가 없습니다.<br><br></small></p>
+                 </c:otherwise>
+                 </c:choose>
                   </tbody>
                 </table>
                 <!-- /.table -->
@@ -301,19 +317,19 @@
                 <div class="float-left">
                  	      <div class="form-group" style="margin-left:10px">
 
+<c:if test="${fn:length(voteList)!=0}">
 <a href="/search/voteresult?keyword=${keyword}" class="nav-link"><b>투표 검색 결과 더 보기</b> </a>
-  
+ </c:if> 
   </div>
                 </div>
                 <!-- /.float-right -->
               </div>
             </div>
           </div>
-          </c:if>
           
           
           
-           <c:if test="${fileCount != '0'}">
+          
                     <div class="card card-danger card-outline">
             <div class="card-header">
               <h4 class="card-title"><b>파일 검색 결과 총 ${fileCount}건</b></h4>
@@ -333,6 +349,8 @@
               <div class="table-responsive mailbox-messages">
                 <table class="table table-hover table-striped">
                   <tbody>
+              <c:choose>
+			<c:when test="${fn:length(fileList)!=0}">
                   <c:forEach var="fileitem" items="${fileList}" >
                   <tr>
                   
@@ -365,7 +383,7 @@
               		</small>
               		
               		</td>
-                    <td class="mailbox-name" style="width:700px">
+                    <td class="mailbox-name" style="width:52%">
                     <div class="row" style="padding-bottom:10px;">
                      <span>
 	                    <c:if test="${fileitem.c_Name == null}">
@@ -425,6 +443,11 @@
                     <!-- 5 mins ago --></td>
                   </tr>
               </c:forEach>
+               </c:when>
+                 <c:otherwise>
+                 <p style="text-align:center;"><small><br><br>검색 결과가 없습니다.<br><br></small></p>
+                 </c:otherwise>
+                 </c:choose>
                   </tbody>
                 </table>
                 <!-- /.table -->
@@ -442,8 +465,9 @@
                 
                 <div class="float-left">
                  	      <div class="form-group" style="margin-left:10px">
+<c:if test="${fn:length(fileList)!=0}">
 <a href="/search/fileresult?keyword=${keyword}" class="nav-link"><b>파일 검색 결과 더 보기</b> </a>
-
+</c:if>
   
   </div>
                 </div>
@@ -451,11 +475,10 @@
               </div>
             </div>
           </div>
-         </c:if> 
+         
           
           
           
-                     <c:if test="${replyCount != '0'}">
                     <div class="card card-danger card-outline">
             <div class="card-header">
               <h4 class="card-title"><b>댓글 및 메모 검색 결과 총 ${replyCount}건</b></h4>
@@ -475,10 +498,12 @@
               <div class="table-responsive mailbox-messages">
                 <table class="table table-hover table-striped">
                   <tbody>
+             <c:choose>
+			<c:when test="${fn:length(replyList)!=0}">
                   <c:forEach var="replyitem" items="${replyList}" >
                   <tr>
               
-                    <td class="mailbox-name">
+                    <td class="mailbox-name" style="width:63%">
                     <div class="row" style="padding-bottom:10px;">
                      <span>
 	                    <c:if test="${replyitem.c_Name == null}">
@@ -559,6 +584,11 @@
                     <!-- 5 mins ago --></td>
                   </tr>
               </c:forEach>
+               </c:when>
+                 <c:otherwise>
+                 <p style="text-align:center;"><small><br><br>검색 결과가 없습니다.<br><br></small></p>
+                 </c:otherwise>
+                 </c:choose>
                   </tbody>
                 </table>
                 <!-- /.table -->
@@ -576,14 +606,16 @@
                 
                 <div class="float-left">
                  	      <div class="form-group" style="margin-left:10px">
+       <c:if test="${fn:length(replyList)!=0}">          	      
 						<a href="/search/replyresult?keyword=${keyword}" class="nav-link"><b>댓글 및 메모 검색 결과 더 보기</b> </a>
+						</c:if>
 						</div>
                 </div>
                 <!-- /.float-right -->
               </div>
             </div>
           </div>
-          </c:if>
+          
           
         </div>
         <!-- /.col -->
