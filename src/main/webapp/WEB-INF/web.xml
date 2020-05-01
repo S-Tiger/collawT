@@ -54,7 +54,7 @@
 
 
 <!-- CKFINDER START -->
-<servlet>
+<!-- <servlet>
   <servlet-name>ConnectorServlet</servlet-name>
   <servlet-class>com.ckfinder.connector.ConnectorServlet</servlet-class>
   <init-param>
@@ -71,7 +71,7 @@
 <servlet-mapping>
   <servlet-name>ConnectorServlet</servlet-name>
   <url-pattern>/ckfinder/core/connector/java/connector.java</url-pattern>
-</servlet-mapping>  
+</servlet-mapping>   -->
 <!-- CKFINDER END -->
 
 
