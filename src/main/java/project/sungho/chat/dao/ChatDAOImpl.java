@@ -21,9 +21,8 @@ public class ChatDAOImpl implements ChatDAO{
 	}
 
 	@Override
-	public void updateChat(Map<String, Object> dataMap) throws DataAccessException {
-		// TODO Auto-generated method stub
-		
+	public void readingMsg(Map<String, Object> searchMap) throws DataAccessException {
+		sqlSession.update("chat.readingMsg" ,searchMap);
 	}
 
 	@Override
@@ -40,6 +39,23 @@ public class ChatDAOImpl implements ChatDAO{
 	public int deleteChat(Map<String, Object> dataMap) throws DataAccessException {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public List<Map> msgCount(Map<String, Object> searchMap) throws DataAccessException {
+		List<Map>result = sqlSession.selectList("chat.msgCount",searchMap);
+		
+		if (result != null) {
+			return result;
+		}
+		return null;
+	}
+	
+	@Override
+	public List<Map> totalCount(Map<String, Object> searchMap) throws DataAccessException {
+		List<Map> result = sqlSession.selectList("chat.totalCount",searchMap);
+		
+			return result;
 	}
 
 }

@@ -26,8 +26,5 @@ public interface BookmarkController {
 
 	public int bookmarkCheck(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
-	public int acceptBookmark(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception;
-	
-	public int rejectBookmark(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 }

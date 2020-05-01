@@ -18,11 +18,9 @@
 		wsocket.onclose = onClose;
 		target_Id = $(obj).data('targetmember');
 		
-		
 	}
 	function disconnect() {
-		if(wsocket != null){
-		wsocket.close();}
+		if(wsocket != null){wsocket.close();}
 	}
 	function onOpen(evt) {
 		$.ajax({
@@ -49,6 +47,7 @@
 			appendMessage(data.substring(4));
 		}
 			appendMessage(data);
+			
 	}
 	function onClose(evt) {
 		$("#chatMessageArea").empty();
@@ -128,6 +127,11 @@
 										<b style="font-size: 14px;">
 										${partnermember.mem_Name}<font size="2">
 										(${partnermember.mem_Id})</font></b>
+										<c:forEach var="msgcountItem" items="${msgCount}">
+										<c:if test="${partnermember.mem_Id == msgcountItem.mem_Id}">
+											<span id = "${msgcountItem.mem_Id}" class="badge badge-danger navbar-badge">${msgcountItem.chat_Count}</span>
+										</c:if>
+										</c:forEach>
 								</a></li>	
 							</c:forEach>
 							</ul>

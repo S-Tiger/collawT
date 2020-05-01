@@ -53,22 +53,6 @@ public class BookmarkDAOImpl implements BookmarkDAO {
 		return result;
 	}
 
-	@Override
-	public int acceptBookmark(Map<String, Object> dataMap) throws Exception {
-		// TODO Auto-generated method stub
-		int result;
-		result = sqlSession.update("bookmark.acceptBookmark",dataMap);
-		return result;
-	}
-	
-	
-	@Override
-	public int rejectBookmark(Map<String, Object> dataMap) throws Exception {
-		// TODO Auto-generated method stub
-		int result;
-		result = sqlSession.update("bookmark.rejectBookmark",dataMap);
-		return result;
-	}
 	
 	
 }

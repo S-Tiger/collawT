@@ -103,7 +103,7 @@ public class BookmarkControllerImpl implements BookmarkController {
 	}
 
 	@Override
-	@GetMapping("bookmarkCheck") //ajax 회원체크를 위한 맴버체크
+	@GetMapping("bookmarkCheck") 
 	@ResponseBody
 	public int bookmarkCheck(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Map<String, Object> dataMap = new HashMap<String, Object>();
@@ -122,41 +122,7 @@ public class BookmarkControllerImpl implements BookmarkController {
 	}
 
 	
-	//초대 수락을 위한 ajax 컨트롤러
-	@Override
-	@GetMapping("accept")
-	@ResponseBody
-	public int acceptBookmark(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
-		Map<String, Object> dataMap = new HashMap<String, Object>();
-		
-		Enumeration enu = request.getParameterNames();
-		while (enu.hasMoreElements()) {
-			String name = (String) enu.nextElement();
-			String value = request.getParameter(name);
-			dataMap.put(name, value);
-		}
-		return bookmarService.acceptBookmark(dataMap);
-	}
 	
-	
-	
-	//초대 거절을 위한 ajax 컨트롤러 
-	@Override
-	@GetMapping("reject")
-	@ResponseBody
-	public int rejectBookmark(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
-		Map<String, Object> dataMap = new HashMap<String, Object>();
-		
-		Enumeration enu = request.getParameterNames();
-		while (enu.hasMoreElements()) {
-			String name = (String) enu.nextElement();
-			String value = request.getParameter(name);
-			dataMap.put(name, value);
-		}
-		return bookmarService.rejectBookmark(dataMap);
-	}
 	
 
 }

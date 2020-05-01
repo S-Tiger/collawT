@@ -20,8 +20,5 @@ public interface BookmarkService {
 	 
 	 public int bookmarkCheck(Map<String, Object> dataMap) throws Exception;
 	 
-	 public int acceptBookmark(Map<String, Object> dataMap) throws Exception;
-
-	 public int rejectBookmark(Map<String, Object> dataMap) throws Exception;
 	 
 }

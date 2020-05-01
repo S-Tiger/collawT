@@ -51,16 +51,5 @@ public class BookmarkServiceImpl implements BookmarkService{
 		 
 	}
 	
-	//초대 수락 서비스
-	@Override
-	public int acceptBookmark(Map<String, Object> dataMap) throws Exception {
-		return bookmarkDAO.acceptBookmark(dataMap);
-	}
-	
-	//초대 거절 서비스 
-	@Override
-	public int rejectBookmark(Map<String, Object> dataMap) throws Exception {
-		return bookmarkDAO.rejectBookmark(dataMap);
-	}
 
 }
