@@ -65,6 +65,19 @@
 		url = url + "?keyword="+$('#keyword').val();
 		location.href=url;
 		})
+		
+		//엔터키 검색
+		$("#keyword").keydown(function(){
+			if (event.keyCode == '13') {
+				var url = "${contextPath}/search/wholeresult";
+				url = url + "?keyword="+$('#keyword').val();
+				location.href=url;
+			}
+		})
+		
+		//검색시 검색어 유지
+	var keyword_1 = $("#keyword_1").val();
+	 $("#keyword").val(keyword_1);
 	
 		
 		//알림개수 가져오기
@@ -316,11 +329,11 @@
         <a href="/main" class="nav-link">Home</a>
       </li>
     </ul>
-
+<!-- 검색 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
     <!-- SEARCH FORM -->
     <div class="form-inline ml-3">
       <div class="input-group input-group-sm">
-        <input class="form-control form-control-navbar" type="text" placeholder="Search" id="keyword" name="keyword">
+        <input class="form-control form-control-navbar" type="text" placeholder="검색" id="keyword" name="keyword">
         <div class="input-group-append">
           <button class="btn btn-navbar"  id = "search" name = "search">
             <i class="fas fa-search"></i>
@@ -328,6 +341,8 @@
         </div>
       </div>
     </div>
+     <input type="hidden" value="${keyword}" id="keyword_1" name="keyword_1">
+    
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">

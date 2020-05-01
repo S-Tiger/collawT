@@ -60,6 +60,19 @@ public class Whole_searchServiceImpl implements Whole_searchService {
 		return whole_searchDAO.fileCount(cri);
 	}
 	
+	//파일 검색결과 작성자 필터링
+	@Override
+	public List<Map> fileWriter(fileCriteria cri) throws Exception{
+		return whole_searchDAO.fileWriter(cri);
+	}
+	
+	//파일 검색결과 확장자 필터링
+	@Override
+	public List<Map> fileEx(fileCriteria cri) throws Exception{
+		return whole_searchDAO.fileEx(cri);
+	}
+	
+	
 	// 투표 검색결과 페이징
 	@Override
 	public List<Map> searchVote(voteCriteria cri) throws DataAccessException  {
@@ -73,6 +86,12 @@ public class Whole_searchServiceImpl implements Whole_searchService {
 		return whole_searchDAO.voteCount(cri);
 	}
 	
+	//투표 검색결과 작성자 필터링
+	@Override
+	public List<Map> voteWriter(voteCriteria cri) throws Exception{
+		return whole_searchDAO.voteWriter(cri);
+	}
+	
 	// 댓글 검색결과 페이징
 	@Override
 	public List<Map> searchReply(replyCriteria cri) throws DataAccessException  {
@@ -84,6 +103,12 @@ public class Whole_searchServiceImpl implements Whole_searchService {
 	@Override
 	public int replyCount(replyCriteria cri) throws Exception{
 		return whole_searchDAO.replyCount(cri);
+	}
+	
+	//투표 검색결과 작성자 필터링
+	@Override
+	public List<Map> replyWriter(replyCriteria cri) throws Exception{
+		return whole_searchDAO.replyWriter(cri);
 	}
 	
 	//협업공간 내 멤버 조회

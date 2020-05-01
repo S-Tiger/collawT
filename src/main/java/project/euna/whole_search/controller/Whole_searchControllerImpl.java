@@ -97,6 +97,10 @@ public class Whole_searchControllerImpl implements Whole_searchController {
 	@GetMapping("/fileresult")
 	public ModelAndView fileResult(
 			@RequestParam(required=false) String keyword,
+			@RequestParam(required=false) String c_Id,
+			@RequestParam(required=false) String order,
+			@RequestParam(required=false) String a_NameEx,
+			@RequestParam(required=false) String wr_mem_Id,
 			fileCriteria filecri, HttpSession session, HttpServletRequest request, 
 			HttpServletResponse response) throws Exception {
 		
@@ -115,12 +119,25 @@ public class Whole_searchControllerImpl implements Whole_searchController {
 		List<Map> fileList = whole_searchService.searchFile(filecri);
 		
 		int fileCount = whole_searchService.fileCount(filecri);
+		
+		List<Map> coworkList = issueService.coRead(mem_Id);
+		
+		List<Map> fileWriter = whole_searchService.fileWriter(filecri);
+		
+		List<Map> fileEx = whole_searchService.fileEx(filecri);
 	
 		ModelAndView mav = new ModelAndView("wholesearch/fileResult");
 		mav.addObject("filepageMaker", filepageMaker);
 		mav.addObject("fileList", fileList);
 		mav.addObject("fileCount", fileCount);
+		mav.addObject("coworkList", coworkList);
+		mav.addObject("fileWriter", fileWriter);
+		mav.addObject("fileEx", fileEx);
 		mav.addObject("keyword", keyword);
+		mav.addObject("c_Id", c_Id);
+		mav.addObject("order", order);
+		mav.addObject("wr_mem_Id", wr_mem_Id);
+		mav.addObject("a_NameEx", a_NameEx);
 		return mav;
 		
 	}
@@ -131,6 +148,10 @@ public class Whole_searchControllerImpl implements Whole_searchController {
 	@GetMapping("/voteresult")
 	public ModelAndView voteResult(
 			@RequestParam(required=false) String keyword,
+			@RequestParam(required=false) String c_Id,
+			@RequestParam(required=false) String order,
+			@RequestParam(required=false) String vs_Num,
+			@RequestParam(required=false) String wr_mem_Id,
 			voteCriteria votecri, HttpSession session, HttpServletRequest request, 
 			HttpServletResponse response) throws Exception {
 		
@@ -149,12 +170,22 @@ public class Whole_searchControllerImpl implements Whole_searchController {
 		List<Map> voteList = whole_searchService.searchVote(votecri);
 		
 		int voteCount = whole_searchService.voteCount(votecri);
+		
+		List<Map> coworkList = issueService.coRead(mem_Id);
+		
+		List<Map> voteWriter = whole_searchService.voteWriter(votecri);
 	
 		ModelAndView mav = new ModelAndView("wholesearch/voteResult");
 		mav.addObject("votepageMaker", votepageMaker);
 		mav.addObject("voteList", voteList);
 		mav.addObject("voteCount", voteCount);
+		mav.addObject("coworkList", coworkList);
+		mav.addObject("voteWriter", voteWriter);
 		mav.addObject("keyword", keyword);
+		mav.addObject("c_Id", c_Id);
+		mav.addObject("order", order);
+		mav.addObject("wr_mem_Id", wr_mem_Id);
+		mav.addObject("vs_Num", vs_Num);
 		return mav;
 		
 	}
@@ -164,6 +195,9 @@ public class Whole_searchControllerImpl implements Whole_searchController {
 	@GetMapping("/replyresult")
 	public ModelAndView replyResult(
 			@RequestParam(required=false) String keyword,
+			@RequestParam(required=false) String c_Id,
+			@RequestParam(required=false) String order,
+			@RequestParam(required=false) String wr_mem_Id,
 			replyCriteria replycri, HttpSession session, HttpServletRequest request, 
 			HttpServletResponse response) throws Exception {
 		
@@ -182,12 +216,21 @@ public class Whole_searchControllerImpl implements Whole_searchController {
 		List<Map> replyList = whole_searchService.searchReply(replycri);
 		
 		int replyCount = whole_searchService.replyCount(replycri);
+		
+		List<Map> coworkList = issueService.coRead(mem_Id);
+		
+		List<Map> replyWriter = whole_searchService.replyWriter(replycri);
 	
 		ModelAndView mav = new ModelAndView("wholesearch/replyResult");
 		mav.addObject("replypageMaker", replypageMaker);
 		mav.addObject("replyList", replyList);
 		mav.addObject("replyCount", replyCount);
+		mav.addObject("coworkList", coworkList);
+		mav.addObject("replyWriter", replyWriter);
 		mav.addObject("keyword", keyword);
+		mav.addObject("c_Id", c_Id);
+		mav.addObject("order", order);
+		mav.addObject("wr_mem_Id", wr_mem_Id);
 		return mav;
 		
 	}
@@ -215,6 +258,10 @@ public class Whole_searchControllerImpl implements Whole_searchController {
 		votecri.setMem_Id(mem_Id);
 		filecri.setMem_Id(mem_Id);
 		replycri.setMem_Id(mem_Id);
+		issuecri.setPerPageNum(5);
+		votecri.setPerPageNum(5);
+		filecri.setPerPageNum(5);
+		replycri.setPerPageNum(5);
 		
 		issuePageMaker issuepageMaker = new issuePageMaker();
 		issuepageMaker.setCri(issuecri);

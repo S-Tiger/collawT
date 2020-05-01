@@ -82,6 +82,9 @@ public String makeQuery(int page) {
 		UriComponents uriComponents =
 		UriComponentsBuilder.newInstance()
 							.queryParam("keyword", cri.getKeyword())
+							.queryParam("c_Id", cri.getC_Id())
+							.queryParam("order", cri.getOrder())
+							.queryParam("wr_mem_Id", cri.getWr_mem_Id())
 						    .queryParam("page", page)
 							.queryParam("perPageNum", cri.getPerPageNum())
 							.build();

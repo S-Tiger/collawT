@@ -26,4 +26,8 @@ public interface Whole_searchService {
 	public int replyCount(replyCriteria cri) throws Exception;
 	public List<Map> comemRead(issueCriteria cri);
 	public List<Map> issueWriter(issueCriteria cri) throws Exception;
+	public List<Map> fileWriter(fileCriteria cri) throws Exception;
+	public List<Map> voteWriter(voteCriteria cri) throws Exception;
+	public List<Map> replyWriter(replyCriteria cri) throws Exception;
+	public List<Map> fileEx(fileCriteria cri) throws Exception;
 }

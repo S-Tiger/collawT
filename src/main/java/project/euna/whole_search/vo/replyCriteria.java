@@ -7,8 +7,10 @@ public class replyCriteria {
 	private int rowStart;
 	private int rowEnd;
 	private String mem_Id;
-	private String searchType;
 	private String keyword;
+	private String c_Id;
+	private String order;
+	private String wr_mem_Id;
 	
 	public replyCriteria() {
 		this.page = 1;
@@ -55,7 +57,9 @@ public class replyCriteria {
 
 	@Override
 	public String toString() {
-		return "replyCriteria [keyword="+ keyword + "page=" + page + ", perPageNum=" + perPageNum + ", rowStart=" + rowStart + ", rowEnd=" + rowEnd
+		return "replyCriteria [keyword="+ keyword + ", c_Id="+c_Id+", order="+order+
+				", wr_mem_Id"+wr_mem_Id+
+				", page=" + page + ", perPageNum=" + perPageNum + ", rowStart=" + rowStart + ", rowEnd=" + rowEnd
 				+ "]";
 	}
 
@@ -67,13 +71,6 @@ public class replyCriteria {
 		this.mem_Id = mem_Id;
 	}
 
-	public String getSearchType() {
-		return searchType;
-	}
-
-	public void setSearchType(String searchType) {
-		this.searchType = searchType;
-	}
 
 	public String getKeyword() {
 		return keyword;
@@ -81,6 +78,30 @@ public class replyCriteria {
 
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
+	}
+
+	public String getC_Id() {
+		return c_Id;
+	}
+
+	public void setC_Id(String c_Id) {
+		this.c_Id = c_Id;
+	}
+
+	public String getOrder() {
+		return order;
+	}
+
+	public void setOrder(String order) {
+		this.order = order;
+	}
+
+	public String getWr_mem_Id() {
+		return wr_mem_Id;
+	}
+
+	public void setWr_mem_Id(String wr_mem_Id) {
+		this.wr_mem_Id = wr_mem_Id;
 	}
 
 	

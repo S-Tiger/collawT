@@ -29,16 +29,27 @@ public interface Whole_searchController {
 	
 	public ModelAndView fileResult(
 			@RequestParam(required=false) String keyword,
+			@RequestParam(required=false) String c_Id,
+			@RequestParam(required=false) String order,
+			@RequestParam(required=false) String a_NameEx,
+			@RequestParam(required=false) String wr_mem_Id,
 			fileCriteria filecri, HttpSession session, HttpServletRequest request, 
 			HttpServletResponse response) throws Exception;
 	
 	public ModelAndView voteResult(
 			@RequestParam(required=false) String keyword,
+			@RequestParam(required=false) String c_Id,
+			@RequestParam(required=false) String order,
+			@RequestParam(required=false) String vs_Num,
+			@RequestParam(required=false) String wr_mem_Id,
 			voteCriteria votecri, HttpSession session, HttpServletRequest request, 
 			HttpServletResponse response) throws Exception;
 	
 	public ModelAndView replyResult(
 			@RequestParam(required=false) String keyword,
+			@RequestParam(required=false) String c_Id,
+			@RequestParam(required=false) String order,
+			@RequestParam(required=false) String wr_mem_Id,
 			replyCriteria replycri, HttpSession session, HttpServletRequest request, 
 			HttpServletResponse response) throws Exception;
 	

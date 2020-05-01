@@ -7,7 +7,6 @@ public class issueCriteria {
 	private int rowStart;
 	private int rowEnd;
 	private String mem_Id;
-	private String searchType;
 	private String keyword;
 	private String c_Id;
 	private String order;
@@ -73,13 +72,6 @@ public class issueCriteria {
 		this.mem_Id = mem_Id;
 	}
 
-	public String getSearchType() {
-		return searchType;
-	}
-
-	public void setSearchType(String searchType) {
-		this.searchType = searchType;
-	}
 
 	public String getKeyword() {
 		return keyword;

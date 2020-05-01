@@ -23,4 +23,8 @@ public interface Whole_searchDAO {
 	public int replyCount(replyCriteria cri) throws Exception;
 	public List<Map> comemRead(issueCriteria cri);
 	public List<Map> issueWriter(issueCriteria cri) throws DataAccessException;
+	public List<Map> fileWriter(fileCriteria cri) throws DataAccessException;
+	public List<Map> voteWriter(voteCriteria cri) throws DataAccessException;
+	public List<Map> replyWriter(replyCriteria cri) throws DataAccessException;
+	public List<Map> fileEx(fileCriteria cri) throws DataAccessException;
 }

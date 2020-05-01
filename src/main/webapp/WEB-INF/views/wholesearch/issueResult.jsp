@@ -127,27 +127,27 @@
               <ul class="nav nav-pills flex-column">
                   <li class="nav-item">
                   <a href="/search/wholeresult?keyword=${keyword}" class="nav-link">
-                    <i class="fas fa-th-large"></i> 전체
+                    <i class="fas fa-th-large"></i>&nbsp;전체
                   </a>
                 </li>
                 <li class="nav-item active" style="background-color:#dc3545;">
                   <a href="/search/issueresult?keyword=${keyword}" class="nav-link" style="color:white">
-                     <i class="far fa-file-alt"></i> <b>이슈</b>
+                     <i class="far fa-file-alt"></i>&nbsp;<b>이슈</b>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="/search/voteresult?keyword=${keyword}" class="nav-link">
-                    <i class="fas fa-vote-yea"></i> 투표
+                    <i class="fas fa-vote-yea"></i>&nbsp;투표
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="/search/fileresult?keyword=${keyword}" class="nav-link">
-                    <i class="fas fa-inbox"></i> 파일
+                    <i class="fas fa-inbox"></i>&nbsp;파일
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="/search/replyresult?keyword=${keyword}" class="nav-link">
-                    <i class="fas fa-comment-dots"></i> 댓글 및 메모
+                    <i class="fas fa-comment-dots"></i>&nbsp;댓글 및 메모
                   </a>
                 </li>
                
