@@ -16,8 +16,8 @@ public class ChatDAOImpl implements ChatDAO{
 
 	@Override
 	public List<Map> searchList(Map<String, Object> searchMap) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
+		List<Map>result = sqlSession.selectList("chat.searchList",searchMap);
+		return result;
 	}
 
 	@Override

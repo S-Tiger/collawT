@@ -17,15 +17,17 @@
 	<select id="searchList" resultMap="chatResult01"
 		parameterType="java.util.Map"> 
       <![CDATA[
-         SELECT *
-			FROM CHATMESSAGE C , MEMBER M 
-			WHERE C.MEM_ID = M.MEM_ID
+         SELECT c.* , m.mem_Name
+			FROM CHATMESSAGE c , MEMBER m 
       ]]>
 		<where>
-			<if test=" mem_Id != ''  and  mem_Id != null">
-			AND c.mem_Id = #{mem_Id}
+			<if test="target_Id != ''  and  target_Id != null">
+			c.mem_Id = m.mem_Id
+			AND c.mem_Id IN (#{mem_Id} , #{target_Id})
+			AND c.target_Id IN (#{mem_Id} , #{target_Id})
 			</if>
 		</where>
+		order by chat_Date
 	</select>
 	
 	<insert id="insertChat" parameterType="java.util.Map">

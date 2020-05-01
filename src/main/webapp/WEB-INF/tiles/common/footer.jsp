@@ -16,13 +16,31 @@
 		wsocket.onopen = onOpen;
 		wsocket.onmessage = onMessage;
 		wsocket.onclose = onClose;
-		target_Id =$(obj).data('targetmember');
+		target_Id = $(obj).data('targetmember');
+		
+		
 	}
 	function disconnect() {
-		wsocket.close();
+		if(wsocket != null){
+		wsocket.close();}
 	}
 	function onOpen(evt) {
-		appendMessage(userName+"연결되었습니다.");
+		$.ajax({
+			url : '${contextPath}/chatmsg/list?target_Id='+ target_Id,
+			type : 'get',
+			success : function(data) {
+				var itemString = "";
+				var itemcount = data.length;
+				if (data != 0) {
+					for ( var i in data) {
+				itemString = data[i].mem_Name + ' : ' + data[i].message;
+				appendMessage(itemString);
+			}}else{
+				var notitem = "채팅내역이 없습니다."
+				appendMessage(notitem);
+			}
+				
+			}})
 	}
 	function onMessage(evt) {
 		var data = evt.data;
@@ -33,7 +51,7 @@
 			appendMessage(data);
 	}
 	function onClose(evt) {
-		appendMessage(userName+"연결을 끊었습니다.");
+		$("#chatMessageArea").empty();
 	}
 	
 	function send() {
@@ -68,7 +86,7 @@
 		});
 		$('#sendBtn').click(function() { send(); });
 
-		$(document).on("click","#enterBtn",function(){connect(this);});
+		$(document).on("click","#enterBtn",function(){ disconnect(),connect(this);});
 		//$('#enterBtn').click(function(event) { connect(event); }); 이벤트 버블링때문에 안됨
 		$('#exitBtn').click(function() { disconnect(); });
 	});
