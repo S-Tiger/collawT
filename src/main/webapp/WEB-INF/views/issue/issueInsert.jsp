@@ -240,9 +240,9 @@ span[name="chargerspan"] {
 					'JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','Outdent','Indent','HorizontalRule','Link','Unlink','-',
 					'Find','Replace','SelectAll','Image','Youtube','Table','SpecialChar'],
 					'/',['Styles','Format','Font','FontSize','Undo','Redo'],['TextColor','BGColor'],['Cut','Copy','Paste','PasteText'],['Source']],
-					filebrowserImageUploadUrl: '${pageContext.request.contextPath}/issue/imageUpload'
+					
 					});
-                
+				
 			 	 CKEDITOR.on('dialogDefinition', function( ev ){
 			        var dialogName = ev.data.name;
 			         var dialogDefinition = ev.data.definition;
@@ -255,6 +255,8 @@ span[name="chargerspan"] {
 			                 break;
          }
      });
+			 	 
+			 	CKFinder.setupCKEditor( i_Content, '/ckfinder/' );
 			 	 
 	
  				       

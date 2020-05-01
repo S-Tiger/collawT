@@ -111,7 +111,6 @@
 	<beans:bean id="naverLoginBO"
 		class="project.jeongha.member.vo.NaverLoginBO" />
 
-	<!-- ckeditor -->
-	<resources location="/WEB-INF/views/ckeditor/"
-		mapping="/ckeditor/**"></resources>
+
+		
 </beans:beans>

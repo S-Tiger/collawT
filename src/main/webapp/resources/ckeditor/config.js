@@ -18,13 +18,22 @@ CKEDITOR.editorConfig = function( config ) {
 	config.youtube_responsive = true; //유튜브 영상 반응형으로
 	config.youtube_controls = true; //유튜브 컨트롤 보이기
 	
-	//이미지 첨부 url
-	config.uploadUrl = '/issue/imageUpload';
 	
 	//엑셀 내용 그대로 복사해 오기.
 	config.pasteFromWordPromptCleanup = true;
 	config.pasteFromWordRemoveStyles = false;
 	config.pasteFromWordRemoveFontStyles = false;
 	config.allowedContent=true;
+	
+	config.filebrowserBrowseUrl = "/ckfinder/ckfinder.html";
+
+	config.filebrowserFlashBrowseUrl = "/ckfinder/ckfinder.html?type=Flash";
+
+	config.filebrowserUploadUrl = "/ckfinder/core/connector/java/connctor.java?command=QuickUpload&type=Files";
+
+	config.filebrowserImageUploadUrl = "/ckfinder/core/connector/java/connector.java?command=QuickUpload&type=Images";
+
+	config.filebrowserFlashUploadUrl = "/ckfinder/core/connector/java/connector.java?command=QuickUpload&type=Flash"; 
+	
 	
 };
