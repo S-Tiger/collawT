@@ -151,10 +151,8 @@ public class EVoteControllerImpl implements EVoteController {
 		searchMap.put("c_Id", c_Id);
 		
 		Map<String, Object> vote = evoteService.voteRead(searchMap);
-		
 		List<Map> voted = evoteService.votedRead(v_Num);
-		Map<String,Object> searchC_Id = new HashMap<String, Object>();
-		searchC_Id.put("c_Id", c_Id);
+		
 		ModelAndView mav = new ModelAndView("/vote/voteRead");
 		
 		//투표자들 명단
@@ -165,22 +163,38 @@ public class EVoteControllerImpl implements EVoteController {
 		//투표 리스트(항목) , 투표 총계 
 		for (int i = 0; i < voted.size(); i++) {
 			for (int j = 0; j < voteTotal.size() ; j++) {
+				
 				//vd_Num이 같다면 ex 항목 1 == 토탈리스트 항목
 				if(voted.get(i).get("vd_Num").equals(voteTotal.get(j).get("vd_Num"))) {
 					//List v_Num, c_Id, vd_Content, vd_Num
 					//Total vd_Num, v_Count
 					voted.get(i).put("v_Count", voteTotal.get(j).get("v_Count"));
-					
-					
-					System.out.println();
-				}else {
-					voted.get(i).put("v_Count","0");
-					
 				}
 				
 			}
 			
 		}
+		
+//		for (int i = 0; i < voterlist.size(); i++) {
+//			for (int j = 0; j < voteTotal.size(); j++) {
+//				//Total vd_Num, v_Count
+//				//voterlist v_Num, c_Id , vd_Num , mem_Id, mem_Name
+//				if(voterlist.get(i).get("vd_Num").equals(voteTotal.get(j).get("vd_Num"))) {
+//						
+//						voteTotal.get(i).put("mem_Id", voterlist.get(j).get("mem_Id"));
+//						voteTotal.get(i).put("mem_Name", voterlist.get(j).get("mem_Name"));
+//					
+//					
+//					
+//				}
+//				
+//			}
+//			
+//		}
+		System.out.println("@@@@@@@@@@@"+voteTotal);
+		
+		
+		
 		
 		mav.addObject("voteRead", vote);
 		mav.addObject("votedRead", voted);
@@ -297,7 +311,7 @@ public class EVoteControllerImpl implements EVoteController {
 		
 		
 		return	"redirect:/project/vote/read?c_Id="+c_Id+"&v_Num=" + v_Num;
-		//return "redirect:/project/vote/read?i_Num=" + v_Num;
+		
 	}
 
 

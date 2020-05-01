@@ -39,7 +39,8 @@
 		<result property="mem_Name" column="mem_Name" />
 		<result property="mem_File" column="mem_File" javaType="[B"	jdbcType="BLOB" />
 		<result property="v_Subject" column="v_Subject" />
-		<result property="v_Count" column="v_Count" />
+		<result property="v_Count" column="v_Count" javaType="java.lang.Integer" jdbcType="VARCHAR"/>
+		<result property="co_Mem_Total" column="co_Mem_Total" />
 		<result property="vd_Content" column="vd_Content" jdbcType="CLOB"
 			javaType="java.lang.String" />
 		<result property="vd_Num" column="vd_Num" />
@@ -127,7 +128,7 @@
 		select V.v_Num, V.c_Id, V.v_Name, V.v_Content, V.v_Date, V.mem_Id, V.v_Start, V.v_End, V.v_Subject,vs.vs_name, v.vs_num, v.v_count, v.mem_Name,(
                                    	select count(*) as coworker
                                     from co_member
-									where c_id=#{c_Id}) as co_mem_total
+									where c_id=#{c_Id}) as co_Mem_Total
 		from vote V , vote_status vs
 		where v.vs_num = vs.vs_num 
         and v.v_Num=#{v_Num}

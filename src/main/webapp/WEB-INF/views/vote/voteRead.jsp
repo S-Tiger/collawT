@@ -202,7 +202,7 @@
 									<label><small><b>${voteRead.v_Subject}</b></small></label>
 									<div class="card-tools">
 										<button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-											<i class="fas fa-plus"></i>
+											<i class="fas fa-minus"></i>
 										</button>
 									</div>
 								</div>
@@ -214,17 +214,19 @@
 											<!--  상태 index -->
 											<!-- for each -->
 											<tr>
-												<td style="padding-left: 0px; padding-right: 0px; width: 190px;">
-												<c:forEach var="votedReadItem" items="${votedRead}" varStatus="status">
+												<td style="padding-left: 0px; padding-right: 0px; width: 315px;"><c:forEach var="votedReadItem" items="${votedRead}" varStatus="status">
 														<!-- 투표 리스트 -->
 														<input type="hidden" name="getVsNum" value="${status.index+1 }">
 														<input class="form-check-input" type="radio" name="vd_Num" value="${votedReadItem.vd_Num}" style="margin-left: 10px;">
-														<label class="form-check-label" style="margin-left: 40px;">${votedReadItem.vd_Num}.&nbsp;&nbsp;&nbsp;${votedReadItem.vd_Content}</label>
-														<i class="fas fa-users float-rignt" style="color: black;"></i>
-														<span class="badge bg-gray">${votedReadItem.v_Count}</span>
+
+														<label class="form-check-label" style="margin-left: 40px;">${votedReadItem.vd_Num}.&nbsp;&nbsp;&nbsp;${votedReadItem.vd_Content}</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+														
+														<i class="fas fa-users float-rignt" style="color: black; margin-left: 60px;"></i>
+														<span class="badge bg-gray"> <c:if test="${votedReadItem[status.index+1].v_Count == null}">0</c:if>${votedReadItem.v_Count}
+														</span>
 														<br>
-												</c:forEach></td>
-												
+													</c:forEach></td>
+
 											</tr>
 											<tr>
 											</tr>
@@ -281,24 +283,52 @@
 
 
 					<div class="card-body">
+						<table>
+							<tr>
+								<td style="padding-left: 0px; padding-right: 0px; width: 315px;"><c:forEach var="voteTotalItem" items="${voteTotal}" varStatus="i">
+										<span class="users-list-date">${voteTotalItem.vd_Num}번&nbsp;&nbsp;</span>
+										<!-- 그래프 -->
+										<progress value="${voteTotalItem.v_Count}" max="${voteRead.co_Mem_Total }"></progress>
+										&nbsp;&nbsp;&nbsp;&nbsp;<span class="users-list-date float-right" style="font-size: small; margin-right: 70px;">${voteTotalItem.v_Count *100 / voteRead.co_Mem_Total *100 /100} % &nbsp;&nbsp;&nbsp;&nbsp; ${voteTotalItem.v_Count}명</span>
+										<br>
+									</c:forEach></td>
+							</tr>
+						</table>
 
-						<c:forEach var="voteTotalItem" items="${voteTotal}">
-							<p>${voteTotalItem.vd_Num}번&nbsp;&nbsp;${voteTotalItem.v_Count}명</p>
-							<div>
-								<progress value="${voteTotalItem.v_Count}" max="${voteRead.CO_MEM_TOTAL }"></progress>
-								<label>${voteTotalItem.v_Count}/${voteRead.CO_MEM_TOTAL }*100%</label>
-								<c:out value="${voteTotalItem.v_Count}x${voteRead.CO_MEM_TOTAL }"></c:out>
+						=============================
 
+						<c:forEach var="voteTotalItem" items="${voteTotal}" varStatus="i">
+							<span class="users-list-date">${voteTotalItem.vd_Num}번&nbsp;&nbsp;</span>
+							<!-- 그래프 -->
+							<progress value="${voteTotalItem.v_Count}" max="${voteRead.co_Mem_Total }"></progress>
+							<span class="users-list-date float-right" style="font-size: small; margin-right: 70px;"> ${voteTotalItem.v_Count *100 / voteRead.co_Mem_Total *100 /100} % &nbsp;&nbsp;&nbsp;&nbsp; ${voteTotalItem.v_Count}명</span>
+							<span class="users-list-date">&nbsp;${voteTotalItem.vd_Num}번투표자</span>
+
+							<c:forEach var="voterItem" items="${voterList}" varStatus="j">
+								<c:if test="${voteTotal[i.index].vd_Num eq voterList[j.index].vd_Num}">
+								&nbsp;&nbsp;&nbsp;&nbsp;
+								<%-- <c:out value="${voterItem.mem_Name}"/> --%>
+									<a class="users-list-name">${voterList[j.index].mem_Name}</a>
+
+
+									<%-- 	<a class="users-list-name">${voterItem.mem_Name}(${voterItem.mem_Id})</a> --%>
+								</c:if>
+							</c:forEach>
+						</c:forEach>
+
+						<!-- 차트 넣을곳-->
+
+						<%-- <c:forEach var="voterItem" items="${voterList}">
+						
 							
+							<div class="user-block">
+								<!-- 이름가죠오기 -->
+							<p>${voterItem.vd_Num}번투표자</p>
+								<span class="description" id="mem_Name"> <c:out value="${voterItem.mem_Name}" />
+								<c:out value="(${voterItem.mem_Id})" /></span>
 
 							</div>
-
-						</c:forEach>
-						<!-- 차트 넣을곳-->
-				
-						<c:forEach var="voterItem" items="${voterList}">
-							<p>${voterItem.vd_Num}번투표자${voterItem.mem_Name}(${voterItem.mem_Id})</p>
-						</c:forEach>
+						</c:forEach> --%>
 
 					</div>
 
@@ -326,22 +356,33 @@
 				<h4 class="m-0 text-dark" style="font-family: Recipekorea; max-width: 80%; display: contents;">투표자 현황</h4>
 			</div>
 			<tr style="background-color: #dc3545; color: white;">
-				<td style="width: 30%; vertical-align: top"><font size="3em"><b>보기</b></font></td>
+				<!-- <td style="width: 30%; vertical-align: top"><font size="3em"><b>보기</b></font></td> -->
 				<td style="width: 50%"><font size="3em"><b>투표자</b></font></a>
 				<td style="width: 50%"><font size="3em"><b></b></font></a>
 			</tr>
 			<tr>
-				<td><c:forEach var="votedRead" items="${votedRead}" varStatus="status">
+				<%--	<td>
+				 	<c:forEach var="votedRead" items="${votedRead}" varStatus="status">
 						<c:out value="${votedRead.vd_Num} ."></c:out>
 						<label class="form-check-label">&nbsp;${votedRead.vd_Content}</label>
 						<br>
 
+					</c:forEach> </td>--%>
+				<td>============================= <c:forEach var="voteTotalItem" items="${voteTotal}" varStatus="i">
+						<span class="users-list-date">${voteTotalItem.vd_Num}번&nbsp;&nbsp;</span>
+						<!-- 그래프 -->
+						<progress value="${voteTotalItem.v_Count}" max="${voteRead.co_Mem_Total }"></progress>
+						<span class="users-list-date float-right" style="font-size: small; margin-right: 70px;"> ${voteTotalItem.v_Count *100 / voteRead.co_Mem_Total *100 /100} % &nbsp;&nbsp;&nbsp;&nbsp; ${voteTotalItem.v_Count}명</span>
+						<span class="users-list-date">&nbsp;${voteTotalItem.vd_Num}번투표자</span>
+						<c:forEach var="voterItem" items="${voterList}" varStatus="j">
+							<c:if test="${voteTotal[i.index].vd_Num eq voterList[j.index].vd_Num}">
+								<%-- <c:out value="${voterItem.mem_Name}"/> --%>
+								<a class="users-list-name">${voterList[j.index].mem_Name}</a>
+
+							</c:if>
+						</c:forEach>
 					</c:forEach></td>
-				<td><c:forEach var="voterItem" items="${voterList}">
-						<label class="form-check-label">&nbsp;${voterItem.vd_Num}번투표자${voterItem.mem_Name}(${voterItem.mem_Id})</label>
-						<br>
-					</c:forEach></td>
-				<td>
+				<td></td>
 			</tr>
 			<tbody id='bookmarkitem'>
 			</tbody>
