@@ -457,7 +457,7 @@
 								<!--  <span class="right badge badge-danger">New</span>-->
 							</p>
 					</a></li>
-						<li class="nav-item"><a href="/personal/list?mem_Id=${member.mem_Id}" class="nav-link">
+						<li class="nav-item"><a href="/personal/main?mem_Id=${member.mem_Id}" class="nav-link">
 									<i class="nav-icon fas fa-user-secret"></i>
 									<p>내 공간</p>
 							</a></li>

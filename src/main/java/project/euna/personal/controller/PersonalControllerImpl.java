@@ -58,6 +58,26 @@ public class PersonalControllerImpl implements PersonalController {
 	IssueService issueService;
 
 
+	//홈 화면
+	@Override
+	@GetMapping("/main")
+	public ModelAndView main(PersonalVO personalVO, Criteria cri, String mem_Id, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		List<Map> list = personalService.searchList(cri);
+		
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		
+	
+		ModelAndView mav = new ModelAndView("personal/myHome");
+	
+		return mav;
+		
+	}	
+	
+	
+	
+	
+	
 	
 	//글 목록 조회 페이징
 	@Override
@@ -74,7 +94,6 @@ public class PersonalControllerImpl implements PersonalController {
 	
 		ModelAndView mav = new ModelAndView("personal/personalList");
 		mav.addObject("personalList", list);
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!personalList"+list);
 		mav.addObject("pageMaker", pageMaker);
 	
 		return mav;
