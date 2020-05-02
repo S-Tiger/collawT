@@ -83,13 +83,13 @@ function withdrawal() {
 	}
 	
 	
-	$(function () {
+$(function () {
     //-------------
     //- DONUT CHART -
     //-------------
     // Get context with jQuery - using jQuery's .get() method.
-    var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
-    var donutData        = {
+    var donutChartCanvas1 = $('#donutChart1').get(0).getContext('2d')
+    var donutData1        = {
       labels: [
           '발의됨', 
           '진행중',
@@ -102,25 +102,145 @@ function withdrawal() {
           data: [1,2,3,4],
           backgroundColor : ['#6c757d', '#007bff', '#ffc107', '#28a745'],
         }
-      ]
+      ],
+
     }
-    var donutOptions     = {
+    var donutOptions1     = {
       maintainAspectRatio : false,
       responsive : true,
+      cutoutPercentage: 65,
       legend: {
           display: true,
           position : 'left',
-          align : 'start'
-      }
-    }
+          align : 'start',
+        labels: {pointStyle:'circle', usePointStyle:true}
+      },
+  	elements: {
+  			center: {
+  				text: '총 100건',
+		        color: '#FF6384', // Default is #000000
+		        fontStyle: 'Arial', // Default is Arial
+		        sidePadding: 20 // Defualt is 20 (as a percentage)
+  			}
+  		}
+  	}     
+    
+    
+    
+
     //Create pie or douhnut chart
     // You can switch between pie and douhnut using the method below.
-    var donutChart = new Chart(donutChartCanvas, {
+    var donutChart1 = new Chart(donutChartCanvas1, {
       type: 'doughnut',
-      data: donutData,
-      options: donutOptions      
+      data: donutData1,
+      options: donutOptions1      
     })
-	})
+	
+	
+	
+	
+	Chart.pluginService.register({
+		beforeDraw: function (chart) {
+			if (chart.config.options.elements.center) {
+        //Get ctx from string
+        var ctx = chart.chart.ctx;
+        
+				//Get options from the center object in options
+        var centerConfig = chart.config.options.elements.center;
+      	var fontStyle = centerConfig.fontStyle || 'Arial';
+				var txt = centerConfig.text;
+        var color = centerConfig.color || '#000';
+        var sidePadding = centerConfig.sidePadding || 20;
+        var sidePaddingCalculated = (sidePadding/100) * (chart.innerRadius * 2)
+        //Start with a base font of 30px
+        ctx.font = "30px " + fontStyle;
+        
+				//Get the width of the string and also the width of the element minus 10 to give it 5px side padding
+        var stringWidth = ctx.measureText(txt).width;
+        var elementWidth = (chart.innerRadius * 2) - sidePaddingCalculated;
+
+        // Find out how much the font can grow in width.
+        var widthRatio = elementWidth / stringWidth;
+        var newFontSize = 30;
+        var elementHeight = (chart.innerRadius * 2);
+
+        // Pick a new font size so it will not be larger than the height of label.
+        var fontSizeToUse = Math.min(newFontSize, elementHeight);
+
+				//Set font settings to draw it correctly.
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        var centerX = ((chart.chartArea.left + chart.chartArea.right) / 2);
+        var centerY = ((chart.chartArea.top + chart.chartArea.bottom) / 2);
+        ctx.font = fontSizeToUse+"px " + fontStyle;
+        ctx.fillStyle = color;
+        
+        //Draw text in center
+        ctx.fillText(txt, centerX, centerY);
+			}
+		}
+	});
+	
+    
+    
+    //-------------
+    //- DONUT CHART -
+    //-------------
+    // Get context with jQuery - using jQuery's .get() method.
+    var donutChartCanvas2 = $('#donutChart2').get(0).getContext('2d')
+    var donutData2        = {
+      labels: [
+          '투표 참여율', 
+          '투표 미참여율'
+           
+      ],
+      datasets: [
+        {
+          data: [1,2],
+          backgroundColor : ['#FF6384', '#6c757d'],
+        }
+      ],
+
+    }
+    var donutOptions2     = {
+      maintainAspectRatio : false,
+      responsive : true,
+      cutoutPercentage: 65,
+      legend: {
+          display: false,
+          position : 'left',
+          align : 'start',
+        labels: {pointStyle:'circle', usePointStyle:true}
+      },
+  	elements: {
+  			center: {
+  				text: '90%',
+        color: '#FF6384', // Default is #000000
+        fontStyle: 'Arial', // Default is Arial
+        sidePadding: 20 // Defualt is 20 (as a percentage)
+  			}
+  		}
+      
+  	}     
+    
+    
+    
+
+    //Create pie or douhnut chart
+    // You can switch between pie and douhnut using the method below.
+    var donutChart2 = new Chart(donutChartCanvas2, {
+      type: 'doughnut',
+      data: donutData2,
+      options: donutOptions2      
+    })
+	
+	
+    
+    
+})
+
+
+
 
 </script>
 
@@ -215,7 +335,7 @@ function withdrawal() {
               </div>
               <div class="card-body">
 				<div class="chart-responsive">
-                <canvas id="donutChart" style="min-height: 252px; height: 252px; max-height: 252px; max-width: 100%; display: block; width: 406px;" width="812" height="502" class="chartjs-render-monitor"></canvas>
+                <canvas id="donutChart1" style="min-height: 252px; height: 252px; max-height: 252px; max-width: 100%; display: block; width: 406px;" width="812" height="502" class="chartjs-render-monitor"></canvas>
              	 </div>
 
               </div>
@@ -229,9 +349,10 @@ function withdrawal() {
                 <h3 class="card-title">투표 참여율</h3>
               </div>
               <div class="card-body">
-                  <div class="col-12 text-center">
-                    <input type="text" class="knob" value="70" data-width="100%" data-height="100%" data-fgColor="#932ab6" data-readOnly=true width="296" height="296" style="width: 237.8px; height: 251px;">
-                  </div>
+				<div class="chart-responsive">
+                <canvas id="donutChart2" style="min-height: 252px; height: 252px; max-height: 252px; max-width: 100%; display: block; width: 406px;" width="812" height="502" class="chartjs-render-monitor"></canvas>
+             	 </div>
+
 
               </div>
               <!-- /.card-body -->
