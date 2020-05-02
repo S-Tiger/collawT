@@ -22,9 +22,83 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
   <script type="text/javascript">
+  
+  function checkAll() {
+      if (!checkUserId(form.mem_Id.value)) {
+          return false;
+      } else if (!checkPassword(form.mem_Id.value, form.mem_Pwd.value, form.mem_Pwd1.value)) {
+          return false;
+      } else if (!checkName(form.mem_Name.value)) {
+          return false;
+      } 
+      return true;
+  }
+//공백확인 함수
+  function checkExistData(value, dataName) {
+      if (value == "") {
+          alert(dataName + " 입력해주세요!");
+          return false;
+      }
+      return true;
+  }
+
+  
+  function checkUserId(id) {
+      //Id가 입력되었는지 확인하기
+      if (!checkExistData(id, "아이디를"))
+          return false;
+
+      var idRegExp = /^[A-Za-z0-9_]+[A-Za-z0-9]*[@]{1}[A-Za-z0-9]+[A-Za-z0-9]*[.]{1}[A-Za-z]{1,3}$/;
+      if (!idRegExp.test(id)) {
+          alert("아이디는 이메일 형식으로 옳바르지 않습니다.");
+          form.mem_Id.value = "";
+          form.mem_Id.focus();
+          return false;
+      }
+      return true; //확인이 완료되었을 때
+  }
+
+
+  function checkPassword(id, password1, password2) {
+      //비밀번호가 입력되었는지 확인하기
+      if (!checkExistData(password1, "비밀번호를"))
+          return false;
+      //비밀번호 확인이 입력되었는지 확인하기
+      if (!checkExistData(password2, "비밀번호 확인을"))
+          return false;
+
+      var password1RegExp = /^[a-zA-z0-9]{4,12}$/; //비밀번호 유효성 검사
+      if (!password1RegExp.test(password1)) {
+          alert("비밀번호는 영문 대소문자와 숫자 4~12자리로 입력해야합니다!");
+          form.mem_Pwd.value = "";
+          form.mem_Pwd.focus();
+          return false;
+      }
+      //비밀번호와 비밀번호 확인이 맞지 않다면..
+      if (password1 != password2) {
+          alert("두 비밀번호가 맞지 않습니다.");
+          form.mem_Pwd.value = "";
+          form.mem_Pwd1.value = "";
+          form.mem_Pwd1.focus();
+          return false;
+      }
+
+      //아이디와 비밀번호가 같을 때..
+      if (id == password1) {
+          alert("아이디와 비밀번호는 같을 수 없습니다!");
+          form.mem_Pwd.value = "";
+          form.mem_Pwd1.value = "";
+          form.mem_Pwd1.focus();
+          return false;
+      }
+      return true; //확인이 완료되었을 때
+  }    
+  
+  
+  
   $(function(){
 	  
-		$("#joinForm").submit(function(){
+		 $("#joinForm").submit(function(){
 			//console.log("checked: "+$("agreeTerms").is(":checked"));
 			var mem_Pwd0 = $("#mem_Pwd0").val();
 			var mem_Pwd1 = $("#mem_Pwd1").val();
@@ -34,7 +108,7 @@
 			if ($("#agreeTerms").is(":checked")==false){
 				alert("회원가입 동의를 해주세요.");	
 				return false;
-			}else if(mem_Pwd0 !== mem_Pwd1){
+			}/* else if(mem_Pwd0 !== mem_Pwd1){
 				alert("비밀번호가 다릅니다.");
 				$("#mem_Pwd0").val("").focus();
 				$("#mem_Pwd1").val("");
@@ -48,12 +122,12 @@
 			}else if (mem_Pwd0.length < 8 || mem_Pwd0.length > 12 ) {
 				alert("비밀번호는 8자리 ~ 12자리 이내로 입력해주세요");
 				$("#mem_Pwd0").val("").focus();
-				return false;
-			}else if (num < 0 || eng < 0){
-				alert("영문,숫자, 특수문자를 혼합하여 입력해주세요.");
+				return false; */
+			else if (num < 0 || eng < 0){
+				alert("비밀번호에 영문,숫자, 특수문자를 혼합하여 입력해주세요.");
 				return false;
 			}
-		}); 
+		});  
 	// 아이디 유효성 검사(1 = 중복 / 0 != 중복)
 		$("#mem_Id").blur(function() {
 			var idJ = /^[a-z0-9]{4,12}$/;
@@ -115,7 +189,7 @@
     <div class="card-body register-card-body">
       <p class="login-box-msg">회원가입</p>
 
-      <form action="/member/join" method="post" id="joinForm">
+      <form action="/member/join" name="form" method="post" id="joinForm"onsubmit="return checkAll()">
         <div class="input-group mb-3">
           <input type="text" name="mem_Name" class="form-control" placeholder="콜라우티에서 사용할 이름 또는 닉네임">
           <div class="input-group-append">
@@ -136,7 +210,7 @@
         <!-- <input type="button" id="checkBtn" onClick="" value="중복체크하기"> -->
         <!-- 아이디 중복값  -->
         <div class="input-group mb-3">
-          <input type="password" id="pw" name="mem_Pwd" class="form-control" placeholder="비밀번호">
+          <input type="password" id="mem_Pwd0" name="mem_Pwd" class="form-control" placeholder="비밀번호">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -144,7 +218,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" id="pw2" class="form-control" placeholder="비밀번호 확인">
+          <input type="password" id="mem_Pwd1" class="form-control" name="mem_Pwd1" placeholder="비밀번호 확인">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -158,7 +232,7 @@
               <input type="checkbox" id="agreeTerms" name="terms" >
               <label for="agreeTerms">
               회원가입 <a href="#">동의</a>
-              <script type="text/javascript">
+              <!-- <script type="text/javascript">
               $(document).ready(function(){
             	    $("#agreeTerms").change(function(){
             	        if($("#agreeTerms").is(":checked")){
@@ -169,7 +243,7 @@
             	    });
             	});
               
-              </script>
+              </script> -->
               </label>
             </div>
           </div>
@@ -198,6 +272,7 @@
 
       <a href="/member/loginPage" class="text-center">이미 회원가입을 하셨나요?</a>
     </div>
+    
     <!-- /.form-box -->
   </div><!-- /.card -->
 </div>

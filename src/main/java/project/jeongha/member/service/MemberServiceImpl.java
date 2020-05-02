@@ -186,77 +186,83 @@ public class MemberServiceImpl implements MemberService {
 		if (div.equals("join")) {
 			// 회원가입 메일 내용
 			subject = "Collaw T 협업 회원가입 인증 메일입니다.";
-			msg +="<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css\"/>";
-			msg += "<div align='center' style='border:1px solid black; font-family:verdana'>";
-			msg += "<h3 style='color: blue;'>";
-			msg += memberVO.getMem_Name() + "님 Collaw T 회원가입을 환영합니다.</h3>";
-			msg += "<i class=\"fas fa-envelope-open-text\"></i>";
-			msg += "<div style='font-size: 130%'>";
-			msg += "하단의 인증 버튼 클릭 시 정상적으로 회원가입이 완료됩니다.</div><br/>";
-			msg += "<form method='post' action='http://localhost:8090/member/approvalMember'>";
-			msg += "<input type='hidden' name='mem_Id' value='" + memberVO.getMem_Id() + "'>";
-			msg += "<input type='hidden' name='mem_Key' value='" + memberVO.getMem_Key() + "'>";
-			msg += "<input type='submit' value='인증'></form><br/></div>";
-//			msg +=" \"  <html>\"\n" + 
-//					"  + \" <head>\"\n" + 
-//					"  + \" <link rel=stylesheet type=text/css href=URL/com/yani2.css>\"\n" + 
-//					"  + \" </head>\"\n" + 
-//					"  + \" <body bgcolor=white background=\\\"URL/images/music_mail/leaf.gif\\\">\"\n" + 
-//					"  + \" <table width=100% height=100% style=\\\"line-height:100%; margin-top:0; margin-bottom:0;\\\" border=0 cellpadding=0 cellspacing=0>\"\n" + 
-//					"  + \"  <tr>\"\n" + 
-//					"  + \"   <td width=100% height=100% align=center valign=center>\"\n" + 
-//					"  + \"    <table style=\\\"line-height:100%; margin-top:0; margin-bottom:0;\\\" bgcolor=black border=0 cellpadding=2 cellspacing=0 width=442>\"\n" + 
-//					"  + \"     <tr>\"\n" + 
-//					"  + \"      <td>\"\n" + 
-//					"  + \"       <table style=\\\"line-height:100%; margin-top:0; margin-bottom:0;\\\" border=0 cellpadding=0 cellspacing=0 width=440>\"\n" + 
-//					"     + \"        <tr>\"\n" + 
-//					"     + \"         <td width=100%><img src=\\\"URL/images/music_mail/70_top.gif\\\" width=440 height=105 border=0></td>\"\n" + 
-//					"     + \"        </tr>\"\n" + 
-//					"  + \"        <tr>\"\n" + 
-//					"  + \"         <td width=100%>\"\n" + 
-//					"  + \"          <table border=0 cellpadding=0 cellspacing=0 width=100%>\"\n" + 
-//					"  + \"           <tr>\"\n" + 
-//					"  + \"            <td width=27 height=188 background=\\\"URL/images/music_mail/70_left.gif\\\"></td>\"\n" + 
-//					"        + \"            <td width=383 height=188 bgcolor=#FFEB9C valign=top>to. \" + fc.a2k(name) + \"<br>\"\n" + 
-//					"        +              bodys + \"<br><br><br>\"\n" + 
-//					"        + \"             ----------------------------------------------------------------------------\"\n" + 
-//					"        + \"             <br>\"\n" + 
-//					"        + \"             가수 :\" + music_title + \"<br>\"\n" + 
-//					"        + \"             제목 :\" + music_name\n" + 
-//					"        + \"            </td>\"\n" + 
-//					"        + \"            <td width=30 height=188 background=\\\"URL/images/music_mail/70_right.gif\\\"></td>\"\n" + 
-//					"        + \"           </tr>\"\n" + 
-//					"        + \"          </table>\"\n" + 
-//					"        + \"         </td>\"\n" + 
-//					"        + \"        </tr>\"\n" + 
-//					"  + \"        <tr>\"\n" + 
-//					"  + \"         <td width=100%>\"\n" + 
-//					"  + \"          <table border=0 cellpadding=0 cellspacing=0 width=100%>\"\n" + 
-//					"  + \"           <tr>\"\n" + 
-//					"  + \"            <td><img src=\\\"URL/images/music_mail/70_bottom1.gif\\\" width=200 height=160 border=0></td><td><img src=\\\"URL/images/music_mail/70_bottom2.gif\\\" width=240 height=160 border=0></td>\"\n" + 
-//					"  + \"           </tr>\"\n" + 
-//					"  + \"          </table>\"\n" + 
-//					"  + \"         </td>\"\n" + 
-//					"  + \"        </tr>\"\n" + 
-//					"  + \"       </table>\"\n" + 
-//					"  + \"      </td>\"\n" + 
-//					"  + \"     </tr>\"\n" + 
-//					"  + \"    </table>\"\n" + 
-//					"  + \"   </td>\"\n" + 
-//					"  + \"  </tr>\"\n" + 
-//					"  + \" </table>\"\n" + 
-//					"  + \" <div style=\\\"display:none; left:-1000px; top:-1000px\\\">\"\n" + 
-//					"  + \" </div>\"\n" + 
-//					"  + \" </body>\"\n" + 
-//					"  + \" </html>\";";
+			msg += "<html>";
+			msg += "<head>";
+			msg += "<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css\"/>";
+			msg += "</head>";
+			msg += "<body>";
+			msg +="\n" + 
+					"<div style=\"font-family: 'Apple SD Gothic Neo', 'sans-serif' !important; width: 540px; height: 600px; border-top: 4px solid #02b875; margin: 100px auto; padding: 30px 0; box-sizing: border-box;\">\n" + 
+					"    <h1 style=\"margin: 0; padding: 0 5px; font-size: 28px; font-weight: 400;\">\n" + 
+					"        <span style=\"font-size: 15px; margin: 0 0 10px 3px;\">콜라우티</span><br />\n" + 
+					"        <span style=\"color: #02b875;\">안녕하세요 콜라우티 메일인증</span> 안내입니다.\n" + 
+					"    </h1>\n";
+			msg += 			"<img src=\"https://daeakin.github.io//img/Mail.png\">"+
+					"    <p style=\"font-size: 16px; line-height: 26px; margin-top: 50px; padding: 0 5px;\">\n" + 
+					"        안녕하세요.<br />\n" + 
+					"        콜라우티에 가입해 주셔서 진심으로 감사드립니다.<br />\n" + 
+					"        아래 <b style=\"color:#02b875;\">'메일 인증'</b> 버튼을 클릭하여 회원가입을 완료해 주세요.<br />\n" + 
+					"        감사합니다.\n" + 
+					"    </p>\n" + 
+					"\n" + 
+					"\n" + 
+					"\n" + 
+					"    <form method=\"post\" action=\"http://localhost:8090/member/approvalMember\">\n" + 
+					"    						<input type=\"hidden\" name=\"mem_Id\" value= \"" +  memberVO.getMem_Id()+ "\">\n" + 
+					"     						<input type=\"hidden\" name=\"mem_Key\" value=\"" +memberVO.getMem_Key()+"\" >\n" + 
+					"     						<input type=\"submit\" value=\"메일인증\">\n" + 
+					"    </form><br/>\n" + 
+					"\n" + 
+					"\n" + 
+					"    <div style=\"border-top: 1px solid #DDD; padding: 5px;\">\n" + 
+					"        <p style=\"font-size: 13px; line-height: 21px; color: #555;\">\n" + 
+					"            만약 버튼이 정상적으로 클릭되지 않는다면,collawt@gmail.com으로 문의 주세요<br />\n" + 
+					"        </p>\n" + 
+					"    </div>\n" + 
+					"</div>";
+//			msg += 		"<div align='center' style='border:1px solid black; font-family:verdana'>";
+//			msg += 			"<h3 style='color: black;'>";
+//			msg += 				memberVO.getMem_Name() + "님 Collaw T 회원가입을 환영합니다.</h3>";
+//			msg += 			"<i class=\"fas fa-envelope-open-text\"></i>";
+//			msg += 			"<img src=\"https://daeakin.github.io//img/Mail.png\">";
+//			msg += 				"<div style='font-size: 130%'>";
+//			msg += 					"하단의 인증 버튼 클릭 시 정상적으로 회원가입이 완료됩니다.</div><br/>";
+//			msg += 					"<form method='post' action='http://localhost:8090/member/approvalMember'>";
+//			msg += 						"<input type='hidden' name='mem_Id' value='" + memberVO.getMem_Id() + "'>";
+//			msg += 						"<input type='hidden' name='mem_Key' value='" + memberVO.getMem_Key() + "'>";
+//			msg += 						"<input type='submit' value='회원인증'>"
+//					+ 				"</form><br/>"
+//					+ 	"</div>";
+			msg += "</body>";
+			msg += "</html>";
 
 		} else if (div.equals("find_pw")) {
 			subject = "CollawT 임시 비밀번호 입니다.";
-			msg += "<div align='center' style='border:1px solid black; font-family:verdana'>";
-			msg += "<h3 style='color: blue;'>";
-			msg += memberVO.getMem_Name() + "님의 임시 비밀번호 입니다. 비밀번호를 변경하여 사용하세요.</h3>";
-			msg += "<p>임시 비밀번호 : ";
-			msg += memberVO.getMem_Pwd() + "</p></div>";
+//			msg += "<div align='center' style='border:1px solid black; font-family:verdana'>";
+//			msg += "<h3 style='color: blue;'>";
+//			msg += memberVO.getMem_Name() + "님의 임시 비밀번호 입니다. 비밀번호를 변경하여 사용하세요.</h3>";
+//			msg += "<p>임시 비밀번호 : ";
+//			msg += memberVO.getMem_Pwd() + "</p></div>";
+			msg += "<div style=\"font-family: 'Apple SD Gothic Neo', 'sans-serif' !important; width: 540px; height: 600px; border-top: 4px solid #02b875; margin: 100px auto; padding: 30px 0; box-sizing: border-box;\">\n" + 
+					"	<h1 style=\"margin: 0; padding: 0 5px; font-size: 28px; font-weight: 400;\">";
+			msg +=		"<span style=\"font-size: 15px; margin: 0 0 10px 3px;\"> 콜라우티 </span><br/>";
+			msg +=		"<span style=\"color: #02b875;\">임시 비밀번호</span> 안내입니다.</h1>";
+			msg +="			<p style=\"font-size: 16px; line-height: 26px; margin-top: 50px; padding: 0 5px;\">\n" + 
+					"		안녕하세요 콜라우티 입니다.<br />\n" ;
+			msg += 			"요청하신 "+memberVO.getMem_Name() + "님의 임시 비밀번호 입니다.임시 번호로 로그인 후 비밀번호를 변경하여 사용하세요.<br />\n";
+			msg +=		"	</p>";
+			msg +="<p style=\"font-size: 16px; margin: 40px 5px 20px; line-height: 28px;\">\n" + 
+					"		임시 비밀번호: <br />\n" + 
+					"		<span style=\"font-size: 24px;\">"+ memberVO.getMem_Pwd() +"</span>\n" + 
+					"	</p>";
+			msg += "<div style=\"border-top: 1px solid #DDD; padding: 5px;\">\n" + 
+					"		<p style=\"font-size: 13px; line-height: 21px; color: #555;\">\n" + 
+					"			문의사항은 collawt@gmail.com으로 문의 주세요!.<br />\n" + 
+					"		</p>\n" + 
+					"	</div>\n" + 
+					"</div>";
+			
+			
 		}
 		// 받는 사람 E-Mail 주소
 		String mail = memberVO.getMem_Id();

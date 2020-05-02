@@ -213,21 +213,23 @@
 											<!-- 투표 내용 -->
 											<!--  상태 index -->
 											<!-- for each -->
+												<c:forEach var="votedReadItem" items="${votedRead}" varStatus="status">
 											<tr>
-												<td style="padding-left: 0px; padding-right: 0px; width: 315px;"><c:forEach var="votedReadItem" items="${votedRead}" varStatus="status">
+												<td style="padding-left: 0px; padding-right: 0px; width: 315px;">
 														<!-- 투표 리스트 -->
 														<input type="hidden" name="getVsNum" value="${status.index+1 }">
 														<input class="form-check-input" type="radio" name="vd_Num" value="${votedReadItem.vd_Num}" style="margin-left: 10px;">
 
 														<label class="form-check-label" style="margin-left: 40px;">${votedReadItem.vd_Num}.&nbsp;&nbsp;&nbsp;${votedReadItem.vd_Content}</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 														
-														<i class="fas fa-users float-rignt" style="color: black; margin-left: 60px;"></i>
-														<span class="badge bg-gray"> <c:if test="${votedReadItem[status.index+1].v_Count == null}">0</c:if>${votedReadItem.v_Count}
-														</span>
+												</td>
+												<td>		
+														<span class="badge bg-gray">${votedReadItem.v_Count}</span>
 														<br>
-													</c:forEach></td>
+												</td>		
 
 											</tr>
+													</c:forEach>
 											<tr>
 											</tr>
 											<tr>
@@ -241,6 +243,7 @@
 													</c:if></td>
 												<td></td>
 											</tr>
+											
 										</tbody>
 									</table>
 								</div>
@@ -308,7 +311,8 @@
 								<c:if test="${voteTotal[i.index].vd_Num eq voterList[j.index].vd_Num}">
 								&nbsp;&nbsp;&nbsp;&nbsp;
 								<%-- <c:out value="${voterItem.mem_Name}"/> --%>
-									<a class="users-list-name">${voterList[j.index].mem_Name}</a>
+									 &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+									 <a class="users-list-name">${voterList[j.index].mem_Name}</a>
 
 
 									<%-- 	<a class="users-list-name">${voterItem.mem_Name}(${voterItem.mem_Id})</a> --%>
