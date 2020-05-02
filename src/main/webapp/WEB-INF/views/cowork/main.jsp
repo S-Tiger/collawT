@@ -100,13 +100,18 @@ function withdrawal() {
       datasets: [
         {
           data: [1,2,3,4],
-          backgroundColor : ['#f56954', '#00a65a', '#f39c12', '#00c0ef'],
+          backgroundColor : ['#6c757d', '#007bff', '#ffc107', '#28a745'],
         }
       ]
     }
     var donutOptions     = {
       maintainAspectRatio : false,
       responsive : true,
+      legend: {
+          display: true,
+          position : 'left',
+          align : 'start'
+      }
     }
     //Create pie or douhnut chart
     // You can switch between pie and douhnut using the method below.
@@ -197,18 +202,49 @@ function withdrawal() {
 								
 <!--  진행상황 및 멤버 뷰 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 			<div class="row">
-			<div class="col-md-8">
+
+			<div class="col-md-4">
+			
+			<div class="card">
+              <div class="card-header">
+                <h3 class="card-title">이슈 진행 현황</h3>
+
+                <div class="card-tools">
+
+                </div>
+              </div>
+              <div class="card-body">
+				<div class="chart-responsive">
+                <canvas id="donutChart" style="min-height: 252px; height: 252px; max-height: 252px; max-width: 100%; display: block; width: 406px;" width="812" height="502" class="chartjs-render-monitor"></canvas>
+             	 </div>
+
+              </div>
+              <!-- /.card-body -->
+            </div>
+			</div>
+			
+			<div class="col-md-4">
+				<div class="card">
+              <div class="card-header">
+                <h3 class="card-title">투표 참여율</h3>
+              </div>
+              <div class="card-body">
+                  <div class="col-12 text-center">
+                    <input type="text" class="knob" value="70" data-width="100%" data-height="100%" data-fgColor="#932ab6" data-readOnly=true width="296" height="296" style="width: 237.8px; height: 251px;">
+                  </div>
+
+              </div>
+              <!-- /.card-body -->
+            </div>
+			</div>
+
+
+			<div class="col-md-4">
 			                <div class="card">
                   <div class="card-header">
-                    <h3 class="card-title">Latest Members</h3>
+                    <h3 class="card-title">협업공간 멤버</h3>
 
-                    <div class="card-tools">
-                      <span class="badge badge-danger">8 New Members</span>
-                      <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                      </button>
-                      <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i>
-                      </button>
-                    </div>
+
                   </div>
                   <!-- /.card-header -->
                   <div class="card-body p-0">
@@ -257,31 +293,14 @@ function withdrawal() {
                     <!-- /.users-list -->
                   </div>
                   <!-- /.card-body -->
-                  <div class="card-footer text-center">
-                    <a href="javascript::">View All Users</a>
-                  </div>
+
                   <!-- /.card-footer -->
                 </div>
 			
 			</div>
-			<div class="col-md-4">
 			
-			<div class="card card-danger">
-              <div class="card-header">
-                <h3 class="card-title">Donut Chart</h3>
 
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
-                </div>
-              </div>
-              <div class="card-body"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 406px;" width="812" height="500" class="chartjs-render-monitor"></canvas>
-              </div>
-              <!-- /.card-body -->
-            </div>
-			</div>
+			
 			</div>
 								
 <!-- 최근 등록된 이슈 및 투표 글 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
