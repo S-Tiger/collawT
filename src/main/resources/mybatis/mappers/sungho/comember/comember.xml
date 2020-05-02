@@ -9,6 +9,7 @@
 		<result property="c_Name" column="c_Name" />
 		<result property="mem_Id" column="mem_Id" />
 		<result property="mem_Name" column="mem_Name" />
+		<result property="mem_File" column="mem_File" />
 		<result property="grade" column="grade" />
 	</resultMap>
 
@@ -35,8 +36,8 @@
 	<select id="memberList" resultMap="comemberResult01"
 		parameterType="java.util.Map"> 
       <![CDATA[
-         select c_Id, mem_Id, mem_Name, grade
-			from(select c.c_Id, c.mem_Id, m.mem_Name, c.grade
+         select c_Id, mem_Id, mem_Name, grade, mem_File
+			from(select c.c_Id, c.mem_Id, m.mem_Name, c.grade, m.mem_File
        		  from co_member c, member m
          		 where m.mem_Id = c.mem_Id
          )

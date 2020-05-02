@@ -12,6 +12,13 @@
 .nav-pills .nav-link.active {
 	background-color: #dc3545;
 }
+#userImage1 {
+width:70px !important; height:70px !important;
+}
+
+#userImage2 {
+width:70px !important; height:70px !important;
+}
 </style>
 <script type="text/javascript">
 function withdrawal() {
@@ -310,13 +317,11 @@ $(function () {
 						 id= "issueMenu">투표</a></li>
 						
 				</ol>
-				
-				 <button type="button" class="btn btn-success float-right" onclick="location.href='/project/issue/insert?c_Id=${pjt.c_Id}'"style="text-align:center; float:right; background-color:#DC3545; border-color:#DC3545; font-family: Spoqa Han Sans; font-size:13px;">
-								<i class="fas fa-edit"></i> <b>이슈 작성</b></button>
+
 				
 			</div>
 						<!-- Main content -->
-						<section class="content">
+						<section class="content" style="background-color: rgb(242,242,242)">
 							<div class="container-fluid">
 							<br>
 								
@@ -327,7 +332,7 @@ $(function () {
 			
 			<div class="card">
               <div class="card-header">
-                <h3 class="card-title">이슈 진행 현황</h3>
+                <h3 class="card-title"><b>이슈 진행 현황</b></h3>
 
                 <div class="card-tools">
 
@@ -346,7 +351,7 @@ $(function () {
 			<div class="col-md-4">
 				<div class="card">
               <div class="card-header">
-                <h3 class="card-title">투표 참여율</h3>
+                <h3 class="card-title"><b>투표 참여율</b></h3>
               </div>
               <div class="card-body">
 				<div class="chart-responsive">
@@ -363,53 +368,30 @@ $(function () {
 			<div class="col-md-4">
 			                <div class="card">
                   <div class="card-header">
-                    <h3 class="card-title">협업공간 멤버</h3>
+                    <h3 class="card-title"><b>협업공간 멤버</b></h3>
+                    	 <h3 class="card-title float-right" style="text-align:right">총 ${memberList.size()}명</h3>
 
 
                   </div>
                   <!-- /.card-header -->
-                  <div class="card-body p-0">
+                  <div class="card-body p-0" style="min-height: 292px; overflow:auto;">
+                  
                     <ul class="users-list clearfix">
+                    <c:forEach var="member" items="${memberList}" >
                       <li>
-                        <img src="${contextPath}/resources/dist/img/user1-128x128.jpg" alt="User Image">
-                        <a class="users-list-name" href="#">Alexander Pierce</a>
-                        <span class="users-list-date">Today</span>
+                        <c:if test="${member.mem_File != null }">
+						<img alt="프로필사진"
+						src="/member/getByteImage?mem_Id=${member.mem_Id}" class="img-circle elevation-2" id="userImage1"/>
+						</c:if>
+						<c:if test="${member.mem_File == null }">
+						<img src="${contextPath}/resources/dist/img/profile.jpg" 
+						class="img-circle elevation-2" id="userImage2" alt="프로필사진">
+						</c:if>
+						<br>
+                        <a class="users-list-name" href="#">${member.mem_Name}</a>
+                        
                       </li>
-                      <li>
-                        <img src="${contextPath}/resources/dist/img/user8-128x128.jpg" alt="User Image">
-                        <a class="users-list-name" href="#">Norman</a>
-                        <span class="users-list-date">Yesterday</span>
-                      </li>
-                      <li>
-                        <img src="${contextPath}/resources/dist/img/user7-128x128.jpg" alt="User Image">
-                        <a class="users-list-name" href="#">Jane</a>
-                        <span class="users-list-date">12 Jan</span>
-                      </li>
-                      <li>
-                        <img src="${contextPath}/resources/dist/img/user6-128x128.jpg" alt="User Image">
-                        <a class="users-list-name" href="#">John</a>
-                        <span class="users-list-date">12 Jan</span>
-                      </li>
-                      <li>
-                        <img src="${contextPath}/resources/dist/img/user2-160x160.jpg" alt="User Image">
-                        <a class="users-list-name" href="#">Alexander</a>
-                        <span class="users-list-date">13 Jan</span>
-                      </li>
-                      <li>
-                        <img src="${contextPath}/resources/dist/img/user5-128x128.jpg" alt="User Image">
-                        <a class="users-list-name" href="#">Sarah</a>
-                        <span class="users-list-date">14 Jan</span>
-                      </li>
-                      <li>
-                        <img src="${contextPath}/resources/dist/img/user4-128x128.jpg" alt="User Image">
-                        <a class="users-list-name" href="#">Nora</a>
-                        <span class="users-list-date">15 Jan</span>
-                      </li>
-                      <li>
-                        <img src="${contextPath}/resources/dist/img/user3-128x128.jpg" alt="User Image">
-                        <a class="users-list-name" href="#">Nadia</a>
-                        <span class="users-list-date">15 Jan</span>
-                      </li>
+                    </c:forEach>
                     </ul>
                     <!-- /.users-list -->
                   </div>
@@ -429,7 +411,7 @@ $(function () {
 									<div class="col-md-6">
 										<div class="card">
               <div class="card-header border-transparent">
-                <h3 class="card-title"><i class="ion ion-clipboard mr-1"></i>최근 등록된 글</h3>
+                <h3 class="card-title"><i class="ion ion-clipboard mr-1"></i><b>최근 등록된 글</b></h3>
 
               </div>
               <!-- /.card-header -->
@@ -478,7 +460,7 @@ $(function () {
 									<div class="col-md-6">
 										<div class="card">
               <div class="card-header border-transparent">
-                <h3 class="card-title"><i class="ion ion-clipboard mr-1"></i>현재 진행중인 투표</h3>
+                <h3 class="card-title"><i class="ion ion-clipboard mr-1"></i><b>현재 진행중인 투표</b></h3>
 
               </div>
               <!-- /.card-header -->

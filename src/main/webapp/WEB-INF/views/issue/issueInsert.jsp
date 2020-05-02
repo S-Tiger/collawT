@@ -318,7 +318,7 @@ span[name="chargerspan"] {
 				style="font-size: 0.9em; line-height: 1.0; color: #a1a1a1; ">
 			
 				담당자 목록을  확인하세요.</span>
-              <div id="chargerList" class = "form-control" style="height: 100px; width: 100%; white-space: pre-line; margin-bottom: 5px; overflow:scroll;"></div>
+              <div id="chargerList" class = "form-control" style="height: 100px; width: 100%; white-space: pre-line; margin-bottom: 5px; overflow:auto;"></div>
              
 				</div>
 				<div id="chargerForm"></div>
