@@ -81,8 +81,44 @@ function withdrawal() {
 		$('#hidden_Id'+applyCount).remove();
 		
 	}
+	
+	
+	$(function () {
+    //-------------
+    //- DONUT CHART -
+    //-------------
+    // Get context with jQuery - using jQuery's .get() method.
+    var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
+    var donutData        = {
+      labels: [
+          '발의됨', 
+          '진행중',
+          '일시정지', 
+          '완료', 
+           
+      ],
+      datasets: [
+        {
+          data: [1,2,3,4],
+          backgroundColor : ['#f56954', '#00a65a', '#f39c12', '#00c0ef'],
+        }
+      ]
+    }
+    var donutOptions     = {
+      maintainAspectRatio : false,
+      responsive : true,
+    }
+    //Create pie or douhnut chart
+    // You can switch between pie and douhnut using the method below.
+    var donutChart = new Chart(donutChartCanvas, {
+      type: 'doughnut',
+      data: donutData,
+      options: donutOptions      
+    })
+	})
 
 </script>
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
@@ -157,6 +193,210 @@ function withdrawal() {
 						<!-- Main content -->
 						<section class="content">
 							<div class="container-fluid">
+							<br>
+								
+<!--  진행상황 및 멤버 뷰 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+			<div class="row">
+			<div class="col-md-8">
+			                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">Latest Members</h3>
+
+                    <div class="card-tools">
+                      <span class="badge badge-danger">8 New Members</span>
+                      <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                      </button>
+                      <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body p-0">
+                    <ul class="users-list clearfix">
+                      <li>
+                        <img src="${contextPath}/resources/dist/img/user1-128x128.jpg" alt="User Image">
+                        <a class="users-list-name" href="#">Alexander Pierce</a>
+                        <span class="users-list-date">Today</span>
+                      </li>
+                      <li>
+                        <img src="${contextPath}/resources/dist/img/user8-128x128.jpg" alt="User Image">
+                        <a class="users-list-name" href="#">Norman</a>
+                        <span class="users-list-date">Yesterday</span>
+                      </li>
+                      <li>
+                        <img src="${contextPath}/resources/dist/img/user7-128x128.jpg" alt="User Image">
+                        <a class="users-list-name" href="#">Jane</a>
+                        <span class="users-list-date">12 Jan</span>
+                      </li>
+                      <li>
+                        <img src="${contextPath}/resources/dist/img/user6-128x128.jpg" alt="User Image">
+                        <a class="users-list-name" href="#">John</a>
+                        <span class="users-list-date">12 Jan</span>
+                      </li>
+                      <li>
+                        <img src="${contextPath}/resources/dist/img/user2-160x160.jpg" alt="User Image">
+                        <a class="users-list-name" href="#">Alexander</a>
+                        <span class="users-list-date">13 Jan</span>
+                      </li>
+                      <li>
+                        <img src="${contextPath}/resources/dist/img/user5-128x128.jpg" alt="User Image">
+                        <a class="users-list-name" href="#">Sarah</a>
+                        <span class="users-list-date">14 Jan</span>
+                      </li>
+                      <li>
+                        <img src="${contextPath}/resources/dist/img/user4-128x128.jpg" alt="User Image">
+                        <a class="users-list-name" href="#">Nora</a>
+                        <span class="users-list-date">15 Jan</span>
+                      </li>
+                      <li>
+                        <img src="${contextPath}/resources/dist/img/user3-128x128.jpg" alt="User Image">
+                        <a class="users-list-name" href="#">Nadia</a>
+                        <span class="users-list-date">15 Jan</span>
+                      </li>
+                    </ul>
+                    <!-- /.users-list -->
+                  </div>
+                  <!-- /.card-body -->
+                  <div class="card-footer text-center">
+                    <a href="javascript::">View All Users</a>
+                  </div>
+                  <!-- /.card-footer -->
+                </div>
+			
+			</div>
+			<div class="col-md-4">
+			
+			<div class="card card-danger">
+              <div class="card-header">
+                <h3 class="card-title">Donut Chart</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                </div>
+              </div>
+              <div class="card-body"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 406px;" width="812" height="500" class="chartjs-render-monitor"></canvas>
+              </div>
+              <!-- /.card-body -->
+            </div>
+			</div>
+			</div>
+								
+<!-- 최근 등록된 이슈 및 투표 글 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+								<div class="row">
+									<div class="col-md-6">
+										<div class="card">
+              <div class="card-header border-transparent">
+                <h3 class="card-title"><i class="ion ion-clipboard mr-1"></i>최근 등록된 글</h3>
+
+              </div>
+              <!-- /.card-header -->
+              
+              <div class="card-body p-0">
+                <div class="table-responsive">
+                  <table class="table m-0">
+
+                    <tbody>
+                    <tr>
+                      <td>투표/이슈</td>
+                      <td>글 제목</td>
+                      <td>작성자</td>
+                    </tr>
+                                        <tr>
+                      <td>투표/이슈</td>
+                      <td>글 제목</td>
+                      <td>작성자</td>
+                    </tr>
+                                        <tr>
+                      <td>투표/이슈</td>
+                      <td>글 제목</td>
+                      <td>작성자</td>
+                    </tr>
+                                        <tr>
+                      <td>투표/이슈</td>
+                      <td>글 제목</td>
+                      <td>작성자</td>
+                    </tr>
+                                        <tr>
+                      <td>투표/이슈</td>
+                      <td>글 제목</td>
+                      <td>작성자</td>
+                    </tr>
+               
+                    </tbody>
+                  </table>
+                </div>
+                <!-- /.table-responsive -->
+              </div>
+              <!-- /.card-body -->
+
+            </div>
+									</div>
+									
+									<div class="col-md-6">
+										<div class="card">
+              <div class="card-header border-transparent">
+                <h3 class="card-title"><i class="ion ion-clipboard mr-1"></i>현재 진행중인 투표</h3>
+
+              </div>
+              <!-- /.card-header -->
+              
+              <div class="card-body p-0">
+                <div class="table-responsive">
+                  <table class="table m-0">
+
+                    <tbody>
+                    <tr>
+                      <td>투표/이슈</td>
+                      <td>글 제목</td>
+                      <td>작성자</td>
+                    </tr>
+                                        <tr>
+                      <td>투표/이슈</td>
+                      <td>글 제목</td>
+                      <td>작성자</td>
+                    </tr>
+                                        <tr>
+                      <td>투표/이슈</td>
+                      <td>글 제목</td>
+                      <td>작성자</td>
+                    </tr>
+                                        <tr>
+                      <td>투표/이슈</td>
+                      <td>글 제목</td>
+                      <td>작성자</td>
+                    </tr>
+                                        <tr>
+                      <td>투표/이슈</td>
+                      <td>글 제목</td>
+                      <td>작성자</td>
+                    </tr>
+               
+                    </tbody>
+                  </table>
+                </div>
+                <!-- /.table-responsive -->
+              </div>
+              <!-- /.card-body -->
+
+            </div>
+									</div>
+
+								</div>
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
 								<!-- Small boxes (Stat box) -->
 								<div class="row">
 									<div class="col-lg-3 col-6">
