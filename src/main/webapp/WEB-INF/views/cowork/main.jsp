@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/SRC2/modal/dist/needpopup.min.css">
 <style>
@@ -439,7 +440,7 @@ $(function () {
 									<div class="col-md-6">
 										<div class="card">
               <div class="card-header border-transparent">
-                <h3 class="card-title"><i class="ion ion-clipboard mr-1"></i><b>최근 등록된 글</b></h3>
+                <h3 class="card-title"><b>최근 등록된 글</b></h3>
 
               </div>
               <!-- /.card-header -->
@@ -449,6 +450,8 @@ $(function () {
                   <table class="table m-0">
 
                     <tbody>
+              <c:choose>
+			<c:when test="${fn:length(recentBoard)!=0}">
        <c:forEach var="recentBoarditem" items="${recentBoard}" >
                     <tr>
                       <td name="boarditem" style="width:15%">${recentBoarditem.BOARDTYPE}</td>
@@ -473,6 +476,11 @@ $(function () {
                       &nbsp;${recentBoarditem.MEM_NAME}</td>
                     </tr>
          </c:forEach>
+            </c:when>
+                 <c:otherwise>
+                 <p style="text-align:center;"><small><br><br>최근 등록된 글이 없습니다.<br><br><br><br></small></p>
+                 </c:otherwise>
+                 </c:choose>
                                       
                
                     </tbody>
@@ -488,7 +496,7 @@ $(function () {
 									<div class="col-md-6">
 										<div class="card" style="max-height:293.800px; overflow:auto">
               <div class="card-header border-transparent">
-                <h3 class="card-title"><i class="ion ion-clipboard mr-1"></i><b>현재 진행중인 투표</b></h3>
+                <h3 class="card-title"><b>현재 진행중인 투표</b></h3>
 
               </div>
               <!-- /.card-header -->
@@ -496,7 +504,8 @@ $(function () {
               <div class="card-body p-0" style="overflow:auto">
                 <div class="table-responsive">
                   <table class="table m-0">
-
+              <c:choose>
+			<c:when test="${fn:length(voteOn)!=0}">
                     <tbody>
        <c:forEach var="voteOnitem" items="${voteOn}" >
                     <tr>
@@ -516,7 +525,11 @@ $(function () {
                       &nbsp;${voteOnitem.MEM_NAME}</td>
                     </tr>
          </c:forEach>
-                                      
+              </c:when>
+                 <c:otherwise>
+                 <p style="text-align:center;"><small><br><br>현재 진행중인 투표가 없습니다.<br><br><br><br></small></p>
+                 </c:otherwise>
+                 </c:choose>                        
                
                     </tbody>
                   </table>

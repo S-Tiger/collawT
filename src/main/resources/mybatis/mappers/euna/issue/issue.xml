@@ -310,8 +310,7 @@
 		<!-- 투표 참여율 -->
 	<select id="votePercent"  resultType="String"> 
       <![CDATA[
-  select  
-  NVL(vte.voter/decode((m.memcount*v.votecount),0,null,(m.memcount*v.votecount)),0)*100 as percent
+  select round(NVL(vte.voter/decode((m.memcount*v.votecount),0,null,(m.memcount*v.votecount)),0)*100,0) as percent
   from
     (select memcount, c_Id
         from(
