@@ -147,4 +147,18 @@ public class IssueDAOImpl implements IssueDAO {
 
 	}
 	
+	// 홈 화면 현재 진행중인 투표
+	@Override
+	public List<Map> voteOn(String c_Id) {
+		return sqlSession.selectList("issue.voteOn", c_Id);
+
+	}
+	
+	// 투표 참여율
+	@Override
+	public String votePercent(String c_Id) {
+		return sqlSession.selectOne("issue.votePercent", c_Id);
+
+	}
+	
 }

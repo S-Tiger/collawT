@@ -78,12 +78,15 @@ public class CoworkControllerImpl implements CoworkController {
 		List<Map>memberList = comemberService.memberList(searchMap);
 		List<Map>igCount = issueService.igCount(c_Id);
 		List<Map>recentBoard = issueService.recentBoard(c_Id);
+		List<Map>voteOn = issueService.voteOn(c_Id);
+		String votePercent = issueService.votePercent(c_Id);
 		
 		model.addAttribute("pjt", pjt); 
 		model.addAttribute("memberList", memberList);
 		model.addAttribute("igCount", igCount);
 		model.addAttribute("recentBoard", recentBoard);
-		
+		model.addAttribute("voteOn", voteOn);
+		model.addAttribute("votePercent", votePercent);
 		return "/cowork/main"; //뷰url지정해주세요
 		
 	}

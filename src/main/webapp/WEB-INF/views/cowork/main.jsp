@@ -213,6 +213,9 @@ $(function () {
     //- DONUT CHART -
     //-------------
     // Get context with jQuery - using jQuery's .get() method.
+    var votePercent = $('#votePercent').val();
+    var nonvotePercent = 100-votePercent;
+    
     var donutChartCanvas2 = $('#donutChart2').get(0).getContext('2d')
     var donutData2        = {
       labels: [
@@ -222,7 +225,7 @@ $(function () {
       ],
       datasets: [
         {
-          data: [1,2],
+          data: [votePercent,nonvotePercent],
           backgroundColor : ['#FF6384', '#6c757d'],
         }
       ],
@@ -240,7 +243,7 @@ $(function () {
       },
   	elements: {
   			center: {
-  				text: '90%',
+  				text: votePercent+'%',
         color: '#FF6384', // Default is #000000
         fontStyle: 'Arial', // Default is Arial
         sidePadding: 20 // Defualt is 20 (as a percentage)
@@ -381,7 +384,8 @@ $(function () {
 				<div class="chart-responsive">
                 <canvas id="donutChart2" style="min-height: 252px; height: 252px; max-height: 252px; max-width: 100%; display: block; width: 406px;" width="812" height="502" class="chartjs-render-monitor"></canvas>
              	 </div>
-
+				 <input type="hidden" value="${votePercent}" id="votePercent">
+					
 
               </div>
               <!-- /.card-body -->
@@ -401,18 +405,18 @@ $(function () {
                   <div class="card-body p-0" style="min-height: 292px; overflow:auto;">
                   
                     <ul class="users-list clearfix">
-                    <c:forEach var="member" items="${memberList}" >
+                    <c:forEach var="memberitem" items="${memberList}" >
                       <li>
-                        <c:if test="${member.mem_File != null }">
+                        <c:if test="${memberitem.mem_File != null }">
 						<img alt="프로필사진"
-						src="/member/getByteImage?mem_Id=${member.mem_Id}" class="img-circle elevation-2" id="userImage1"/>
+						src="/member/getByteImage?mem_Id=${memberitem.mem_Id}" class="img-circle elevation-2" id="userImage1"/>
 						</c:if>
-						<c:if test="${member.mem_File == null }">
+						<c:if test="${memberitem.mem_File == null }">
 						<img src="${contextPath}/resources/dist/img/profile.jpg" 
 						class="img-circle elevation-2" id="userImage2" alt="프로필사진">
 						</c:if>
 						<br>
-                        <a class="users-list-name" href="#">${member.mem_Name}</a>
+                        <a class="users-list-name" href="#">${memberitem.mem_Name}</a>
                         
                       </li>
                     </c:forEach>
@@ -447,8 +451,8 @@ $(function () {
                     <tbody>
        <c:forEach var="recentBoarditem" items="${recentBoard}" >
                     <tr>
-                      <td name="boarditem">${recentBoarditem.BOARDTYPE}</td>
-                      <td name="boarditem">
+                      <td name="boarditem" style="width:15%">${recentBoarditem.BOARDTYPE}</td>
+                      <td name="boarditem" style="width:45%">
                 <c:if test="${recentBoarditem.BOARDTYPE=='이슈'}">
 				<a href="/project/issue/read?c_Id=${recentBoarditem.C_ID}&i_Num=${recentBoarditem.I_NUM}"> <b>${recentBoarditem.I_NAME}</b></a>
 				</c:if>
@@ -457,12 +461,12 @@ $(function () {
 				</c:if>
                       
                       </td>
-                      <td name="boarditem">
-                      	<c:if test="${member.mem_File != null }">
+                      <td name="boarditem" style="width:40%">
+                      	<c:if test="${recentBoarditem.MEM_FILE != null }">
 						<img alt="프로필사진"
 						src="/member/getByteImage?mem_Id=${recentBoarditem.MEM_ID}" class="img-circle elevation-2" id="userImage3"/>
 						</c:if>
-						<c:if test="${member.mem_File == null }">
+						<c:if test="${recentBoarditem.MEM_FILE == null }">
 						<img src="${contextPath}/resources/dist/img/profile.jpg" 
 						class="img-circle elevation-2" id="userImage4" alt="프로필사진">
 						</c:if>
@@ -482,31 +486,34 @@ $(function () {
 									</div>
 									
 									<div class="col-md-6">
-										<div class="card">
+										<div class="card" style="max-height:293.800px; overflow:auto">
               <div class="card-header border-transparent">
                 <h3 class="card-title"><i class="ion ion-clipboard mr-1"></i><b>현재 진행중인 투표</b></h3>
 
               </div>
               <!-- /.card-header -->
               
-              <div class="card-body p-0">
+              <div class="card-body p-0" style="overflow:auto">
                 <div class="table-responsive">
                   <table class="table m-0">
 
                     <tbody>
-       <c:forEach var="recentBoarditem" items="${recentBoard}" >
+       <c:forEach var="voteOnitem" items="${voteOn}" >
                     <tr>
-                      <td name="boarditem"><b>${recentBoarditem.I_NAME}</b></td>
-                      <td name="boarditem">
-                      	<c:if test="${member.mem_File != null }">
+                      <td name="boarditem" style="width:60%">
+				<a href="/project/vote/read?c_Id=${voteOnitem.C_ID}&v_Num=${voteOnitem.I_NUM}"> <b>${voteOnitem.I_NAME}</b></a>
+                      
+                      </td>
+                      <td name="boarditem" style="width:40%">
+                      	<c:if test="${voteOnitem.MEM_FILE != null }">
 						<img alt="프로필사진"
-						src="/member/getByteImage?mem_Id=${recentBoarditem.MEM_ID}" class="img-circle elevation-2" id="userImage3"/>
+						src="/member/getByteImage?mem_Id=${voteOnitem.MEM_ID}" class="img-circle elevation-2" id="userImage3"/>
 						</c:if>
-						<c:if test="${member.mem_File == null }">
+						<c:if test="${voteOnitem.MEM_FILE == null }">
 						<img src="${contextPath}/resources/dist/img/profile.jpg" 
 						class="img-circle elevation-2" id="userImage4" alt="프로필사진">
 						</c:if>
-                      &nbsp;${recentBoarditem.MEM_NAME}</td>
+                      &nbsp;${voteOnitem.MEM_NAME}</td>
                     </tr>
          </c:forEach>
                                       

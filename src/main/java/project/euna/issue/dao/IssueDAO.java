@@ -28,5 +28,7 @@ public interface IssueDAO {
 	public List<Map> chargerList(String c_Id);
 	public List<Map> igCount(String c_Id);
 	public List<Map> recentBoard(String c_Id);
+	public List<Map> voteOn(String c_Id);
+	public String votePercent(String c_Id);
 
 }

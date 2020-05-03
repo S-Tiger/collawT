@@ -136,5 +136,18 @@ public class IssueServiceImpl implements IssueService {
 	public List<Map> recentBoard(String c_Id) {
 		return issueDAO.recentBoard(c_Id);
 	}
+	
+	//홈 화면 이슈/투표 최근글
+	@Override
+	public List<Map> voteOn(String c_Id) {
+		return issueDAO.voteOn(c_Id);
+	}
+	
+	//홈 화면 이슈/투표 최근글
+	@Override
+	public String votePercent(String c_Id) {
+		return issueDAO.votePercent(c_Id);
+	}
+
 
 }

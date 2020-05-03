@@ -264,12 +264,12 @@
 	<!-- 홈 화면 이슈/투표 최근글 -->
 	<select id="recentBoard"  resultType="java.util.HashMap"> 
       <![CDATA[
-  select c_id, c_name, i_name, i_date, i_start, i_end, mem_id, mem_name, boardtype, i_Num, rnum
+  select c_id, c_name, i_name, i_date, i_start, i_end, mem_id, mem_name, boardtype, i_Num, rnum, mem_File
   from(
-    select c_id, c_name, i_name, i_date, i_start, i_end, mem_id, mem_name, boardtype, i_Num, row_number() over(order by i_date desc) as rnum
+    select c_id, c_name, i_name, i_date, i_start, i_end, mem_id, mem_name, boardtype, i_Num, row_number() over(order by i_date desc) as rnum, mem_File
     from(
             (select i.c_id as c_id, c.c_name as c_name, i.i_name as i_name, i.i_date as i_date, i.i_start as i_start, i.i_end as i_end, i.mem_id as mem_id, m.mem_name as mem_name,
-           '이슈' as boardtype, i.i_Num as i_Num
+           '이슈' as boardtype, i.i_Num as i_Num, m.mem_File
             from issue i, member m, co_work c
             where i.mem_Id = m.mem_Id
             and c.c_id=i.c_id
@@ -277,7 +277,7 @@
             )
             union all
             (select v.c_id as c_id, c.c_name as c_name, v.v_name as i_name, v.v_date as i_date, v.v_start as i_start, v.v_end as i_end, v.mem_id as mem_id, m.mem_name as mem_name,
-            '투표' as boardtype, v.v_num as i_Num
+            '투표' as boardtype, v.v_num as i_Num, m.mem_File
             from vote v, member m, co_work c
             where v.mem_Id = m.mem_Id
             and v.c_id=c.c_id
@@ -290,6 +290,62 @@
       ]]>
 	</select> 
 
+
+	<!-- 홈 화면 진행중인 투표글 -->
+	<select id="voteOn"  resultType="java.util.HashMap"> 
+      <![CDATA[
+
+        select v.c_id as c_id, c.c_name as c_name, v.v_name as i_name, v.v_date as i_date, v.v_start as i_start, v.v_end as i_end, v.mem_id as mem_id, m.mem_name as mem_name,
+            v.v_num as i_Num, row_number() over(order by v_date desc) as rnum, v.vs_Num as vs_Num
+            from vote v, member m, co_work c
+            where v.mem_Id = m.mem_Id
+            and v.c_id=c.c_id
+            and c.c_id=#{c_Id}
+            and v.vs_Num='1'
+
+      ]]>
+	</select> 
+	
+	
+		<!-- 투표 참여율 -->
+	<select id="votePercent"  resultType="String"> 
+      <![CDATA[
+  select  
+  NVL(vte.voter/decode((m.memcount*v.votecount),0,null,(m.memcount*v.votecount)),0)*100 as percent
+  from
+    (select memcount, c_Id
+        from(
+            select count(cm.mem_Id) as memcount, co.c_Id
+            from co_work co left outer join co_member cm
+            on cm.c_Id=co.c_Id
+            group by co.c_Id
+            )
+       where c_Id=#{c_Id}
+    )m,
+   (select votecount, c_Id
+        from(
+            select count(vo.v_Num) as votecount, co.c_Id
+            from co_work co left outer join vote vo
+            on vo.c_Id=co.c_Id
+            group by co.c_Id
+            )
+       where c_Id=#{c_Id}
+    )v,
+     (select voter, c_Id
+         from
+         (
+            select count(vt.mem_Id) as voter, co.c_Id
+            from co_work co left outer join voter vt
+            on vt.c_Id=co.c_Id
+            group by co.c_Id
+         )
+        where c_Id=#{c_Id}
+        )vte
+    where m.c_Id=v.c_Id
+    and m.c_Id=vte.c_Id
+
+      ]]>
+	</select> 
 
 
 </mapper>
