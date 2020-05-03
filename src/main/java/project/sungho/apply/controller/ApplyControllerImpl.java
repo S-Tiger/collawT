@@ -52,14 +52,13 @@ public class ApplyControllerImpl implements ApplyController {
 	public String searchList(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		HttpSession session = request.getSession();
-
 		Map<String, Object> searchMap = new HashMap<String, Object>();
-
 		searchMap = (Map<String, Object>) session.getAttribute("member");
 
+		
 		List<Map> list = applyService.searchList(searchMap);
 		model.addAttribute("applylist", list);
-		System.out.println("applyList에 얼마나 들어있나~~~~:");
+		//System.out.println("applyList에 얼마나 들어있나~~~~:");
 		return "newspeed/newspeedList3";
 	}
 

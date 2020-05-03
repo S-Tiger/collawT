@@ -37,7 +37,7 @@
 	
 	<insert id="insertApply" parameterType="java.util.Map">
 		insert into apply_mem(c_Id, mem_Id, ap_Date, ap_Yn, ap_Status, invite) 
-		values(#{c_Id}, #{mem_Id}, sysdate, 'waiting', 1, #{invite})
+		values(#{c_Id}, #{mem_Id}, (select to_char(sysdate, 'YYYY/MM/DD/ HH24:MI:SS') from dual), 'waiting', 1, #{invite})
 	</insert>	
 	
 	

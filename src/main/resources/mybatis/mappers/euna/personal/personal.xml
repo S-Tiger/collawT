@@ -25,7 +25,24 @@
 		<result property="p_i_Start" column="p_i_Start" />
 		<result property="p_i_End" column="p_i_End" />
 	</resultMap>
-
+	
+	<resultMap id="personalResult03" type="java.util.HashMap">
+		<!-- property는 화면단에서 쓸 이름, column은 데이터컬럼명이랑 동일 -->
+		<result property="c_Id" column="c_Id" />
+		<result property="mem_Id" column="mem_Id" />
+		<result property="ap_Date" column="ap_Date" />
+		<result property="ap_Yn" column="ap_Yn" />
+		<result property="ap_Status" column="ap_Status" />
+		<result property="invite" column="invite" />
+		<result property="c_Name" column="c_Name" />
+		<result property="mem_Name" column="mem_Name" />
+		<result property="mem_File" column="mem_File" javaType="[B"	jdbcType="BLOB"/>
+		<result property="i_Name" column="i_Name" />
+		<result property="i_Content" column="i_Content" jdbcType="CLOB" javaType="java.lang.String"/>
+		<result property="i_Num" column="i_Num" />
+		<result property="not_Kind" column="not_Kind" />
+		<result property="type" column="type" />
+	</resultMap>
 
 	
 
@@ -179,6 +196,48 @@
 		(select to_char(sysdate, 'YYYY/MM/DD/ HH24:MI:SS') from dual)
 		, #{ig_Num} , #{mem_Id}, #{i_Start}, #{i_End})
 	</insert>
+	
+	
+	
+		<!-- 새로운 소식 -->
+		<select id="newspeed"  resultMap="personalResult03"> 
+      <![CDATA[
+  select c_Id, mem_Id, ap_Date, ap_Yn, ap_Status, invite, c_Name, mem_Name, i_Name, i_Content, i_Num, not_Kind, mem_File, type
+  from (
+      (select a.c_Id as c_Id, a.mem_Id as mem_Id, a.ap_Date as ap_Date, a.ap_Yn as ap_Yn, a.ap_Status as ap_Status, a.invite as invite, b.c_Name as c_Name, c.mem_Name as mem_Name,
+      null as i_Name, null as i_Content, null as i_Num, null as not_Kind, c.mem_File as mem_File, '1' as type
+      from apply_mem a, co_work b, member c
+      where a.c_Id=b.c_Id
+      and c.mem_Id=a.mem_Id
+      and a.mem_Id=#{mem_Id}
+      and a.ap_Yn = 'waiting')
+      union all
+        (select i.c_Id as c_Id, i.mem_Id as mem_Id, i.i_Date as ap_Date, null as ap_Yn, n.not_status as ap_Status, null as invite, c.c_Name as c_Name, m.mem_Name as mem_Name,
+        i.i_Name as i_Name, i.i_Content as i_Content, i.i_Num as i_Num, n.not_kind as not_Kind, m.mem_File as mem_File,'2' as type
+        from issue i , notify n, co_work c, member m 
+        where i.i_Num = n.i_num
+        and n.c_Id = c.c_Id
+        and m.mem_Id=n.mem_Id
+        and n.mem_Id = #{mem_Id}
+        and n.not_status = '0'
+        and n.not_kind = '1'
+        ) 
+        union all
+        (select r.c_Id as c_Id, r.mem_Id as mem_Id, r.r_Date as ap_Date, null as ap_Yn, n.not_status as ap_Status, null as invite, c.c_Name as c_Name, m.mem_Name as mem_Name,
+        null as i_Name, r.r_Content as i_Content, r.i_Num as i_Num, n.not_kind as not_Kind, m.mem_File as mem_File,'3' as type
+        from reply r , notify n, co_work c, member m 
+        where r.i_Num = n.i_num
+        and r.c_Id = c.c_Id
+        and r.mem_Id=m.mem_Id
+        and n.mem_Id = #{mem_Id}
+        and n.not_status = '0'
+        and n.not_kind = '2'
+        )
+    )
+  order by ap_Date desc
+      ]]>
+	</select> 
+	
 
 
 

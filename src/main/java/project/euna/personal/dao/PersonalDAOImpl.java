@@ -134,4 +134,11 @@ public class PersonalDAOImpl implements PersonalDAO {
 		return sqlSession.selectList("personal.chargerList", mem_Id);
 	}
 	
+	
+	//내공간 알림
+	@Override
+	public List<Map> newspeed(String mem_Id) {
+		return sqlSession.selectList("personal.newspeed", mem_Id);
+	}
+	
 }

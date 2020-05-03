@@ -125,5 +125,11 @@ public class PersonalServiceImpl implements PersonalService {
 		return personalDAO.chargerList(mem_Id);
 	}
 	
+	//내공간 알림
+	@Override
+	public List<Map> newspeed(String mem_Id) {
+		return personalDAO.newspeed(mem_Id);
+	}
+	
 
 }

@@ -59,7 +59,7 @@ public class NotifyDAOImpl implements NotifyDAO {
 	@Override
 	public List<Map> viewReply(Map<String, Object> searchMap) throws DataAccessException{
 		List<Map> list = sqlSession.selectList("notify.viewReply",searchMap);
-		System.out.println("viewReply타냐~~~~~~~~~~~~~~~~~"+list.toString());
+		//System.out.println("viewReply타냐~~~~~~~~~~~~~~~~~"+list.toString());
 		return list;
 	}
 

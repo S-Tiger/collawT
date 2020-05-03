@@ -92,7 +92,7 @@ public class notifyControllerImpl implements NotifyController {
 		Map<String,Object> searchMap = new HashMap<String,Object>();
 		searchMap = (Map<String,Object>) session.getAttribute("member");
 		List<Map> notifyView = notifyService.viewNotify(searchMap);
-		System.out.println("view 타나??==:"+notifyView.toString());
+		//System.out.println("view 타나??==:"+notifyView.toString());
 		return notifyView;
 	}
 	
@@ -103,7 +103,7 @@ public class notifyControllerImpl implements NotifyController {
 		Map<String,Object> searchMap = new HashMap<String,Object>();
 		searchMap = (Map<String,Object>)session.getAttribute("member");
 		List<Map> viewReply = notifyService.viewReply(searchMap);
-		System.out.println("viewReply~~~~~~~:"+viewReply.toString());
+		//System.out.println("viewReply~~~~~~~:"+viewReply.toString());
 		return viewReply;
 	}
 	@GetMapping("/list")
@@ -118,7 +118,7 @@ public class notifyControllerImpl implements NotifyController {
 		ModelAndView mav = new ModelAndView("/newspeed/newspeedList3");
 		mav.addObject("notifyList", notifyList);
 		mav.addObject("applylist", list);
-		System.out.println("notifyList값=="+notifyList);
+		//System.out.println("notifyList값=="+notifyList);
 		return mav;
 		
 	}
@@ -132,7 +132,7 @@ public class notifyControllerImpl implements NotifyController {
 		List<Map> replyList = notifyService.replyList(searchMap);
 		ModelAndView mav = new ModelAndView("/newspeed/newspeedList3");
 		mav.addObject("replyList", replyList);
-		System.out.println("replyList=="+replyList);
+		//System.out.println("replyList=="+replyList);
 		return mav;
 		
 	}

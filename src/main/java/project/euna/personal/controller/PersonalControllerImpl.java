@@ -33,6 +33,8 @@ import project.euna.personal.vo.Criteria;
 import project.euna.personal.vo.PersonalVO;
 import project.euna.personal.vo.PageMaker;
 import project.euna.reply.service.ReplyService;
+import project.notify.service.NotifyService;
+import project.sungho.apply.service.ApplyService;
 import project.sungho.comember.service.ComemberService;
 import project.sungho.cowork.service.CoworkService;
 
@@ -56,20 +58,39 @@ public class PersonalControllerImpl implements PersonalController {
 	
 	@Inject
 	IssueService issueService;
+	
+	@Inject
+	ApplyService applyService;
+	
+	@Inject
+	NotifyService notifyService;
+
 
 
 	//홈 화면
 	@Override
 	@GetMapping("/main")
-	public ModelAndView main(PersonalVO personalVO, Criteria cri, String mem_Id, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView main(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		List<Map> list = personalService.searchList(cri);
+		HttpSession session = request.getSession();
+		Map<String, Object> member = new HashMap<String,Object>();
+		member = (Map<String, Object>) session.getAttribute("member");
+		String mem_Id = (String) member.get("mem_Id");
 		
-		Map<String, Object> searchMap = new HashMap<String, Object>();
 		
-	
+//		List<Map> applylist = applyService.searchList(searchMap);
+//		List<Map> notifyList = notifyService.searchNotify(searchMap);
+//		List<Map> replyList = notifyService.replyList(searchMap);
+		
+		List<Map> newspeed = personalService.newspeed(mem_Id);
+
+		
 		ModelAndView mav = new ModelAndView("personal/myHome");
-	
+		mav.addObject("newspeed", newspeed);
+//		mav.addObject("applylist", applylist);
+//		mav.addObject("notifyList", notifyList);
+//		mav.addObject("replyList", replyList);
+		
 		return mav;
 		
 	}	

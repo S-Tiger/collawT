@@ -26,5 +26,6 @@ public interface PersonalDAO {
 	public Map<String, Object> get_p_Num();
 	public int personalCopy(Map map) ;
 	public List<Map> chargerList(String c_Id);
+	public List<Map> newspeed(String mem_Id);
 
 }

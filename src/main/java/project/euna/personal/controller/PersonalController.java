@@ -29,7 +29,7 @@ public interface PersonalController {
 	public String personalDelete(String mem_Id, String p_Num, PersonalVO personalVO) throws Exception;//	
 	public String personalUpdate(String mem_Id, String p_Num, PersonalVO personalVO, Model model, HttpSession session) throws Exception;
 	public String personalUpdate(PersonalVO personalVO, HttpServletRequest request, HttpServletResponse response) throws Exception ;
-	public ModelAndView main(PersonalVO personalVO, Criteria cri, String mem_Id, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView main(HttpServletRequest request, HttpServletResponse response) throws Exception;
 //	public void communityImageUpload(HttpServletRequest request, HttpServletResponse response, @RequestParam MultipartFile upload);
 //	public String personalCopy(personalVO personalVO, HttpSession session, HttpServletRequest request, HttpServletResponse response, RedirectAttributes rttr) throws Exception;
 }
