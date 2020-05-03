@@ -51,11 +51,11 @@ span[name="chargerspan"] {
 				alert("투표항목을 입력해주세요");
 				document.insertForm.vd_Content.focus();
 				return false;
-			} else if (v_Name.length > 12) {
-				alert("제목은 12자리 이내로 입력해주세요");
+			} else if (v_Name.length > 20) {
+				alert("제목은 20자리 이내로 입력해주세요");
 				return false;
-			} else if (v_Content.length > 12) {
-				alert("내용은 12자리 이내로 입력해주세요.");
+			} else if (v_Content.length > 150) {
+				alert("내용은 150자리 이내로 입력해주세요.");
 				return false;
 			} else if (v_Subject.length > 12) {
 				alert("투표 주제는 12자리 이내로 입력해주세요.");
@@ -273,10 +273,16 @@ span[name="chargerspan"] {
 								<label for="inputStatus">답변 선택 수</label> <select class="form-control custom-select" id="v_Count" name="v_Count">
 									<option value="1">1개 선택 가능</option>
 									<option value="2">2개 선택 가능</option>
-									<option value="3">3개 선택 가능</option>
 								</select>
 							</div>
-
+							
+							<!-- 익명 -->
+							<div class="form-group">
+								<label for="inputStatus">투표자 공개 범위</label> <select class="form-control custom-select" id="v_Show" name="v_Show">
+									<option value="1">공개</option>
+									<option value="0">비공개</option>
+								</select>
+							</div>
 
 
 							<!-- 기간 설정 -->

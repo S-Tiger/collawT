@@ -88,7 +88,7 @@ public class EVoteControllerImpl implements EVoteController {
 		String vs_Num = voteVO.getVs_Num();
 		String v_Subject = voteVO.getV_Subject();
 		String v_Count = voteVO.getV_Count();
-
+		String v_Show = request.getParameter("v_Show");
 		
 		
 		Map<String, Object> cmap = new HashMap<String, Object>();
@@ -102,6 +102,7 @@ public class EVoteControllerImpl implements EVoteController {
 		cmap.put("v_Subject", v_Subject);
 		cmap.put("v_Count", v_Count);
 		cmap.put("mem_Name", mem_Name);
+		cmap.put("v_Show",v_Show);
 		evoteService.voteInsert(cmap);
 		
 		

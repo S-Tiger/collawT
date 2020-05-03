@@ -215,8 +215,6 @@ function Del_poll()
 							<!-- 투표 항목 -->
 							<div class="form-group">
 								
-								<button type="button" class="btn btn-block btn-default btn-xs float-right" style="width: 80px; margin: 1px" onClick="Insert_poll()" onfocus='this.blur()'>항목 추가</button>
-								<button type="button" class="btn btn-block btn-default btn-xs float-right" style="width: 80px; margin: 1px" onClick="Del_poll()" onfocus='this.blur()' > 삭제</button>
 								<c:forEach var="votedReadItem" items="${votedRead}" varStatus="status">
 								<label for="inputName">투표 항목${status.index+1} </label>
 								<input type="hidden" id="vd_Num" name="vd_Num" class="form-control" value="${status.index+1}"> 

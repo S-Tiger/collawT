@@ -50,6 +50,25 @@
 	background: rgba(0, 0, 0, 0.5);
 	z-index: -1;
 }
+
+progress {
+	display: block; /* default: inline-block */
+	width: 200px;
+	padding: 4px;
+	border: 0 none;
+	background: #444;
+	border-radius: 14px;
+}
+
+progress::-moz-progress-bar {
+	border-radius: 12px;
+	background: blue;
+}
+
+progress::-webkit-progress-value {
+	border-radius: 12px;
+	background: #fff;
+}
 </style>
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -213,23 +232,16 @@
 											<!-- 투표 내용 -->
 											<!--  상태 index -->
 											<!-- for each -->
-												<c:forEach var="votedReadItem" items="${votedRead}" varStatus="status">
-											<tr>
-												<td style="padding-left: 0px; padding-right: 0px; width: 315px;">
-														<!-- 투표 리스트 -->
-														<input type="hidden" name="getVsNum" value="${status.index+1 }">
-														<input class="form-check-input" type="radio" name="vd_Num" value="${votedReadItem.vd_Num}" style="margin-left: 10px;">
+											<c:forEach var="votedReadItem" items="${votedRead}" varStatus="status">
+												<tr>
+													<td style="padding-left: 0px; padding-right: 0px; width: 315px;">
+														<!-- 투표 리스트 --> <input type="hidden" name="getVsNum" value="${status.index+1 }"> <input class="form-check-input" type="radio" name="vd_Num" value="${votedReadItem.vd_Num}" style="margin-left: 10px;"> <label class="form-check-label" style="margin-left: 40px;">${votedReadItem.vd_Num}.&nbsp;&nbsp;&nbsp;${votedReadItem.vd_Content}</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-														<label class="form-check-label" style="margin-left: 40px;">${votedReadItem.vd_Num}.&nbsp;&nbsp;&nbsp;${votedReadItem.vd_Content}</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-														
-												</td>
-												<td>		
-														<span class="badge bg-gray">${votedReadItem.v_Count}</span>
-														<br>
-												</td>		
+													</td>
+													<td><i class="fas fa-user-alt"></i><span class="badge bg-gray"><c:if test="${votedRead[status.index].v_Count ==null }">0</c:if>${votedReadItem.v_Count}</span> <br></td>
 
-											</tr>
-													</c:forEach>
+												</tr>
+											</c:forEach>
 											<tr>
 											</tr>
 											<tr>
@@ -243,7 +255,7 @@
 													</c:if></td>
 												<td></td>
 											</tr>
-											
+
 										</tbody>
 									</table>
 								</div>
@@ -279,7 +291,7 @@
 
 
 
-			<!-- 댓글 부분~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+			<!-- 그래프 부분~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 			<div class="col-md-6">
 				<div class="card">
@@ -291,34 +303,14 @@
 								<td style="padding-left: 0px; padding-right: 0px; width: 315px;"><c:forEach var="voteTotalItem" items="${voteTotal}" varStatus="i">
 										<span class="users-list-date">${voteTotalItem.vd_Num}번&nbsp;&nbsp;</span>
 										<!-- 그래프 -->
-										<progress value="${voteTotalItem.v_Count}" max="${voteRead.co_Mem_Total }"></progress>
-										&nbsp;&nbsp;&nbsp;&nbsp;<span class="users-list-date float-right" style="font-size: small; margin-right: 70px;">${voteTotalItem.v_Count *100 / voteRead.co_Mem_Total *100 /100} % &nbsp;&nbsp;&nbsp;&nbsp; ${voteTotalItem.v_Count}명</span>
+										<progress value="${voteTotalItem.v_Count}" max="${voteRead.co_Mem_Total }" style="margin-left: 0px; margin-top: 0px; margin-bottom: 0px; margin-right: 0px;"></progress>
+										&nbsp;&nbsp;&nbsp;&nbsp;<span class="users-list-date float-right" style="font-size: small; margin-right: 70px;">${voteTotalItem.v_Count *100 / voteRead.co_Mem_Total *100 /100} % &nbsp;&nbsp;&nbsp;&nbsp<%-- ; ${voteTotalItem.v_Count}명 --%></span>
 										<br>
 									</c:forEach></td>
 							</tr>
 						</table>
 
-						=============================
 
-						<c:forEach var="voteTotalItem" items="${voteTotal}" varStatus="i">
-							<span class="users-list-date">${voteTotalItem.vd_Num}번&nbsp;&nbsp;</span>
-							<!-- 그래프 -->
-							<progress value="${voteTotalItem.v_Count}" max="${voteRead.co_Mem_Total }"></progress>
-							<span class="users-list-date float-right" style="font-size: small; margin-right: 70px;"> ${voteTotalItem.v_Count *100 / voteRead.co_Mem_Total *100 /100} % &nbsp;&nbsp;&nbsp;&nbsp; ${voteTotalItem.v_Count}명</span>
-							<span class="users-list-date">&nbsp;${voteTotalItem.vd_Num}번투표자</span>
-
-							<c:forEach var="voterItem" items="${voterList}" varStatus="j">
-								<c:if test="${voteTotal[i.index].vd_Num eq voterList[j.index].vd_Num}">
-								&nbsp;&nbsp;&nbsp;&nbsp;
-								<%-- <c:out value="${voterItem.mem_Name}"/> --%>
-									 &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-									 <a class="users-list-name">${voterList[j.index].mem_Name}</a>
-
-
-									<%-- 	<a class="users-list-name">${voterItem.mem_Name}(${voterItem.mem_Id})</a> --%>
-								</c:if>
-							</c:forEach>
-						</c:forEach>
 
 						<!-- 차트 넣을곳-->
 
@@ -335,12 +327,12 @@
 						</c:forEach> --%>
 
 					</div>
-
-					<p>
-						<a href="/#" data-needpopup-show="#voterList-popup" class="nav-link" id="voterlist"> <i class="fas fa-vote-yea"></i> 투표자 현황 <span class="badge badge-info right" id="bookmarkcount" style="background-color: #FFC108"></span>
-						</a>
-					</p>
-
+					<c:if test="${voteRead.v_Show==1 }">
+						<p>
+							<a href="/#" data-needpopup-show="#voterList-popup" class="nav-link" id="voterlist"> <i class="fas fa-vote-yea"></i> 투표자 현황 <span class="badge badge-info right" id="bookmarkcount" style="background-color: #FFC108"></span>
+							</a>
+						</p>
+					</c:if>
 
 					<!-- /댓글 입력 -->
 				</div>
@@ -362,31 +354,29 @@
 			<tr style="background-color: #dc3545; color: white;">
 				<!-- <td style="width: 30%; vertical-align: top"><font size="3em"><b>보기</b></font></td> -->
 				<td style="width: 50%"><font size="3em"><b>투표자</b></font></a>
-				<td style="width: 50%"><font size="3em"><b></b></font></a>
 			</tr>
 			<tr>
-				<%--	<td>
+				<%-- <td>
 				 	<c:forEach var="votedRead" items="${votedRead}" varStatus="status">
 						<c:out value="${votedRead.vd_Num} ."></c:out>
 						<label class="form-check-label">&nbsp;${votedRead.vd_Content}</label>
 						<br>
 
-					</c:forEach> </td>--%>
-				<td>============================= <c:forEach var="voteTotalItem" items="${voteTotal}" varStatus="i">
-						<span class="users-list-date">${voteTotalItem.vd_Num}번&nbsp;&nbsp;</span>
-						<!-- 그래프 -->
-						<progress value="${voteTotalItem.v_Count}" max="${voteRead.co_Mem_Total }"></progress>
-						<span class="users-list-date float-right" style="font-size: small; margin-right: 70px;"> ${voteTotalItem.v_Count *100 / voteRead.co_Mem_Total *100 /100} % &nbsp;&nbsp;&nbsp;&nbsp; ${voteTotalItem.v_Count}명</span>
+					</c:forEach>
+				 </td>
+		 --%>
+				<td><c:if test="${empty voteTotal}">투표자가 없습니다.</c:if> <c:forEach var="voteTotalItem" items="${voteTotal}" varStatus="i">
 						<span class="users-list-date">&nbsp;${voteTotalItem.vd_Num}번투표자</span>
+						<%-- 
+				<c:forEach var="voteTotalItem" items="${voteTotal}" varStatus="i">
+						<span class="users-list-date">&nbsp;${voteTotalItem.vd_Num}번투표자</span> --%>
 						<c:forEach var="voterItem" items="${voterList}" varStatus="j">
 							<c:if test="${voteTotal[i.index].vd_Num eq voterList[j.index].vd_Num}">
 								<%-- <c:out value="${voterItem.mem_Name}"/> --%>
-								<a class="users-list-name">${voterList[j.index].mem_Name}</a>
-
+								<span class="badge bg-gray"> <a class="users-list-name">${voterList[j.index].mem_Name}</a></span>
 							</c:if>
 						</c:forEach>
 					</c:forEach></td>
-				<td></td>
 			</tr>
 			<tbody id='bookmarkitem'>
 			</tbody>

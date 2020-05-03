@@ -61,6 +61,7 @@ if ('${msg}' == 'success') {
 	 };  */
 	$(function() {
 
+
 		//비밀번호같지 확인하는 자바스크립트 (서브밋할때 작동됨)
 		if ($("#pwForm").submit(function() {
 			console.log("11");
@@ -69,7 +70,7 @@ if ('${msg}' == 'success') {
 				$("#pw").val("").focus();
 				$("#pw2").val("");
 				return false;
-			} else if ($("#pw").val().length < 4) {
+			} else if ($("#pw").val().length < 8) {
 				alert("비밀번호는 8자 이상으로 설정해야 합니다.");
 				$("#pw").val("").focus();
 				return false;
@@ -257,7 +258,7 @@ if ('${msg}' == 'success') {
 							<!-- 비밀번호 변경 -->
 
 							<div class="card-body"
-								style="padding-top: 5px; padding-bottom: 0px; height: 165px;">
+								style="padding-top: 0px;padding-bottom: 0px;">
 								<div class="form-group">
 									<form id="pwForm" action="/member/update_pw" method="post">
 										<input type="hidden" name="mem_Id" value="${member.mem_Id}">

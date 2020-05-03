@@ -34,6 +34,7 @@
 		<result property="mem_Id" column="mem_Id" />
 		<result property="v_Date" column="v_Date" />
 		<result property="v_Name" column="v_Name" />
+		<result property="v_Show" column="v_Show" />
 		<result property="vs_Num" column="vs_Num" />
 		<result property="vs_Name" column="vs_Name" />
 		<result property="mem_Name" column="mem_Name" />
@@ -89,12 +90,12 @@
 			SELECT vote_seq.nextval as vote_seq FROM dual
 		</selectKey>
 		insert into vote(v_Num, c_Id, v_Name, v_Content, v_Date, mem_Id,
-		v_Start, v_End, vs_Num, v_Subject, v_Count, mem_Name)
+		v_Start, v_End, vs_Num, v_Subject, v_Count, mem_Name,v_Show )
 		values(#{v_Num}, #{c_Id},
 		#{v_Name}, #{v_Content} ,
 		(select to_char(sysdate, 'YYYY/MM/DD/ HH24:MI:SS') from dual)
 		, #{mem_Id}, #{v_Start}, #{v_End},
-		#{vs_Num},#{v_Subject}, #{v_Count}, #{mem_Name} )
+		#{vs_Num},#{v_Subject}, #{v_Count}, #{mem_Name}, #{v_Show} )
 	</insert>
 
 	<!-- 투표보기란 입력 -->
@@ -125,7 +126,7 @@
 	<!-- 투표 조회 -->
 	<select id="voteRead" parameterType="String" resultMap="voteResult02"> 
       <![CDATA[
-		select V.v_Num, V.c_Id, V.v_Name, V.v_Content, V.v_Date, V.mem_Id, V.v_Start, V.v_End, V.v_Subject,vs.vs_name, v.vs_num, v.v_count, v.mem_Name,(
+		select V.v_Num, V.c_Id, V.v_Name, V.v_Content, V.v_Date, V.mem_Id, V.v_Start, V.v_End, V.v_Subject,vs.vs_name, v.vs_num, v.v_count,v.v_show ,v.mem_Name,(
                                    	select count(*) as coworker
                                     from co_member
 									where c_id=#{c_Id}) as co_Mem_Total
