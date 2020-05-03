@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.ModelAndView;
 
+import project.euna.issue.service.IssueService;
 import project.sungho.comember.service.ComemberService;
 import project.sungho.cowork.service.CoworkService;
 import project.sungho.cowork.vo.CoworkVO;
@@ -36,6 +37,9 @@ public class CoworkControllerImpl implements CoworkController {
 	CoworkService coworkService;
 	@Autowired
 	ComemberService comemberService;
+	
+	@Autowired
+	IssueService issueService;
 	
 	
 	
@@ -72,8 +76,11 @@ public class CoworkControllerImpl implements CoworkController {
 		
 		Map<String, Object>pjt = coworkService.searchMain(searchMap); //vo타입에 list를 생성하고 서비스에서 가져온 데이터를 list에 넣습니다
 		List<Map>memberList = comemberService.memberList(searchMap);
+		List<Map>igCount = issueService.igCount(c_Id);
+		
 		model.addAttribute("pjt", pjt); 
 		model.addAttribute("memberList", memberList);
+		model.addAttribute("igCount", igCount);
 		
 		return "/cowork/main"; //뷰url지정해주세요
 		

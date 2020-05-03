@@ -125,5 +125,11 @@ public class IssueServiceImpl implements IssueService {
 		return issueDAO.chargerList(c_Id);
 	}
 	
+	//상태 카운트
+	@Override
+	public List<Map> igCount(String c_Id) {
+		return issueDAO.igCount(c_Id);
+	}
+	
 
 }

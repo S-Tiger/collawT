@@ -26,5 +26,6 @@ public interface IssueDAO {
 	public Map<String, Object> get_i_Num();
 	public int issueCopy(Map map) ;
 	public List<Map> chargerList(String c_Id);
+	public List<Map> igCount(String c_Id);
 
 }

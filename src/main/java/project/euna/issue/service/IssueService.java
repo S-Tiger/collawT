@@ -27,5 +27,5 @@ public interface IssueService {
 	public List<Map> coRead(String mem_id);
 	public void  issueCopy(Map map);
 	public List<Map> chargerList(String c_Id);
-
+	public List<Map> igCount(String c_Id);
 }

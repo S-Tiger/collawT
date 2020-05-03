@@ -245,6 +245,21 @@
 		(select to_char(sysdate, 'YYYY/MM/DD/ HH24:MI:SS') from dual)
 		, #{ig_Num} , #{mem_Id}, #{i_Start}, #{i_End})
 	</insert>
+	
+	
+	<!-- 상태 카운트 -->
+	<select id="igCount"  resultType="java.util.HashMap"> 
+      <![CDATA[
+    select NVL(igc.igcount,0)as igcount, ig.ig_Num, ig.ig_Name
+    from issue_group ig left outer join 
+           (select count(i_Num) as igcount, ig_Num
+           from issue
+           where c_Id=#{c_Id}
+           group by ig_Num
+           order by ig_Num asc)igc
+    on ig.ig_Num = igc.ig_Num
+      ]]>
+	</select> 
 
 
 

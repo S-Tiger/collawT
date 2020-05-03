@@ -133,4 +133,11 @@ public class IssueDAOImpl implements IssueDAO {
 		return sqlSession.selectList("issue.chargerList", c_Id);
 	}
 	
+	// 상태 카운트
+	@Override
+	public List<Map> igCount(String c_Id) {
+		return sqlSession.selectList("issue.igCount", c_Id);
+
+	}
+	
 }

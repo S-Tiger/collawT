@@ -95,18 +95,24 @@ $(function () {
     //- DONUT CHART -
     //-------------
     // Get context with jQuery - using jQuery's .get() method.
+    var ig_Num_1 = $('#ig_Num_1').val();
+    var ig_Num_2 = $('#ig_Num_2').val();
+    var ig_Num_3 = $('#ig_Num_3').val();
+    var ig_Num_4 = $('#ig_Num_4').val();
+    var ig_Name_1 = $('#ig_Name_1').val();
+    var ig_Name_2 = $('#ig_Name_2').val();
+    var ig_Name_3 = $('#ig_Name_3').val();
+    var ig_Name_4 = $('#ig_Name_4').val();
+    var centerText = '총 '+(parseInt(ig_Num_1)+parseInt(ig_Num_2)+parseInt(ig_Num_3)+parseInt(ig_Num_4))+'건';
+    
     var donutChartCanvas1 = $('#donutChart1').get(0).getContext('2d')
     var donutData1        = {
       labels: [
-          '발의됨', 
-          '진행중',
-          '일시정지', 
-          '완료', 
-           
+    	  ig_Name_1, ig_Name_2, ig_Name_3, ig_Name_4           
       ],
       datasets: [
         {
-          data: [1,2,3,4],
+          data: [ig_Num_1,ig_Num_2,ig_Num_3,ig_Num_4],
           backgroundColor : ['#6c757d', '#007bff', '#ffc107', '#28a745'],
         }
       ],
@@ -124,7 +130,7 @@ $(function () {
       },
   	elements: {
   			center: {
-  				text: '총 100건',
+  				text: centerText,
 		        color: '#FF6384', // Default is #000000
 		        fontStyle: 'Arial', // Default is Arial
 		        sidePadding: 20 // Defualt is 20 (as a percentage)
@@ -333,10 +339,15 @@ $(function () {
 			<div class="card">
               <div class="card-header">
                 <h3 class="card-title" ><b>이슈 진행 현황</b></h3>
-
-                <div class="card-tools">
-
-                </div>
+				
+				
+				<c:forEach var="igCountitem" items="${igCount}" >
+                <input type="hidden" value="${igCountitem.IGCOUNT}" id="ig_Num_${igCountitem.IG_NUM}">
+                </c:forEach>
+                <c:forEach var="igNameitem" items="${igCount}" >
+                <input type="hidden" value="${igNameitem.IG_NAME}" id="ig_Name_${igNameitem.IG_NUM}">
+                </c:forEach>
+                
               </div>
               <div class="card-body">
 				<div class="chart-responsive">
