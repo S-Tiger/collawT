@@ -140,4 +140,11 @@ public class IssueDAOImpl implements IssueDAO {
 
 	}
 	
+	// 홈 화면 이슈/투표 최근글
+	@Override
+	public List<Map> recentBoard(String c_Id) {
+		return sqlSession.selectList("issue.recentBoard", c_Id);
+
+	}
+	
 }

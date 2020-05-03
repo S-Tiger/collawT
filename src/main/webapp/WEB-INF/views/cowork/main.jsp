@@ -19,6 +19,19 @@ width:70px !important; height:70px !important;
 #userImage2 {
 width:70px !important; height:70px !important;
 }
+
+#userImage3 {
+width:25px !important; height:25px !important;
+}
+
+#userImage4 {
+width:25px !important; height:25px !important;
+
+}
+td[name="boarditem"]{
+overflow:hidden; font-size:10pt;
+}
+
 </style>
 <script type="text/javascript">
 function withdrawal() {
@@ -432,31 +445,31 @@ $(function () {
                   <table class="table m-0">
 
                     <tbody>
+       <c:forEach var="recentBoarditem" items="${recentBoard}" >
                     <tr>
-                      <td>투표/이슈</td>
-                      <td>글 제목</td>
-                      <td>작성자</td>
+                      <td name="boarditem">${recentBoarditem.BOARDTYPE}</td>
+                      <td name="boarditem">
+                <c:if test="${recentBoarditem.BOARDTYPE=='이슈'}">
+				<a href="/project/issue/read?c_Id=${recentBoarditem.C_ID}&i_Num=${recentBoarditem.I_NUM}"> <b>${recentBoarditem.I_NAME}</b></a>
+				</c:if>
+				<c:if test="${recentBoarditem.BOARDTYPE=='투표'}">
+				<a href="/project/vote/read?c_Id=${recentBoarditem.C_ID}&v_Num=${recentBoarditem.I_NUM}"> <b>${recentBoarditem.I_NAME}</b></a>
+				</c:if>
+                      
+                      </td>
+                      <td name="boarditem">
+                      	<c:if test="${member.mem_File != null }">
+						<img alt="프로필사진"
+						src="/member/getByteImage?mem_Id=${recentBoarditem.MEM_ID}" class="img-circle elevation-2" id="userImage3"/>
+						</c:if>
+						<c:if test="${member.mem_File == null }">
+						<img src="${contextPath}/resources/dist/img/profile.jpg" 
+						class="img-circle elevation-2" id="userImage4" alt="프로필사진">
+						</c:if>
+                      &nbsp;${recentBoarditem.MEM_NAME}</td>
                     </tr>
-                                        <tr>
-                      <td>투표/이슈</td>
-                      <td>글 제목</td>
-                      <td>작성자</td>
-                    </tr>
-                                        <tr>
-                      <td>투표/이슈</td>
-                      <td>글 제목</td>
-                      <td>작성자</td>
-                    </tr>
-                                        <tr>
-                      <td>투표/이슈</td>
-                      <td>글 제목</td>
-                      <td>작성자</td>
-                    </tr>
-                                        <tr>
-                      <td>투표/이슈</td>
-                      <td>글 제목</td>
-                      <td>작성자</td>
-                    </tr>
+         </c:forEach>
+                                      
                
                     </tbody>
                   </table>
@@ -481,31 +494,22 @@ $(function () {
                   <table class="table m-0">
 
                     <tbody>
+       <c:forEach var="recentBoarditem" items="${recentBoard}" >
                     <tr>
-                      <td>투표/이슈</td>
-                      <td>글 제목</td>
-                      <td>작성자</td>
+                      <td name="boarditem"><b>${recentBoarditem.I_NAME}</b></td>
+                      <td name="boarditem">
+                      	<c:if test="${member.mem_File != null }">
+						<img alt="프로필사진"
+						src="/member/getByteImage?mem_Id=${recentBoarditem.MEM_ID}" class="img-circle elevation-2" id="userImage3"/>
+						</c:if>
+						<c:if test="${member.mem_File == null }">
+						<img src="${contextPath}/resources/dist/img/profile.jpg" 
+						class="img-circle elevation-2" id="userImage4" alt="프로필사진">
+						</c:if>
+                      &nbsp;${recentBoarditem.MEM_NAME}</td>
                     </tr>
-                                        <tr>
-                      <td>투표/이슈</td>
-                      <td>글 제목</td>
-                      <td>작성자</td>
-                    </tr>
-                                        <tr>
-                      <td>투표/이슈</td>
-                      <td>글 제목</td>
-                      <td>작성자</td>
-                    </tr>
-                                        <tr>
-                      <td>투표/이슈</td>
-                      <td>글 제목</td>
-                      <td>작성자</td>
-                    </tr>
-                                        <tr>
-                      <td>투표/이슈</td>
-                      <td>글 제목</td>
-                      <td>작성자</td>
-                    </tr>
+         </c:forEach>
+                                      
                
                     </tbody>
                   </table>

@@ -28,4 +28,5 @@ public interface IssueService {
 	public void  issueCopy(Map map);
 	public List<Map> chargerList(String c_Id);
 	public List<Map> igCount(String c_Id);
+	public List<Map> recentBoard(String c_Id);
 }

@@ -131,5 +131,10 @@ public class IssueServiceImpl implements IssueService {
 		return issueDAO.igCount(c_Id);
 	}
 	
+	//홈 화면 이슈/투표 최근글
+	@Override
+	public List<Map> recentBoard(String c_Id) {
+		return issueDAO.recentBoard(c_Id);
+	}
 
 }

@@ -77,10 +77,12 @@ public class CoworkControllerImpl implements CoworkController {
 		Map<String, Object>pjt = coworkService.searchMain(searchMap); //vo타입에 list를 생성하고 서비스에서 가져온 데이터를 list에 넣습니다
 		List<Map>memberList = comemberService.memberList(searchMap);
 		List<Map>igCount = issueService.igCount(c_Id);
+		List<Map>recentBoard = issueService.recentBoard(c_Id);
 		
 		model.addAttribute("pjt", pjt); 
 		model.addAttribute("memberList", memberList);
 		model.addAttribute("igCount", igCount);
+		model.addAttribute("recentBoard", recentBoard);
 		
 		return "/cowork/main"; //뷰url지정해주세요
 		

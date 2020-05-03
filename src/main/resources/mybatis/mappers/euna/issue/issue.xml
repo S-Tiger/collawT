@@ -247,7 +247,7 @@
 	</insert>
 	
 	
-	<!-- 상태 카운트 -->
+	<!-- 홈 화면 상태 카운트 -->
 	<select id="igCount"  resultType="java.util.HashMap"> 
       <![CDATA[
     select NVL(igc.igcount,0)as igcount, ig.ig_Num, ig.ig_Name
@@ -258,6 +258,35 @@
            group by ig_Num
            order by ig_Num asc)igc
     on ig.ig_Num = igc.ig_Num
+      ]]>
+	</select> 
+	
+	<!-- 홈 화면 이슈/투표 최근글 -->
+	<select id="recentBoard"  resultType="java.util.HashMap"> 
+      <![CDATA[
+  select c_id, c_name, i_name, i_date, i_start, i_end, mem_id, mem_name, boardtype, i_Num, rnum
+  from(
+    select c_id, c_name, i_name, i_date, i_start, i_end, mem_id, mem_name, boardtype, i_Num, row_number() over(order by i_date desc) as rnum
+    from(
+            (select i.c_id as c_id, c.c_name as c_name, i.i_name as i_name, i.i_date as i_date, i.i_start as i_start, i.i_end as i_end, i.mem_id as mem_id, m.mem_name as mem_name,
+           '이슈' as boardtype, i.i_Num as i_Num
+            from issue i, member m, co_work c
+            where i.mem_Id = m.mem_Id
+            and c.c_id=i.c_id
+            and c.c_id=#{c_Id}
+            )
+            union all
+            (select v.c_id as c_id, c.c_name as c_name, v.v_name as i_name, v.v_date as i_date, v.v_start as i_start, v.v_end as i_end, v.mem_id as mem_id, m.mem_name as mem_name,
+            '투표' as boardtype, v.v_num as i_Num
+            from vote v, member m, co_work c
+            where v.mem_Id = m.mem_Id
+            and v.c_id=c.c_id
+            and c.c_id=#{c_Id}
+            )
+            )
+            )
+        where rnum between '1' and '5'
+        order by i_date desc
       ]]>
 	</select> 
 
