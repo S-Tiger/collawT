@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="/SRC2/modal/dist/needpopup.min.css">
 <style type="text/css">
     .fc-day-top.fc-sat { color:#0000FF; }     /* 토요일 */
     .fc-day-top.fc-sun { color:#FF0000; }    /* 일요일 */
@@ -340,27 +339,22 @@ function withdrawal() {
       themeSystem: 'bootstrap',
       editable: true,
       //Random default events
-     
+   
       events: function(info,successCallback, failureCallback){
-    	  console.log("${pjt.c_Id}-----------------------------------------------------")
     	  $.ajax({
 				url : '${contextPath}/project/calendarlist?c_Id=${pjt.c_Id}',
 				type : 'get',
 				success : function(data) {
 					successCallback(data);
 				}
-       });  
+       });   
+    	
        },
-       eventClick:function(event) {
-           if(event.url) {
-               
-        	   alert(event.url)
-               return false;
-           }
-       } ,
 
+     /* events: function(info,successCallback, failureCallback){
+      	 
+         }, */
 
-       
       editable  : true,
       droppable : true, // this allows things to be dropped onto the calendar !!!
       drop      : function(info) {

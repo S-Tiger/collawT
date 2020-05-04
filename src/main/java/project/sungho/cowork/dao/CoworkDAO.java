@@ -19,5 +19,7 @@ public interface CoworkDAO {
 	 Map<String, Object> searchMain(Map<String, Object> searchMap) throws DataAccessException;;
 	 
 	 public List<Map> calendarlist(Map<String, Object> searchMap)throws DataAccessException;
+	 
+	 public List<Map> calendarvotelist(Map<String, Object> searchMap)throws DataAccessException;
 
 }

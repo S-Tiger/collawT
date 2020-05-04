@@ -166,7 +166,36 @@ public class CoworkControllerImpl implements CoworkController {
 			eventlist.get(i).put("color", "#28a745");
 			eventlist.get(i).put("textColor", "#FFF");
 			}
+		List<Map> votelist = coworkService.calendarvotelist(searchMap);
+		
+		String voteurl= "/project/vote/read?c_Id="+c_Id+"&v_Num=";
+		for (int i = 0; i < votelist.size(); i++) {
+			votelist.get(i).put("url", voteurl + votelist.get(i).get("url"));
+			votelist.get(i).put("color", "#ffc107");
+			votelist.get(i).put("textColor", "#FFF");
+		}
+		eventlist.addAll(votelist);
+		
 		return eventlist;
+	}
+	
+	@Override
+	@GetMapping("/calendarvotelist")
+	@ResponseBody
+	public List<Map> calendarvotelist(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		String c_Id = (String)request.getParameter("c_Id");
+		searchMap.put("c_Id", c_Id);
+		System.out.println(c_Id);
+		List<Map> votelist = coworkService.calendarvotelist(searchMap);
+		
+		String itemurl = "/project/vote/read?v_Num=";
+		for (int i = 0; i < votelist.size(); i++) {
+			votelist.get(i).put("url", itemurl + votelist.get(i).get("url"));
+			votelist.get(i).put("color", "#ffc107");
+			votelist.get(i).put("textColor", "#FFF");
+		}
+		return votelist;
 	}
 
 

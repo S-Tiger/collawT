@@ -21,6 +21,7 @@ public interface CoworkController {
 	public String deleteCowork(Model model, HttpServletRequest request, HttpServletResponse responsen) throws Exception;
 	
 	public List<Map> calendarlist(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public List<Map> calendarvotelist(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 	public String calendar(Model model ,HttpServletRequest request, HttpServletResponse responsen) throws Exception;
 	

@@ -76,6 +76,12 @@ public class CoworkServiceImpl implements CoworkService {
 		return list;
 	}
 	
+	@Override
+	public List<Map> calendarvotelist(Map<String, Object> searchMap) throws DataAccessException {
+		List<Map>list = coworkDAO.calendarvotelist(searchMap);
+		return list;
+	}
+	
 	
 
 }

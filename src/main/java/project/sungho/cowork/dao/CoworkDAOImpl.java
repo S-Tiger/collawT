@@ -72,5 +72,10 @@ public class CoworkDAOImpl implements CoworkDAO {
 		return list;
 		
 	}
+	public List<Map> calendarvotelist(Map<String, Object> searchMap) throws DataAccessException {
+		List<Map> list = sqlSession.selectList("cowork.calendarvotelist", searchMap); 
+		return list;
+		
+	}
 
 }

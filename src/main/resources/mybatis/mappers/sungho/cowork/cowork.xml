@@ -26,6 +26,13 @@
 		<result property="end" column="i_End" />
 		<result property="url" column="i_Num" />
 	</resultMap>
+	
+	<resultMap id="calendarResult02" type="java.util.Map">
+		<result property="title" column="v_Name"  />
+		<result property="start" column="v_Start" />
+		<result property="end" column="v_End" />
+		<result property="url" column="v_Num" />
+	</resultMap>
 
 	<select id="searchList" resultMap="coworkResult01" parameterType="coworkVO"> 
       <![CDATA[
@@ -82,6 +89,7 @@
 		where c_Id = #{c_Id}
 	</update>
 
+	<!-- 이슈용 쿼리 -->
 	<select id="calendarlist" resultMap="calendarResult01" parameterType="java.util.Map"> 
          	select i_Name , i_Num  , i_Start , i_End
 			from issue
@@ -91,5 +99,15 @@
 			</if>
 		</where>
 	</select>
-
+	
+	<!-- 투표영 쿼리 -->
+	<select id="calendarvotelist" resultMap="calendarResult02" parameterType="java.util.Map"> 
+         	select v_Name , v_Num  , v_Start , v_End
+			from vote
+      <where>
+			<if test=" c_Id != ''  and  c_Id != null">
+			c_Id = #{c_Id}
+			</if>
+		</where>
+	</select>
 </mapper>

@@ -3,7 +3,6 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="/SRC2/modal/dist/needpopup.min.css">
 
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script type="text/javascript">
@@ -164,7 +163,7 @@
 				<div  id = "chatarea" class="col-md-6" style="max-width: 100%; visibility: hidden;">
 	
     
-    <h5 id = "inputTarget"></h5>
+    <li class="nav-item has-treeview" id = "inputTarget" style="margin: 10px;"></li>
     <div id="chatArea"><div id="chatMessageArea"></div></div>
     <br/>
     <input type="text" id="message">
