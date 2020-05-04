@@ -50,8 +50,8 @@ public class notifyControllerImpl implements NotifyController {
 	 
 	@RequestMapping("/update")	
 	public void notifyUpdate(HttpServletRequest request, HttpServletResponse response,Model model) throws Exception {
-		System.out.println("이거 데이터 상태값변경----------------");
-		System.out.println("update에 넘겨주는 값+++++++++++++++++++++:"+request.getParameter("i_Num"));
+		//System.out.println("이거 데이터 상태값변경----------------");
+		//System.out.println("update에 넘겨주는 값+++++++++++++++++++++:"+request.getParameter("i_Num"));
 		String mem_Id = request.getParameter("id");
 		HttpSession session = request.getSession();
 		String i_Num = request.getParameter("i_Num");
@@ -61,9 +61,10 @@ public class notifyControllerImpl implements NotifyController {
 		searchMap.put("c_Id", c_Id);
 		searchMap.put("i_Num", i_Num);
 		notifyService.notifyUpdate(searchMap);
-		request.setAttribute("c_Id", c_Id);
-		request.setAttribute("i_Num", i_Num);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/project/issue/read"); 
+		//request.setAttribute("c_Id", c_Id);
+		//request.setAttribute("i_Num", i_Num);
+		request.setAttribute("mem_Id", mem_Id);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/main"); 
         dispatcher.forward(request, response);
 	}
 	
@@ -71,6 +72,7 @@ public class notifyControllerImpl implements NotifyController {
 	public void voteUpdate(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String c_Id = request.getParameter("c_Id");
 		String v_Num = request.getParameter("v_Num");
+		String mem_Id = request.getParameter("mem_Id");
 		HttpSession session = request.getSession();
 		Map<String,Object> searchMap = new HashMap<String,Object>();
 		searchMap = (Map<String,Object>)session.getAttribute("member");
@@ -79,13 +81,15 @@ public class notifyControllerImpl implements NotifyController {
 		notifyService.voteUpdate(searchMap);
 		request.setAttribute("c_Id", c_Id);
 		request.setAttribute("v_Num",v_Num);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/project/vote/read");
+		request.setAttribute("mem_Id", mem_Id);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/main");
 		dispatcher.forward(request, response);
 	}
 	@RequestMapping("/replyupdate")
 	public void replyUpdate(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String i_Num = request.getParameter("i_Num");
 		String c_Id = request.getParameter("c_Id");
+		String mem_Id = request.getParameter("mem_Id");
 		HttpSession session = request.getSession();
 		Map<String,Object> searchMap = new HashMap<String,Object>();
 		searchMap = (Map<String,Object>)session.getAttribute("member");
@@ -94,7 +98,8 @@ public class notifyControllerImpl implements NotifyController {
 		notifyService.replyUpdate(searchMap);
 		request.setAttribute("c_Id", c_Id);
 		request.setAttribute("i_Num", i_Num);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/project/issue/read");
+		request.setAttribute("mem_Id", mem_Id);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/main");
 		dispatcher.forward(request, response);
 	}
 	@GetMapping("/insert")

@@ -244,6 +244,17 @@
         and n.not_status = '0'
         and n.not_kind = '2'
         )
+        union all
+        (select v.c_Id as c_Id, v.mem_Id as mem_Id, v.v_Date as ap_Date, null as ap_Yn, n.not_status as ap_Status, null as invite, c.c_Name as c_Name, m.mem_Name as mem_Name,
+        v.v_Name as i_Name, v.v_Content as i_Content, v.v_Num as i_Num, n.not_kind as not_Kind, m.mem_File as mem_File,'4' as type
+        from vote v , notify n, co_work c, member m 
+        where v.v_Num = n.v_num
+        and v.c_Id = c.c_Id
+        and v.mem_Id=m.mem_Id
+        and n.mem_Id = #{mem_Id}
+        and n.not_status = '0'
+        and n.not_kind = '3'
+        )
     )
   order by ap_Date desc
       ]]>

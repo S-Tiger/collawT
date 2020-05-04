@@ -217,14 +217,23 @@ $(function () {
 <!--  새로운 소식 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 			<div class="row">
 			<div class="col-md-7">
-				<div class="card">
+				<div class="card" style="min-height:695px; max-height:695px">
               <div class="card-header">
                 <h3 class="card-title"><b>새로운 소식</b></h3>
 
               </div>
               <!-- /.card-header -->
               
-              <div class="card-body">
+              <div class="card-body" style="overflow:auto">
+              
+<%--                <c:if test="${fn:length(newspeed)==0}">
+               <p style="text-align:center;">
+               <br><br><br><br><br><br><br><br><br><br><i class="far fa-newspaper" style="font-size:5em; color:gray;"></i>
+               <br>새로운 소식이 없습니다.<br>:D</p>
+              
+              </c:if> --%>	 
+
+<%-- 			<c:if  test= "${fn:length(newspeed)>0}"> --%>
                 <div class="timeline timeline-inverse">
                 	<c:forEach var="newspeeditem" items="${newspeed}">
 							 <c:choose>
@@ -331,15 +340,53 @@ $(function () {
 							</div>
 							</c:if>
 							</c:when>
+							
+							<c:when  test= "${newspeeditem.type eq '4'}">
+							 
+							<div>
+								<i class="fas fa-vote-yea bg-purple"></i>
+
+								<div class="timeline-item">
+									<span class="time"><i class="far fa-clock"></i> ${newspeeditem.ap_Date}&nbsp;&nbsp;&nbsp;
+									<a href="/notify/voteUpdate?c_Id=${newspeeditem.c_Id}&v_Num=${newspeeditem.i_Num}" style="color:red"><i class="fas fa-times"></i></a>
+									</span>
+
+									<h3 class="timeline-header">
+									<b>투표 │ </b>
+										from <a href="/project/main?c_Id=${newspeeditem.c_Id}">${newspeeditem.c_Name}</a>
+									</h3>
+									<div class="timeline-body">
+									<div class="row" style="padding:7px; line-height:2em">
+									<c:if test="${newspeeditem.mem_File != null }">
+									<img alt="프로필사진" width="25" height="25"
+									src="/member/getByteImage?mem_Id=${newspeeditem.mem_Id}" class="img-circle elevation-1"/>
+									</c:if>
+									<c:if test="${newspeeditem.mem_File == null }">
+									<img src="${contextPath}/resources/dist/img/profile.jpg" width="25" height="25"
+									class="img-circle elevation-1" alt="프로필사진">
+									</c:if>
+									&nbsp;
+									${newspeeditem.mem_Name}(${newspeeditem.mem_Id})님이 &nbsp;<a href="/project/vote/read?c_Id=${newspeeditem.c_Id}&v_Num=${newspeeditem.i_Num}"><b>${newspeeditem.i_Name}</b></a>&nbsp;투표글을 등록하셨습니다.</div>
+									</div>
+									<div class="timeline-footer" id="timeline-footer">
+									</div>
+								</div>
+							</div>
+							</c:when>
+
 							</c:choose>
 							  </c:forEach>
 							  
-							  
+ 
 
 					<div>
                         <i class="far fa-clock bg-gray"></i>
                       </div>	
                 </div>
+              <%--   </c:if> --%>
+
+
+                
                 <!-- /.table-responsive -->
               </div>
               <!-- /.card-body -->
