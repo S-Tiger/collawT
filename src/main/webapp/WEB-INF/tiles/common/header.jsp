@@ -393,7 +393,7 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
          <i class="fas fa-comments"></i>
-         <span class="badge badge-danger navbar-badge">${totalCount}</span>
+         <span id= "totalCountNum"class="badge badge-danger navbar-badge">${totalCount}</span>
         </a>
       </li>
     </ul>

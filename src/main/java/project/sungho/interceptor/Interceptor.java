@@ -47,6 +47,7 @@ public class Interceptor extends HandlerInterceptorAdapter {
 			//로그인한 회원에게 온 메세지를 맴버별로 카운트
 			List<Map> msgCount = chatDAO.msgCount(member);
 			//모든 카운트
+			int totalCount = chatDAO.totalCount(member);
 			for (int i = 0; i < list.size(); i++) {
 				//로그인한 회원의 협업공간의 맴버들을 불러와 협업공간 정보에 저장함 , 협업공간별 칼라도 저정(채팅방구분)
 				Map<String, Object> memberSearch = list.get(i);
@@ -70,6 +71,7 @@ public class Interceptor extends HandlerInterceptorAdapter {
 			
 			request.setAttribute("coworklist", list);
 			request.setAttribute("msgCount", msgCount);
+			request.setAttribute("totalCount", totalCount);
 			return true;
 		}
 		

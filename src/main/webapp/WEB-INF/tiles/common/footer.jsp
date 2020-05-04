@@ -11,18 +11,12 @@
 	var userId = '${member.mem_Id}';
 	var userName = '${member.mem_Name}';
 	var target_Id
+	var target_Name
 	function connect(obj) {
-		wsocket = new WebSocket("ws://localhost:8090/chat-ws");
-		wsocket.onopen = onOpen;
-		wsocket.onmessage = onMessage;
-		wsocket.onclose = onClose;
+		//타겟 아이디 가져오기
 		target_Id = $(obj).data('targetmember');
+		target_Name = $(obj).data('targetnames');
 		
-	}
-	function disconnect() {
-		if(wsocket != null){wsocket.close();}
-	}
-	function onOpen(evt) {
 		$.ajax({
 			url : '${contextPath}/chatmsg/list?target_Id='+ target_Id,
 			type : 'get',
@@ -39,6 +33,29 @@
 			}
 				
 			}})
+		
+		wsocket = new WebSocket("ws://localhost:8090/chat-ws");
+		wsocket.onopen = onOpen;
+		wsocket.onmessage = onMessage;
+		wsocket.onclose = onClose;
+		
+		//채팅알림 카운트를 확인시 삭제 및 총 카운트에서 확인한 채팅 카운트를 빼기위한 스크립트
+		var countSpan = $(obj).children('span');
+		var musCount = countSpan.html();
+		var totalCountNum = $('#totalCountNum').html();
+		var changeNum = totalCountNum - musCount;
+		$('#inputTarget').html(target_Name);
+		$('#totalCountNum').html(changeNum);
+		$('#chatarea').css('visibility','visible');
+		countSpan.empty();
+	}
+	function disconnect() {
+		if(wsocket != null){wsocket.close();}
+		$('#chatarea').css('visibility','hidden');
+	}
+	function onOpen(evt) {
+		
+		
 	}
 	function onMessage(evt) {
 		var data = evt.data;
@@ -51,6 +68,7 @@
 	}
 	function onClose(evt) {
 		$("#chatMessageArea").empty();
+		
 	}
 	
 	function send() {
@@ -122,17 +140,20 @@
 						<ul class="nav nav-treeview" >
 					
 						<c:forEach var="partnermember" items="${partnerList.memberList}">
-								<li class="nav-item"><a href="#" class="nav-link" data-targetmember="${partnermember.mem_Id}" id="enterBtn"
+						<c:if test="${partnermember.mem_Id != member.mem_Id}">
+								<li class="nav-item"><a href="#" class="nav-link" data-targetmember="${partnermember.mem_Id}"
+								data-targetnames="${partnermember.mem_Name}" id="enterBtn"
 								 style="padding-top: 5px; padding-bottom: 5px; padding-left: 10px; white-space: none;">
 										<b style="font-size: 14px;">
 										${partnermember.mem_Name}<font size="2">
 										(${partnermember.mem_Id})</font></b>
 										<c:forEach var="msgcountItem" items="${msgCount}">
 										<c:if test="${partnermember.mem_Id == msgcountItem.mem_Id}">
-											<span id = "${msgcountItem.mem_Id}" class="badge badge-danger navbar-badge">${msgcountItem.chat_Count}</span>
+											<span id="countNum" class="badge badge-danger navbar-badge">${msgcountItem.chat_Count}</span>
 										</c:if>
 										</c:forEach>
 								</a></li>	
+								</c:if>
 							</c:forEach>
 							</ul>
 				</li></ul>
@@ -140,10 +161,10 @@
 						
 				</nav>
 				
-				<div class="col-md-6" style="max-width: 100%;">
+				<div  id = "chatarea" class="col-md-6" style="max-width: 100%; visibility: hidden;">
 	
     
-    <h3>대화 영역</h3>
+    <h5 id = "inputTarget"></h5>
     <div id="chatArea"><div id="chatMessageArea"></div></div>
     <br/>
     <input type="text" id="message">

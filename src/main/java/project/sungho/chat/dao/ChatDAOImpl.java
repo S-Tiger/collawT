@@ -52,8 +52,8 @@ public class ChatDAOImpl implements ChatDAO{
 	}
 	
 	@Override
-	public List<Map> totalCount(Map<String, Object> searchMap) throws DataAccessException {
-		List<Map> result = sqlSession.selectList("chat.totalCount",searchMap);
+	public int totalCount(Map<String, Object> searchMap) throws DataAccessException {
+		int result = sqlSession.selectOne("chat.totalCount",searchMap);
 		
 			return result;
 	}

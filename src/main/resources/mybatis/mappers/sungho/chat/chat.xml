@@ -73,9 +73,9 @@
 		group by mem_Id
 	</select>
 	
-	<select id="totalCount" resultMap="chatResult01" parameterType="java.util.Map"> 
+	<select id="totalCount" resultType="int" parameterType="java.util.Map"> 
       <![CDATA[
-		select count(*) as chat_Count
+		select count(*)
 		from CHATMESSAGE
 		]]>
 		<where>

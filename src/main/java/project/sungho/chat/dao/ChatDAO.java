@@ -19,5 +19,5 @@ public interface ChatDAO {
 	
 	public List<Map> msgCount(Map<String, Object> searchMap) throws DataAccessException;
 	
-	public List<Map> totalCount(Map<String, Object> searchMap) throws DataAccessException;
+	public int totalCount(Map<String, Object> searchMap) throws DataAccessException;
 } 
