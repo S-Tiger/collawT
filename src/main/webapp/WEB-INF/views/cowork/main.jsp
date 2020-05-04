@@ -559,22 +559,27 @@ $(function () {
 <!-- 정보변경 모달 팝업 내용 -->
 <div id='update-popup' class="needpopup">
 	<a href="#"></a>
-	<p>
-	<form id="projectupdate" action="/project/update" method="post">
-		<p class="login-box-msg" style="padding-bottom: 10px">
+	
+	<form id="projectupdate" action="/project/update" method="post" style="display: inline;">
+	<div class= "form-group">
+		<div class="col-md-6" style="max-width: 100%;">
 			<input type="hidden" id="c_Id" name="c_Id" value="${pjt.c_Id}">
-			<label style="font-family: Recipekorea; padding-bottom: 5px;">이름</label>
+			<h4 class="m-0 text-dark" style="font-family: Recipekorea; padding-bottom: 5px;">협업공간명</h4>
 			<input class="form-control" type="text" id="c_Name" name="c_Name"
 				required value="${pjt.c_Name}">
-		</p>
-		<p class="login-box-msg" style="padding-bottom: 10px">
-			<label style="font-family: Recipekorea; padding-bottom: 5px;">설명</label>
+		</div>
+		</div>
+		<div class= "form-group">
+		<div class="col-md-6" style="max-width: 100%;">
+		<h4 class="m-0 text-dark" style="font-family: Recipekorea; padding-bottom: 5px;">협업공간 설명</h4>
 			<textarea class="form-control" rows="3" id="c_Comment"
 				name="c_Comment" required>${pjt.c_Comment}</textarea>
-		</p>
-		<p class="login-box-msg" style="padding-bottom: 10px">
-			<label style="font-family: Recipekorea; padding-bottom: 5px;">관리자
-				변경</label><br> <select name="mem_Id">
+		</div>
+		</div>
+		<div class= "form-group">
+		<div class="col-md-6" style="max-width: 100%;">
+		<h4 class="m-0 text-dark" style="font-family: Recipekorea; padding-bottom: 5px;">관리자 변경</h4>
+			 <select class="form-control custom-select" name="mem_Id">
 				<option value="${member.mem_Id}">${member.mem_Name}(${member.mem_Id})</option>
 				<c:forEach var="itemList" items="${memberList}">
 					<c:if test="${itemList.mem_Id != pjt.mem_Id}">
@@ -582,27 +587,38 @@ $(function () {
 					</c:if>
 				</c:forEach>
 			</select>
-		</p>
-		<p class="login-box-msg" style="padding-bottom: 10px">
-			<label style="font-family: Recipekorea; padding-bottom: 5px;">카테고리</label><br>
-			<select name="c_Category">
+		</div>
+		</div>
+		<div class= "form-group">
+		<div class="col-md-6" style="max-width: 100%;">
+			<h4 class="m-0 text-dark" style="font-family: Recipekorea; padding-bottom: 5px;">카테고리</h4>
+			<select class="form-control custom-select" name="c_Category">
 
-				<option value="${pjt.c_Category}">${pjt.c_Category}</option>
-				<option value="0">협업업무관련</option>
-				<option value="1">개인업무관련</option>
-				<option value="2">학업과제관련</option>
+				<option value="${pjt.c_Category}" hidden>
+				<c:choose> 
+				 <c:when test = "${pjt.c_Category == 1}"> 협업업무관련</c:when>
+				 <c:when test = "${pjt.c_Category == 2}"> 개인업무관련</c:when>
+				 <c:when test = "${pjt.c_Category == 3}"> 학업과제관련</c:when>
+				 </c:choose>
+				</option>
+				<option value="1">협업업무관련</option>
+				<option value="2">개인업무관련</option>
+				<option value="3">학업과제관련</option>
 			</select>
-		</p>
-		<button type="submit" class="btn btn-block btn-success">정보변경</button>
+		</div>
+		</div>
+		  <span class="col-md-6">
+		<button type="submit" class="btn btn-block btn-success" style="width: 220px; float:none; display: inline;">정보변경</button>
+		</span>
 	</form>
-	<span>
-		<form id="projectdelete" action="/project/delete" method="post">
+		<form id="projectdelete" action="/project/delete" method="post" style="display: contents; ">
+		<span class="col-md-6">
 			<input type="hidden" id="c_Id" name="c_Id" value="${pjt.c_Id}">
-			<button style="background-color: #dc3545;" type="submit"
+			<button style="background-color: #dc3545; width: 220px; display: inline; float: right; border-color: #dc3545;" type="submit"
 				class="btn btn-block btn-success">협업공간삭제</button>
+		</span>
 		</form>
-	</span>
-</div>
+		</div>
 <!-- 맴버초대 모달 팝업 내용 -->
 <div id='add-popup' class="needpopup">
 	<div style="padding-bottom: 25px;">
@@ -641,7 +657,7 @@ $(function () {
 			</form>
 		</span> <span>
 			<button type="reset" class="btn btn-block btn-success"
-				onclick="history.go(0);" style="width: 220px">취소</button>
+				onclick="history.go(0);" style="width: 220px; background-color: #dc3545; border-color: #dc3545;" >취소</button>
 		</span>
 	</div>
 </div>

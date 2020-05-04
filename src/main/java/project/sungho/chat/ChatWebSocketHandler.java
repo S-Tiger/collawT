@@ -75,11 +75,11 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 		dataMap.put("message",msg);
 		
 		//나 자신에게 메세지를 보냄
-		myws.sendMessage(new TextMessage(msgName+":"+msg));
+		myws.sendMessage(new TextMessage(msgName+" : "+msg));
 		
 		//대상이 접속해 있을 경우 대상에게 메세지를 보냄
 		if (ws != null) {
-			chatDAO.logoutinsertChat(dataMap);
+			chatDAO.insertChat(dataMap);
 			List<Map>countNum = chatDAO.msgCount(dataMap);
 			ws.sendMessage(new TextMessage(msgName+" : "+msg));
 		}else {

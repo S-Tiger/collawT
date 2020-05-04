@@ -405,7 +405,7 @@
 		<a  href="/main" class="brand-link navbar-danger"> <img
 			src="${contextPath}/resources/dist/img/logocollawT.png" alt="AdminLTE Logo"
 			class="brand-image img-circle elevation-3" style="opacity: .8">
-			<span class="brand-text font-weight-light">Collaw T</span>
+			<span class="brand-text font-weight-light" style="font-family:Tahoma;">&nbsp;Collaw T</span>
 		</a>
 
 		<!-- Sidebar -->
@@ -519,19 +519,19 @@
 <form action="/project/insert" method="post" id="createpjtform">
               <div class="form-group">
               <div class="col-md-6" style="max-width: 100%;">
-                <label for="inputName">협업공간명</label>
+                <h4 class="m-0 text-dark" style="font-family: Recipekorea; padding-bottom: 5px;">협업공간명</h4>
                 <input type="text" name="c_Name" id="create_Name" class="form-control">
               </div>
               </div>
               <div class="form-group">
               <div class="col-md-6" style="max-width: 100%;">
-                <label for="inputDescription">협업공간 설명</label>
+                <h4 class="m-0 text-dark" style="font-family: Recipekorea; padding-bottom: 5px;">협업공간 설명</h4>
                 <textarea name="c_Comment" id="create_Comment" class="form-control" rows="4"></textarea>
               </div>
               </div>
               <div class="form-group">
               <div class="col-md-6" style="max-width: 100%;">
-                <label for="inputStatus">카테고리</label>
+                <h4 class="m-0 text-dark" style="font-family: Recipekorea; padding-bottom: 5px;">카테고리</h4>
                <select class="form-control custom-select" name= "c_Category" id="create_Category">
                   <option value="00" hidden>선택해주세요</option>
                   <option value="01">협업관련 업무관리</option>
@@ -542,8 +542,9 @@
               </div>
               <input type="hidden"  name = mem_Id value= ${member.mem_Id }>
               <div class="col-md-6" style="max-width: 100%;">
-          <input type="submit" value="생성" class="btn btn-success float-right" id="projectInsert"  style="width: 100px;">
-          <input type="reset" class="btn btn-block btn-success" onclick="history.go(0);" value = "취소" style="background-color: #dc3545; width: 100px;">
+          <input type="submit" value="생성" class="btn btn-success" id="projectInsert"  style="width: 220px; float:none;">
+          <input type="reset" class="btn btn-block btn-success" onclick="history.go(0);" value = "취소" style="background-color: #dc3545; 
+          float: right;background-color: #dc3545;width: 220px;border-color: #dc3545; ">
           </div>
       </form>
 </div>
