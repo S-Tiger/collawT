@@ -147,4 +147,10 @@ public class PersonalDAOImpl implements PersonalDAO {
 		return sqlSession.selectList("personal.voteAvailable", mem_Id);
 	}
 	
+	//내가 담당한 이슈 현황
+	@Override
+	public List<Map> myissue(String mem_Id) {
+		return sqlSession.selectList("personal.myissue", mem_Id);
+	}
+	
 }

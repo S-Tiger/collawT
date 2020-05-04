@@ -288,6 +288,24 @@ order by v_Num desc
       ]]>
 	</select> 
 	
+	
+		<!-- 내가 담당한 이슈 현황 -->
+		<select id="myissue"  resultType="java.util.HashMap"> 
+      <![CDATA[
+  select ig.ig_Num, NVL(c.count,0) as count
+  from issue_group ig left outer join 
+  (
+      select i.ig_Num, count(i.ig_Num) as count
+      from issue i left outer join charger c
+      on c.i_Num = i.i_Num
+      where c.mem_Id=#{mem_Id}
+      group by i.ig_Num
+    )c
+on ig.ig_Num = c.ig_Num
+order by ig.ig_Num asc
+      ]]>
+	</select> 
+	
 
 
 

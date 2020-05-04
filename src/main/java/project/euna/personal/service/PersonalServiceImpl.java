@@ -137,5 +137,11 @@ public class PersonalServiceImpl implements PersonalService {
 		return personalDAO.voteAvailable(mem_Id);
 	}
 	
+	//내가 담당한 이슈 현황
+	@Override
+	public List<Map> myissue(String mem_Id) {
+		return personalDAO.myissue(mem_Id);
+	}
+	
 
 }

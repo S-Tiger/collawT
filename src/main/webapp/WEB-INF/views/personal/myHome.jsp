@@ -35,6 +35,11 @@ $(function () {
     //- DONUT CHART -
     //-------------
     // Get context with jQuery - using jQuery's .get() method.
+    var myissue1 = $('#myissue1').val();
+    var myissue2 = $('#myissue2').val();
+    var myissue3 = $('#myissue3').val();
+    var myissue4 = $('#myissue4').val();
+    var total = parseInt(myissue1)+parseInt(myissue2)+parseInt(myissue3)+parseInt(myissue4)
     var donutChartCanvas1 = $('#donutChart1').get(0).getContext('2d')
     var donutData1        = {
       labels: [
@@ -46,7 +51,7 @@ $(function () {
       ],
       datasets: [
         {
-          data: [1,2,3,4],
+          data: [myissue1,myissue2,myissue3,myissue4],
           backgroundColor : ['#6c757d', '#007bff', '#ffc107', '#28a745'],
         }
       ],
@@ -64,7 +69,7 @@ $(function () {
       },
   	elements: {
   			center: {
-  				text: '총 100건',
+  				text: '총 '+total+'건',
 		        color: '#FF6384', // Default is #000000
 		        fontStyle: 'Arial', // Default is Arial
 		        sidePadding: 20 // Defualt is 20 (as a percentage)
@@ -412,6 +417,10 @@ $(function () {
 				<div class="chart-responsive">
                 <canvas id="donutChart1" style="min-height: 252px; height: 252px; max-height: 252px; max-width: 100%; display: block; width: 406px;" width="812" height="502" class="chartjs-render-monitor"></canvas>
              	 </div>
+             	 
+             	 <c:forEach var="myissueitem" items="${myissue}">
+             	 <input type="hidden" value="${myissueitem.COUNT}" id="myissue${myissueitem.IG_NUM}">
+             	 </c:forEach>
 
               </div>
               <!-- /.card-body -->
