@@ -230,25 +230,28 @@ $(function () {
 							 <c:choose>
 							 <c:when  test= "${newspeeditem.type eq '1'}">
 							<div>
+								
 								<i class="fas fa-envelope bg-primary"></i>
 
 								<div class="timeline-item">
-									<span class="time"><i class="far fa-clock"></i> ${newspeeditem.ap_Date}</span>
+									<span class="time"><i class="far fa-clock"></i> ${newspeeditem.ap_Date}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 
 									<h3 class="timeline-header">
-										<a href="#">${newspeeditem.c_Name}</a>에서 가입 요청이 전달되었습니다.
+									<b>초대 │ </b>
+									from <b>${newspeeditem.c_Name}</b>
 									</h3>
 									<div class="timeline-body">
-									<div class="row" style="padding : 7px">
-										<c:if test="${newspeeditem.mem_File != null }">
-										<img alt="프로필사진" width="25" height="25"
-										src="/member/getByteImage?mem_Id=${newspeeditem.mem_Id}" class="img-circle elevation-1"/>
-										</c:if>
-										<c:if test="${newspeeditem.mem_File == null }">
-										<img src="${contextPath}/resources/dist/img/profile.jpg" width="25" height="25"
-										class="img-circle elevation-1" alt="프로필사진">
-										</c:if>
-									&nbsp;${newspeeditem.mem_Name}(${newspeeditem.mem_Id})님께서 회원님을&nbsp;<a href="#"><b>${newspeeditem.c_Name}</b></a>에 초대하셨습니다. </div></div>
+									<div class="row" style="padding:7px; line-height:2em">
+									<c:if test="${newspeeditem.mem_File != null }">
+									<img alt="프로필사진" width="25" height="25"
+									src="/member/getByteImage?mem_Id=${newspeeditem.mem_Id}" class="img-circle elevation-1"/>
+									</c:if>
+									<c:if test="${newspeeditem.mem_File == null }">
+									<img src="${contextPath}/resources/dist/img/profile.jpg" width="25" height="25"
+									class="img-circle elevation-1" alt="프로필사진">
+									</c:if>
+									&nbsp;
+									${newspeeditem.mem_Name}(${newspeeditem.mem_Id})님께서 회원님을&nbsp;<b>${newspeeditem.c_Name}</b>에 초대하셨습니다. </div></div>
 									<div class="timeline-footer" id="timeline-footer">
 									<form  id = "myform" action="/news/accept" method="post" style="display: inline;  margin: 5;">
 									<input type="hidden" name="c_Id" id="c_Id" value="${newspeeditem.c_Id}">
@@ -262,16 +265,32 @@ $(function () {
 							</c:when>
 							
 							 <c:when  test= "${newspeeditem.type eq '2'}">
+							 
 							<div>
-								<i class="fas fa-envelope bg-primary"></i>
+								<i class="fas fa-clipboard-list bg-info"></i>
 
 								<div class="timeline-item">
-									<span class="time"><i class="far fa-clock"></i> ${newspeeditem.ap_Date}</span>
+									<span class="time"><i class="far fa-clock"></i> ${newspeeditem.ap_Date}&nbsp;&nbsp;&nbsp;
+									<a href="/notify/update?c_Id=${newspeeditem.c_Id}&i_Num=${newspeeditem.i_Num}" style="color:red"><i class="fas fa-times"></i></a>
+									</span>
 
 									<h3 class="timeline-header">
-										<a href="#">${newspeeditem.c_Name}</a>에 새 이슈가 등록되었습니다.
+									<b>이슈 │ </b>
+										from <a href="/project/main?c_Id=${newspeeditem.c_Id}">${newspeeditem.c_Name}</a>
 									</h3>
-									<div class="timeline-body">${newspeeditem.i_Name}</div>
+									<div class="timeline-body">
+									<div class="row" style="padding:7px; line-height:2em">
+									<c:if test="${newspeeditem.mem_File != null }">
+									<img alt="프로필사진" width="25" height="25"
+									src="/member/getByteImage?mem_Id=${newspeeditem.mem_Id}" class="img-circle elevation-1"/>
+									</c:if>
+									<c:if test="${newspeeditem.mem_File == null }">
+									<img src="${contextPath}/resources/dist/img/profile.jpg" width="25" height="25"
+									class="img-circle elevation-1" alt="프로필사진">
+									</c:if>
+									&nbsp;
+									${newspeeditem.mem_Name}(${newspeeditem.mem_Id})님이 &nbsp;<a href="/project/issue/read?c_Id=${newspeeditem.c_Id}&i_Num=${newspeeditem.i_Num}"><b>${newspeeditem.i_Name}</b></a>&nbsp;이슈를 등록하셨습니다.</div>
+									</div>
 									<div class="timeline-footer" id="timeline-footer">
 									</div>
 								</div>
@@ -284,12 +303,28 @@ $(function () {
 								<i class="fas fa-comments bg-warning"></i>
 
 								<div class="timeline-item">
-									<span class="time"><i class="far fa-clock"></i> ${newspeeditem.ap_Date}</span>
+
+									<span class="time"><i class="far fa-clock"></i> ${newspeeditem.ap_Date}&nbsp;&nbsp;&nbsp;
+									<a href="/notify/replyupdate?c_Id=${newspeeditem.c_Id}&i_Num=${newspeeditem.i_Num}" style="color:red"><i class="fas fa-times"></i></a></span>
 
 									<h3 class="timeline-header">
-										<a href="#">${newspeeditem.mem_Name}</a>님이 댓글을 남기셨습니다.
+									<b>댓글 │ </b>
+									from <a href="/project/main?c_Id=${newspeeditem.c_Id}">${newspeeditem.c_Name}</a>
+										
 									</h3>
-									<div class="timeline-body">${newspeeditem.i_Content}</div>
+									<div class="timeline-body">
+									<div class="row" style="padding:7px; line-height:2em">
+									<c:if test="${newspeeditem.mem_File != null }">
+									<img alt="프로필사진" width="25" height="25"
+									src="/member/getByteImage?mem_Id=${newspeeditem.mem_Id}" class="img-circle elevation-1"/>
+									</c:if>
+									<c:if test="${newspeeditem.mem_File == null }">
+									<img src="${contextPath}/resources/dist/img/profile.jpg" width="25" height="25"
+									class="img-circle elevation-1" alt="프로필사진">
+									</c:if>
+									&nbsp;
+									${newspeeditem.mem_Name}(${newspeeditem.mem_Id})님이&nbsp;<a href="/project/issue/read?c_Id=${newspeeditem.c_Id}&i_Num=${newspeeditem.i_Num}"><b>${newspeeditem.i_Name}</b></a>글에 댓글을 남기셨습니다.</div>
+									<div class="row" style="margin-left:32px; margin-right:32px;"><small>${newspeeditem.i_Content}</small></div></div>
 									<div class="timeline-footer" id="timeline-footer">
 									</div>
 								</div>
@@ -300,69 +335,7 @@ $(function () {
 							  </c:forEach>
 							  
 							  
-							  
-							  
-<%-- 							  
-							  <c:forEach var="item" items="${notifyList}">
-							<div>
-								<i class="fas fa-envelope bg-primary"></i>
 
-								<div class="timeline-item">
-									<span class="time"><i class="far fa-clock"></i> ${applylist1.ap_Date}</span>
-
-									<h3 class="timeline-header">
-										<a href="#">${applylist1.c_Name}</a>에서 가입 요청이 전달되었습니다.
-									</h3>
-									<div class="timeline-body">${applylist1.mem_Name}님께서 회원님을  ${applylist1.c_Name}에 초대하셨습니다. </div>
-									<div class="timeline-footer" id="timeline-footer">
-									<form  id = "myform" action="/news/accept" method="post" style="display: inline;  margin: 5;">
-									<input type="hidden" name="c_Id" id="c_Id" value="${applylist1.c_Id}">
-									<input type="hidden" name="mem_Id" id="mem_Id" value="${applylist1.mem_Id}">
-										<a id = "acceptsubmit" href="#" class="btn btn-primary btn-sm" style="color: white;">수락</a>
-										<a id = "rejectsubmit" href="#" class="btn btn-danger btn-sm" style="color: white;">거절</a>
-										</form>
-									</div>
-								</div>
-							</div>
-							  </c:forEach>
-							  
-							  
-                  
-                  <c:forEach var="item" items = "${notifyList}">
-						<div class="post">						
-							<div class="user-block">
-								
-								<span class="username"  id = "test11" > <a href="/notify/update?c_Id=${item.c_Id}&i_Num=${item.i_Num}">${item.mem_Id}
-										</a> <a href="#" class="float-right btn-tool"><i
-										class="fas fa-times"></i></a>
-								</span> <span class="description">${item.i_Date}
-									</span>
-							</div>
-							<!-- /.user-block -->
-							<p>${item.i_Content}</p>
-
-							
-						</div>
-						</c:forEach>
-						
-											<c:forEach var="reply" items = "${replyList}">
-						<div class="post">						
-							<div class="user-block">
-								<img class="img-circle img-bordered-sm"
-									src="${contextPath}/resources/dist/img/user1-128x128.jpg" alt="user image">	
-								
-								<span class="username"  id = "test44" > <a href="/notify/replyupdate?c_Id=${reply.c_Id}&i_Num=${reply.i_Num}">${reply.mem_Id}
-										</a> <a href="#" class="float-right btn-tool"><i
-										class="fas fa-times"></i></a>
-								</span> <span class="description">
-									</span>
-							</div>
-							<!-- /.user-block -->
-							<p>${reply.i_Content}</p>
-
-							
-						</div>
-						</c:forEach>  --%>
 					<div>
                         <i class="far fa-clock bg-gray"></i>
                       </div>	
@@ -397,75 +370,25 @@ $(function () {
               <!-- /.card-body -->
             </div>
 			
-				<div class="card">
+
+
+
+				<div class="card" style="max-height:337.800px;">
               <div class="card-header">
-                <h3 class="card-title"><b>내 담당 이슈 리스트</b></h3>
+                <h3 class="card-title"><b>참여 가능한 투표</b></h3>
               </div>
-              <div class="card-body">
+              <div class="card-body" style="overflow:auto">
 				<div class="table-responsive">
                   <table class="table m-0">
 
                     <tbody>
+                    <c:forEach var="vaitem" items="${voteAvailable}">
                     <tr>
-                      <td>협업공간명</td>
-                      <td>글 제목</td>
+                      <td style="width:60%"><a href="/project/vote/read?c_Id=${vaitem.c_Id}&v_Num=${vaitem.v_Num}"><b>${vaitem.v_Name}</b></a> </td>
+                      <td style="width:40%"><small>from <a href="/project/main?c_Id=${vaitem.c_Id}"><b>${vaitem.c_Name}</b></a></small></td>
                     </tr>
-                                        <tr>
-                      <td>협업공간명</td>
-                      <td>글 제목</td>
-                    </tr>
-                                        <tr>
-                      <td>협업공간명</td>
-                      <td>글 제목</td>
-                    </tr>
-                                        <tr>
-                      <td>협업공간명</td>
-                      <td>글 제목</td>
-                    </tr>
-                                        <tr>
-                      <td>협업공간명</td>
-                      <td>글 제목</td>
-                    </tr>
-               
-                    </tbody>
-                  </table>
-                </div>
+                    </c:forEach>
 
-
-              </div>
-              <!-- /.card-body -->
-            </div>
-
-
-				<div class="card">
-              <div class="card-header">
-                <h3 class="card-title"><b>참여하지 않은 투표</b></h3>
-              </div>
-              <div class="card-body">
-				<div class="table-responsive">
-                  <table class="table m-0">
-
-                    <tbody>
-                    <tr>
-                      <td>협업공간명</td>
-                      <td>글 제목</td>
-                    </tr>
-                                        <tr>
-                      <td>협업공간명</td>
-                      <td>글 제목</td>
-                    </tr>
-                                        <tr>
-                      <td>협업공간명</td>
-                      <td>글 제목</td>
-                    </tr>
-                                        <tr>
-                      <td>협업공간명</td>
-                      <td>글 제목</td>
-                    </tr>
-                                        <tr>
-                      <td>협업공간명</td>
-                      <td>글 제목</td>
-                    </tr>
                
                     </tbody>
                   </table>

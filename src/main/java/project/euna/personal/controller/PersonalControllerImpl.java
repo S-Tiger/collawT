@@ -77,19 +77,14 @@ public class PersonalControllerImpl implements PersonalController {
 		member = (Map<String, Object>) session.getAttribute("member");
 		String mem_Id = (String) member.get("mem_Id");
 		
-		
-//		List<Map> applylist = applyService.searchList(searchMap);
-//		List<Map> notifyList = notifyService.searchNotify(searchMap);
-//		List<Map> replyList = notifyService.replyList(searchMap);
-		
 		List<Map> newspeed = personalService.newspeed(mem_Id);
+		List<Map> voteAvailable = personalService.voteAvailable(mem_Id);
 
 		
 		ModelAndView mav = new ModelAndView("personal/myHome");
 		mav.addObject("newspeed", newspeed);
-//		mav.addObject("applylist", applylist);
-//		mav.addObject("notifyList", notifyList);
-//		mav.addObject("replyList", replyList);
+		mav.addObject("voteAvailable", voteAvailable);
+
 		
 		return mav;
 		

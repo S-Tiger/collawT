@@ -131,5 +131,11 @@ public class PersonalServiceImpl implements PersonalService {
 		return personalDAO.newspeed(mem_Id);
 	}
 	
+	//참여 가능한 투표
+	@Override
+	public List<Map> voteAvailable(String mem_Id) {
+		return personalDAO.voteAvailable(mem_Id);
+	}
+	
 
 }
