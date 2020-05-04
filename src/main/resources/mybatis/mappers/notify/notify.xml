@@ -23,6 +23,7 @@
 		<result property = "c_Id" column = "c_Id"/>
 		<result property = "i_Date" column = "i_Date"/>
 		<result property = "i_Content" column = "i_Content" jdbcType="CLOB" javaType="java.lang.String"/>
+		<result property = "v_Num" column = "v_Num"/>
 	</resultMap>
 	
 	<resultMap id="replyResult01" type="ReplyVO">
@@ -40,10 +41,21 @@
           select not_Num, i_Num, not_Status, not_Kind, mem_Id, c_Id 
               from notify
               where not_Status = '0'
-              and mem_Id = #{mem_Id}         
+              and mem_Id = #{mem_Id}
+              and not_Kind = '1'      
       ]]>			
 	</select>
 	
+	<select id="viewVote" resultMap="notifyResult02" parameterType="java.util.Map">
+	<![CDATA[
+		 select c_Id, v_Num
+		 from notify
+		 where not_Status = '0'
+		 and mem_Id = #{mem_Id}
+		 and not_Kind = '3'
+	 ]]>
+	
+	</select>
 	
 	<select id = "searchNotify" resultMap = "notifyResult02" parameterType = "java.util.Map">
 	<![CDATA[
@@ -55,6 +67,7 @@
 	]]>
 	</select>
 	
+	<!-- list 뿌려주는 컨트롤러 -->
 	<select id = "replyList" resultMap = "notifyResult02" parameterType = "java.util.Map">
 	<![CDATA[
 	select i.i_Date, i.mem_Id, i.i_Num, i.c_Id, i.i_Content
@@ -83,6 +96,17 @@
 ]]>
 </insert>
 
+<insert id="voteInsertNotify" parameterType ="java.util.Map">
+<![CDATA[
+	insert into notify(not_Num,v_Num, not_Status, not_Kind, mem_Id, c_Id)
+    select notify_seq.nextval,#{v_Num},'0','3',mem_Id,c_Id 
+    from co_member
+    where c_Id = #{c_Id}
+    and mem_Id not in #{mem_Id}
+]]>
+</insert>
+
+<!-- 개수세는 컨트롤러 -->
 <select id="viewReply" resultMap = "notifyResult02" parameterType="java.util.Map">
 	<![CDATA[
          select i_Num, c_Id
@@ -108,6 +132,17 @@
 	where i_Num = #{i_Num}
 	and c_Id = #{c_Id}
 	and not_Kind = '2'
+	
+	]]>
+	</update>
+	
+	<update id ="voteUpdate" parameterType = "java.util.Map">
+	<![CDATA[
+	update notify set not_Status = '1'
+	where v_Num = #{v_Num}
+	and c_Id = #{c_Id}
+	and not_Kind = '3'
+	and not_Status = '0'
 	
 	]]>
 	</update>

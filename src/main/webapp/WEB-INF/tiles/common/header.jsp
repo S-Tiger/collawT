@@ -90,7 +90,17 @@
 				var count =parseInt(itemcount);
 				total += count;
 				$("#test01").html(itemcount);				
-				$("#test00").html(itemcount);
+				
+			}
+		})
+		$.ajax({
+			url : '${contextPath}/notify/viewVote',
+			type : 'get',
+			success : function(data){
+				var itemcount = data.length;
+				var count =parseInt(itemcount);
+				total += count;
+				$("#test66").html(itemcount);
 			}
 		})
 		$.ajax({
@@ -101,7 +111,7 @@
 				var count =parseInt(itemcount);
 				total += count;
 				$("#test03").html(itemcount);				
-				$("#test00").html(itemcount);
+				
 			}
 		})
 		
@@ -350,13 +360,13 @@
 <!-- 알림~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
       <!-- Notifications Dropdown Menu -->
       <li class="nav-item dropdown"><a class="nav-link"
-					data-toggle="dropdown" href="#"> <i class="fas fa-bell"></i> <span
+					data-toggle="dropdown" href="#"><i class="fas fa-bell"></i> <span
 						class="badge badge-warning navbar-badge" id ="test00"></span>
 				</a>
 					<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" >
 						<span class="dropdown-item dropdown-header" id = "test22" ></span>
 						<div class="dropdown-divider"></div>
-						<a href="/notify/list" class="dropdown-item"> <i
+						<a href="/notify/replyList" class="dropdown-item"> <i
 							class="fas fa-envelope mr-2" id = "test01"></i> <span
 							class="float-right text-muted text-sm"></span>
 						</a>
@@ -368,6 +378,11 @@
           <div class="dropdown-divider"></div>
           <a href="/notify/list" class="dropdown-item">
             <i class="fas fa-file mr-2" id="test03"></i> 
+            <span class="float-right text-muted text-sm"></span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="/notify/voteList" class="dropdown-item">
+            <i class="fas fa-users mr-2" id="test66"></i> 
             <span class="float-right text-muted text-sm"></span>
           </a>
           

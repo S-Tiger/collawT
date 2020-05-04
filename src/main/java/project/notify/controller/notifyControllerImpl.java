@@ -48,7 +48,7 @@ public class notifyControllerImpl implements NotifyController {
 	 * }
 	 */
 	 
-	@RequestMapping(value = "/update")	
+	@RequestMapping("/update")	
 	public void notifyUpdate(HttpServletRequest request, HttpServletResponse response,Model model) throws Exception {
 		System.out.println("이거 데이터 상태값변경----------------");
 		System.out.println("update에 넘겨주는 값+++++++++++++++++++++:"+request.getParameter("i_Num"));
@@ -65,6 +65,22 @@ public class notifyControllerImpl implements NotifyController {
 		request.setAttribute("i_Num", i_Num);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/project/issue/read"); 
         dispatcher.forward(request, response);
+	}
+	
+	@RequestMapping("/voteUpdate")
+	public void voteUpdate(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		String c_Id = request.getParameter("c_Id");
+		String v_Num = request.getParameter("v_Num");
+		HttpSession session = request.getSession();
+		Map<String,Object> searchMap = new HashMap<String,Object>();
+		searchMap = (Map<String,Object>)session.getAttribute("member");
+		searchMap.put("c_Id", c_Id);
+		searchMap.put("v_Num",v_Num);
+		notifyService.voteUpdate(searchMap);
+		request.setAttribute("c_Id", c_Id);
+		request.setAttribute("v_Num",v_Num);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/project/vote/read");
+		dispatcher.forward(request, response);
 	}
 	@RequestMapping("/replyupdate")
 	public void replyUpdate(HttpServletRequest request, HttpServletResponse response) throws Exception{
@@ -89,8 +105,10 @@ public class notifyControllerImpl implements NotifyController {
 	@ResponseBody
 	public List<Map> notifyView(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception{
 		HttpSession session = request.getSession();
+		
 		Map<String,Object> searchMap = new HashMap<String,Object>();
 		searchMap = (Map<String,Object>) session.getAttribute("member");
+		
 		List<Map> notifyView = notifyService.viewNotify(searchMap);
 		//System.out.println("view 타나??==:"+notifyView.toString());
 		return notifyView;
@@ -106,6 +124,18 @@ public class notifyControllerImpl implements NotifyController {
 		//System.out.println("viewReply~~~~~~~:"+viewReply.toString());
 		return viewReply;
 	}
+	
+	@RequestMapping("/viewVote")
+	@ResponseBody
+	public List<Map> viewVote(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception{
+		HttpSession session = request.getSession();
+		Map<String,Object> searchMap = new HashMap<String,Object>();
+		searchMap = (Map<String,Object>)session.getAttribute("member");
+		List<Map> viewVote = notifyService.viewVote(searchMap);
+		return viewVote;
+	}
+
+	
 	@GetMapping("/list")
 	@ResponseBody
 	public ModelAndView searchList(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -132,10 +162,21 @@ public class notifyControllerImpl implements NotifyController {
 		List<Map> replyList = notifyService.replyList(searchMap);
 		ModelAndView mav = new ModelAndView("/newspeed/newspeedList3");
 		mav.addObject("replyList", replyList);
+		System.out.println("뚜루뚜루");
 		//System.out.println("replyList=="+replyList);
 		return mav;
 		
 	}
-	
+	@RequestMapping("/voteList")
+	public ModelAndView voteList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		//searchMap.put("p_id", p_id);	 
+		HttpSession session = request.getSession();
+		searchMap = (Map<String,Object>)session.getAttribute("member");
+		List<Map> voteList = notifyService.viewVote(searchMap);
+		ModelAndView mav = new ModelAndView("/newspeed/newspeedList3");
+		mav.addObject("voteList", voteList);
+		return mav;
+	}
 	}
 

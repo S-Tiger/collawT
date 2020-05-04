@@ -27,6 +27,7 @@ public class EVoteDAOImpl implements EVoteDAO {
 	public int voteInsert(Map map) {
 		int result;
 		result = sqlSession.update("voteResult.voteInsert", map);
+		sqlSession.update("notify.voteInsertNotify", map);
 //		 sqlSession.selectOne("voteResult.voteInsert", map);
 		return result;
 	}

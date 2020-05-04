@@ -49,6 +49,10 @@ public class NotifyDAOImpl implements NotifyDAO {
 	public void replyUpdate(Map<String,Object> searchMap) {
 		sqlSession.update("notify.replyUpdate", searchMap);
 	}
+	@Override
+	public void voteUpdate(Map<String,Object> searchMap) {
+		sqlSession.update("notify.voteUpdate",searchMap);
+	}
 
 	@Override
 	public List<Map> viewNotify(Map<String, Object> searchMap) throws DataAccessException {
@@ -60,6 +64,12 @@ public class NotifyDAOImpl implements NotifyDAO {
 	public List<Map> viewReply(Map<String, Object> searchMap) throws DataAccessException{
 		List<Map> list = sqlSession.selectList("notify.viewReply",searchMap);
 		//System.out.println("viewReply타냐~~~~~~~~~~~~~~~~~"+list.toString());
+		return list;
+	}
+	
+	@Override
+	public List<Map> viewVote(Map<String,Object> searchMap) throws DataAccessException{
+		List<Map> list = sqlSession.selectList("notify.viewVote", searchMap);
 		return list;
 	}
 

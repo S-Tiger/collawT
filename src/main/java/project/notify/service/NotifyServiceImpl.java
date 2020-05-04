@@ -41,6 +41,11 @@ public class NotifyServiceImpl implements NotifyService{
 		// TODO Auto-generated method stub
 		 notifyDAO.notifyUpdate(searchMap);		
 	}
+	
+	@Override
+	public void voteUpdate(Map<String,Object> searchMap) {
+		notifyDAO.voteUpdate(searchMap);
+	}
 	@Override
 	public void replyUpdate(Map<String,Object> searchMap) {
 		notifyDAO.replyUpdate(searchMap);
@@ -64,6 +69,11 @@ public class NotifyServiceImpl implements NotifyService{
 		return list;
 	}
 
+	@Override
+	public List<Map> viewVote(Map<String,Object> searchMap) throws DataAccessException{
+		List<Map> list = notifyDAO.viewVote(searchMap);
+		return list;
+	}
 	
 	
 }
