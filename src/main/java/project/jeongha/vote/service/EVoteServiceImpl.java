@@ -172,6 +172,16 @@ public class EVoteServiceImpl implements EVoteService {
 		evoteDAO.votedUpdate(cmap);
 		
 	}
+	//업데이트vs_Num
+	@Override
+	public void updateVs_Num(Map<String,Object> searchMap) {
+		evoteDAO.updateVs_Num(searchMap);
+	}
+	//c_Id
+	@Override
+	public Map<String, Object> voteReadList(Map<String, Object> searchMap) {
+		return evoteDAO.voteReadList(searchMap);
+	}
 	
 
 	

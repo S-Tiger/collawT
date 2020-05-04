@@ -57,8 +57,8 @@ span[name="chargerspan"] {
 			} else if (v_Content.length > 150) {
 				alert("내용은 150자리 이내로 입력해주세요.");
 				return false;
-			} else if (v_Subject.length > 12) {
-				alert("투표 주제는 12자리 이내로 입력해주세요.");
+			} else if (v_Subject.length > 20) {
+				alert("투표 주제는 20자리 이내로 입력해주세요.");
 				return false;
 			} else if (vd_Content.length > 12) {
 				alert("투표 항목은 12자리 이내로 입력해주세요.");
@@ -269,12 +269,12 @@ span[name="chargerspan"] {
 
 
 							<!-- 답변 선택 수 -->
-							<div class="form-group">
+						 	<!-- <div class="form-group">
 								<label for="inputStatus">답변 선택 수</label> <select class="form-control custom-select" id="v_Count" name="v_Count">
 									<option value="1">1개 선택 가능</option>
 									<option value="2">2개 선택 가능</option>
 								</select>
-							</div>
+							</div>  -->
 							
 							<!-- 익명 -->
 							<div class="form-group">

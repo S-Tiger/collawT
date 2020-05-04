@@ -26,4 +26,5 @@ public interface MemberService {
 	public MemberVO memberLoginNaver(Map<String, Object> memberVO) throws Exception;
 	public void approvalMember(MemberVO memberVO, HttpServletResponse response) throws Exception ;
 	
+	
 }

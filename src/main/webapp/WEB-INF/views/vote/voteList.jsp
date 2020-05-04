@@ -128,7 +128,6 @@
 
 
 			
-			
 </script>
 <!-- 정보변경 모달 팝업 내용 -->
 <div id='update-popup' class="needpopup">
@@ -288,8 +287,8 @@
 			
 						<!-- Main content -->
 	<section class="content">
-		
-			
+	
+			<!-- <input type="text" id="today" name="v_Today"> -->
 			
 			       <!-- 리스트 부분 -->
         <div class="card-body p-0">

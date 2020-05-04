@@ -123,6 +123,8 @@ progress::-webkit-progress-value {
 		});
 
 	})
+	
+	
 </script>
 
 
@@ -151,7 +153,8 @@ progress::-webkit-progress-value {
 				<!-- 본문 부분~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 				<form name="insertVoterForm" action="/project/vote/insertVoter" method="get" encType="UTF-8">
-
+					<!--  완료 처리하기 위한 오늘 날짜가져오 -->
+				<!-- 	<input type="text" id="today" name="v_Today"> -->
 					<div class="card card-widget">
 
 
@@ -235,11 +238,12 @@ progress::-webkit-progress-value {
 											<c:forEach var="votedReadItem" items="${votedRead}" varStatus="status">
 												<tr>
 													<td style="padding-left: 0px; padding-right: 0px; width: 315px;">
-														<!-- 투표 리스트 --> <input type="hidden" name="getVsNum" value="${status.index+1 }"> <input class="form-check-input" type="radio" name="vd_Num" value="${votedReadItem.vd_Num}" style="margin-left: 10px;"> <label class="form-check-label" style="margin-left: 40px;">${votedReadItem.vd_Num}.&nbsp;&nbsp;&nbsp;${votedReadItem.vd_Content}</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+														<!-- 투표 리스트 --> <input type="hidden" name="getVsNum" value="${status.index+1 }"> 
+														<c:if test="${ voteRead.vs_Num==1}"><input class="form-check-input" type="radio" name="vd_Num" value="${votedReadItem.vd_Num}" style="margin-left: 10px;"></c:if>
+														<label class="form-check-label" style="margin-left: 40px;">${votedReadItem.vd_Num}.&nbsp;&nbsp;&nbsp;${votedReadItem.vd_Content}</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 													</td>
 													<td><i class="fas fa-user-alt"></i><span class="badge bg-gray"><c:if test="${votedRead[status.index].v_Count ==null }">0</c:if>${votedReadItem.v_Count}</span> <br></td>
-
 												</tr>
 											</c:forEach>
 											<tr>
@@ -261,7 +265,9 @@ progress::-webkit-progress-value {
 								</div>
 							</div>
 							<div class="row float-right">
+								<c:if test="${ voteRead.vs_Num==1}">
 								<input type="submit" value="투표하기" class="btn btn-block btn-default btn-xs float-right" style="width: 80px; margin: 1px; padding-bottom: 1px; border-bottom-width: 1px; margin-bottom: 30px;">
+								</c:if>
 							</div>
 
 
@@ -327,6 +333,11 @@ progress::-webkit-progress-value {
 						</c:forEach> --%>
 
 					</div>
+					<c:if test="${voteRead.v_Show==0 }">
+					<p  class="nav-link" >
+						 <i class="fas fa-vote-yea"></i> 비공개 투표입니다. <span class="badge badge-info right" id="bookmarkcount" style="background-color: #FFC108"></span>
+					</p>
+					</c:if>
 					<c:if test="${voteRead.v_Show==1 }">
 						<p>
 							<a href="/#" data-needpopup-show="#voterList-popup" class="nav-link" id="voterlist"> <i class="fas fa-vote-yea"></i> 투표자 현황 <span class="badge badge-info right" id="bookmarkcount" style="background-color: #FFC108"></span>

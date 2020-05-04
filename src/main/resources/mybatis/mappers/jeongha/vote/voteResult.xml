@@ -90,12 +90,12 @@
 			SELECT vote_seq.nextval as vote_seq FROM dual
 		</selectKey>
 		insert into vote(v_Num, c_Id, v_Name, v_Content, v_Date, mem_Id,
-		v_Start, v_End, vs_Num, v_Subject, v_Count, mem_Name,v_Show )
+		v_Start, v_End, vs_Num, v_Subject, mem_Name,v_Show )
 		values(#{v_Num}, #{c_Id},
 		#{v_Name}, #{v_Content} ,
 		(select to_char(sysdate, 'YYYY/MM/DD/ HH24:MI:SS') from dual)
 		, #{mem_Id}, #{v_Start}, #{v_End},
-		#{vs_Num},#{v_Subject}, #{v_Count}, #{mem_Name}, #{v_Show} )
+		#{vs_Num},#{v_Subject},  #{mem_Name}, #{v_Show} )
 	</insert>
 
 	<!-- 투표보기란 입력 -->
@@ -248,6 +248,14 @@
 		select count(*) from voter where mem_Id = #{mem_Id} and v_Num=#{v_Num}
 		]]>
 	</select>
+	
+	<!-- vs_Num 변경 -->
+	<update id="updateVs_Num" parameterType="java.util.HashMap">
+		UPDATE vote
+		SET vs_Num = '2'
+		WHERE v_Num = #{v_Num}
+	</update>
+	
 
 	<!-- 협업공간 조회 -->
 	<!-- <select id="coRead" resultType="java.util.HashMap"> <![CDATA[ select 

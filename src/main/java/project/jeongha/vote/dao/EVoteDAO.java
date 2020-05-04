@@ -16,6 +16,7 @@ public interface EVoteDAO {
 	public int voterInsert(Map map);
 	public List<Map> searchList(Criteria cri) throws DataAccessException;
 	public Map<String, Object> voteRead(Map<String, Object> v_Num);
+	public Map<String, Object> voteReadList(Map<String, Object> searchMap);
 	public void voteDelete(String i_Num) throws Exception;
 	public void voteUpdate(Map<String, Object> cmap) throws Exception;
 	public void votedUpdate(Map<String, Object> cmap) throws Exception;
@@ -33,5 +34,5 @@ public interface EVoteDAO {
 	public  List<Map>  voteTotal(Map<String, Object> voteCount)throws Exception;
 	public int checkId(Map<String, Object> mem_Id) throws Exception ;
 	public Map<String, Object> countCowork(Map<String, Object> searchC_Id) throws Exception; 
-	
+	public void updateVs_Num(Map<String, Object> searchMap);
 }

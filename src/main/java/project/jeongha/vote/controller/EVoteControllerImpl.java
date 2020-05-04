@@ -1,6 +1,8 @@
 package project.jeongha.vote.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +34,8 @@ import project.sungho.cowork.service.CoworkService;
 
 @RequestMapping("/project/vote/*")
 public class EVoteControllerImpl implements EVoteController {
-
+	Date time = new Date();
+	SimpleDateFormat format1 = new SimpleDateFormat ( "yyyyMMdd");
 	//
 	@Inject
 	EVoteService evoteService;
@@ -52,6 +55,7 @@ public class EVoteControllerImpl implements EVoteController {
 	public ModelAndView searchList(Criteria cri, String c_Id, HttpSession session, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
+		
 		List<Map> list = evoteService.searchList(cri);
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
@@ -60,11 +64,33 @@ public class EVoteControllerImpl implements EVoteController {
 		Map<String, Object> searchMap = new HashMap<String, Object>();
 		searchMap.put("c_Id", c_Id);
 		Map<String, Object> pjt = coworkService.searchMain(searchMap);
-
+		System.out.println("list:"+list);
+		
+		
+		
+		//Map<String, Object> vote = evoteService.voteReadList(searchMap);
+		
+		//날짜가 지나면 완료하기
+		String today = format1.format(time);
+		int todayInt = Integer.parseInt(today);
+		for (int i = 0; i < list.size(); i++) {
+			String re = (String)list.get(i).get("v_End");
+			String v_Num = (String)list.get(i).get("v_Num");
+			System.out.println("sdfasdfa"+v_Num);
+			if(re!=null) {
+			String re_a = re.replace("-", "");
+			int v_End = Integer.parseInt(re_a);
+			if (todayInt > v_End) {
+				Map<String, Object> searchMap1 = new HashMap<String, Object>();
+				searchMap1.put("v_Num", v_Num);
+				evoteService.updateVs_Num(searchMap1);
+			}
+			}
+		}
+		List<Map> list1 = evoteService.searchList(cri);
 		ModelAndView mav = new ModelAndView("vote/voteList");
-		mav.addObject("voteList", list);
+		mav.addObject("voteList", list1);
 		mav.addObject("pageMaker", pageMaker);
-
 		mav.addObject("pjt", pjt);
 
 		return mav;
@@ -146,14 +172,35 @@ public class EVoteControllerImpl implements EVoteController {
 	@GetMapping("/read")
 	public ModelAndView voteRead(String c_Id,String v_Num, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		System.out.println("read c_Id: "+c_Id);
+		
+		//오늘날짜
+		String today = format1.format(time);
+		int todayInt = Integer.parseInt(today);
+		
+		//System.out.println("read c_Id: "+c_Id);
 		Map<String, Object> searchMap = new HashMap<String, Object>();
 		searchMap.put("v_Num", v_Num);
 		searchMap.put("c_Id", c_Id);
 		
 		Map<String, Object> vote = evoteService.voteRead(searchMap);
 		List<Map> voted = evoteService.votedRead(v_Num);
+		//디비에서 마감일 가져오기
+		String  a = (String) vote.get("v_End");
+		if(a!=null) {
+		String re_a = a.replace("-", "");
+		System.out.println("1231231"+re_a);
+		int v_End = Integer.parseInt(re_a);
 		
+		//오늘 날짜 비교해서 지나면 완료하기...
+		if(todayInt > v_End) {
+			
+			evoteService.updateVs_Num(searchMap);
+		}
+		}
+		String vs_Num = (String)vote.get("vs_Num");
+		System.out.println("vs_Num: "+vs_Num);
+		System.out.println("vote: "+vote);
+		Map<String, Object> vote2 = evoteService.voteRead(searchMap);
 		ModelAndView mav = new ModelAndView("/vote/voteRead");
 		
 		//투표자들 명단
@@ -197,7 +244,7 @@ public class EVoteControllerImpl implements EVoteController {
 		
 		
 		
-		mav.addObject("voteRead", vote);
+		mav.addObject("voteRead", vote2);
 		mav.addObject("votedRead", voted);
 		mav.addObject("voterList",voterlist);
 		mav.addObject("voteTotal",voteTotal);

@@ -27,7 +27,6 @@ public class EVoteDAOImpl implements EVoteDAO {
 	public int voteInsert(Map map) {
 		int result;
 		result = sqlSession.update("voteResult.voteInsert", map);
-		sqlSession.update("notify.voteInsertNotify", map);
 //		 sqlSession.selectOne("voteResult.voteInsert", map);
 		return result;
 	}
@@ -153,10 +152,23 @@ public class EVoteDAOImpl implements EVoteDAO {
 		
 		return sqlSession.selectOne("voteResult.countCowork", searchC_Id);
 	}
+	//수정
 	@Override
 	public void votedUpdate(Map<String, Object> cmap) throws Exception {
 		sqlSession.update("voteResult.votedUpdate", cmap);
 		
+	}
+	
+	//업데이트 vs_Num
+	@Override
+	public void updateVs_Num(Map<String, Object> searchMap) {
+		
+		sqlSession.update("voteResult.updateVs_Num",searchMap);
+	}
+	
+	@Override
+	public Map<String, Object> voteReadList(Map<String, Object> searchMap) {
+		return sqlSession.selectOne("voteResult.voteReadList", searchMap);
 	}
 	
 	
