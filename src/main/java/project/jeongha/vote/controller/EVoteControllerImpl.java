@@ -73,6 +73,7 @@ public class EVoteControllerImpl implements EVoteController {
 		//날짜가 지나면 완료하기
 		String today = format1.format(time);
 		int todayInt = Integer.parseInt(today);
+		System.out.println("today: "+todayInt);
 		for (int i = 0; i < list.size(); i++) {
 			String re = (String)list.get(i).get("v_End");
 			String v_Num = (String)list.get(i).get("v_Num");

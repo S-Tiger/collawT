@@ -33,6 +33,11 @@
 		<put-attribute name="content" value="/WEB-INF/views/member/forgotPwd.jsp" />
 	</definition>
 	
+	<definition name="/question" extends="defaultLayout">
+		<put-attribute name="content" value="/WEB-INF/views/question.jsp" />
+	</definition>
+	
+	
 	<definition name="contentLayout" template="/WEB-INF/tiles/common/contentLayout.jsp">
  	 <put-attribute name="content" />
 	</definition>

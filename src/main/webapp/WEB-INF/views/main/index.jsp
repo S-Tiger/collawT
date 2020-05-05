@@ -8,9 +8,8 @@
 	var result = '${msg}';
 	if(result == 'success'){
 		alert('콜라우티를 이용해주셔서 감사합니다.');
-		
+	<%session.removeAttribute("msg"); %>
 		}
-	
 </script>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">

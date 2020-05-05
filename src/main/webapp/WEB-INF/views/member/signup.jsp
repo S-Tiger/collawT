@@ -30,7 +30,10 @@
           return false;
       } else if (!checkName(form.mem_Name.value)) {
           return false;
-      } 
+      } else if (!form.terms.checked){
+    	  alert("회원가입 동의를 해주세요.");
+    	  return false;
+      }
       return true;
   }
 //공백확인 함수
@@ -58,6 +61,14 @@
       return true; //확인이 완료되었을 때
   }
 
+  
+  function checkName(name) {
+      //Id가 입력되었는지 확인하기
+      if (!checkExistData(name, "이름 또는 닉네임"))
+          return false;
+
+      return true; //확인이 완료되었을 때
+  }
 
   function checkPassword(id, password1, password2) {
       //비밀번호가 입력되었는지 확인하기
@@ -66,14 +77,15 @@
       //비밀번호 확인이 입력되었는지 확인하기
       if (!checkExistData(password2, "비밀번호 확인을"))
           return false;
-
-      var password1RegExp = /^[a-zA-z0-9]{4,12}$/; //비밀번호 유효성 검사
+	
+      
+      var password1RegExp = /^[a-zA-z0-9]{10,12}$/;
       if (!password1RegExp.test(password1)) {
-          alert("비밀번호는 영문 대소문자와 숫자 4~12자리로 입력해야합니다!");
+          alert("비밀번호는 영문 대소문자와 숫자 10~12자리로 입력해야합니다!");
           form.mem_Pwd.value = "";
           form.mem_Pwd.focus();
           return false;
-      }
+      } 
       //비밀번호와 비밀번호 확인이 맞지 않다면..
       if (password1 != password2) {
           alert("두 비밀번호가 맞지 않습니다.");
@@ -81,6 +93,12 @@
           form.mem_Pwd1.value = "";
           form.mem_Pwd1.focus();
           return false;
+      }
+  		var num = password1.search(/[0-9]/g);
+		var eng = password1.search(/[a-z]/ig);
+      if(num < 0 || eng < 0){
+    	  alert("비밀번호에 영문,숫자, 특수문자를 혼합하여 입력해주세요.");
+			return false;
       }
 
       //아이디와 비밀번호가 같을 때..
@@ -98,7 +116,7 @@
   
   $(function(){
 	  
-		 $("#joinForm").submit(function(){
+		 /* $("#joinForm").submit(function(){
 			//console.log("checked: "+$("agreeTerms").is(":checked"));
 			var mem_Pwd0 = $("#mem_Pwd0").val();
 			var mem_Pwd1 = $("#mem_Pwd1").val();
@@ -108,7 +126,7 @@
 			if ($("#agreeTerms").is(":checked")==false){
 				alert("회원가입 동의를 해주세요.");	
 				return false;
-			}/* else if(mem_Pwd0 !== mem_Pwd1){
+			} else if(mem_Pwd0 !== mem_Pwd1){
 				alert("비밀번호가 다릅니다.");
 				$("#mem_Pwd0").val("").focus();
 				$("#mem_Pwd1").val("");
@@ -122,12 +140,12 @@
 			}else if (mem_Pwd0.length < 8 || mem_Pwd0.length > 12 ) {
 				alert("비밀번호는 8자리 ~ 12자리 이내로 입력해주세요");
 				$("#mem_Pwd0").val("").focus();
-				return false; */
-			else if (num < 0 || eng < 0){
+				return false; 
+			} else if (num < 0 || eng < 0){
 				alert("비밀번호에 영문,숫자, 특수문자를 혼합하여 입력해주세요.");
 				return false;
-			}
-		});  
+			} 
+		});   */
 	// 아이디 유효성 검사(1 = 중복 / 0 != 중복)
 		$("#mem_Id").blur(function() {
 			var idJ = /^[a-z0-9]{4,12}$/;

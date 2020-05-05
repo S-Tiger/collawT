@@ -59,11 +59,92 @@ if ('${msg}' == 'success') {
 	/* 	if(${msg != null}){
 	 alert('${msg}');
 	 };  */
+	 
+	 
+	 function checkAll() {
+	      if (!checkUserId(form.mem_Id.value)) {
+	          return false;
+	      } else if (!checkPassword(form.mem_Id.value, form.mem_Pwd.value, form.mem_Pwd1.value)) {
+	          return false;
+	      } else if (!checkName(form.mem_Name.value)) {
+	          return false;
+	      } 
+	      return true;
+	  }
+	//공백확인 함수
+	  function checkExistData(value, dataName) {
+	      if (value == "") {
+	          alert(dataName + " 입력해주세요!");
+	          return false;
+	      }
+	      return true;
+	  }
+
+	  
+	  function checkUserId(id) {
+	      //Id가 입력되었는지 확인하기
+	      if (!checkExistData(id, "아이디를"))
+	          return false;
+
+	      var idRegExp = /^[A-Za-z0-9_]+[A-Za-z0-9]*[@]{1}[A-Za-z0-9]+[A-Za-z0-9]*[.]{1}[A-Za-z]{1,3}$/;
+	      if (!idRegExp.test(id)) {
+	          alert("아이디는 이메일 형식으로 옳바르지 않습니다.");
+	          form.mem_Id.value = "";
+	          form.mem_Id.focus();
+	          return false;
+	      }
+	      return true; //확인이 완료되었을 때
+	  }
+
+
+	  function checkPassword(id, password1, password2) {
+	      //비밀번호가 입력되었는지 확인하기
+	      if (!checkExistData(password1, "비밀번호를"))
+	          return false;
+	      //비밀번호 확인이 입력되었는지 확인하기
+	      if (!checkExistData(password2, "비밀번호 확인을"))
+	          return false;
+		
+	      
+	      var password1RegExp = /^[a-zA-z0-9]{10,12}$/;
+	      if (!password1RegExp.test(password1)) {
+	          alert("비밀번호는 영문 대소문자와 숫자 10~12자리로 입력해야합니다!");
+	          form.mem_Pwd.value = "";
+	          form.mem_Pwd.focus();
+	          return false;
+	      } 
+	      //비밀번호와 비밀번호 확인이 맞지 않다면..
+	      if (password1 != password2) {
+	          alert("두 비밀번호가 맞지 않습니다.");
+	          form.mem_Pwd.value = "";
+	          form.mem_Pwd1.value = "";
+	          form.mem_Pwd1.focus();
+	          return false;
+	      }
+	  		var num = password1.search(/[0-9]/g);
+			var eng = password1.search(/[a-z]/ig);
+	      if(num < 0 || eng < 0){
+	    	  alert("비밀번호에 영문,숫자, 특수문자를 혼합하여 입력해주세요.");
+				return false;
+	      }
+
+	      //아이디와 비밀번호가 같을 때..
+	      if (id == password1) {
+	          alert("아이디와 비밀번호는 같을 수 없습니다!");
+	          form.mem_Pwd.value = "";
+	          form.mem_Pwd1.value = "";
+	          form.mem_Pwd1.focus();
+	          return false;
+	      }
+	      return true; //확인이 완료되었을 때
+	  }    
+	  
+	 
 	$(function() {
 
 
 		//비밀번호같지 확인하는 자바스크립트 (서브밋할때 작동됨)
-		if ($("#pwForm").submit(function() {
+		/* if ($("#pwForm").submit(function() {
 			console.log("11");
 			if ($("#pw").val() !== $("#pw2").val()) {
 				alert("변경하실 비밀번호가 일치하지 않습니다.");
@@ -74,14 +155,11 @@ if ('${msg}' == 'success') {
 				alert("비밀번호는 8자 이상으로 설정해야 합니다.");
 				$("#pw").val("").focus();
 				return false;
-			} else if ($.trim($("#pw").val()) !== $("#pw").val()) {
-				alert("공백은 입력이 불가능합니다.");
-				return false;
 			} else {
 				alert("비밀번호가 수정되었습니다.");
 			}
 		}))
-			;
+			; */
 
 		//파일 비어잇는거 못들어가게함 서브밋 탈때 작동됨
 		if ($("#fileupload").submit(function() {
@@ -157,11 +235,7 @@ if ('${msg}' == 'success') {
 											class="form-control" type="text" id="mem_Name"
 											name="mem_Name" value="${member.mem_Name}" required>
 									</div>
-									<div class="form-group">
-										<label for="inputEstimatedDuration"></label> <input
-											type="hidden" id="inputEstimatedDuration"
-											class="form-control">
-									</div>
+									
 									<div class="row">
 										<div class="col-12">
 											<input type="submit" value="이름변경"
@@ -258,22 +332,23 @@ if ('${msg}' == 'success') {
 							<!-- 비밀번호 변경 -->
 
 							<div class="card-body"
-								style="padding-top: 0px;padding-bottom: 0px;">
+								style="padding-top: 20px;padding-bottom: 20px;">
 								<div class="form-group">
-									<form id="pwForm" action="/member/update_pw" method="post">
+									<form id="pwForm" class="form-horizontal" action="/member/update_pw" method="post" name="form" onsubmit="return checkAll()">
+										<div class="form-group">
 										<input type="hidden" name="mem_Id" value="${member.mem_Id}">
-										<label for="inputEstimatedBudget">현재 비밀번호</label> <input
+										<label for="inputEstimatedDuration">현재 비밀번호</label> <input
 											class="form-control" id="old_pw" name="old_pw"
 											type="password" required>
-
+										</div>
 										<div class="form-group">
-											<label for="inputSpentBudget">새로운 비밀번호</label> <input
+											<label for="inputEstimatedDuration">새로운 비밀번호</label> <input
 												class="form-control" id="pw" name="mem_Pwd" type="password"
 												required>
 										</div>
 										<div class="form-group">
 											<label for="inputEstimatedDuration">새로운 비밀번호 확인</label> <input
-												class="form-control" id="pw2" type="password"
+												class="form-control" id="pw2" name="mem_Pwd1" type="password"
 												type="password" required>
 										</div>
 										<div class="row">

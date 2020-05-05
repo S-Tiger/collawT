@@ -59,7 +59,6 @@ public class MemberServiceImpl implements MemberService {
 			// 가입완료
 			// memberVO.setForgot_key(create_key());
 			//인증번호 생성
-			
 			memberVO.setMem_Key(create_key());
 			member.put("mem_Key", memberVO.getMem_Key());
 			dao.memberJoin(member);

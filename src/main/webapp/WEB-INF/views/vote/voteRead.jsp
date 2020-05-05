@@ -217,7 +217,7 @@ progress::-webkit-progress-value {
 
 
 							<br> <br> <br> <input type="hidden" id="v_Num" name="v_Num" value="${voteRead.v_Num}" /> <br> <br>
-
+						
 							<!-- 투표 view~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 							<div class="card card-primary collapsed-card">
 								<div class="card-header" style="height: 30px; padding-left: 13px; padding-right: 16px; padding-top: 4px; background-color: #e87c87;">
