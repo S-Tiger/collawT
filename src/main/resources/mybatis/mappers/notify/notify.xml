@@ -93,9 +93,8 @@
 <![CDATA[
 	insert into notify(not_Num, i_Num, not_Status, not_Kind, mem_Id, c_Id)
 	select notify_seq.nextval,#{i_Num},'0','2',mem_Id,c_Id 
-    from co_member
-    where c_Id = #{c_Id}
-    and mem_Id not in #{mem_Id}
+    from issue
+    where i_Num = #{i_Num}
     
 ]]>
 </insert>
@@ -104,6 +103,16 @@
 <![CDATA[
 	insert into notify(not_Num,v_Num, not_Status, not_Kind, mem_Id, c_Id)
     select notify_seq.nextval,#{v_Num},'0','3',mem_Id,c_Id 
+    from co_member
+    where c_Id = #{c_Id}
+    and mem_Id not in #{mem_Id}
+]]>
+</insert>
+
+<insert id="votereplyInsertNotify" parameterType="voteReplyVO">
+<![CDATA[
+	insert into notify(not_Num, v_Num, not_Status, not_Kind, mem_Id, c_Id)
+	select notify_seq.nextval,#{v_Num},'0','4',mem_Id,c_Id 
     from co_member
     where c_Id = #{c_Id}
     and mem_Id not in #{mem_Id}

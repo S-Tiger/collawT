@@ -229,7 +229,7 @@
       null as i_Name, null as i_Content, null as i_Num, null as not_Kind, c.mem_File as mem_File, '1' as type
       from apply_mem a, co_work b, member c
       where a.c_Id=b.c_Id
-      and c.mem_Id=a.mem_Id
+      and c.mem_Id=a.invite
       and a.mem_Id=#{mem_Id}
       and a.ap_Yn = 'waiting')
       union all
@@ -265,6 +265,18 @@
         and n.mem_Id = #{mem_Id}
         and n.not_status = '0'
         and n.not_kind = '3'
+        )
+        union all
+        (select r.c_Id as c_Id, r.mem_Id as mem_Id, r.vr_Date as ap_Date, null as ap_Yn, n.not_status as ap_Status, null as invite, c.c_Name as c_Name, m.mem_Name as mem_Name,
+        v.v_Name as i_Name, r.vr_Content as i_Content, r.v_Num as i_Num, n.not_kind as not_Kind, m.mem_File as mem_File,'5' as type
+        from vote_reply r , notify n, co_work c, member m, vote v
+        where r.v_Num = n.v_num
+        and r.c_Id = c.c_Id
+        and r.mem_Id=m.mem_Id
+        and r.v_Num=v.v_Num
+        and n.mem_Id = #{mem_Id}
+        and n.not_status = '0'
+        and n.not_kind = '4'
         )
     )
   order by ap_Date desc

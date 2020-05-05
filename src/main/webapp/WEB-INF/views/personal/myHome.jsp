@@ -264,14 +264,14 @@ $(function () {
 									<div class="row" style="padding:7px; line-height:2em">
 									<c:if test="${newspeeditem.mem_File != null }">
 									<img alt="프로필사진" width="25" height="25"
-									src="/member/getByteImage?mem_Id=${newspeeditem.mem_Id}" class="img-circle elevation-1"/>
+									src="/member/getByteImage?mem_Id=${newspeeditem.invite}" class="img-circle elevation-1"/>
 									</c:if>
 									<c:if test="${newspeeditem.mem_File == null }">
 									<img src="${contextPath}/resources/dist/img/profile.jpg" width="25" height="25"
 									class="img-circle elevation-1" alt="프로필사진">
 									</c:if>
 									&nbsp;
-									${newspeeditem.mem_Name}(${newspeeditem.mem_Id})님께서 회원님을&nbsp;<b>${newspeeditem.c_Name}</b>에 초대하셨습니다. </div></div>
+									${newspeeditem.mem_Name}(${newspeeditem.invite})님께서 회원님을&nbsp;<b>${newspeeditem.c_Name}</b>에 초대하셨습니다. </div></div>
 									<div class="timeline-footer" id="timeline-footer">
 									<form  id = "myform" action="/news/accept" method="post" style="display: inline;  margin: 5;">
 									<input type="hidden" name="c_Id" id="c_Id" value="${newspeeditem.c_Id}">
@@ -383,6 +383,41 @@ $(function () {
 									</div>
 								</div>
 							</div>
+							</c:when>
+							
+							<c:when  test= "${newspeeditem.type eq '5'}">
+							<c:if test="${newspeeditem.mem_Id != member.mem_Id}">
+							<div>
+								<i class="fas fa-comments bg-warning"></i>
+
+								<div class="timeline-item">
+
+									<span class="time"><i class="far fa-clock"></i> ${newspeeditem.ap_Date}&nbsp;&nbsp;&nbsp;
+									<a href="/notify/votereplyupdate?c_Id=${newspeeditem.c_Id}&v_Num=${newspeeditem.v_Num}" style="color:red"><i class="fas fa-times"></i></a></span>
+
+									<h3 class="timeline-header">
+									<b>댓글 │ </b>
+									from <a href="/project/main?c_Id=${newspeeditem.c_Id}">${newspeeditem.c_Name}</a>
+										
+									</h3>
+									<div class="timeline-body">
+									<div class="row" style="padding:7px; line-height:2em">
+									<c:if test="${newspeeditem.mem_File != null }">
+									<img alt="프로필사진" width="25" height="25"
+									src="/member/getByteImage?mem_Id=${newspeeditem.mem_Id}" class="img-circle elevation-1"/>
+									</c:if>
+									<c:if test="${newspeeditem.mem_File == null }">
+									<img src="${contextPath}/resources/dist/img/profile.jpg" width="25" height="25"
+									class="img-circle elevation-1" alt="프로필사진">
+									</c:if>
+									&nbsp;
+									${newspeeditem.mem_Name}(${newspeeditem.mem_Id})님이&nbsp;<a href="/project/vote/read?c_Id=${newspeeditem.c_Id}&v_Num=${newspeeditem.v_Num}"><b>${newspeeditem.v_Name}</b></a>글에 댓글을 남기셨습니다.</div>
+									<div class="row" style="margin-left:32px; margin-right:32px;"><small>${newspeeditem.i_Content}</small></div></div>
+									<div class="timeline-footer" id="timeline-footer">
+									</div>
+								</div>
+							</div>
+							</c:if>
 							</c:when>
 
 							</c:choose>

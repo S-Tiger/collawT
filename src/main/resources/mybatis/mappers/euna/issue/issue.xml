@@ -29,6 +29,7 @@
 		<result property="ig_Num" column="ig_Num" />
 		<result property="mem_Id" column="mem_Id" />
 		<result property="mem_Name" column="mem_Name" />
+		<result property="mem_File" column="mem_File" />
 		<result property="ig_Name" column="ig_Name" />
 		<result property="ig_Color" column="ig_Color" />
 		<result property="charger" column="charger" />
@@ -147,7 +148,7 @@
 	<!-- 게시글 조회 -->
 	<select id="issueRead"  parameterType="String" resultMap="issueResult02"> 
       <![CDATA[
-        select I.i_Num, I.c_Id, I.i_Name, I.i_Content, I.i_Date, I.mem_Id, M.mem_name, I.i_Start, I.i_End, I.ig_Num, IG.ig_Name ,ig.ig_Color
+        select I.i_Num, I.c_Id, I.i_Name, I.i_Content, I.i_Date, I.mem_Id, M.mem_name, I.i_Start, I.i_End, I.ig_Num, IG.ig_Name ,ig.ig_Color, m.mem_File
 		from issue I, member M, issue_group IG
 		where I.mem_Id = M.mem_Id
 		and I.ig_Num = IG.ig_Num

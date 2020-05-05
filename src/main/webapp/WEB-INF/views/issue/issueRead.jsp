@@ -167,12 +167,12 @@ $(document).ready(function() {
 						str+='<div class="card-footer card-comments">';
 						str+='<div class="card-comment">';
 						
-
-						str+='<c:if test="${'+result[i].mem_File +' != NULL}">';
+						str+='<input type="text" value="'+resultsize+'">';
+						str+='<c:if test="${'+result[i].mem_File +' != null}">';
 						str+='<img alt="Not null" width="50" height="50"src="/member/getByteImage?mem_Id='+result[i].mem_Id+'" class="img-circle elevation-1"/>';
 						str+='</c:if>';
 						
-						str+='<c:if test="${'+result[i].mem_File +'== NULL}">';
+						str+='<c:if test="${'+result[i].mem_File +'==  null}">';
 						str+='<img src="${contextPath}/resources/dist/img/profile.jpg" width="50" height="50" class="img-circle elevation-1" alt="Null">';
 						str+='</c:if>';
 							
@@ -351,11 +351,11 @@ $(document).ready(function() {
 
 								<!-- 멤버이미지 넣기 -->
 								
-								<c:if test="${member.mem_File != null }">
+								<c:if test="${issueRead.mem_File != null }">
 								<img alt="프로필사진" width="50" height="50"
 								src="/member/getByteImage?mem_Id=${issueRead.mem_Id}" class="img-circle elevation-2"/>
 								</c:if>
-								<c:if test="${member.mem_File == null }">
+								<c:if test="${issueRead.mem_File == null }">
 								<img src="${contextPath}/resources/dist/img/profile.jpg" width="50" height="50"
 								class="img-circle elevation-2" alt="프로필사진">
 								</c:if>
