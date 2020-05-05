@@ -11,7 +11,7 @@ import project.jeongha.vote.vo.Criteria;
 
 public interface EVoteDAO {
 //
-	public int voteInsert(Map map);
+	public void voteInsert(Map map);
 	public int votedInsert(Map map);
 	public int voterInsert(Map map);
 	public List<Map> searchList(Criteria cri) throws DataAccessException;

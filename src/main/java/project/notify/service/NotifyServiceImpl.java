@@ -19,15 +19,7 @@ public class NotifyServiceImpl implements NotifyService{
 
 	@Override
 	public void notifyInsert(IssueVO issueVO) {
-		int result = notifyDAO.notifyInsert(issueVO);
-		
-		if(result == 0) {
-			System.out.println(" noti insert fail");
-		}else {
-			System.out.println(" noti insert success");
-		}
-		
-		
+		notifyDAO.notifyInsert(issueVO);
 	}
 
 	@Override

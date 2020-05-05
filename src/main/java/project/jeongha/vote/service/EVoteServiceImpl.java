@@ -31,7 +31,7 @@ public class EVoteServiceImpl implements EVoteService {
 	//투표 제목 및 
 	@Override
 	public void  voteInsert(Map map) {
-		int result = evoteDAO.voteInsert(map);
+		evoteDAO.voteInsert(map);
 		//System.out.println("!!!!!!!!!!!!!!!!!11cmap service"+map);
 		
 	}

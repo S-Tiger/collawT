@@ -30,12 +30,9 @@ public class ReplyDAOImpl implements ReplyDAO {
 		
 	//댓글 입력
 	@Override
-	public int replyInsert(ReplyVO replyVO) {
-		int result;
-		result = sqlSession.update("reply.replyInsert", replyVO);
+	public void replyInsert(ReplyVO replyVO) {
+		sqlSession.update("reply.replyInsert", replyVO);
 		sqlSession.update("notify.replyInsertNotify",replyVO);
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!dao :"+replyVO.getC_Id());
-		return result;
 	}
 
 

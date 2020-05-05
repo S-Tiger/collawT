@@ -24,11 +24,9 @@ public class EVoteDAOImpl implements EVoteDAO {
 		}
 	// 투표 입력
 	@Override
-	public int voteInsert(Map map) {
-		int result;
-		result = sqlSession.update("voteResult.voteInsert", map);
-//		 sqlSession.selectOne("voteResult.voteInsert", map);
-		return result;
+	public void voteInsert(Map map) {
+		sqlSession.update("voteResult.voteInsert", map);
+		sqlSession.update("notify.voteInsertNotify", map);
 	}
 
 	// 항목들 입력
