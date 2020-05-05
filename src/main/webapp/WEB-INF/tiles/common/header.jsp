@@ -465,14 +465,7 @@
 									<p>협업공간 생성</p>
 							</a></li>
 						</ul></li>
-												<li class="nav-item" ><a href="${contextPath}/news/list"
-						class="nav-link" > <i class="nav-icon fas fa-book-open" ></i>
-							<p>
-								새로운 소식 <span class="badge badge-info right"></span>
-								<!--  <span class="right badge badge-danger">New</span>-->
-							</p>
-					</a></li>
-						<li class="nav-item"><a href="/personal/main?mem_Id=${member.mem_Id}" class="nav-link">
+						<li class="nav-item"><a href="/main" class="nav-link">
 									<i class="nav-icon fas fa-user-secret"></i>
 									<p>내 공간</p>
 							</a></li>

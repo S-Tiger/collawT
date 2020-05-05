@@ -179,7 +179,7 @@ $(function () {
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-	<div class="content-header" style="height: 100px">
+	<div class="content-header" style="height: 80px">
 		<div class="container-fluid">
 			<div class="row mb-2">
 				<div class="col-sm-6">
@@ -187,9 +187,7 @@ $(function () {
 						<h1 class="m-0 text-dark"
 							style="font-family: Recipekorea; max-width: 80%; display: contents;">내 공간</h1>
 					</div>
-					<div>
-					<p class="breadcrumb float-sm-left" style="position: absolute; margin-top: 10px">나만의 이슈와 내가 쓴 글을 한번에 관리하세요 :D</p>
-					</div>
+
 					</div>
 			</div>
 		</div>
@@ -199,7 +197,7 @@ $(function () {
 			<div class="card-header p-2">
 				<ol class="nav nav-pills" style="font-family: Spoqa Han Sans; font-size:15px; margin:0px; border:none; padding-inline-start: 0px;  width:400px; float:left;  ">
 					<li class="nav-item" ><a class="nav-link active" style="background-color:#DC3545;"
-						href="/personal/main?mem_Id=${member.mem_Id}"  id="activityMenu" ><b>홈</b></a></li>
+						href="/main"  id="activityMenu" ><b>홈</b></a></li>
 
 					<li class="nav-item" ><a class="nav-link"
 						href="/personal/list?mem_Id=${member.mem_Id}" >내 이슈</a></li>
@@ -231,14 +229,14 @@ $(function () {
               
               <div class="card-body" style="overflow:auto">
               
-<%--                <c:if test="${fn:length(newspeed)==0}">
-               <p style="text-align:center;">
-               <br><br><br><br><br><br><br><br><br><br><i class="far fa-newspaper" style="font-size:5em; color:gray;"></i>
-               <br>새로운 소식이 없습니다.<br>:D</p>
-              
-              </c:if> --%>	 
+            <c:if test="${fn:length(newspeed)==0}">
+            <p style="text-align:center;">
+            <br><br><br><br><br><br><br><br><br><br><i class="far fa-newspaper" style="font-size:5em; color:gray;"></i>
+            <br>새로운 소식이 없습니다.<br>:D</p>
+           
+           </c:if>
 
-<%-- 			<c:if  test= "${fn:length(newspeed)>0}"> --%>
+			<c:if  test= "${fn:length(newspeed)>0}">
                 <div class="timeline timeline-inverse">
                 	<c:forEach var="newspeeditem" items="${newspeed}">
 							 <c:choose>
@@ -388,7 +386,7 @@ $(function () {
                         <i class="far fa-clock bg-gray"></i>
                       </div>	
                 </div>
-              <%--   </c:if> --%>
+                </c:if> 
 
 
                 

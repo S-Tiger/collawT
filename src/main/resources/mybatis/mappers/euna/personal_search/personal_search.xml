@@ -69,8 +69,44 @@
 	</select>
 	
 	
-	<!-- 게시물 삭제 -->
+	<!-- 내가 쓴 글 게시물 삭제 -->
 	<delete id="issueDelete" parameterType="String">
+		DELETE
+		FROM issue
+		WHERE i_Num=#{i_Num}
+	</delete>
+	
+	
+		<!-- 내가 쓴 댓글 확인-->
+	<select id="myreplylist" resultMap="personal_searchResult01" parameterType="project.euna.personal_search.vo.Criteria"> 
+	<![CDATA[
+        select c_Id, c_Name, i_Name, i_Date, mem_Id, rnum, boardtype, i_Num, rnum
+		from(
+		    select c_Id, c_Name, i_Name, i_Date, mem_Id, row_number() over(order by i_date desc) as rnum, boardtype, i_Num
+		    from v_allboard
+		    where mem_Id=#{mem_Id}
+		    )
+		where rnum between #{rowStart} and #{rowEnd}
+	
+	]]>
+
+	</select>
+	
+	
+	
+	<!-- 내가 쓴 댓글 게시물 총 갯수 -->
+	<select id="replylistCount" resultType="int" parameterType="project.euna.personal_search.vo.Criteria"> 
+      <![CDATA[
+		select count(*)
+		from v_allboard
+        where mem_Id=#{mem_Id}
+      ]]>
+
+	</select>
+	
+	
+	<!-- 내가 쓴 댓글 게시물 삭제 -->
+	<delete id="replyDelete" parameterType="String">
 		DELETE
 		FROM issue
 		WHERE i_Num=#{i_Num}

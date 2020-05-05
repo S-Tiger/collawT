@@ -80,7 +80,8 @@ public class HomeController {
 		List<Map> newspeed = personalService.newspeed(mem_Id);
 		List<Map> voteAvailable = personalService.voteAvailable(mem_Id);
 		List<Map> myissue = personalService.myissue(mem_Id);
-
+		
+		System.out.println("!!!!!!!!!!!!!!!!!!!"+newspeed);
 		
 		ModelAndView mav = new ModelAndView("personal/myHome");
 		mav.addObject("newspeed", newspeed);
