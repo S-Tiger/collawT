@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<script src="${path}/ckeditor/ckeditor.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
-
-
+<script src = "${path}/resources/ckeditor/ckeditor.js"></script>
+<c:set var="contextPath"  value="${pageContext.request.contextPath}" />
+    <script type = "text/javascript">
+        window.parent.CKEDITOR.tools.callFunction('${CKEditorFuncNum}','${filePath}', '업로드완료');
+    </script>
 <style type="text/css">
 span[name="chargerspan"] {
 	background-clip: padding-box;
@@ -26,7 +28,7 @@ span[name="chargerspan"] {
 
 		periodSetting();
 
-		 //글쓰기 빈 값 안되게 검사
+		//글쓰기 빈 값 안되게 검사
 		$("#insertForm").submit(function() {
 			console.log();
 			var v_Name = $("#v_Name").val();
@@ -34,11 +36,10 @@ span[name="chargerspan"] {
 			var v_Subject = $("#v_Subject").val();
 			var vd_Content = $("#vd_Content").val();
 
-			
-			if(v_Name==''){
+			if (v_Name == '') {
 				alert("제목을 입력하세요");
 				document.insertForm.v_Name.focus();
-				return false; 
+				return false;
 			} else if (v_Content == '') {
 				alert("내용을 입력해주세요");
 				document.insertForm.v_Content.focus();
@@ -64,12 +65,12 @@ span[name="chargerspan"] {
 				alert("투표 항목은 12자리 이내로 입력해주세요.");
 				return false;
 			}
-			
+
 			periodSetting();
 
 			document.insertForm.submit();
-			
-		}); 
+
+		});
 
 		//캘린더 시작일/마감일 구하기/기간 미설정 시
 		$("#periodNull").click(function() {
@@ -111,39 +112,39 @@ span[name="chargerspan"] {
 			}
 		}
 
-	/* 	$("#insertForm").submit(function() {
-			console.log("test");
-			var v_Name = $("v_Name").val();
-			var v_Content = $("v_Content").val();
-			var v_Subject = $("v_Content").val();
-			var vd_Content = $("v_Content").val();
+		/* 	$("#insertForm").submit(function() {
+				console.log("test");
+				var v_Name = $("v_Name").val();
+				var v_Content = $("v_Content").val();
+				var v_Subject = $("v_Content").val();
+				var vd_Content = $("v_Content").val();
 
-			if (v_Name == "") {
-				alert("제목을 입력해주세요");
-				return false;
-			} else if (v_Content == "") {
-				alert("내용을 입력해주세요");
-				return false;
-			} else if (v_Subject == "") {
-				alert("투표제목을 입력해주세요");
-				return false;
-			} else if (vd_Content == "") {
-				alert("투표항목을 입력해주세요");
-				return false;
-			} else if (v_Name.length > 12) {
-				alert("제목은 12자리 이내로 입력해주세요");
-				return false;
-			} else if (v_Content.length > 12) {
-				alert("내용은 12자리 이내로 입력해주세요.");
-				return false;
-			} else if (v_Subject.length > 12) {
-				alert("투표 주제는 12자리 이내로 입력해주세요.");
-				return false;
-			} else if (vd_Content.length > 12) {
-				alert("투표 항목은 12자리 이내로 입력해주세요.");
-				return false;
-			}
-		}); */
+				if (v_Name == "") {
+					alert("제목을 입력해주세요");
+					return false;
+				} else if (v_Content == "") {
+					alert("내용을 입력해주세요");
+					return false;
+				} else if (v_Subject == "") {
+					alert("투표제목을 입력해주세요");
+					return false;
+				} else if (vd_Content == "") {
+					alert("투표항목을 입력해주세요");
+					return false;
+				} else if (v_Name.length > 12) {
+					alert("제목은 12자리 이내로 입력해주세요");
+					return false;
+				} else if (v_Content.length > 12) {
+					alert("내용은 12자리 이내로 입력해주세요.");
+					return false;
+				} else if (v_Subject.length > 12) {
+					alert("투표 주제는 12자리 이내로 입력해주세요.");
+					return false;
+				} else if (vd_Content.length > 12) {
+					alert("투표 항목은 12자리 이내로 입력해주세요.");
+					return false;
+				}
+			}); */
 
 	}); // end ready
 </script>
@@ -213,6 +214,45 @@ span[name="chargerspan"] {
 								<div class="form-group">
 									<label for="inputDescription">내용</label>
 									<textarea name="v_Content" id="v_Content" class="form-control" style="width: 100%;"></textarea>
+									<script>
+										//CK에디터 적용
+										CKEDITOR.replace('v_Content', {
+											allowedContent : true,
+
+											toolbar : [
+													[ 'NewPage', 'Preview', 'Bold', 'Italic',
+															'Underline', 'Strike', '-',
+															'Subscript', 'Superscript', '-', '-',
+															'JustifyLeft', 'JustifyCenter',
+															'JustifyRight', 'JustifyBlock', '-',
+															'Outdent', 'Indent', 'HorizontalRule',
+															'Link', 'Unlink', '-', 'Find',
+															'Replace', 'SelectAll', 'Image',
+															'Youtube', 'Table', 'SpecialChar' ],
+													'/',
+													[ 'Styles', 'Format', 'Font', 'FontSize',
+															'Undo', 'Redo' ],
+													[ 'TextColor', 'BGColor' ],
+													[ 'Cut', 'Copy', 'Paste', 'PasteText' ],
+													[ 'Source' ] ],
+
+										});
+
+										CKEDITOR.on('dialogDefinition', function(ev) {
+											var dialogName = ev.data.name;
+											var dialogDefinition = ev.data.definition;
+
+											switch (dialogName) {
+											case 'image': //Image Properties dialog
+												//dialogDefinition.removeContents('info');
+												//dialogDefinition.removeContents('Link'); // 링크탭 제거
+												dialogDefinition.removeContents('advanced'); // 자세히탭 제거
+												break;
+											}
+										});
+
+										CKFinder.setupCKEditor(v_Content, '/ckfinder/');
+									</script>
 								</div>
 
 
@@ -257,10 +297,7 @@ span[name="chargerspan"] {
 								<label for="inputName">투표 항목1</label>
 								<button type="button" class="btn btn-block btn-default btn-xs float-right" style="width: 80px; margin: 1px" onClick="Insert_poll()" onfocus='this.blur()'>항목 추가</button>
 								<button type="button" class="btn btn-block btn-default btn-xs float-right" style="width: 80px; margin: 1px" onClick="Del_poll()" onfocus='this.blur()'>삭제</button>
-								<input type="hidden" id="vd_Num" name="vd_Num" class="form-control" value="1"> 
-								<input type="text" id="vd_Content" name="vd_Content" class="form-control">
-								<label for="inputName">투표 항목2</label> 
-								<input type="hidden" id="vd_Num" name="vd_Num" class="form-control" value="2">
+								<input type="hidden" id="vd_Num" name="vd_Num" class="form-control" value="1"> <input type="text" id="vd_Content" name="vd_Content" class="form-control"> <label for="inputName">투표 항목2</label> <input type="hidden" id="vd_Num" name="vd_Num" class="form-control" value="2">
 								<input type="text" id="vd_Content" name="vd_Content" class="form-control">
 								<!--추가되는. -->
 								<table width="100%" cellpadding="0" cellspacing="0" id="poll_item"></table>
@@ -269,13 +306,13 @@ span[name="chargerspan"] {
 
 
 							<!-- 답변 선택 수 -->
-						 	<!-- <div class="form-group">
+							<!-- <div class="form-group">
 								<label for="inputStatus">답변 선택 수</label> <select class="form-control custom-select" id="v_Count" name="v_Count">
 									<option value="1">1개 선택 가능</option>
 									<option value="2">2개 선택 가능</option>
 								</select>
 							</div>  -->
-							
+
 							<!-- 익명 -->
 							<div class="form-group">
 								<label for="inputStatus">투표자 공개 범위</label> <select class="form-control custom-select" id="v_Show" name="v_Show">

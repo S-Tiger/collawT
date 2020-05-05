@@ -14,6 +14,7 @@
 		<!-- 정하 -->
 		<typeAlias type="project.jeongha.member.vo.MemberVO" alias="MemberVO" />
 		<typeAlias type="project.jeongha.vote.vo.VoteVO" alias="VoteVO" />
+		<typeAlias type="project.jeongha.reply.vo.VoteReplyVO" alias="VoteReplyVO" />
 		<typeAlias type="project.jeongha.question.vo.QuestionVO" alias="QuestionVO" />
 		
 		<!-- 은아 -->

@@ -33,9 +33,6 @@ public class QuestionControllerImpl implements QuestionController {
 	@GetMapping("/question")
 	public String qustion(QuestionVO qVo,HttpServletRequest reqest, HttpServletResponse response, HttpSession session) {
 		
-		
-		
-		
 		return "/question";
 	}
 
@@ -57,14 +54,13 @@ public class QuestionControllerImpl implements QuestionController {
 		insertThing.put("q_Email",q_Email);
 		insertThing.put("q_Kind",q_Kind);
 		System.out.println("sendEmal.:"+insertThing);
-	//	qService.insertQuestion(insertThing);
+		qService.insertQuestion(insertThing);
 			
 			sendEmail(qVo);
 			session.setAttribute("question", "question");
+			
 		return "redirect:/";
 	}
-
-	
 
 	@Override
 	public void sendEmail(QuestionVO qVo) throws Exception {
@@ -102,7 +98,7 @@ public class QuestionControllerImpl implements QuestionController {
 					msg += 			""+
 							"    <p style=\"font-size: 16px; line-height: 26px; margin-top: 50px; padding: 0 5px;\">\n" ;
 					msg += "분류: "+ q_Kind +"<br>";
-					msg += q_Content;
+					msg += "문의 내용: "+q_Content;
 					msg+=	"    </p>\n" + 
 							"    <div style=\"border-top: 1px solid #DDD; padding: 5px;\">\n" + 
 							"        <p style=\"font-size: 13px; line-height: 21px; color: #555;\">\n" + 
@@ -111,13 +107,7 @@ public class QuestionControllerImpl implements QuestionController {
 							"</div>";
 					msg += "</body>";
 					msg += "</html>";
-		
-		
-		
-		
-		
 		String mail = "collawt@gmail.com";
-		System.out.println(mail);
 		try {
 			HtmlEmail email = new HtmlEmail();
 			email.setDebug(true);
@@ -137,11 +127,7 @@ public class QuestionControllerImpl implements QuestionController {
 			email.setHtmlMsg(msg);
 			email.send();
 		} catch (Exception e) {
-
 			System.out.println("메일발송 실패 : " + e);
 		}
 	}
-	
-	
-	
 }

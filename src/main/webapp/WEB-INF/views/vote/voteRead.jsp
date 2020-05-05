@@ -75,54 +75,280 @@ progress::-webkit-progress-value {
 <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
 
 <script type="text/javascript">
-	$(document).ready(function() {
+function checkAll() {
+    //투표 선택안하면 ...
+	var chk_radio = document.getElementsByName('vd_Num');
+	var sel_type = null;
+	for(var i=0;i<chk_radio.length;i++){
+		if(chk_radio[i].checked == true){ 
+			sel_type = chk_radio[i].value;
+		}
+	}
 
-		//댓글 목록 항상 호출
-		//getReplyList();
+	if(sel_type == null){
+            alert("투표유형을 선택해주세요."); 
+		return false;
 
-		var formObj = $("form[name='readForm']");
-		var formReply = $("form[name='replyForm']");
+	}
+	 return true;
+}
 
-		//북마크 체크 변수
-		var checkbook = 0
+$(document).ready(function() {
+	
+	
+	
+	//댓글 목록 항상 호출
+	getReplyList();
+	
+	var formObj = $("form[name='readForm']");
+	var formReply = $("form[name='replyForm']");
 
-		//북마크 체크 확인
-		bookcheck();
+	
+	
+	//북마크 체크 변수
+	var checkbook = 0
+	
+	//북마크 체크 확인
+	bookcheck();
+	
+	
+	//console.log("22222222222"+checkbook);
 
-		//console.log("22222222222" + checkbook);
 
-		//댓글 입력 버튼 클릭 시 이벤트
 
-		//북마크 추가 상태 확인 메소드
-		function bookcheck() {
+	
+	
+	//댓글 입력 버튼 클릭 시 이벤트
+	$("#replyInsert_btn").on("click", function() {
+		var vr_Content = $("#vr_Content").val();
+		//댓글 입력 비어있으면 아무 이벤트도 일어나지 않게 하기
+		if(vr_Content==''){
+			return false;
+		
+	//
+		 }else{
+			 console.log("its been a longday")
 			$.ajax({
-				url : "/bookmark/bookmarkCheck",
-				type : 'get',
-				data : {
+				url:"/voteReply/insert",
+				type:'post',
+				data:{
+					vr_Content: $("#vr_Content").val(),
 					v_Num : $("#v_Num").val(),
+					c_Id : $("#c_Id").val()
 				},
-				success : function(data) {
-					if (data == 1) {
-						$("#bookmarkinsert").css('color', '#f8f9fa');
-						$("#bookmarkinsert").css('background-color', '#dc3545');
-						console.log(checkbook);
-						checkbook = 1;
-						console.log(checkbook);
-					}
-
+				success:function(data){
+					
+                        $("#vr_Content").val("");
+                        getReplyList();
+					
 				}
 			})
 		}
-
-		$("#modal_opne_btn").click(function() {
-			$("#modal").attr("style", "display:block");
-		});
-
-		$("#modal_close_btn").click(function() {
-			$("#modal").attr("style", "display:none");
-		});
-
 	})
+	
+	
+	//북마크 버튼 이벤트
+	$("#bookmarkinsert").on("click", function() {
+		console.log("1121212"+checkbook);
+		if(checkbook == 0){
+		$.ajax({
+			url:"/bookmark/insert",
+			type:'post',
+			data:{
+				i_Num : $("#i_Num").val(),
+			},
+			success:function(data){
+				var bookcount = $("#bookmarkcount").html();
+				console.log(bookcount);
+				if(data == 1){
+                    alert("북마크에 등록하셨습니다.");
+				$("#bookmarkinsert").css('color','#f8f9fa');
+				$("#bookmarkinsert").css('background-color', '#dc3545');
+				checkbook = 1;
+				bookcount++;
+				console.log(bookcount);
+				$("#bookmarkcount").html(bookcount);
+				}
+			}
+		})
+		}else if(checkbook == 1){
+			$.ajax({
+				url:"/bookmark/delete",
+				type:'post',
+				data:{
+					i_Num : $("#i_Num").val(),
+				},
+				success:function(data){
+					var bookcount = $("#bookmarkcount").html();
+					if(data == 1){
+	                    alert("북마크를 해제하셨습니다.");
+					$("#bookmarkinsert").css('color','#444');
+					$("#bookmarkinsert").css('background-color', '#f8f9fa');
+					checkbook = 0;
+					bookcount--;
+					console.log(bookcount);
+					$("#bookmarkcount").html(bookcount);
+				}
+					}
+				})
+			}
+		})
+	
+		
+		//북마크 추가 상태 확인 메소드
+	function bookcheck() {
+		$.ajax({
+			url:"/bookmark/bookmarkCheck",
+			type:'get',
+			data:{
+				i_Num : $("#i_Num").val(),
+			},
+			success:function(data){
+				if(data == 1){
+				$("#bookmarkinsert").css('color','#f8f9fa');
+				$("#bookmarkinsert").css('background-color', '#dc3545');
+				console.log(checkbook);
+				checkbook = 1;
+				console.log(checkbook);
+				}
+				
+			}
+		})
+	}
+	
+})
+
+	//댓글 목록
+	function getReplyList(){
+		$.ajax({
+			type:"get",
+			url : "${path}/voteReply/list?v_Num=${voteRead.v_Num}",
+			
+			success:function(result){
+				
+				var str="";
+				if(result!=0){
+					for(var i in result){
+						str+='<div class="card-footer card-comments">';
+						str+='<div class="card-comment">';
+						
+
+						str+='<c:if test="${'+result[i].mem_File +' != NULL}">';
+						str+='<img alt="Not null" width="50" height="50"src="/member/getByteImage?mem_Id='+result[i].mem_Id+'" class="img-circle elevation-1"/>';
+						str+='</c:if>';
+						
+						str+='<c:if test="${'+result[i].mem_File +'== NULL}">';
+						str+='<img src="${contextPath}/resources/dist/img/profile.jpg" width="50" height="50" class="img-circle elevation-1" alt="Null">';
+						str+='</c:if>';
+						
+
+
+
+
+						
+						str+='<div class="comment-text">';
+						str+='<span class="username">'+result[i].mem_Name;
+						str+='<span class="text-muted float-right">'+result[i].vr_Date+'</span>';
+						str+='<small>'+('${member.mem_Id}'==result[i].mem_Id ? "&nbsp;&nbsp;&nbsp;<a href='javascript:replyModifyForm("+result[i].vr_Num+",\""+result[i].vr_Content+"\")'>수정</a>" : "")+'</small>';
+						str+='<small>'+('${member.mem_Id}'==result[i].mem_Id ? "&nbsp;&nbsp;&nbsp;<a href='javascript:replyDelete("+result[i].vr_Num+")'>삭제</a>" : "")+'</small></span>';
+						
+						str+='<p id="replyContent'+result[i].vr_Num+'" name="replyContent">'+result[i].vr_Content+'</p>';
+						str+='</div></div></div>';
+						str+='<input type="hidden" id="vr_Num" name="vr_Num" value="'+result[i].vr_Num+'" />';
+					}
+					
+				}else{
+					str+='<div class="card-footer card-comments">';
+					
+					str+='<div class="card-comment">';
+					str+='<div class="comment-text">';
+					str+='<p style="text-align:center;"><small><br><br>작성된 댓글이 없습니다.<br>이 글의 첫 번째 댓글을 작성해주세요 :D</small></p>'
+					str+='</div></div></div>';
+				}
+				$("#replyList").html(str);
+			}
+				
+		})
+		
+	}
+
+
+	//댓글 삭제
+  	function replyDelete(vr_Num){
+	
+		if(confirm("삭제하시겠습니까?")){
+			$.ajax({
+				url : "/voteReply/delete",
+				data : {"vr_Num" : vr_Num},
+				type : 'post',
+				success:function(){
+					alert("삭제되었습니다.");
+					getReplyList();
+					
+				}
+			})
+			
+		}
+			
+	}
+	
+	
+	
+	//댓글 수정창 열기
+  	function replyModifyForm(vr_Num, vr_Content){
+		
+		var str="";
+		
+		str+='<div><textarea id="vr_Content'+vr_Num+'" name="vr_Content'+vr_Num+'" class="form-control">'+vr_Content+'</textarea></div>';
+		str+='<small><a href="javascript:replyUpdate('+vr_Num+')" id="replyInsert_btn" name="replyInsert_btn">입력</span></small>&nbsp;&nbsp;';
+		str+='<small><a href="javascript:replyCancle('+vr_Num+',\''+vr_Content+'\')" id="replyCancel_btn" name="replyCancel_btn">취소</span></small>';
+	
+		
+		$('#replyContent'+vr_Num).html(str);	
+			
+	} 
+
+  
+	
+	//댓글 수정 db
+	function replyUpdate(vr_Num){
+		var updateContent = $('[name=vr_Content'+vr_Num+']').val();
+	    console.log("gesg");
+	    $.ajax({
+	        url : '/voteReply/update',
+	        type : 'post',
+	        data : {'vr_Content' : updateContent, 'vr_Num' : vr_Num},
+	        success : function(data){
+	           
+	        	getReplyList();
+	        }
+	    });
+	}
+	
+	//댓글 입력 취소 버튼 클릭시
+	function replyCancle(vr_Num, vr_Content){
+		var str="";
+		str+='<p id="replyContent'+vr_Num+'" name="replyContent">'+vr_Content+'</p>';
+			
+		$('#replyContent'+vr_Num).html(str);	
+	}
+	
+	//클립보드로 url 복사
+
+
+	function urlClipCopy() {
+		var tempElem = document.createElement('textarea');
+		  tempElem.value = window.document.location.href; 
+		  document.body.appendChild(tempElem);
+
+		  tempElem.select();
+		  document.execCommand("copy");
+		  document.body.removeChild(tempElem);
+		  alert("URL이 클립보드에 복사되었습니다. CTRL+V하시면 URL이 입력됩니다");
+
+	}
+
+	
 	
 	
 </script>
@@ -152,7 +378,7 @@ progress::-webkit-progress-value {
 				<!-- Box Comment -->
 				<!-- 본문 부분~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-				<form name="insertVoterForm" action="/project/vote/insertVoter" method="get" encType="UTF-8">
+				<form name="insertVoterForm" action="/project/vote/insertVoter" onsubmit="return checkAll()" method="get" encType="UTF-8">
 					<!--  완료 처리하기 위한 오늘 날짜가져오 -->
 				<!-- 	<input type="text" id="today" name="v_Today"> -->
 					<div class="card card-widget">
@@ -172,8 +398,7 @@ progress::-webkit-progress-value {
 								</button>
 								<ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; right: 0px; transform: translate3d(0px, 38px, 0px);">
 
-									<li><a class="dropdown-item" href="#"><small>다른 협업공간으로 복사</small></a></li>
-									<li><a class="dropdown-item" href="#"><small>URL 복사</small></a></li>
+							 <li><a class="dropdown-item" href="javascript:urlClipCopy()"><small>URL 복사</small></a></li>
 								</ul>
 							</div>
 							<!-- 본인만 글 수정, 삭제 가능-->
@@ -345,6 +570,37 @@ progress::-webkit-progress-value {
 						</p>
 					</c:if>
 
+					<div id="replyList"></div>
+					
+					<!-- 댓글  입력-->
+					<div class="card-footer" id="replyInput" name="replyInput">
+
+						
+							<%-- <img class="img-fluid img-circle img-sm"
+								src="/member/getByteImage?mem_Id=${member.mem_Id}" alt="Alt Text" width="50" height="50" > --%>
+							
+								<c:if test="${member.mem_File != null }">
+								<img class="img-fluid img-circle img-sm"
+								src="/member/getByteImage?mem_Id=${member.mem_Id}" alt="Alt Text" width="50" height="50" >
+								</c:if>
+								<c:if test="${member.mem_File == null }">
+								<img class="img-fluid img-circle img-sm"
+								src="${contextPath}/resources/dist/img/profile.jpg" alt="Alt Text" width="50" height="50">
+								</c:if>
+						
+							<div class="img-push">
+								<textarea id="vr_Content" name="vr_Content" class="form-control"	placeholder="댓글을 입력하세요"></textarea>
+									
+									
+									<small><a href="#" id="replyInsert_btn" name="replyInsert_btn">입력</a></small>
+																		
+									<input type="hidden" id="v_Num" name="v_Num" value="${voteRead.v_Num}" />
+									<input type="hidden" id="c_Id" name="c_Id" value="${voteRead.c_Id}" />
+									
+								
+							</div>
+					
+					</div>
 					<!-- /댓글 입력 -->
 				</div>
 			</div>

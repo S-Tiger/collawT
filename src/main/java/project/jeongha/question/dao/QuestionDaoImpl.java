@@ -15,8 +15,8 @@ public class QuestionDaoImpl implements QuestionDao {
 	@Override
 	public int insertQuestion(Map<String, Object> insertThing) {
 		
+		return sqlSession.insert("question.questionInsert", insertThing);
 		
-		return sqlSession.insert("question.insert",insertThing);
 	}
 
 }
