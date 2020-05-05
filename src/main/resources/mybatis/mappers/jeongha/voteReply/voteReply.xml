@@ -8,7 +8,7 @@
 		<!-- property는 화면단에서 쓸 이름, column은 데이터컬럼명이랑 동일 -->
 		<result property="v_Num" column="v_Num" />
 		<result property="vr_Num" column="vr_Num" />
-		<result property="vr_Content" column="vr_Content" />
+		<result property="vr_Content" column="vr_Content" jdbcType="CLOB" javaType="java.lang.String"/>
 		<result property="vr_Date" column="vr_Date" />
 		<result property="mem_Id" column="mem_Id" />
 		<result property="c_Id" column="c_Id" />
@@ -17,7 +17,7 @@
 	<resultMap id="replyResult02" type="java.util.HashMap">
 		<!-- property는 화면단에서 쓸 이름, column은 데이터컬럼명이랑 동일 -->
 		<result property="vr_Num" column="vr_Num" />
-		<result property="vr_Content" column="vr_Content"/>
+		<result property="vr_Content" column="vr_Content" jdbcType="CLOB" javaType="java.lang.String"/>
 		<result property="vr_Date" column="vr_Date" />
 		<result property="v_Num" column="v_Num" />
 		<result property="c_Id" column="c_Id" />

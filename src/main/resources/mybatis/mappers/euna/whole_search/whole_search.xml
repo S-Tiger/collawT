@@ -713,7 +713,7 @@ from(
 	<select id="searchReply" resultMap="replyResult" parameterType="project.euna.whole_search.vo.replyCriteria"> 
       <![CDATA[
  
-      select r_Num, r_Content, r_Date, i_Num, c_Id, wr_mem_Id, mem_Name, c_Name, i_Name,rnum, ig_Num, ig_Name,ig_Color
+          select r_Num, r_Content, r_Date, i_Num, c_Id, wr_mem_Id, mem_Name, c_Name, i_Name,rnum, ig_Num, ig_Name,ig_Color
       from(
         select r_Num, r_Content, r_Date, i_Num, c_Id, wr_mem_Id, mem_Name, c_Name, i_Name, row_number() over(order by r_date desc) as rnum, ig_Num, ig_Name, ig_Color
         from(
@@ -735,7 +735,24 @@ from(
                   )
             
             union all
+            select r.vr_Num as r_Num, r.vr_Content as r_Content, r.vr_Date as r_Date, r.v_Num as i_Num, r.c_Id as c_Id, r. mem_Id as wr_mem_Id,
+            m.mem_Name as mem_Name,
+            c.c_Name as c_Name,
+            v.v_Name as i_Name, v.vs_Num as ig_Num,
+            vs.vs_Name as ig_Name, vs.vs_Color as ig_Color
             
+            from vote_reply r, member m, co_work c, vote v, vote_status vs
+            
+            where r.mem_Id = m.mem_Id
+            and r.c_Id = c.c_Id
+            and r.v_Num = v.v_Num
+            and v.vs_Num = vs.vs_Num
+            and c.c_Id IN
+                (
+                 select c_Id from CO_MEMBER where mem_Id=#{mem_Id}
+                  )
+            
+            union all
             select pm.p_m_Num as r_Num, pm.p_m_Content as r_Content, pm.p_m_Date as r_Date, pm.p_Num as i_Num, pm.mem_Id as c_Id, pm.mem_Id as wr_mem_Id,
             m.mem_Name as mem_Name,
             null as c_Name,
@@ -787,38 +804,58 @@ from(
 		<!-- 댓글 검색결과 총 갯수 -->
 	<select id="replyCount" resultType="int" parameterType="project.euna.whole_search.vo.replyCriteria"> 
 	      <![CDATA[
-        select count(*)
+     select count(*)
+      from(
+        select r_Num, r_Content, r_Date, i_Num, c_Id, wr_mem_Id, mem_Name, c_Name, i_Name, row_number() over(order by r_date desc) as rnum, ig_Num, ig_Name, ig_Color
         from(
             select r.r_Num as r_Num, r.r_Content as r_Content, r.r_Date as r_Date, r.i_Num as i_Num, r.c_Id as c_Id, r. mem_Id as wr_mem_Id,
             m.mem_Name as mem_Name,
             c.c_Name as c_Name,
             i.i_Name as i_Name, i.ig_Num as ig_Num,
-            ig.ig_Name as ig_Name
+            ig.ig_Name as ig_Name, ig.ig_Color as ig_Color
             
             from reply r, member m, co_work c, issue i, issue_group ig
             
             where r.mem_Id = m.mem_Id
             and r.c_Id = c.c_Id
             and r.i_Num = i.i_Num
-            and ig.ig_Num= i.ig_Num
+            and ig.ig_Num = i.ig_Num
             and c.c_Id IN
                 (
                  select c_Id from CO_MEMBER where mem_Id=#{mem_Id}
                   )
             
             union all
+            select r.vr_Num as r_Num, r.vr_Content as r_Content, r.vr_Date as r_Date, r.v_Num as i_Num, r.c_Id as c_Id, r. mem_Id as wr_mem_Id,
+            m.mem_Name as mem_Name,
+            c.c_Name as c_Name,
+            v.v_Name as i_Name, v.vs_Num as ig_Num,
+            vs.vs_Name as ig_Name, vs.vs_Color as ig_Color
             
+            from vote_reply r, member m, co_work c, vote v, vote_status vs
+            
+            where r.mem_Id = m.mem_Id
+            and r.c_Id = c.c_Id
+            and r.v_Num = v.v_Num
+            and v.vs_Num = vs.vs_Num
+            and c.c_Id IN
+                (
+                 select c_Id from CO_MEMBER where mem_Id=#{mem_Id}
+                  )
+            
+            union all
             select pm.p_m_Num as r_Num, pm.p_m_Content as r_Content, pm.p_m_Date as r_Date, pm.p_Num as i_Num, pm.mem_Id as c_Id, pm.mem_Id as wr_mem_Id,
             m.mem_Name as mem_Name,
             null as c_Name,
-            p.p_i_Name as i_Name, null as ig_Num,
-            null as ig_Name
+            p.p_i_Name as i_Name,  null as ig_Num,
+           	null as ig_Name, null as ig_Color
             
             from personal_memo pm, member m, personal p
             
             where pm.mem_Id=m.mem_Id
             and pm.p_Num=p.p_Num
             and m.mem_Id = #{mem_Id}
+            )
             )
                        ]]>
                <trim prefix="WHERE" prefixOverrides="AND|OR">
@@ -846,37 +883,57 @@ from(
 	<select id="replyWriter" resultMap="replyResult" parameterType="project.euna.whole_search.vo.replyCriteria"> 
       <![CDATA[
          select distinct wr_mem_Id, mem_Name
-         from ( 
-            (select r.r_Num as r_Num, r.r_Content as r_Content, r.r_Date as r_Date, r.i_Num as i_Num, r.c_Id as c_Id, r. mem_Id as wr_mem_Id,
+      from(
+        select r_Num, r_Content, r_Date, i_Num, c_Id, wr_mem_Id, mem_Name, c_Name, i_Name, row_number() over(order by r_date desc) as rnum, ig_Num, ig_Name, ig_Color
+        from(
+            select r.r_Num as r_Num, r.r_Content as r_Content, r.r_Date as r_Date, r.i_Num as i_Num, r.c_Id as c_Id, r. mem_Id as wr_mem_Id,
             m.mem_Name as mem_Name,
             c.c_Name as c_Name,
             i.i_Name as i_Name, i.ig_Num as ig_Num,
-            ig.ig_Name as ig_Name
+            ig.ig_Name as ig_Name, ig.ig_Color as ig_Color
             
             from reply r, member m, co_work c, issue i, issue_group ig
             
             where r.mem_Id = m.mem_Id
             and r.c_Id = c.c_Id
             and r.i_Num = i.i_Num
-            and ig.ig_Num= i.ig_Num
+            and ig.ig_Num = i.ig_Num
             and c.c_Id IN
                 (
                  select c_Id from CO_MEMBER where mem_Id=#{mem_Id}
                   )
-            )
-            union all
             
-            (select pm.p_m_Num as r_Num, pm.p_m_Content as r_Content, pm.p_m_Date as r_Date, pm.p_Num as i_Num, pm.mem_Id as c_Id, pm.mem_Id as wr_mem_Id,
+            union all
+            select r.vr_Num as r_Num, r.vr_Content as r_Content, r.vr_Date as r_Date, r.v_Num as i_Num, r.c_Id as c_Id, r. mem_Id as wr_mem_Id,
+            m.mem_Name as mem_Name,
+            c.c_Name as c_Name,
+            v.v_Name as i_Name, v.vs_Num as ig_Num,
+            vs.vs_Name as ig_Name, vs.vs_Color as ig_Color
+            
+            from vote_reply r, member m, co_work c, vote v, vote_status vs
+            
+            where r.mem_Id = m.mem_Id
+            and r.c_Id = c.c_Id
+            and r.v_Num = v.v_Num
+            and v.vs_Num = vs.vs_Num
+            and c.c_Id IN
+                (
+                 select c_Id from CO_MEMBER where mem_Id=#{mem_Id}
+                  )
+            
+            union all
+            select pm.p_m_Num as r_Num, pm.p_m_Content as r_Content, pm.p_m_Date as r_Date, pm.p_Num as i_Num, pm.mem_Id as c_Id, pm.mem_Id as wr_mem_Id,
             m.mem_Name as mem_Name,
             null as c_Name,
-            p.p_i_Name as i_Name, null as ig_Num,
-            null as ig_Name
+            p.p_i_Name as i_Name,  null as ig_Num,
+           	null as ig_Name, null as ig_Color
             
             from personal_memo pm, member m, personal p
             
             where pm.mem_Id=m.mem_Id
             and pm.p_Num=p.p_Num
-            and m.mem_Id = #{mem_Id})
+            and m.mem_Id = #{mem_Id}
+            )
             )
                        ]]>
                <trim prefix="WHERE" prefixOverrides="AND|OR">

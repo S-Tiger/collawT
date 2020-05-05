@@ -195,6 +195,7 @@ public class PersonalControllerImpl implements PersonalController {
 	@GetMapping("/delete")
 	public String personalDelete(String mem_Id, String p_Num, PersonalVO personalVO) throws Exception{
 		
+		personalService.personalmemoDelete(p_Num);
 		personalService.personalDelete(personalVO.getP_Num());
 		personal_appendixService.fileDelete(p_Num);
 		

@@ -29,5 +29,6 @@ public interface PersonalDAO {
 	public List<Map> newspeed(String mem_Id);
 	public List<Map> voteAvailable(String mem_Id);
 	public List<Map> myissue(String mem_Id);
+	public void personalmemoDelete(String p_Num) throws Exception;
 
 }

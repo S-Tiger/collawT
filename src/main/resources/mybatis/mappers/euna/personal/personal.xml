@@ -126,6 +126,13 @@
 		FROM personal
 		WHERE p_Num=#{p_Num}
 	</delete>
+	
+	<!-- 게시물 삭제 시 메모 삭제-->
+	<delete id="personalmemoDelete" parameterType="String">
+		DELETE
+		FROM personal_memo
+		WHERE p_Num=#{p_Num}
+	</delete>
 
 	<!-- 게시물 수정 -->
 	<update id="personalUpdate"

@@ -59,6 +59,13 @@ public class PersonalDAOImpl implements PersonalDAO {
 		sqlSession.delete("personal.personalDelete", p_Num);
 
 	}
+	
+	// 글 삭제 시 메모 삭제
+	@Override
+	public void personalmemoDelete(String p_Num) throws Exception {
+		sqlSession.delete("personal.personalmemoDelete", p_Num);
+
+	}
 
 	// 글 수정
 	@Override
