@@ -116,6 +116,10 @@ $(function () {
     var ig_Name_2 = $('#ig_Name_2').val();
     var ig_Name_3 = $('#ig_Name_3').val();
     var ig_Name_4 = $('#ig_Name_4').val();
+    var ig_Color_1 = $('#ig_Color_1').val();
+    var ig_Color_2 = $('#ig_Color_2').val();
+    var ig_Color_3 = $('#ig_Color_3').val();
+    var ig_Color_4 = $('#ig_Color_4').val();
     var centerText = '총 '+(parseInt(ig_Num_1)+parseInt(ig_Num_2)+parseInt(ig_Num_3)+parseInt(ig_Num_4))+'건';
     
     var donutChartCanvas1 = $('#donutChart1').get(0).getContext('2d')
@@ -126,7 +130,7 @@ $(function () {
       datasets: [
         {
           data: [ig_Num_1,ig_Num_2,ig_Num_3,ig_Num_4],
-          backgroundColor : ['#6c757d', '#007bff', '#ffc107', '#28a745'],
+          backgroundColor : [ig_Color_1, ig_Color_2, ig_Color_3, ig_Color_4],
         }
       ],
 
@@ -144,7 +148,7 @@ $(function () {
   	elements: {
   			center: {
   				text: centerText,
-		        color: '#FF6384', // Default is #000000
+		        color: 'gray-dark', // Default is #000000
 		        fontStyle: 'Arial', // Default is Arial
 		        sidePadding: 20 // Defualt is 20 (as a percentage)
   			}
@@ -359,9 +363,9 @@ $(function () {
 				
 				<c:forEach var="igCountitem" items="${igCount}" >
                 <input type="hidden" value="${igCountitem.IGCOUNT}" id="ig_Num_${igCountitem.IG_NUM}">
-                </c:forEach>
-                <c:forEach var="igNameitem" items="${igCount}" >
-                <input type="hidden" value="${igNameitem.IG_NAME}" id="ig_Name_${igNameitem.IG_NUM}">
+                <input type="hidden" value="${igCountitem.IG_NAME}" id="ig_Name_${igCountitem.IG_NUM}">
+                <input type="hidden" value="${igCountitem.IG_COLOR}" id="ig_Color_${igCountitem.IG_NUM}">
+                
                 </c:forEach>
                 
               </div>

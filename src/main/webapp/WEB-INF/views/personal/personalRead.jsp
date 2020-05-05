@@ -89,16 +89,25 @@ $(document).ready(function() {
 					for(var i in result){
 						str+='<div class="card-footer card-comments">';
 						str+='<div class="card-comment">';
-	
+						
+
+						str+='<c:if test="${'+result[i].mem_File +' != NULL}">';
+						str+='<img alt="Not null" width="50" height="50"src="/member/getByteImage?mem_Id='+result[i].mem_Id+'" class="img-circle elevation-1"/>';
+						str+='</c:if>';
+						
+						str+='<c:if test="${'+result[i].mem_File +'== NULL}">';
+						str+='<img src="${contextPath}/resources/dist/img/profile.jpg" width="50" height="50" class="img-circle elevation-1" alt="Null">';
+						str+='</c:if>';
+							
 						str+='<div class="comment-text">';
-				
+						str+='<span class="username">'+result[i].mem_Name;
 						str+='<span class="text-muted float-right">'+result[i].p_m_Date+'</span>';
 						str+='<small>'+('${member.mem_Id}'==result[i].mem_Id ? "&nbsp;&nbsp;&nbsp;<a href='javascript:replyModifyForm("+result[i].p_m_Num+",\""+result[i].p_m_Content+"\")'>수정</a>" : "")+'</small>';
-						str+='<small>'+('${member.mem_Id}'==result[i].mem_Id ? "&nbsp;&nbsp;&nbsp;<a href='javascript:replyDelete("+result[i].p_m_Num+")'>삭제</a>" : "")+'</small>';
+						str+='<small>'+('${member.mem_Id}'==result[i].mem_Id ? "&nbsp;&nbsp;&nbsp;<a href='javascript:replyDelete("+result[i].p_m_Num+")'>삭제</a>" : "")+'</small></span>';
 						
 						str+='<p id="replyContent'+result[i].p_m_Num+'" name="replyContent">'+result[i].p_m_Content+'</p>';
 						str+='</div></div></div>';
-						str+='<input type="hidden" id="p_m_Num" name="p_m_Num" value="'+result[i].p_m_Num+'" />';
+						str+='<input type="hidden" id="r_Num" name="r_Num" value="'+result[i].p_m_Num+'" />';
 					}
 					
 				}else{
@@ -106,7 +115,7 @@ $(document).ready(function() {
 					
 					str+='<div class="card-comment">';
 					str+='<div class="comment-text">';
-					str+='<p style="text-align:center;"><small><br><br>작성된 댓글이 없습니다.<br>이 글의 첫 번째 댓글을 작성해주세요 :D</small></p>'
+					str+='<p style="text-align:center;"><small><br><br>작성된 메모가 없습니다.<br>메모를 남겨보세요 :D</small></p>'
 					str+='</div></div></div>';
 				}
 				$("#replyList").html(str);
@@ -271,7 +280,7 @@ function urlClipCopy() {
 							
 							
 							<div class="btn-group float-right">
-                          <button type="button" class="btn btn-default" data-toggle="dropdown" aria-expanded="false" style="border:white;background-color:white;height:20px;padding-top: 0px;color:gray"><i class="fas fa-cog"></i>
+                          <button type="button" class="btn btn-default" data-toggle="dropdown" aria-expanded="false" style="border:white;background-color:white;height:20px;padding-top: 0px;color:gray"><i class="fas fa-ellipsis-h"></i>
                           </button>
                           <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; right: 0px; transform: translate3d(0px, 38px, 0px);">
                             
@@ -332,12 +341,12 @@ function urlClipCopy() {
 							<br>
 
 <!-- 이슈정보~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-<div class="card card-primary collapsed-card">
+<div class="card card-primary ">
             <div class="card-header" style="height:30px; padding-left:13px; padding-right:16px; padding-top:4px; background-color:#e87c87;">
-             <label><small><b>이슈 정보 더 보기</b></small></label>
+             <label><small><b>이슈 정보</b></small></label>
                 <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                  <i class="fas fa-plus"></i></button>
+                  <i class="fas fa-minus"></i></button>
               </div>
             </div>
             <div class="card-body p-0">
@@ -441,15 +450,15 @@ function urlClipCopy() {
 				<div class="card">
 
 					
-					<div id="replyList"></div>
+					<div id="replyList" style="max-height:631px; overflow:auto"></div>
 					
 					<!-- 댓글  입력-->
 					<div class="card-footer" id="replyInput" name="replyInput">
-
+					
 			
 						
 							<div class="img-push">
-								<textarea id="p_m_Content" name="p_m_Content" class="form-control"	placeholder="댓글을 입력하세요"></textarea>
+								<textarea id="p_m_Content" name="p_m_Content" class="form-control"	placeholder="메모를 남겨주세요"></textarea>
 									
 									
 									<small><a href="#" id="replyInsert_btn" name="replyInsert_btn">입력</a></small>

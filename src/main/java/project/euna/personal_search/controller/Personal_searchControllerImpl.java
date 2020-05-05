@@ -91,9 +91,10 @@ public class Personal_searchControllerImpl implements Personal_searchController 
 		member = (Map<String, Object>) session.getAttribute("member");
 		String mem_Id = (String) member.get("mem_Id");
 		
-		issueService.chargerDelete(i_Num);
-		issueService.issueDelete(i_Num);
 		appendixService.fileDelete(i_Num);
+		issueService.chargerDelete(i_Num);
+		issueService.replyDelete(i_Num);
+		issueService.issueDelete(i_Num);
 	
 		
 		
@@ -108,6 +109,8 @@ public class Personal_searchControllerImpl implements Personal_searchController 
 		member = (Map<String, Object>) session.getAttribute("member");
 		String mem_Id = (String) member.get("mem_Id");
 		
+		evoteService.votereplyDelete(v_Num);
+		evoteService.votedDelete(v_Num);
 		evoteService.voteDelete(v_Num);
 	
 		

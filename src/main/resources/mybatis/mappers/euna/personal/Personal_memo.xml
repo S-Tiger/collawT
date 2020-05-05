@@ -20,7 +20,7 @@
 		<result property="p_m_Content" column="p_m_Content" jdbcType="CLOB" javaType="java.lang.String"/>
 		<result property="p_m_Date" column="p_m_Date" />
 		<result property="mem_Id" column="mem_Id" />
-		
+		<result property="mem_Name" column="mem_Name" />
 	</resultMap>
 
 	
@@ -28,9 +28,10 @@
 	<!-- 댓글 목록 -->
 	<select id="searchList" resultMap="personal_memoResult02"> 
       <![CDATA[
-        select p_m_Num, p_m_Content, p_m_Date, p_Num, mem_Id
-		from personal_memo
-		where p_Num = #{p_Num}
+        select pm.p_m_Num, pm.p_m_Content, pm.p_m_Date, pm.p_Num, pm.mem_Id, m.mem_Name
+		from personal_memo pm, member m
+		where pm.mem_Id=m.mem_Id 
+		and p_Num = #{p_Num}
 		order by p_m_Num asc
       ]]>
 

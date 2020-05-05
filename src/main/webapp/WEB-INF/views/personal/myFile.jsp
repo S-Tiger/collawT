@@ -185,7 +185,7 @@ $(document).ready(function() {
 			     </select>
 			     &nbsp;&nbsp;&nbsp;
 			  <select class="form-control custom-select" id="a_NameEx" name="a_NameEx">
-			         <option id="" name="" value="">전체 확장자</option>
+			         <option id="" name="" value="">전체 유형</option>
 			         <c:forEach var="exitem" items="${fileEx}" >
 			         <option id="${exitem.a_NameEx}" name="${exitem.a_NameEx}" value="${exitem.a_NameEx}">${exitem.a_NameEx}</option>
 			        </c:forEach>
@@ -265,12 +265,7 @@ $(document).ready(function() {
 	                   
 	                   &nbsp;&nbsp;
 	                   <c:if test="${item.ig_Name != null}">
-			                   <span style= "height : 17px; font-size : 10px; vertical-align : text-bottom; padding: .4em .4em;
-									<c:if test="${item.ig_Name == '발의됨'}">background-color:#6c757d;</c:if>
-									<c:if test="${item.ig_Name == '진행중'}">background-color:#007bff;</c:if>
-									<c:if test="${item.ig_Name == '일시정지'}">background-color:#ffc107;</c:if>
-									<c:if test="${item.ig_Name == '완료'}">background-color:#28a745;</c:if>
-									"
+			                   <span style= "height : 17px; font-size : 10px; vertical-align : text-bottom; padding: .4em .4em; background-color:${item.ig_Color};"
 									id="ig_Name" name="ig_Name" class="badge badge-success"><c:out  value="${item.ig_Name}" />
 									
 								</span>

@@ -63,10 +63,8 @@ $(document).ready(function() {
 	      
 		      	if(boardtype==1){
 			    	location.href="${contextPath}/personal/search/issuedelete?i_Num="+i_Num;
-			    	alert("이슈 삭제")
 			      }else if(boardtype==2){
 				    	location.href="${contextPath}/personal/search/votedelete?v_Num="+i_Num;
-				    	alert("투표 삭제")
 			      }else if(boardtype==3){
 				    	location.href="${contextPath}/personal/search/personaldelete?p_Num="+i_Num;
 			      }else{
@@ -95,7 +93,7 @@ $(document).ready(function() {
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-	<div class="content-header" style="height: 100px">
+	<div class="content-header" style="height: 80px">
 		<div class="container-fluid">
 			<div class="row mb-2">
 				<div class="col-sm-6">
@@ -103,9 +101,7 @@ $(document).ready(function() {
 						<h1 class="m-0 text-dark"
 							style="font-family: Recipekorea; max-width: 80%; display: contents;">내 공간</h1>
 					</div>
-					<div>
-					<p class="breadcrumb float-sm-left" style="position: absolute; margin-top: 10px">나만의 이슈와 내가 쓴 글을 한번에 관리하세요 :D</p>
-					</div>
+
 					</div>
 			</div>
 		</div>
@@ -159,7 +155,7 @@ $(document).ready(function() {
                   <!-- 체크박스 -->
                   	 <td style="width:5%" class="sorting_1">	
                         <input type="checkbox" value="" id="${myBoardlist.i_Num}" name="checkbox">
-                        <input type="text" value="${myBoardlist.i_Num}" id="text${myBoardlist.i_Num}" name="checkbox">
+                        <input type="hidden" value="${myBoardlist.i_Num}" id="text${myBoardlist.i_Num}" name="checkbox">
 				  </td>
 				  <!-- 협업공간명 -->
 				  <td style="width:13%;">
@@ -172,9 +168,9 @@ $(document).ready(function() {
 				  <!-- 유형 -->
 				  <td style="width:7%;">
 				   <font size="3em">
-				  <c:if test="${myBoardlist.boardtype==1}">이슈<input type="text" name = "boardtype" id="${myBoardlist.boardtype}" value="${myBoardlist.boardtype}"></c:if>
-				  <c:if test="${myBoardlist.boardtype==2}">투표<input type="text" name = "boardtype" id="${myBoardlist.boardtype}" value="${myBoardlist.boardtype}"></c:if>
-				  <c:if test="${myBoardlist.boardtype==3}">이슈<input type="text" name = "boardtype" id="${myBoardlist.boardtype}" value="${myBoardlist.boardtype}"></c:if>
+				  <c:if test="${myBoardlist.boardtype==1}">이슈<input type="hidden" name = "boardtype" id="${myBoardlist.boardtype}" value="${myBoardlist.boardtype}"></c:if>
+				  <c:if test="${myBoardlist.boardtype==2}">투표<input type="hidden" name = "boardtype" id="${myBoardlist.boardtype}" value="${myBoardlist.boardtype}"></c:if>
+				  <c:if test="${myBoardlist.boardtype==3}">이슈<input type="hidden" name = "boardtype" id="${myBoardlist.boardtype}" value="${myBoardlist.boardtype}"></c:if>
 				  </font>
 					 
 				  </td>

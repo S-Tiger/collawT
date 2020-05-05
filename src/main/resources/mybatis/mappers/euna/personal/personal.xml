@@ -24,6 +24,7 @@
 		<result property="p_i_Date" column="p_i_Date" />
 		<result property="p_i_Start" column="p_i_Start" />
 		<result property="p_i_End" column="p_i_End" />
+		<result property="mem_Name" column="mem_Name" />
 	</resultMap>
 	
 	<resultMap id="personalResult03" type="java.util.HashMap">
@@ -59,11 +60,14 @@
 	<!-- 글 목록 페이징-->
   		<select id="searchList" resultMap="personalResult02" parameterType="project.euna.personal.vo.Criteria"> 
       <![CDATA[
-		select p_Num, mem_Id, p_i_Name, p_i_Content, p_i_Date, p_i_Start, p_i_End
+		select p_Num, mem_Id, p_i_Name, p_i_Content, p_i_Date, p_i_Start, p_i_End, mem_Name
         from (
-            select p_Num, mem_Id, p_i_Name, p_i_Content, p_i_Date, p_i_Start, p_i_End, row_number() over(order by p_Num desc) as rnum
-            from personal
-            where mem_id = #{mem_Id}
+            select p.p_Num, p.mem_Id, p.p_i_Name, p.p_i_Content, p.p_i_Date, p.p_i_Start, p.p_i_End, 
+            row_number() over(order by p_Num desc) as rnum,
+            m.mem_Name
+            from personal p, member m
+            where p.mem_Id = m.mem_Id 
+            and p.mem_id = #{mem_Id}
             )
         where rnum between #{rowStart} and #{rowEnd}
         order by to_number(p_Num) desc
@@ -292,7 +296,7 @@ order by v_Num desc
 		<!-- 내가 담당한 이슈 현황 -->
 		<select id="myissue"  resultType="java.util.HashMap"> 
       <![CDATA[
-  select ig.ig_Num, NVL(c.count,0) as count
+  select ig.ig_Num, ig.ig_Color, ig.ig_Name, NVL(c.count,0) as count
   from issue_group ig left outer join 
   (
       select i.ig_Num, count(i.ig_Num) as count

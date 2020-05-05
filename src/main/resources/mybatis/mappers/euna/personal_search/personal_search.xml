@@ -41,6 +41,8 @@
 		<result property="mem_Id" column="mem_Id" />
 		<result property="c_Name" column="c_Name" />
 		<result property="mem_Name" column="mem_Name" />
+		<result property="ig_Name" column="ig_Name" />
+		<result property="ig_Color" column="ig_Color" />
 	</resultMap>
 
 
@@ -124,11 +126,13 @@
         (select a.a_File as a_File, a.a_Realname as a_Realname, a.a_NameEx as a_NameEx, a.a_Num as a_Num, a.a_Del as a_Del, a.a_Size as a_Size,
                 i.i_Num as i_Num, i.c_Id as c_Id, i.I_Name as I_Name, i.I_Date as I_Date, i.mem_Id as mem_Id,
                 c.c_Name as c_Name,
-                m.mem_name as mem_name
-         from appendix a, issue i, co_work c, member m
+                m.mem_name as mem_Name,
+                ig.ig_Color as ig_Color, ig.ig_Name as ig_Name
+         from appendix a, issue i, co_work c, member m, issue_group ig
          where i.i_Num = a.i_Num
          and c.c_id=i.c_id
          and m.mem_id=i.mem_id
+         and i.ig_Num = ig.ig_Num
          and a.a_Del = 'N'
          and c.c_Id in
             (
@@ -139,7 +143,8 @@
         (select pa.p_a_File as a_File, pa.p_a_Realname as a_Realname, pa.p_a_NameEx as a_NameEx, pa.p_a_Num as a_Num, pa.p_a_Del as a_Del, pa.p_a_Size as a_Size,
                 p.p_Num as i_Num, p.mem_Id as c_Id, p.p_i_Name as I_Name, p.p_i_Date as I_Date, p.mem_Id as mem_Id,
                 null as c_name,
-                m.mem_name as mem_name
+                m.mem_name as mem_Name,
+                null as ig_Color, null as ig_Name
             from personal_appendix pa, personal p, member m
             where pa.p_Num = p.p_Num
             and m.mem_id=p.mem_id

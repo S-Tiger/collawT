@@ -54,6 +54,13 @@ public class IssueDAOImpl implements IssueDAO {
 		sqlSession.delete("issue.issueDelete", i_Num);
 
 	}
+	
+	// 글 삭제 시 댓글 삭제
+	@Override
+	public void replyDelete(String i_Num) throws Exception {
+		sqlSession.delete("issue.replyDelete", i_Num);
+
+	}
 
 	// 글 수정
 	@Override

@@ -61,6 +61,12 @@ public class IssueServiceImpl implements IssueService {
 	public void issueDelete(String i_Num) throws Exception {
 		issueDAO.issueDelete(i_Num);
 	}
+	
+	//글 삭제 시 댓글 삭제
+	@Override
+	public void replyDelete(String i_Num) throws Exception {
+		issueDAO.replyDelete(i_Num);
+	}
 
 	//글 수정
 	@Override

@@ -31,4 +31,5 @@ public interface IssueService {
 	public List<Map> recentBoard(String c_Id);
 	public List<Map> voteOn(String c_Id);
 	public String votePercent(String c_Id);
+	public void replyDelete(String i_Num) throws Exception;
 }

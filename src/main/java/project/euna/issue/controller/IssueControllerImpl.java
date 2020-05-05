@@ -207,9 +207,11 @@ public class IssueControllerImpl implements IssueController {
 	@GetMapping("/delete")
 	public String issueDelete(String c_Id, String i_Num, IssueVO issueVO) throws Exception{
 		
-		issueService.chargerDelete(issueVO.getI_Num());
-		issueService.issueDelete(issueVO.getI_Num());
 		appendixService.fileDelete(i_Num);
+		issueService.chargerDelete(i_Num);
+		issueService.replyDelete(i_Num);
+		issueService.issueDelete(i_Num);
+		
 		
 		return "redirect:/project/issue/list?c_Id="+c_Id;
 	}

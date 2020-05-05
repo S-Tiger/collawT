@@ -39,20 +39,28 @@ $(function () {
     var myissue2 = $('#myissue2').val();
     var myissue3 = $('#myissue3').val();
     var myissue4 = $('#myissue4').val();
+    var myissuename1 = $('#myissuename1').val();
+    var myissuename2 = $('#myissuename2').val();
+    var myissuename3 = $('#myissuename3').val();
+    var myissuename4 = $('#myissuename4').val();
+    var myissuecolor1 = $('#myissuecolor1').val();
+    var myissuecolor2 = $('#myissuecolor2').val();
+    var myissuecolor3 = $('#myissuecolor3').val();
+    var myissuecolor4 = $('#myissuecolor4').val();
     var total = parseInt(myissue1)+parseInt(myissue2)+parseInt(myissue3)+parseInt(myissue4)
     var donutChartCanvas1 = $('#donutChart1').get(0).getContext('2d')
     var donutData1        = {
       labels: [
-          '발의됨', 
-          '진행중',
-          '일시정지', 
-          '완료', 
+    	  myissuename1, 
+    	  myissuename2,
+    	  myissuename3, 
+    	  myissuename4, 
            
       ],
       datasets: [
         {
           data: [myissue1,myissue2,myissue3,myissue4],
-          backgroundColor : ['#6c757d', '#007bff', '#ffc107', '#28a745'],
+          backgroundColor : [myissuecolor1, myissuecolor2, myissuecolor3, myissuecolor4],
         }
       ],
 
@@ -70,7 +78,7 @@ $(function () {
   	elements: {
   			center: {
   				text: '총 '+total+'건',
-		        color: '#FF6384', // Default is #000000
+		        color: 'gray-dark', // Default is #000000
 		        fontStyle: 'Arial', // Default is Arial
 		        sidePadding: 20 // Defualt is 20 (as a percentage)
   			}
@@ -418,6 +426,8 @@ $(function () {
              	 
              	 <c:forEach var="myissueitem" items="${myissue}">
              	 <input type="hidden" value="${myissueitem.COUNT}" id="myissue${myissueitem.IG_NUM}">
+             	 <input type="hidden" value="${myissueitem.IG_NAME}" id="myissuename${myissueitem.IG_NUM}">
+             	 <input type="hidden" value="${myissueitem.IG_COLOR}" id="myissuecolor${myissueitem.IG_NUM}">
              	 </c:forEach>
 
               </div>

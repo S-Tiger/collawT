@@ -284,12 +284,7 @@
                   <tr>
                   
                       <td  style="width:5%; vertical-align:top"> 
-                            <span style= "
-							<c:if test="${issueList.ig_Num == 1}">background-color:#6c757d;</c:if>
-							<c:if test="${issueList.ig_Num == 2}">background-color:#007bff;</c:if>
-							<c:if test="${issueList.ig_Num == 3}">background-color:#ffc107;</c:if>
-							<c:if test="${issueList.ig_Num == 4}">background-color:#28a745;</c:if>
-							"
+                            <span style= "background-color:${issueList.ig_Color}"
 							id="ig_Name" name="ig_Name" class="badge badge-success"><c:out  value="${issueList.ig_Name}" /></span>
 						
 						</td>

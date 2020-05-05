@@ -241,11 +241,6 @@ $(document).ready(function() {
 						str+='<img src="${contextPath}/resources/dist/img/profile.jpg" width="50" height="50" class="img-circle elevation-1" alt="Null">';
 						str+='</c:if>';
 						
-
-
-
-
-						
 						str+='<div class="comment-text">';
 						str+='<span class="username">'+result[i].mem_Name;
 						str+='<span class="text-muted float-right">'+result[i].vr_Date+'</span>';

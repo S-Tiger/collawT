@@ -175,12 +175,7 @@ $(document).ready(function() {
 						str+='<c:if test="${'+result[i].mem_File +'== NULL}">';
 						str+='<img src="${contextPath}/resources/dist/img/profile.jpg" width="50" height="50" class="img-circle elevation-1" alt="Null">';
 						str+='</c:if>';
-						
-
-
-
-
-						
+							
 						str+='<div class="comment-text">';
 						str+='<span class="username">'+result[i].mem_Name;
 						str+='<span class="text-muted float-right">'+result[i].r_Date+'</span>';
@@ -321,18 +316,13 @@ $(document).ready(function() {
 					<div class="card card-widget">
 						<div class="card-header">
 						
-						<span style= "vertical-align:text-top;
-							<c:if test="${issueRead.ig_Num == 1}">background-color:#6c757d;</c:if>
-							<c:if test="${issueRead.ig_Num == 2}">background-color:#007bff;</c:if>
-							<c:if test="${issueRead.ig_Num == 3}">background-color:#ffc107;</c:if>
-							<c:if test="${issueRead.ig_Num == 4}">background-color:#28a745;</c:if>
-							"
+						<span style= "vertical-align:text-top; background-color:${issueRead.ig_Color};"
 							id="ig_Name" name="ig_Name" class="badge badge-success"><c:out  value="${issueRead.ig_Name}" /></span>&nbsp;&nbsp;
 							<span id="i_Name" name="i_Name"><b><c:out	value="${issueRead.i_Name}" /></b></span>
 							
 							
 							<div class="btn-group float-right">
-                          <button type="button" class="btn btn-default" data-toggle="dropdown" aria-expanded="false" style="border:white;background-color:white;height:20px;padding-top: 0px;color:gray"><i class="fas fa-cog"></i>
+                          <button type="button" class="btn btn-default" data-toggle="dropdown" aria-expanded="false" style="border:white;background-color:white;height:20px;padding-top: 0px;color:gray"><i class="fas fa-ellipsis-h"></i>
                           </button>
                           <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; right: 0px; transform: translate3d(0px, 38px, 0px);">
                             
@@ -551,7 +541,7 @@ $(document).ready(function() {
 				<div class="card">
 
 					
-					<div id="replyList"></div>
+					<div id="replyList" style="max-height:631px; overflow:auto"></div>
 					
 					<!-- 댓글  입력-->
 					<div class="card-footer" id="replyInput" name="replyInput">

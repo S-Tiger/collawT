@@ -17,6 +17,7 @@
 		<result property="c_Name" column="c_Name" />
 		<result property="mem_Name" column="mem_Name" />
 		<result property="ig_Name" column="ig_Name" />
+		<result property="ig_Color" column="ig_Color" />
 		<result property="wr_mem_Id" column="wr_mem_Id" />
 		<result property="rnum" column="rnum" />
 		<result property="i_Content" column="i_Content" jdbcType="CLOB" javaType="java.lang.String"/>
@@ -43,6 +44,7 @@
 		<result property="ig_Num" column="ig_Num" />
 		<result property="ig_Name" column="ig_Name" />
 		<result property="wr_mem_Id" column="wr_mem_Id" />
+		<result property="ig_Color" column="ig_Color" />
 		
 	</resultMap>
 
@@ -76,6 +78,7 @@
 		<result property="rnum" column="rnum" />
 		<result property="ig_Num" column="ig_Num" />
 		<result property="ig_Name" column="ig_Name" />
+		<result property="ig_Color" column="ig_Color" />
 	</resultMap>
 
 
@@ -85,16 +88,16 @@
 	<select id="searchIssue" resultMap="issueResult" parameterType="project.euna.whole_search.vo.issueCriteria"> 
       <![CDATA[
  
- select rnum, i_Num, c_Id, i_Name, i_Date, ig_Num, wr_mem_Id, c_Name, mem_Name, ig_Name, i_Content
+ select rnum, i_Num, c_Id, i_Name, i_Date, ig_Num, wr_mem_Id, c_Name, mem_Name, ig_Name, i_Content, ig_Color
  from
  (
-        select i_Num, c_Id, i_Name, i_Date, ig_Num, wr_mem_Id, c_Name, mem_Name, ig_Name, row_number() over(order by i_date desc) as rnum, i_Content
+        select i_Num, c_Id, i_Name, i_Date, ig_Num, wr_mem_Id, c_Name, mem_Name, ig_Name, row_number() over(order by i_date desc) as rnum, i_Content, ig_Color
                   from
                       (
                       (select I.I_NUM as i_Num, I.C_ID as c_Id, I.I_NAME as i_Name, I.I_DATE as i_Date, I.IG_NUM as ig_Num, I.MEM_ID as wr_mem_Id, I.I_CONTENT as i_Content,
                               C.C_NAME as c_Name,
                               M.MEM_NAME as mem_Name,
-                              IG.IG_NAME as ig_Name
+                              IG.IG_NAME as ig_Name, IG.IG_COLOR as ig_Color
                        from ISSUE I, CO_WORK C, MEMBER M, ISSUE_GROUP IG
                        where C.C_ID=I.C_ID
                        and M.MEM_ID=I.MEM_ID
@@ -110,7 +113,7 @@
                       (select P.P_NUM as i_Num, P.MEM_ID as c_Id, P.P_I_NAME as i_Name, P.P_I_DATE as i_Date, null as ig_Num, P.MEM_ID as wr_mem_Id, P.P_I_CONTENT as i_content,
                               null as c_Name,
                               M.MEM_NAME as mem_Name,
-                              null as ig_Name
+                              null as ig_Name, null as ig_Color
                           from PERSONAL P, MEMBER M
                           where M.MEM_ID=P.MEM_ID
                           and M.MEM_ID = #{mem_Id}
@@ -283,15 +286,15 @@
 		<select id="searchFile" resultMap="fileResult" parameterType="project.euna.whole_search.vo.fileCriteria"> 
       <![CDATA[
  
-select a_File, a_Realname, a_NameEx, a_Num, a_Del, a_Size, i_Num, c_Id, i_Name, i_Date, wr_mem_Id, c_Name, mem_name, rnum, i_Content, ig_Num, ig_Name
+select a_File, a_Realname, a_NameEx, a_Num, a_Del, a_Size, i_Num, c_Id, i_Name, i_Date, wr_mem_Id, c_Name, mem_name, rnum, i_Content, ig_Num, ig_Name, ig_Color
    from (         
-            select a_File, a_Realname, a_NameEx, a_Num, a_Del, a_Size, i_Num, c_Id, i_Name, i_Date, wr_mem_Id, i_Content, c_Name, mem_name, row_number() over(order by i_date desc) as rnum, ig_Num, ig_Name
+            select a_File, a_Realname, a_NameEx, a_Num, a_Del, a_Size, i_Num, c_Id, i_Name, i_Date, wr_mem_Id, i_Content, c_Name, mem_name, row_number() over(order by i_date desc) as rnum, ig_Num, ig_Name, ig_Color
             from (
                  (select a.a_File as a_File, a.a_Realname as a_Realname, a.a_NameEx as a_NameEx, a.a_Num as a_Num, a.a_Del as a_Del, a.a_Size as a_Size,
                         i.i_Num as i_Num, i.c_Id as c_Id, i.I_Name as I_Name, i.I_Date as I_Date, i.mem_Id as wr_mem_Id, i.i_Content as i_Content, ig.ig_Num as ig_Num,
                         c.c_Name as c_Name,
                         m.mem_Name as mem_Name,
-                        ig.ig_Name as ig_Name
+                        ig.ig_Name as ig_Name, ig.ig_Color as ig_Color
                  from appendix a, issue i, co_work c, member m, issue_group ig
                  where i.i_Num = a.i_Num
                  and c.c_id=i.c_id
@@ -308,7 +311,7 @@ select a_File, a_Realname, a_NameEx, a_Num, a_Del, a_Size, i_Num, c_Id, i_Name, 
                         p.p_Num as i_Num, p.mem_Id as c_Id, p.p_i_Name as I_Name, p.p_i_Date as I_Date, p.mem_Id as wr_mem_Id, p.p_i_Content as i_Content, null as ig_Num,
                         null as c_name,
                         m.mem_name as mem_name,
-                        null as ig_Name
+                        null as ig_Name, null as ig_Color
                     from personal_appendix pa, personal p, member m
                     where pa.p_Num = p.p_Num
                     and m.mem_id=p.mem_id
@@ -710,15 +713,15 @@ from(
 	<select id="searchReply" resultMap="replyResult" parameterType="project.euna.whole_search.vo.replyCriteria"> 
       <![CDATA[
  
-      select r_Num, r_Content, r_Date, i_Num, c_Id, wr_mem_Id, mem_Name, c_Name, i_Name,rnum, ig_Num, ig_Name
+      select r_Num, r_Content, r_Date, i_Num, c_Id, wr_mem_Id, mem_Name, c_Name, i_Name,rnum, ig_Num, ig_Name,ig_Color
       from(
-        select r_Num, r_Content, r_Date, i_Num, c_Id, wr_mem_Id, mem_Name, c_Name, i_Name, row_number() over(order by r_date desc) as rnum, ig_Num, ig_Name
+        select r_Num, r_Content, r_Date, i_Num, c_Id, wr_mem_Id, mem_Name, c_Name, i_Name, row_number() over(order by r_date desc) as rnum, ig_Num, ig_Name, ig_Color
         from(
             select r.r_Num as r_Num, r.r_Content as r_Content, r.r_Date as r_Date, r.i_Num as i_Num, r.c_Id as c_Id, r. mem_Id as wr_mem_Id,
             m.mem_Name as mem_Name,
             c.c_Name as c_Name,
             i.i_Name as i_Name, i.ig_Num as ig_Num,
-            ig.ig_Name as ig_Name
+            ig.ig_Name as ig_Name, ig.ig_Color as ig_Color
             
             from reply r, member m, co_work c, issue i, issue_group ig
             
@@ -737,7 +740,7 @@ from(
             m.mem_Name as mem_Name,
             null as c_Name,
             p.p_i_Name as i_Name,  null as ig_Num,
-           	null as ig_Name
+           	null as ig_Name, null as ig_Color
             
             from personal_memo pm, member m, personal p
             

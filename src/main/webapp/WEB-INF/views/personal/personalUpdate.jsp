@@ -400,7 +400,7 @@ span[name="chargerspan"] {
            <br>
                 
            <input type="submit" id = "submit" value="이슈 수정" class="btn btn-danger btn-sm float-right" style="margin:3px;">
-           <input type="button" id = "cancel" value="작성 취소" class="btn btn-danger btn-sm float-right" onclick="javascript:fileDelete(${personalUpdate.p_Num})" style="margin:3px;">     
+           <input type="button" id = "cancel" value="수정 취소" class="btn btn-danger btn-sm float-right" onclick="javascript:fileDelete(${personalUpdate.p_Num})" style="margin:3px;">     
                     
                  </div>
               </div>

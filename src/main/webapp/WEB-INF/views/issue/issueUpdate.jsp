@@ -504,12 +504,7 @@ function deleteCharger(chargedCount){
 		
 		
 		<c:if test="${igRead.IG_NUM == issueUpdate.ig_Num}">checked</c:if>> 
-		<span style= "
-		<c:if test="${igRead.IG_NUM == 1}">background-color:#6c757d;</c:if>
-		<c:if test="${igRead.IG_NUM == 2}">background-color:#007bff;</c:if>
-		<c:if test="${igRead.IG_NUM == 3}">background-color:#ffc107;</c:if>
-		<c:if test="${igRead.IG_NUM == 4}">background-color:#28a745;</c:if>
-		"
+		<span style= "background-color:${igRead.IG_COLOR}"
 		id="ig_Name" name="ig_Name" class="badge badge-success" >${igRead.IG_NAME}</span>&nbsp;&nbsp;</label>
 		</c:forEach>
 		<input type="hidden" id="ig_Num" name="ig_Num" value="">

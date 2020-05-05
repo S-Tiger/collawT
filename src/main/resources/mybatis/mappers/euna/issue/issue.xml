@@ -30,6 +30,7 @@
 		<result property="mem_Id" column="mem_Id" />
 		<result property="mem_Name" column="mem_Name" />
 		<result property="ig_Name" column="ig_Name" />
+		<result property="ig_Color" column="ig_Color" />
 		<result property="charger" column="charger" />
 	</resultMap>
 	
@@ -70,11 +71,11 @@
 	<![CDATA[
 	
 	        
-        select rnum, i_Num, c_Id, i_Name, i_Content, i_Date, mem_Id, i_Start, i_End, mem_name, ig_Num, ig_Name, charger
+        select rnum, i_Num, c_Id, i_Name, i_Content, i_Date, mem_Id, i_Start, i_End, mem_name, ig_Num, ig_Name, charger, ig_Color
         from
         (
           select row_number() over(order by I.i_Num desc) as rnum, I.i_Num, I.c_Id, I.i_Name, I.i_Content, I.i_Date, I.mem_Id, I.i_Start, I.i_End, 
-            M.mem_name, IG.ig_Num, IG.ig_Name, c.charger
+            M.mem_name, IG.ig_Num, IG.ig_Name, c.charger, ig.ig_Color
             
             from issue I, member M, Issue_Group IG, V_CHARGERLIST c
             where I.mem_Id = M.mem_Id
@@ -146,7 +147,7 @@
 	<!-- 게시글 조회 -->
 	<select id="issueRead"  parameterType="String" resultMap="issueResult02"> 
       <![CDATA[
-        select I.i_Num, I.c_Id, I.i_Name, I.i_Content, I.i_Date, I.mem_Id, M.mem_name, I.i_Start, I.i_End, I.ig_Num, IG.ig_Name 
+        select I.i_Num, I.c_Id, I.i_Name, I.i_Content, I.i_Date, I.mem_Id, M.mem_name, I.i_Start, I.i_End, I.ig_Num, IG.ig_Name ,ig.ig_Color
 		from issue I, member M, issue_group IG
 		where I.mem_Id = M.mem_Id
 		and I.ig_Num = IG.ig_Num
@@ -158,6 +159,13 @@
 	<delete id="issueDelete" parameterType="String">
 		DELETE
 		FROM issue
+		WHERE i_Num=#{i_Num}
+	</delete>
+	
+		<!-- 게시물 삭제 시 댓글 삭제 -->
+	<delete id="replyDelete" parameterType="String">
+		DELETE
+		FROM reply
 		WHERE i_Num=#{i_Num}
 	</delete>
 
@@ -250,7 +258,7 @@
 	<!-- 홈 화면 상태 카운트 -->
 	<select id="igCount"  resultType="java.util.HashMap"> 
       <![CDATA[
-    select NVL(igc.igcount,0)as igcount, ig.ig_Num, ig.ig_Name
+    select NVL(igc.igcount,0)as igcount, ig.ig_Num, ig.ig_Name, ig.ig_Color
     from issue_group ig left outer join 
            (select count(i_Num) as igcount, ig_Num
            from issue
