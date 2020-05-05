@@ -61,17 +61,22 @@
 	document.ready = function() {
 		//검색
 		$("#search").click(function(){
-		var url = "${contextPath}/search/wholeresult";
-		url = url + "?keyword="+$('#keyword').val();
-		location.href=url;
+			if($("#keyword").val()!=''){
+				var url = "${contextPath}/search/wholeresult";
+				url = url + "?keyword="+$('#keyword').val();
+				location.href=url;
+			}
+
 		})
 		
 		//엔터키 검색
 		$("#keyword").keydown(function(){
+			if($("#keyword").val()!=''){
 			if (event.keyCode == '13') {
 				var url = "${contextPath}/search/wholeresult";
 				url = url + "?keyword="+$('#keyword').val();
 				location.href=url;
+			}
 			}
 		})
 		

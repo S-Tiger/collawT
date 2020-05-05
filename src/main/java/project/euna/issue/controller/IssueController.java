@@ -31,7 +31,7 @@ public interface IssueController {
 	
 	public String issueUpdate(String c_Id, String i_Num, IssueVO issueVO, Model model, HttpSession session) throws Exception;
 	public String issueUpdate(IssueVO issueVO, HttpServletRequest request, HttpServletResponse response) throws Exception;
-	public void communityImageUpload(HttpServletRequest request, HttpServletResponse response, @RequestParam MultipartFile upload);
+	//public void communityImageUpload(HttpServletRequest request, HttpServletResponse response, @RequestParam MultipartFile upload);
 	public String issueCopy(IssueVO issueVO, HttpSession session, HttpServletRequest request, HttpServletResponse response, RedirectAttributes rttr) throws Exception;
 }
 

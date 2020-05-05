@@ -427,7 +427,7 @@ $(function () {
 
 
 
-				<div class="card" style="max-height:337.800px;">
+				<div class="card" style="max-height:337.800px; min-height:337.800px;">
               <div class="card-header">
                 <h3 class="card-title"><b>참여 가능한 투표</b></h3>
               </div>

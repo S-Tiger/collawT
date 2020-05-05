@@ -35,4 +35,6 @@ public interface EVoteDAO {
 	public int checkId(Map<String, Object> mem_Id) throws Exception ;
 	public Map<String, Object> countCowork(Map<String, Object> searchC_Id) throws Exception; 
 	public void updateVs_Num(Map<String, Object> searchMap);
+	public void votedDelete(String i_Num) throws Exception;
+	public void votereplyDelete(String i_Num) throws Exception;
 }

@@ -20,6 +20,10 @@
 		<result property="mem_Name" column="mem_Name" />
 		<result property="rnum" column="rnum" />
 		<result property="boardtype" column="boardtype" />
+		<result property="ig_Num" column="ig_Num" />
+		<result property="vs_Num" column="vs_Num" />
+		<result property="ig_Name" column="ig_Name" />
+		<result property="ig_Color" column="ig_Color" />
 	</resultMap>
 	
 	<resultMap id="fileResult01" type="java.util.HashMap">
@@ -44,9 +48,9 @@
 	<!-- 내가 쓴 글 확인-->
 	<select id="myBoardlist" resultMap="personal_searchResult01" parameterType="project.euna.personal_search.vo.Criteria"> 
 	<![CDATA[
-        select c_Id, c_Name, i_Name, i_Date, mem_Id, rnum, boardtype, i_Num, rnum
+        select c_Id, c_Name, i_Name, i_Date, mem_Id, rnum, boardtype, i_Num, rnum, ig_Num, ig_Name, ig_Color
 		from(
-		    select c_Id, c_Name, i_Name, i_Date, mem_Id, row_number() over(order by i_date desc) as rnum, boardtype, i_Num
+		    select c_Id, c_Name, i_Name, i_Date, mem_Id, row_number() over(order by i_date desc) as rnum, boardtype, i_Num, ig_Num, ig_Name, ig_Color
 		    from v_allboard
 		    where mem_Id=#{mem_Id}
 		    )

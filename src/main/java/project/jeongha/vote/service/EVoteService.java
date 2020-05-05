@@ -37,4 +37,6 @@ public interface EVoteService {
 	public List<Map> voteTotal(Map<String, Object> voteCount)throws Exception;
 	public Map<String,Object> countCowork(Map<String,Object> searchC_Id) throws Exception;
 	public void updateVs_Num(Map<String,Object> searchMap);
+	public void votedDelete(String v_Num) throws Exception;
+	public void votereplyDelete(String v_Num) throws Exception;
 }

@@ -17,13 +17,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import project.euna.appendix.service.AppendixService;
 import project.euna.issue.service.IssueServiceImpl;
+import project.euna.personal.service.PersonalService;
+import project.euna.personal.service.Personal_appendixService;
 import project.euna.personal_search.service.Personal_searchService;
 import project.euna.personal_search.vo.Criteria;
 import project.euna.personal_search.vo.PageMaker;
 import project.euna.whole_search.service.Whole_searchService;
 import project.euna.whole_search.vo.fileCriteria;
 import project.euna.whole_search.vo.filePageMaker;
+import project.jeongha.vote.service.EVoteService;
 
 @Controller
 
@@ -39,6 +43,18 @@ public class Personal_searchControllerImpl implements Personal_searchController 
 	
 	@Inject
 	IssueServiceImpl issueService;
+	
+	@Inject
+	AppendixService appendixService;
+	
+	@Inject
+	EVoteService evoteService;
+	
+	@Inject
+	Personal_appendixService personal_appendixService;
+	
+	@Inject
+	PersonalService personalService;
 
 	
 	//글 목록 조회 페이징
@@ -67,18 +83,55 @@ public class Personal_searchControllerImpl implements Personal_searchController 
 
 	
 
-	//게시글 삭제
-//	@Override
-//	@GetMapping("/delete")
-//	public String issueDelete(String c_Id, String i_Num, IssueVO issueVO) throws Exception{
-//		
-//		personal_searchService.chargerDelete(issueVO.getI_Num());
-//		personal_searchService.issueDelete(issueVO.getI_Num());
-//	
-//		
-//		
-//		return "redirect:/project/issue/list?c_Id="+c_Id;
-//	}
+	//이슈 게시글 삭제
+	@Override
+	@GetMapping("/issuedelete")
+	public String issueDelete(String i_Num, HttpSession session) throws Exception{
+		Map<String, Object> member = new HashMap<String,Object>();
+		member = (Map<String, Object>) session.getAttribute("member");
+		String mem_Id = (String) member.get("mem_Id");
+		
+		issueService.chargerDelete(i_Num);
+		issueService.issueDelete(i_Num);
+		appendixService.fileDelete(i_Num);
+	
+		
+		
+		return "redirect:/personal/search/myBoardlist?mem_Id="+mem_Id;
+	}
+	
+	//투표 게시글 삭제
+	@Override
+	@GetMapping("/votedelete")
+	public String voteDelete(String v_Num, HttpSession session) throws Exception{
+		Map<String, Object> member = new HashMap<String,Object>();
+		member = (Map<String, Object>) session.getAttribute("member");
+		String mem_Id = (String) member.get("mem_Id");
+		
+		evoteService.voteDelete(v_Num);
+	
+		
+		
+		return "redirect:/personal/search/myBoardlist?mem_Id="+mem_Id;
+	}
+	
+	//내 이슈 게시글 삭제
+	@Override
+	@GetMapping("/personaldelete")
+	public String personaldelete(String p_Num, HttpSession session) throws Exception{
+		Map<String, Object> member = new HashMap<String,Object>();
+		member = (Map<String, Object>) session.getAttribute("member");
+		String mem_Id = (String) member.get("mem_Id");
+		
+		personalService.personalDelete(p_Num);
+		personal_appendixService.fileDelete(p_Num);
+	
+		
+		
+		return "redirect:/personal/search/myBoardlist?mem_Id="+mem_Id;
+	}
+	
+	
 	
 	//파일함
 	@Override

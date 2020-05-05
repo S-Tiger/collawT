@@ -87,6 +87,20 @@ public class EVoteDAOImpl implements EVoteDAO {
 
 	}
 	
+	// 글 삭제 시 투표 보기 삭제
+	@Override
+	public void votedDelete(String i_Num) throws Exception {
+		sqlSession.delete("voteResult.votedDelete", i_Num);
+
+	}
+	
+	// 글 삭제 시 댓글 삭제
+	@Override
+	public void votereplyDelete(String i_Num) throws Exception {
+		sqlSession.delete("voteResult.votereplyDelete", i_Num);
+
+	}
+	
 	//투표 카운트
 	
 	// 글 수정

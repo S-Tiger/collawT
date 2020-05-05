@@ -296,7 +296,7 @@
       <![CDATA[
 
         select v.c_id as c_id, c.c_name as c_name, v.v_name as i_name, v.v_date as i_date, v.v_start as i_start, v.v_end as i_end, v.mem_id as mem_id, m.mem_name as mem_name,
-            v.v_num as i_Num, row_number() over(order by v_date desc) as rnum, v.vs_Num as vs_Num
+            v.v_num as i_Num, row_number() over(order by v_date desc) as rnum, v.vs_Num as vs_Num, m.mem_File as mem_File
             from vote v, member m, co_work c
             where v.mem_Id = m.mem_Id
             and v.c_id=c.c_id

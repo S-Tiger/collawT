@@ -164,6 +164,22 @@
 		WHERE
 		v_Num=#{v_Num}
 	</delete>
+	
+	<!-- 게시글 삭제 시 투표 보기 삭제 -->
+	<delete id="votedDelete" parameterType="String">
+		DELETE
+		FROM voted
+		WHERE
+		v_Num=#{v_Num}
+	</delete>
+	
+	<!-- 게시글 삭제 시 댓글 삭제 -->
+	<delete id="votereplyDelete" parameterType="String">
+		DELETE
+		FROM vote_reply
+		WHERE
+		v_Num=#{v_Num}
+	</delete>
 
 	<!-- vote 수정 -->
 	<update id="voteUpdate" parameterType="java.util.HashMap">
@@ -217,31 +233,6 @@
 	</select>
 	
 
-	<!-- 이슈 담당자 삽입 -->
-	<insert id="comemInsert" parameterType="java.util.Map">
-		insert into
-		charger(cr_Num, i_Num, c_Id, cr_Status, mem_Id)
-		values(CR_NUM_SEQ.nextval, #{i_Num}, #{c_Id}, #{cr_Status}, #{mem_Id})
-	</insert>
-
-
-	<!-- 이슈 담당자 조회 -->
-	<select id="chargerRead" resultType="java.util.HashMap"> 
-      <![CDATA[
-			select m.mem_id, m.mem_name
-			from charger ch, member m
-			where m.mem_id=ch.mem_id
-			and i_Num=#{i_Num}
-      ]]>
-	</select>
-
-	<!-- 이슈 담당자 수정(삭제 후 다시 삽입) -->
-	<delete id="chargerDelete" parameterType="String">
-		DELETE
-		FROM charger
-		WHERE i_Num=#{i_Num}
-	</delete>
-
 	<!-- 투표 중복확인검사 -->
 	<select id="checkId" parameterType="java.util.HashMap" resultType="int">
 		<![CDATA[
@@ -257,13 +248,6 @@
 	</update>
 	
 
-	<!-- 협업공간 조회 -->
-	<!-- <select id="coRead" resultType="java.util.HashMap"> <![CDATA[ select 
-		c.c_name,c.c_id from co_work c, member m where c.mem_id=m.mem_id and m.mem_id=#{mem_id} 
-		order by c_id asc ]]> </select> -->
-
-	<!-- 글쓰기 화면 전환 시 글번호 먼저 가져오기 -->
-	<!-- <select id="get_i_Num" resultMap="voteResult02"> <![CDATA[ select from 
-		dual ]]> </select> -->
+	
 
 </mapper>

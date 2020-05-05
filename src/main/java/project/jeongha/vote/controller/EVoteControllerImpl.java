@@ -260,6 +260,8 @@ public class EVoteControllerImpl implements EVoteController {
 	@GetMapping("/delete")
 	public String voteDelete(String c_Id, String v_Num, VoteVO voteVO) throws Exception {
 
+		evoteService.votereplyDelete(voteVO.getV_Num());
+		evoteService.votedDelete(voteVO.getV_Num());
 		evoteService.voteDelete(voteVO.getV_Num());
 
 		return "redirect:/project/vote/list?c_Id=" + c_Id;

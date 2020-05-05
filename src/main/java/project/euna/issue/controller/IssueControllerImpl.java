@@ -336,56 +336,56 @@ public class IssueControllerImpl implements IssueController {
 
 	
 	
-	@PostMapping("/imageUpload")
-	@ResponseBody
-	@Override
-	public void communityImageUpload(HttpServletRequest request, HttpServletResponse response, @RequestParam MultipartFile upload) {
-		HttpSession session = request.getSession();
-	    OutputStream out = null;
-	    PrintWriter printWriter = null;
-	    response.setCharacterEncoding("utf-8");
-	    response.setContentType("text/html;charset=utf-8");
-        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-
-	    try{
-	 
-	        String fileName = upload.getOriginalFilename();
-	        byte[] bytes = upload.getBytes();
-	        String uploadPath = session.getServletContext().getRealPath("/") + fileName;//저장경로
-	        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+uploadPath);
-	 
-	        out = new FileOutputStream(new File(uploadPath));
-	        out.write(bytes);
-	        String callback = request.getParameter("CKEditorFuncNum");
-	 
-	        printWriter = response.getWriter();
-	        String fileUrl = uploadPath+("/") + fileName;//url경로
-	 
-	        printWriter.println("<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction("
-	                + callback
-	                + ",'"
-	                + fileUrl
-	                + "','이미지를 업로드 하였습니다.'"
-	                + ")</script>");
-	        printWriter.flush();
-	 
-	    }catch(IOException e){
-	        e.printStackTrace();
-	    } finally {
-	        try {
-	            if (out != null) {
-	                out.close();
-	            }
-	            if (printWriter != null) {
-	                printWriter.close();
-	            }
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
-	    }
-	 
-	    return;
-	}
+//	@PostMapping("/imageUpload")
+//	@ResponseBody
+//	@Override
+//	public void communityImageUpload(HttpServletRequest request, HttpServletResponse response, @RequestParam MultipartFile upload) {
+//		HttpSession session = request.getSession();
+//	    OutputStream out = null;
+//	    PrintWriter printWriter = null;
+//	    response.setCharacterEncoding("utf-8");
+//	    response.setContentType("text/html;charset=utf-8");
+//        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+//
+//	    try{
+//	 
+//	        String fileName = upload.getOriginalFilename();
+//	        byte[] bytes = upload.getBytes();
+//	        String uploadPath = session.getServletContext().getRealPath("/") + fileName;//저장경로
+//	        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+uploadPath);
+//	 
+//	        out = new FileOutputStream(new File(uploadPath));
+//	        out.write(bytes);
+//	        String callback = request.getParameter("CKEditorFuncNum");
+//	 
+//	        printWriter = response.getWriter();
+//	        String fileUrl = uploadPath+("/") + fileName;//url경로
+//	 
+//	        printWriter.println("<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction("
+//	                + callback
+//	                + ",'"
+//	                + fileUrl
+//	                + "','이미지를 업로드 하였습니다.'"
+//	                + ")</script>");
+//	        printWriter.flush();
+//	 
+//	    }catch(IOException e){
+//	        e.printStackTrace();
+//	    } finally {
+//	        try {
+//	            if (out != null) {
+//	                out.close();
+//	            }
+//	            if (printWriter != null) {
+//	                printWriter.close();
+//	            }
+//	        } catch (IOException e) {
+//	            e.printStackTrace();
+//	        }
+//	    }
+//	 
+//	    return;
+//	}
 
 
 }

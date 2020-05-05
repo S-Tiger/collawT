@@ -437,7 +437,7 @@ $(function () {
 <!-- 최근 등록된 이슈 및 투표 글 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 								<div class="row">
 									<div class="col-md-6">
-										<div class="card">
+										<div class="card" style="max-height:293.800px; min-height:293.800px;">
               <div class="card-header border-transparent">
                 <h3 class="card-title"><b>최근 등록된 글</b></h3>
 
@@ -477,7 +477,7 @@ $(function () {
          </c:forEach>
             </c:when>
                  <c:otherwise>
-                 <p style="text-align:center;"><small><br><br>최근 등록된 글이 없습니다.<br><br><br><br></small></p>
+                 <p style="text-align:center;"><small><br><br><br><br>최근 등록된 글이 없습니다.</small></p>
                  </c:otherwise>
                  </c:choose>
                                       
@@ -493,7 +493,7 @@ $(function () {
 									</div>
 									
 									<div class="col-md-6">
-										<div class="card" style="max-height:293.800px; overflow:auto">
+										<div class="card" style="max-height:293.800px; min-height:293.800px; overflow:auto">
               <div class="card-header border-transparent">
                 <h3 class="card-title"><b>현재 진행중인 투표</b></h3>
 
@@ -526,7 +526,7 @@ $(function () {
          </c:forEach>
               </c:when>
                  <c:otherwise>
-                 <p style="text-align:center;"><small><br><br>현재 진행중인 투표가 없습니다.<br><br><br><br></small></p>
+                 <p style="text-align:center;"><small><br><br><br><br>현재 진행중인 투표가 없습니다.</small></p>
                  </c:otherwise>
                  </c:choose>                        
                

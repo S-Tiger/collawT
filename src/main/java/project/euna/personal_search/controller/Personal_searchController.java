@@ -23,5 +23,8 @@ public interface Personal_searchController {
 			@RequestParam(required=false) String wr_mem_Id,
 			fileCriteria filecri, HttpSession session, HttpServletRequest request, 
 			HttpServletResponse response) throws Exception;
+	public String issueDelete(String i_Num, HttpSession session) throws Exception;
+	public String voteDelete(String v_Num, HttpSession session) throws Exception;
+	public String personaldelete(String p_Num, HttpSession session) throws Exception;
 }
 

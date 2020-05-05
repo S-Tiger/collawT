@@ -26,6 +26,12 @@
 
 
 </style>
+<!-- jsGrid -->
+<script src="${contextPath}/resources/plugins/jsgrid/demos/db.js"></script>
+<script src="${contextPath}/resources/plugins/jsgrid/jsgrid.min.js"></script>
+<!-- DataTables -->
+<script src="${contextPath}/resources/plugins/datatables/jquery.dataTables.js"></script>
+<script src="${contextPath}/resources/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -45,19 +51,46 @@ $(document).ready(function() {
   });
   
   function fileDelete(){
-	  
+	  if(confirm('삭제하시겠습니까?')){
 	//체크박스 중 체크된 체크박스만 가져와서 Loop 합니다.
-	  $("input:checkbox[name=checkbox]:checked").each(function(i,elements){
-	      //해당 index(순서)값을 가져옵니다.
-	      index = $(elements).index("input:checkbox[name=checkbox]");                
-	      //해당 index에 해당하는 체크박스의 ID 속성을 가져옵니다.        
-	      alert($("input:checkbox[name=checkbox]").eq(index).attr("id"));
-	     
-	  });
+		  $("input:checkbox[name=checkbox]:checked").each(function(i,elements){
+			  
+		      //해당 index(순서)값을 가져옵니다.
+		      index = $(elements).index("input:checkbox[name=checkbox]");
+		      //해당 index에 해당하는 체크박스의 ID 속성을 가져옵니다.
+		      var boardtype = $("input:text[name=boardtype]").eq(index).val();
+		      var i_Num = $("input:checkbox[name=checkbox]").eq(index).attr("id")
+	      
+		      	if(boardtype==1){
+			    	location.href="${contextPath}/personal/search/issuedelete?i_Num="+i_Num;
+			    	alert("이슈 삭제")
+			      }else if(boardtype==2){
+				    	location.href="${contextPath}/personal/search/votedelete?v_Num="+i_Num;
+				    	alert("투표 삭제")
+			      }else if(boardtype==3){
+				    	location.href="${contextPath}/personal/search/personaldelete?p_Num="+i_Num;
+			      }else{
+			    	  alert("오류가 발생하였습니다.");
+			      }
+	    	  
+	  })
+	  alert('삭제되었습니다.');
+  	}else{
+		return false;
+	}
   }
   
 
+  $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+    });
 		
+  
 </script>
 
 <!-- Content Wrapper. Contains page content -->
@@ -102,38 +135,52 @@ $(document).ready(function() {
 			
 			       <!-- 리스트 부분 -->
         <div class="card-body p-0">
-           <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
+           <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4" role="grid" aria-describedby="example2_info">
            
-           <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+           <table id="example2" class="table table-striped table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+            <c:choose>
+			<c:when test="${fn:length(myBoardlist)!=0}">
               <thead style="font-size:13px;">
                 <tr role="row">
                 <th><input type="checkbox" value="" id="checkAll" name="checkAll"></th>
-                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending" style="width: 203.4px;">협업공간명</th>
-                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 262.6px;">글 제목</th>
-                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 233px;">작성일</th>
+                <th>협업공간명</th>
+                <th>유형</th>
+                <th>제목</th>
+               	<th>상태</th>
+                <th>작성일</th>
                </tr>
             
               </thead>
               <tbody>
               
-			<c:choose>
-			<c:when test="${fn:length(myBoardlist)!=0}">
+
                  <c:forEach var="myBoardlist" items="${myBoardlist}" >	
                   <tr role="row" class="odd">
                   <!-- 체크박스 -->
                   	 <td style="width:5%" class="sorting_1">	
-                        <input type="checkbox" value="" id="checkbox${myBoardlist.rnum}" name="checkbox">
-                        <input type="text" value="${myBoardlist.rnum}" id="text${myBoardlist.rnum}" name="checkbox">
+                        <input type="checkbox" value="" id="${myBoardlist.i_Num}" name="checkbox">
+                        <input type="text" value="${myBoardlist.i_Num}" id="text${myBoardlist.i_Num}" name="checkbox">
 				  </td>
 				  <!-- 협업공간명 -->
-				  <td class="sorting_1" style="width:10%;">
+				  <td style="width:13%;">
 				   <font size="3em">
 				  <c:if test="${myBoardlist.c_Name==null}">내 공간</c:if>
 				  <c:if test="${myBoardlist.c_Name!=null}"> ${myBoardlist.c_Name}</c:if></font>
 					 
 				  </td>
-               	<!-- 링크 -->
-				<td class="sorting_1" style="width:60%">	
+				  
+				  <!-- 유형 -->
+				  <td style="width:7%;">
+				   <font size="3em">
+				  <c:if test="${myBoardlist.boardtype==1}">이슈<input type="text" name = "boardtype" id="${myBoardlist.boardtype}" value="${myBoardlist.boardtype}"></c:if>
+				  <c:if test="${myBoardlist.boardtype==2}">투표<input type="text" name = "boardtype" id="${myBoardlist.boardtype}" value="${myBoardlist.boardtype}"></c:if>
+				  <c:if test="${myBoardlist.boardtype==3}">이슈<input type="text" name = "boardtype" id="${myBoardlist.boardtype}" value="${myBoardlist.boardtype}"></c:if>
+				  </font>
+					 
+				  </td>
+				  
+               	<!-- 제목&링크 -->
+				<td style="width:50%">	
 				<c:if test="${myBoardlist.boardtype==1}">
 				<a href="/project/issue/read?c_Id=${myBoardlist.c_Id}&i_Num=${myBoardlist.i_Num}"> <font size="3em"><b>${myBoardlist.i_Name}</b></font></a>
 				</c:if>
@@ -146,8 +193,18 @@ $(document).ready(function() {
 					  
 					  <br>
 				  </td>
-				  <td class="sorting_1" style="width:25%; text-align:center">	
-					  <font size="3em"><b>${myBoardlist.i_Date}</b></font>
+				 
+				 <!-- 상태 -->
+				  <td style="width:10%; ">
+				   <font size="3em">
+					<span class="badge badge-success" style="background-color:${myBoardlist.ig_Color}">${myBoardlist.ig_Name}</span>
+				  </font>
+					 
+				  </td>
+				  
+				   <!-- 작성일 -->
+				  <td style="width:25%; text-align:center">	
+					  <font size="3em">${myBoardlist.i_Date}</font>
 					  <br>
 				  </td>
                     
@@ -162,26 +219,17 @@ $(document).ready(function() {
                  </c:choose>
               </tbody>
           </table>
-                  <button type="button" class="btn btn-danger" onclick="javascript:fileDelete()" style="text-align:center; float:right; font-family: Spoqa Han Sans; font-size:13px;">
-								<b>삭제</b></button>
-          </div>
-
-        
-        
-        </div>
-        <!-- /리스트 부분 -->
-       
-         <br>
-       
-	</section>
-	<!-- /.content -->
-					
-				
-				</div>
-				        <!-- 페이징 -->
- <div class="form-group" style="margin-left:20px">
-
-   <ul class="pagination pagination-sm m-0">
+          
+          				        <!-- 페이징 -->
+ <div class="form-group" style="margin-left:10px; margin-right:10px">
+ 	<div class="row">
+   <div class="col-md-4">
+   <c:if test="${fn:length(myBoardlist)!=0}">
+        <button type="button" class="btn btn-danger" onclick="javascript:fileDelete()" style="text-align:center; font-family: Spoqa Han Sans; font-size:13px;">
+								<b>선택 삭제</b></button></c:if>
+								</div>
+	<div class="col-md-8">
+   <ul class="pagination pagination-sm m-0" style="float:right">
     <c:if test="${pageMaker.prev}">
     	<li class="page-item" id="liStyle"><a class="page-link" href="myBoardlist${pageMaker.makeQuery(pageMaker.startPage - 1)}">&laquo;</a></li>
     </c:if> 
@@ -201,15 +249,33 @@ $(document).ready(function() {
     	<li class="page-item" id="liStyle"><a class="page-link" href="myBoardlist${pageMaker.makeQuery(pageMaker.endPage + 1)}">&raquo;</a></li>
     </c:if> 
   </ul>
-  <br>
+  </div>
+</div>
   </div>
   
  
         <!--/페이징  -->
+        
+        
+
+          </div>
+
+        
+        
+        </div>
+        <!-- /리스트 부분 -->
+       
+         <br>
+       
+	</section>
+	<!-- /.content -->
+					
+				
+				</div>
+
 			</div>
 			<!-- /.card-body -->
 		
-		
+	</div>	
 <!-- /.content-wrapper -->
 
-  

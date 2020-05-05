@@ -93,6 +93,18 @@ public class EVoteServiceImpl implements EVoteService {
 	public void voteDelete(String v_Num) throws Exception {
 		evoteDAO.voteDelete(v_Num);
 	}
+	
+	//글 삭제 시 투표 보기 삭제
+	@Override
+	public void votedDelete(String v_Num) throws Exception {
+		evoteDAO.voteDelete(v_Num);
+	}
+	
+	//글 삭제 시 댓글 삭제
+	@Override
+	public void votereplyDelete(String v_Num) throws Exception {
+		evoteDAO.votereplyDelete(v_Num);
+	}
 
 	//글 수정
 	@Override
