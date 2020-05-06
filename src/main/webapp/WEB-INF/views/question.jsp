@@ -60,7 +60,7 @@ function checkQ_Content(q_Content) {
     if (!checkExistData(q_Content, "문의 내용을")){
         return false;
     }else if (q_Content.length < 8||q_Content.length > 300){
-    	alert("8~ 300자 내로 작성하세요. ");
+    	alert("8 ~ 300자 내로 작성하세요. ");
     
     	return false;
     }
@@ -83,10 +83,10 @@ function checkQ_Email(q_Email) {
 </script>
 
 </head>
-<body class="hold-transition register-page">
+<body class="hold-transition register-page" style="background-color: white;">
 	<div class="register-box">
 		<div class="register-logo">
-			<a href="${contextPath}/resources/index2.html"><b>Collaw </b>T</a>
+			<a href="/"><b>Collaw </b>T</a>
 		</div>
 
 		<div class="card">

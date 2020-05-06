@@ -98,7 +98,8 @@
 			<exclude-mapping path="/logout" />
 			<exclude-mapping path="/notify/*" />
 			<exclude-mapping path="/bookmark/*" />
-
+			<exclude-mapping path="/question" />
+			<exclude-mapping path="/question/sendEmail" />
 			<beans:ref bean="LoginInterceptor" />
 		</interceptor>
 	</interceptors>
@@ -111,7 +112,6 @@
 	<!-- 네이버 로그인 -->	
 	<beans:bean id="naverLoginBO"
 		class="project.jeongha.member.vo.NaverLoginBO" />
-
 
 		
 </beans:beans>
