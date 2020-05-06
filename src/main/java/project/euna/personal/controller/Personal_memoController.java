@@ -21,7 +21,7 @@ public interface Personal_memoController {
 	public String personal_memoInsert(Personal_memoVO personal_memoVO, HttpSession session) throws Exception;
 	public List<Map> searchList(@RequestParam ("p_Num")String p_Num, HttpServletRequest request, HttpServletResponse response) throws Exception;
 
-	public void personal_memoDelete(Personal_memoVO personal_memoVO) throws Exception;
+	public void personal_memoDelete(String p_m_Num) throws Exception;
 
 	public void personal_memoUpdate(Personal_memoVO personal_memoVO) throws Exception;
 	}

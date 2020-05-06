@@ -14,6 +14,6 @@ public interface Personal_memoDAO {
 	
 	public List<Map> searchList(String p_Num) throws DataAccessException;
 	public int personal_memoInsert(Personal_memoVO personal_memoVO);
-	public void personal_memoDelete(Personal_memoVO personal_memoVO) throws Exception;
+	public void personal_memoDelete(String p_m_Num) throws Exception;
 	public void personal_memoUpdate(Personal_memoVO personal_memoVO) throws Exception;
 }

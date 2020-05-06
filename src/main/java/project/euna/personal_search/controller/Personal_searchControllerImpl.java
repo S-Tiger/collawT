@@ -21,6 +21,7 @@ import project.euna.appendix.service.AppendixService;
 import project.euna.issue.service.IssueServiceImpl;
 import project.euna.personal.service.PersonalService;
 import project.euna.personal.service.Personal_appendixService;
+import project.euna.personal.service.Personal_memoService;
 import project.euna.personal_search.service.Personal_searchService;
 import project.euna.personal_search.vo.Criteria;
 import project.euna.personal_search.vo.PageMaker;
@@ -63,6 +64,9 @@ public class Personal_searchControllerImpl implements Personal_searchController 
 	
 	@Inject
 	VoteReplyService voteReplyService;
+	
+	@Inject
+	Personal_memoService personal_memoService;
 
 	
 	//글 목록 조회 페이징
@@ -133,12 +137,12 @@ public class Personal_searchControllerImpl implements Personal_searchController 
 		Map<String, Object> member = new HashMap<String,Object>();
 		member = (Map<String, Object>) session.getAttribute("member");
 		String mem_Id = (String) member.get("mem_Id");
-		
-		personalService.personalDelete(p_Num);
+
 		personal_appendixService.fileDelete(p_Num);
+		personalService.personalmemoDelete(p_Num);
+		personalService.personalDelete(p_Num);
+
 	
-		
-		
 		return "redirect:/personal/search/myBoardlist?mem_Id="+mem_Id;
 	}
 	
@@ -204,8 +208,8 @@ public class Personal_searchControllerImpl implements Personal_searchController 
 		member = (Map<String, Object>) session.getAttribute("member");
 		String mem_Id = (String) member.get("mem_Id");
 		
-		personalService.personalDelete(p_m_Num);
-		personal_appendixService.fileDelete(p_m_Num);
+		personal_memoService.personal_memoDelete(p_m_Num);
+
 
 		
 		return "redirect:/personal/search/myReplylist?mem_Id="+mem_Id;

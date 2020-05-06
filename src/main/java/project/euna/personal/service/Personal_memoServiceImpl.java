@@ -37,8 +37,8 @@ public class Personal_memoServiceImpl implements Personal_memoService {
 
 	//댓글 삭제
 	@Override
-	public void personal_memoDelete(Personal_memoVO personal_memoVO) throws Exception {
-		personal_memoDAOImpl.personal_memoDelete(personal_memoVO);
+	public void personal_memoDelete(String p_m_Num) throws Exception {
+		personal_memoDAOImpl.personal_memoDelete(p_m_Num);
 	}
 
 	//댓글 수정

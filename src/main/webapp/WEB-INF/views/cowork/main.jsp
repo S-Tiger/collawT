@@ -335,7 +335,7 @@ $(function () {
 						
 					<li class="nav-item" id = "activityMenu"><a class="nav-link " href="/project/issue/list?c_Id=${pjt.c_Id}"
 						 id= "issueMenu">이슈</a></li>
-					<li class="nav-item" id = "activityMenu"><a class="nav-link" href="#"
+					<li class="nav-item" id = "activityMenu"><a class="nav-link" href="/project/kanban?c_Id=${pjt.c_Id}"
 						 id= "issueMenu">칸반</a></li>
 					<li class="nav-item" id = "activityMenu"><a class="nav-link" href="/project/calendar?c_Id=${pjt.c_Id}"
 						 id= "issueMenu">캘린더</a></li>
@@ -382,7 +382,7 @@ $(function () {
 			<div class="col-md-4">
 				<div class="card">
               <div class="card-header">
-                <h3 class="card-title"><b>투표 참여율</b></h3>
+                <h3 class="card-title"><b>전체 투표 참여율</b></h3>
               </div>
               <div class="card-body">
 				<div class="chart-responsive">

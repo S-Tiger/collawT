@@ -68,10 +68,8 @@ public class Personal_memoControllerImpl implements Personal_memoController {
 	@Override
 	@PostMapping("/delete")
 	@ResponseBody
-	public void personal_memoDelete(Personal_memoVO personal_memoVO) throws Exception{
-		
-	
-		personal_memoService.personal_memoDelete(personal_memoVO);
+	public void personal_memoDelete(String p_m_Num) throws Exception{
+		personal_memoService.personal_memoDelete(p_m_Num);
 		
 	}
 	

@@ -377,7 +377,7 @@ $(function () {
 									class="img-circle elevation-1" alt="프로필사진">
 									</c:if>
 									&nbsp;
-									${newspeeditem.mem_Name}(${newspeeditem.mem_Id})님이 &nbsp;<a href="/project/vote/read?c_Id=${newspeeditem.c_Id}&v_Num=${newspeeditem.i_Num}"><b>${newspeeditem.i_Name}</b></a>&nbsp;투표글을 등록하셨습니다.</div>
+									${newspeeditem.mem_Name}(${newspeeditem.mem_Id})님이 &nbsp;<a href="/project/vote/read?c_Id=${newspeeditem.c_Id}&v_Num=${newspeeditem.i_Num}"><b>${newspeeditem.i_Name}</b></a>&nbsp;투표를 등록하셨습니다.</div>
 									</div>
 									<div class="timeline-footer" id="timeline-footer">
 									</div>

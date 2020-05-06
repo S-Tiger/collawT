@@ -39,8 +39,8 @@ public class Personal_memoDAOImpl implements Personal_memoDAO {
 
 	//댓글 삭제
 	@Override
-	public void personal_memoDelete(Personal_memoVO personal_memoVO) throws Exception {
-		sqlSession.delete("personal_memo.personal_memoDelete", personal_memoVO);
+	public void personal_memoDelete(String p_m_Num) throws Exception {
+		sqlSession.delete("personal_memo.personal_memoDelete", p_m_Num);
 		
 	}
 	

@@ -47,7 +47,7 @@
 
 
 	<!-- 댓글 삭제 -->
-	<delete id="personal_memoDelete" parameterType="personal_memoVO">
+	<delete id="personal_memoDelete" parameterType="String">
 		DELETE
 		FROM personal_memo
 		WHERE p_m_Num=#{p_m_Num}
