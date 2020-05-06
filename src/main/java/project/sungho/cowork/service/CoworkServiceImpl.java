@@ -82,6 +82,19 @@ public class CoworkServiceImpl implements CoworkService {
 		return list;
 	}
 	
+	@Override
+	public List<Map> kanbanlist(Map<String, Object> searchMap) throws DataAccessException {
+		List<Map>list = coworkDAO.kanbanlist(searchMap);
+		return list;
+	}
+	
+	@Override
+	public int kanbanUpdate(Map<String, Object> searchMap) throws DataAccessException {
+		int result = coworkDAO.kanbanUpdate(searchMap);
+		return result;
+	}
+	
+	
 	
 
 }

@@ -33,6 +33,13 @@
 		<result property="end" column="v_End" />
 		<result property="url" column="v_Num" />
 	</resultMap>
+	
+	<resultMap id="kanbanResult01" type="java.util.Map">
+		<result property="i_Name" column="i_Name"  />
+		<result property="i_Num" column="i_Num" />
+		<result property="ig_Num" column="ig_Num" />
+		<result property="c_Id" column="c_Id"  />
+	</resultMap>
 
 	<select id="searchList" resultMap="coworkResult01" parameterType="coworkVO"> 
       <![CDATA[
@@ -100,7 +107,7 @@
 		</where>
 	</select>
 	
-	<!-- 투표영 쿼리 -->
+	<!-- 투표용 쿼리 -->
 	<select id="calendarvotelist" resultMap="calendarResult02" parameterType="java.util.Map"> 
          	select v_Name , v_Num  , v_Start , v_End
 			from vote
@@ -110,4 +117,22 @@
 			</if>
 		</where>
 	</select>
+	
+	<!-- 칸반이슈용 쿼리 -->
+	<select id="kanbanlist" resultMap="kanbanResult01" parameterType="java.util.Map"> 
+         	select i_Name , i_Num , ig_Num , c_Id
+			from issue
+      <where>
+			<if test=" c_Id != ''  and  c_Id != null">
+			c_Id = #{c_Id}
+			</if>
+		</where>
+		order by to_number(i_Num) asc
+	</select>
+	
+	<update id="kanbanUpdate" parameterType="java.util.Map">
+		update ISSUE
+		set  ig_Num = #{ig_Num}
+		where i_Num = #{i_Num}
+	</update>
 </mapper>

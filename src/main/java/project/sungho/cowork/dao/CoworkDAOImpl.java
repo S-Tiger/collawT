@@ -77,5 +77,19 @@ public class CoworkDAOImpl implements CoworkDAO {
 		return list;
 		
 	}
+	
+	@Override
+	public List<Map> kanbanlist(Map<String, Object> searchMap) throws DataAccessException {
+		List<Map> list = sqlSession.selectList("cowork.kanbanlist", searchMap); 
+		return list;
+		
+	}
+	
+	@Override
+	public int kanbanUpdate(Map<String, Object> searchMap) throws DataAccessException {
+		int result = sqlSession.update("cowork.kanbanUpdate", searchMap); 
+		return result;
+		
+	}
 
 }

@@ -2,17 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<style type="text/css">
-    .fc-day-top.fc-sat { color:#0000FF; }     /* 토요일 */
-    .fc-day-top.fc-sun { color:#FF0000; }    /* 일요일 */
-</style>
-
- <!-- fullCalendar -->
-  <link rel="stylesheet" href="${contextPath}/resources/plugins/fullcalendar/main.min.css">
-  <link rel="stylesheet" href="${contextPath}/resources/plugins/fullcalendar-daygrid/main.min.css">
-  <link rel="stylesheet" href="${contextPath}/resources/plugins/fullcalendar-timegrid/main.min.css">
-  <link rel="stylesheet" href="${contextPath}/resources/plugins/fullcalendar-bootstrap/main.min.css">
-  <!-- /fullCalendar -->
 
 <style>
 .accent-teal a:not(.dropdown-item):not(.btn-app):not(.nav-link):not(.brand-link) {
@@ -21,7 +10,36 @@
 .nav-pills .nav-link.active {
 	background-color: #dc3545;
 }
+
+.dropitem{
+    cursor: grab;
+    }
+
+.kanbandiv{
+    min-height: 380px;
+    padding: 0px;
+
+}    
+    
+#kanbandiv1 div{
+box-shadow: 0 0 1px #ffc107;
+margin: 10px;
+}
+#kanbandiv2 div{
+box-shadow: 0 0 1px #007bff;
+margin: 10px;
+}
+#kanbandiv3 div{
+box-shadow: 0 0 1px #e83e8c;
+margin: 10px;
+}
+#kanbandiv4 div{
+box-shadow: 0 0 1px #28a745;
+margin: 10px;
+}
+
 </style>
+
 <script type="text/javascript">
 function withdrawal() {
 	var a = confirm("정말 협업공간을 나가시겠습니까?")
@@ -32,8 +50,6 @@ function withdrawal() {
 	}
 	
 }
-
-	
 
 	$('#applyform').ready(function() {
 		$('#insertsubmit').click(function() {
@@ -91,6 +107,40 @@ function withdrawal() {
 		
 	}
 
+	
+	    function allowDrop(ev) {
+	        ev.preventDefault();
+	    }
+	 
+	    //드래그 했을시, 드래그 당하고 있는 해당 객체의 id를 가져와서 dataTransfer.setData로 담아줍니다. 
+	    //해당 객체의 별명을 text로 지정해주게 됩니다. 그러면 다음 함수인 drop()에서 별명을 통해 데이터를 전달받게 됩니다.
+	    function drag(ev) {
+	        ev.dataTransfer.setData("text", ev.target.id);
+	    }
+	 
+	    //위에서 text로 별명을 주었던 것을 getData()해서 가져옵니다. 그 데이터르 drop되는 위치에 append 시켜줌으로써 드래그 앤 드롭은 끝 입니다.
+	    function drop(ev) {
+	        ev.preventDefault();
+	        var data = ev.dataTransfer.getData("text");
+	        var updateNum;
+	       if (ev.target.className == 'dropitem') {
+	    	   //div 클래스가 dropitem 일경우 부모div에게 어팬드
+			ev.target.parentNode.appendChild(document.getElementById(data));
+	        updateNum = ev.target.parentNode.id;
+			}else{
+	        ev.target.appendChild(document.getElementById(data));
+	        updateNum = ev.target.id;
+	        }
+	       	console.log(updateNum);
+	       	console.log("data="+data)
+	       	
+	    	$.ajax({
+				url : '${contextPath}/project/kanbanUpdate?i_Num='+data+'&ig_Num='+updateNum,
+				type : 'get',
+				success : function(data) {
+					console.log("1 = 완료 / 0 = 실패 : " + data)}});
+	       
+	    }
 </script>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -150,9 +200,9 @@ function withdrawal() {
 						
 					<li class="nav-item" id = "activityMenu"><a class="nav-link " href="/project/issue/list?c_Id=${pjt.c_Id}"
 						 id= "issueMenu">이슈</a></li>
-					<li class="nav-item" id = "activityMenu"><a class="nav-link" href="/project/kanban?c_Id=${pjt.c_Id}"
+					<li class="nav-item" id = "activityMenu"><a class="nav-link active" href="/project/kanban?c_Id=${pjt.c_Id}"
 						 id= "issueMenu">칸반</a></li>
-					<li class="nav-item" id = "activityMenu"><a class="nav-link  active" href="/project/calendar?c_Id=${pjt.c_Id}"
+					<li class="nav-item" id = "activityMenu"><a class="nav-link" href="/project/calendar?c_Id=${pjt.c_Id}"
 						 id= "issueMenu">캘린더</a></li>
 					<li class="nav-item" id = "activityMenu"><a class="nav-link" href="/project/vote/list?c_Id=${pjt.c_Id}"
 						 id= "issueMenu">투표</a></li>
@@ -161,43 +211,69 @@ function withdrawal() {
 				
 				
 			</div>
-						<!-- Main content -->
-						<section class="content">
-      <div class="container-fluid">
-        <div class="row">
-        
-          <div class="col-md-9">
-            <div class="card card-primary">
-              <div class="card-body p-0">
-                <!-- THE CALENDAR -->
-              <div id="calendar"></div>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-          </div><!-- ㅇㅇ -->
-          <!-- /.col -->
-            <div class="col-md-3">
-            <div class="sticky-top mb-3" style="z-index: 0">
-              <div class="card">
-                <div class="card-body">
-                  <!-- the events -->
-							
-                  <div id="external-events">
-                    <div class="external-event" style="background-color: #28a745; color: white; cursor: auto;">이슈</div>
-                    <div class="external-event" style="background-color: #ffc107; color: white; cursor: auto;">투표</div>
-                  </div>
-                </div>
-                <!-- /.card-body -->
-              </div>
-              <!-- /.card -->
-            </div>
-          </div>
-          <!-- /.col -->
-        </div>
-        <!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </section>
+	<!-- Main content -->
+		<div class="row">
+		
+		<!-- 첫번째  -->
+		<div class="col-md-4" style="max-width: 25%;padding-left: 10px;padding-right: 0px;">
+		<div class="card" style="margin: 10px; box-shadow: 0 0 1px #ffc107, 0 1px 3px #ffc107;">
+		<div class="card-header"><b>발의됨</b></div>
+		<div class="card-body kanbandiv"  id="kanbandiv1" ondrop="drop(event)" ondragover="allowDrop(event)">
+		<c:forEach var="kanbanitem1" items="${kanbanlist}">
+			<c:if test="${kanbanitem1.ig_Num == 1 }">
+			<div id="${kanbanitem1.i_Num}" class="dropitem" draggable="true" ondragstart="drag(event)">${kanbanitem1.i_Name}</div>
+			</c:if>
+		</c:forEach>		
+		</div> 
+		</div>
+		</div>
+		<!-- 첫번째 끝  -->
+		<!-- 두번째  -->
+		<div class="col-md-4" style="max-width: 25%;padding-left: 0px;padding-right: 0px;">
+		<div class="card" style="margin: 10px; box-shadow: 0 0 1px #007bff, 0 1px 3px #007bff;">
+		<div class="card-header"><b>진행 중</b></div>
+		<div class="card-body kanbandiv" id="kanbandiv2" ondrop="drop(event)" ondragover="allowDrop(event)">
+		<c:forEach var="kanbanitem1" items="${kanbanlist}">
+			<c:if test="${kanbanitem1.ig_Num == 2 }">
+			<div id="${kanbanitem1.i_Num}" class="dropitem" draggable="true" ondragstart="drag(event)">${kanbanitem1.i_Name}</div>
+			</c:if>
+		</c:forEach>		
+		</div>
+		</div>
+		</div>
+		<!-- 두번째 끝  -->
+		<!-- 세번째  -->
+		<div class="col-md-4" style="max-width: 25%;padding-left: 0px;padding-right: 0px;">
+		<div class="card" style="margin: 10px;  box-shadow: 0 0 1px #e83e8c, 0 1px 3px #e83e8c;">
+		<div class="card-header"><b>일시중지</b></div>
+		<div class="card-body kanbandiv" id="kanbandiv3" ondrop="drop(event)" ondragover="allowDrop(event)">
+		<c:forEach var="kanbanitem1" items="${kanbanlist}">
+			<c:if test="${kanbanitem1.ig_Num == 3 }">
+			<div id="${kanbanitem1.i_Num}" class="dropitem" draggable="true" ondragstart="drag(event)">${kanbanitem1.i_Name}</div>
+			</c:if>
+		</c:forEach>		
+		</div>
+		</div>
+		</div>
+		<!-- 세번째 끝  -->
+		<!-- 네번째  -->
+		<div class="col-md-4" style="max-width: 25%;padding-left: 0px;padding-right: 10px;">
+		<div class="card" style="margin: 10px; box-shadow: 0 0 1px #28a745, 0 1px 3px #28a745;">
+		<div class="card-header"><b>완료</b></div>
+		<div class="card-body kanbandiv" id="kanbandiv4" ondrop="drop(event)" ondragover="allowDrop(event)">
+		<c:forEach var="kanbanitem1" items="${kanbanlist}">
+			<c:if test="${kanbanitem1.ig_Num == 4 }">
+			<div id="${kanbanitem1.i_Num}" class="dropitem" draggable="true" ondragstart="drag(event)">${kanbanitem1.i_Name}</div>
+			</c:if>
+		</c:forEach>		
+		</div>
+		</div>
+		</div>
+		 <!-- 네번째 끝  -->
+		</div>
+		
+
+
     <!-- /.content -->
   </div>
   </div>
@@ -310,115 +386,6 @@ function withdrawal() {
 </div>
 
 
-<script src="${contextPath}/resources/plugins/moment/moment.min.js"></script>
-<script src="${contextPath}/resources/plugins/fullcalendar/main.min.js"></script>
-<script src="${contextPath}/resources/plugins/fullcalendar-daygrid/main.min.js"></script>
-<script src="${contextPath}/resources/plugins/fullcalendar-timegrid/main.min.js"></script>
-<script src="${contextPath}/resources/plugins/fullcalendar-interaction/main.min.js"></script>
-<script src="${contextPath}/resources/plugins/fullcalendar-bootstrap/main.min.js"></script>
-<!-- Page specific script -->
-<script>
-  $(function () {
-
-    /* initialize the calendar
-     -----------------------------------------------------------------*/
-    //Date for the calendar events (dummy data)
-    var date = new Date()
-    var d    = date.getDate(),
-        m    = date.getMonth(),
-        y    = date.getFullYear()
-
-    var Calendar = FullCalendar.Calendar;
-    var Draggable = FullCalendarInteraction.Draggable;
-
-    var containerEl = document.getElementById('external-events');
-    var checkbox = document.getElementById('drop-remove');
-    var calendarEl = document.getElementById('calendar');
-
-    // initialize the external events
-    // -----------------------------------------------------------------
-    
-    var calendar = new Calendar(calendarEl, {
-      plugins: [ 'bootstrap', 'interaction', 'dayGrid', 'timeGrid' ],
-      header    : {
-        left  : 'prev',
-        center: 'title',
-        right : 'next'
-      },
-      
-      themeSystem: 'bootstrap',
-      editable: true,
-      //Random default events
-   
-      events: function(info,successCallback, failureCallback){
-    	  $.ajax({
-				url : '${contextPath}/project/calendarlist?c_Id=${pjt.c_Id}',
-				type : 'get',
-				success : function(data) {
-					successCallback(data);
-				}
-       });   
-    	
-       },
-
-     /* events: function(info,successCallback, failureCallback){
-      	 
-         }, */
-
-      editable  : true,
-      droppable : true, // this allows things to be dropped onto the calendar !!!
-      drop      : function(info) {
-        // is the "remove after drop" checkbox checked?
-        if (checkbox.checked) {
-          // if so, remove the element from the "Draggable Events" list
-          info.draggedEl.parentNode.removeChild(info.draggedEl);
-        }
-      }    
-    });
-
-    calendar.render();
-    // $('#calendar').fullCalendar()
-
-    /* ADDING EVENTS */
-    var currColor = '#3c8dbc' //Red by default
-    //Color chooser button
-    var colorChooser = $('#color-chooser-btn')
-    $('#color-chooser > li > a').click(function (e) {
-      e.preventDefault()
-      //Save color
-      currColor = $(this).css('color')
-      //Add color effect to button
-      $('#add-new-event').css({
-        'background-color': currColor,
-        'border-color'    : currColor
-      })
-    })
-    $('#add-new-event').click(function (e) {
-      e.preventDefault()
-      //Get value and make sure it is not null
-      var val = $('#new-event').val()
-      if (val.length == 0) {
-        return
-      }
-
-      //Create events
-      var event = $('<div />')
-      event.css({
-        'background-color': currColor,
-        'border-color'    : currColor,
-        'color'           : '#fff'
-      }).addClass('external-event')
-      event.html(val)
-      $('#external-events').prepend(event)
-
-      //Add draggable funtionality
-      ini_events(event)
-
-      //Remove event from text input
-      $('#new-event').val('')
-    })
-  })
-</script>
 
 
 

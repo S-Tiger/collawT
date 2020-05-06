@@ -17,6 +17,8 @@ public interface CoworkService {
 	 public int deleteCowork(Map<String, Object> dataMap) throws Exception;
 	 
 	 public List<Map> calendarlist(Map<String, Object> searchMap)throws DataAccessException;
-	 
 	 public List<Map> calendarvotelist(Map<String, Object> searchMap)throws DataAccessException;
+	 
+	 public List<Map> kanbanlist(Map<String, Object> searchMap)throws DataAccessException;
+	 public int kanbanUpdate(Map<String, Object> searchMap)throws DataAccessException;
 }

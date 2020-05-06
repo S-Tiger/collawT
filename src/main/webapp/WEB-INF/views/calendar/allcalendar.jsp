@@ -51,7 +51,7 @@
             <div class="sticky-top mb-3">
               <div class="card">
                 <div class="card-header">
-                  <h4 class="card-title">칼라</h4>
+                  <h5 class="card-title">해당 협업공간</h5>
                 </div>
                 <div class="card-body">
                   <!-- the events -->

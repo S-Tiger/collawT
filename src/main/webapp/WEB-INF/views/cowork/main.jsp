@@ -666,26 +666,6 @@ $(function () {
 	</div>
 </div>
 
-<!-- 공간맴버 리스트 모달 팝업 내용 -->
-<div id='memberlist-popup' class="needpopup">
-	<div class="col-md-6" style="max-width: 100%;">
-<table class="table table-striped projects" style="white-space: nowrap; overflow: hidden;"><div style="margin-bottom: 10px;">
-<h4 class="m-0 text-dark" style="font-family: Recipekorea; max-width: 80%; display: contents;">공간맴버 리스트</h4></div>
-		<tr style="background-color: #dc3545; color: white;">
-			<td style="width:70%; vertical-align:top"><font size="3em"><b>회원정보</b></font></td>
-			<td style="width:20%"><font size="3em"><b>등급</b></font></a>
-			<td style="width:10%; vertical-align:top"><font size="3em"><b>추가</b></font></td></tr>
-	<c:forEach var="memberItem" items="${memberList}" >
-			<tr>
-			<td style="width:70%; vertical-align:top"><font size="3em">
-			<span>${memberItem.mem_Name}(${memberItem.mem_Id})</span></font></td>
-			<td style="width:20%"><font size="3em"><b>${memberItem.grade}</b></font></td>
-			<td style="width:10%; vertical-align:top"><font size="3em"><b>추가</b></font></td>
-			</tr>
-			</c:forEach>
-</table>
-</div>
-</div>
 
 
 
