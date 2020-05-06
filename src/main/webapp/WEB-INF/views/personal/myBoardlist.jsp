@@ -112,13 +112,12 @@ $(document).ready(function() {
 				<ol class="nav nav-pills" style="font-family: Spoqa Han Sans; font-size:15px; margin:0px; border:none; padding-inline-start: 0px;  width:400px; float:left;  ">
 					<li class="nav-item" ><a class="nav-link " 
 						href="/main"  id="activityMenu" >홈</a></li>
-
 					<li class="nav-item" ><a class="nav-link"
 						href="/personal/list?mem_Id=${member.mem_Id}" >내 이슈</a></li>
 					<li class="nav-item" ><a class="nav-link active"   style="background-color:#DC3545;"
 						href="/personal/search/myBoardlist?mem_Id=${member.mem_Id}" id="activityMenu"><b>내가 쓴 글</b></a></li>
 					<li class="nav-item" ><a class="nav-link"
-						href="#" data-toggle="tab" id="activityMenu">내가 쓴 댓글</a></li>
+						href="/personal/search/myReplylist?mem_Id=${member.mem_Id}" id="activityMenu">내가 쓴 댓글</a></li>
 				</ol>
 				
 								

@@ -39,12 +39,19 @@ public class Personal_searchServiceImpl implements Personal_searchService {
 		return personal_searchDAO.myBoardlistCount(mem_Id);
 	}
 	
+	//댓글 목록 조회 페이징
+	@Override
+	public List<Map> myReplylist(Criteria cri) throws Exception{
+		List<Map> list = personal_searchDAO.myReplylist(cri);
+		return list;
+	}
+	
+	//댓글  총 갯수
+	@Override
+	public int myReplylistCount(String mem_Id) throws Exception{
+		return personal_searchDAO.myReplylistCount(mem_Id);
+	}
 
-	//글 삭제
-//	@Override
-//	public void issueDelete(String i_Num) throws Exception {
-//		issueDAO.issueDelete(i_Num);
-//	}
 
 	//전체 파일
 	@Override

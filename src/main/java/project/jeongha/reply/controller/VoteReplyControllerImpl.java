@@ -55,9 +55,9 @@ public class VoteReplyControllerImpl implements VoteReplyController {
 	@Override
 	@PostMapping("/delete")
 	@ResponseBody
-	public void voteReplyDelete(VoteReplyVO voteReplyVO) throws Exception {
+	public void voteReplyDelete(String vr_Num) throws Exception {
 		System.out.println("xxxx");
-		voteReplyService.voteReplyDelete(voteReplyVO);
+		voteReplyService.voteReplyDelete(vr_Num);
 		
 	}
 

@@ -9,11 +9,14 @@
 	<resultMap id="personal_searchResult01" type="java.util.HashMap">
 		<!-- property는 화면단에서 쓸 이름, column은 데이터컬럼명이랑 동일 -->
 		<result property="i_Num" column="i_Num" />
+		<result property="r_Num" column="r_Num" />
 		<result property="c_Id" column="c_Id" />
 		<result property="c_Name" column="c_Name" />
 		<result property="i_Name" column="i_Name" />
 		<result property="i_Content" column="i_Content" jdbcType="CLOB" javaType="java.lang.String"/>
+		<result property="r_Content" column="r_Content" jdbcType="CLOB" javaType="java.lang.String"/>
 		<result property="i_Date" column="i_Date" />
+		<result property="r_Date" column="r_Date" />
 		<result property="i_Start" column="i_Start" />
 		<result property="i_End" column="i_End" />
 		<result property="mem_Id" column="mem_Id" />
@@ -25,7 +28,6 @@
 		<result property="ig_Name" column="ig_Name" />
 		<result property="ig_Color" column="ig_Color" />
 	</resultMap>
-	
 	<resultMap id="fileResult01" type="java.util.HashMap">
 		<!-- property는 화면단에서 쓸 이름, column은 데이터컬럼명이랑 동일 -->
 		<result property="a_File" column="a_File" javaType="[B" jdbcType="BLOB"/>
@@ -75,21 +77,15 @@
 	</select>
 	
 	
-	<!-- 내가 쓴 글 게시물 삭제 -->
-	<delete id="issueDelete" parameterType="String">
-		DELETE
-		FROM issue
-		WHERE i_Num=#{i_Num}
-	</delete>
 	
 	
 		<!-- 내가 쓴 댓글 확인-->
 	<select id="myreplylist" resultMap="personal_searchResult01" parameterType="project.euna.personal_search.vo.Criteria"> 
 	<![CDATA[
-        select c_Id, c_Name, i_Name, i_Date, mem_Id, rnum, boardtype, i_Num, rnum
+        select c_Id, c_Name, i_Name, r_Date, mem_Id, rnum, boardtype, i_Num, rnum, ig_Num, ig_Name, ig_Color, r_Content, r_Num
 		from(
-		    select c_Id, c_Name, i_Name, i_Date, mem_Id, row_number() over(order by i_date desc) as rnum, boardtype, i_Num
-		    from v_allboard
+		    select c_Id, c_Name, i_Name, r_Date, mem_Id, row_number() over(order by r_date desc) as rnum, boardtype, i_Num, ig_Num, ig_Name, ig_Color, r_Content, r_Num
+		    from v_allreply
 		    where mem_Id=#{mem_Id}
 		    )
 		where rnum between #{rowStart} and #{rowEnd}
@@ -104,19 +100,13 @@
 	<select id="replylistCount" resultType="int" parameterType="project.euna.personal_search.vo.Criteria"> 
       <![CDATA[
 		select count(*)
-		from v_allboard
+		from v_allreply
         where mem_Id=#{mem_Id}
       ]]>
 
 	</select>
 	
-	
-	<!-- 내가 쓴 댓글 게시물 삭제 -->
-	<delete id="replyDelete" parameterType="String">
-		DELETE
-		FROM issue
-		WHERE i_Num=#{i_Num}
-	</delete>
+
 	
 	
 	

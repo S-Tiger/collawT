@@ -17,7 +17,7 @@ public interface VoteReplyController {
 	
 	public String voteReplyInsert(VoteReplyVO voteReplyVO, HttpSession session) throws Exception ;
 	public List<Map> voteSearchList(@RequestParam ("v_Num")String v_Num, HttpServletRequest request, HttpServletResponse response) throws Exception;
-	public void voteReplyDelete(VoteReplyVO voteReplyVO) throws Exception;
+	public void voteReplyDelete(String vr_Num) throws Exception;
 	public void voteReplyUpdate(VoteReplyVO voteReplyVO) throws Exception;
 	
 }

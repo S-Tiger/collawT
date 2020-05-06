@@ -34,15 +34,23 @@ public class Personal_searchDAOImpl implements Personal_searchDAO {
 	public int myBoardlistCount(String mem_Id) throws Exception {
 		return sqlSession.selectOne("personal_search.listCount", mem_Id);
 	}
+	
+	// 내가쓴 댓글 목록 페이징
+	@Override
+	public List<Map> myReplylist(Criteria cri) throws DataAccessException {
+
+		List<Map> list = sqlSession.selectList("personal_search.myreplylist", cri);
+		return list;
+
+	}
+
+	// 내가쓴 댓글 게시물 총 갯수
+	@Override
+	public int myReplylistCount(String mem_Id) throws Exception {
+		return sqlSession.selectOne("personal_search.replylistCount", mem_Id);
+	}
 
 
-
-	// 글 삭제
-//	@Override
-//	public void issueDelete(String i_Num) throws Exception {
-//		sqlSession.delete("issue.issueDelete", i_Num);
-//
-//	}
 	
 	
 	//전체 파일

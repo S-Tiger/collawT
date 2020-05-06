@@ -51,7 +51,7 @@
 
 
 	<!-- 댓글 삭제 -->
-	<delete id="replyDelete" parameterType="ReplyVO">
+	<delete id="replyDelete" parameterType="String">
 		DELETE
 		FROM reply
 		WHERE r_Num=#{r_Num}

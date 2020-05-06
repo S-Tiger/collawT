@@ -24,9 +24,11 @@ import project.euna.personal.service.Personal_appendixService;
 import project.euna.personal_search.service.Personal_searchService;
 import project.euna.personal_search.vo.Criteria;
 import project.euna.personal_search.vo.PageMaker;
+import project.euna.reply.service.ReplyService;
 import project.euna.whole_search.service.Whole_searchService;
 import project.euna.whole_search.vo.fileCriteria;
 import project.euna.whole_search.vo.filePageMaker;
+import project.jeongha.reply.service.VoteReplyService;
 import project.jeongha.vote.service.EVoteService;
 
 @Controller
@@ -55,6 +57,12 @@ public class Personal_searchControllerImpl implements Personal_searchController 
 	
 	@Inject
 	PersonalService personalService;
+	
+	@Inject
+	ReplyService replyService;
+	
+	@Inject
+	VoteReplyService voteReplyService;
 
 	
 	//글 목록 조회 페이징
@@ -134,6 +142,74 @@ public class Personal_searchControllerImpl implements Personal_searchController 
 		return "redirect:/personal/search/myBoardlist?mem_Id="+mem_Id;
 	}
 	
+	
+	//댓글 목록 조회 페이징
+	@Override
+	@GetMapping("/myReplylist")
+	public ModelAndView myReplylist(Criteria cri, String mem_Id, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+//		Map<String, Object> member = new HashMap<String,Object>();
+//		member = (Map<String, Object>) session.getAttribute("member");
+//		mem_Id = (String) member.get("mem_Id");
+				
+		List<Map> list = personal_searchService.myReplylist(cri);
+		PageMaker pageMaker = new PageMaker();
+		
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(personal_searchService.myReplylistCount(mem_Id));
+		
+	
+		ModelAndView mav = new ModelAndView("personal/myReplylist");
+		mav.addObject("myReplylist", list);
+		mav.addObject("pageMaker", pageMaker);		
+		
+		return mav;
+		
+	}
+	
+	//이슈댓글 삭제
+	@Override
+	@GetMapping("/issuereplydelete")
+	public String issuereplyDelete(String r_Num, HttpSession session) throws Exception{
+		Map<String, Object> member = new HashMap<String,Object>();
+		member = (Map<String, Object>) session.getAttribute("member");
+		String mem_Id = (String) member.get("mem_Id");
+		
+		replyService.replyDelete(r_Num);
+	
+		
+		
+		return "redirect:/personal/search/myReplylist?mem_Id="+mem_Id;
+	}
+	
+	//투표 댓글 삭제
+	@Override
+	@GetMapping("/votereplydelete")
+	public String votereplyDelete(String vr_Num, HttpSession session) throws Exception{
+		Map<String, Object> member = new HashMap<String,Object>();
+		member = (Map<String, Object>) session.getAttribute("member");
+		String mem_Id = (String) member.get("mem_Id");
+		
+		voteReplyService.voteReplyDelete(vr_Num);
+	
+		
+		return "redirect:/personal/search/myReplylist?mem_Id="+mem_Id;
+	}
+	
+	//내 이슈 댓글 삭제
+	@Override
+	@GetMapping("/personalmemodelete")
+	public String personalmemoDelete(String p_m_Num, HttpSession session) throws Exception{
+		Map<String, Object> member = new HashMap<String,Object>();
+		member = (Map<String, Object>) session.getAttribute("member");
+		String mem_Id = (String) member.get("mem_Id");
+		
+		personalService.personalDelete(p_m_Num);
+		personal_appendixService.fileDelete(p_m_Num);
+
+		
+		return "redirect:/personal/search/myReplylist?mem_Id="+mem_Id;
+	}
 	
 	
 	//파일함

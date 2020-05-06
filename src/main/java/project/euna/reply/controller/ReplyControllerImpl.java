@@ -71,9 +71,9 @@ public class ReplyControllerImpl implements ReplyController {
 	@PostMapping("/delete")
 	@ResponseBody
 	public void replyDelete(ReplyVO replyVO) throws Exception{
-		
+		String r_Num = replyVO.getR_Num();
 	
-		replyService.replyDelete(replyVO);
+		replyService.replyDelete(r_Num);
 		
 	}
 	

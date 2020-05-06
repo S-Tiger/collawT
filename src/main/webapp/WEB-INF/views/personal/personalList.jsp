@@ -55,7 +55,7 @@
 					<li class="nav-item" ><a class="nav-link"   
 						href="/personal/search/myBoardlist?mem_Id=${member.mem_Id}" id="activityMenu">내가 쓴 글</a></li>
 					<li class="nav-item" ><a class="nav-link"
-						href="#" data-toggle="tab" id="activityMenu">내가 쓴 댓글</a></li>
+						href="/personal/search/myReplylist?mem_Id=${member.mem_Id}" id="activityMenu">내가 쓴 댓글</a></li>
 				</ol>
 				
 				<button type="button" class="btn btn-success float-right" onclick="location.href='/personal/insert?mem_Id=${member.mem_Id}'"style="text-align:center; float:right; background-color:#DC3545; border-color:#DC3545; font-family: Spoqa Han Sans; font-size:13px;">

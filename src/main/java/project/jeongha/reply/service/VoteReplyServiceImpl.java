@@ -23,15 +23,15 @@ public class VoteReplyServiceImpl implements VoteReplyService{
 
 	@Override
 	public void voteReplyInsert(VoteReplyVO voteReplyVO) {
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!service :"+voteReplyVO.getC_Id());
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!service :"+voteReplyVO.getVr_Content());
-		int result = voteReplyDao.replyInsert(voteReplyVO);
+		//System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!service :"+voteReplyVO.getC_Id());
+		//System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!service :"+voteReplyVO.getVr_Content());
+		voteReplyDao.replyInsert(voteReplyVO);
 		
 	}
 
 	@Override
-	public void voteReplyDelete(VoteReplyVO voteReplyVO) throws Exception {
-		voteReplyDao.replyDelete(voteReplyVO);
+	public void voteReplyDelete(String vr_Num) throws Exception {
+		voteReplyDao.replyDelete(vr_Num);
 		
 	}
 

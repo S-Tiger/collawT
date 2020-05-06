@@ -11,8 +11,8 @@ import project.jeongha.reply.vo.VoteReplyVO;
 public interface VoteReplyDao {
 
 	public List<Map> searchList(String v_Num) throws DataAccessException;
-	public int replyInsert(VoteReplyVO voteReplyVO);
-	public void replyDelete(VoteReplyVO voteReplyVO) throws Exception;
+	public void replyInsert(VoteReplyVO voteReplyVO);
+	public void replyDelete(String vr_Num) throws Exception;
 	public void replyUpdate(VoteReplyVO voteReplyVO) throws Exception;
 	
 	

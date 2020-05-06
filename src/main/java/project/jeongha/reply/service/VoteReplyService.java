@@ -11,10 +11,7 @@ public interface VoteReplyService {
 
 	public List<Map> voteSearchList(String v_Num) throws Exception;
 	public void voteReplyInsert(VoteReplyVO voteReplyVO);
-	public void voteReplyDelete(VoteReplyVO voteReplyVO) throws Exception;
+	public void voteReplyDelete(String vr_Num) throws Exception;
 	public void voteReplyUpdate(VoteReplyVO voteReplyVO) throws Exception;
 
-
-	
-	
 }

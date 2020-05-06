@@ -38,8 +38,8 @@ public class ReplyDAOImpl implements ReplyDAO {
 
 	//댓글 삭제
 	@Override
-	public void replyDelete(ReplyVO replyVO) throws Exception {
-		sqlSession.delete("reply.replyDelete", replyVO);
+	public void replyDelete(String r_Num) throws Exception {
+		sqlSession.delete("reply.replyDelete", r_Num);
 		
 	}
 	

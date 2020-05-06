@@ -26,18 +26,16 @@ public class VoteReplyDaoImpl  implements VoteReplyDao{
 	}
 
 	@Override
-	public int replyInsert(VoteReplyVO voteReplyVO) {
-		int result;
-		result = sqlSession.update("voteReply.replyInsert", voteReplyVO);
-		//sqlSession.update("notify.replyInsertNotify",voteReplyVO);
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!dao :"+voteReplyVO.getC_Id());
-		return result;
+	public void replyInsert(VoteReplyVO voteReplyVO) {
+		sqlSession.update("voteReply.replyInsert", voteReplyVO);
+		sqlSession.delete("notify.votereplyInsertNotify", voteReplyVO);
+
 	}
 
 	@Override
-	public void replyDelete(VoteReplyVO voteReplyVO) throws Exception {
-		sqlSession.delete("voteReply.replyDelete", voteReplyVO);
-		sqlSession.delete("notify.votereplyInsertNotify", voteReplyVO);
+	public void replyDelete(String vr_Num) throws Exception {
+		sqlSession.delete("voteReply.replyDelete", vr_Num);
+		
 	}
 
 	@Override

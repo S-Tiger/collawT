@@ -167,7 +167,7 @@ $(document).ready(function() {
 						str+='<div class="card-footer card-comments">';
 						str+='<div class="card-comment">';
 						
-						str+='<input type="text" value="'+resultsize+'">';
+						
 						str+='<c:if test="${'+result[i].mem_File +' != null}">';
 						str+='<img alt="Not null" width="50" height="50"src="/member/getByteImage?mem_Id='+result[i].mem_Id+'" class="img-circle elevation-1"/>';
 						str+='</c:if>';
@@ -265,8 +265,6 @@ $(document).ready(function() {
 	}
 	
 	//클립보드로 url 복사
-
-
 	function urlClipCopy() {
 		var tempElem = document.createElement('textarea');
 		  tempElem.value = window.document.location.href; 

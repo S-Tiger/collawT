@@ -212,7 +212,7 @@ $(function () {
 					<li class="nav-item" ><a class="nav-link " 
 						href="/personal/search/myBoardlist?mem_Id=${member.mem_Id}" id="activityMenu">내가 쓴 글</a></li>
 					<li class="nav-item" ><a class="nav-link"
-						href="#" data-toggle="tab" id="activityMenu">내가 쓴 댓글</a></li>
+						href="/personal/search/myReplylist?mem_Id=${member.mem_Id}" id="activityMenu">내가 쓴 댓글</a></li>
 					
 				</ol>
 				

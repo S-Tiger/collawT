@@ -13,5 +13,7 @@ public interface Personal_searchDAO {
 	public List<Map> myBoardlist(Criteria cri) throws DataAccessException;
 	public int myBoardlistCount(String mem_Id) throws Exception;
 	public List<Map> myFile(String mem_Id) throws DataAccessException;
+	public List<Map> myReplylist(Criteria cri) throws DataAccessException;
+	public int myReplylistCount(String mem_Id) throws Exception;
 
 }

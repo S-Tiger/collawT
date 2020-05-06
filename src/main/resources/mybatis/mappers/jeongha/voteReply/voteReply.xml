@@ -51,7 +51,7 @@
 
 
 	<!-- 댓글 삭제 -->
-	<delete id="replyDelete" parameterType="VoteReplyVO">
+	<delete id="replyDelete" parameterType="String">
 		DELETE
 		FROM vote_reply
 		WHERE vr_Num=#{vr_Num}
