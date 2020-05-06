@@ -32,7 +32,6 @@
 			{Header:"회원이름(별명)",Type:"Text",SaveName:"mem_Name",MinWidth:150,KeyField:1 ,MultiLineText:1, Wrap:1},
 			{Header:"가입일",Type:"Date",SaveName:"mem_JoinDate",MinWidth:100},
 			{Header:"가입방식",Type:"Text",SaveName:"mem_Loginapi",MinWidth:100},
-			{Header:"숫자",Type:"Int",SaveName:"num",MinWidth:60},
 		];   
 		IBS_InitSheet( mySheet , initSheet);
 
@@ -46,7 +45,7 @@
 		switch(sAction) {
 			case "search": //조회
 			    var param = FormQueryStringEnc(document.frm);
-				mySheet.DoSearch("${contextPath}/hm/hmp002_d001/searchList.do", param);
+				mySheet.DoSearch("${contextPath}/manager/searchList", param);
 				//mySheet.DoSearch("transaction_data2.json");
 				break;
 			case "reload": //초기화
@@ -83,14 +82,16 @@
 <body onload="LoadPage()">
   <div class="page_title">
     <span><a class="closeDepth" href="#">closeDepth</a></span> 
-    <span class="title">기본기능 > <b>트랜젝션관리</b></span>
+    <span class="title"><b>회원관리</b></span>
   </div>
   <div class="main_content">
     <div class="exp_product">각 행의 데이터를 수정하거나 입력,삭제시 상태컬럼의 변화를
 			확인하고,저장 버튼 클릭시 서버로 전송되는 데이터를 확인한다.</div>
     <div class="exp_product">
       <form name='frm'>
-        ID: <input type='text' id="p_id" name="p_id" /> 
+        이메일: <input type='text' id="mem_Id" name="mem_Id" /> 
+        회원이름(): <input type='text' id="mem_Name" name="mem_Name" /> 
+        가입방식: <input type='text' id="mem_Loginapi" name="mem_Loginapi" /> 
       </form>
     </div>
     <div class="ib_function float_right">

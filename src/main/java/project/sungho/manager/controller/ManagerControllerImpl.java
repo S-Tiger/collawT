@@ -1,4 +1,4 @@
-package project.hm.hmp002_d001.controller;
+package project.sungho.manager.controller;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -30,53 +30,44 @@ import org.springframework.web.servlet.ModelAndView;
 
 import project.hm.hmp002_d001.service.Hmp002_d001Service;
 import project.hm.hmp002_d001.vo.Hmp002_d001VO;
+import project.sungho.comember.service.ComemberService;
+import project.sungho.manager.service.ManagerService;
 
 @Controller
-public class Hmp002_d001ControllerImpl implements Hmp002_d001Controller {
-	private static final Logger logger = LoggerFactory.getLogger(Hmp002_d001ControllerImpl.class);
-	@Autowired
-	Hmp002_d001Service hmp002_d001Service;
-	@Autowired
-	Hmp002_d001VO hmp002_d001VO;
+@RequestMapping("/manager/member/*")
+public class ManagerControllerImpl implements ManagerController {
+	@Autowired 
+	ManagerService managerService;
 	
 	@Override
-	@RequestMapping(value = "/hm/hmp002_d001/searchInit.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/main", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView searchInit(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		ModelAndView mav = new ModelAndView("hm/ibsheet_basic");
+		ModelAndView mav = new ModelAndView("/manager/meminfo");
 		return mav;
 	} 
 	
 	@Override
-	@RequestMapping(value = "/hm/hmp002_d001/searchList.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/searchList", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
 	public Map searchList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		Map<String, Object> searchMap = new HashMap<String, Object>(); // 검색조건
 		Map<String, Object> resultMap = new HashMap<String, Object>(); // 조회결과
 		
-		// 검색조건설정
-		searchMap.put("p_id", request.getParameter("p_id"));
 		
+		searchMap.put("mem_Id", request.getParameter("mem_Id"));
+		// 검색조건설정
 		//데이터 조회
-		List<Hmp002_d001VO> data = hmp002_d001Service.searchList(searchMap);
+		List<Map> data = managerService.searchList(searchMap);
         resultMap.put("Data", data);
         
         return resultMap;
 	}
 	
-	@Override 
-	@RequestMapping(value = "/hm/hmp002_d001/searchList2.do", method = { RequestMethod.GET, RequestMethod.POST })
-	@ResponseBody
-	public String searchList2(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		request.setCharacterEncoding("utf-8");
-        String str = "{\"Data\":[{\"ID\":\"그것만이 내 세상\",\"PWD\":\"Keys to the Heart\",\"NAME\":\"2017\",\"EMAIL\":\"한국\",\"JOINDATE\":\"20190101\",\"NUM\":\"1\"}]}";
-        //JSON 반환 
-        return str;
-	}
 	
 	@Override
-	@RequestMapping(value = "/hm/hmp002_d001/saveData.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/saveData", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
 	public Map saveData(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
@@ -93,7 +84,7 @@ public class Hmp002_d001ControllerImpl implements Hmp002_d001Controller {
 		
 		Map<String, String> result = new HashMap<String, String>();
 		try {
-			hmp002_d001Service.saveData(dataMap);	
+			managerService.saveData(dataMap);	
 			result.put("Code","0");
 			result.put("Message","저장되었습니다");
 		}catch(Exception e) {
