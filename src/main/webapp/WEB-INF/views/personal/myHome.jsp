@@ -318,7 +318,6 @@ $(function () {
 							</c:when>
 							
 							<c:when  test= "${newspeeditem.type eq '3'}">
-							<c:if test="${newspeeditem.mem_Id != member.mem_Id}">
 							<div>
 								<i class="fas fa-comments bg-warning"></i>
 
@@ -349,7 +348,6 @@ $(function () {
 									</div>
 								</div>
 							</div>
-							</c:if>
 							</c:when>
 							
 							<c:when  test= "${newspeeditem.type eq '4'}">

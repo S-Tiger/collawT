@@ -29,16 +29,17 @@ public class VoteReplyControllerImpl implements VoteReplyController {
 	@PostMapping("/insert")
 	@ResponseBody
 	@Override
-	public String voteReplyInsert(VoteReplyVO voteReplyVO, HttpSession session) throws Exception {
+	public String voteReplyInsert(@RequestParam ("v_Num")String v_Num, @RequestParam ("c_Id")String c_Id, VoteReplyVO voteReplyVO, HttpSession session) throws Exception {
 		Map<String, Object> member = new HashMap<String,Object>();
 		member = (Map<String, Object>) session.getAttribute("member");
 		String mem_Id = (String) member.get("mem_Id");
 		
 		voteReplyVO.setMem_Id(mem_Id);
+		voteReplyVO.setC_Id(c_Id);
+		voteReplyVO.setV_Num(v_Num);
 
 	
 		voteReplyService.voteReplyInsert(voteReplyVO);
-		System.out.println("!!!!!!!!!!!!!!!!!1 controller : "+voteReplyVO.getC_Id());
 				
 		return "redirect:/reply/list";	}
 

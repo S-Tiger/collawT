@@ -37,17 +37,18 @@ public class ReplyControllerImpl implements ReplyController {
 	@Override
 	@PostMapping("/insert")
 	@ResponseBody
-	public String replyInsert(ReplyVO replyVO, HttpSession session) throws Exception {
+	public String replyInsert(@RequestParam ("i_Num")String i_Num, @RequestParam ("c_Id")String c_Id, ReplyVO replyVO, HttpSession session) throws Exception {
 		Map<String, Object> member = new HashMap<String,Object>();
 		member = (Map<String, Object>) session.getAttribute("member");
 		String mem_Id = (String) member.get("mem_Id");
 		
 		replyVO.setMem_Id(mem_Id);
-
+		replyVO.setI_Num(i_Num);
+		replyVO.setC_Id(c_Id);
+		
 		
 		replyService.replyInsert(replyVO);
-		System.out.println("!!!!!!!!!!!!!!!!!1 controller : "+replyVO.getC_Id());
-				
+	
 		return "redirect:/reply/list";
 	
 	}

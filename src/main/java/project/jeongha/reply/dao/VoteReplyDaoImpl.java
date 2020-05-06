@@ -28,13 +28,15 @@ public class VoteReplyDaoImpl  implements VoteReplyDao{
 	@Override
 	public void replyInsert(VoteReplyVO voteReplyVO) {
 		sqlSession.update("voteReply.replyInsert", voteReplyVO);
-		sqlSession.delete("notify.votereplyInsertNotify", voteReplyVO);
+		sqlSession.update("notify.votereplyInsertNotify", voteReplyVO);
+
 
 	}
 
 	@Override
 	public void replyDelete(String vr_Num) throws Exception {
 		sqlSession.delete("voteReply.replyDelete", vr_Num);
+
 		
 	}
 

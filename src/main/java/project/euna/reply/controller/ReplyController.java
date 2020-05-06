@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import project.euna.reply.vo.ReplyVO;
 
 public interface ReplyController {
-	public String replyInsert(ReplyVO replyVO, HttpSession session) throws Exception;
+	public String replyInsert(@RequestParam ("i_Num")String i_Num, @RequestParam ("c_Id")String c_Id, ReplyVO replyVO, HttpSession session) throws Exception;
 	public List<Map> searchList(@RequestParam ("i_Num")String i_Num, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public void replyDelete(ReplyVO replyVO) throws Exception;
 	public void replyUpdate(ReplyVO replyVO) throws Exception;
