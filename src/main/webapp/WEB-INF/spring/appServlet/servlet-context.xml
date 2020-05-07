@@ -124,5 +124,10 @@
 	<beans:bean id="naverLoginBO"
 		class="project.jeongha.member.vo.NaverLoginBO" />
 
+	<mvc:interceptors> 
+		<beans:bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"> 
+		<beans:property name="paramName" value="lang" /> 
+		</beans:bean> 
+		</mvc:interceptors>
 		
 </beans:beans>
