@@ -26,7 +26,7 @@ import project.sungho.apply.service.ApplyService;
 @Controller
 
 @RequestMapping("/notify/*")
-public class notifyControllerImpl implements NotifyController {
+public class NotifyControllerImpl implements NotifyController {
 	
 	
 	@Autowired

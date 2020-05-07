@@ -159,5 +159,6 @@ public class PersonalDAOImpl implements PersonalDAO {
 	public List<Map> myissue(String mem_Id) {
 		return sqlSession.selectList("personal.myissue", mem_Id);
 	}
+
 	
 }

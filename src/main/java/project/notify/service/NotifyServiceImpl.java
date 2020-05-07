@@ -18,8 +18,8 @@ public class NotifyServiceImpl implements NotifyService{
 	NotifyDAOImpl notifyDAO;
 
 	@Override
-	public void notifyInsert(IssueVO issueVO) {
-		notifyDAO.notifyInsert(issueVO);
+	public void notifyInsert(Map map) {
+		notifyDAO.notifyInsert(map);
 	}
 
 	@Override

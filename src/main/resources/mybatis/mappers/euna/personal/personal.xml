@@ -206,16 +206,17 @@
       ]]>
 	</select>
 	
-		<!-- 다른협업공간으로 복제 입력 -->
+		
+		<!-- 다른협업공간에서 복제 입력 -->
 		
 	<insert id="personalCopy" parameterType="PersonalVO">
-	<selectKey resultType="string" keyProperty="i_Num" order="BEFORE">
-        SELECT personal_i_Num.nextval as i_Num FROM dual        
+	<selectKey resultType="string" keyProperty="p_Num" order="BEFORE">
+        SELECT PERSONAL_SEQ.nextval as p_Num FROM dual        
     	</selectKey>   
-		insert into personal(i_Num, c_Id, i_Name, i_Content, i_Date, ig_Num , mem_Id, i_Start, i_End)
-		values(#{i_Num}, #{c_Id}, #{i_Name}, #{i_Content} ,  
+		insert into personal(p_Num, p_i_Name, p_i_Content, p_i_Date , mem_Id, p_i_Start, p_i_End)
+		values(#{p_Num}, #{p_i_Name}, #{p_i_Content},  
 		(select to_char(sysdate, 'YYYY/MM/DD/ HH24:MI:SS') from dual)
-		, #{ig_Num} , #{mem_Id}, #{i_Start}, #{i_End})
+		, #{mem_Id} , #{p_i_Start}, #{p_i_End})
 	</insert>
 	
 	

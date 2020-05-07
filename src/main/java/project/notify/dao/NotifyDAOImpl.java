@@ -19,9 +19,9 @@ public class NotifyDAOImpl implements NotifyDAO {
 	private SqlSession sqlSession;
 
 	@Override
-	public int notifyInsert(IssueVO issueVO) {
+	public int notifyInsert(Map map) {
 		int result;
-		result = sqlSession.update("notify.notifyInsert", issueVO);
+		result = sqlSession.update("notify.notifyInsert", map);
 		return result;
 	}
 

@@ -121,7 +121,7 @@ public class IssueServiceImpl implements IssueService {
 	@Override
 	public void  issueCopy(Map map) {
 		int result = issueDAO.issueCopy(map);
-		//notifyDAO.notifyInsert(map);
+		notifyDAO.notifyInsert(map);
 		
 	}
 	

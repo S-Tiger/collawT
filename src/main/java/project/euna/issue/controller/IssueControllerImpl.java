@@ -39,6 +39,8 @@ import project.euna.issue.service.IssueService;
 import project.euna.issue.vo.Criteria;
 import project.euna.issue.vo.IssueVO;
 import project.euna.issue.vo.PageMaker;
+import project.euna.personal.service.PersonalService;
+import project.euna.personal.service.Personal_appendixService;
 import project.euna.reply.service.ReplyService;
 import project.sungho.comember.service.ComemberService;
 import project.sungho.cowork.service.CoworkService;
@@ -66,8 +68,12 @@ public class IssueControllerImpl implements IssueController {
 	
 	@Inject
 	ComemberService comemberService;
-
 	
+	@Inject
+	PersonalService personalService;
+
+	@Inject
+	Personal_appendixService personal_appendixService;
 
 
 	
@@ -153,7 +159,7 @@ public class IssueControllerImpl implements IssueController {
 		
 		
 		
-		return "redirect:/project/issue/read?i_Num="+i_Num;
+		return "redirect:/project/issue/read?c_Id="+c_Id+"&i_Num="+i_Num;
 	
 	}
 	
@@ -286,7 +292,7 @@ public class IssueControllerImpl implements IssueController {
 		
 		
 		//수정한 게시물로 리턴
-		return "redirect:/project/issue/read?i_Num="+i_Num;
+		return "redirect:/project/issue/read?c_Id="+c_Id+"&i_Num="+i_Num;
 	}
 	
 	
@@ -297,15 +303,16 @@ public class IssueControllerImpl implements IssueController {
 		Map<String, Object> member = new HashMap<String,Object>();
 		member = (Map<String, Object>) session.getAttribute("member");
 		String mem_Id = (String) member.get("mem_Id");
+		String i_Num = issueVO.getI_Num();
+
 		
 		String coworkSelect = request.getParameter("coworkSelect");
-		
-		if(coworkSelect == "myspace") {
+		if(coworkSelect.equals("myspace") ) {
+
 			String p_i_Name = issueVO.getI_Name();
 			String p_i_Content = issueVO.getI_Content();
 			String p_i_Start = issueVO.getI_Start();
 			String p_i_End = issueVO.getI_End();
-			String i_Num = issueVO.getI_Num();
 			
 			Map<String, Object> cmap = new HashMap<String,Object>();
 			cmap.put("mem_Id", mem_Id);
@@ -314,28 +321,29 @@ public class IssueControllerImpl implements IssueController {
 			cmap.put("p_i_Start",p_i_Start);
 			cmap.put("p_i_End", p_i_End);
 		
-			issueService.issueCopy(cmap);
-			String redirecti_Num = (String) cmap.get("i_Num");
+			personalService.personalCopy(cmap);
+			String redirectp_Num = (String) cmap.get("p_Num");
 			
 			Map<String, Object> hmap = new HashMap<String,Object>();
 			hmap.put("i_Num", i_Num);
-			hmap.put("redirecti_Num", redirecti_Num);
 
-			appendixService.copyFile(hmap);
+			hmap.put("redirectp_Num", redirectp_Num);
+
+			personal_appendixService.copyFile(hmap);
 			
 			rttr.addFlashAttribute("msg", "success");
 
-			return "redirect:/personal/issue/read?p_Num="+redirecti_Num;
+			return "redirect:/personal/read?p_Num="+redirectp_Num;
 			
 						
 		}else {
+
 			String c_Id = issueVO.getC_Id();
 			String i_Name = issueVO.getI_Name();
 			String i_Content = issueVO.getI_Content();
 			String i_Start = issueVO.getI_Start();
 			String i_End = issueVO.getI_End();
 			String ig_Num = issueVO.getig_Num();
-			String i_Num = issueVO.getI_Num();
 			
 			Map<String, Object> cmap = new HashMap<String,Object>();
 			cmap.put("mem_Id", mem_Id);

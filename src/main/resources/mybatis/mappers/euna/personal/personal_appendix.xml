@@ -59,10 +59,10 @@
 	<!-- 협업공간 첨부파일 복사 -->
 	 <insert id="copyFile" parameterType="java.util.HashMap">
 		insert into personal_appendix(p_a_RealName, p_a_File, p_a_NameEx, p_Num, p_a_Num, p_a_Size, p_a_Del)
-	    select p_a_RealName, p_a_File, p_a_NameEx, #{redirectp_Num}, PERSONAL_APPENDIX_SEQ.nextval as p_a_Num, p_a_Size, p_a_Del
-	    from personal_appendix
-	    where p_Num = #{p_Num}
-	    and p_a_Del = 'N'
+	    select a_RealName, a_File, a_NameEx, #{redirectp_Num}, PERSONAL_APPENDIX_SEQ.nextval as p_a_Num, a_Size, a_Del
+	    from appendix
+	    where i_Num = #{i_Num}
+	    and a_Del = 'N'
 	</insert>
 	
 	

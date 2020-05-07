@@ -10,7 +10,7 @@ import project.notify.vo.NotifyVO;
 
 public interface NotifyService {
 	
-	public void notifyInsert(IssueVO issueVO);
+	public void notifyInsert(Map map);
 	public List<Map> searchNotify (Map<String, Object> searchMap);
 	public List<Map> replyList(Map<String,Object> searchMap);
 	public void notifyUpdate(Map<String,Object> searchMap);

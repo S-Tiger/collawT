@@ -117,11 +117,10 @@ public class PersonalServiceImpl implements PersonalService {
 		
 	}
 	
-	//다른 협업공간으로 복사
+	//다른 협업공간에서 복사
 	@Override
 	public void  personalCopy(Map map) {
 		int result = personalDAO.personalCopy(map);
-		//notifyDAO.notifyInsert(map);
 		
 	}
 	
