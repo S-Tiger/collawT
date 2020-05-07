@@ -108,7 +108,11 @@
 		class="project.sungho.interceptor.PjtInterceptor"></beans:bean>
 	<interceptors>
 		<interceptor>
-			<mapping path="/project/**" />
+			<mapping path="/project/*/read"/>
+			<mapping path="/project/main"/>
+			<mapping path="/project/kanban"/>
+			<mapping path="/project/*/list"/>
+			<mapping path="/project/calendar"/>
 			<mvc:exclude-mapping path="/resources/**" />
 			<beans:ref bean="ProJectInterceptor" />
 		</interceptor>

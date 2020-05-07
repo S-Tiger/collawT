@@ -138,9 +138,10 @@ function withdrawal() {
 				url : '${contextPath}/project/kanbanUpdate?i_Num='+data+'&ig_Num='+updateNum,
 				type : 'get',
 				success : function(data) {
-					console.log("1 = 완료 / 0 = 실패 : " + data)}});
+					console.log("1 = 완료 / 0 = 실패 : "+data)}});
 	       
 	    }
+	    
 </script>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">

@@ -185,12 +185,11 @@ public class CoworkControllerImpl implements CoworkController {
 		Map<String, Object> searchMap = new HashMap<String, Object>();
 		String i_Num = (String) request.getParameter("i_Num");
 		String ig_Stat = (String) request.getParameter("ig_Num");
+		System.out.println("칸반번호================="+ig_Stat);
 		String ig_Num = ig_Stat.substring(9,10);
-		
 		searchMap.put("i_Num", i_Num);
 		searchMap.put("ig_Num", ig_Num);
 		int result = coworkService.kanbanUpdate(searchMap);
-		
 		return result;
 	}
 	

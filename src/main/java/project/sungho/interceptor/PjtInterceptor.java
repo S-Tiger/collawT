@@ -39,10 +39,8 @@ public class PjtInterceptor extends HandlerInterceptorAdapter {
 		if (memKind.equals("03")) {
 			return true;
 		}	
-		System.out.println("맴버권한================================"+ memKind);
 		for (int i = 0; i < checkId.size(); i++) {
-			System.out.println("체크리스트============================"+checkId.get(i));
-			if (checkmember.equals(checkId.get(i).get("c_Id"))) {
+			if (checkId.get(i).get("c_Id").equals(checkmember)) {
 				return true;
 			}
 		}
