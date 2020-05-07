@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- <script src="http://code.jquery.com/jquery-latest.js"></script> -->
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +14,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>협업툴 Collaw T - 간단하고 쉬운협업</title>
+<title><spring:message code="site.title" text="협업툴 Collaw T - 간단하고 쉬운협업" /></title>
 
 <!-- Bootstrap core CSS -->
 <link href="${contextPath}/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -218,6 +219,10 @@ img {
 	max-width: 100%;
 	height: auto !important;
 }
+#korea,#america{
+font-size: xx-small;
+vertical-align: bottom; 
+}
 </style>
 <script type="text/javascript">
 	console.log('${question}');
@@ -238,9 +243,11 @@ img {
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav text-uppercase ml-auto">
-					<li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services" style="color: black">제품 설명</a></li>
-					<li class="nav-item"><a class="nav-link js-scroll-trigger" href="/question" style="color: black">고객 지원</a></li>
-					<li class="nav-item"><a class="nav-link js-scroll-trigger" href="/member/signup" style="color: black">회원가입</a></li>
+					<li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services" style="color: black"><spring:message code="site.information" text="제품 설명" /></a></li>
+					<li class="nav-item"><a class="nav-link js-scroll-trigger" href="/question" style="color: black"><spring:message code="site.customers" text="고객 지원" /></a></li>
+					<li class="nav-item"><a class="nav-link js-scroll-trigger" href="/member/signup" style="color: black"><spring:message code="site.signup" text="회원가입" /></a></li>
+					<li class="nav-item"id="korea"><a class="nav-link js-scroll-trigger" style="color: black" href="<c:url value="/?lang=kor"/>">한국어</a> </li>
+					<li class="nav-item" id="america"><a class="nav-link js-scroll-trigger" style="color: black" href="<c:url value="/?lang=en"/>">English</a> </li>					
 				</ul>
 			</div>
 		</div>
@@ -266,10 +273,10 @@ img {
 				<div class="col-md-6"style=" position: absolute; z-index: 2;">
 					<div class="card-body" style="border-color: white !important;">
 						<h1>&nbsp</h1><br> <br>
-						<h1 style="text-align: left;"class="ng">효과적인 팀워크 가벼워진 업무</h1>
-						<h4 style="text-align: left;"class="ng">이메일이 필요없는 간편한 소통과 파일 공유, 빠른 피드백 확인까지 바라던 기능들을 모두 담았습니다.</h4>
-						<p style="text-align: left;"class="ng">여러분이 더 협력적으로 일하고 더 많은 일을 할 수 있도록 협업 게시판, 목록, 칸반, 검색기능을 통해 유연한 방법으로 프로젝트를 정리하고 우선순위를 정할 수 있는 Collaw T 입니다.</p>
-						<a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger float-right ng" style="background-color: #fed136; font-size: large; border-color: #fed136; padding-top: 13px; padding-bottom: 13px; padding-left: 20px; padding-right: 20px;" href="member/loginPage">로그인</a>
+						<h1 style="text-align: left;"class="ng"><spring:message code="site.detail1" text="효과적인 팀워크 가벼워진 업무, 협업툴" /></h1>
+						<h4 style="text-align: left;"class="ng"><spring:message code="site.detail2" text="이메일이 필요없는 간편한 소통과 파일 공유, 빠른 피드백 확인까지. 바라던 기능들을 모두 담았습니다." /></h4>
+						<p style="text-align: left;"class="ng"><spring:message code="site.detail3" text="여러분이 더 협력적으로 일하고 더 많은 일을 할 수 있도록 협업 게시판, 목록, 칸반, 검색기능을 통해 여러분의 재미있고 유연하며 보람 있는 방법으로 프로젝트를 정리하고 우선순위를 정할 수 있는 Collaw T" /></p>
+						<a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger float-right ng" style="background-color: #fed136; font-size: large; border-color: #fed136; padding-top: 13px; padding-bottom: 13px; padding-left: 20px; padding-right: 20px;" href="member/loginPage"><spring:message code="site.login" text="로그인" /></a>
 						<h1>&nbsp</h1>
 						<h1>&nbsp</h1>
 						<h1>&nbsp</h1>
@@ -300,7 +307,7 @@ img {
 				<div class="col-md-12">
 					<br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
 					<div class="card-body" style="border-color: white !important;">
-						<h4 style="text-align: left;">안녕하세요. 콜라우티 고객지원입니다. 무엇을 도와드릴까요?</h4>
+						<h4 style="text-align: left;"><spring:message code="site.help" text="안녕하세요. 콜라우티 고객지원입니다. 무엇을 도와드릴까요?" /></h4>
 						<a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger float-right" style="font-size: large; background-color: #fed136; border-color: #fed136; padding-top: 13px; padding-bottom: 13px; padding-left: 20px; padding-right: 20px;" href="/question"> 고객지원 바로가기 </a>
 					</div>
 					<br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
