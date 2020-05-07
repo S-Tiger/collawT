@@ -55,6 +55,7 @@
 <link rel="stylesheet" href="${contextPath}/resources/plugins/summernote/summernote-bs4.css">
 <!-- Google Font: Source Sans Pro -->
 <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
 </head>
 <style>
 .header {
@@ -195,89 +196,6 @@ img {
 	height: auto !important;
 }
 
-ul, li {
-	list-style: none;
-}
-
-.slide {
-	height: 300px;
-	overflow: hidden;
-	position: relative;
-}
-
-.slide ul {
-	width: calc(100% * 4);
-	display: flex;
-	transition: 1s;
-}
-
-.slide li {
-	width: calc(100%/ 4);
-	height: 300px;
-}
-
-.slide li:nth-child(1) {
-	background: #ffa;
-}
-
-.slide li:nth-child(2) {
-	background: #faa;
-}
-
-.slide li:nth-child(3) {
-	background: #afa;
-}
-
-.slide li:nth-child(4) {
-	background: #aaf;
-}
-
-.slide input {
-	display: none;
-}
-
-.slide .bullet {
-	position: absolute;
-	bottom: 20px;
-	left: 0;
-	right: 0;
-	text-align: center;
-	z-index: 10;
-}
-
-.slide .bullet label {
-	width: 10px;
-	height: 10px;
-	border-radius: 10px;
-	border: 2px solid #666;
-	display: inline-block;
-	background: #fff;
-	font-size: 0;
-	transition: 0.5s;
-	cursor: pointer;
-}
-/* 슬라이드 조작 */
-#pos1:checked ~ ul {
-	margin-left: 0;
-}
-
-#pos2:checked ~ ul {
-	margin-left: -100%;
-}
-
-#pos3:checked ~ ul {
-	margin-left: -200%;
-}
-
-#pos4:checked ~ ul {
-	margin-left: -300%;
-}
-/* bullet 조작 */
-#pos1:checked ~ .bullet label:nth-child(1), #pos2:checked ~ .bullet label:nth-child(2),
-	#pos3:checked ~ .bullet label:nth-child(3), #pos4:checked ~ .bullet label:nth-child(4)
-	{
-	background: #666;
-}
 </style>
 <script type="text/javascript">
 	console.log('${question}');
@@ -286,7 +204,6 @@ ul, li {
 		alert('문의 주셔서 감사합니다.');
 <%session.removeAttribute("question");%>
 	}
-
 </script>
 <body id="page-top">
 
@@ -310,7 +227,9 @@ ul, li {
 	<!-- Header -->
 	<header class="masthead">
 		<div class="container">
-		<br><br><br>
+			<br>
+			<br>
+			<br>
 			<!-- <div class="intro-text">
 				<div class="intro-lead-in">콜라우티에 오신것을 환영합니다!</div>
 				<div class="intro-heading text-uppercase">온라인으로 함께 만드는 협업</div>
@@ -326,11 +245,11 @@ ul, li {
 			<div class="row" id="services">
 				<div class="col-md-6">
 					<div class="card-body" style="border-color: white !important;">
-						<h1>:D</h1>
+						<h1> &nbsp</h1>
 						<h1 style="text-align: left;">효과적인 팀워크 가벼워진 업무, 협업툴</h1>
 						<h4 style="text-align: left;">이메일이 필요없는 간편한 소통과 파일 공유, 빠른 피드백 확인까지. 바라던 기능들을 모두 담았습니다.</h4>
 						<p style="text-align: left;">여러분이 더 협력적으로 일하고 더 많은 일을 할 수 있도록 협업 게시판, 목록, 칸반, 검색기능을 통해 여러분의 재미있고 유연하며 보람 있는 방법으로 프로젝트를 정리하고 우선순위를 정할 수 있는 Collaw T</p>
-						<a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger float-right" style="background-color: #fed136;font-size: large ; border-color: #fed136; padding-top: 13px; padding-bottom: 13px; padding-left: 20px; padding-right: 20px;" href="member/loginPage">로그인</a>
+						<a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger float-right" style="background-color: #fed136; font-size: large; border-color: #fed136; padding-top: 13px; padding-bottom: 13px; padding-left: 20px; padding-right: 20px;" href="member/loginPage">로그인</a>
 					</div>
 				</div>
 				<!-- /.col (LEFT) -->
@@ -352,7 +271,7 @@ ul, li {
 		<div class="container">
 			<div class="row" id="services">
 				<div class="col-md-6">
-					<div class="card-body" style="border-color: white !important; ">
+					<div class="card-body" style="border-color: white !important;">
 						<h4 style="text-align: left;">안녕하세요. 콜라우티 고객지원입니다. 무엇을 도와드릴까요?</h4>
 					</div>
 				</div>
@@ -360,9 +279,7 @@ ul, li {
 				<div class="col-md-6">
 					<!-- LINE CHART -->
 					<div class="card-body" style="border-color: white !important;">
-						<a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" style=" font-size: large ;background-color: #fed136; border-color: #fed136; padding-top: 13px; padding-bottom: 13px; padding-left: 20px; padding-right: 20px;" href="/question">
-						고객지원 바로가기
-						</a>
+						<a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" style="font-size: large; background-color: #fed136; border-color: #fed136; padding-top: 13px; padding-bottom: 13px; padding-left: 20px; padding-right: 20px;" href="/question"> 고객지원 바로가기 </a>
 					</div>
 					<!-- /.card -->
 				</div>
@@ -379,17 +296,36 @@ ul, li {
 			<div class="row" id="services">
 				<div class="col-md-12">
 
-					<div class="slide">
-						<input type="radio" name="pos" id="pos1" checked> <input type="radio" name="pos" id="pos2"> <input type="radio" name="pos" id="pos3"> <input type="radio" name="pos" id="pos4">
-						<ul>
-							<li></li>
-							<li></li>
-							<li></li>
-							<li></li>
-						</ul>
-						<p class="bullet">
-							<label for="pos1">1</label> <label for="pos2">2</label> <label for="pos3">3</label> <label for="pos4">4</label>
-						</p>
+					<div class="swiper-container">
+						<div class="swiper-wrapper">
+							<div class="swiper-slide">Slide 1
+							<img src="/resources/img/work.png">
+							</div>
+							<div class="swiper-slide">Slide 2
+							<img src="/resources/img/mainwork.png">
+							</div>
+							<div class="swiper-slide">Slide 3
+							<img src="/resources/img/worktogather.png">
+							</div>
+							<div class="swiper-slide">Slide 4
+							<H1>홈페이지 스샷찍어서 올리면 좋을것 같아요</H1>
+							</div>
+							<div class="swiper-slide">Slide 5
+							<H1>홈페이지 스샷찍어서 올리면 좋을것 같아요</H1><img src="/resources/img/teamproject.png"></div>
+							<div class="swiper-slide">Slide 6<H1>홈페이지 스샷찍어서 올리면 좋을것 같아요</H1>
+							<img src="/resources/img/workplace.png">
+							</div>
+							<div class="swiper-slide">Slide 7<H1>홈페이지 스샷찍어서 올리면 좋을것 같아요</H1>
+							<img src="/resources/img/webmobile.png"></div>
+							<div class="swiper-slide">Slide 8<H1>홈페이지 스샷찍어서 올리면 좋을것 같아요</H1></div>
+							<div class="swiper-slide">Slide 9<H1>홈페이지 스샷찍어서 올리면 좋을것 같아요</H1></div>
+							<div class="swiper-slide">Slide 10<H1>홈페이지 스샷찍어서 올리면 좋을것 같아요</H1></div>
+						</div>
+						<!-- Add Pagination -->
+						<div class="swiper-pagination"></div>
+						<!-- Add Arrows -->
+						<div class="swiper-button-next"></div>
+						<div class="swiper-button-prev"></div>
 					</div>
 				</div>
 				<!-- /.col (LEFT) -->
@@ -399,7 +335,28 @@ ul, li {
 
 		</div>
 	</header>
+ <!-- Swiper JS -->
+  <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
 
+  <!-- Initialize Swiper -->
+  <script>
+    var swiper = new Swiper('.swiper-container', {
+      spaceBetween: 30,
+      centeredSlides: true,
+      autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+  </script>
 	<!-- Footer -->
 	<footer class="footer" style="background-color: white">
 		<div class="container">

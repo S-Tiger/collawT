@@ -215,7 +215,7 @@ function withdrawal() {
 		<div class="row">
 		
 		<!-- 첫번째  -->
-		<div class="col-md-4" style="max-width: 25%;padding-left: 10px;padding-right: 0px;">
+		<div class="col-md-3">
 		<div class="card" style="margin: 10px; box-shadow: 0 0 1px #ffc107, 0 1px 3px #ffc107;">
 		<div class="card-header"><b>발의됨</b></div>
 		<div class="card-body kanbandiv"  id="kanbandiv1" ondrop="drop(event)" ondragover="allowDrop(event)">
@@ -229,7 +229,7 @@ function withdrawal() {
 		</div>
 		<!-- 첫번째 끝  -->
 		<!-- 두번째  -->
-		<div class="col-md-4" style="max-width: 25%;padding-left: 0px;padding-right: 0px;">
+		<div class="col-md-3">
 		<div class="card" style="margin: 10px; box-shadow: 0 0 1px #007bff, 0 1px 3px #007bff;">
 		<div class="card-header"><b>진행 중</b></div>
 		<div class="card-body kanbandiv" id="kanbandiv2" ondrop="drop(event)" ondragover="allowDrop(event)">
@@ -243,7 +243,7 @@ function withdrawal() {
 		</div>
 		<!-- 두번째 끝  -->
 		<!-- 세번째  -->
-		<div class="col-md-4" style="max-width: 25%;padding-left: 0px;padding-right: 0px;">
+		<div class="col-md-3">
 		<div class="card" style="margin: 10px;  box-shadow: 0 0 1px #e83e8c, 0 1px 3px #e83e8c;">
 		<div class="card-header"><b>일시중지</b></div>
 		<div class="card-body kanbandiv" id="kanbandiv3" ondrop="drop(event)" ondragover="allowDrop(event)">
@@ -257,7 +257,7 @@ function withdrawal() {
 		</div>
 		<!-- 세번째 끝  -->
 		<!-- 네번째  -->
-		<div class="col-md-4" style="max-width: 25%;padding-left: 0px;padding-right: 10px;">
+		<div class="col-md-3" >
 		<div class="card" style="margin: 10px; box-shadow: 0 0 1px #28a745, 0 1px 3px #28a745;">
 		<div class="card-header"><b>완료</b></div>
 		<div class="card-body kanbandiv" id="kanbandiv4" ondrop="drop(event)" ondragover="allowDrop(event)">

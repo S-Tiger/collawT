@@ -36,6 +36,9 @@
 	<definition name="/question" extends="defaultLayout">
 		<put-attribute name="content" value="/WEB-INF/views/question.jsp" />
 	</definition>
+	<definition name="hm/*" extends="defaultLayout">
+		<put-attribute name="content" value="/WEB-INF/hm/*.jsp" />
+	</definition>
 	
 	
 	<definition name="contentLayout" template="/WEB-INF/tiles/common/contentLayout.jsp">
