@@ -338,44 +338,51 @@ vertical-align: bottom;
 					<div class="swiper-container">
 						<div class="swiper-wrapper">
 							<div class="swiper-slide">
-								Slide 1 <img src="/resources/img/work.png">
+								<H1>화면 소개 - 검색(임시;)</H1>
+								Slide 1 <img src="/resources/img/1.png">
 							</div>
 							<div class="swiper-slide">
-								Slide 2 <img src="/resources/img/mainwork.png">
+								<H1>화면 소개 - 게시판</H1>
+								Slide 2 <img src="/resources/img/2.png">
 							</div>
 							<div class="swiper-slide">
-								Slide 3 <img src="/resources/img/worktogather.png">
+								<H1>화면 소개 - 스케줄</H1>
+								Slide 3 <img src="/resources/img/3.png">
 							</div>
 							<div class="swiper-slide">
 								Slide 4
-								<H1>홈페이지 스샷찍어서 올리면 좋을것 같아요</H1>
+								<H1>칸반-1</H1>
+								<img src="/resources/img/4.png">
 							</div>
 							<div class="swiper-slide">
 								Slide 5
-								<H1>홈페이지 스샷찍어서 올리면 좋을것 같아요</H1>
-								<img src="/resources/img/teamproject.png">
+								<H1>칸반-2</H1>
+								<img src="/resources/img/5.png">
 							</div>
 							<div class="swiper-slide">
 								Slide 6
-								<H1>홈페이지 스샷찍어서 올리면 좋을것 같아요</H1>
-								<img src="/resources/img/workplace.png">
+								<H1>추후 업뎃 예정</H1>
+								<img src="/resources/img/6.png">
 							</div>
 							<div class="swiper-slide">
 								Slide 7
-								<H1>홈페이지 스샷찍어서 올리면 좋을것 같아요</H1>
-								<img src="/resources/img/webmobile.png">
+								<H1>추후 업뎃 예정</H1>
+								<img src="/resources/img/7.png">
 							</div>
 							<div class="swiper-slide">
 								Slide 8
-								<H1>홈페이지 스샷찍어서 올리면 좋을것 같아요</H1>
+								<H1>알람</H1>
+								<img src="/resources/img/8-1.png">
 							</div>
 							<div class="swiper-slide">
 								Slide 9
-								<H1>홈페이지 스샷찍어서 올리면 좋을것 같아요</H1>
+								<H1>추후 업뎃 예정</H1>
+								<img src="/resources/img/9.png">
 							</div>
 							<div class="swiper-slide">
 								Slide 10
-								<H1>홈페이지 스샷찍어서 올리면 좋을것 같아요</H1>
+								<H1>추후 업뎃 예정</H1>
+								<img src="/resources/img/10.png">
 							</div>
 						</div>
 						<!-- Add Pagination -->

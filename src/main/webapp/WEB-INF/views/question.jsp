@@ -96,7 +96,7 @@ function checkQ_Email(q_Email) {
 				<form action="/question/sendEmail" name="form" method="post" onsubmit="return checkAll()">
 
 					<div class="card card-primary">
-						<div class="card-header">
+						<div class="card-header" style="background-color: #20c997;border-color:#20c997">
 							<h3 class="card-title">문의하기</h3>
 
 							<div class="card-tools">
@@ -140,10 +140,10 @@ function checkQ_Email(q_Email) {
 					</div>
 					<div class="row">
 						<div class="col-6">
-							<a href="javascript:history.back()" class="btn btn-primary btn-block">뒤로가기</a>
+							<a href="javascript:history.back()" class="btn btn-primary btn-block"style="background-color: #20c997;border-color:#20c997">뒤로가기</a>
 						</div>
 						<div class="col-6">
-							<button type="submit" class="btn btn-primary btn-block">제출</button>
+							<button type="submit" class="btn btn-primary btn-block"style="background-color: #20c997;border-color:#20c997">제출</button>
 						</div>
 						<!-- /.col -->
 					</div>

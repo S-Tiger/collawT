@@ -42,7 +42,7 @@ width: 100%;
 			{Header:"작성일",Type:"Date",SaveName:"v_Date",MinWidth:100},
 			{Header:"투표시작일",Type:"Date",SaveName:"v_Start",MinWidth:100},
 			{Header:"투표마감일",Type:"Date",SaveName:"v_End",MinWidth:100},
-			{Header:"링크",Type:"text",SaveName:"LINK_BUFF",MinWidth:100}
+			{Header:"링크",Type:"button",SaveName:"link",MinWidth:100}
 		];
 		IBS_InitSheet( mySheet , initSheet);
 
@@ -92,7 +92,7 @@ width: 100%;
 	
 	function mySheet_OnClick(Row, Col, Value, CellX, CellY, CellW, CellH) {
 		  //특정 열을 클릭했을 때 다른 페이지로 이동하도록 처리
-		  if( mySheet.ColSaveName(Col) == "LINK_BUFF"){
+		  if( mySheet.ColSaveName(Col) == "link"){
 		 
 		    location.href = "/project/vote/read?c_Id=" + mySheet.GetCellValue(Row,"c_Id")+"&"+"v_Num="+mySheet.GetCellValue(Row,"v_Num");
 		   // http://localhost:8090/project/vote/read?c_Id=523&v_Num=781

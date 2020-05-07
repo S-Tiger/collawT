@@ -49,10 +49,9 @@ public class ManagerVoteControllerImpl implements ManagerVoteController {
 		//데이터 조회
 		List<Map> data = managerVoteService.searchList(searchMap);
         
-//        for (int i = 0; i < data.size(); i++) {
-//        	String url = "http://localhost:8090/project/vote/read?c_Id="+data.get(i).get("c_Id")+"&"+"v_Num="+data.get(i).get("v_Num") ;
-//              data.get(i).put("link", url);
-//		}
+        for (int i = 0; i < data.size(); i++) {
+              data.get(i).put("link", "바로가기");
+		}
         System.out.println("조회결과"+resultMap);
         
         resultMap.put("Data", data);
