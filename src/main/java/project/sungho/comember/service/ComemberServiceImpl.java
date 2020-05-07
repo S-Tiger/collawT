@@ -51,6 +51,13 @@ public class ComemberServiceImpl implements ComemberService{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	@Override
+	public void deleteMember(Map<String, Object> dataMap) throws Exception {
+		comemberDAO.deleteMember(dataMap);
+		// TODO Auto-generated method stub
+		
+	}
 
 
 

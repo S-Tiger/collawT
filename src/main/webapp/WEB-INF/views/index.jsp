@@ -58,6 +58,29 @@
 <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
 </head>
 <style>
+@import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);
+@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+@import url(//fonts.googleapis.com/earlyaccess/jejumyeongjo.css);
+@import url(//fonts.googleapis.com/earlyaccess/kopubbatang.css);
+@import url(//fonts.googleapis.com/earlyaccess/nanumbrushscript.css);
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+@import url(//fonts.googleapis.com/earlyaccess/hanna.css);
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+@import url(//fonts.googleapis.com/earlyaccess/nanummyeongjo.css);
+@import url(//fonts.googleapis.com/earlyaccess/jejuhallasan.css);
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
+ 
+.np{font-family: 'Nanum Pen Script', cursive;}
+.jg{font-family: 'Jeju Gothic', sans-serif;}
+.jm{font-family: 'Jeju Myeongjo', serif;}
+.kb{font-family: 'KoPub Batang', serif;}
+.nb{font-family: 'Nanum Brush Script', cursive;}
+.ns{font-family: 'Noto Sans KR', sans-serif;}
+.hn{font-family: 'Hanna', sans-serif;}
+.ng{font-family: 'Nanum Gothic', sans-serif;}
+.nm{font-family: 'Nanum Myeongjo', serif;}
+.jh{font-family: 'Jeju Hallasan', cursive;}
+.ngc{font-family: 'Nanum Gothic Coding', monospace;}
 .header {
 	position: relative;
 	height: 200px;
@@ -216,7 +239,7 @@ img {
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav text-uppercase ml-auto">
 					<li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services" style="color: black">제품 설명</a></li>
-					<li class="nav-item"><a class="nav-link js-scroll-trigger" href="#question" style="color: black">고객 지원</a></li>
+					<li class="nav-item"><a class="nav-link js-scroll-trigger" href="/question" style="color: black">고객 지원</a></li>
 					<li class="nav-item"><a class="nav-link js-scroll-trigger" href="/member/signup" style="color: black">회원가입</a></li>
 				</ul>
 			</div>
@@ -240,23 +263,27 @@ img {
 	<header class="masthead" id="services">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-6">
+				<div class="col-md-6"style=" position: absolute; z-index: 2;">
 					<div class="card-body" style="border-color: white !important;">
+						<h1>&nbsp</h1><br> <br>
+						<h1 style="text-align: left;"class="ng">효과적인 팀워크 가벼워진 업무</h1>
+						<h4 style="text-align: left;"class="ng">이메일이 필요없는 간편한 소통과 파일 공유, 빠른 피드백 확인까지 바라던 기능들을 모두 담았습니다.</h4>
+						<p style="text-align: left;"class="ng">여러분이 더 협력적으로 일하고 더 많은 일을 할 수 있도록 협업 게시판, 목록, 칸반, 검색기능을 통해 유연한 방법으로 프로젝트를 정리하고 우선순위를 정할 수 있는 Collaw T 입니다.</p>
+						<a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger float-right ng" style="background-color: #fed136; font-size: large; border-color: #fed136; padding-top: 13px; padding-bottom: 13px; padding-left: 20px; padding-right: 20px;" href="member/loginPage">로그인</a>
 						<h1>&nbsp</h1>
-						<h1 style="text-align: left;">효과적인 팀워크 가벼워진 업무, 협업툴</h1>
-						<h4 style="text-align: left;">이메일이 필요없는 간편한 소통과 파일 공유, 빠른 피드백 확인까지. 바라던 기능들을 모두 담았습니다.</h4>
-						<p style="text-align: left;">여러분이 더 협력적으로 일하고 더 많은 일을 할 수 있도록 협업 게시판, 목록, 칸반, 검색기능을 통해 여러분의 재미있고 유연하며 보람 있는 방법으로 프로젝트를 정리하고 우선순위를 정할 수 있는 반응형 웹기반 협업툴 Collaw T 입니다.</p>
-						<a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger float-right" style="background-color: #fed136; font-size: large; border-color: #fed136; padding-top: 13px; padding-bottom: 13px; padding-left: 20px; padding-right: 20px;" href="member/loginPage">로그인</a>
-						<h1>&nbsp</h1><h1>&nbsp</h1><h1>&nbsp</h1>
+						<h1>&nbsp</h1>
+						<h1>&nbsp</h1>
 					</div>
 				</div>
 				<!-- /.col (LEFT) -->
-				<div class="col-md-6">
+				<div class="col-md-6" style="position: relative; left: 55%; z-index: 1; opacity: 0.3;">
 					<!-- LINE CHART -->
 					<div class="card-body" style="border-color: white !important;">
-					<h1>&nbsp</h1>
+						<h1>&nbsp</h1>
 						<img src="../resources/img/teamproject.png" style="width: 544px; height: 326px;">
-						<h1>&nbsp</h1><h1>&nbsp</h1><h1>&nbsp</h1>
+						<h1>&nbsp</h1>
+						<h1>&nbsp</h1>
+						<h1>&nbsp</h1>
 					</div>
 					<!-- /.card -->
 				</div>
@@ -267,19 +294,19 @@ img {
 		</div>
 	</header>
 
-	<header class="masthead" id="question">
+	<!-- <header class="masthead" id="question">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-				<br> <br> <br><br> <br> <br><br> <br> <br><br> <br> <br>
+					<br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
 					<div class="card-body" style="border-color: white !important;">
 						<h4 style="text-align: left;">안녕하세요. 콜라우티 고객지원입니다. 무엇을 도와드릴까요?</h4>
 						<a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger float-right" style="font-size: large; background-color: #fed136; border-color: #fed136; padding-top: 13px; padding-bottom: 13px; padding-left: 20px; padding-right: 20px;" href="/question"> 고객지원 바로가기 </a>
 					</div>
-				<br> <br> <br><br> <br> <br><br> <br> <br><br> <br> <br>
+					<br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
 				</div>
-				<!-- /.col (LEFT) -->
-				<!-- <div class="col-md-6">
+				/.col (LEFT)
+				<div class="col-md-6">
 					LINE CHART
 					<br> <br> <br><br> <br> <br><br> <br> <br><br> <br> <br>
 					<div class="card-body" style="border-color: white !important;">
@@ -287,13 +314,13 @@ img {
 					</div>
 					<br> <br> <br><br> <br> <br><br> <br> <br><br> <br> <br>
 					/.card
-				</div> -->
-				<!-- /.col (RIGHT) -->
+				</div>
+				/.col (RIGHT)
 			</div>
-			<!-- /.row -->
+			/.row
 
 		</div>
-	</header>
+	</header> -->
 
 	<!-- Header -->
 	<header class="masthead" id="question">
@@ -404,10 +431,7 @@ img {
 					</ul>
 				</div>
 				<div class="col-md-12">
-					<p>
-					© 2020~ Collaw T, Inc. (주) 콜라우티 | 
-					서울특별시 종로구 YMCA 빌딩 | 개인정보 취급방침 | 이용 약관 대표자: 김성호 | 
-					사업자등록번호: 000-00-0000 | 통신판매업신고번호: (가상)2020-서울종로-00000 phone: 02-0000-0000</p>
+					<p>© 2020~ Collaw T, Inc. (주) 콜라우티 | 서울특별시 종로구 YMCA 빌딩 | 개인정보 취급방침 | 이용 약관 대표자: 김성호 | 사업자등록번호: 000-00-0000 | 통신판매업신고번호: (가상)2020-서울종로-00000 phone: 02-0000-0000</p>
 				</div>
 			</div>
 		</div>

@@ -27,7 +27,7 @@
 		initSheet.Cols = [
 			{Header:"상태",Type:"Status",SaveName:"STATUS",MinWidth:50, Align:"Center"},
 			{Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:50},
-			{Header:"이메일",Type:"Text",SaveName:"mem_Id",MinWidth:150,Align:"Center"},
+			{Header:"이메일",Type:"Text",SaveName:"mem_Id",MinWidth:150,Align:"Center",Edit :true},
 			{Header:"비밀번호",Type:"Text",SaveName:"mem_Pwd",MinWidth:80,KeyField:1 ,MultiLineText:1},			
 			{Header:"회원이름(별명)",Type:"Text",SaveName:"mem_Name",MinWidth:150,KeyField:1 ,MultiLineText:1, Wrap:1},
 			{Header:"가입일",Type:"Date",SaveName:"mem_JoinDate",MinWidth:100},

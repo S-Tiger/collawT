@@ -48,7 +48,7 @@
           </div>
           <!-- /.col -->
             <div class="col-md-3">
-            <div class="sticky-top mb-3">
+            <div class="sticky-top mb-3" style="z-index : 1;">
               <div class="card">
                 <div class="card-header">
                   <h5 class="card-title">해당 협업공간</h5>

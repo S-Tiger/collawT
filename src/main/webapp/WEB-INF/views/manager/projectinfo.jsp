@@ -32,7 +32,7 @@ width: 100%;
 		initSheet.Cols = [
 			{Header:"상태",Type:"Status",SaveName:"STATUS",MinWidth:50, Align:"Center"},
 			{Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:50},
-			{Header:"공간ID",Type:"Text",SaveName:"c_Id",MinWidth:50 ,KeyField:1},
+			{Header:"공간ID",Type:"Text",SaveName:"c_Id",MinWidth:50 ,KeyField:1, Edit:false},
 			{Header:"공간이름",Type:"Text",SaveName:"c_Name",MinWidth:200 ,MultiLineText:1},			
 			{Header:"공간설명",Type:"Text",SaveName:"c_Comment",MinWidth:150 ,MultiLineText:1, Wrap:1},
 			{Header:"공간대표",Type:"Text",SaveName:"mem_Id",MinWidth:100,MultiLineText:1, Wrap:1},

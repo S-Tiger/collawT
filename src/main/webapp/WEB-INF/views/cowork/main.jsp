@@ -102,6 +102,16 @@ function withdrawal() {
 		
 	}
 	
+	function comemberdelete(obj) {
+		
+		var delStat = confirm(obj+"님을 강퇴하시겠습니까?");
+		
+		if (delStat == true) {
+			alert(obj+"님을 강퇴하였습니다.")
+		}
+		
+	}
+	
 	
 $(function () {
     //-------------
@@ -400,8 +410,12 @@ $(function () {
 			<div class="col-md-4">
 			                <div class="card">
                   <div class="card-header">
-                    <h3 class="card-title"><b>협업공간 멤버</b></h3>
-                    	 <h3 class="card-title float-right" style="text-align:right">총 ${memberList.size()}명</h3>
+                    <h3 class="card-title"><b>협업공간 멤버</b></h3> 
+                    <c:if test="${member.mem_Id == pjt.mem_Id}">
+                  <a style="font-size: 13px; margin-left : 3px; position: absolute;" href="/#" data-needpopup-show="#memberlist-popup">
+                    <i class="nav-icon fas fa-cogs"> </i></a>
+                    </c:if>
+                  <h3 class="card-title float-right" style="text-align:right">총 ${memberList.size()}명</h3>
 
 
                   </div>
@@ -420,10 +434,10 @@ $(function () {
 						class="img-circle elevation-2" id="userImage2" alt="프로필사진">
 						</c:if>
 						<br>
-                        <a style= "margin: 5px;"class="users-list-name" href="#">${memberitem.mem_Name}
+                        <a style= "margin: 5px;"class="users-list-name" href="#">
                         <c:if test="${memberitem.mem_Id == pjt.mem_Id}">
                         <img src="${contextPath}/resources/dist/img/crown.jpg" style="width: 20px; margin-top: -5px;">
-                        </c:if>
+                        </c:if>${memberitem.mem_Name}
                         </a>
                       </li>
                     </c:forEach>
@@ -671,4 +685,26 @@ $(function () {
 
 
 
-
+<!-- 공간맴버 리스트 모달 팝업 내용 -->
+<div id='memberlist-popup' class="needpopup">
+	<div class="col-md-6" style="max-width: 100%;">
+<table class="table table-striped projects" style="white-space: nowrap; overflow: hidden;"><div style="margin-bottom: 10px;">
+<h4 class="m-0 text-dark" style="font-family: Recipekorea; max-width: 80%; display: contents;">공간맴버 리스트</h4></div>
+		<tr style="background-color: #dc3545; color: white;">
+			<td style="width:70%; vertical-align:top"><font size="3em"><b>회원정보</b></font></td>
+			<td style="width:30%; vertical-align:top"><font size="3em"><b>강퇴</b></font></a>
+	<c:forEach var="memberItem2" items="${memberList}" >
+	<c:if test="${memberItem2.mem_Id != pjt.mem_Id}">
+			<tr>
+			<td style="width:70%; vertical-align:top"><font size="3em">
+			<span>${memberItem2.mem_Name}(${memberItem2.mem_Id})</span></font></td>
+			<td style="width:30%; vertical-align:top; padding-left: 22px;">
+			<a href="/pjtmember/deleteMember?c_Id=${pjt.c_Id}&mem_Id=${memberItem2.mem_Id}" onclick="return comemberdelete('${memberItem2.mem_Id}')" style="padding: 0px; margin-top: 3;">
+			<i class="fas fa-user-alt-slash"></i></a>
+			</td>
+			</tr>
+			</c:if>
+			</c:forEach>
+</table>
+</div>
+</div>

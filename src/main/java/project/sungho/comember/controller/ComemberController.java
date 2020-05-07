@@ -15,5 +15,6 @@ public String searchList(Model model ,HttpServletRequest request, HttpServletRes
 	public String updateComember(Model model) throws Exception;
 	public String insertComember(CoworkVO coworkVO, HttpSession session) throws Exception;
 	public String deleteComember(Model model ,HttpServletRequest request, HttpServletResponse responsel) throws Exception;
+	public String deleteMember(Model model ,HttpServletRequest request, HttpServletResponse responsel) throws Exception;
 	
 }
