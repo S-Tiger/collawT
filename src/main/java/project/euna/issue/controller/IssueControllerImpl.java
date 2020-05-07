@@ -306,7 +306,6 @@ public class IssueControllerImpl implements IssueController {
 		String i_End = issueVO.getI_End();
 		String ig_Num = issueVO.getig_Num();
 		String i_Num = issueVO.getI_Num();
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!"+i_Num);
 		
 		Map<String, Object> cmap = new HashMap<String,Object>();
 		cmap.put("mem_Id", mem_Id);

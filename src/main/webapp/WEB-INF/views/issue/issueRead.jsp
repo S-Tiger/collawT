@@ -598,20 +598,20 @@ $(document).ready(function() {
 	<form action="/project/issue/copy" method="post" id="applyform">
       <select class="form-control custom-select" id="coworkSelect" name="coworkSelect">
       	<option selected disabled>협업공간을 선택하세요</option>
-         <c:forEach var="coworkList" items="${coworkList}" >
-         
+      	  <option id="myspace" name="myspace">내 공간</option>
+         <c:forEach var="coworkList" items="${coworkList}" > 
          <c:if test="${coworkList.C_ID != issueRead.c_Id}">
          <option id="copyc_Id" name="copyc_Id" value="${coworkList.C_ID}">${coworkList.C_NAME}</option>
        </c:if>
         </c:forEach>
        </select>	
 		
-		<input type="hidden" value="${issueRead.i_Name}" id="i_Name" name="i_Name">
-		<input type="hidden" value="${issueRead.i_Content}" id="i_Content" name="i_Content">
-		<input type="hidden" value="${issueRead.ig_Num}" id="ig_Num" name="ig_Num">
-		<input type="hidden" value="${issueRead.i_Start}" id="i_Start" name="i_Start">
-		<input type="hidden" value="${issueRead.i_End}" id="i_End" name="i_End">
-		<input type="hidden" value="${issueRead.i_Num}" id="i_Num" name="i_Num">
+		<input type="hidden" value="${issueRead.i_Name}" name="i_Name">
+		<input type="hidden" value="${issueRead.i_Content}" name="i_Content">
+		<input type="hidden" value="${issueRead.ig_Num}" name="ig_Num">
+		<input type="hidden" value="${issueRead.i_Start}" name="i_Start">
+		<input type="hidden" value="${issueRead.i_End}" name="i_End">
+		<input type="hidden" value="${issueRead.i_Num}" name="i_Num">
  		<input type="hidden" value="" id="changedc_Id" name="c_Id">
 		
 	
