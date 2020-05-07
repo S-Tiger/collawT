@@ -33,25 +33,7 @@
 //	@Autowired
 //	CoworkService coworkService;
 //
-//	public void searchList(Model model) throws Exception {
-//  System.out.println("aop실행"); HttpServletRequest request =
-//  ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).
-//  getRequest();
-//  
-//  HttpSession session = request.getSession();
-//  
-//  String mem_Id = (String)session.getAttribute("mem_id");
-//  
-//  Map<String, Object> searchMap = new HashMap<String, Object>();
-//  searchMap.put("mem_Id", mem_Id);
-//  
-//  List<CoworkVO> list = coworkService.searchList(searchMap); 
-// 
-//  
-//  model.addAttribute("coworklist", list);
-//  
-//asdsd
-//  }
+//	
 //
 //	@After("execution( project...controller..(..))")
 //	public void aroundAdvice() throws Throwable {

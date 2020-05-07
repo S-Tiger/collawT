@@ -26,6 +26,7 @@ public class Interceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
+		
 		//로그인하여 세션에 저장되어있는 회원정보를 불러옴
 		HttpSession session = request.getSession();
 		Map<String, Object> member = new HashMap<String,Object>();

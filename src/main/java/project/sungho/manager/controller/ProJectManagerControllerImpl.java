@@ -32,18 +32,19 @@ import project.hm.hmp002_d001.service.Hmp002_d001Service;
 import project.hm.hmp002_d001.vo.Hmp002_d001VO;
 import project.sungho.comember.service.ComemberService;
 import project.sungho.manager.service.ManagerService;
+import project.sungho.manager.service.ProJectManagerService;
 
 @Controller
-@RequestMapping("/manager/member/*")
-public class ManagerControllerImpl implements ManagerController {
+@RequestMapping("/manager/project/*")
+public class ProJectManagerControllerImpl implements ProJectManagerController {
 	@Autowired 
-	ManagerService managerService;
+	ProJectManagerService pjtmanagerService;
 	
 	@Override
 	@RequestMapping(value = "/main", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView searchInit(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		ModelAndView mav = new ModelAndView("/manager/meminfo");
+		ModelAndView mav = new ModelAndView("/manager/projectinfo");
 		return mav;
 	} 
 	
@@ -56,12 +57,12 @@ public class ManagerControllerImpl implements ManagerController {
 		Map<String, Object> resultMap = new HashMap<String, Object>(); // 조회결과
 		
 		
+		searchMap.put("c_Id", request.getParameter("c_Id"));
+		searchMap.put("c_Name", request.getParameter("c_Name"));
 		searchMap.put("mem_Id", request.getParameter("mem_Id"));
-		searchMap.put("mem_Name", request.getParameter("mem_Name"));
-		searchMap.put("mem_Loginapi", request.getParameter("mem_Loginapi"));
 		// 검색조건설정
 		//데이터 조회
-		List<Map> data = managerService.searchList(searchMap);
+		List<Map> data = pjtmanagerService.searchList(searchMap);
         resultMap.put("Data", data);
         
         return resultMap;
@@ -86,7 +87,7 @@ public class ManagerControllerImpl implements ManagerController {
 		
 		Map<String, String> result = new HashMap<String, String>();
 		try {
-			managerService.saveData(dataMap);	
+			pjtmanagerService.saveData(dataMap);	
 			result.put("Code","0");
 			result.put("Message","저장되었습니다");
 		}catch(Exception e) {

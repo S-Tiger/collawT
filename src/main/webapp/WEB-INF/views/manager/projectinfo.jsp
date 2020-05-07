@@ -32,12 +32,13 @@ width: 100%;
 		initSheet.Cols = [
 			{Header:"상태",Type:"Status",SaveName:"STATUS",MinWidth:50, Align:"Center"},
 			{Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:50},
-			{Header:"이메일",Type:"Text",SaveName:"mem_Id",MinWidth:200,KeyField:1,Align:"Center"},
-			{Header:"비밀번호",Type:"Text",SaveName:"mem_Pwd",MinWidth:80 ,MultiLineText:1},			
-			{Header:"회원이름(별명)",Type:"Text",SaveName:"mem_Name",MinWidth:150,MultiLineText:1, Wrap:1},
-			{Header:"가입일",Type:"Date",SaveName:"mem_JoinDate",MinWidth:100},
-			{Header:"가입방식",Type:"Text",SaveName:"mem_Loginapi",MinWidth:100},
+			{Header:"공간ID",Type:"Text",SaveName:"c_Id",MinWidth:50 ,KeyField:1},
+			{Header:"공간이름",Type:"Text",SaveName:"c_Name",MinWidth:200 ,MultiLineText:1},			
+			{Header:"공간설명",Type:"Text",SaveName:"c_Comment",MinWidth:150 ,MultiLineText:1, Wrap:1},
+			{Header:"공간대표",Type:"Text",SaveName:"mem_Id",MinWidth:100,MultiLineText:1, Wrap:1},
+			{Header:"카테고리",Type:"Text",SaveName:"c_Category",MinWidth:100},
 		];   
+		
 		IBS_InitSheet( mySheet , initSheet);
 
 		mySheet.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
@@ -50,7 +51,7 @@ width: 100%;
 		switch(sAction) {
 			case "search": //조회
 			    var param = FormQueryStringEnc(document.frm);
-				mySheet.DoSearch("${contextPath}/manager/member/searchList", param);
+				mySheet.DoSearch("${contextPath}/manager/project/searchList", param);
 				//mySheet.DoSearch("transaction_data2.json");
 				break;
 			case "reload": //초기화
@@ -59,7 +60,7 @@ width: 100%;
 			case "save": // 저장
 				//var tempStr = mySheet.GetSaveString();
 				//alert("서버로 전달되는 문자열 확인 :"+tempStr);
-				mySheet.DoSave("${contextPath}/manager/member/saveData");
+				mySheet.DoSave("${contextPath}/manager/project/saveData");
 				break;			
 			case "insert": //신규행 추가
 				var row = mySheet.DataInsert();
@@ -91,7 +92,7 @@ width: 100%;
 		
 <body onload="LoadPage()">
   <div class="page_title">
-    <span class="title"><b>회원관리</b></span>
+    <span class="title"><b>협업공간관리</b></span>
   </div>
   <div class="main_content">
     <div class="exp_product">각 행의 데이터를 수정하거나 입력,삭제시 상태컬럼의 변화를
@@ -99,9 +100,9 @@ width: 100%;
 			<div class="row">
     <div class="exp_product" style="width: 100%;">
       <form name='frm'>
-        이메일: <input type='text' id="mem_Id" name="mem_Id" /> 
-        회원이름(별명): <input type='text' id="mem_Name" name="mem_Name" /> 
-        가입방식: <input type='text' id="mem_Loginapi" name="mem_Loginapi" /> 
+        공간ID: <input type='text' id="c_Id" name="c_Id" /> 
+        공간이름: <input type='text' id="c_Name" name="c_Name" /> 
+        공간대표: <input type='text' id="mem_Id" name="mem_Id" /> 
       </form>
     </div>
     <div class="ib_function float_right">
