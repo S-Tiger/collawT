@@ -168,7 +168,7 @@ public class notifyControllerImpl implements NotifyController {
 		searchMap = (Map<String,Object>)session.getAttribute("member");
 		List<Map> notifyList = notifyService.searchNotify(searchMap);
 		List<Map> list = applyService.searchList(searchMap);
-		ModelAndView mav = new ModelAndView("/newspeed/newspeedList3");
+		ModelAndView mav = new ModelAndView("/personal/myHome");
 		mav.addObject("notifyList", notifyList);
 		mav.addObject("applylist", list);
 		//System.out.println("notifyList값=="+notifyList);
@@ -183,7 +183,7 @@ public class notifyControllerImpl implements NotifyController {
 		HttpSession session = request.getSession();
 		searchMap = (Map<String,Object>)session.getAttribute("member");
 		List<Map> replyList = notifyService.replyList(searchMap);
-		ModelAndView mav = new ModelAndView("/newspeed/newspeedList3");
+		ModelAndView mav = new ModelAndView("/personal/myHome");
 		mav.addObject("replyList", replyList);
 		System.out.println("뚜루뚜루");
 		//System.out.println("replyList=="+replyList);
@@ -197,7 +197,7 @@ public class notifyControllerImpl implements NotifyController {
 		HttpSession session = request.getSession();
 		searchMap = (Map<String,Object>)session.getAttribute("member");
 		List<Map> voteList = notifyService.viewVote(searchMap);
-		ModelAndView mav = new ModelAndView("/newspeed/newspeedList3");
+		ModelAndView mav = new ModelAndView("/personal/myHome");
 		mav.addObject("voteList", voteList);
 		return mav;
 	}

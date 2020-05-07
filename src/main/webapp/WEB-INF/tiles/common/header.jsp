@@ -92,9 +92,11 @@
 			type : 'get',
 			success : function(data){
 				var itemcount = data.length;
+				var str='개의 글에 댓글이 달렸습니다'
+				var no=itemcount+str;
 				var count =parseInt(itemcount);
 				total += count;
-				$("#test01").html(itemcount);				
+				$("#test01").html(no);				
 				
 			}
 		})
@@ -103,9 +105,11 @@
 			type : 'get',
 			success : function(data){
 				var itemcount = data.length;
+				var str='개의 투표가 있습니다'
+				var no=itemcount+str;
 				var count =parseInt(itemcount);
 				total += count;
-				$("#test66").html(itemcount);
+				$("#test66").html(no);
 			}
 		})
 		$.ajax({
@@ -113,9 +117,11 @@
 			type : 'get',
 			success : function(data){
 				var itemcount = data.length;
+				var str='개의 이슈가 있습니다'
+				var no=itemcount+str;
 				var count =parseInt(itemcount);
 				total += count;
-				$("#test03").html(itemcount);				
+				$("#test03").html(no);				
 				
 			}
 		})
@@ -133,11 +139,15 @@
 					}
 				}
 				var itemcount1 = itemString.length;
+				var str='개의 초대가 있습니다'
+				var no=itemcount1+str;
 				var count1 =parseInt(itemcount1);
 				total += count1;
-				$("#test33").html(itemcount1);
+				var str='개의 알림이 있습니다'
+				var last=total+str;
+				$("#test33").html(no);
 				$("#test00").html(total);
-				$("#test22").html(total);
+				$("#test22").html(last);
 			}
 		})
 		//북마크 리스트 가져오기 ajax 
@@ -371,22 +381,22 @@
 					<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" >
 						<span class="dropdown-item dropdown-header" id = "test22" ></span>
 						<div class="dropdown-divider"></div>
-						<a href="/notify/replyList" class="dropdown-item"> <i
+						<a href="/main" class="dropdown-item"> <i
 							class="fas fa-envelope mr-2" id = "test01"></i> <span
 							class="float-right text-muted text-sm"></span>
 						</a>
           <div class="dropdown-divider"></div>
-          <a href="/notify/list" class="dropdown-item">
+          <a href="/main" class="dropdown-item">
             <i class="fas fa-users mr-2" id="test33"></i> 
             <span class="float-right text-muted text-sm"></span>
           </a>
           <div class="dropdown-divider"></div>
-          <a href="/notify/list" class="dropdown-item">
+          <a href="/main" class="dropdown-item">
             <i class="fas fa-file mr-2" id="test03"></i> 
             <span class="float-right text-muted text-sm"></span>
           </a>
           <div class="dropdown-divider"></div>
-          <a href="/notify/voteList" class="dropdown-item">
+          <a href="/main" class="dropdown-item">
             <i class="fas fa-users mr-2" id="test66"></i> 
             <span class="float-right text-muted text-sm"></span>
           </a>
