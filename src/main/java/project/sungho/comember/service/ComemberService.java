@@ -16,4 +16,5 @@ public interface ComemberService {
 	 public void updateComember(Map<String, Object> dataMap) throws Exception;
 	 public void insertComember(Map<String, Object> dataMap) throws Exception;
 	 public void deleteComember(Map<String, Object> dataMap) throws Exception;
+	 public void deleteMember(Map<String, Object> dataMap) throws Exception;
 }

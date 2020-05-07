@@ -78,5 +78,20 @@ public class ComemberControllerImpl implements ComemberController {
 		
 		return "redirect:/main";
 	}
+	
+	@Override
+	@GetMapping("deleteMember")
+	public String deleteMember(Model model ,HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String c_Id = request.getParameter("c_Id");
+		String mem_Id = request.getParameter("mem_Id");
+		
+		System.out.println("--------------------강퇴--------"+c_Id+mem_Id);
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		dataMap.put("c_Id", c_Id);
+		dataMap.put("mem_Id", mem_Id);
+		comemberService.deleteMember(dataMap);
+		
+		return "redirect:/project/main?c_Id=" + c_Id;
+	}
 
 }

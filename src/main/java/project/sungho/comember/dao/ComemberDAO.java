@@ -18,4 +18,5 @@ public interface ComemberDAO {
 	 public void insertComember(Map<String, Object> dataMap) throws DataAccessException;
 	 public void deleteComember(Map<String, Object> dataMap) throws DataAccessException;
 	 public void deleteComemberAll(Map<String, Object> dataMap) throws DataAccessException;
+	 public void deleteMember(Map<String, Object> dataMap) throws DataAccessException;
 }

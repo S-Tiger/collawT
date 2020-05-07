@@ -56,6 +56,12 @@ public class ComemberDAOImpl implements ComemberDAO {
 		sqlSession.delete("comember.deleteComember",dataMap);
 	}
 	
+	@Override
+	public void deleteMember(Map<String, Object> dataMap) throws DataAccessException {
+		// TODO Auto-generated method stub
+		sqlSession.delete("comember.deleteMember",dataMap);
+	}
+	
 	public void deleteComemberAll(Map<String, Object> dataMap) throws DataAccessException {
 		// TODO Auto-generated method stub
 		sqlSession.delete("comember.deleteComemberAll",dataMap);
