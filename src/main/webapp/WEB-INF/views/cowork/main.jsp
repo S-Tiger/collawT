@@ -420,10 +420,10 @@ $(function () {
 						class="img-circle elevation-2" id="userImage2" alt="프로필사진">
 						</c:if>
 						<br>
-                        <a style= "margin: 5px;"class="users-list-name" href="#">${memberitem.mem_Name}
                         <c:if test="${memberitem.mem_Id == pjt.mem_Id}">
                         <img src="${contextPath}/resources/dist/img/crown.jpg" style="width: 20px; margin-top: -5px;">
                         </c:if>
+                        <a style= "margin: 5px;"class="users-list-name" href="#">${memberitem.mem_Name}
                         </a>
                       </li>
                     </c:forEach>
