@@ -12,6 +12,7 @@
 		<result property="mem_File" column="mem_File" javaType="[B"
 			jdbcType="BLOB" />
 		<result property="mem_Key" column="mem_Key" />
+		<result property="mem_Kind" column="mem_Kind" />
 		<result property="mem_LoginApi" column="mem_LoginApi" />
 		<!-- <result property="forgot_Key" column="mem_Imagname" /> -->
 	</resultMap>
@@ -92,7 +93,8 @@
 	<select id="login" resultMap="memberResult01"
 		parameterType="java.util.Map">
 	<![CDATA[
-		select mem_id,mem_pwd, mem_file, mem_loginapi, mem_name, mem_joindate, mem_kind from member
+		select mem_id,mem_pwd, mem_file, mem_loginapi, mem_name, mem_joindate, mem_kind 
+		from member
 		where mem_Id = #{mem_Id}
 	]]>
 

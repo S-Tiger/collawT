@@ -221,6 +221,7 @@ public class MemberControllerImpl implements MemberController {
 
 		// 로그인시 세션에.. 로그인성공
 		if (memberVO != null && passMatch) {
+			
 			System.out.println("로그인 성공(객체): " + memberVO);
 
 			HttpSession session = request.getSession();
