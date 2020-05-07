@@ -35,10 +35,14 @@ public class PjtInterceptor extends HandlerInterceptorAdapter {
 		String loginId = (String) member.get("mem_Id");
 		String checkmember = request.getParameter("c_Id");
 		checkId = comemberService.searchList(member);
-		
+		String memKind = (String) member.get("mem_Kind");
+		if (memKind.equals("03")) {
+			return true;
+		}	
+		System.out.println("맴버권한================================"+ memKind);
 		for (int i = 0; i < checkId.size(); i++) {
 			System.out.println("체크리스트============================"+checkId.get(i));
-			if (checkmember.equals(checkId.get(i).get("c_Id")) || member.get("mem_Kind").equals("03")) {
+			if (checkmember.equals(checkId.get(i).get("c_Id"))) {
 				return true;
 			}
 		}
