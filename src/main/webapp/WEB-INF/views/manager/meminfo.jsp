@@ -22,6 +22,8 @@ width: 100%;
 	//시트 높이 계산용
 	var pageheightoffset = 200;
 	
+
+	
 	/*Sheet 기본 설정 */
 	function LoadPage() {
 		mySheet.RemoveAll();
@@ -37,6 +39,7 @@ width: 100%;
 			{Header:"회원이름(별명)",Type:"Text",SaveName:"mem_Name",MinWidth:150,MultiLineText:1, Wrap:1},
 			{Header:"가입일",Type:"Date",SaveName:"mem_JoinDate",MinWidth:100},
 			{Header:"가입방식",Type:"Text",SaveName:"mem_Loginapi",MinWidth:100},
+			
 		];   
 		IBS_InitSheet( mySheet , initSheet);
 
