@@ -18,4 +18,5 @@ public interface Personal_appendixService {
 	public void uploadFile(Map<String, Object> hmap) throws Exception;
 	public void copyFile(Map<String, Object> hmap) throws Exception;
 	public void fileDelete(String p_Num) throws Exception;
+	public void copyFiletoCowork(Map<String, Object> hmap) throws Exception;
 }

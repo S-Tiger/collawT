@@ -65,6 +65,15 @@
 	    and a_Del = 'N'
 	</insert>
 	
+		<!-- 협업공간 첨부파일 복사 -->
+	 <insert id="copyFiletoCowork" parameterType="java.util.HashMap">
+		insert into appendix(a_RealName, a_File, a_NameEx, i_Num, a_Num, a_Size, a_Del)
+	    select p_a_RealName, p_a_File, p_a_NameEx, #{redirecti_Num}, appendix_seq.nextval as p_a_Num, p_a_Size, p_a_Del
+	    from personal_appendix
+	    where p_Num = #{p_Num}
+	    and p_a_Del = 'N'
+	</insert>
+	
 	
 		<!-- 작성 취소 시 파일 없애기 -->
 	<delete id="fileDelete" parameterType="String">

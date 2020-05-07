@@ -492,7 +492,7 @@ function urlClipCopy() {
 			복사한 글을 게시할 협업공간을 선택하세요.</span>
 	</div>
 	
-	<form action="/project/issue/copy" method="post" id="copyform">
+	<form action="/personal/copy" method="post" id="copyform">
       <select class="form-control custom-select" id="coworkSelect" name="coworkSelect">
       	<option selected disabled>협업공간을 선택하세요</option>
          <c:forEach var="coworkList" items="${coworkList}" >

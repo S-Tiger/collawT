@@ -597,7 +597,6 @@ $(document).ready(function() {
 	
 	<form action="/project/issue/copy" method="post" id="copyform">
       <select class="form-control custom-select" id="coworkSelect" name="coworkSelect">
-      	<option selected disabled>협업공간을 선택하세요</option>
       	  <option id="myspace" value="myspace" name="myspace">내 공간</option>
          <c:forEach var="coworkList" items="${coworkList}" > 
          <c:if test="${coworkList.C_ID != issueRead.c_Id}">

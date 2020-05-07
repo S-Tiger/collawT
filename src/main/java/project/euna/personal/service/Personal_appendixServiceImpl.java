@@ -56,6 +56,12 @@ public class Personal_appendixServiceImpl implements Personal_appendixService {
 			personal_appendixDAO.copyFile(hmap);
 		}
 		
+		//다른 협업공간으로 첨부파일 복사
+		@Override
+		public void copyFiletoCowork(Map<String, Object> hmap) throws Exception {
+			personal_appendixDAO.copyFiletoCowork(hmap);
+		}
+		
 		//작성 취소 시 파일 없애기
 		@Override
 		public void fileDelete(String p_Num) throws Exception {

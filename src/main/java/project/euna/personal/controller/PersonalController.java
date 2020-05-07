@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import project.euna.appendix.vo.AppendixVO;
+import project.euna.issue.vo.IssueVO;
 import project.euna.personal.vo.Criteria;
 import project.euna.personal.vo.PersonalVO;
 
@@ -30,6 +31,7 @@ public interface PersonalController {
 	public String personalUpdate(String mem_Id, String p_Num, PersonalVO personalVO, Model model, HttpSession session) throws Exception;
 	public String personalUpdate(PersonalVO personalVO, HttpServletRequest request, HttpServletResponse response) throws Exception ;
 	public ModelAndView main(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public String issueCopy(IssueVO issueVO, HttpSession session, HttpServletRequest request, HttpServletResponse response, RedirectAttributes rttr) throws Exception;
 //	public void communityImageUpload(HttpServletRequest request, HttpServletResponse response, @RequestParam MultipartFile upload);
 //	public String personalCopy(personalVO personalVO, HttpSession session, HttpServletRequest request, HttpServletResponse response, RedirectAttributes rttr) throws Exception;
 }

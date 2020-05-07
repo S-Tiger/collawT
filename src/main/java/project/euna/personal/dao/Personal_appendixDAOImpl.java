@@ -58,6 +58,12 @@ public class Personal_appendixDAOImpl implements Personal_appendixDAO {
 		sqlSession.insert("personal_appendix.copyFile", hmap);
 	}
 	
+	//협업공간으로 첨부파일 복사
+	@Override
+	public void copyFiletoCowork(Map<String, Object> hmap) throws Exception {
+		sqlSession.insert("personal_appendix.copyFiletoCowork", hmap);
+	}
+	
 	//작성 취소 시 파일 없애기
 	@Override
 	public void fileDelete(String p_Num) throws Exception {

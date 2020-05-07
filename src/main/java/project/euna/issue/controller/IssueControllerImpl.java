@@ -41,6 +41,7 @@ import project.euna.issue.vo.IssueVO;
 import project.euna.issue.vo.PageMaker;
 import project.euna.personal.service.PersonalService;
 import project.euna.personal.service.Personal_appendixService;
+import project.euna.personal.vo.PersonalVO;
 import project.euna.reply.service.ReplyService;
 import project.sungho.comember.service.ComemberService;
 import project.sungho.cowork.service.CoworkService;
@@ -299,12 +300,13 @@ public class IssueControllerImpl implements IssueController {
 	//다른 협업공간으로 복제 글 쓰기 DB에 넣기
 	@Override
 	@PostMapping("/copy")
-	public String issueCopy(IssueVO issueVO, HttpSession session, HttpServletRequest request, HttpServletResponse response, RedirectAttributes rttr) throws Exception {
+	public String issueCopy(PersonalVO personalVO, IssueVO issueVO, HttpSession session, HttpServletRequest request, HttpServletResponse response, RedirectAttributes rttr) throws Exception {
 		Map<String, Object> member = new HashMap<String,Object>();
 		member = (Map<String, Object>) session.getAttribute("member");
 		String mem_Id = (String) member.get("mem_Id");
 		String i_Num = issueVO.getI_Num();
-
+		String p_Num = personalVO.getP_Num();
+		
 		
 		String coworkSelect = request.getParameter("coworkSelect");
 		if(coworkSelect.equals("myspace") ) {

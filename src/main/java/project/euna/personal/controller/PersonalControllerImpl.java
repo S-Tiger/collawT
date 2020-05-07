@@ -24,8 +24,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import project.euna.appendix.service.AppendixService;
 import project.euna.issue.service.IssueService;
+import project.euna.issue.vo.IssueVO;
 import project.euna.personal.dao.PersonalDAO;
 import project.euna.personal.service.PersonalService;
 import project.euna.personal.service.Personal_appendixService;
@@ -64,6 +67,9 @@ public class PersonalControllerImpl implements PersonalController {
 	
 	@Inject
 	NotifyService notifyService;
+	
+	@Inject
+	AppendixService appendixService;
 
 
 
@@ -239,49 +245,48 @@ public class PersonalControllerImpl implements PersonalController {
 	}
 //	
 //	
-//	//다른 협업공간으로 복제 글 쓰기 DB에 넣기
-//	@Override
-//	@PostMapping("/copy")
-//	public String personalCopy(personalVO personalVO, HttpSession session, HttpServletRequest request, HttpServletResponse response, RedirectAttributes rttr) throws Exception {
-//	
-//		Map<String, Object> member = new HashMap<String,Object>();
-//		member = (Map<String, Object>) session.getAttribute("member");
-//		String mem_Id = (String) member.get("mem_Id");
-//		
-//		String c_Id = personalVO.getC_Id();
-//		String i_Name = personalVO.getI_Name();
-//		String i_Content = personalVO.getI_Content();
-//		String i_Start = personalVO.getI_Start();
-//		String i_End = personalVO.getI_End();
-//		String ig_Num = personalVO.getig_Num();
-//		String p_Num = personalVO.getp_Num();
-//		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!"+p_Num);
-//		
-//		Map<String, Object> cmap = new HashMap<String,Object>();
-//		cmap.put("mem_Id", mem_Id);
-//		cmap.put("c_Id", c_Id);
-//		cmap.put("i_Name", i_Name);
-//		cmap.put("i_Content",i_Content);
-//		cmap.put("i_Start", i_Start);
-//		cmap.put("i_End", i_End);
-//		cmap.put("ig_Num", ig_Num);
-//		
-//		
-//		personalService.personalCopy(cmap);
-//		String redirectp_Num = (String) cmap.get("p_Num");
-//		
-//		Map<String, Object> hmap = new HashMap<String,Object>();
-//		hmap.put("p_Num", p_Num);
-//		hmap.put("redirectp_Num", redirectp_Num);
-//
-//		appendixService.copyFile(hmap);
-//
-//		
-//		rttr.addFlashAttribute("msg", "success");
-//
-//		return "redirect:/project/personal/read?c_Id="+c_Id+"&p_Num="+redirectp_Num;
-//	
-//	}
+	//다른 협업공간으로 복제 글 쓰기 DB에 넣기
+	@Override
+	@PostMapping("/copy")
+	public String issueCopy(IssueVO issueVO, HttpSession session, HttpServletRequest request, HttpServletResponse response, RedirectAttributes rttr) throws Exception {
+		Map<String, Object> member = new HashMap<String,Object>();
+		member = (Map<String, Object>) session.getAttribute("member");
+		String mem_Id = (String) member.get("mem_Id");
+		String p_Num = request.getParameter("p_Num");
+
+		
+		String coworkSelect = request.getParameter("coworkSelect");
+	
+			String c_Id = request.getParameter("c_Id");
+			String i_Name = request.getParameter("p_i_Name");
+			String i_Content = request.getParameter("p_i_Content");
+			String i_Start = request.getParameter("p_i_Start");
+			String i_End = request.getParameter("p_i_End");
+			String ig_Num = "1";
+			
+			Map<String, Object> cmap = new HashMap<String,Object>();
+			cmap.put("mem_Id", mem_Id);
+			cmap.put("c_Id", c_Id);
+			cmap.put("i_Name", i_Name);
+			cmap.put("i_Content",i_Content);
+			cmap.put("i_Start", i_Start);
+			cmap.put("i_End", i_End);
+			cmap.put("ig_Num", ig_Num);
+			
+			issueService.issueCopy(cmap);
+			String redirecti_Num = (String) cmap.get("i_Num");
+			
+			Map<String, Object> hmap = new HashMap<String,Object>();
+			hmap.put("p_Num", p_Num);
+			hmap.put("redirecti_Num", redirecti_Num);
+
+			personal_appendixService.copyFiletoCowork(hmap);
+			rttr.addFlashAttribute("msg", "success");
+
+			return "redirect:/project/issue/read?c_Id="+c_Id+"&i_Num="+redirecti_Num;
+		
+	
+	}
 //
 //	
 //

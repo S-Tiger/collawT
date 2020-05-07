@@ -18,4 +18,5 @@ public interface Personal_appendixDAO {
 	public Map<String, Object> get_p_Num();
 	public void copyFile(Map<String, Object> hmap) throws Exception;
 	public void fileDelete(String p_Num) throws Exception;
+	public void copyFiletoCowork(Map<String, Object> hmap) throws Exception;
 	}
