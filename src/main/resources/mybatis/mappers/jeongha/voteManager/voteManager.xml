@@ -14,25 +14,40 @@
 		<result property="v_Show" column="v_Show" />
 		<result property="v_Date" column="v_Date" />		
 		<result property="v_Start" column="v_Start" />
+		<result property="c_Id" column="c_Id" />
 		<result property="v_End" column="v_End" />
 	</resultMap>
 
 	<select id="searchList" resultMap="voteManagerResult01" parameterType="java.util.Map"> 
       <![CDATA[
-         select mem_Id, mem_Name,  SUBSTR(v_date, 1, 10) as v_Date , v_Num, v_Name, v_Subject, v_Content, v_Show, v_Start, v_End
+         select c_Id, mem_Id, mem_Name,  SUBSTR(v_date, 1, 10) as v_Date , v_Num, v_Name, v_Subject, v_Content, REPLACE(v_Show,'1','공개')as v_Show, v_Start, v_End
          from   vote
       ]]>
 		<where>
 			<choose>
 				<when test="mem_Id != '' and mem_Id != null and mem_Name != ''  and  mem_Name != null"  >
-					mem_Id = #{mem_Id} and mem_Name = #{mem_Name}
+					<![CDATA[
+					REPLACE(upper(REGEXP_REPLACE(mem_Id,'<[^>]*>|\&([^;])*;', '')),' ','') like CONCAT('%' || REPLACE(upper(#{mem_Id}),' ',''), '%') 
+					and 
+					REPLACE(upper(REGEXP_REPLACE(mem_Name,'<[^>]*>|\&([^;])*;', '')),' ','') like CONCAT('%' || REPLACE(upper(#{mem_Name}),' ',''), '%')
+					]]>
 				</when>
 				<when test="mem_Id != '' and mem_Id != null" >
-					mem_Id = #{mem_Id}
+					<![CDATA[
+               		REPLACE(upper(REGEXP_REPLACE(mem_Id,'<[^>]*>|\&([^;])*;', '')),' ','') like CONCAT('%' || REPLACE(upper(#{mem_Id}),' ',''), '%')
+               		]]>
 				</when>
 				<when test="mem_Name != '' and mem_Name != null " >
-					mem_Name = #{mem_Name}
+					<![CDATA[
+					REPLACE(upper(REGEXP_REPLACE(mem_Name,'<[^>]*>|\&([^;])*;', '')),' ','') like CONCAT('%' || REPLACE(upper(#{mem_Name}),' ',''), '%')
+					]]>
 				</when>
+				<when test="v_Content != '' and v_Content != null " >
+					<![CDATA[
+					REPLACE(upper(REGEXP_REPLACE(v_Content,'<[^>]*>|\&([^;])*;', '')),' ','') like CONCAT('%' || REPLACE(upper(#{v_Content}),' ',''), '%')
+					]]>
+				</when>
+				
 			</choose>
 		</where>
 		
@@ -41,9 +56,13 @@
 	
 	<!-- 회원정보는 별명만 변경가능하게 했음 -->
 	<update id="updateData" parameterType="java.util.Map">
-		update member
-		set  mem_Name = #{mem_Name}
-		where mem_Id = #{mem_Id}
+		UPDATE vote
+		SET v_Name = #{v_Name},
+			v_Subject = #{v_Subject},
+			v_Date = #{v_Date},
+			v_Start = #{v_Start},
+			v_End =	#{v_End}
+		WHERE v_Num=#{v_Num}
 	</update>	
 	
 	<insert id="insertData" parameterType="java.util.Map">
@@ -56,6 +75,6 @@
 	
 	<delete id="deleteData" parameterType="java.util.Map">
 		delete vote
-		where mem_Id = #{mem_Id}
+		where v_Num = #{v_Num}
 	</delete>	 
 </mapper>

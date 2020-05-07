@@ -34,14 +34,15 @@ width: 100%;
 			{Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:50},
 			{Header:"이메일",Type:"Text",SaveName:"mem_Id",MinWidth:200,Align:"Center"},
 			{Header:"회원이름(별명)",Type:"Text",SaveName:"mem_Name",MinWidth:150,KeyField:1 ,MultiLineText:1, Wrap:1},
+			{Header:"공간아이디",Type:"Text",SaveName:"c_Id",MinWidth:50, Align:"Center"},
+			{Header:"투표번호",Type:"Text",SaveName:"v_Num",MinWidth:100},
 			{Header:"투표제목",Type:"Text",SaveName:"v_Name",MinWidth:80,KeyField:1 ,MultiLineText:1},			
-			{Header:"투표내용",Type:"Text",SaveName:"v_Content",MinWidth:100},
 			{Header:"투표주제",Type:"Text",SaveName:"v_Subject",MinWidth:100},
 			{Header:"투표공개여부",Type:"Text",SaveName:"v_Show",MinWidth:100},
 			{Header:"작성일",Type:"Date",SaveName:"v_Date",MinWidth:100},
-			{Header:"투표시작일",Type:"Text",SaveName:"v_Start",MinWidth:100},
-			{Header:"투표마감일",Type:"Text",SaveName:"v_End",MinWidth:100},
-			
+			{Header:"투표시작일",Type:"Date",SaveName:"v_Start",MinWidth:100},
+			{Header:"투표마감일",Type:"Date",SaveName:"v_End",MinWidth:100},
+			{Header:"링크",Type:"text",SaveName:"LINK_BUFF",MinWidth:100}
 		];
 		IBS_InitSheet( mySheet , initSheet);
 
@@ -49,6 +50,8 @@ width: 100%;
         //mySheet.ShowSubSum([{StdCol:"Release",SumCols:"price",Sort:"asc"}]);
 		//doAction('search');
 	}
+	
+	
 	
 	/*Sheet 각종 처리*/
 	function doAction(sAction) {
@@ -87,6 +90,15 @@ width: 100%;
 		}	
 	}	
 	
+	function mySheet_OnClick(Row, Col, Value, CellX, CellY, CellW, CellH) {
+		  //특정 열을 클릭했을 때 다른 페이지로 이동하도록 처리
+		  if( mySheet.ColSaveName(Col) == "LINK_BUFF"){
+		 
+		    location.href = "/project/vote/read?c_Id=" + mySheet.GetCellValue(Row,"c_Id")+"&"+"v_Num="+mySheet.GetCellValue(Row,"v_Num");
+		   // http://localhost:8090/project/vote/read?c_Id=523&v_Num=781
+		  }
+		}
+	
 </script>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper" >
@@ -96,7 +108,7 @@ width: 100%;
 		
 <body onload="LoadPage()">
   <div class="page_title">
-    <span class="title"><b>회원관리</b></span>
+    <span class="title"><b>투표관리</b></span>
   </div>
   <div class="main_content">
     <div class="exp_product">각 행의 데이터를 수정하거나 입력,삭제시 상태컬럼의 변화를
@@ -105,13 +117,13 @@ width: 100%;
     <div class="exp_product" style="width: 100%;">
       <form name='frm'>
         이메일: <input type='text' id="mem_Id" name="mem_Id" /> 
-        회원이름(): <input type='text' id="mem_Name" name="mem_Name" /> 
-        가입방식: <input type='text' id="mem_Loginapi" name="mem_Loginapi" /> 
+        작성자명: <input type='text' id="mem_Name" name="mem_Name" /> 
+        투표내용: <input type='text' id="v_Content" name="v_Content" /> 
       </form>
     </div>
     <div class="ib_function float_right">
 	  <a href="javascript:doAction('reload')" class="f1_btn_gray lightgray" style="color: black;">초기화</a>
-	  <a href="javascript:doAction('insert')" class="f1_btn_gray lightgray" style="color: black; margin-right: 527px;">추가</a>
+	  <!-- <a href="javascript:doAction('insert')" class="f1_btn_gray lightgray" style="color: black; margin-right: 527px;">추가</a> -->
 	  <a href="javascript:doAction('search')" class="f1_btn_white gray">조회</a>
 	  <a href="javascript:doAction('save')" class="f1_btn_white gray">저장</a>
 	</div>

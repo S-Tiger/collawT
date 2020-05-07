@@ -40,13 +40,22 @@ public class ManagerVoteControllerImpl implements ManagerVoteController {
 		Map<String, Object> searchMap = new HashMap<String, Object>(); // 검색조건
 		Map<String, Object> resultMap = new HashMap<String, Object>(); // 조회결과
 		
+		//http://localhost:8090/project/vote/read?c_Id=281&v_Num=1081
 		
-		searchMap.put("mem_Id", request.getParameter("mem_Id"));
 		// 검색조건설정
+		searchMap.put("mem_Id", request.getParameter("mem_Id"));
+		searchMap.put("mem_Name", request.getParameter("mem_Name"));
+		searchMap.put("v_Content", request.getParameter("v_Content"));
 		//데이터 조회
 		List<Map> data = managerVoteService.searchList(searchMap);
-        resultMap.put("Data", data);
         
+//        for (int i = 0; i < data.size(); i++) {
+//        	String url = "http://localhost:8090/project/vote/read?c_Id="+data.get(i).get("c_Id")+"&"+"v_Num="+data.get(i).get("v_Num") ;
+//              data.get(i).put("link", url);
+//		}
+        System.out.println("조회결과"+resultMap);
+        
+        resultMap.put("Data", data);
         return resultMap;
 	}
 
@@ -66,6 +75,7 @@ public class ManagerVoteControllerImpl implements ManagerVoteController {
 			dataMap.put(name, values);
 		}
 		
+		System.out.println(" wwwwwww"+dataMap);
 		Map<String, String> result = new HashMap<String, String>();
 		try {
 			managerVoteService.saveData(dataMap);	
