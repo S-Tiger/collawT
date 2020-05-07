@@ -215,7 +215,7 @@ public class MemberControllerImpl implements MemberController {
 		// 로그인로직
 		// 담아서
 		Map<String, Object> memberVO = service.login(memLogin, response);
-
+		String kind = "03";
 		// db에 복호화된 비밀번호를 매치시킴
 		boolean passMatch = passEncoder.matches(member.getMem_Pwd(), (String) memberVO.get("mem_Pwd"));
 
@@ -223,12 +223,17 @@ public class MemberControllerImpl implements MemberController {
 		if (memberVO != null && passMatch) {
 			
 			System.out.println("로그인 성공(객체): " + memberVO);
-
+			System.out.println("로그인 권환 ================================"+memberVO.get("mem_Kind"));
+			if (memberVO.get("mem_Kind").equals(kind)) {
+				HttpSession session = request.getSession();
+				session.setAttribute("member", memberVO);
+				mav.setViewName("redirect:/manager/member/main");
+			}else {
 			HttpSession session = request.getSession();
 			session.setAttribute("member", memberVO);
 			// jsp페이지에서 ${member.mem_Id}---->이런식으로 접근해야됨
 			mav.setViewName("redirect:/main");
-
+			}
 			// 실패했을경우
 		} else {
 
