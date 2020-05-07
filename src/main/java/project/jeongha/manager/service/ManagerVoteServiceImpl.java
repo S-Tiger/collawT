@@ -26,6 +26,7 @@ public class ManagerVoteServiceImpl implements ManagerVoteService {
 	@Override
 	public void saveData(Map<String, String[]> dataMap) throws DataAccessException {
 		String[] status = dataMap.get("STATUS");
+		System.out.println("ssssssssss"+dataMap);
 		int length = status.length; // row��
 		int i = 0;
 		
