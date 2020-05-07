@@ -42,6 +42,10 @@ public class NotifyServiceImpl implements NotifyService{
 	public void replyUpdate(Map<String,Object> searchMap) {
 		notifyDAO.replyUpdate(searchMap);
 	}
+	@Override
+	public void votereplyUpdate(Map<String,Object> searchMap) {
+		notifyDAO.votereplyUpdate(searchMap);
+	}
 
 	@Override
 	public List<Map> viewNotify(Map<String, Object> searchMap) throws DataAccessException {

@@ -53,6 +53,10 @@ public class NotifyDAOImpl implements NotifyDAO {
 	public void voteUpdate(Map<String,Object> searchMap) {
 		sqlSession.update("notify.voteUpdate",searchMap);
 	}
+	@Override
+	public void votereplyUpdate(Map<String,Object> searchMap) {
+		sqlSession.update("notify.votereplyUpdate", searchMap);
+	}
 
 	@Override
 	public List<Map> viewNotify(Map<String, Object> searchMap) throws DataAccessException {

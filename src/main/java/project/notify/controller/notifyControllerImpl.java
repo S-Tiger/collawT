@@ -102,6 +102,24 @@ public class notifyControllerImpl implements NotifyController {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/main");
 		dispatcher.forward(request, response);
 	}
+	@RequestMapping("/votereplyupdate")
+	public void votereplyupdate(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		String v_Num = request.getParameter("v_Num");
+		String c_Id = request.getParameter("c_Id");
+		String mem_Id = request.getParameter("mem_Id");
+		HttpSession session = request.getSession();
+		Map<String,Object> searchMap = new HashMap<String,Object>();
+		searchMap = (Map<String,Object>)session.getAttribute("member");
+		searchMap.put("c_Id", c_Id);
+		searchMap.put("v_Num", v_Num);
+		notifyService.votereplyUpdate(searchMap);
+		request.setAttribute("c_Id", c_Id);
+		request.setAttribute("v_Num", v_Num);
+		request.setAttribute("mem_Id", mem_Id);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/main");
+		dispatcher.forward(request, response);
+	}
+	
 	@GetMapping("/insert")
 	public String test() {
 		return "/notify/notifyadd";

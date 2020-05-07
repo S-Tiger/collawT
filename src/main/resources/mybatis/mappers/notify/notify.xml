@@ -161,5 +161,15 @@
 	
 	]]>
 	</update>
+	
+	<update id ="votereplyUpdate" parameterType = "java.util.Map">
+	<![CDATA[
+	update notify set not_Status = '1'
+	where v_Num = #{v_Num}
+	and c_Id = #{c_Id}
+	and not_Kind = '4'
+	
+	]]>
+	</update>
 
 </mapper>

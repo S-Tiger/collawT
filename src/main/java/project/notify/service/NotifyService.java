@@ -15,6 +15,7 @@ public interface NotifyService {
 	public List<Map> replyList(Map<String,Object> searchMap);
 	public void notifyUpdate(Map<String,Object> searchMap);
 	public void replyUpdate(Map<String,Object> searchMap);
+	public void votereplyUpdate(Map<String,Object> searchMap);
 	public void voteUpdate(Map<String,Object> searchMap);
 	public List<Map> viewNotify(Map<String,Object> searchMap) throws DataAccessException;
 	public List<Map> viewReply(Map<String,Object> searchMap) throws DataAccessException;
