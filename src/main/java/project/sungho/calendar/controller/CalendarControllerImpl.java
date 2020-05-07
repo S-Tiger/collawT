@@ -76,7 +76,6 @@ public class CalendarControllerImpl implements CalendarController {
 			}
 		}
 		
-		
 		return eventlist;
 	}
 

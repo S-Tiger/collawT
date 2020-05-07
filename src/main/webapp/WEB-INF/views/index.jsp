@@ -195,7 +195,6 @@ img {
 	max-width: 100%;
 	height: auto !important;
 }
-
 </style>
 <script type="text/javascript">
 	console.log('${question}');
@@ -227,9 +226,7 @@ img {
 	<!-- Header -->
 	<header class="masthead">
 		<div class="container">
-			<br>
-			<br>
-			<br>
+			<br> <br> <br>
 			<!-- <div class="intro-text">
 				<div class="intro-lead-in">콜라우티에 오신것을 환영합니다!</div>
 				<div class="intro-heading text-uppercase">온라인으로 함께 만드는 협업</div>
@@ -240,23 +237,26 @@ img {
 
 
 	<!-- 제품문의 -->
-	<header class="masthead">
+	<header class="masthead" id="services">
 		<div class="container">
-			<div class="row" id="services">
+			<div class="row">
 				<div class="col-md-6">
 					<div class="card-body" style="border-color: white !important;">
-						<h1> &nbsp</h1>
+						<h1>&nbsp</h1>
 						<h1 style="text-align: left;">효과적인 팀워크 가벼워진 업무, 협업툴</h1>
 						<h4 style="text-align: left;">이메일이 필요없는 간편한 소통과 파일 공유, 빠른 피드백 확인까지. 바라던 기능들을 모두 담았습니다.</h4>
-						<p style="text-align: left;">여러분이 더 협력적으로 일하고 더 많은 일을 할 수 있도록 협업 게시판, 목록, 칸반, 검색기능을 통해 여러분의 재미있고 유연하며 보람 있는 방법으로 프로젝트를 정리하고 우선순위를 정할 수 있는 Collaw T</p>
+						<p style="text-align: left;">여러분이 더 협력적으로 일하고 더 많은 일을 할 수 있도록 협업 게시판, 목록, 칸반, 검색기능을 통해 여러분의 재미있고 유연하며 보람 있는 방법으로 프로젝트를 정리하고 우선순위를 정할 수 있는 반응형 웹기반 협업툴 Collaw T 입니다.</p>
 						<a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger float-right" style="background-color: #fed136; font-size: large; border-color: #fed136; padding-top: 13px; padding-bottom: 13px; padding-left: 20px; padding-right: 20px;" href="member/loginPage">로그인</a>
+						<h1>&nbsp</h1><h1>&nbsp</h1><h1>&nbsp</h1>
 					</div>
 				</div>
 				<!-- /.col (LEFT) -->
 				<div class="col-md-6">
 					<!-- LINE CHART -->
 					<div class="card-body" style="border-color: white !important;">
+					<h1>&nbsp</h1>
 						<img src="../resources/img/teamproject.png" style="width: 544px; height: 326px;">
+						<h1>&nbsp</h1><h1>&nbsp</h1><h1>&nbsp</h1>
 					</div>
 					<!-- /.card -->
 				</div>
@@ -267,22 +267,27 @@ img {
 		</div>
 	</header>
 
-	<header class="masthead">
+	<header class="masthead" id="question">
 		<div class="container">
-			<div class="row" id="services">
-				<div class="col-md-6">
+			<div class="row">
+				<div class="col-md-12">
+				<br> <br> <br><br> <br> <br><br> <br> <br><br> <br> <br>
 					<div class="card-body" style="border-color: white !important;">
 						<h4 style="text-align: left;">안녕하세요. 콜라우티 고객지원입니다. 무엇을 도와드릴까요?</h4>
+						<a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger float-right" style="font-size: large; background-color: #fed136; border-color: #fed136; padding-top: 13px; padding-bottom: 13px; padding-left: 20px; padding-right: 20px;" href="/question"> 고객지원 바로가기 </a>
 					</div>
+				<br> <br> <br><br> <br> <br><br> <br> <br><br> <br> <br>
 				</div>
 				<!-- /.col (LEFT) -->
-				<div class="col-md-6">
-					<!-- LINE CHART -->
+				<!-- <div class="col-md-6">
+					LINE CHART
+					<br> <br> <br><br> <br> <br><br> <br> <br><br> <br> <br>
 					<div class="card-body" style="border-color: white !important;">
-						<a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" style="font-size: large; background-color: #fed136; border-color: #fed136; padding-top: 13px; padding-bottom: 13px; padding-left: 20px; padding-right: 20px;" href="/question"> 고객지원 바로가기 </a>
+						<h1></h1>
 					</div>
-					<!-- /.card -->
-				</div>
+					<br> <br> <br><br> <br> <br><br> <br> <br><br> <br> <br>
+					/.card
+				</div> -->
 				<!-- /.col (RIGHT) -->
 			</div>
 			<!-- /.row -->
@@ -298,28 +303,46 @@ img {
 
 					<div class="swiper-container">
 						<div class="swiper-wrapper">
-							<div class="swiper-slide">Slide 1
-							<img src="/resources/img/work.png">
+							<div class="swiper-slide">
+								Slide 1 <img src="/resources/img/work.png">
 							</div>
-							<div class="swiper-slide">Slide 2
-							<img src="/resources/img/mainwork.png">
+							<div class="swiper-slide">
+								Slide 2 <img src="/resources/img/mainwork.png">
 							</div>
-							<div class="swiper-slide">Slide 3
-							<img src="/resources/img/worktogather.png">
+							<div class="swiper-slide">
+								Slide 3 <img src="/resources/img/worktogather.png">
 							</div>
-							<div class="swiper-slide">Slide 4
-							<H1>홈페이지 스샷찍어서 올리면 좋을것 같아요</H1>
+							<div class="swiper-slide">
+								Slide 4
+								<H1>홈페이지 스샷찍어서 올리면 좋을것 같아요</H1>
 							</div>
-							<div class="swiper-slide">Slide 5
-							<H1>홈페이지 스샷찍어서 올리면 좋을것 같아요</H1><img src="/resources/img/teamproject.png"></div>
-							<div class="swiper-slide">Slide 6<H1>홈페이지 스샷찍어서 올리면 좋을것 같아요</H1>
-							<img src="/resources/img/workplace.png">
+							<div class="swiper-slide">
+								Slide 5
+								<H1>홈페이지 스샷찍어서 올리면 좋을것 같아요</H1>
+								<img src="/resources/img/teamproject.png">
 							</div>
-							<div class="swiper-slide">Slide 7<H1>홈페이지 스샷찍어서 올리면 좋을것 같아요</H1>
-							<img src="/resources/img/webmobile.png"></div>
-							<div class="swiper-slide">Slide 8<H1>홈페이지 스샷찍어서 올리면 좋을것 같아요</H1></div>
-							<div class="swiper-slide">Slide 9<H1>홈페이지 스샷찍어서 올리면 좋을것 같아요</H1></div>
-							<div class="swiper-slide">Slide 10<H1>홈페이지 스샷찍어서 올리면 좋을것 같아요</H1></div>
+							<div class="swiper-slide">
+								Slide 6
+								<H1>홈페이지 스샷찍어서 올리면 좋을것 같아요</H1>
+								<img src="/resources/img/workplace.png">
+							</div>
+							<div class="swiper-slide">
+								Slide 7
+								<H1>홈페이지 스샷찍어서 올리면 좋을것 같아요</H1>
+								<img src="/resources/img/webmobile.png">
+							</div>
+							<div class="swiper-slide">
+								Slide 8
+								<H1>홈페이지 스샷찍어서 올리면 좋을것 같아요</H1>
+							</div>
+							<div class="swiper-slide">
+								Slide 9
+								<H1>홈페이지 스샷찍어서 올리면 좋을것 같아요</H1>
+							</div>
+							<div class="swiper-slide">
+								Slide 10
+								<H1>홈페이지 스샷찍어서 올리면 좋을것 같아요</H1>
+							</div>
 						</div>
 						<!-- Add Pagination -->
 						<div class="swiper-pagination"></div>
@@ -335,50 +358,56 @@ img {
 
 		</div>
 	</header>
- <!-- Swiper JS -->
-  <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+	<!-- Swiper JS -->
+	<script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
 
-  <!-- Initialize Swiper -->
-  <script>
-    var swiper = new Swiper('.swiper-container', {
-      spaceBetween: 30,
-      centeredSlides: true,
-      autoplay: {
-        delay: 2500,
-        disableOnInteraction: false,
-      },
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-      },
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-    });
-  </script>
+	<!-- Initialize Swiper -->
+	<script>
+		var swiper = new Swiper('.swiper-container', {
+			spaceBetween : 30,
+			centeredSlides : true,
+			autoplay : {
+				delay : 2500,
+				disableOnInteraction : false,
+			},
+			pagination : {
+				el : '.swiper-pagination',
+				clickable : true,
+			},
+			navigation : {
+				nextEl : '.swiper-button-next',
+				prevEl : '.swiper-button-prev',
+			},
+		});
+	</script>
 	<!-- Footer -->
 	<footer class="footer" style="background-color: white">
 		<div class="container">
 			<div class="row align-items-center">
 				<div class="col-md-4">
-					<span class="copyright">Copyright &copy; Collaw T</span>
+					<!-- <span class="copyright">Copyright &copy; Collaw T</span> -->
 				</div>
 				<div class="col-md-4">
 					<ul class="list-inline social-buttons">
-						<li class="list-inline-item"><a href="#"> <i class="fab fa-twitter"></i>
+						<!-- <li class="list-inline-item"><a href="#"> <i class="fab fa-twitter"></i>
 						</a></li>
 						<li class="list-inline-item"><a href="#"> <i class="fab fa-facebook-f"></i>
 						</a></li>
 						<li class="list-inline-item"><a href="#"> <i class="fab fa-linkedin-in"></i>
-						</a></li>
+						</a></li> -->
 					</ul>
 				</div>
 				<div class="col-md-4">
 					<ul class="list-inline quicklinks">
-						<li class="list-inline-item"><a href="#">Privacy Policy</a></li>
-						<li class="list-inline-item"><a href="#">Terms of Use</a></li>
+						<li class="list-inline-item"><a href="#"></a></li>
+						<li class="list-inline-item"><a href="#"></a></li>
 					</ul>
+				</div>
+				<div class="col-md-12">
+					<p>
+					© 2020~ Collaw T, Inc. (주) 콜라우티 | 
+					서울특별시 종로구 YMCA 빌딩 | 개인정보 취급방침 | 이용 약관 대표자: 김성호 | 
+					사업자등록번호: 000-00-0000 | 통신판매업신고번호: (가상)2020-서울종로-00000 phone: 02-0000-0000</p>
 				</div>
 			</div>
 		</div>

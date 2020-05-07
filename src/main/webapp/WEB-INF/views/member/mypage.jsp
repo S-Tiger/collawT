@@ -386,15 +386,18 @@ if ('${msg}' == 'success') {
 										method="post">
 										<input type="hidden" name="mem_Id" value="${member.mem_Id}" />
 										<p class="login-box-msg">이용해주셔서 감사합니다.</p>
-										<label for="inputEstimatedBudget">현재 비밀번호</label> <input
+										<label for="inputEstimatedBudget">현재 비밀번호</label> 
+										<div class="form-group">
+										<input
 											class="form-control" id="pwd" name="mem_Pwd" type="password"
-											required>
+											required></div>
 										<div class="row">
 											<div class="col-12">
+											<div class="form-group">
 												<input type="submit" value="회원탈퇴"
 													class="btn btn-success float-right"
 													onclick="fn_deleteMem()" />
-											</div>
+											</div></div>
 										</div>
 										<!-- 변경폼 -->
 
