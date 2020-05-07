@@ -109,30 +109,24 @@
                with font-awesome or any other icon font library -->
 						<li class="nav-item"><a href="/manager/member/main" class="nav-link">
 									<i class="nav-icon fas fa-user-secret"></i>
-									<p>회원관리</p>
+									<p>회원 관리</p>
 							</a></li>
 
-					<li class="nav-item"><a href="/manager/project/main" 
-						class="nav-link" > <i class="nav-icon fas fa-bookmark"></i>
-							<p>공간관리</p>
+					<li class="nav-item"><a href="/manager/issue/main" 
+						class="nav-link" > <i class="nav-icon fas fa-edit"></i>
+							<p>이슈 관리</p>
 					</a></li>
-					
-					
-					
-					<li class="nav-item" ><a href="/calendar/main"
-						class="nav-link"> <i class="nav-icon fas fa-calendar-check"></i>
-							<p>
-								전체 캘린더 <span class="badge badge-info right"></span>
-								<!--  <span class="right badge badge-danger">New</span>-->
-							</p>
+					<li class="nav-item"><a href="/manager/vote/main" 
+						class="nav-link" > <i class="nav-icon fas fa-vote-yea"></i>
+							<p>투표 관리</p>
 					</a></li>
-					
-					<li class="nav-item" ><a href="/personal/search/myFile"
-						class="nav-link"> <i class="nav-icon fas fa-archive"></i>
-							<p>
-								전체 파일함 <span class="badge badge-info right"></span>
-								<!--  <span class="right badge badge-danger">New</span>-->
-							</p>
+					<li class="nav-item"><a href="/manager/personal/main" 
+						class="nav-link" > <i class="nav-icon fas fa-user-lock"></i>
+							<p>내 이슈 관리</p>
+					</a></li>
+					<li class="nav-item"><a href="/manager/reply/main" 
+						class="nav-link" > <i class="nav-icon fas fa-comments"></i>
+							<p>댓글 및 메모 관리</p>
 					</a></li>
 					
 				</ul>

@@ -32,7 +32,7 @@ width: 100%;
 		initSheet.Cols = [
 			{Header:"상태",Type:"Status",SaveName:"STATUS",MinWidth:50, Align:"Center",Edit:false},
 			{Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:50,Edit:false},
-			{Header:"번호",Type:"Text",SaveName:"p_i_Num",MinWidth:50,KeyField:1 ,MultiLineText:1,Edit:false},			
+			{Header:"번호",Type:"Text",SaveName:"p_Num",MinWidth:50,KeyField:1 ,MultiLineText:1,Edit:false},			
 			{Header:"제목",Type:"Text",SaveName:"p_i_Name",MinWidth:150 ,MultiLineText:1,Edit:false},			
 			{Header:"작성자ID",Type:"Text",SaveName:"mem_Id",MinWidth:150 ,MultiLineText:1, Wrap:1,Edit:false},
 			{Header:"작성일",Type:"Date",SaveName:"p_i_Date",MinWidth:100,Edit:false},
@@ -93,7 +93,7 @@ width: 100%;
 		
 <body onload="LoadPage()">
   <div class="page_title">
-    <span class="title"><b>협업공간 이슈관리</b></span>
+    <span class="title"><b>내 이슈 관리</b></span>
   </div>
   <div class="main_content">
 

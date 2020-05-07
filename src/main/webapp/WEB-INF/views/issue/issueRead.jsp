@@ -595,10 +595,10 @@ $(document).ready(function() {
 			복사한 글을 게시할 협업공간을 선택하세요.</span>
 	</div>
 	
-	<form action="/project/issue/copy" method="post" id="applyform">
+	<form action="/project/issue/copy" method="post" id="copyform">
       <select class="form-control custom-select" id="coworkSelect" name="coworkSelect">
       	<option selected disabled>협업공간을 선택하세요</option>
-      	  <option id="myspace" name="myspace">내 공간</option>
+      	  <option id="myspace" value="myspace" name="myspace">내 공간</option>
          <c:forEach var="coworkList" items="${coworkList}" > 
          <c:if test="${coworkList.C_ID != issueRead.c_Id}">
          <option id="copyc_Id" name="copyc_Id" value="${coworkList.C_ID}">${coworkList.C_NAME}</option>
@@ -618,7 +618,7 @@ $(document).ready(function() {
 		<br><br>
 		<span style="float: left; padding-right: 50px;">
 			
-		<button type="submit" id="insertsubmit"
+		<button type="submit" id="copysubmit"
 					class="btn btn-block btn-success" style="width: 220px;">복사</button>
 			
 		</span> <span>
@@ -633,8 +633,6 @@ $(document).ready(function() {
 		$("#changedc_Id").val(copyc_Id);
 	
 	})
-	
-	
 
 	</script>
 

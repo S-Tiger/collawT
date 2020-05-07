@@ -104,7 +104,7 @@ width: 100%;
 		
 <body onload="LoadPage()">
   <div class="page_title">
-    <span class="title"><b>협업공간 이슈관리</b></span>
+    <span class="title"><b>이슈관리</b></span>
   </div>
   <div class="main_content">
 

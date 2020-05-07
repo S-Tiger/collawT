@@ -83,7 +83,7 @@ public class HomeController {
 		List<Map> voteAvailable = personalService.voteAvailable(mem_Id);
 		List<Map> myissue = personalService.myissue(mem_Id);
 		
-		System.out.println("!!!!!!!!!!!!!!!!!!!"+newspeed);
+		//System.out.println("!!!!!!!!!!!!!!!!!!!"+newspeed);
 		
 		ModelAndView mav = new ModelAndView("personal/myHome");
 		mav.addObject("newspeed", newspeed);

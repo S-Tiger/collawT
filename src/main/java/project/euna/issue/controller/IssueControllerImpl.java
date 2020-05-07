@@ -294,42 +294,71 @@ public class IssueControllerImpl implements IssueController {
 	@Override
 	@PostMapping("/copy")
 	public String issueCopy(IssueVO issueVO, HttpSession session, HttpServletRequest request, HttpServletResponse response, RedirectAttributes rttr) throws Exception {
-	
 		Map<String, Object> member = new HashMap<String,Object>();
 		member = (Map<String, Object>) session.getAttribute("member");
 		String mem_Id = (String) member.get("mem_Id");
 		
-		String c_Id = issueVO.getC_Id();
-		String i_Name = issueVO.getI_Name();
-		String i_Content = issueVO.getI_Content();
-		String i_Start = issueVO.getI_Start();
-		String i_End = issueVO.getI_End();
-		String ig_Num = issueVO.getig_Num();
-		String i_Num = issueVO.getI_Num();
+		String coworkSelect = request.getParameter("coworkSelect");
 		
-		Map<String, Object> cmap = new HashMap<String,Object>();
-		cmap.put("mem_Id", mem_Id);
-		cmap.put("c_Id", c_Id);
-		cmap.put("i_Name", i_Name);
-		cmap.put("i_Content",i_Content);
-		cmap.put("i_Start", i_Start);
-		cmap.put("i_End", i_End);
-		cmap.put("ig_Num", ig_Num);
+		if(coworkSelect == "myspace") {
+			String p_i_Name = issueVO.getI_Name();
+			String p_i_Content = issueVO.getI_Content();
+			String p_i_Start = issueVO.getI_Start();
+			String p_i_End = issueVO.getI_End();
+			String i_Num = issueVO.getI_Num();
+			
+			Map<String, Object> cmap = new HashMap<String,Object>();
+			cmap.put("mem_Id", mem_Id);
+			cmap.put("p_i_Name", p_i_Name);
+			cmap.put("p_i_Content", p_i_Content);
+			cmap.put("p_i_Start",p_i_Start);
+			cmap.put("p_i_End", p_i_End);
 		
-		
-		issueService.issueCopy(cmap);
-		String redirecti_Num = (String) cmap.get("i_Num");
-		
-		Map<String, Object> hmap = new HashMap<String,Object>();
-		hmap.put("i_Num", i_Num);
-		hmap.put("redirecti_Num", redirecti_Num);
+			issueService.issueCopy(cmap);
+			String redirecti_Num = (String) cmap.get("i_Num");
+			
+			Map<String, Object> hmap = new HashMap<String,Object>();
+			hmap.put("i_Num", i_Num);
+			hmap.put("redirecti_Num", redirecti_Num);
 
-		appendixService.copyFile(hmap);
+			appendixService.copyFile(hmap);
+			
+			rttr.addFlashAttribute("msg", "success");
 
-		
-		rttr.addFlashAttribute("msg", "success");
+			return "redirect:/personal/issue/read?p_Num="+redirecti_Num;
+			
+						
+		}else {
+			String c_Id = issueVO.getC_Id();
+			String i_Name = issueVO.getI_Name();
+			String i_Content = issueVO.getI_Content();
+			String i_Start = issueVO.getI_Start();
+			String i_End = issueVO.getI_End();
+			String ig_Num = issueVO.getig_Num();
+			String i_Num = issueVO.getI_Num();
+			
+			Map<String, Object> cmap = new HashMap<String,Object>();
+			cmap.put("mem_Id", mem_Id);
+			cmap.put("c_Id", c_Id);
+			cmap.put("i_Name", i_Name);
+			cmap.put("i_Content",i_Content);
+			cmap.put("i_Start", i_Start);
+			cmap.put("i_End", i_End);
+			cmap.put("ig_Num", ig_Num);
+			
+			
+			issueService.issueCopy(cmap);
+			String redirecti_Num = (String) cmap.get("i_Num");
+			
+			Map<String, Object> hmap = new HashMap<String,Object>();
+			hmap.put("i_Num", i_Num);
+			hmap.put("redirecti_Num", redirecti_Num);
 
-		return "redirect:/project/issue/read?c_Id="+c_Id+"&i_Num="+redirecti_Num;
+			appendixService.copyFile(hmap);
+			rttr.addFlashAttribute("msg", "success");
+
+			return "redirect:/project/issue/read?c_Id="+c_Id+"&i_Num="+redirecti_Num;
+		}
 	
 	}
 

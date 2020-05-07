@@ -3,7 +3,7 @@
       PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="personal_issuemanager">
+<mapper namespace="personalmanager">
 	<resultMap id="managerResult01" type="java.util.Map">
 		<result property="p_i_Name" column="p_i_Name" />
 		<result property="p_Num" column="p_Num" />
@@ -37,30 +37,30 @@
 				</when>
 				<when test="mem_Id != '' and mem_Id != null and p_i_Content != '' and p_i_Content != null" >
 					<![CDATA[
-					and REPLACE(upper(REGEXP_REPLACE(i.mem_Id,'<[^>]*>|\&([^;])*;', '')),' ','') like CONCAT('%' || REPLACE(upper(#{mem_Id}),' ',''), '%')
-					and REPLACE(upper(REGEXP_REPLACE(i.p_i_Content,'<[^>]*>|\&([^;])*;', '')),' ','') like CONCAT('%' || REPLACE(upper(#{p_i_Content}),' ',''), '%')
+					and REPLACE(upper(REGEXP_REPLACE(mem_Id,'<[^>]*>|\&([^;])*;', '')),' ','') like CONCAT('%' || REPLACE(upper(#{mem_Id}),' ',''), '%')
+					and REPLACE(upper(REGEXP_REPLACE(p_i_Content,'<[^>]*>|\&([^;])*;', '')),' ','') like CONCAT('%' || REPLACE(upper(#{p_i_Content}),' ',''), '%')
 					]]>
 				</when>
 				<when test="p_i_Name != '' and p_i_Name != null and p_i_Content != '' and p_i_Content != null" >
 					<![CDATA[
-					and REPLACE(upper(REGEXP_REPLACE(i.p_i_Name,'<[^>]*>|\&([^;])*;', '')),' ','') like CONCAT('%' || REPLACE(upper(#{p_i_Name}),' ',''), '%')
-					and REPLACE(upper(REGEXP_REPLACE(i.p_i_Content,'<[^>]*>|\&([^;])*;', '')),' ','') like CONCAT('%' || REPLACE(upper(#{p_i_Content}),' ',''), '%')
+					and REPLACE(upper(REGEXP_REPLACE(p_i_Name,'<[^>]*>|\&([^;])*;', '')),' ','') like CONCAT('%' || REPLACE(upper(#{p_i_Name}),' ',''), '%')
+					and REPLACE(upper(REGEXP_REPLACE(p_i_Content,'<[^>]*>|\&([^;])*;', '')),' ','') like CONCAT('%' || REPLACE(upper(#{p_i_Content}),' ',''), '%')
 					]]>
 				</when>
 			<!-- 1개 -->
 				<when test="mem_Id != '' and mem_Id != null" >
 					<![CDATA[
-					and REPLACE(upper(REGEXP_REPLACE(i.mem_Id,'<[^>]*>|\&([^;])*;', '')),' ','') like CONCAT('%' || REPLACE(upper(#{mem_Id}),' ',''), '%')
+					and REPLACE(upper(REGEXP_REPLACE(mem_Id,'<[^>]*>|\&([^;])*;', '')),' ','') like CONCAT('%' || REPLACE(upper(#{mem_Id}),' ',''), '%')
 					]]>
 				</when>
 				<when test="p_i_Name != '' and p_i_Name != null" >
 					<![CDATA[
-					and REPLACE(upper(REGEXP_REPLACE(i.p_i_Name,'<[^>]*>|\&([^;])*;', '')),' ','') like CONCAT('%' || REPLACE(upper(#{p_i_Name}),' ',''), '%')
+					and REPLACE(upper(REGEXP_REPLACE(p_i_Name,'<[^>]*>|\&([^;])*;', '')),' ','') like CONCAT('%' || REPLACE(upper(#{p_i_Name}),' ',''), '%')
 					]]>
 				</when>
 				<when test="p_i_Content != '' and p_i_Content != null" >
 					<![CDATA[
-					and REPLACE(upper(REGEXP_REPLACE(i.p_i_Content,'<[^>]*>|\&([^;])*;', '')),' ','') like CONCAT('%' || REPLACE(upper(#{p_i_Content}),' ',''), '%')
+					and REPLACE(upper(REGEXP_REPLACE(p_i_Content,'<[^>]*>|\&([^;])*;', '')),' ','') like CONCAT('%' || REPLACE(upper(#{p_i_Content}),' ',''), '%')
 					]]>
 				</when>
 
