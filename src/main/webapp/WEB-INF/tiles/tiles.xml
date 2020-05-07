@@ -9,6 +9,15 @@
 			value="/WEB-INF/tiles/common/footer.jsp" />
 	</definition>
 	
+	<definition name="managerLayout"
+		template="/WEB-INF/tiles/common/managerlayout.jsp">
+		<put-attribute name="header"
+			value="/WEB-INF/tiles/common/managerheader.jsp" />
+		<put-attribute name="content" />
+		<put-attribute name="footer"
+			value="/WEB-INF/tiles/common/footer.jsp" />
+	</definition>
+	
 	<definition name="defaultLayout"
 		template="/WEB-INF/tiles/common/defaultLayout.jsp">
 		<put-attribute name="content" />
@@ -36,14 +45,17 @@
 	<definition name="/question" extends="defaultLayout">
 		<put-attribute name="content" value="/WEB-INF/views/question.jsp" />
 	</definition>
-	<definition name="hm/*" extends="defaultLayout">
-		<put-attribute name="content" value="/WEB-INF/hm/*.jsp" />
-	</definition>
-	
 	
 	<definition name="contentLayout" template="/WEB-INF/tiles/common/contentLayout.jsp">
  	 <put-attribute name="content" />
 	</definition>
+	
+	<definition name="manager/*" extends="managerLayout"> <put-attribute name="content" 
+		value="/WEB-INF/views/manager/{1}.jsp" /> 
+		</definition>
+	<definition name="/manager/*" extends="managerLayout"> <put-attribute name="content" 
+		value="/WEB-INF/views/manager/{1}.jsp" /> 
+		</definition>
 	
 	<definition name="/*" extends="mainLayout">
 		<put-attribute name="content"
@@ -55,5 +67,7 @@
 	<definition name="*/*" extends="mainLayout"> <put-attribute name="content" 
 		value="/WEB-INF/views/{1}/{2}.jsp" /> 
 		</definition>
+		
+	
 </tiles-definitions>
 

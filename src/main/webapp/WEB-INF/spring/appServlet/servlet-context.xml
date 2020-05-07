@@ -103,6 +103,17 @@
 			<beans:ref bean="LoginInterceptor" />
 		</interceptor>
 	</interceptors>
+	
+	<beans:bean id="ProJectInterceptor"
+		class="project.sungho.interceptor.PjtInterceptor"></beans:bean>
+	<interceptors>
+		<interceptor>
+			<mapping path="/project/**" />
+			<mvc:exclude-mapping path="/resources/**" />
+			<beans:ref bean="ProJectInterceptor" />
+		</interceptor>
+	</interceptors>
+	
 
 	<!-- batch -->
 	<!-- <task:annotation-driven executor="executor" scheduler="scheduler"/> 

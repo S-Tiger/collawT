@@ -310,7 +310,7 @@ $(function () {
 				</div>
 				<!-- /.col -->
 				<div class="col-sm-6">
-					<ol class="breadcrumb float-sm-right">
+					<ol class="breadcrumb float-right">
 
 						<li class="breadcrumb-item"><a style="font-size: 30px;"
 							href="/#" data-needpopup-show="#add-popup"> <i
@@ -420,8 +420,11 @@ $(function () {
 						class="img-circle elevation-2" id="userImage2" alt="프로필사진">
 						</c:if>
 						<br>
-                        <a class="users-list-name" href="#">${memberitem.mem_Name}</a>
-                        
+                        <a style= "margin: 5px;"class="users-list-name" href="#">${memberitem.mem_Name}
+                        <c:if test="${memberitem.mem_Id == pjt.mem_Id}">
+                        <img src="${contextPath}/resources/dist/img/crown.jpg" style="width: 20px; margin-top: -5px;">
+                        </c:if>
+                        </a>
                       </li>
                     </c:forEach>
                     </ul>

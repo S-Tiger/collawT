@@ -43,7 +43,9 @@ public class HomeController {
 		
 		String uri = (String) request.getRequestURI();
 		if (member != null) {
-			return "redirect:/main";
+			if (member.get("mem_Kind").equals("03")) {
+				return "redirect:/manager/member/main";
+			}else {return "redirect:/main";}
 			}else {
 		
 		return "/index";
