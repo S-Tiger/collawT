@@ -41,7 +41,6 @@ public class PjtInterceptor extends HandlerInterceptorAdapter {
 			if (checkmember.equals(checkId.get(i).get("c_Id")) || member.get("mem_Kind").equals("03")) {
 				return true;
 			}
-				
 		}
 		response.sendRedirect("/main");
 		return false;
