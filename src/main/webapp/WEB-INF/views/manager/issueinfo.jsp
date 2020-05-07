@@ -26,7 +26,7 @@ width: 100%;
 		  //특정 열을 클릭했을 때 다른 페이지로 이동하도록 처리
 		  if( mySheet.ColSaveName(Col) == "link"){
 		 
-		    location.href = "/project/issue/read?c_Id=" + mySheet.GetCellValue(Row,"c_Id") + "i_Num="+mySheet.GetCellValue(Row,"i_Num");
+		    location.href = "/project/issue/read?c_Id=" + mySheet.GetCellValue(Row,"c_Id") + "&i_Num="+mySheet.GetCellValue(Row,"i_Num");
 		 
 		  }
 		}
