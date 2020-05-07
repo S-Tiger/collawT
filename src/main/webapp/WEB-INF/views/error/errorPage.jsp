@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>에러페이지</title>
 <div style="text-align:center; margin-top:100px">
-	<img src="../resources/img/fatal_error_msg.jpg">
+	<img src="../resources/img/error_txt1.png">
 </head>
 <body>
 	<%-- <h1>에러가 발생했습니다.</h1>
