@@ -13,7 +13,7 @@
 	var wsocket;
 	
 	function connect() {
-		wsocket = new WebSocket("ws://localhost:8090/chat-ws");
+		wsocket = new WebSocket("ws://192.168.0.77:8090/chat-ws");
 		wsocket.onopen = onOpen;
 		wsocket.onmessage = onMessage;
 		wsocket.onclose = onClose;
