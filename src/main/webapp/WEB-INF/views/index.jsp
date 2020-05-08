@@ -216,12 +216,15 @@ header.masthead .intro-text .intro-heading {
 }
 
 img {
-	max-width: 100%;
-	height: auto !important;
+/* 	max-width: 100%;
+	height: auto !important; */
+	width:700px;
+	height: 300px;
 }
 #korea,#america{
 font-size: xx-small;
 vertical-align: bottom; 
+margin-top: 12px;
 }
 </style>
 <script type="text/javascript">
@@ -237,16 +240,16 @@ vertical-align: bottom;
 	<!-- Navigation -->
 	<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="background: white">
 		<div class="container">
-			<a class="navbar-brand js-scroll-trigger" href="#page-top">Collaw T</a>
+			<a class="navbar-brand js-scroll-trigger kb" href="#page-top">Collaw T</a>
 			<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
 				Menu <i class="fas fa-bars"></i>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav text-uppercase ml-auto">
-					<li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services" style="color: black"><spring:message code="site.information" text="제품 설명" /></a></li>
+					<li class="nav-item"><a class="nav-link js-scroll-trigger kb" href="#services" style="color: black"><spring:message code="site.information" text="제품 설명" /></a></li>
 					<li class="nav-item"><a class="nav-link js-scroll-trigger" href="/question" style="color: black"><spring:message code="site.customers" text="고객 지원" /></a></li>
 					<li class="nav-item"><a class="nav-link js-scroll-trigger" href="/member/signup" style="color: black"><spring:message code="site.signup" text="회원가입" /></a></li>
-					<li class="nav-item"id="korea"><a class="nav-link js-scroll-trigger" style="color: black" href="<c:url value="/?lang=kor"/>">한국어</a> </li>
+					<li class="nav-item" id="korea"><a class="nav-link js-scroll-trigger float-bottom" style="color: black" href="<c:url value="/?lang=kor"/>">한국어</a> </li>
 					<li class="nav-item" id="america"><a class="nav-link js-scroll-trigger" style="color: black" href="<c:url value="/?lang=en"/>">English</a> </li>					
 				</ul>
 			</div>
@@ -265,16 +268,16 @@ vertical-align: bottom;
 		</div>
 	</header>
 
-
+	
 	<!-- 제품문의 -->
-	<header class="masthead" id="services">
+	<header class="masthead" id="">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-6"style=" position: absolute; z-index: 2;">
+				<div class="col-md-6"style="width:70%; position: absolute; z-index: 2;">
 					<div class="card-body" style="border-color: white !important;">
 						<h1>&nbsp</h1><br> <br>
-						<h1 style="text-align: left;"class="ng"><spring:message code="site.detail1" text="효과적인 팀워크 가벼워진 업무, 협업툴" /></h1>
-						<h4 style="text-align: left;"class="ng"><spring:message code="site.detail2" text="이메일이 필요없는 간편한 소통과 파일 공유, 빠른 피드백 확인까지. 바라던 기능들을 모두 담았습니다." /></h4>
+						<h2 style="text-align: left;"class="ng"><spring:message code="site.detail1" text="효과적인 팀워크 가벼워진 업무, 협업툴" /></h2>
+						<h5 style="text-align: left;"class="ng"><spring:message code="site.detail2" text="이메일이 필요없는 간편한 소통과 파일 공유, 빠른 피드백 확인까지 바라던 기능들을 모두 담았습니다." /></h5>
 						<p style="text-align: left;"class="ng"><spring:message code="site.detail3" text="여러분이 더 협력적으로 일하고 더 많은 일을 할 수 있도록 협업 게시판, 목록, 칸반, 검색기능을 통해 여러분의 재미있고 유연하며 보람 있는 방법으로 프로젝트를 정리하고 우선순위를 정할 수 있는 Collaw T" /></p>
 						<a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger float-right ng" style="background-color: #fed136; font-size: large; border-color: #fed136; padding-top: 13px; padding-bottom: 13px; padding-left: 20px; padding-right: 20px;" href="member/loginPage"><spring:message code="site.login" text="로그인" /></a>
 						<h1>&nbsp</h1>
@@ -337,24 +340,23 @@ vertical-align: bottom;
 
 					<div class="swiper-container">
 						<div class="swiper-wrapper">
-							<div class="swiper-slide">
-								<H1>화면 소개 - 검색(임시;)</H1>
-								Slide 1 <img src="/resources/img/1.png">
+							<div class="swiper-slide ng">
+								<H1>화면 소개 - 내공간</H1>
+							 <img src="/resources/img/11.png" >
 							</div>
 							<div class="swiper-slide">
-								<H1>화면 소개 - 게시판</H1>
-								Slide 2 <img src="/resources/img/2.png">
+								<H1>화면 소개 - 협업공간</H1>
+								 <img src="/resources/img/22.png">
 							</div>
 							<div class="swiper-slide">
-								<H1>화면 소개 - 스케줄</H1>
-								Slide 3 <img src="/resources/img/3.png">
+								<H1>화면 소개 - 채팅</H1>
+								 <img src="/resources/img/33.png">
 							</div>
 							<div class="swiper-slide">
-								Slide 4
-								<H1>칸반-1</H1>
-								<img src="/resources/img/4.png">
+								<H1>파일관리</H1>
+								<img src="/resources/img/44.png">
 							</div>
-							<div class="swiper-slide">
+						<!-- 	<div class="swiper-slide">
 								Slide 5
 								<H1>칸반-2</H1>
 								<img src="/resources/img/5.png">
@@ -383,7 +385,7 @@ vertical-align: bottom;
 								Slide 10
 								<H1>추후 업뎃 예정</H1>
 								<img src="/resources/img/10.png">
-							</div>
+							</div> -->
 						</div>
 						<!-- Add Pagination -->
 						<div class="swiper-pagination"></div>
