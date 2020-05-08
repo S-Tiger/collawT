@@ -194,14 +194,19 @@ public class IssueControllerImpl implements IssueController {
 		member = (Map<String, Object>) session.getAttribute("member");
 		String mem_Id = (String) member.get("mem_Id");
 		
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		String c_Id = (String) request.getParameter("c_Id");
+		searchMap.put("c_Id", c_Id);
+		
 		List<Map> coworkList = issueService.coRead(mem_Id);
 		Map<String, Object> board = issueService.issueRead(i_Num);
 		List<Map> list = appendixService.fileList(i_Num);
 		List<Map> chargerList = issueService.chargerRead(i_Num);
-		
+		Map<String, Object> pjt = coworkService.searchMain(searchMap);
 		
 		ModelAndView mav = new ModelAndView("issue/issueRead");
 		mav.addObject("issueRead", board);
+		mav.addObject("pjt", pjt);
 		mav.addObject("file", list);
 		mav.addObject("chargerList", chargerList);
 		mav.addObject("coworkList", coworkList);

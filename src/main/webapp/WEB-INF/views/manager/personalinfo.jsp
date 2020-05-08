@@ -22,6 +22,15 @@ width: 100%;
 	//시트 높이 계산용
 	var pageheightoffset = 200;
 	
+	function mySheet_OnClick(Row, Col, Value, CellX, CellY, CellW, CellH) {
+		  //특정 열을 클릭했을 때 다른 페이지로 이동하도록 처리
+		  if( mySheet.ColSaveName(Col) == "link"){
+		 
+		    location.href = "/personal/read?p_Num=" +mySheet.GetCellValue(Row,"p_Num");
+		 
+		  }
+		}
+	
 	/*Sheet 기본 설정 */
 	function LoadPage() {
 		mySheet.RemoveAll();
@@ -36,7 +45,7 @@ width: 100%;
 			{Header:"제목",Type:"Text",SaveName:"p_i_Name",MinWidth:150 ,MultiLineText:1,Edit:false},			
 			{Header:"작성자ID",Type:"Text",SaveName:"mem_Id",MinWidth:150 ,MultiLineText:1, Wrap:1,Edit:false},
 			{Header:"작성일",Type:"Date",SaveName:"p_i_Date",MinWidth:100,Edit:false},
-			{Header:"게시글 링크",Type:"Button",MinWidth:100}
+			{Header:"게시글 링크",Type:"Button",SaveName:"link",MinWidth:100}
 		];   
 		IBS_InitSheet( mySheet , initSheet);
 
@@ -50,7 +59,7 @@ width: 100%;
 		switch(sAction) {
 			case "search": //조회
 			    var param = FormQueryStringEnc(document.frm);
-				mySheet.DoSearch("${contextPath}/manager/issue/searchList", param);
+				mySheet.DoSearch("${contextPath}/manager/personal/searchList", param);
 				//mySheet.DoSearch("transaction_data2.json");
 				break;
 			case "reload": //초기화
@@ -59,7 +68,7 @@ width: 100%;
 			case "save": // 저장
 				//var tempStr = mySheet.GetSaveString();
 				//alert("서버로 전달되는 문자열 확인 :"+tempStr);
-				mySheet.DoSave("${contextPath}/manager/issue/saveData");
+				mySheet.DoSave("${contextPath}/manager/personal/saveData");
 				break;			
 			case "insert": //신규행 추가
 				var row = mySheet.DataInsert();

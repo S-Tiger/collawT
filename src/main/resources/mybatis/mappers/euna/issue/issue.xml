@@ -29,7 +29,7 @@
 		<result property="ig_Num" column="ig_Num" />
 		<result property="mem_Id" column="mem_Id" />
 		<result property="mem_Name" column="mem_Name" />
-		<result property="mem_File" column="mem_File" />
+		<result property="mem_File" column="mem_File" javaType="[B" jdbcType="BLOB"/>
 		<result property="ig_Name" column="ig_Name" />
 		<result property="ig_Color" column="ig_Color" />
 		<result property="charger" column="charger" />
@@ -214,7 +214,7 @@
 	<!-- 이슈 담당자 조회 -->
 	<select id="chargerRead"  resultType="java.util.HashMap"> 
       <![CDATA[
-			select m.mem_id, m.mem_name
+			select m.mem_id, m.mem_name, m.mem_File
 			from charger ch, member m
 			where m.mem_id=ch.mem_id
 			and i_Num=#{i_Num}

@@ -307,18 +307,18 @@ function urlClipCopy() {
 
 								<!-- 멤버이미지 넣기 -->
 								
-								<c:if test="${member.mem_File != null }">
+								<c:if test="${personalRead.mem_File != null }">
 								<img alt="프로필사진" width="50" height="50"
-								src="/member/getByteImage?mem_Id=${member.mem_Id}" class="img-circle elevation-2"/>
+								src="/member/getByteImage?mem_Id=${personalRead.mem_Id}" class="img-circle elevation-2"/>
 								</c:if>
-								<c:if test="${member.mem_File == null }">
+								<c:if test="${personalRead.mem_File == null }">
 								<img src="${contextPath}/resources/dist/img/profile.jpg" width="50" height="50"
 								class="img-circle elevation-2" alt="프로필사진">
 								</c:if>
 								<span class="username" id="mem_Name" name="mem_Name">
-								<c:out value="${member.mem_Name}" /></span>
+								<c:out value="${personalRead.mem_Name}" /></span>
 								<span class="description"id="mem_Id" name="mem_Id">
-								<c:out	value="${member.mem_Id}" /></span>  
+								<c:out	value="${personalRead.mem_Id}" /></span>  
 								
 								
 							</div>

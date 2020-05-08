@@ -2,6 +2,8 @@
 	pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
@@ -175,7 +177,7 @@ $(document).ready(function() {
 						str+='<c:if test="${'+result[i].mem_File +'== NULL}">';
 						str+='<img src="${contextPath}/resources/dist/img/profile.jpg" width="50" height="50" class="img-circle elevation-1" alt="Null">';
 						str+='</c:if>';
-							
+						
 						str+='<div class="comment-text">';
 						str+='<span class="username">'+result[i].mem_Name;
 						str+='<span class="text-muted float-right">'+result[i].r_Date+'</span>';
@@ -184,7 +186,7 @@ $(document).ready(function() {
 						
 						str+='<p id="replyContent'+result[i].r_Num+'" name="replyContent">'+result[i].r_Content+'</p>';
 						str+='</div></div></div>';
-						str+='<input type="hidden" id="r_Num" name="r_Num" value="'+result[i].r_Num+'" />';
+						str+='<input type="hidden" id="vr_Num" name="vr_Num" value="'+result[i].r_Num+'" />';
 					}
 					
 				}else{
@@ -332,7 +334,7 @@ $(document).ready(function() {
                           </ul>
                         </div>
                         <!-- 본인만 글 수정, 삭제 가능-->
-                        <c:if test="${member.mem_Id == issueRead.mem_Id}">
+                        <c:if test="${member.mem_Id == issueRead.mem_Id || member.mem_Id == pjt.mem_Id}">
                         <span class="text-muted float-right"><small><a href="/project/issue/update?c_Id=${issueRead.c_Id}&i_Num=${issueRead.i_Num}">수정</a>｜</small>
 						<small><a onclick="if(confirm('삭제하시겠습니까?')){alert('삭제되었습니다.');}else{return false;};" href='/project/issue/delete?c_Id=${issueRead.c_Id}&i_Num=${issueRead.i_Num}'>삭제</a></small></span>
 						</c:if>
@@ -385,12 +387,12 @@ $(document).ready(function() {
 							<br>
 
 <!-- 이슈정보~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-<div class="card card-primary collapsed-card">
+<div class="card card-primary">
             <div class="card-header" style="height:30px; padding-left:13px; padding-right:16px; padding-top:4px; background-color:#e87c87;">
-             <label><small><b>이슈 정보 더 보기</b></small></label>
+             <label><small><b>이슈 정보</b></small></label>
                 <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                  <i class="fas fa-plus"></i></button>
+                  <i class="fas fa-minus"></i></button>
               </div>
             </div>
             <div class="card-body p-0">
@@ -427,34 +429,37 @@ $(document).ready(function() {
 					<span style="font-size: 0.8em;"><b>이슈 담당자</b></span>
 					</div>
 					<div id="chargerListCheck">
-							<c:forEach var="chargerList" items="${chargerList}" >
+					<c:choose>
+					<c:when test="${fn:length(chargerList)==0}">
+					 <p><small>지정된 담당자가 없습니다.</small></p>
+					</c:when>
+					<c:otherwise>
+							<c:forEach var="chargerListitem" items="${chargerList}" >
 							
 								<div class="row" style="margin:9px">
 								<div class="user-block-sm">	
 								
-								
-								<%-- <img alt="프로필사진" width="30" height="30"
-								src="/member/getByteImage?mem_Id=${chargerList.MEM_ID}" class="img-circle"/> --%>
-								
-								
-								<c:if test="${member.mem_File != null }">
+			
+								<c:if test="${chargerListitem.MEM_FILE != null }">
 								<img alt="프로필사진" width="30" height="30"
-								src="/member/getByteImage?mem_Id=${chargerList.MEM_ID}" class="img-circle"/>
+								src="/member/getByteImage?mem_Id=${chargerListitem.MEM_ID}" class="img-circle"/>
 								</c:if>
-								<c:if test="${member.mem_File == null }">
+								<c:if test="${chargerListitem.MEM_FILE == null }">
 								<img src="${contextPath}/resources/dist/img/profile.jpg" style="width:30px; height:30px"
 								class="img-circle" alt="User Image">
 								</c:if>
 								
 								
 								<span class="username" id="ch_mem_Name" name="mem_Name">
-								<small><c:out value=" ${chargerList.MEM_NAME}"/></small></span>
+								<small><c:out value=" ${chargerListitem.MEM_NAME}"/></small></span>
 								<span class="description"id="mem_Id" name="mem_Id">
-								<small><c:out	value="(${chargerList.MEM_ID})"/></small></span>
+								<small><c:out	value="(${chargerListitem.MEM_ID})"/></small></span>
 								</div>
 								</div>
 								
 								</c:forEach>
+						</c:otherwise>
+						</c:choose>
 					</div>
 				
 							</td>

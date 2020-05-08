@@ -54,7 +54,7 @@ public class PersonalManagerControllerImpl implements PersonalManagerController 
 		request.setCharacterEncoding("utf-8");
 		Map<String, Object> searchMap = new HashMap<String, Object>(); // 검색조건
 		Map<String, Object> resultMap = new HashMap<String, Object>(); // 조회결과
-		
+
 		
 		searchMap.put("mem_Id", request.getParameter("mem_Id"));
 		searchMap.put("p_i_Name", request.getParameter("p_i_Name"));
@@ -68,7 +68,6 @@ public class PersonalManagerControllerImpl implements PersonalManagerController 
         for (int i = 0; i < data.size(); i++) {
             data.get(i).put("link", "바로가기");
          }
-        System.out.println("!!!!!!!!!"+resultMap);
         return resultMap;
 	}
 	

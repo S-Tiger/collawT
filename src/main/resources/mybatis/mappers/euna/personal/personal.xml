@@ -25,6 +25,7 @@
 		<result property="p_i_Start" column="p_i_Start" />
 		<result property="p_i_End" column="p_i_End" />
 		<result property="mem_Name" column="mem_Name" />
+		<result property="mem_File" column="mem_File" javaType="[B" jdbcType="BLOB"/>
 	</resultMap>
 	
 	<resultMap id="personalResult03" type="java.util.HashMap">
@@ -114,9 +115,10 @@
 	<!-- 게시글 조회 -->
 	<select id="personalRead"  parameterType="String" resultMap="personalResult02"> 
       <![CDATA[
-        select p_Num, p_i_Name, p_i_Content, p_i_Date, p_i_Start, p_i_End
-		from personal
-        where p_Num=#{p_Num}
+        select p.p_Num, p.p_i_Name, p.p_i_Content, p.p_i_Date, p.p_i_Start, p.p_i_End, m.mem_Id, m.mem_File, m.mem_Name
+		from personal p, member m
+        where p.mem_Id = m.mem_Id
+        and p_Num=#{p_Num}
       ]]>
 	</select>
 
