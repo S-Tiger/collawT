@@ -493,9 +493,9 @@ $(document).ready(function() {
 
 
 							<!-- 북마크 부분~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-							<button type="button" class="btn btn-default btn-sm" id="bookmarkinsert" style="color: #444; margin: 3px;">
+							<!-- <button type="button" class="btn btn-default btn-sm" id="bookmarkinsert" style="color: #444; margin: 3px;">
 								<i class="fas fa-bookmark"></i> 북마크
-							</button>
+							</button> -->
 							<input type="hidden" name="mem_Id" value="${voteRead.mem_Id}"> <a id="list_btn" class="btn btn-default btn-sm" href='list?c_Id=${voteRead.c_Id}' style="color: #444; margin: 3px;"> <i class="fas fa-list"></i>&nbsp;목록
 							</a> <br> <br>
 							<div></div>

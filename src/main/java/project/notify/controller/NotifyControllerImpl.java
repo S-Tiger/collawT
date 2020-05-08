@@ -144,7 +144,7 @@ public class NotifyControllerImpl implements NotifyController {
 		Map<String,Object> searchMap = new HashMap<String,Object>();
 		searchMap = (Map<String,Object>)session.getAttribute("member");
 		List<Map> viewReply = notifyService.viewReply(searchMap);
-		//System.out.println("viewReply~~~~~~~:"+viewReply.toString());
+		//System.out.println("viewReply~~~~~~~@@@@@@@@@@@@@@@@@@@@@@@@@@@@@:"+viewReply.toString());
 		return viewReply;
 	}
 	

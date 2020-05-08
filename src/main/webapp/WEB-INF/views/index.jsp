@@ -6,33 +6,25 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
-
 <title><spring:message code="site.title" text="협업툴 Collaw T - 간단하고 쉬운협업" /></title>
-
 <!-- Bootstrap core CSS -->
 <link href="${contextPath}/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
 <!-- Custom fonts for this template -->
 <link href="${contextPath}/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
 <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
-
 <!-- Custom styles for this template -->
 <link href="${contextPath}/resources/css/agency.min.css" rel="stylesheet">
 <link rel="stylesheet" href="${contextPath}/resources/modal/dist/needpopup.min.css">
 <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="${contextPath}/resources/modal/dist/needpopup.min.js"></script>
-
-
 <title>협업툴 Collaw T - 간단하고 쉬운협업</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -90,15 +82,12 @@
 	position: relative;
 	height: 600px;
 }
-
 .section-01 {
 	background-color: white;
 }
-
 .section-02 {
 	background-color: white;
 }
-
 .section-03 {
 	background-color: white;
 } /* floating menu */
@@ -111,12 +100,10 @@
 	margin: -220px 0 0 0;
 	background-color: #d4cecf;; /*background: url("") 0 0 no-repeat;*/
 }
-
 .floating-menu li {
 	margin: 0;
 	*float: left;
 }
-
 .floating-menu a {
 	display: block;
 	width: 123px;
@@ -126,35 +113,28 @@
 	border: 1px solid #464646;
 	text-decoration: none;
 }
-
 .floating-menu a.menu-04 {
 	height: 20px;
 	background: none;
 }
-
 .floating-menu li.on a {
 	background-color: #333;
 	color: #fff; /*background: url("") 0 0 no-repeat;*/
 }
-
 .floating-menu li.on a.menu-01 { /* background-position: -131px 0;*/
 	
 }
-
 .floating-menu li.on a.menu-02 {
 	/* background-position: -131px -104px;*/
 	
 }
-
 .floating-menu li.on a.menu-03 { /*background-position: -131px -219px;*/
 	
 }
-
 .footer {
 	height: 100px;
 	background-color: #707070;
 }
-
 header.masthead {
 	text-align: center;
 	color: black;
@@ -167,7 +147,6 @@ header.masthead {
 	text-shadow: 0 0 black;
 	background-repeat: no-repeat;
 }
-
 .card-body {
 	/* 		overflow: hidden;
             display: flex;
@@ -177,7 +156,6 @@ header.masthead {
             height: 300px; */
 	
 }
-
 .header.masthead {
 	text-align: center;
 	color: #fff;
@@ -188,12 +166,10 @@ header.masthead {
 	background-size: cover;
 	background-color: white;
 }
-
 header.masthead .intro-text {
 	padding-top: 150px;
 	padding-bottom: 100px
 }
-
 header.masthead .intro-text .intro-lead-in {
 	font-size: 22px;
 	font-style: italic;
@@ -204,7 +180,6 @@ header.masthead .intro-text .intro-lead-in {
 		'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
 		'Noto Color Emoji'
 }
-
 header.masthead .intro-text .intro-heading {
 	font-size: 50px;
 	font-weight: 700;
@@ -214,17 +189,22 @@ header.masthead .intro-text .intro-heading {
 		Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji',
 		'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'
 }
+.indeximg {
+	max-width: 100%;
+	height: auto !important;
+	width: 600px;
+	hieght: 300px;
+}
 
 img {
-/* 	max-width: 100%;
-	height: auto !important; */
-	width:700px;
-	height: 300px;
+	max-width: 100%;
+	height: auto !important;
 }
+
+
 #korea,#america{
 font-size: xx-small;
 vertical-align: bottom; 
-margin-top: 12px;
 }
 </style>
 <script type="text/javascript">
@@ -236,26 +216,24 @@ margin-top: 12px;
 	}
 </script>
 <body id="page-top">
-
 	<!-- Navigation -->
 	<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="background: white">
 		<div class="container">
-			<a class="navbar-brand js-scroll-trigger kb" href="#page-top">Collaw T</a>
+			<a class="navbar-brand js-scroll-trigger" href="#page-top">Collaw T</a>
 			<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
 				Menu <i class="fas fa-bars"></i>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav text-uppercase ml-auto">
-					<li class="nav-item"><a class="nav-link js-scroll-trigger kb" href="#services" style="color: black"><spring:message code="site.information" text="제품 설명" /></a></li>
+					<li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services" style="color: black"><spring:message code="site.information" text="제품 설명" /></a></li>
 					<li class="nav-item"><a class="nav-link js-scroll-trigger" href="/question" style="color: black"><spring:message code="site.customers" text="고객 지원" /></a></li>
 					<li class="nav-item"><a class="nav-link js-scroll-trigger" href="/member/signup" style="color: black"><spring:message code="site.signup" text="회원가입" /></a></li>
-					<li class="nav-item" id="korea"><a class="nav-link js-scroll-trigger float-bottom" style="color: black" href="<c:url value="/?lang=kor"/>">한국어</a> </li>
-					<li class="nav-item" id="america"><a class="nav-link js-scroll-trigger" style="color: black" href="<c:url value="/?lang=en"/>">English</a> </li>					
+					<li class="nav-item"id="korea"><a class="nav-link js-scroll-trigger" style="color: black;margin-top: 12px;" href="<c:url value="/?lang=kor"/>">한국어</a> </li>
+					<li class="nav-item" id="america"><a class="nav-link js-scroll-trigger" style="color: black;margin-top: 12px;" href="<c:url value="/?lang=en"/>">English</a> </li>					
 				</ul>
 			</div>
 		</div>
 	</nav>
-
 	<!-- Header -->
 	<header class="masthead">
 		<div class="container">
@@ -267,17 +245,15 @@ margin-top: 12px;
 			</div> -->
 		</div>
 	</header>
-
-	
 	<!-- 제품문의 -->
 	<header class="masthead" id="">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-6"style="width:70%; position: absolute; z-index: 2;">
+				<div class="col-md-6"style=" position: absolute; z-index: 2;">
 					<div class="card-body" style="border-color: white !important;">
 						<h1>&nbsp</h1><br> <br>
-						<h2 style="text-align: left;"class="ng"><spring:message code="site.detail1" text="효과적인 팀워크 가벼워진 업무, 협업툴" /></h2>
-						<h5 style="text-align: left;"class="ng"><spring:message code="site.detail2" text="이메일이 필요없는 간편한 소통과 파일 공유, 빠른 피드백 확인까지 바라던 기능들을 모두 담았습니다." /></h5>
+						<h1 style="text-align: left;"class="ng"><spring:message code="site.detail1" text="효과적인 팀워크 가벼워진 업무, 협업툴" /></h1>
+						<h4 style="text-align: left;"class="ng"><spring:message code="site.detail2" text="이메일이 필요없는 간편한 소통과 파일 공유, 빠른 피드백 확인까지. 바라던 기능들을 모두 담았습니다." /></h4>
 						<p style="text-align: left;"class="ng"><spring:message code="site.detail3" text="여러분이 더 협력적으로 일하고 더 많은 일을 할 수 있도록 협업 게시판, 목록, 칸반, 검색기능을 통해 여러분의 재미있고 유연하며 보람 있는 방법으로 프로젝트를 정리하고 우선순위를 정할 수 있는 Collaw T" /></p>
 						<a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger float-right ng" style="background-color: #fed136; font-size: large; border-color: #fed136; padding-top: 13px; padding-bottom: 13px; padding-left: 20px; padding-right: 20px;" href="member/loginPage"><spring:message code="site.login" text="로그인" /></a>
 						<h1>&nbsp</h1>
@@ -300,10 +276,8 @@ margin-top: 12px;
 				<!-- /.col (RIGHT) -->
 			</div>
 			<!-- /.row -->
-
 		</div>
 	</header>
-
 	<!-- <header class="masthead" id="question">
 		<div class="container">
 			<div class="row">
@@ -328,64 +302,31 @@ margin-top: 12px;
 				/.col (RIGHT)
 			</div>
 			/.row
-
 		</div>
 	</header> -->
-
 	<!-- Header -->
 	<header class="masthead" id="question">
 		<div class="container">
 			<div class="row" id="services">
 				<div class="col-md-12">
-
 					<div class="swiper-container">
 						<div class="swiper-wrapper">
-							<div class="swiper-slide ng">
-								<H1>화면 소개 - 내공간</H1>
-							 <img src="/resources/img/11.png" >
+							<div class="swiper-slide">
+								<H1>화면 소개</H1>
+								<img class="indeximg" src="/resources/img/11.png">
 							</div>
 							<div class="swiper-slide">
-								<H1>화면 소개 - 협업공간</H1>
-								 <img src="/resources/img/22.png">
+								<H1>화면 소개</H1>
+								<img  class="indeximg" src="/resources/img/22.png">
+							</div>
+							<div  class="swiper-slide">
+								<H1>화면 소개</H1>
+								 <img class="indeximg"  src="/resources/img/33.png">
 							</div>
 							<div class="swiper-slide">
-								<H1>화면 소개 - 채팅</H1>
-								 <img src="/resources/img/33.png">
+								<H1>화면 소개</H1>
+								<img class="indeximg"  src="/resources/img/44.png">
 							</div>
-							<div class="swiper-slide">
-								<H1>파일관리</H1>
-								<img src="/resources/img/44.png">
-							</div>
-						<!-- 	<div class="swiper-slide">
-								Slide 5
-								<H1>칸반-2</H1>
-								<img src="/resources/img/5.png">
-							</div>
-							<div class="swiper-slide">
-								Slide 6
-								<H1>추후 업뎃 예정</H1>
-								<img src="/resources/img/6.png">
-							</div>
-							<div class="swiper-slide">
-								Slide 7
-								<H1>추후 업뎃 예정</H1>
-								<img src="/resources/img/7.png">
-							</div>
-							<div class="swiper-slide">
-								Slide 8
-								<H1>알람</H1>
-								<img src="/resources/img/8-1.png">
-							</div>
-							<div class="swiper-slide">
-								Slide 9
-								<H1>추후 업뎃 예정</H1>
-								<img src="/resources/img/9.png">
-							</div>
-							<div class="swiper-slide">
-								Slide 10
-								<H1>추후 업뎃 예정</H1>
-								<img src="/resources/img/10.png">
-							</div> -->
 						</div>
 						<!-- Add Pagination -->
 						<div class="swiper-pagination"></div>
@@ -395,15 +336,12 @@ margin-top: 12px;
 					</div>
 				</div>
 				<!-- /.col (LEFT) -->
-
 			</div>
 			<!-- /.row -->
-
 		</div>
 	</header>
 	<!-- Swiper JS -->
 	<script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
-
 	<!-- Initialize Swiper -->
 	<script>
 		var swiper = new Swiper('.swiper-container', {
@@ -452,23 +390,15 @@ margin-top: 12px;
 			</div>
 		</div>
 	</footer>
-
-
-
 	<!-- Bootstrap core JavaScript -->
 	<script src="${contextPath}/resources/vendor/jquery/jquery.min.js"></script>
 	<script src="${contextPath}/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
 	<!-- Plugin JavaScript -->
 	<script src="${contextPath}/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
-
 	<!-- Contact form JavaScript -->
 	<script src="${contextPath}/resources/js/jqBootstrapValidation.js"></script>
 	<script src="${contextPath}/resources/js/contact_me.js"></script>
-
 	<!-- Custom scripts for this template -->
 	<script src="${contextPath}/resources/js/agency.min.js"></script>
-
 </body>
-
 </html>
