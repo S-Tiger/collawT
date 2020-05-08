@@ -90,6 +90,7 @@ public class ComemberControllerImpl implements ComemberController {
 		dataMap.put("c_Id", c_Id);
 		dataMap.put("mem_Id", mem_Id);
 		comemberService.deleteMember(dataMap);
+		applyService.deleteApply(dataMap);
 		
 		return "redirect:/project/main?c_Id=" + c_Id;
 	}
