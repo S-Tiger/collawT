@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!-- <script src="http://code.jquery.com/jquery-latest.js"></script> -->
+<script src="http://code.jquery.com/jquery-latest.js"></script> 
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
@@ -58,7 +58,7 @@
 <script type="text/javascript">
 
 
-	document.ready = function() {
+	$(document).ready(function(){
 		//검색
 		$("#search").click(function(){
 			if($("#keyword").val()!=''){
@@ -92,8 +92,16 @@
 			type : 'get',
 			success : function(data){
 				var itemcount = data.length;
-				var str='개의 새로운 댓글이 있습니다.'
+				var str='개의 글에 댓글이 달렸습니다'
 				var no=itemcount+str;
+				 if(itemcount != 0){				
+					var div ='<div class="dropdown-divider"></div>'
+				    div +='<a href="/main" class="dropdown-item"> <i class="fas fa-list" style="display: flex;">'
+					div +='<p id = "test01" style="margin: 2px; margin-left: 10px; color: lightslategray;font-size: 12px;font-weight: normal"></p>'
+					div +='</i> <span class="float-right text-muted text-sm"></span></a><div class="dropdown-divider"></div>'
+          
+					$('#app').append(div)
+				} 
 				var count =parseInt(itemcount);
 				total += count;
 				$("#test01").html(no);				
@@ -105,7 +113,15 @@
 			type : 'get',
 			success : function(data){
 				var itemcount = data.length;
-				var str='개의 새로운 투표가 있습니다.'
+				var str='개의 투표가 있습니다'
+					 if(itemcount != 0){				
+							var div ='<div class="dropdown-divider"></div>'
+						    div +='<a href="/main" class="dropdown-item"> <i class="fas fa-vote-yea" style="display: flex;">'
+							div +='<p id = "test66" style="margin: 2px; margin-left: 10px; color: lightslategray;font-size: 12px;font-weight: normal"></p></i>'
+							div +='<span class="float-right text-muted text-sm"></span></a><div class="dropdown-divider"></div>'
+							
+							$('#app').append(div)
+						} 
 				var no=itemcount+str;
 				var count =parseInt(itemcount);
 				total += count;
@@ -117,8 +133,16 @@
 			type : 'get',
 			success : function(data){
 				var itemcount = data.length;
-				var str='개의 새로운 이슈가 있습니다'
+				var str='개의 이슈가 있습니다'
 				var no=itemcount+str;
+				 if(itemcount != 0){				
+						var div ='<div class="dropdown-divider"></div>'
+					    div +='<a href="/main" class="dropdown-item"> <i class="fas fa-copy" style="display: flex;">'
+						div +='<p id = "test03" style="margin: 2px; margin-left: 10px; color: lightslategray;font-size: 12px;font-weight: normal"></p></i>'
+						div +='<span class="float-right text-muted text-sm"></span></a><div class="dropdown-divider"></div>'
+						
+						$('#app').append(div)
+					} 
 				var count =parseInt(itemcount);
 				total += count;
 				$("#test03").html(no);				
@@ -139,11 +163,19 @@
 					}
 				}
 				var itemcount1 = itemString.length;
-				var str='개의 새로운 초대가 있습니다.'
+				var str='개의 초대가 있습니다'
+					  if(itemcount1 != 0){				
+							var div ='<div class="dropdown-divider"></div>'
+						    div +='<a href="/main" class="dropdown-item"> <i class="fas fa-envelope" style="display: flex;" >'
+							div +='<p id = "test33" style="margin: 2px; margin-left: 10px; color: lightslategray;font-size: 12px;font-weight: normal"></p></i>'
+							div +='<span class="float-right text-muted text-sm"></span></a><div class="dropdown-divider"></div>'
+						
+							$('#app').append(div)
+						}  
 				var no=itemcount1+str;
 				var count1 =parseInt(itemcount1);
 				total += count1;
-				var str='개의 알림이 있습니다.'
+				var str='개의 알림이 있습니다'
 				var last=total+str;
 				$("#test33").html(no);
 				$("#test00").html(total);
@@ -224,7 +256,7 @@
 				}})
 	})
 	
-	};
+	});
 	function menuclick() {
 		deleteCookie('menu');
 		var stat = document.getElementById('menustat').className;
@@ -372,44 +404,14 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
 
-<!-- 알림~~~~~~~~~~~~~~~~~~~~~s~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<!-- 알림~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
       <!-- Notifications Dropdown Menu -->
-      <li class="nav-item dropdown"><a class="nav-link"
+      <li class="nav-item dropdown" ><a class="nav-link"
 					data-toggle="dropdown" href="#"><i class="fas fa-bell"></i> <span
 						class="badge badge-warning navbar-badge" id ="test00"></span>
 				</a>
-					<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" >
+					 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" id="app" >
 						<span class="dropdown-item dropdown-header" id = "test22" ></span>
-						<div class="dropdown-divider"></div>
-						<a href="/main" class="dropdown-item"> 
-						<i class="fas fa-list" style="display: flex;">
-						<p id = "test01" style="margin: 2px; margin-left: 10px; color: lightslategray;
-    					font-size: 12px;font-weight: normal"></p>
-						</i> <span
-							class="float-right text-muted text-sm"></span>
-						</a>
-          <div class="dropdown-divider"></div>
-          <a href="/main" class="dropdown-item">
-            <i class="fas fa-envelope" style="display: flex;" >
-            <p id = "test33" style="margin: 2px; margin-left: 10px; color: lightslategray;
-    					font-size: 12px;font-weight: normal"></p></i> 
-            <span class="float-right text-muted text-sm"></span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="/main" class="dropdown-item">
-            <i class="fas fa-copy" style="display: flex;">
-            <p id = "test03" style="margin: 2px; margin-left: 10px; color: lightslategray;
-    					font-size: 12px;font-weight: normal"></p></i> 
-            <span class="float-right text-muted text-sm"></span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="/main" class="dropdown-item">
-            <i class="fas fa-vote-yea" style="display: flex;">
-              <p id = "test66" style="margin: 2px; margin-left: 10px; color: lightslategray;
-    					font-size: 12px;font-weight: normal"></p></i> 
-            <span class="float-right text-muted text-sm"></span>
-          </a>
-          
       </li>
       
       
