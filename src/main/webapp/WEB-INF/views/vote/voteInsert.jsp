@@ -25,9 +25,7 @@ span[name="chargerspan"] {
 
 <script type="text/javascript">
 	$(document).ready(function() {
-
 		periodSetting();
-
 		//글쓰기 빈 값 안되게 검사
 		$("#insertForm").submit(function() {
 			console.log();
@@ -35,7 +33,6 @@ span[name="chargerspan"] {
 			var v_Content = $("#v_Content").val();
 			var v_Subject = $("#v_Subject").val();
 			var vd_Content = $("#vd_Content").val();
-
 			if (v_Name == '') {
 				alert("제목을 입력하세요");
 				document.insertForm.v_Name.focus();
@@ -45,7 +42,7 @@ span[name="chargerspan"] {
 				document.insertForm.v_Content.focus();
 				return false;
 			} else if (v_Subject == '') {
-				alert("투표제목을 입력해주세요");
+				alert("투표주제를 입력해주세요");
 				document.insertForm.v_Subject.focus();
 				return false;
 			} else if (vd_Content == "") {
@@ -65,35 +62,27 @@ span[name="chargerspan"] {
 				alert("투표 항목은 12자리 이내로 입력해주세요.");
 				return false;
 			}
-
 			periodSetting();
-
 			document.insertForm.submit();
-
 		});
-
 		//캘린더 시작일/마감일 구하기/기간 미설정 시
 		$("#periodNull").click(function() {
 			periodSetting();
 		})
-
 		//캘린더 기능
 		$('#v_Period').daterangepicker({
 			locale : {
 				format : 'YYYY-MM-DD'
 			}
 		})
-
 		function periodSetting() {
 			if ($("#periodNull").is(":checked") == true) {
 				var v_Start = "";
 				var v_End = "";
 				document.insertForm.v_Start.value = v_Start;
 				document.insertForm.v_End.value = v_End;
-
 				var v_PeriodCheck = "";
 				document.insertForm.v_PeriodCheck.value = v_PeriodCheck;
-
 				$("#v_Period").css('background-color', '#e9ecef');
 				$("#v_Period").css('color', '#e9ecef');
 				$("#v_Period").attr('disabled', true)
@@ -101,51 +90,15 @@ span[name="chargerspan"] {
 				$("#v_Period").css('background-color', '#fff');
 				$("#v_Period").css('color', '#495057');
 				$("#v_Period").attr('disabled', false)
-
 				var v_PeriodCheck = $("#v_Period").val();
 				document.insertForm.v_PeriodCheck.value = v_PeriodCheck;
-
 				var v_Start = $("#v_PeriodCheck").val().substring(0, 10);
 				var v_End = $("#v_PeriodCheck").val().substring(13, 23);
 				document.insertForm.v_Start.value = v_Start;
 				document.insertForm.v_End.value = v_End;
 			}
 		}
-
-		/* 	$("#insertForm").submit(function() {
-				console.log("test");
-				var v_Name = $("v_Name").val();
-				var v_Content = $("v_Content").val();
-				var v_Subject = $("v_Content").val();
-				var vd_Content = $("v_Content").val();
-
-				if (v_Name == "") {
-					alert("제목을 입력해주세요");
-					return false;
-				} else if (v_Content == "") {
-					alert("내용을 입력해주세요");
-					return false;
-				} else if (v_Subject == "") {
-					alert("투표제목을 입력해주세요");
-					return false;
-				} else if (vd_Content == "") {
-					alert("투표항목을 입력해주세요");
-					return false;
-				} else if (v_Name.length > 12) {
-					alert("제목은 12자리 이내로 입력해주세요");
-					return false;
-				} else if (v_Content.length > 12) {
-					alert("내용은 12자리 이내로 입력해주세요.");
-					return false;
-				} else if (v_Subject.length > 12) {
-					alert("투표 주제는 12자리 이내로 입력해주세요.");
-					return false;
-				} else if (vd_Content.length > 12) {
-					alert("투표 항목은 12자리 이내로 입력해주세요.");
-					return false;
-				}
-			}); */
-
+	
 	}); // end ready
 </script>
 <script language="javascript">
