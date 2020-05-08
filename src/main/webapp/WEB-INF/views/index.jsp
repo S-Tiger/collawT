@@ -192,12 +192,9 @@ header.masthead .intro-text .intro-heading {
 .indeximg {
 	max-width: 100%;
 	height: auto !important;
-	width: 600px;
-	hieght: 300px;
 }
-
 img {
-	max-width: 100%;
+	width: auto !important;
 	height: auto !important;
 }
 
@@ -251,18 +248,18 @@ vertical-align: bottom;
 			<div class="row">
 				<div class="col-md-6"style=" position: absolute; z-index: 2;">
 					<div class="card-body" style="border-color: white !important;">
-						<h1>&nbsp</h1><br> <br>
-						<h1 style="text-align: left;"class="ng"><spring:message code="site.detail1" text="효과적인 팀워크 가벼워진 업무, 협업툴" /></h1>
-						<h4 style="text-align: left;"class="ng"><spring:message code="site.detail2" text="이메일이 필요없는 간편한 소통과 파일 공유, 빠른 피드백 확인까지. 바라던 기능들을 모두 담았습니다." /></h4>
-						<p style="text-align: left;"class="ng"><spring:message code="site.detail3" text="여러분이 더 협력적으로 일하고 더 많은 일을 할 수 있도록 협업 게시판, 목록, 칸반, 검색기능을 통해 여러분의 재미있고 유연하며 보람 있는 방법으로 프로젝트를 정리하고 우선순위를 정할 수 있는 Collaw T" /></p>
-						<a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger float-right ng" style="background-color: #fed136; font-size: large; border-color: #fed136; padding-top: 13px; padding-bottom: 13px; padding-left: 20px; padding-right: 20px;" href="member/loginPage"><spring:message code="site.login" text="로그인" /></a>
+						<h5>&nbsp</h5><br> <br>
+						<h1 style="text-align: left; margin: 10px"class="ng"><spring:message code="site.detail1" text="&nbsp효과적인 팀워크 가벼워진 업무, 협업툴" /></h1>
+						<h4 style="text-align: left; padding: 10px"class="ng"><spring:message code="site.detail2" text="이메일이 필요없는 간편한 소통과 파일 공유, 빠른 피드백 확인까지. 바라던 기능들을 모두 담았습니다." /></h4>
+						<p style="text-align: left; padding: 10px"class="ng"><spring:message code="site.detail3" text="여러분이 더 협력적으로 일하고 더 많은 일을 할 수 있도록 협업 게시판, 목록, 칸반, 검색기능을 통해  재미있고 유연하며 보람 있는 방법으로 프로젝트를 정리하고 우선순위를 정할 수 있는 온라인 협업툴  Collaw T" /></p>
+						<a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger float-right ng" style="background-color: #fed136; font-size: large; border-color: #fed136; padding-top: 13px; padding-bottom: 13px; padding-left: 20px; padding-right: 20px; margin-right: 50px; margin-top: 5px" href="member/loginPage"><spring:message code="site.login" text="로그인" /></a>
 						<h1>&nbsp</h1>
 						<h1>&nbsp</h1>
 						<h1>&nbsp</h1>
 					</div>
 				</div>
 				<!-- /.col (LEFT) -->
-				<div class="col-md-6" style="position: relative; left: 55%; z-index: 1; opacity: 0.3;">
+				<div class="col-md-6" style="position: relative; left: 55%; z-index: 1; opacity: 0.3; padding-top: 80px">
 					<!-- LINE CHART -->
 					<div class="card-body" style="border-color: white !important;">
 						<h1>&nbsp</h1>
