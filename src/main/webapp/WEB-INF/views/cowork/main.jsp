@@ -108,6 +108,8 @@ function withdrawal() {
 		
 		if (delStat == true) {
 			alert(obj+"님을 강퇴하였습니다.")
+		}else{
+			return false;
 		}
 		
 	}

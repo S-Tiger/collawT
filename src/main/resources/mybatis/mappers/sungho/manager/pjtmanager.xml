@@ -22,25 +22,25 @@
 			<choose>
 				<when test="c_Id != '' and c_Id != null and c_Name != ''  and  c_Name != null 
 					and mem_Id != ''  and  mem_Id != null " >
-					c_Id = #{c_Id} and c_Name = #{c_Name} and mem_Id = ${mem_Id}
+					c_Id = #{c_Id} and c_Name like '%'||#{c_Name}||'%' and mem_Id like '%'||#{mem_Id}||'%'
 				</when>
 				<when test="c_Id != '' and c_Id != null and c_Name != ''  and  c_Name != null" >
-					c_Id = #{c_Id} and c_Name = #{c_Name}
+					c_Id = #{c_Id} and c_Name like '%'||#{c_Name}||'%'
 				</when>
 				<when test="c_Id != '' and c_Id != null and mem_Id != ''  and  mem_Id != null" >
-					c_Id = #{c_Id} and mem_Id = #{mem_Id}
+					c_Id = #{c_Id} and mem_Id like '%'||${mem_Id}||'%'
 				</when>
 				<when test="c_Name != '' and c_Name != null and mem_Id != ''  and  mem_Id != null" >
-					c_Name = #{c_Name} and mem_Id = #{mem_Id}
+					c_Name like '%'||#{c_Name}||'%' and mem_Id like '%'||#{mem_Id}||'%'
 				</when>
 				<when test="c_Id != '' and c_Id != null">
 					c_Id = #{c_Id}
 				</when>
 				<when test="c_Name != ''  and  c_Name != null">
-					c_Name = #{c_Name}
+					c_Name like '%'||#{c_Name}||'%'
 				</when>
 				<when test="mem_Id != ''  and  mem_Id != null">
-					mem_Id = #{mem_Id}
+					mem_Id like '%'||#{mem_Id}||'%'
 				</when>
 			</choose>
 		</where>

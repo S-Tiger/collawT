@@ -108,8 +108,12 @@
 					<!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
 						<li class="nav-item"><a href="/manager/member/main" class="nav-link">
-									<i class="nav-icon fas fa-user-secret"></i>
+									<i class="nav-icon fas fa-user"></i>
 									<p>회원 관리</p>
+							</a></li>
+						<li class="nav-item"><a href="/manager/project/main" class="nav-link">
+									<i class="nav-icon fas fa-handshake"></i>
+									<p>공간 관리</p>
 							</a></li>
 
 					<li class="nav-item"><a href="/manager/issue/main" 
@@ -122,11 +126,16 @@
 					</a></li>
 					<li class="nav-item"><a href="/manager/personal/main" 
 						class="nav-link" > <i class="nav-icon fas fa-user-lock"></i>
-							<p>내 이슈 관리</p>
+							<p>개인 이슈 관리</p>
 					</a></li>
 					<li class="nav-item"><a href="/manager/reply/main" 
-						class="nav-link" > <i class="nav-icon fas fa-comments"></i>
+						class="nav-link" > <i class="nav-icon fas fa-list"></i>
 							<p>댓글 및 메모 관리</p>
+					</a></li>
+					
+					<li class="nav-item"><a href="/manager/chat/main" 
+						class="nav-link" > <i class="nav-icon fas fa-comments"></i>
+							<p>채팅 관리</p>
 					</a></li>
 					
 				</ul>

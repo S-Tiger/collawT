@@ -21,25 +21,29 @@
 			<choose>
 				<when test="mem_Id != '' and mem_Id != null and mem_Name != ''  and  mem_Name != null 
 					and mem_Loginapi != ''  and  mem_Loginapi != null " >
-					mem_Id = #{mem_Id} and mem_Name = #{mem_Name} and mem_Loginapi = ${mem_Loginapi}
+					<![CDATA[
+					mem_Id like '%'||#{mem_Id}||'%' and mem_Name like '%'||#{mem_Name}||'%' and mem_Loginapi like '%'||${mem_Loginapi}||'%'
+					]]>
 				</when>
 				<when test="mem_Id != '' and mem_Id != null and mem_Name != ''  and  mem_Name != null" >
-					mem_Id = #{mem_Id} and mem_Name = #{mem_Name}
+					mem_Id like '%'||#{mem_Id}||'%' and mem_Name like '%'||#{mem_Name}||'%'
 				</when>
 				<when test="mem_Id != '' and mem_Id != null and mem_Loginapi != ''  and  mem_Loginapi != null" >
-					mem_Id = #{mem_Id} and mem_Loginapi = #{mem_Loginapi}
+					mem_Id like '%'||#{mem_Id}||'%' and mem_Loginapi like '%'||${mem_Loginapi}||'%'
 				</when>
 				<when test="mem_Name != '' and mem_Name != null and mem_Loginapi != ''  and  mem_Loginapi != null" >
-					mem_Name = #{mem_Name} and mem_Loginapi = #{mem_Loginapi}
+					mem_Name like '%'||#{mem_Name}||'%' and mem_Loginapi like '%'||${mem_Loginapi}||'%'
 				</when>
 				<when test="mem_Id != '' and mem_Id != null">
-					mem_Id = #{mem_Id}
+				<![CDATA[
+					mem_Id like '%'||#{mem_Id}||'%'
+					]]>
 				</when>
 				<when test="mem_Name != ''  and  mem_Name != null">
-					mem_Name = #{mem_Name}
+					mem_Name like '%'||#{mem_Name}||'%'
 				</when>
 				<when test="mem_Loginapi != ''  and  mem_Loginapi != null">
-					mem_Loginapi = #{mem_Loginapi}
+					mem_Loginapi like '%'||${mem_Loginapi}||'%'
 				</when>
 			</choose>
 		</where>

@@ -49,7 +49,7 @@ public class CalendarControllerImpl implements CalendarController {
 		//이슈리스트와 협업공간크기만큼 돌리는 2중 for문
 		for (int i = 0; i < eventlist.size(); i++) {
 			//이슈리스트데이터에 해당url을 변경해서 바로 읽을수 있게 변경
-			eventlist.get(i).put("url", itemurl + eventlist.get(i).get("url"));
+			eventlist.get(i).put("url", itemurl + eventlist.get(i).get("url") +"&c_Id="+eventlist.get(i).get("c_Id"));
 			for (int j = 0; j < colorlist.size(); j++) {
 				//이슈리스트와 가입한 협업공간 이름을 비교 후 같으면 해당 번호에 맞는 color를 입힘
 				if (colorlist.get(j).get("c_Id").equals(eventlist.get(i).get("c_Id"))) {

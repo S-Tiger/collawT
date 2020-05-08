@@ -33,7 +33,7 @@ public class PjtInterceptor extends HandlerInterceptorAdapter {
 		
 		member = (Map<String, Object>) session.getAttribute("member");
 		String loginId = (String) member.get("mem_Id");
-		String checkmember = request.getParameter("c_Id");
+		String checkmember = (String)request.getParameter("c_Id");
 		checkId = comemberService.searchList(member);
 		String memKind = (String) member.get("mem_Kind");
 		if (memKind.equals("03")) {

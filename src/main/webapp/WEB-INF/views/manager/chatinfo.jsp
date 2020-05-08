@@ -22,8 +22,6 @@ width: 100%;
 	//시트 높이 계산용
 	var pageheightoffset = 200;
 	
-
-	
 	/*Sheet 기본 설정 */
 	function LoadPage() {
 		mySheet.RemoveAll();
@@ -34,13 +32,14 @@ width: 100%;
 		initSheet.Cols = [
 			{Header:"상태",Type:"Status",SaveName:"STATUS",MinWidth:50, Align:"Center"},
 			{Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:50},
-			{Header:"이메일",Type:"Text",SaveName:"mem_Id",MinWidth:200,KeyField:1,Align:"Center",Edit:false},
-			{Header:"비밀번호",Type:"Text",SaveName:"mem_Pwd",MinWidth:80 ,MultiLineText:1,UpdateEdit:false},			
-			{Header:"회원이름(별명)",Type:"Text",SaveName:"mem_Name",MinWidth:150,MultiLineText:1, Wrap:1},
-			{Header:"가입일",Type:"Date",SaveName:"mem_JoinDate",MinWidth:100,UpdateEdit:false},
-			{Header:"가입방식",Type:"Text",SaveName:"mem_Loginapi",MinWidth:100,UpdateEdit:false},
-			
+			{Header:"채팅ID",Type:"Text",SaveName:"chat_Id",MinWidth:50 ,KeyField:1, Edit:false},
+			{Header:"발신자",Type:"Text",SaveName:"mem_Id",MinWidth:200 ,MultiLineText:1,UpdateEdit:false},			
+			{Header:"수신자",Type:"Text",SaveName:"target_Id",MinWidth:150 ,MultiLineText:1, Wrap:1,UpdateEdit:false},
+			{Header:"메세지내용",Type:"Text",SaveName:"message",MinWidth:100,MultiLineText:1, Wrap:1,UpdateEdit:false},
+			{Header:"발신날짜",Type:"Date",SaveName:"chat_Date",MinWidth:100},
+			{Header:"확인유무",Type:"Text",SaveName:"chat_Stat",MinWidth:100},
 		];   
+		
 		IBS_InitSheet( mySheet , initSheet);
 
 		mySheet.SetEditableColorDiff(1); // 편집불가능할 셀 표시구분
@@ -53,7 +52,7 @@ width: 100%;
 		switch(sAction) {
 			case "search": //조회
 			    var param = FormQueryStringEnc(document.frm);
-				mySheet.DoSearch("${contextPath}/manager/member/searchList", param);
+				mySheet.DoSearch("${contextPath}/manager/chat/searchList", param);
 				//mySheet.DoSearch("transaction_data2.json");
 				break;
 			case "reload": //초기화
@@ -62,7 +61,7 @@ width: 100%;
 			case "save": // 저장
 				//var tempStr = mySheet.GetSaveString();
 				//alert("서버로 전달되는 문자열 확인 :"+tempStr);
-				mySheet.DoSave("${contextPath}/manager/member/saveData");
+				mySheet.DoSave("${contextPath}/manager/chat/saveData");
 				break;			
 			case "insert": //신규행 추가
 				var row = mySheet.DataInsert();
@@ -94,7 +93,7 @@ width: 100%;
 		
 <body onload="LoadPage()">
   <div class="page_title">
-    <span class="title"><b>회원관리</b></span>
+    <span class="title"><b>채팅관리</b></span>
   </div>
   <div class="main_content">
     <div class="exp_product">각 행의 데이터를 수정하거나 입력,삭제시 상태컬럼의 변화를
@@ -102,9 +101,9 @@ width: 100%;
 			<div class="row">
     <div class="exp_product" style="width: 100%;">
       <form name='frm'>
-        이메일: <input type='text' id="mem_Id" name="mem_Id" /> 
-        회원이름(별명): <input type='text' id="mem_Name" name="mem_Name" /> 
-        가입방식: <input type='text' id="mem_Loginapi" name="mem_Loginapi" /> 
+        메세지내용: <input type='text' id="message" name="message" /> 
+        발신자: <input type='text' id="mem_Id" name="mem_Id" /> 
+        수신자: <input type='text' id="target_Id" name="target_Id" /> 
       </form>
     </div>
     <div class="ib_function float_right">
