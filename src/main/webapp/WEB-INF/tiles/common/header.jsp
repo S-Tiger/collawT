@@ -92,7 +92,7 @@
 			type : 'get',
 			success : function(data){
 				var itemcount = data.length;
-				var str='개의 글에 댓글이 달렸습니다'
+				var str='개의 새로운 댓글이 있습니다.'
 				var no=itemcount+str;
 				var count =parseInt(itemcount);
 				total += count;
@@ -105,7 +105,7 @@
 			type : 'get',
 			success : function(data){
 				var itemcount = data.length;
-				var str='개의 투표가 있습니다'
+				var str='개의 새로운 투표가 있습니다.'
 				var no=itemcount+str;
 				var count =parseInt(itemcount);
 				total += count;
@@ -117,7 +117,7 @@
 			type : 'get',
 			success : function(data){
 				var itemcount = data.length;
-				var str='개의 이슈가 있습니다'
+				var str='개의 새로운 이슈가 있습니다'
 				var no=itemcount+str;
 				var count =parseInt(itemcount);
 				total += count;
@@ -139,11 +139,11 @@
 					}
 				}
 				var itemcount1 = itemString.length;
-				var str='개의 초대가 있습니다'
+				var str='개의 새로운 초대가 있습니다.'
 				var no=itemcount1+str;
 				var count1 =parseInt(itemcount1);
 				total += count1;
-				var str='개의 알림이 있습니다'
+				var str='개의 알림이 있습니다.'
 				var last=total+str;
 				$("#test33").html(no);
 				$("#test00").html(total);
@@ -372,7 +372,7 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
 
-<!-- 알림~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<!-- 알림~~~~~~~~~~~~~~~~~~~~~s~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
       <!-- Notifications Dropdown Menu -->
       <li class="nav-item dropdown"><a class="nav-link"
 					data-toggle="dropdown" href="#"><i class="fas fa-bell"></i> <span
@@ -381,23 +381,32 @@
 					<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" >
 						<span class="dropdown-item dropdown-header" id = "test22" ></span>
 						<div class="dropdown-divider"></div>
-						<a href="/main" class="dropdown-item"> <i
-							class="fas fa-envelope mr-2" id = "test01"></i> <span
+						<a href="/main" class="dropdown-item"> 
+						<i class="fas fa-list" style="display: flex;">
+						<p id = "test01" style="margin: 2px; margin-left: 10px; color: lightslategray;
+    					font-size: 12px;font-weight: normal"></p>
+						</i> <span
 							class="float-right text-muted text-sm"></span>
 						</a>
           <div class="dropdown-divider"></div>
           <a href="/main" class="dropdown-item">
-            <i class="fas fa-users mr-2" id="test33"></i> 
+            <i class="fas fa-envelope" style="display: flex;" >
+            <p id = "test33" style="margin: 2px; margin-left: 10px; color: lightslategray;
+    					font-size: 12px;font-weight: normal"></p></i> 
             <span class="float-right text-muted text-sm"></span>
           </a>
           <div class="dropdown-divider"></div>
           <a href="/main" class="dropdown-item">
-            <i class="fas fa-file mr-2" id="test03"></i> 
+            <i class="fas fa-copy" style="display: flex;">
+            <p id = "test03" style="margin: 2px; margin-left: 10px; color: lightslategray;
+    					font-size: 12px;font-weight: normal"></p></i> 
             <span class="float-right text-muted text-sm"></span>
           </a>
           <div class="dropdown-divider"></div>
           <a href="/main" class="dropdown-item">
-            <i class="fas fa-users mr-2" id="test66"></i> 
+            <i class="fas fa-vote-yea" style="display: flex;">
+              <p id = "test66" style="margin: 2px; margin-left: 10px; color: lightslategray;
+    					font-size: 12px;font-weight: normal"></p></i> 
             <span class="float-right text-muted text-sm"></span>
           </a>
           

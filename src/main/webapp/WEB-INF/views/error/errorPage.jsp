@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>  
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>에러페이지</title>
 <div style="text-align:center; margin-top:100px">
-	<img src="../resources/img/error_txt1.png">
+	<img src="${contextPath}/resources/img/error_txt1.png">
 </head>
 <body>
 	
