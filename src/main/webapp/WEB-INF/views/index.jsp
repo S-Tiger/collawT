@@ -309,19 +309,19 @@ vertical-align: bottom;
 					<div class="swiper-container">
 						<div class="swiper-wrapper">
 							<div class="swiper-slide">
-								<H1>화면 소개</H1>
+								<H1><spring:message code="site.description" text="화면소개" /></H1>
 								<img class="indeximg" src="/resources/img/11.png">
 							</div>
 							<div class="swiper-slide">
-								<H1>화면 소개</H1>
+								<H1><spring:message code="site.description" text="화면소개" /></H1>
 								<img  class="indeximg" src="/resources/img/22.png">
 							</div>
 							<div  class="swiper-slide">
-								<H1>화면 소개</H1>
+								<H1><spring:message code="site.description" text="화면소개" /></H1>
 								 <img class="indeximg"  src="/resources/img/33.png">
 							</div>
 							<div class="swiper-slide">
-								<H1>화면 소개</H1>
+								<H1><spring:message code="site.description" text="화면소개" /></H1>
 								<img class="indeximg"  src="/resources/img/44.png">
 							</div>
 						</div>
@@ -382,7 +382,7 @@ vertical-align: bottom;
 					</ul>
 				</div>
 				<div class="col-md-12">
-					<p>© 2020~ Collaw T, Inc. (주) 콜라우티 | 서울특별시 종로구 YMCA 빌딩 | 개인정보 취급방침 | 이용 약관 대표자: 김성호 | 사업자등록번호: 000-00-0000 | 통신판매업신고번호: (가상)2020-서울종로-00000 phone: 02-0000-0000</p>
+					<p><spring:message code="site.description1" text="© 2020~ Collaw T, Inc. (주) 콜라우티 | 서울특별시 종로구 YMCA 빌딩 | 개인정보 취급방침 | 이용 약관 대표자: 김성호 | 사업자등록번호: 000-00-0000 | 통신판매업신고번호: (가상)2020-서울종로-00000 phone: 02-0000-0000" /></p>
 				</div>
 			</div>
 		</div>
