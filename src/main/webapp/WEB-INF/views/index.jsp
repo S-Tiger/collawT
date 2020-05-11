@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- <script src="http://code.jquery.com/jquery-latest.js"></script> -->
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="en">
@@ -52,28 +52,71 @@
 </head>
 <style>
 @import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);
+
 @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+
 @import url(//fonts.googleapis.com/earlyaccess/jejumyeongjo.css);
+
 @import url(//fonts.googleapis.com/earlyaccess/kopubbatang.css);
+
 @import url(//fonts.googleapis.com/earlyaccess/nanumbrushscript.css);
+
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
 @import url(//fonts.googleapis.com/earlyaccess/hanna.css);
+
 @import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
 @import url(//fonts.googleapis.com/earlyaccess/nanummyeongjo.css);
+
 @import url(//fonts.googleapis.com/earlyaccess/jejuhallasan.css);
+
 @import url(//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
- 
-.np{font-family: 'Nanum Pen Script', cursive;}
-.jg{font-family: 'Jeju Gothic', sans-serif;}
-.jm{font-family: 'Jeju Myeongjo', serif;}
-.kb{font-family: 'KoPub Batang', serif;}
-.nb{font-family: 'Nanum Brush Script', cursive;}
-.ns{font-family: 'Noto Sans KR', sans-serif;}
-.hn{font-family: 'Hanna', sans-serif;}
-.ng{font-family: 'Nanum Gothic', sans-serif;}
-.nm{font-family: 'Nanum Myeongjo', serif;}
-.jh{font-family: 'Jeju Hallasan', cursive;}
-.ngc{font-family: 'Nanum Gothic Coding', monospace;}
+
+.np {
+	font-family: 'Nanum Pen Script', cursive;
+}
+
+.jg {
+	font-family: 'Jeju Gothic', sans-serif;
+}
+
+.jm {
+	font-family: 'Jeju Myeongjo', serif;
+}
+
+.kb {
+	font-family: 'KoPub Batang', serif;
+}
+
+.nb {
+	font-family: 'Nanum Brush Script', cursive;
+}
+
+.ns {
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+.hn {
+	font-family: 'Hanna', sans-serif;
+}
+
+.ng {
+	font-family: 'Nanum Gothic', sans-serif;
+}
+
+.nm {
+	font-family: 'Nanum Myeongjo', serif;
+}
+
+.jh {
+	font-family: 'Jeju Hallasan', cursive;
+}
+
+.ngc {
+	font-family: 'Nanum Gothic Coding', monospace;
+}
+
 .header {
 	position: relative;
 	height: 200px;
@@ -82,12 +125,15 @@
 	position: relative;
 	height: 600px;
 }
+
 .section-01 {
 	background-color: white;
 }
+
 .section-02 {
 	background-color: white;
 }
+
 .section-03 {
 	background-color: white;
 } /* floating menu */
@@ -100,10 +146,12 @@
 	margin: -220px 0 0 0;
 	background-color: #d4cecf;; /*background: url("") 0 0 no-repeat;*/
 }
+
 .floating-menu li {
 	margin: 0;
 	*float: left;
 }
+
 .floating-menu a {
 	display: block;
 	width: 123px;
@@ -113,32 +161,39 @@
 	border: 1px solid #464646;
 	text-decoration: none;
 }
+
 .floating-menu a.menu-04 {
 	height: 20px;
 	background: none;
 }
+
 .floating-menu li.on a {
 	background-color: #333;
 	color: #fff; /*background: url("") 0 0 no-repeat;*/
 }
+
 .floating-menu li.on a.menu-01 { /* background-position: -131px 0;*/
 	
 }
+
 .floating-menu li.on a.menu-02 {
 	/* background-position: -131px -104px;*/
 	
 }
+
 .floating-menu li.on a.menu-03 { /*background-position: -131px -219px;*/
 	
 }
+
 .footer {
 	height: 100px;
 	background-color: #707070;
 }
+
 header.masthead {
 	text-align: center;
 	color: black;
-	background-color: white;
+	background-color: transparent;
 	background-image: url(../img/header-bg.jpg);
 	background-repeat: no-repeat;
 	background-attachment: scroll;
@@ -147,6 +202,7 @@ header.masthead {
 	text-shadow: 0 0 black;
 	background-repeat: no-repeat;
 }
+
 .card-body {
 	/* 		overflow: hidden;
             display: flex;
@@ -156,20 +212,23 @@ header.masthead {
             height: 300px; */
 	
 }
+
 .header.masthead {
 	text-align: center;
 	color: #fff;
-	background-color: white;
+	background-color: transparent;
 	background-repeat: no-repeat;
 	background-attachment: scroll;
 	background-position: center center;
 	background-size: cover;
 	background-color: white;
 }
+
 header.masthead .intro-text {
 	padding-top: 150px;
 	padding-bottom: 100px
 }
+
 header.masthead .intro-text .intro-lead-in {
 	font-size: 22px;
 	font-style: italic;
@@ -180,6 +239,7 @@ header.masthead .intro-text .intro-lead-in {
 		'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
 		'Noto Color Emoji'
 }
+
 header.masthead .intro-text .intro-heading {
 	font-size: 50px;
 	font-weight: 700;
@@ -189,21 +249,90 @@ header.masthead .intro-text .intro-heading {
 		Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji',
 		'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'
 }
+
 .indeximg {
 	max-width: 100%;
 	height: auto !important;
 }
+
 img {
 	width: auto !important;
 	height: auto !important;
 }
 
-
-#korea,#america{
-font-size: xx-small;
-vertical-align: bottom; 
+#korea, #america {
+	font-size: xx-small;
+	vertical-align: bottom;
+}
+section#contact {
+    background-color: transparent;
+    background-image: url(/resources/img/cust.png); 
+    background-size :50%, 25%, 25% ;
+    background-repeat: no-repeat;
+    background-position: right;
 }
 </style>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript">
+function checkAll() {
+    if (!checkQ_Subject(form.q_Subject.value)) {
+        return false;
+    } else if (!checkQ_Content(form.q_Content.value)) {
+        return false;
+    } else if (!checkQ_Email(form.q_Email.value)) {
+        return false;
+    } 
+    return true;
+}
+//공백확인 함수
+function checkExistData(value, dataName) {
+    if (value == "") {
+        alert(dataName + " 입력해주세요!");
+        return false;
+    }
+    return true;
+}
+
+
+function checkQ_Subject(q_Subject) {
+    //제목이 입력되었는지 확인하기
+    if (!checkExistData(q_Subject, "문의 제목을"))
+        return false;
+
+   
+    return true; //확인이 완료되었을 때
+}
+
+
+function checkQ_Content(q_Content) {
+    //내용이 입력되었는지 확인하기
+    if (!checkExistData(q_Content, "문의 내용을")){
+        return false;
+    }else if (q_Content.length < 8||q_Content.length > 300){
+    	alert("8 ~ 300자 내로 작성하세요. ");
+    
+    	return false;
+    }
+
+    return true; //확인이 완료되었을 때
+}
+
+function checkQ_Email(q_Email) {
+    
+    //이메일이 입력되었는지 확인하기
+    if (!checkExistData(q_Email, "이메일을"))
+        return false;
+	
+    
+    
+    return true; //확인이 완료되었을 때
+    
+}    
+
+</script>
+
+
+
 <script type="text/javascript">
 	console.log('${question}');
 	var result = '${question}';
@@ -223,10 +352,10 @@ vertical-align: bottom;
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav text-uppercase ml-auto">
 					<li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services" style="color: black"><spring:message code="site.information" text="제품 설명" /></a></li>
-					<li class="nav-item"><a class="nav-link js-scroll-trigger" href="/question" style="color: black"><spring:message code="site.customers" text="고객 지원" /></a></li>
+					<li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact" style="color: black"><spring:message code="site.customers" text="고객 지원" /></a></li>
 					<li class="nav-item"><a class="nav-link js-scroll-trigger" href="/member/signup" style="color: black"><spring:message code="site.signup" text="회원가입" /></a></li>
-					<li class="nav-item"id="korea"><a class="nav-link js-scroll-trigger" style="color: black;margin-top: 12px;" href="<c:url value="/?lang=kor"/>">한국어</a> </li>
-					<li class="nav-item" id="america"><a class="nav-link js-scroll-trigger" style="color: black;margin-top: 12px;" href="<c:url value="/?lang=en"/>">English</a> </li>					
+					<li class="nav-item" id="korea"><a class="nav-link js-scroll-trigger" style="color: black; margin-top: 12px;" href="<c:url value="/?lang=kor"/>">한국어</a></li>
+					<li class="nav-item" id="america"><a class="nav-link js-scroll-trigger" style="color: black; margin-top: 12px;" href="<c:url value="/?lang=en"/>">English</a></li>
 				</ul>
 			</div>
 		</div>
@@ -242,31 +371,36 @@ vertical-align: bottom;
 			</div> -->
 		</div>
 	</header>
-	<!-- 제품문의 -->
+	<!--첫화면 -->
 	<header class="masthead" id="">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-6"style=" position: absolute; z-index: 2;">
+				<div class="col-md-6" style="position: absolute; z-index: 2;">
 					<div class="card-body" style="border-color: white !important;">
-						<h5>&nbsp</h5><br> <br>
-						<h1 style="text-align: left; margin: 10px"class="ng"><spring:message code="site.detail1" text="&nbsp효과적인 팀워크 가벼워진 업무, 협업툴" /></h1>
-						<h4 style="text-align: left; padding: 10px"class="ng"><spring:message code="site.detail2" text="이메일이 필요없는 간편한 소통과 파일 공유, 빠른 피드백 확인까지. 바라던 기능들을 모두 담았습니다." /></h4>
-						<p style="text-align: left; padding: 10px"class="ng"><spring:message code="site.detail3" text="여러분이 더 협력적으로 일하고 더 많은 일을 할 수 있도록 협업 게시판, 목록, 칸반, 검색기능을 통해  재미있고 유연하며 보람 있는 방법으로 프로젝트를 정리하고 우선순위를 정할 수 있는 온라인 협업툴  Collaw T" /></p>
-						<a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger float-right ng" style="background-color: #fed136; font-size: large; border-color: #fed136; padding-top: 13px; padding-bottom: 13px; padding-left: 20px; padding-right: 20px; margin-right: 50px; margin-top: 5px" href="member/loginPage"><spring:message code="site.login" text="로그인" /></a>
+						<h5>&nbsp</h5>
+						<br> <br>
+						<h1 style="text-align: left; margin: 10px" class="ng">
+							<spring:message code="site.detail1" text="&nbsp효과적인 팀워크 가벼워진 업무, 협업툴" />
+						</h1>
+						<h4 style="text-align: left; padding: 10px" class="ng">
+							<spring:message code="site.detail2" text="이메일이 필요없는 간편한 소통과 파일 공유, 빠른 피드백 확인까지. 바라던 기능들을 모두 담았습니다." />
+						</h4>
+						<p style="text-align: left; padding: 10px" class="ng">
+							<spring:message code="site.detail3" text="여러분이 더 협력적으로 일하고 더 많은 일을 할 수 있도록 협업 게시판, 목록, 칸반, 검색기능을 통해 유연한 방법으로 프로젝트를 정리하고 우선순위를 정할 수 있는 온라인 협업툴  Collaw T" />
+						</p>
+						<a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger float-right ng" style="background-color: #fed136; font-size: large; border-color: #fed136; padding-top: 13px; padding-bottom: 13px; padding-left: 20px; padding-right: 20px; margin-right: 50px; margin-top: 5px"
+							href="member/loginPage"><spring:message code="site.login" text="로그인" /></a>
 						<h1>&nbsp</h1>
 						<h1>&nbsp</h1>
 						<h1>&nbsp</h1>
 					</div>
 				</div>
 				<!-- /.col (LEFT) -->
-				<div class="col-md-6" style="position: relative; left: 55%; z-index: 1; opacity: 0.3; padding-top: 80px">
+				<div class="col-md-6" style="position: relative; left: 55%; z-index: 1; opacity: 0.5; padding-top: 80px">
 					<!-- LINE CHART -->
 					<div class="card-body" style="border-color: white !important;">
 						<h1>&nbsp</h1>
 						<img src="../resources/img/teamproject.png" style="width: 544px; height: 326px;">
-						<h1>&nbsp</h1>
-						<h1>&nbsp</h1>
-						<h1>&nbsp</h1>
 					</div>
 					<!-- /.card -->
 				</div>
@@ -302,27 +436,35 @@ vertical-align: bottom;
 		</div>
 	</header> -->
 	<!-- Header -->
-	<header class="masthead" id="question">
+	 <section class="py-5">
 		<div class="container">
 			<div class="row" id="services">
 				<div class="col-md-12">
 					<div class="swiper-container">
 						<div class="swiper-wrapper">
 							<div class="swiper-slide">
-								<H1><spring:message code="site.description" text="화면소개" /></H1>
+								<H1>
+									<spring:message code="site.description" text="화면소개" />
+								</H1>
 								<img class="indeximg" src="/resources/img/11.png">
 							</div>
 							<div class="swiper-slide">
-								<H1><spring:message code="site.description" text="화면소개" /></H1>
-								<img  class="indeximg" src="/resources/img/22.png">
-							</div>
-							<div  class="swiper-slide">
-								<H1><spring:message code="site.description" text="화면소개" /></H1>
-								 <img class="indeximg"  src="/resources/img/33.png">
+								<H1>
+									<spring:message code="site.description" text="화면소개" />
+								</H1>
+								<img class="indeximg" src="/resources/img/22.png">
 							</div>
 							<div class="swiper-slide">
-								<H1><spring:message code="site.description" text="화면소개" /></H1>
-								<img class="indeximg"  src="/resources/img/44.png">
+								<H1>
+									<spring:message code="site.description" text="화면소개" />
+								</H1>
+								<img class="indeximg" src="/resources/img/33.png">
+							</div>
+							<div class="swiper-slide">
+								<H1>
+									<spring:message code="site.description" text="화면소개" />
+								</H1>
+								<img class="indeximg" src="/resources/img/44.png">
 							</div>
 						</div>
 						<!-- Add Pagination -->
@@ -336,7 +478,7 @@ vertical-align: bottom;
 			</div>
 			<!-- /.row -->
 		</div>
-	</header>
+	</section>
 	<!-- Swiper JS -->
 	<script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
 	<!-- Initialize Swiper -->
@@ -358,8 +500,63 @@ vertical-align: bottom;
 			},
 		});
 	</script>
+
+	<!-- Contact -->
+	<section class="page-section" id="contact" >
+	
+		<div class="container" >
+			<div class="row">
+				<div class="col-lg-12 text-center" >
+					<h2 class="section-heading text-uppercase" style="color:black;text-align: left !important">고객지원</h2>
+					<h3 class="section-subheading text-muted"></h3>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12" >
+					<form action="/question/sendEmail" name="form" method="post" onsubmit="return checkAll()">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<input class="form-control" name="q_Subject" id="inputName" type="text" placeholder="문의제목 *" required="required" data-validation-required-message="문의명을 입력해주세요.">
+									<p class="help-block text-danger"></p>
+								</div>
+								<div class="form-group">
+									<input class="form-control" id="email" name="q_Email" type="email" placeholder="이메일 *" required="required" data-validation-required-message="회원님의 이메일을 입력해주세요.">
+									<p class="help-block text-danger"></p>
+								</div>
+								<div class="form-group">
+									<select class="form-control" id="q_Kind" name="q_Kind" style="height: 66px !important; color:#D7DBDD; font-weight: bold ">
+										<option value="버그 관련">버그 관련</option>
+										<option value="일반 문의">일반 문의</option>
+										<option value="아이디어 제의">아이디어 제의</option>
+										<option value="기타 문의">기타 문의</option>
+									</select>
+								</div>
+							</div>
+							
+							<div class="col-md-6" >
+								<div class="form-group" >
+									<textarea id="inputDescription" class="form-control" name="q_Content" placeholder="문의내용 *" required="required" data-validation-required-message="Please enter a message."></textarea>
+									<p class="help-block text-danger"></p>
+								</div>
+							</div>
+							
+							
+							<div class="clearfix"></div>
+							<div class="col-lg-12 text-center">
+								<div id="success"></div>
+								<button id="sendMessageButton" class="btn btn-primary btn-xl text-uppercase" style="background-color: #fed136; font-size: large; border-color: #fed136; padding-top: 13px; padding-bottom: 13px; padding-left: 20px; padding-right: 20px;" type="submit">문의 하기</button>
+							</div>
+						</div>
+						
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+
 	<!-- Footer -->
-	<footer class="footer" style="background-color: white">
+	<footer class="footer" style="background-color: transparent;">
 		<div class="container">
 			<div class="row align-items-center">
 				<div class="col-md-4">
@@ -382,7 +579,9 @@ vertical-align: bottom;
 					</ul>
 				</div>
 				<div class="col-md-12">
-					<p><spring:message code="site.description1" text="© 2020~ Collaw T, Inc. (주) 콜라우티 | 서울특별시 종로구 YMCA 빌딩 | 개인정보 취급방침 | 이용 약관 대표자: 김성호 | 사업자등록번호: 000-00-0000 | 통신판매업신고번호: (가상)2020-서울종로-00000 phone: 02-0000-0000" /></p>
+					<p>
+						<spring:message code="site.description1" text="© 2020~ Collaw T, Inc. (주) 콜라우티 | 서울특별시 종로구 YMCA 빌딩 | 개인정보 취급방침 | 이용 약관 대표자: 김성호 | 사업자등록번호: 000-00-0000 | 통신판매업신고번호: (가상)2020-서울종로-00000 phone: 02-0000-0000" />
+					</p>
 				</div>
 			</div>
 		</div>
