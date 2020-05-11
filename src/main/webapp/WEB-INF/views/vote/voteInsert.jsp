@@ -30,7 +30,7 @@ span[name="chargerspan"] {
 		$("#insertForm").submit(function() {
 			console.log();
 			var v_Name = $("#v_Name").val();
-			/* var v_Content = $("#v_Content").val(); */
+			//var v_Content = CKEDITOR.instances.contents.getData();
 			var v_Subject = $("#v_Subject").val();
 			var vd_Content = $("#vd_Content").val();
 			
@@ -46,11 +46,11 @@ span[name="chargerspan"] {
 				alert("제목을 입력하세요");
 				document.insertForm.v_Name.focus();
 				return false; 
-			}/*  else if (v_Content == '') {
+			}  else if (CKEDITOR.instances.v_Content.getData() == '') {
 				console.log("sdaklfj"+v_Content);
 				alert("내용을 입력해주세요");
 				return false;
-			} */ else if (v_Subject == '') {
+			}  else if (v_Subject == '') {
 				alert("투표주제를 입력해주세요");
 				document.insertForm.v_Subject.focus();
 				return false;
