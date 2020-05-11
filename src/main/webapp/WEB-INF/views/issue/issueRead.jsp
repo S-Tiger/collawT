@@ -86,7 +86,6 @@ $(document).ready(function() {
 	
 	//북마크 버튼 이벤트
 	$("#bookmarkinsert").on("click", function() {
-		console.log("0000000000000"+checkbook);
 		if(checkbook == 0){
 		$.ajax({
 			url:"/bookmark/insert",
@@ -124,7 +123,10 @@ $(document).ready(function() {
 					checkbook = 0;
 					bookcount--;
 					console.log(bookcount);
-					$("#bookmarkcount").html(bookcount);
+					if (bookcount == 0) {
+					$("#bookmarkcount").empty();
+					}else{
+					$("#bookmarkcount").html(bookcount);}
 				}
 					}
 				})

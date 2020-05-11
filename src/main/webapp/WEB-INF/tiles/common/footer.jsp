@@ -41,12 +41,9 @@
 		//채팅알림 카운트를 확인시 삭제 및 총 카운트에서 확인한 채팅 카운트를 빼기위한 스크립트
 		var countSpan = $(obj).children('span');
 		var musCount = countSpan.html();
-		console.log('클릭한 채팅의 갯수='+musCount);
 		if (musCount != null) {
 		var totalCountNum = $('#totalCountNum').html();
-		console.log('총 채팅의 갯수='+totalCountNum);
 		var changeNum = totalCountNum - musCount;
-		console.log('바뀔채팅의 갯수='+changeNum);
 		$('#totalCountNum').html(changeNum);
 		}
 		$('#inputTarget').html(target_Name);
@@ -119,7 +116,7 @@
 }
 </style>
 	
-	<footer class="main-footer">
+	<footer class="main-footer" >
     <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
