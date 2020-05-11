@@ -505,7 +505,9 @@ $(function () {
 							<!-- /.container-fluid -->
 						</section>
 						<!-- /.content -->
-
+</div>
+</div>
+</div>
 		
 <!-- /.content-wrapper -->
 
