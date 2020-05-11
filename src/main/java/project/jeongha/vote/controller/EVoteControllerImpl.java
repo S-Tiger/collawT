@@ -240,7 +240,7 @@ public class EVoteControllerImpl implements EVoteController {
 //			}
 //			
 //		}
-		System.out.println("@@@@@@@@@@@"+voteTotal);
+		System.out.println("@@@@@@@@@@@"+vote2);
 		
 		
 		

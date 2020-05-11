@@ -126,12 +126,13 @@
 	<!-- 투표 조회 -->
 	<select id="voteRead" parameterType="String" resultMap="voteResult02"> 
       <![CDATA[
-		select V.v_Num, V.c_Id, V.v_Name, V.v_Content, V.v_Date, V.mem_Id, V.v_Start, V.v_End, V.v_Subject,vs.vs_name, v.vs_num, v.v_count,v.v_show ,v.mem_Name,(
+		select m.mem_file, V.v_Num, V.c_Id, V.v_Name, V.v_Content, V.v_Date, V.mem_Id, V.v_Start, V.v_End, V.v_Subject,vs.vs_name, v.vs_num, v.v_count,v.v_show ,v.mem_Name,(
                                    	select count(*) as coworker
                                     from co_member
 									where c_id=#{c_Id}) as co_Mem_Total
-		from vote V , vote_status vs
+		from vote V , vote_status vs, member m
 		where v.vs_num = vs.vs_num 
+		and m.mem_id=v.mem_id
         and v.v_Num=#{v_Num}
       ]]>
 	</select>

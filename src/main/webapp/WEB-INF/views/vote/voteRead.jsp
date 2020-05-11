@@ -77,16 +77,17 @@ progress::-webkit-progress-value {
 <script type="text/javascript">
 function checkAll() {
     //투표 선택안하면 ...
-	var chk_radio = document.getElementsByName('vd_Num');
+	var vd_Num = document.getElementsByName('vd_Num');
 	var sel_type = null;
-	for(var i=0;i<chk_radio.length;i++){
-		if(chk_radio[i].checked == true){ 
-			sel_type = chk_radio[i].value;
+	for(var i=0;i< vd_Num.length;i++){
+		if(vd_Num[i].checked == true){ 
+			sel_type = vd_Num[i].value;
+			console.log(sel_type);
 		}
 	}
 
 	if(sel_type == null){
-            alert("투표유형을 선택해주세요."); 
+            alert("투표유형을 선택해주세요. "); 
 		return false;
 
 	}
@@ -232,14 +233,7 @@ $(document).ready(function() {
 						str+='<div class="card-footer card-comments">';
 						str+='<div class="card-comment">';
 						
-
-						str+='<c:if test="${'+result[i].mem_File +' != NULL}">';
-						str+='<img alt="Not null" width="50" height="50"src="/member/getByteImage?mem_Id='+result[i].mem_Id+'" class="img-circle elevation-1"/>';
-						str+='</c:if>';
-						
-						str+='<c:if test="${'+result[i].mem_File +'== NULL}">';
-						str+='<img src="${contextPath}/resources/dist/img/profile.jpg" width="50" height="50" class="img-circle elevation-1" alt="Null">';
-						str+='</c:if>';
+						str+='<img width="50" height="50" src="/member/getByteImage?mem_Id='+result[i].mem_Id+'" class="img-circle elevation-1" onError="this.src=\'${contextPath}/resources/dist/img/profile.jpg\';"/>';
 						
 						str+='<div class="comment-text">';
 						str+='<span class="username">'+result[i].mem_Name;

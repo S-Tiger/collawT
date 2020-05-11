@@ -30,40 +30,51 @@ span[name="chargerspan"] {
 		$("#insertForm").submit(function() {
 			console.log();
 			var v_Name = $("#v_Name").val();
-			var v_Content = $("#v_Content").val();
+			/* var v_Content = $("#v_Content").val(); */
 			var v_Subject = $("#v_Subject").val();
 			var vd_Content = $("#vd_Content").val();
-			if (v_Name == '') {
+			
+		/* 	for (var i = 0; i < vd_Content.length; i++) {
+				if(vd_Content[i] ==null) {
+					alert("투표유형을 선택해주세요. "); 
+					return false;
+				}
+				
+			} */
+			
+			if(v_Name==''){
 				alert("제목을 입력하세요");
 				document.insertForm.v_Name.focus();
-				return false;
-			} else if (v_Content == '') {
+				return false; 
+			}/*  else if (v_Content == '') {
+				console.log("sdaklfj"+v_Content);
 				alert("내용을 입력해주세요");
-				document.insertForm.v_Content.focus();
 				return false;
-			} else if (v_Subject == '') {
+			} */ else if (v_Subject == '') {
 				alert("투표주제를 입력해주세요");
 				document.insertForm.v_Subject.focus();
 				return false;
-			} else if (vd_Content == "") {
+			} else if (vd_Content == '') {
 				alert("투표항목을 입력해주세요");
-				document.insertForm.vd_Content.focus();
 				return false;
-			} else if (v_Name.length > 20) {
-				alert("제목은 20자리 이내로 입력해주세요");
+			} else if (v_Name.length > 12) {
+				alert("제목은 12자리 이내로 입력해주세요");
 				return false;
-			} else if (v_Content.length > 150) {
-				alert("내용은 150자리 이내로 입력해주세요.");
+			} else if (v_Content.length > 12) {
+				alert("내용은 12자리 이내로 입력해주세요.");
 				return false;
-			} else if (v_Subject.length > 20) {
-				alert("투표 주제는 20자리 이내로 입력해주세요.");
+			} else if (v_Subject.length > 12) {
+				alert("투표 주제는 12자리 이내로 입력해주세요.");
 				return false;
 			} else if (vd_Content.length > 12) {
 				alert("투표 항목은 12자리 이내로 입력해주세요.");
 				return false;
 			}
+			console.log("??");
+			
 			periodSetting();
 			document.insertForm.submit();
+			
 		});
 		//캘린더 시작일/마감일 구하기/기간 미설정 시
 		$("#periodNull").click(function() {
@@ -166,46 +177,9 @@ span[name="chargerspan"] {
 								</div>
 								<div class="form-group">
 									<label for="inputDescription">내용</label>
+									<!-- <input type="text" name="v_Content" id="v_Content" class="form-control" > -->
 									<textarea name="v_Content" id="v_Content" class="form-control" style="width: 100%;"></textarea>
-									<script>
-										//CK에디터 적용
-										CKEDITOR.replace('v_Content', {
-											allowedContent : true,
-
-											toolbar : [
-													[ 'NewPage', 'Preview', 'Bold', 'Italic',
-															'Underline', 'Strike', '-',
-															'Subscript', 'Superscript', '-', '-',
-															'JustifyLeft', 'JustifyCenter',
-															'JustifyRight', 'JustifyBlock', '-',
-															'Outdent', 'Indent', 'HorizontalRule',
-															'Link', 'Unlink', '-', 'Find',
-															'Replace', 'SelectAll', 'Image',
-															'Youtube', 'Table', 'SpecialChar' ],
-													'/',
-													[ 'Styles', 'Format', 'Font', 'FontSize',
-															'Undo', 'Redo' ],
-													[ 'TextColor', 'BGColor' ],
-													[ 'Cut', 'Copy', 'Paste', 'PasteText' ],
-													[ 'Source' ] ],
-
-										});
-
-										CKEDITOR.on('dialogDefinition', function(ev) {
-											var dialogName = ev.data.name;
-											var dialogDefinition = ev.data.definition;
-
-											switch (dialogName) {
-											case 'image': //Image Properties dialog
-												//dialogDefinition.removeContents('info');
-												//dialogDefinition.removeContents('Link'); // 링크탭 제거
-												dialogDefinition.removeContents('advanced'); // 자세히탭 제거
-												break;
-											}
-										});
-
-										CKFinder.setupCKEditor(v_Content, '/ckfinder/');
-									</script>
+									
 								</div>
 
 
@@ -268,7 +242,7 @@ span[name="chargerspan"] {
 
 							<!-- 익명 -->
 							<div class="form-group">
-								<label for="inputStatus">투표자 공개 범위</label> <select class="form-control custom-select" id="v_Show" name="v_Show">
+								<label for="inputStatus">투표자 공개 여부</label> <select class="form-control custom-select" id="v_Show" name="v_Show">
 									<option value="1">공개</option>
 									<option value="0">비공개</option>
 								</select>
@@ -316,6 +290,45 @@ span[name="chargerspan"] {
 	</section>
 	<!-- /.content -->
 </div>
+<script>
+										//CK에디터 적용
+										CKEDITOR.replace('v_Content', {
+											allowedContent : true,
+
+											toolbar : [
+													[ 'NewPage', 'Preview', 'Bold', 'Italic',
+															'Underline', 'Strike', '-',
+															'Subscript', 'Superscript', '-', '-',
+															'JustifyLeft', 'JustifyCenter',
+															'JustifyRight', 'JustifyBlock', '-',
+															'Outdent', 'Indent', 'HorizontalRule',
+															'Link', 'Unlink', '-', 'Find',
+															'Replace', 'SelectAll', 'Image',
+															'Youtube', 'Table', 'SpecialChar' ],
+													'/',
+													[ 'Styles', 'Format', 'Font', 'FontSize',
+															'Undo', 'Redo' ],
+													[ 'TextColor', 'BGColor' ],
+													[ 'Cut', 'Copy', 'Paste', 'PasteText' ],
+													[ 'Source' ] ],
+
+										});
+
+										CKEDITOR.on('dialogDefinition', function(ev) {
+											var dialogName = ev.data.name;
+											var dialogDefinition = ev.data.definition;
+
+											switch (dialogName) {
+											case 'image': //Image Properties dialog
+												//dialogDefinition.removeContents('info');
+												//dialogDefinition.removeContents('Link'); // 링크탭 제거
+												dialogDefinition.removeContents('advanced'); // 자세히탭 제거
+												break;
+											}
+										});
+
+										CKFinder.setupCKEditor(v_Content, '/ckfinder/');
+									</script>
 <!-- /.content-wrapper -->
 
 
