@@ -81,18 +81,6 @@ function delbtn(applyCount){
 	
 }
 
-function comemberdelete(obj) {
-	
-	var delStat = confirm(obj+"님을 강퇴하시겠습니까?");
-	
-	if (delStat == true) {
-		alert(obj+"님을 강퇴하였습니다.")
-	}else{
-		return false;
-	}
-	
-}
-
 </script>
 <!-- 정보변경 모달 팝업 내용 -->
 <div id='update-popup' class="needpopup">

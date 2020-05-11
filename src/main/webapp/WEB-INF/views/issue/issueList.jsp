@@ -15,31 +15,9 @@
 .accent-teal .btn-link, .accent-teal a:not(.dropdown-item):not(.btn-app):not(.nav-link):not(.brand-link) {
     color: #343a40;
 }
-@font-face {
-	font-family: 'Recipekorea';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/Recipekorea.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
-}
 .nav-pills .nav-link.active{
 		    background-color: #dc3545;
- 
-.needpopup {
-	border-radius: 6px;
-	box-shadow: 0 1px 5px 1px rgba(0, 0, 0, 1);
-}
-.needpopup p {
-	font-size: 1.2em;
-	line-height: 1.4;
-	color: #343638;
-	margin: 15px 0;
-	margin: 0;
-}
-.needpopup p+p {
-	margin-top: 10px;
-}
+ }
 #applyspan {
 	background-clip: padding-box;
     border: 1px solid #17a2b8;
@@ -55,18 +33,6 @@
 
 <!-- page script -->
 <script>
-
-	needPopup.config.custom = {
-		'removerPlace' : 'outside',
-		'closeOnOutside' : false,
-		onShow : function() {
-			console.log('needPopup is shown');
-		},
-		onHide : function() {
-			console.log('needPopup is hidden');
-		}
-	};
-	needPopup.init();
 	$('#update-popup').ready(function (){
 				$('#insertsubmit').click(function() {
 					var listnum = $('#applyList').children().length;
@@ -115,86 +81,107 @@
 <!-- 정보변경 모달 팝업 내용 -->
 <div id='update-popup' class="needpopup">
 	<a href="#"></a>
-	<p>
-	<form id="projectupdate" action="/project/update" method="post">
-		<p class="login-box-msg" style="padding-bottom: 10px">
+	
+	<form id="projectupdate" action="/project/update" method="post" style="display: inline;">
+	<div class= "form-group">
+		<div class="col-md-6" style="max-width: 100%;">
 			<input type="hidden" id="c_Id" name="c_Id" value="${pjt.c_Id}">
-			<label style="font-family: Recipekorea; padding-bottom: 5px;">이름</label> <input class="form-control" type="text" id="c_Name"
-				name="c_Name" required value="${pjt.c_Name}">
-		</p>
-		<p class="login-box-msg" style="padding-bottom: 10px">
-			<label style="font-family: Recipekorea; padding-bottom: 5px;">설명</label>
+			<h4 class="m-0 text-dark" style="font-family: Recipekorea; padding-bottom: 5px;">협업공간명</h4>
+			<input class="form-control" type="text" id="c_Name" name="c_Name"
+				required value="${pjt.c_Name}">
+		</div>
+		</div>
+		<div class= "form-group">
+		<div class="col-md-6" style="max-width: 100%;">
+		<h4 class="m-0 text-dark" style="font-family: Recipekorea; padding-bottom: 5px;">협업공간 설명</h4>
 			<textarea class="form-control" rows="3" id="c_Comment"
 				name="c_Comment" required>${pjt.c_Comment}</textarea>
-		</p>
-		<p class="login-box-msg" style="padding-bottom: 10px">
-			<label style="font-family: Recipekorea; padding-bottom: 5px;">관리자 변경</label><br><select name="mem_Id">
+		</div>
+		</div>
+		<div class= "form-group">
+		<div class="col-md-6" style="max-width: 100%;">
+		<h4 class="m-0 text-dark" style="font-family: Recipekorea; padding-bottom: 5px;">관리자 변경</h4>
+			 <select class="form-control custom-select" name="mem_Id">
 				<option value="${member.mem_Id}">${member.mem_Name}(${member.mem_Id})</option>
-			<c:forEach var="memberList" items="${memberList}" >	
-				<c:if test="${memberList.mem_Id != pjt.mem_Id}">
-				<option value="${memberList.mem_Id}">${memberList.mem_Name}(${memberList.mem_Id})</option>
-				</c:if>
-			</c:forEach>
+				<c:forEach var="itemList" items="${memberList}">
+					<c:if test="${itemList.mem_Id != pjt.mem_Id}">
+						<option value="${itemList.mem_Id}">${itemList.mem_Name}(${itemList.mem_Id})</option>
+					</c:if>
+				</c:forEach>
 			</select>
-		</p>
-		<p class="login-box-msg" style="padding-bottom: 10px">
-			<label style="font-family: Recipekorea; padding-bottom: 5px;">카테고리</label><br> <select name="c_Category">
-			
-				<option value="${pjt.c_Category}">${pjt.c_Category}</option>
-				<option value="0">협업업무관련</option>
-				<option value="1">개인업무관련</option>
-				<option value="2">학업과제관련</option>
+		</div>
+		</div>
+		<div class= "form-group">
+		<div class="col-md-6" style="max-width: 100%;">
+			<h4 class="m-0 text-dark" style="font-family: Recipekorea; padding-bottom: 5px;">카테고리</h4>
+			<select class="form-control custom-select" name="c_Category">
+
+				<option value="${pjt.c_Category}" hidden>
+				<c:choose> 
+				 <c:when test = "${pjt.c_Category == 1}"> 협업업무관련</c:when>
+				 <c:when test = "${pjt.c_Category == 2}"> 개인업무관련</c:when>
+				 <c:when test = "${pjt.c_Category == 3}"> 학업과제관련</c:when>
+				 </c:choose>
+				</option>
+				<option value="1">협업업무관련</option>
+				<option value="2">개인업무관련</option>
+				<option value="3">학업과제관련</option>
 			</select>
-		</p>
-			<button type="submit" class="btn btn-block btn-success">정보변경</button>
-			</form>
-	<span>
-		<form id="projectdelete" action="/project/delete" method="post">
-		<input type="hidden" id="c_Id" name="c_Id" value="${pjt.c_Id}">
-		<button style="background-color: #dc3545;" type="submit" class="btn btn-block btn-success">협업공간삭제</button>
+		</div>
+		</div>
+		  <span class="col-md-6">
+		<button type="submit" class="btn btn-block btn-success" style="width: 220px; float:none; display: inline;">정보변경</button>
+		</span>
 	</form>
-	</span>
-</div>
+		<form id="projectdelete" action="/project/delete" method="post" style="display: contents; ">
+		<span class="col-md-6">
+			<input type="hidden" id="c_Id" name="c_Id" value="${pjt.c_Id}">
+			<button style="background-color: #dc3545; width: 220px; display: inline; float: right; border-color: #dc3545;" type="submit"
+				class="btn btn-block btn-success">협업공간삭제</button>
+		</span>
+		</form>
+		</div>
 <!-- 맴버초대 모달 팝업 내용 -->
 <div id='add-popup' class="needpopup">
-	<a href="#"></a>
-	<p>
-		<div style="padding-bottom: 25px;">
-			<h4 class="m-0 text-dark"
-				style="font-family: Recipekorea; padding-bottom: 5px;" >파트너 초대</h4>
-			<span style="font-size: 0.9em; line-height: 1.0; color: #a1a1a1;">
-				많은 사람을 초대하여 원활한 의사소통으로 업무를 효율적으로 처리해보세요. 회사 동료뿐만 아니라 외부 협업자도 파트너로
-				초대할 수 있습니다.</span>
-		</div>
+	<div style="padding-bottom: 25px;">
+		<h4 class="m-0 text-dark"
+			style="font-family: Recipekorea; padding-bottom: 5px;">파트너 초대</h4>
+		<span style="font-size: 0.9em; line-height: 1.0; color: #a1a1a1;">
+			많은 사람을 초대하여 원활한 의사소통으로 업무를 효율적으로 처리해보세요. 회사 동료뿐만 아니라 외부 협업자도 파트너로 초대할
+			수 있습니다.</span>
+	</div>
 
-		<div style="padding-bottom: 25px;">
-			<h4 class="m-0 text-dark"
-				style="font-family: Recipekorea; padding-bottom: 5px;">파트너 아이디</h4>
-			<input style="margin-bottom: 5px;" class="form-control" type="text" id="mem_Id" name="mem_Id"
-				required> <span id= "id_check"
-				style="font-size: 0.9em; line-height: 1.0; color: #a1a1a1;">
-				이메일 주소를 입력하고 Enter키를 눌러 파트너들을 초대해 보세요.</span>
-		</div>
+	<div style="padding-bottom: 25px;">
+		<h4 class="m-0 text-dark"
+			style="font-family: Recipekorea; padding-bottom: 5px;">파트너 아이디</h4>
+		<input style="margin-bottom: 5px;" class="form-control" type="text"
+			id="item_mem_Id" name="mem_Id" required> <span id="id_check"
+			style="font-size: 0.9em; line-height: 1.0; color: #a1a1a1;">
+			이메일 주소를 입력하고 Enter키를 눌러 파트너들을 초대해 보세요.</span>
+	</div>
 
 
-		<div style= "padding-bottom: 25px">
-			<h4 class="m-0 text-dark"
-				style="font-family: Recipekorea; padding-bottom: 5px;">초대 리스트</h4>
-			<div id = "applyList" class = "form-control" style="height: 152px; width: 490px; white-space: pre-line; margin-bottom: 5px;"></div> <span
-				style="font-size: 0.9em; line-height: 1.0; color: #a1a1a1; ">
-			
-				 초대 메세지를 보낼 파트너 아이디를 여기서 확인할 수 있습니다.</span>
-		</div>
-		<div><span style="float: left; padding-right: 50px;">
-		<form action="/news/insert" method="post" id = "applyform">
-			<input type="hidden" name="c_Id" value="${pjt.c_Id}">
-			<button type="submit" id= "insertsubmit" class="btn btn-block btn-success" 
-			style="width: 220px;">초대하기</button></form></span>
-		<span>
-		<button type="reset" class="btn btn-block btn-success" onclick="history.go(0);" style="width: 220px">취소</button>
+	<div style="padding-bottom: 25px">
+		<h4 class="m-0 text-dark"
+			style="font-family: Recipekorea; padding-bottom: 5px;">초대 리스트</h4>
+		<div id="applyList" class="form-control"
+			style="height: 152px; width: 490px; white-space: pre-line; margin-bottom: 5px;"></div>
+		<span style="font-size: 0.9em; line-height: 1.0; color: #a1a1a1;">
+
+			초대 메세지를 보낼 파트너 아이디를 여기서 확인할 수 있습니다.</span>
+	</div>
+	<div>
+		<span style="float: left; padding-right: 50px;">
+			<form action="/news/insert" method="post" id="applyform">
+				<input type="hidden" name="c_Id" value="${pjt.c_Id}">
+				<button type="submit" id="insertsubmit"
+					class="btn btn-block btn-success" style="width: 220px;">초대하기</button>
+			</form>
+		</span> <span>
+			<button type="reset" class="btn btn-block btn-success"
+				onclick="history.go(0);" style="width: 220px; background-color: #dc3545; border-color: #dc3545;" >취소</button>
 		</span>
-		</div>
-		
+	</div>
 </div>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
