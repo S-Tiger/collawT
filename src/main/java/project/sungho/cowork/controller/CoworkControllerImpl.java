@@ -133,7 +133,7 @@ public class CoworkControllerImpl implements CoworkController {
 		System.out.println(c_Id);
 		List<Map> eventlist = coworkService.calendarlist(searchMap);
 
-		String itemurl = "/project/issue/read?i_Num=";
+		String itemurl = "/project/issue/read?c_Id=" + c_Id +"&i_Num=";
 		for (int i = 0; i < eventlist.size(); i++) {
 			eventlist.get(i).put("url", itemurl + eventlist.get(i).get("url"));
 			eventlist.get(i).put("color", "#28a745");

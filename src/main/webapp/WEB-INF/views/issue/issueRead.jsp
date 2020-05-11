@@ -86,7 +86,7 @@ $(document).ready(function() {
 	
 	//북마크 버튼 이벤트
 	$("#bookmarkinsert").on("click", function() {
-		console.log("1121212"+checkbook);
+		console.log("0000000000000"+checkbook);
 		if(checkbook == 0){
 		$.ajax({
 			url:"/bookmark/insert",

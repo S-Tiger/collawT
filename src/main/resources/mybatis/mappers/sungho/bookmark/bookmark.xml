@@ -17,7 +17,7 @@
 	
 	<select id="searchList" resultMap="bookmarkResult01" parameterType="java.util.Map"> 
       <![CDATA[
-         	select i.i_Name , i.i_Num, i.mem_Id , m.mem_Name, c.c_Name 
+         	select i.i_Name , i.i_Num, i.mem_Id , m.mem_Name, c.c_Name , i.c_Id
 			from issue i, bookmark b, member m , co_work c
        
       ]]>
@@ -57,11 +57,11 @@
 	<select id="bookmarkCheck" parameterType="String" resultType="int">
       <![CDATA[
 		select count(*) from BOOKMARK
-		where mem_Id = #{mem_Id}
-		
-		
 		]]>
+	<where>
+		mem_Id = #{mem_Id}
+		and	i_Num = #{i_Num}
+	</where>
 	</select>
-	
 
 </mapper>
