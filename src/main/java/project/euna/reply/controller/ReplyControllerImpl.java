@@ -59,8 +59,6 @@ public class ReplyControllerImpl implements ReplyController {
 	@ResponseBody
 	public List<Map> searchList(@RequestParam ("i_Num")String i_Num, HttpServletRequest request, HttpServletResponse response) throws Exception{		
 		List<Map> list=replyService.searchList(i_Num);
-		//System.out.println("!!!!!!!!!!!!!!!!!!!!!!!"+list);
-		//System.out.println("!!!!!!!!!!!!!!!!!!!!!!!"+list.get(2).size());
 		return list;
 		
 	}

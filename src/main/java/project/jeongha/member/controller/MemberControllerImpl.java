@@ -413,13 +413,22 @@ public class MemberControllerImpl implements MemberController {
 	// 프로필 사진가져옴 /getByteImage?mem_Id=
 	@RequestMapping(value = "/getByteImage", method = RequestMethod.GET)
 	public ResponseEntity<byte[]> getByteImage(@RequestParam("mem_Id") String mem_Id) {
-		// System.out.println("그림파일 가져오기");
-		Map<String, Object> img = dao.getByteImage(mem_Id);
-		// blob컬럼명 img.get("mem_File")
-		byte[] imageContent = (byte[]) img.get("mem_File");
-		// System.out.println("getImg: "+img.get("mem_File"));
+		byte[]imageContent=null;
 		final HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.IMAGE_PNG);
+		
+		try {
+			// System.out.println("그림파일 가져오기");
+			Map<String, Object> img = dao.getByteImage(mem_Id);
+			// blob컬럼명 img.get("mem_File")
+			imageContent = (byte[]) img.get("mem_File");
+			// System.out.println("getImg: "+img.get("mem_File"));
+			
+			headers.setContentType(MediaType.IMAGE_PNG);
+			
+
+		}catch(NullPointerException e) {
+			
+		}
 		return new ResponseEntity<byte[]>(imageContent, headers, HttpStatus.OK);
 	}
 

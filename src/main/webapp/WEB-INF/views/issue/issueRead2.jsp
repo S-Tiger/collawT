@@ -167,10 +167,17 @@ $(document).ready(function() {
 				if(result!=0){
 					for(var i in result){
 						str+='<div class="card-footer card-comments">';
-						str+='<div class="card-comment">';
+						str+='<div class="card-comment">result[i] 길이:'+Object.keys(result[i]).length;
 						
-						str+='<img width="50" height="50" src="/member/getByteImage?mem_Id='+result[i].mem_Id+'" class="img-circle elevation-1" onError="this.src=\'${contextPath}/resources/dist/img/profile.jpg\';"/>';
 
+						str+='//타입 : '+typeof Object.keys(result[i]).length+'<c:if test="${'+Object.keys(result[i]).length +' != 7}">';
+						str+='//낫널일때<img alt="Not null" width="50" height="50"src="/member/getByteImage?mem_Id='+result[i].mem_Id+'" class="img-circle elevation-1"/>';
+						str+='</c:if>';
+						
+						str+='<c:if test="${'+Object.keys(result[i]).length) +' == 7}">';
+						str+='//널일때<img src="${contextPath}/resources/dist/img/profile.jpg" width="50" height="50" class="img-circle elevation-1" alt="Null">';
+						str+='</c:if>';
+						
 						str+='<div class="comment-text">';
 						str+='<span class="username">'+result[i].mem_Name;
 						str+='<span class="text-muted float-right">'+result[i].r_Date+'</span>';

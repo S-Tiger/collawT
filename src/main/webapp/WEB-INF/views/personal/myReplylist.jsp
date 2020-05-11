@@ -60,7 +60,7 @@ $(document).ready(function() {
 		      //해당 index에 해당하는 체크박스의 ID 속성을 가져옵니다.
 		      var boardtype = $("input:hidden[name=boardtype]").eq(index).val();
 		      var r_Num = $("input:checkbox[name=checkbox]").eq(index).attr("id")
-				alert(boardtype)
+				//alert(boardtype)
 	      
  		      	if(boardtype==1){
 			    	location.href="${contextPath}/personal/search/issuereplydelete?r_Num="+r_Num;
