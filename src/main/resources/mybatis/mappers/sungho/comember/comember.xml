@@ -11,6 +11,8 @@
 		<result property="mem_Name" column="mem_Name" />
 		<result property="mem_File" column="mem_File" />
 		<result property="grade" column="grade" />
+		<result property="mem_Log" column="mem_Log" />
+		
 	</resultMap>
 
 	<!-- 회원별 메뉴 리스트를 받위한 쿼리 -->
@@ -36,8 +38,8 @@
 	<select id="memberList" resultMap="comemberResult01"
 		parameterType="java.util.Map"> 
       <![CDATA[
-         select c_Id, mem_Id, mem_Name, grade, mem_File
-			from(select c.c_Id, c.mem_Id, m.mem_Name, c.grade, m.mem_File
+         select c_Id, mem_Id, mem_Name, grade, mem_File , mem_Log
+			from(select c.c_Id, c.mem_Id, m.mem_Name, c.grade, m.mem_File , m.mem_Log
        		  from co_member c, member m
          		 where m.mem_Id = c.mem_Id
          )

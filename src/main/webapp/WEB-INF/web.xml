@@ -85,6 +85,10 @@
 <!-- CKFINDER END -->
 
 
+ <listener>
+          <listener-class>project.sungho.interceptor.LoginCheck</listener-class>
+     </listener>
+
 
 
 </web-app>

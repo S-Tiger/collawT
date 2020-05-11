@@ -39,6 +39,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.google.gson.Gson;
 
+import org.apache.ibatis.session.SqlSession;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -50,6 +51,7 @@ import project.jeongha.member.vo.NaverLoginBO;
 import project.jeongha.member.vo.Token;
 import project.sungho.comember.service.ComemberService;
 import project.sungho.cowork.service.CoworkService;
+import project.sungho.interceptor.LoginCheck;
 
 @Controller // 컨트롤러 어노테이션 컨트롤 마다 작성해주세요
 @RequestMapping("/member/*") // 컨트롤러 맵핑 어노테이션 /패키지명/* 로 지정해주세요
@@ -69,6 +71,9 @@ public class MemberControllerImpl implements MemberController {
 
 	@Autowired
 	BCryptPasswordEncoder passEncoder;
+	
+	@Autowired
+	SqlSession sqlSession;
 
 	// Naver LoginBO
 	private NaverLoginBO naverLoginBO;
@@ -224,6 +229,8 @@ public class MemberControllerImpl implements MemberController {
 			
 			System.out.println("로그인 성공(객체): " + memberVO);
 			System.out.println("로그인 권환 ================================"+memberVO.get("mem_Kind"));
+			
+			sqlSession.update("logincheck.updatelogincheck", memberVO);
 			if (memberVO.get("mem_Kind").equals(kind)) {
 				HttpSession session = request.getSession();
 				session.setAttribute("member", memberVO);
@@ -476,6 +483,7 @@ public class MemberControllerImpl implements MemberController {
 			// System.out.println("아이디 없음");
 			service.memberJoinApi(member);
 			session.setAttribute("member", member);
+			sqlSession.update("logincheck.updatelogincheck", member);
 			return "redirect:/main";
 
 		} else {
@@ -487,7 +495,7 @@ public class MemberControllerImpl implements MemberController {
 			System.out.println(member);
 			session.setAttribute("member", memberVO);
 			// model.addAttribute("result", apiResult);
-
+			sqlSession.update("logincheck.updatelogincheck", member);
 			return "redirect:/main";
 		}
 	}
@@ -548,6 +556,9 @@ public class MemberControllerImpl implements MemberController {
 			System.out.println("아이디 없음");
 			service.memberJoinApiGoogle(member);
 			session.setAttribute("member", member);
+			
+
+			sqlSession.update("logincheck.updatelogincheck", member);
 			return "redirect:/main";
 		} else {
 
@@ -555,6 +566,7 @@ public class MemberControllerImpl implements MemberController {
 			Map<String, Object> memberVO = service.login(member, response);
 			System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + memberVO);
 			session.setAttribute("member", memberVO);
+			sqlSession.update("logincheck.updatelogincheck", member);
 
 		}
 		return "redirect:/main";

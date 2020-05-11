@@ -145,7 +145,12 @@
 								<li class="nav-item"><a href="#" class="nav-link" data-targetmember="${partnermember.mem_Id}"
 								data-targetnames="${partnermember.mem_Name}" id="enterBtn"
 								 style="padding-top: 5px; padding-bottom: 5px; padding-left: 10px; white-space: none;">
+								 		<c:if test="${partnermember.mem_Log == '1'}">
+										<b style="font-size: 14px; color: white;">
+										</c:if>
+								 		<c:if test="${partnermember.mem_Log != '1'}">
 										<b style="font-size: 14px;">
+										</c:if>
 										${partnermember.mem_Name}<font size="2">
 										(${partnermember.mem_Id})</font></b>
 										<c:forEach var="msgcountItem" items="${msgCount}">
