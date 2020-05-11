@@ -291,7 +291,7 @@ $(function () {
 
 								<div class="timeline-item">
 									<span class="time"><i class="far fa-clock"></i> ${newspeeditem.ap_Date}&nbsp;&nbsp;&nbsp;
-									<a href="/notify/update?c_Id=${newspeeditem.c_Id}&i_Num=${newspeeditem.i_Num}" style="color:red"><i class="fas fa-times"></i></a>
+									<a href="/notify/update?c_Id=${newspeeditem.c_Id}&i_Num=${newspeeditem.i_Num}&status=main" style="color:red"><i class="fas fa-times"></i></a>
 									</span>
 
 									<h3 class="timeline-header">
@@ -309,7 +309,7 @@ $(function () {
 									class="img-circle elevation-1" alt="프로필사진">
 									</c:if>
 									&nbsp;
-									${newspeeditem.mem_Name}(${newspeeditem.mem_Id})님이 &nbsp;<a href="/project/issue/read?c_Id=${newspeeditem.c_Id}&i_Num=${newspeeditem.i_Num}"><b>${newspeeditem.i_Name}</b></a>&nbsp;이슈를 등록하셨습니다.</div>
+									${newspeeditem.mem_Name}(${newspeeditem.mem_Id})님이 &nbsp;<a href="/notify/update?c_Id=${newspeeditem.c_Id}&i_Num=${newspeeditem.i_Num}&status=read"><b>${newspeeditem.i_Name}</b></a>&nbsp;이슈를 등록하셨습니다.</div>
 									</div>
 									<div class="timeline-footer" id="timeline-footer">
 									</div>
@@ -324,7 +324,7 @@ $(function () {
 								<div class="timeline-item">
 
 									<span class="time"><i class="far fa-clock"></i> ${newspeeditem.ap_Date}&nbsp;&nbsp;&nbsp;
-									<a href="/notify/replyupdate?c_Id=${newspeeditem.c_Id}&i_Num=${newspeeditem.i_Num}" style="color:red"><i class="fas fa-times"></i></a></span>
+									<a href="/notify/replyupdate?c_Id=${newspeeditem.c_Id}&i_Num=${newspeeditem.i_Num}&r_Num=${newspeeditem.r_Num}&status=main" style="color:red"><i class="fas fa-times"></i></a></span>
 
 									<h3 class="timeline-header">
 									<b>댓글 │ </b>
@@ -342,7 +342,7 @@ $(function () {
 									class="img-circle elevation-1" alt="프로필사진">
 									</c:if>
 									&nbsp;
-									${newspeeditem.mem_Name}(${newspeeditem.mem_Id})님이&nbsp;<a href="/project/issue/read?c_Id=${newspeeditem.c_Id}&i_Num=${newspeeditem.i_Num}"><b>${newspeeditem.i_Name}</b></a>글에 댓글을 남기셨습니다.</div>
+									${newspeeditem.mem_Name}(${newspeeditem.mem_Id})님이&nbsp;<a href="/notify/replyupdate?c_Id=${newspeeditem.c_Id}&i_Num=${newspeeditem.i_Num}&r_Num=${newspeeditem.r_Num}&status=read"><b>${newspeeditem.i_Name}</b></a>글에 댓글을 남기셨습니다.</div>
 									<div class="row" style="margin-left:32px; margin-right:32px;"><small>${newspeeditem.i_Content}</small></div></div>
 									<div class="timeline-footer" id="timeline-footer">
 									</div>
@@ -357,7 +357,7 @@ $(function () {
 
 								<div class="timeline-item">
 									<span class="time"><i class="far fa-clock"></i> ${newspeeditem.ap_Date}&nbsp;&nbsp;&nbsp;
-									<a href="/notify/voteUpdate?c_Id=${newspeeditem.c_Id}&v_Num=${newspeeditem.i_Num}" style="color:red"><i class="fas fa-times"></i></a>
+									<a href="/notify/voteUpdate?c_Id=${newspeeditem.c_Id}&v_Num=${newspeeditem.i_Num}&status=main" style="color:red"><i class="fas fa-times"></i></a>
 									</span>
 
 									<h3 class="timeline-header">
@@ -375,7 +375,7 @@ $(function () {
 									class="img-circle elevation-1" alt="프로필사진">
 									</c:if>
 									&nbsp;
-									${newspeeditem.mem_Name}(${newspeeditem.mem_Id})님이 &nbsp;<a href="/project/vote/read?c_Id=${newspeeditem.c_Id}&v_Num=${newspeeditem.i_Num}"><b>${newspeeditem.i_Name}</b></a>&nbsp;투표를 등록하셨습니다.</div>
+									${newspeeditem.mem_Name}(${newspeeditem.mem_Id})님이 &nbsp;<a href="/notify/voteUpdate?c_Id=${newspeeditem.c_Id}&v_Num=${newspeeditem.i_Num}&status=read"><b>${newspeeditem.i_Name}</b></a>&nbsp;투표를 등록하셨습니다.</div>
 									</div>
 									<div class="timeline-footer" id="timeline-footer">
 									</div>
@@ -391,7 +391,7 @@ $(function () {
 								<div class="timeline-item">
 
 									<span class="time"><i class="far fa-clock"></i> ${newspeeditem.ap_Date}&nbsp;&nbsp;&nbsp;
-									<a href="/notify/votereplyupdate?c_Id=${newspeeditem.c_Id}&v_Num=${newspeeditem.i_Num}" style="color:red"><i class="fas fa-times"></i></a></span>
+									<a href="/notify/votereplyupdate?c_Id=${newspeeditem.c_Id}&v_Num=${newspeeditem.i_Num}&vr_Num=${newspeeditem.r_Num}&status=main" style="color:red"><i class="fas fa-times"></i></a></span>
 
 									<h3 class="timeline-header">
 									<b>댓글 │ </b>
@@ -409,7 +409,7 @@ $(function () {
 									class="img-circle elevation-1" alt="프로필사진">
 									</c:if>
 									&nbsp;
-									${newspeeditem.mem_Name}(${newspeeditem.mem_Id})님이&nbsp;<a href="/project/vote/read?c_Id=${newspeeditem.c_Id}&v_Num=${newspeeditem.i_Num}"><b>${newspeeditem.i_Name}</b></a>글에 댓글을 남기셨습니다.</div>
+									${newspeeditem.mem_Name}(${newspeeditem.mem_Id})님이&nbsp;<a href="/notify/votereplyupdate?c_Id=${newspeeditem.c_Id}&v_Num=${newspeeditem.i_Num}&vr_Num=${newspeeditem.r_Num}&status=read"><b>${newspeeditem.i_Name}</b></a>글에 댓글을 남기셨습니다.</div>
 									<div class="row" style="margin-left:32px; margin-right:32px;"><small>${newspeeditem.i_Content}</small></div></div>
 									<div class="timeline-footer" id="timeline-footer">
 									</div>

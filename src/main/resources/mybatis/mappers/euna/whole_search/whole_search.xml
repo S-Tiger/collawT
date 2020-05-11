@@ -571,7 +571,7 @@ from(
         where v.c_Id=c.c_Id
         and c.c_Id in
             (
-            select c_id from co_member where mem_id='dmsdk@dmsdk.com'
+            select c_id from co_member where mem_id=#{mem_Id}
             )
        )
        ]]>
@@ -629,7 +629,7 @@ from(
         where v.c_Id=c.c_Id
         and c.c_Id in
             (
-            select c_id from co_member where mem_id='dmsdk@dmsdk.com'
+            select c_id from co_member where mem_id=#{mem_Id}
             )
        )
          

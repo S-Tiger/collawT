@@ -154,7 +154,7 @@
                   
                     <span>
                    <img class="img-fluid img-circle img-sm"
-								src="/member/getByteImage?mem_Id=${issueitem.wr_mem_Id}" alt="Alt Text" width="30" height="30" >
+								src="/member/getByteImage?mem_Id=${issueitem.wr_mem_Id}" alt="Alt Text" width="30" height="30" onError="this.src='${contextPath}/resources/dist/img/profile.jpg';">
 								 <small>&nbsp;${issueitem.mem_Name}(${issueitem.wr_mem_Id})</small></span>
 								&nbsp;&nbsp;
 								
@@ -271,7 +271,7 @@
                   
                     <span>
                    <img class="img-fluid img-circle img-sm"
-								src="/member/getByteImage?mem_Id=${voteitem.wr_mem_Id}" alt="Alt Text" width="30" height="30" >
+								src="/member/getByteImage?mem_Id=${voteitem.wr_mem_Id}" alt="Alt Text" width="30" height="30" onError="this.src='${contextPath}/resources/dist/img/profile.jpg';">
 								 <small>&nbsp;${voteitem.mem_Name}(${voteitem.wr_mem_Id})</small></span>
 								&nbsp;&nbsp;
 								
@@ -420,7 +420,7 @@
                   
                     <span>
                    <img class="img-fluid img-circle img-sm"
-								src="/member/getByteImage?mem_Id=${fileitem.wr_mem_Id}" alt="Alt Text" width="30" height="30" >
+								src="/member/getByteImage?mem_Id=${fileitem.wr_mem_Id}" alt="Alt Text" width="30" height="30" onError="this.src='${contextPath}/resources/dist/img/profile.jpg';">
 								 <small>&nbsp;${fileitem.mem_Name}(${fileitem.wr_mem_Id})</small></span>
 								&nbsp;&nbsp;
 								
@@ -557,7 +557,7 @@
                   
                     <span>
                    <img class="img-fluid img-circle img-sm"
-								src="/member/getByteImage?mem_Id=${replyitem.wr_mem_Id}" alt="Alt Text" width="30" height="30" >
+								src="/member/getByteImage?mem_Id=${replyitem.wr_mem_Id}" alt="Alt Text" width="30" height="30" onError="this.src='${contextPath}/resources/dist/img/profile.jpg';">
 								 <small>&nbsp;${replyitem.mem_Name}(${replyitem.wr_mem_Id})</small></span>
 								&nbsp;&nbsp;
 								

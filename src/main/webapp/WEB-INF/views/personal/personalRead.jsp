@@ -91,13 +91,8 @@ $(document).ready(function() {
 						str+='<div class="card-comment">';
 						
 
-						str+='<c:if test="${'+result[i].mem_File +' != NULL}">';
-						str+='<img alt="Not null" width="50" height="50"src="/member/getByteImage?mem_Id='+result[i].mem_Id+'" class="img-circle elevation-1"/>';
-						str+='</c:if>';
-						
-						str+='<c:if test="${'+result[i].mem_File +'== NULL}">';
-						str+='<img src="${contextPath}/resources/dist/img/profile.jpg" width="50" height="50" class="img-circle elevation-1" alt="Null">';
-						str+='</c:if>';
+						str+='<img width="50" height="50" src="/member/getByteImage?mem_Id='+result[i].mem_Id+'" class="img-circle elevation-1" onError="this.src=\'${contextPath}/resources/dist/img/profile.jpg\';"/>';
+
 							
 						str+='<div class="comment-text">';
 						str+='<span class="username">'+result[i].mem_Name;

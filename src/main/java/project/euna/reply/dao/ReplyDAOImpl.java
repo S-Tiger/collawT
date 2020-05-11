@@ -32,6 +32,8 @@ public class ReplyDAOImpl implements ReplyDAO {
 	@Override
 	public void replyInsert(ReplyVO replyVO) {
 		sqlSession.update("reply.replyInsert", replyVO);
+		String r_Num  = replyVO.getR_Num();
+		replyVO.setR_Num(r_Num);
 		sqlSession.update("notify.replyInsertNotify",replyVO);
 	}
 

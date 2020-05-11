@@ -44,8 +44,11 @@
 
 	<!-- 댓글 입력 -->
 	<insert id="replyInsert" parameterType="ReplyVO">
+	<selectKey resultType="string" keyProperty="r_Num" order="BEFORE">
+        SELECT reply_r_num.nextval as r_Num FROM dual        
+    </selectKey>  
 		insert into reply(r_Num, r_Content, r_Date, i_Num, c_Id, mem_Id)
-		values(reply_r_num.nextval, #{r_Content}, (select to_char(sysdate, 'YYYY/MM/DD/ HH24:MI:SS') from dual), #{i_Num} , #{c_Id} , #{mem_Id})
+		values(#{r_Num}, #{r_Content}, (select to_char(sysdate, 'YYYY/MM/DD/ HH24:MI:SS') from dual), #{i_Num} , #{c_Id} , #{mem_Id})
 	</insert>
 
 

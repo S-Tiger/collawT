@@ -44,8 +44,11 @@
 
 	<!-- 댓글 입력 -->
 	<insert id="replyInsert" parameterType="VoteReplyVO">
+	<selectKey resultType="string" keyProperty="vr_Num" order="BEFORE">
+        SELECT vote_reply_seq.nextval as vr_Num FROM dual        
+    </selectKey> 
 		insert into vote_reply(vr_Num, vr_Content, vr_Date, v_Num, c_Id, mem_Id)
-		values(vote_reply_seq.nextval, #{vr_Content}, (select to_char(sysdate, 'YYYY/MM/DD/ HH24:MI:SS') from dual), #{v_Num} , #{c_Id} , #{mem_Id})
+		values(#{vr_Num}, #{vr_Content}, (select to_char(sysdate, 'YYYY/MM/DD/ HH24:MI:SS') from dual), #{v_Num} , #{c_Id} , #{mem_Id})
 	</insert>
 
 

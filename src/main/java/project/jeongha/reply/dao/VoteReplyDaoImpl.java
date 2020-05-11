@@ -28,6 +28,8 @@ public class VoteReplyDaoImpl  implements VoteReplyDao{
 	@Override
 	public void replyInsert(VoteReplyVO voteReplyVO) {
 		sqlSession.update("voteReply.replyInsert", voteReplyVO);
+		String vr_Num = voteReplyVO.getVr_Num();
+		voteReplyVO.setVr_Num(vr_Num);
 		sqlSession.update("notify.votereplyInsertNotify", voteReplyVO);
 
 

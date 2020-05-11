@@ -95,8 +95,8 @@
     using (select mem_Id from issue where i_Num = #{i_Num})i
     on (i.mem_Id = #{mem_Id})
     when not matched then
-    insert(not_Num, i_Num, not_Status, not_Kind, mem_Id, c_Id)
-    values(notify_seq.nextval,#{i_Num},'0','2',i.mem_Id,#{c_Id})
+    insert(not_Num, i_Num, not_Status, not_Kind, mem_Id, c_Id, r_Num)
+    values(notify_seq.nextval,#{i_Num},'0','2',i.mem_Id,#{c_Id}, #{r_Num})
 ]]>
 </insert>
 
@@ -116,8 +116,8 @@
     using (select mem_Id from vote where v_Num = #{v_Num})i
     on (i.mem_Id = #{mem_Id})
     when not matched then
-    insert(not_Num, v_Num, not_Status, not_Kind, mem_Id, c_Id)
-    values(notify_seq.nextval,#{v_Num},'0','4',i.mem_Id,#{c_Id})
+    insert(not_Num, v_Num, not_Status, not_Kind, mem_Id, c_Id, vr_Num)
+    values(notify_seq.nextval,#{v_Num},'0','4',i.mem_Id,#{c_Id},#{vr_Num})
 ]]>
 </insert>
 
@@ -137,17 +137,17 @@
 	<![CDATA[
 	update notify set not_Status = '1'
 	where i_Num = #{i_Num}
-	and mem_Id = #{mem_Id}
+	and not_Kind = '1'
+	and not_Status = '0'
 	  ]]>
 	</update>
 	
 	<update id ="replyUpdate" parameterType = "java.util.Map">
 	<![CDATA[
 	update notify set not_Status = '1'
-	where i_Num = #{i_Num}
-	and c_Id = #{c_Id}
+	where r_Num = #{r_Num}
 	and not_Kind = '2'
-	
+	and not_Status = '0'
 	]]>
 	</update>
 	
@@ -155,20 +155,17 @@
 	<![CDATA[
 	update notify set not_Status = '1'
 	where v_Num = #{v_Num}
-	and c_Id = #{c_Id}
 	and not_Kind = '3'
-	and not_Status = '0'
-	
+	and not_Status = '0'	
 	]]>
 	</update>
 	
 	<update id ="votereplyUpdate" parameterType = "java.util.Map">
 	<![CDATA[
 	update notify set not_Status = '1'
-	where v_Num = #{v_Num}
-	and c_Id = #{c_Id}
+	where vr_Num = #{vr_Num}
 	and not_Kind = '4'
-	
+	and not_Status = '0'
 	]]>
 	</update>
 

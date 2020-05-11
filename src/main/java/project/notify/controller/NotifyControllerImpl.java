@@ -49,75 +49,89 @@ public class NotifyControllerImpl implements NotifyController {
 	 */
 	 
 	@RequestMapping("/update")	
-	public void notifyUpdate(HttpServletRequest request, HttpServletResponse response,Model model) throws Exception {
+	public String notifyUpdate(HttpServletRequest request, HttpServletResponse response,Model model) throws Exception {
 		//System.out.println("이거 데이터 상태값변경----------------");
 		//System.out.println("update에 넘겨주는 값+++++++++++++++++++++:"+request.getParameter("i_Num"));
 		String mem_Id = request.getParameter("id");
 		HttpSession session = request.getSession();
 		String i_Num = request.getParameter("i_Num");
 		String c_Id = request.getParameter("c_Id");
+		String status = request.getParameter("status");
+		
+		
 		Map<String,Object> searchMap = new HashMap<String,Object>();
 		searchMap = (Map<String,Object>) session.getAttribute("member");
-		searchMap.put("c_Id", c_Id);
 		searchMap.put("i_Num", i_Num);
 		notifyService.notifyUpdate(searchMap);
-		//request.setAttribute("c_Id", c_Id);
-		//request.setAttribute("i_Num", i_Num);
-		request.setAttribute("mem_Id", mem_Id);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/main"); 
-        dispatcher.forward(request, response);
+
+		
+		if(status.equals("main")) {
+			return "redirect:/main";
+
+		}else {
+			return "redirect:/project/issue/read?c_Id="+c_Id+"&i_Num="+i_Num;
+		}
 	}
 	
 	@RequestMapping("/voteUpdate")
-	public void voteUpdate(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	public String voteUpdate(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String c_Id = request.getParameter("c_Id");
 		String v_Num = request.getParameter("v_Num");
 		String mem_Id = request.getParameter("mem_Id");
+		String status = request.getParameter("status");
+
 		HttpSession session = request.getSession();
 		Map<String,Object> searchMap = new HashMap<String,Object>();
 		searchMap = (Map<String,Object>)session.getAttribute("member");
-		searchMap.put("c_Id", c_Id);
 		searchMap.put("v_Num",v_Num);
 		notifyService.voteUpdate(searchMap);
-		request.setAttribute("c_Id", c_Id);
-		request.setAttribute("v_Num",v_Num);
-		request.setAttribute("mem_Id", mem_Id);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/main");
-		dispatcher.forward(request, response);
+		
+		if(status.equals("main")) {
+			return "redirect:/main";
+
+		}else {
+			return "redirect:/project/vote/read?c_Id="+c_Id+"&v_Num="+v_Num;
+		}
 	}
 	@RequestMapping("/replyupdate")
-	public void replyUpdate(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	public String replyUpdate(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String i_Num = request.getParameter("i_Num");
+		String r_Num = request.getParameter("r_Num");
 		String c_Id = request.getParameter("c_Id");
 		String mem_Id = request.getParameter("mem_Id");
+		String status = request.getParameter("status");
+
 		HttpSession session = request.getSession();
 		Map<String,Object> searchMap = new HashMap<String,Object>();
 		searchMap = (Map<String,Object>)session.getAttribute("member");
-		searchMap.put("c_Id", c_Id);
-		searchMap.put("i_Num", i_Num);
+		searchMap.put("r_Num", r_Num);
 		notifyService.replyUpdate(searchMap);
-		request.setAttribute("c_Id", c_Id);
-		request.setAttribute("i_Num", i_Num);
-		request.setAttribute("mem_Id", mem_Id);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/main");
-		dispatcher.forward(request, response);
+		if(status.equals("main")) {
+			return "redirect:/main";
+
+		}else {
+			return "redirect:/project/issue/read?c_Id="+c_Id+"&i_Num="+i_Num;
+		}
 	}
 	@RequestMapping("/votereplyupdate")
-	public void votereplyupdate(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	public String votereplyupdate(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String v_Num = request.getParameter("v_Num");
+		String vr_Num = request.getParameter("vr_Num");
 		String c_Id = request.getParameter("c_Id");
 		String mem_Id = request.getParameter("mem_Id");
+		String status = request.getParameter("status");
+
 		HttpSession session = request.getSession();
 		Map<String,Object> searchMap = new HashMap<String,Object>();
 		searchMap = (Map<String,Object>)session.getAttribute("member");
-		searchMap.put("c_Id", c_Id);
-		searchMap.put("v_Num", v_Num);
+		searchMap.put("vr_Num", vr_Num);
 		notifyService.votereplyUpdate(searchMap);
-		request.setAttribute("c_Id", c_Id);
-		request.setAttribute("v_Num", v_Num);
-		request.setAttribute("mem_Id", mem_Id);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/main");
-		dispatcher.forward(request, response);
+		if(status.equals("main")) {
+			return "redirect:/main";
+
+		}else {
+			return "redirect:/project/vote/read?c_Id="+c_Id+"&v_Num="+v_Num;
+		}
 	}
 	
 	@GetMapping("/insert")

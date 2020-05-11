@@ -282,7 +282,7 @@ $(document).ready(function() {
                   
                     <span>
                    <img class="img-fluid img-circle img-sm"
-								src="/member/getByteImage?mem_Id=${item.wr_mem_Id}" alt="Alt Text" width="30" height="30" >
+								src="/member/getByteImage?mem_Id=${item.wr_mem_Id}" alt="Alt Text" width="30" height="30" onError="this.src='${contextPath}/resources/dist/img/profile.jpg';">
 								 <small>&nbsp;${item.mem_Name}(${item.wr_mem_Id})</small></span>
 								&nbsp;&nbsp;
 								
