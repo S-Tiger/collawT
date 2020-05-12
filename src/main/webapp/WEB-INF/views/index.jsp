@@ -531,8 +531,8 @@ function checkQ_Email(q_Email) {
 								</div>
 								<div class="form-group">
 									<select class="form-control" id="q_Kind" name="q_Kind" style="height: 66px !important; color:#D7DBDD; font-weight: bold ">
-										<option value="none">문의 종류 *</option>
-										<option value="버그 관련"><spring:message code="site.sort" text="버그관련*" /></option>
+										<option value="none"><spring:message code="site.sort" text="문의 종류*" /></option>
+										<option value="버그 관련"><spring:message code="site.bug" text="버그관련*" /></option>
 										<option value="일반 문의"><spring:message code="site.general" text="일반문의*" /></option>
 										<option value="아이디어 제의"><spring:message code="site.idea" text="아이디어제의*" /></option>
 										<option value="기타 문의"><spring:message code="site.etc" text="기타문의*" /></option>
