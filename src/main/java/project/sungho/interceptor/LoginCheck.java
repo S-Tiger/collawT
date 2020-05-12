@@ -38,7 +38,7 @@ public class LoginCheck implements HttpSessionListener{
 		// TODO Auto-generated method stub
 		sqlSession = getSqlSession(se);
 		Map<String, Object> logout = (Map<String, Object>) se.getSession().getAttribute("member");
-		System.out.println("로그아웃햇어"+logout.get("mem_Id"));
+		System.out.println("로그아웃 세션파기"+logout.get("mem_Id"));
 		sqlSession.update("logincheck.updatelogoutcheck", logout);
 		
 	}
