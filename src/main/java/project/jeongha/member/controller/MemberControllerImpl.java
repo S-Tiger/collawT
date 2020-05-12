@@ -234,7 +234,7 @@ public class MemberControllerImpl implements MemberController {
 			if (memberVO.get("mem_Kind").equals(kind)) {
 				HttpSession session = request.getSession();
 				session.setAttribute("member", memberVO);
-				mav.setViewName("redirect:/manager/member/main");
+				mav.setViewName("redirect:/manager/main");
 			}else {
 			HttpSession session = request.getSession();
 			session.setAttribute("member", memberVO);
