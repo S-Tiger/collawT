@@ -31,6 +31,8 @@ span[name="chargerspan"] {
 		var i_Num = $("#i_Num").val();
 		var c_Id = $("#c_Id").val();
 		
+
+		
 		//글쓰기 빈 값 안되게 검사
 		$("#submit").click(function(){
 			var i_Name = $("#i_Name").val();
@@ -167,7 +169,6 @@ span[name="chargerspan"] {
 		
 		
 }
-	
 	
 	
 	function periodSetting(){

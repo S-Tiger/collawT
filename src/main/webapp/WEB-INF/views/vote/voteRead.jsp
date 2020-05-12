@@ -374,12 +374,9 @@ $(document).ready(function() {
 
 
 						<div class="card-header">
-							<td style="width: 10%; vertical-align: top"><span style="
-							<c:if test="${voteRead.vs_Num == 1}">background-color:#28a745;</c:if>
-							<c:if test="${voteRead.vs_Num == 2}">background-color:#6c757d;</c:if>
-							" id="ig_Name" name="ig_Name" class="badge badge-success"><c:out
-										value="${voteRead.vs_Name}" /></span></td>&nbsp;&nbsp; <span id="v_Name"><b><c:out value="${voteRead.v_Name}" /></b></span>
-
+						<span style= "vertical-align:text-top; background-color:${voteRead.vs_Color};"
+							id="vs_Name" name="vs_Name" class="badge badge-success"><c:out  value="${voteRead.vs_Name}" /></span>&nbsp;&nbsp;
+							<span id="v_Name" name="v_Name"><b><c:out	value="${voteRead.v_Name}" /></b></span>
 
 							<div class="btn-group float-right">
 								<button type="button" class="btn btn-default" data-toggle="dropdown" aria-expanded="false" style="border: white; background-color: white; height: 20px; padding-top: 0px; color: gray">

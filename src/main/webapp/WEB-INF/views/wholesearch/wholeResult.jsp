@@ -126,6 +126,7 @@
 	                   <b>${issueitem.i_Name}</b>
 	                    </a>
 	                    </c:if>
+	                    
 	                    <c:if test="${issueitem.c_Name != null}">
 						<a  style="color:black;" href="/project/issue/read?c_Id=${issueitem.c_Id}&i_Num=${issueitem.i_Num}">
 	                    <b>${issueitem.i_Name}</b>
@@ -134,12 +135,7 @@
 	                   
 	                   &nbsp;&nbsp;
 	                   <c:if test="${issueitem.ig_Num != null}">
-			                   <span style= "height : 17px; font-size : 10px; vertical-align : text-bottom; padding: .4em .4em;
-									<c:if test="${issueitem.ig_Name == '발의됨'}">background-color:#6c757d;</c:if>
-									<c:if test="${issueitem.ig_Name == '진행중'}">background-color:#007bff;</c:if>
-									<c:if test="${issueitem.ig_Name == '일시정지'}">background-color:#ffc107;</c:if>
-									<c:if test="${issueitem.ig_Name == '완료'}">background-color:#28a745;</c:if>
-									"
+			                   <span style= "height : 17px; font-size : 10px; vertical-align : text-bottom; padding: .4em .4em; background-color:${issueitem.ig_Color};"
 									id="ig_Name" name="ig_Name" class="badge badge-success"><c:out  value="${issueitem.ig_Name}" />
 									
 								</span>
@@ -248,13 +244,11 @@
 	                   &nbsp;&nbsp;
 	                   
 			                   <span style= "height : 17px; font-size : 10px; vertical-align : text-bottom; padding: .4em .4em;
-									<c:if test="${voteitem.vs_Num == '1'}">background-color:#28a745;</c:if>
-									<c:if test="${voteitem.vs_Num == '2'}">background-color:#6c757d;</c:if>
+									background-color:${voteitem.vs_Color};
 									"
-									id="ig_Name" name="ig_Name" class="badge badge-success">
+									id="vs_Name" name="vs_Name" class="badge badge-success">
 									
-									<c:if test="${voteitem.vs_Num == '1'}">진행중</c:if>
-									<c:if test="${voteitem.vs_Num == '2'}">완료</c:if>
+									<c:out  value="${voteitem.vs_Name}" />
 									
 									
 								</span>
@@ -400,12 +394,7 @@
 	                   
 	                   &nbsp;&nbsp;
 	                   <c:if test="${fileitem.ig_Name != null}">
-			                   <span style= "height : 17px; font-size : 10px; vertical-align : text-bottom; padding: .4em .4em;
-									<c:if test="${fileitem.ig_Name == '발의됨'}">background-color:#6c757d;</c:if>
-									<c:if test="${fileitem.ig_Name == '진행중'}">background-color:#007bff;</c:if>
-									<c:if test="${fileitem.ig_Name == '일시정지'}">background-color:#ffc107;</c:if>
-									<c:if test="${fileitem.ig_Name == '완료'}">background-color:#28a745;</c:if>
-									"
+			                   <span style= "height : 17px; font-size : 10px; vertical-align : text-bottom; padding: .4em .4em; background-color:${fileitem.ig_Color};"
 									id="ig_Name" name="ig_Name" class="badge badge-success"><c:out  value="${fileitem.ig_Name}" />
 									
 								</span>
@@ -510,13 +499,8 @@
 						<a  style="color:black;" href="/personal/read?mem_Id=${member.mem_Id}&p_Num=${replyitem.i_Num}">
 	                   <b>${replyitem.i_Name}</b>
 	                   	                   &nbsp;&nbsp;
-	                   <c:if test="${item.ig_Num != null}">
-			                   <span style= "height : 17px; font-size : 10px; vertical-align : text-bottom; padding: .4em .4em;
-									<c:if test="${replyitem.ig_Name == '발의됨'}">background-color:#6c757d;</c:if>
-									<c:if test="${replyitem.ig_Name == '진행중'}">background-color:#007bff;</c:if>
-									<c:if test="${replyitem.ig_Name == '일시정지'}">background-color:#ffc107;</c:if>
-									<c:if test="${replyitem.ig_Name == '완료'}">background-color:#28a745;</c:if>
-									"
+	                   <c:if test="${replyitem.ig_Num != null}">
+			                   <span style= "height : 17px; font-size : 10px; vertical-align : text-bottom; padding: .4em .4em; background-color:${replyitem.ig_Color}"
 									id="ig_Name" name="ig_Name" class="badge badge-success"><c:out  value="${replyitem.ig_Name}" />
 									
 								</span>
@@ -531,12 +515,7 @@
 	                   <b>${replyitem.i_Name}</b>
 	                   	                   &nbsp;&nbsp;
 	                   <c:if test="${replyitem.ig_Num != null}">
-			                   <span style= "height : 17px; font-size : 10px; vertical-align : text-bottom; padding: .4em .4em;
-									<c:if test="${replyitem.ig_Name == '발의됨'}">background-color:#6c757d;</c:if>
-									<c:if test="${replyitem.ig_Name == '진행중'}">background-color:#007bff;</c:if>
-									<c:if test="${replyitem.ig_Name == '일시정지'}">background-color:#ffc107;</c:if>
-									<c:if test="${replyitem.ig_Name == '완료'}">background-color:#28a745;</c:if>
-									"
+			                   <span style= "height : 17px; font-size : 10px; vertical-align : text-bottom; padding: .4em .4em; background-color:${replyitem.ig_Color}"
 									id="ig_Name" name="ig_Name" class="badge badge-success"><c:out  value="${replyitem.ig_Name}" />
 									
 								</span>

@@ -223,13 +223,11 @@ $(document).ready(function() {
 	                   &nbsp;&nbsp;
 	                   
 			                   <span style= "height : 17px; font-size : 10px; vertical-align : text-bottom; padding: .4em .4em;
-									<c:if test="${item.vs_Num == '1'}">background-color:#28a745;</c:if>
-									<c:if test="${item.vs_Num == '2'}">background-color:#6c757d;</c:if>
+									background-color:${item.vs_Color};
 									"
-									id="ig_Name" name="ig_Name" class="badge badge-success">
+									id="vs_Name" name="vs_Name" class="badge badge-success">
 									
-									<c:if test="${item.vs_Num == '1'}">진행중</c:if>
-									<c:if test="${item.vs_Num == '2'}">완료</c:if>
+									<c:out  value="${item.vs_Name}" />
 									
 									
 								</span>

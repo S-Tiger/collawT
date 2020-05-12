@@ -62,6 +62,8 @@
 		<result property="mem_Name" column="mem_Name" />
 		<result property="rnum" column="rnum" />
 		<result property="c_Name" column="c_Name" />
+		<result property="vs_Name" column="vs_Name" />
+		<result property="vs_Color" column="vs_Color" />
 	</resultMap>
 	
 	<resultMap id="replyResult" type="java.util.HashMap">
@@ -560,15 +562,16 @@ select a_File, a_Realname, a_NameEx, a_Num, a_Del, a_Size, i_Num, c_Id, i_Name, 
 		<select id="searchVote" resultMap="voteResult" parameterType="project.euna.whole_search.vo.voteCriteria"> 
       <![CDATA[
  
-select c_Id, v_Num, v_Content, wr_mem_Id, v_Date, v_Name, vs_Num, v_Subject, mem_Name, rnum, c_Name
+select c_Id, v_Num, v_Content, wr_mem_Id, v_Date, v_Name, vs_Num, v_Subject, mem_Name, rnum, c_Name, vs_Color, vs_Name
 from(
-	select c_Id, v_Num, v_Content, wr_mem_Id, v_Date, v_Name, vs_Num, v_Subject, mem_Name, c_Name,row_number() over(order by v_Date desc) as rnum
+	select c_Id, v_Num, v_Content, wr_mem_Id, v_Date, v_Name, vs_Num, v_Subject, mem_Name, c_Name,row_number() over(order by v_Date desc) as rnum, vs_Color, vs_Name
 	from
 	(
         select v.c_Id as c_Id, v.v_Num as v_Num, v.v_Content as v_Content, v.mem_Id as wr_mem_Id, v.v_Date as v_Date, v.v_Name as v_Name, v.vs_Num as vs_Num, v.v_Subject as v_Subject, v.mem_Name as mem_Name,
-                c.c_Name as c_Name
-        from vote v, co_work c
+                c.c_Name as c_Name, vs.vs_Color as vs_Color, vs.vs_Name as vs_Name
+        from vote v, co_work c, vote_Status vs
         where v.c_Id=c.c_Id
+        and v.vs_Num = vs.vs_Num
         and c.c_Id in
             (
             select c_id from co_member where mem_id=#{mem_Id}

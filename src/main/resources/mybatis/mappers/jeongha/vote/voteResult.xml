@@ -45,6 +45,7 @@
 		<result property="vd_Content" column="vd_Content" jdbcType="CLOB"
 			javaType="java.lang.String" />
 		<result property="vd_Num" column="vd_Num" />
+		<result property="vs_Color" column="vs_Color" />
 	</resultMap>
 
 
@@ -53,9 +54,9 @@
 	<select id="searchList" resultMap="voteResult02"
 		parameterType="project.jeongha.vote.vo.Criteria"> 
       <![CDATA[
-		select v_Num, c_Id, v_Name, v_Content, v_Date, mem_Id, mem_name, v_Start, v_End, vs_Num, vs_Name
+		select v_Num, c_Id, v_Name, v_Content, v_Date, mem_Id, mem_name, v_Start, v_End, vs_Num, vs_Name, vs_Color
         from (
-            Select V.v_Num, V.c_Id, V.v_Name, V.v_Content, V.v_Date, V.mem_Id, V.v_Start, V.v_End, V.vs_Num, VS.vs_Name,
+            Select V.v_Num, V.c_Id, V.v_Name, V.v_Content, V.v_Date, V.mem_Id, V.v_Start, V.v_End, V.vs_Num, VS.vs_Name, VS.vs_Color,
             M.mem_name, row_number() over(order by V.v_Num desc) as rnum
             From vote V, member M, vote_status VS
             Where V.mem_Id = M.mem_Id
@@ -126,7 +127,7 @@
 	<!-- 투표 조회 -->
 	<select id="voteRead" parameterType="String" resultMap="voteResult02"> 
       <![CDATA[
-		select m.mem_file, V.v_Num, V.c_Id, V.v_Name, V.v_Content, V.v_Date, V.mem_Id, V.v_Start, V.v_End, V.v_Subject,vs.vs_name, v.vs_num, v.v_count,v.v_show ,v.mem_Name,(
+		select m.mem_file, V.v_Num, V.c_Id, V.v_Name, V.v_Content, V.v_Date, V.mem_Id, V.v_Start, V.v_End, V.v_Subject,vs.vs_name, v.vs_num, v.v_count,v.v_show ,v.mem_Name,vs.vs_Color,(
                                    	select count(*) as coworker
                                     from co_member
 									where c_id=#{c_Id}) as co_Mem_Total

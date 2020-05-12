@@ -275,12 +275,9 @@ function delbtn(applyCount){
                   <tr>
                   
                       <td  style="width:10%; vertical-align:top"> 
-                     	<span style= "
-							<c:if test="${voteList.vs_Num == 1}">background-color:#28a745;</c:if>
-							<c:if test="${voteList.vs_Num == 2}">background-color:#6c757d;</c:if>
-									"id="vs_Name" class="badge badge-success"><c:out  value="${voteList.vs_Name}" />
-						</span>
-						
+                             <span style= "background-color:${voteList.vs_Color}"
+							id="vs_Name" name="vs_Name" class="badge badge-success"><c:out  value="${voteList.vs_Name}" /></span>
+					
 						</td>
 					  <td style="width:60%">	
 					  <a href="/project/vote/read?c_Id=${voteList.c_Id}&v_Num=${voteList.v_Num}"> <font size="3em"><b>${voteList.v_Name}</b></font></a>
