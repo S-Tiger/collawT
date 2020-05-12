@@ -507,7 +507,7 @@ function checkQ_Email(q_Email) {
 		<div class="container" >
 			<div class="row">
 				<div class="col-lg-12 text-center" >
-					<h2 class="section-heading text-uppercase" style="color:black;text-align: left !important">고객지원</h2>
+					<h2 class="section-heading text-uppercase" style="color:black;text-align: left !important"><spring:message code="site.customers" text="고객지원" /></h2>
 					<h3 class="section-subheading text-muted"></h3>
 				</div>
 			</div>
@@ -517,26 +517,26 @@ function checkQ_Email(q_Email) {
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<input class="form-control" name="q_Subject" id="inputName" type="text" placeholder="문의제목 *" required="required" data-validation-required-message="문의명을 입력해주세요.">
+									<input class="form-control" name="q_Subject" id="inputName" type="text" placeholder="<spring:message code="site.subject" text="제목*" />" required="required" data-validation-required-message="<spring:message code="site.checkSubject" text="제목을 작성해 주세요" />">
 									<p class="help-block text-danger"></p>
 								</div>
 								<div class="form-group">
-									<input class="form-control" id="email" name="q_Email" type="email" placeholder="이메일 *" required="required" data-validation-required-message="회원님의 이메일을 입력해주세요.">
+									<input class="form-control" id="email" name="q_Email" type="email" placeholder="<spring:message code="site.email" text="이메일*" />" required="required" data-validation-required-message="<spring:message code="site.emailCheck" text="회원님의 이메일을 기입해주세요" />">
 									<p class="help-block text-danger"></p>
 								</div>
 								<div class="form-group">
 									<select class="form-control" id="q_Kind" name="q_Kind" style="height: 66px !important; color:#D7DBDD; font-weight: bold ">
-										<option value="버그 관련">버그 관련</option>
-										<option value="일반 문의">일반 문의</option>
-										<option value="아이디어 제의">아이디어 제의</option>
-										<option value="기타 문의">기타 문의</option>
+										<option value="버그 관련"><spring:message code="site.sort" text="버그관련*" /></option>
+										<option value="일반 문의"><spring:message code="site.general" text="일반문의*" /></option>
+										<option value="아이디어 제의"><spring:message code="site.idea" text="아이디어제의*" /></option>
+										<option value="기타 문의"><spring:message code="site.etc" text="기타문의*" /></option>
 									</select>
 								</div>
 							</div>
 							
 							<div class="col-md-6" >
 								<div class="form-group" >
-									<textarea id="inputDescription" class="form-control" name="q_Content" placeholder="문의내용 *" required="required" data-validation-required-message="Please enter a message."></textarea>
+									<textarea id="inputDescription" class="form-control" name="q_Content" placeholder="<spring:message code="site.message" text="문의내용*" />" required="required" data-validation-required-message="Please enter a message."></textarea>
 									<p class="help-block text-danger"></p>
 								</div>
 							</div>
@@ -545,7 +545,7 @@ function checkQ_Email(q_Email) {
 							<div class="clearfix"></div>
 							<div class="col-lg-12 text-center">
 								<div id="success"></div>
-								<button id="sendMessageButton" class="btn btn-primary btn-xl text-uppercase" style="background-color: #fed136; font-size: large; border-color: #fed136; padding-top: 13px; padding-bottom: 13px; padding-left: 20px; padding-right: 20px;" type="submit">문의 하기</button>
+								<button id="sendMessageButton" class="btn btn-primary btn-xl text-uppercase" style="background-color: #fed136; font-size: large; border-color: #fed136; padding-top: 13px; padding-bottom: 13px; padding-left: 20px; padding-right: 20px;" type="submit"><spring:message code="site.question" text="문의하기" /></button>
 							</div>
 						</div>
 						
