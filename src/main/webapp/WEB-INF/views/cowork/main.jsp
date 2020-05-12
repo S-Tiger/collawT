@@ -160,7 +160,7 @@ $(function () {
   	elements: {
   			center: {
   				text: centerText,
-		        color: 'gray-dark', // Default is #000000
+		        color: 'gray-dark',  // Default is #000000
 		        fontStyle: 'Arial', // Default is Arial
 		        sidePadding: 20 // Defualt is 20 (as a percentage)
   			}
@@ -242,7 +242,7 @@ $(function () {
       datasets: [
         {
           data: [votePercent,nonvotePercent],
-          backgroundColor : ['#FF6384', '#6c757d'],
+          backgroundColor : ['#FF6384', '#ffe0e7'],
         }
       ],
 
@@ -260,7 +260,7 @@ $(function () {
   	elements: {
   			center: {
   				text: votePercent+'%',
-        color: '#FF6384', // Default is #000000
+        color: 'gray-dark', // Default is #000000
         fontStyle: 'Arial', // Default is Arial
         sidePadding: 20 // Defualt is 20 (as a percentage)
   			}

@@ -55,8 +55,11 @@ span[name="chargerspan"] {
 			
 				if(i_Name==''){
 					alert("이슈명을 입력하세요");
-					document.updateForm.i_Name.focus();
+					document.insertForm.i_Name.focus();
 					return false; 
+				}	else if (CKEDITOR.instances.i_Content.getData() == '') {
+					alert("내용을 입력해주세요");
+					return false;
 				}
 				
 				
@@ -102,10 +105,14 @@ span[name="chargerspan"] {
 				
 				for(var i=0; i<files.length; i++){
 					formData.append("a_File", files[i]);
-					
+					console.log(files[i].size);
+					console.log(files[i].name);
+					if(files[i].size > 52000000){
+						alert("한 파일당 52MB까지만 첨부 가능합니다. 해당 파일의 용량을 확인해주세요. (파일 이름 : "+files[i].name+")");
+						return false;
+					}
 				}
 				formData.append("i_Num", i_Num)
-				console.log(formData);
 				
 				$.ajax({
 					url:'/appendix/fileUpload',

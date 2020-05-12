@@ -40,6 +40,9 @@ span[name="chargerspan"] {
 				alert("이슈명을 입력하세요");
 				document.insertForm.i_Name.focus();
 				return false; 
+			}	else if (CKEDITOR.instances.i_Content.getData() == '') {
+				alert("내용을 입력해주세요");
+				return false;
 			}
 			
 			periodSetting();
@@ -64,14 +67,21 @@ span[name="chargerspan"] {
 		 
 		//파일첨부 ajax
 		$('#a_File').change(function(e){
+
 			var formData = new FormData();
 			var inputFile = $("input[name='a_File']");
 			var files = inputFile[0].files;
 	
 			for(var i=0; i<files.length; i++){
 				formData.append("a_File", files[i]);
-				
+				console.log(files[i].size);
+				console.log(files[i].name);
+				if(files[i].size > 52000000){
+					alert("한 파일당 52MB까지만 첨부 가능합니다. 해당 파일의 용량을 확인해주세요. (파일 이름 : "+files[i].name+")");
+					return false;
+				}
 			}
+			
 			formData.append("i_Num", i_Num)
 			
 			$.ajax({
@@ -81,14 +91,13 @@ span[name="chargerspan"] {
 				data:formData,
 				type:'POST',
 				success:function(result){
-				
 					getFileList();
 				}
 			});
 		});
 	})
 
-	
+
 	//첨부된 파일 리스트
 		 function getFileList(){
 			$.ajax({

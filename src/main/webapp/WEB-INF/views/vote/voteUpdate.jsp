@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<script src="${path}/ckeditor/ckeditor.js"></script>
+<script src = "${path}/resources/ckeditor/ckeditor.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
-
+<c:set var="contextPath"  value="${pageContext.request.contextPath}" />
+    <script type = "text/javascript">
+        window.parent.CKEDITOR.tools.callFunction('${CKEditorFuncNum}','${filePath}', '업로드완료');
+    </script>
 
 <style type="text/css">
 span[name="chargerspan"] {
@@ -35,10 +38,33 @@ span[name="chargerspan"] {
 				alert("제목을 입력하세요");
 				document.insertForm.v_Name.focus();
 				return false; 
+			}  else if (CKEDITOR.instances.v_Content.getData() == '') {
+				console.log("sdaklfj"+v_Content);
+				alert("내용을 입력해주세요");
+				return false;
+			}  else if (v_Subject == '') {
+				alert("투표주제를 입력해주세요");
+				document.insertForm.v_Subject.focus();
+				return false;
+			} else if (vd_Content == '') {
+				alert("투표항목을 입력해주세요");
+				return false;
+			} else if (v_Name.length > 12) {
+				alert("제목은 12자리 이내로 입력해주세요");
+				return false;
+			} else if (v_Content.length > 12) {
+				alert("내용은 12자리 이내로 입력해주세요.");
+				return false;
+			} else if (v_Subject.length > 12) {
+				alert("투표 주제는 12자리 이내로 입력해주세요.");
+				return false;
+			} else if (vd_Content.length > 12) {
+				alert("투표 항목은 12자리 이내로 입력해주세요.");
+				return false;
 			}
+			console.log("??");
 			
 			periodSetting();
-
 			document.insertForm.submit();
 			
 		});
@@ -178,6 +204,37 @@ function Del_poll()
 								<div class="form-group">
 									<label for="inputDescription">내용</label>
 									<textarea name="v_Content" id="v_Content" class="form-control" style="width: 100%;">${voteRead.v_Subject}</textarea>
+				<script>
+           
+                //CK에디터 적용
+					CKEDITOR.replace( 'v_Content', {
+						allowedContent:true,
+	
+					toolbar :[['NewPage','Preview','Bold','Italic','Underline','Strike','-','Subscript','Superscript','-','-',
+					'JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','Outdent','Indent','HorizontalRule','Link','Unlink','-',
+					'Find','Replace','SelectAll','Image','Youtube','Table','SpecialChar'],
+					'/',['Styles','Format','Font','FontSize','Undo','Redo'],['TextColor','BGColor'],['Cut','Copy','Paste','PasteText'],['Source']],
+					
+					});
+				
+			 	 CKEDITOR.on('dialogDefinition', function( ev ){
+			        var dialogName = ev.data.name;
+			         var dialogDefinition = ev.data.definition;
+			      
+			         switch (dialogName) {
+			             case 'image': //Image Properties dialog
+			                 //dialogDefinition.removeContents('info');
+			                 //dialogDefinition.removeContents('Link'); // 링크탭 제거
+			                 dialogDefinition.removeContents('advanced'); // 자세히탭 제거
+			                 break;
+         }
+     });
+			 	 
+			 	CKFinder.setupCKEditor( v_Content, '/ckfinder/' );
+			 	 
+	
+ 				       
+					</script>
 								</div>
        
 								<div class="form-group">
@@ -298,5 +355,4 @@ function Del_poll()
 		<!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-
 

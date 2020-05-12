@@ -161,6 +161,7 @@ public class EVoteControllerImpl implements EVoteController {
 	@GetMapping("/insert")
 	public ModelAndView voteInsert(String c_Id, HttpSession session) {
 
+
 		ModelAndView mav = new ModelAndView("/vote/voteInsert");
 
 		mav.addObject("c_Id", c_Id);
@@ -173,6 +174,10 @@ public class EVoteControllerImpl implements EVoteController {
 	@GetMapping("/read")
 	public ModelAndView voteRead(String c_Id,String v_Num, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
+		//관리자 아이디 가져오기
+		Map<String, Object> managerMap = new HashMap<String, Object>();
+		managerMap.put("c_Id", c_Id);
+		Map<String, Object> pjt = coworkService.searchMain(managerMap);
 		
 		//오늘날짜
 		String today = format1.format(time);
@@ -249,6 +254,8 @@ public class EVoteControllerImpl implements EVoteController {
 		mav.addObject("votedRead", voted);
 		mav.addObject("voterList",voterlist);
 		mav.addObject("voteTotal",voteTotal);
+		mav.addObject("pjt", pjt);
+
 		// mav.addObject("file", list);
 		// mav.addObject("chargerList", chargerList);
 		return mav;

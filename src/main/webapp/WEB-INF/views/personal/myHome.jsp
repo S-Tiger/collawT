@@ -261,21 +261,13 @@ $(function () {
 									from <b>${newspeeditem.c_Name}</b>
 									</h3>
 									<div class="timeline-body">
-									<div class="row" style="padding:7px; line-height:2em">
-									<c:if test="${newspeeditem.mem_File != null }">
-									<img alt="프로필사진" width="25" height="25"
-									src="/member/getByteImage?mem_Id=${newspeeditem.invite}" class="img-circle elevation-1"/>
-									</c:if>
-									<c:if test="${newspeeditem.mem_File == null }">
-									<img src="${contextPath}/resources/dist/img/profile.jpg" width="25" height="25"
-									class="img-circle elevation-1" alt="프로필사진">
-									</c:if>
-									&nbsp;
-									${newspeeditem.mem_Name}(${newspeeditem.invite})님께서 회원님을&nbsp;<b>${newspeeditem.c_Name}</b>에 초대하셨습니다. </div></div>
+
+									
+									${newspeeditem.wr_mem_Name}(${newspeeditem.wr_mem_Id})님께서 회원님을&nbsp;<b>${newspeeditem.c_Name}</b>에 초대하셨습니다. </div>
 									<div class="timeline-footer" id="timeline-footer">
 									<form  id = "myform" action="/news/accept" method="post" style="display: inline;  margin: 5;">
 									<input type="hidden" name="c_Id" id="c_Id" value="${newspeeditem.c_Id}">
-									<input type="hidden" name="mem_Id" id="mem_Id" value="${newspeeditem.mem_Id}">
+									<input type="hidden" name="mem_Id" id="mem_Id" value="${newspeeditem.arm_mem_Id}">
 										<a id = "acceptsubmit" href="#" class="btn btn-primary btn-sm" style="color: white;">수락</a>
 										<a id = "rejectsubmit" href="#" class="btn btn-danger btn-sm" style="color: white;">거절</a>
 										</form>
@@ -299,18 +291,8 @@ $(function () {
 										from <a href="/project/main?c_Id=${newspeeditem.c_Id}">${newspeeditem.c_Name}</a>
 									</h3>
 									<div class="timeline-body">
-									<div class="row" style="padding:7px; line-height:2em">
-									<c:if test="${newspeeditem.mem_File != null }">
-									<img alt="프로필사진" width="25" height="25"
-									src="/member/getByteImage?mem_Id=${newspeeditem.mem_Id}" class="img-circle elevation-1"/>
-									</c:if>
-									<c:if test="${newspeeditem.mem_File == null }">
-									<img src="${contextPath}/resources/dist/img/profile.jpg" width="25" height="25"
-									class="img-circle elevation-1" alt="프로필사진">
-									</c:if>
-									&nbsp;
-									${newspeeditem.mem_Name}(${newspeeditem.mem_Id})님이 &nbsp;<a href="/notify/update?c_Id=${newspeeditem.c_Id}&i_Num=${newspeeditem.i_Num}&status=read"><b>${newspeeditem.i_Name}</b></a>&nbsp;이슈를 등록하셨습니다.</div>
-									</div>
+
+									${newspeeditem.wr_mem_Name}(${newspeeditem.wr_mem_Id})님이 &nbsp;<a href="/notify/update?c_Id=${newspeeditem.c_Id}&i_Num=${newspeeditem.i_Num}&status=read"><b>${newspeeditem.i_Name}</b></a>&nbsp;이슈를 등록하셨습니다.</div>
 									<div class="timeline-footer" id="timeline-footer">
 									</div>
 								</div>
@@ -332,17 +314,8 @@ $(function () {
 										
 									</h3>
 									<div class="timeline-body">
-									<div class="row" style="padding:7px; line-height:2em">
-									<c:if test="${newspeeditem.mem_File != null }">
-									<img alt="프로필사진" width="25" height="25"
-									src="/member/getByteImage?mem_Id=${newspeeditem.mem_Id}" class="img-circle elevation-1"/>
-									</c:if>
-									<c:if test="${newspeeditem.mem_File == null }">
-									<img src="${contextPath}/resources/dist/img/profile.jpg" width="25" height="25"
-									class="img-circle elevation-1" alt="프로필사진">
-									</c:if>
-									&nbsp;
-									${newspeeditem.mem_Name}(${newspeeditem.mem_Id})님이&nbsp;<a href="/notify/replyupdate?c_Id=${newspeeditem.c_Id}&i_Num=${newspeeditem.i_Num}&r_Num=${newspeeditem.r_Num}&status=read"><b>${newspeeditem.i_Name}</b></a>글에 댓글을 남기셨습니다.</div>
+									
+									${newspeeditem.wr_mem_Name}(${newspeeditem.wr_mem_Id})님이&nbsp;<a href="/notify/replyupdate?c_Id=${newspeeditem.c_Id}&i_Num=${newspeeditem.i_Num}&r_Num=${newspeeditem.r_Num}&status=read"><b>${newspeeditem.i_Name}</b></a>글에 댓글을 남기셨습니다.
 									<div class="row" style="margin-left:32px; margin-right:32px;"><small>${newspeeditem.i_Content}</small></div></div>
 									<div class="timeline-footer" id="timeline-footer">
 									</div>
@@ -365,17 +338,8 @@ $(function () {
 										from <a href="/project/main?c_Id=${newspeeditem.c_Id}">${newspeeditem.c_Name}</a>
 									</h3>
 									<div class="timeline-body">
-									<div class="row" style="padding:7px; line-height:2em">
-									<c:if test="${newspeeditem.mem_File != null }">
-									<img alt="프로필사진" width="25" height="25"
-									src="/member/getByteImage?mem_Id=${newspeeditem.mem_Id}" class="img-circle elevation-1"/>
-									</c:if>
-									<c:if test="${newspeeditem.mem_File == null }">
-									<img src="${contextPath}/resources/dist/img/profile.jpg" width="25" height="25"
-									class="img-circle elevation-1" alt="프로필사진">
-									</c:if>
-									&nbsp;
-									${newspeeditem.mem_Name}(${newspeeditem.mem_Id})님이 &nbsp;<a href="/notify/voteUpdate?c_Id=${newspeeditem.c_Id}&v_Num=${newspeeditem.i_Num}&status=read"><b>${newspeeditem.i_Name}</b></a>&nbsp;투표를 등록하셨습니다.</div>
+
+									${newspeeditem.wr_mem_Name}(${newspeeditem.wr_mem_Id})님이 &nbsp;<a href="/notify/voteUpdate?c_Id=${newspeeditem.c_Id}&v_Num=${newspeeditem.i_Num}&status=read"><b>${newspeeditem.i_Name}</b></a>&nbsp;투표를 등록하셨습니다.
 									</div>
 									<div class="timeline-footer" id="timeline-footer">
 									</div>
@@ -399,17 +363,8 @@ $(function () {
 										
 									</h3>
 									<div class="timeline-body">
-									<div class="row" style="padding:7px; line-height:2em">
-									<c:if test="${newspeeditem.mem_File != null }">
-									<img alt="프로필사진" width="25" height="25"
-									src="/member/getByteImage?mem_Id=${newspeeditem.mem_Id}" class="img-circle elevation-1"/>
-									</c:if>
-									<c:if test="${newspeeditem.mem_File == null }">
-									<img src="${contextPath}/resources/dist/img/profile.jpg" width="25" height="25"
-									class="img-circle elevation-1" alt="프로필사진">
-									</c:if>
-									&nbsp;
-									${newspeeditem.mem_Name}(${newspeeditem.mem_Id})님이&nbsp;<a href="/notify/votereplyupdate?c_Id=${newspeeditem.c_Id}&v_Num=${newspeeditem.i_Num}&vr_Num=${newspeeditem.r_Num}&status=read"><b>${newspeeditem.i_Name}</b></a>글에 댓글을 남기셨습니다.</div>
+
+									${newspeeditem.wr_mem_Name}(${newspeeditem.wr_mem_Id})님이&nbsp;<a href="/notify/votereplyupdate?c_Id=${newspeeditem.c_Id}&v_Num=${newspeeditem.i_Num}&vr_Num=${newspeeditem.r_Num}&status=read"><b>${newspeeditem.i_Name}</b></a>글에 댓글을 남기셨습니다.
 									<div class="row" style="margin-left:32px; margin-right:32px;"><small>${newspeeditem.i_Content}</small></div></div>
 									<div class="timeline-footer" id="timeline-footer">
 									</div>

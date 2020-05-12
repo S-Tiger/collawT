@@ -329,10 +329,15 @@ $(document).ready(function() {
                           </ul>
                         </div>
                         <!-- 본인만 글 수정, 삭제 가능-->
+                        <span class="text-muted float-right">
+                        <c:if test="${member.mem_Id == issueRead.mem_Id}">
+                        <small><a href="/project/issue/update?c_Id=${issueRead.c_Id}&i_Num=${issueRead.i_Num}">수정</a>｜</small>
+                        </c:if>
+                        <!-- 협업공간 관리자는 모든 글 삭제 가능-->
                         <c:if test="${member.mem_Id == issueRead.mem_Id || member.mem_Id == pjt.mem_Id}">
-                        <span class="text-muted float-right"><small><a href="/project/issue/update?c_Id=${issueRead.c_Id}&i_Num=${issueRead.i_Num}">수정</a>｜</small>
-						<small><a onclick="if(confirm('삭제하시겠습니까?')){alert('삭제되었습니다.');}else{return false;};" href='/project/issue/delete?c_Id=${issueRead.c_Id}&i_Num=${issueRead.i_Num}'>삭제</a></small></span>
+						<small><a onclick="if(confirm('삭제하시겠습니까?')){alert('삭제되었습니다.');}else{return false;};" href='/project/issue/delete?c_Id=${issueRead.c_Id}&i_Num=${issueRead.i_Num}'>삭제</a></small>
 						</c:if>
+						</span>
 						</div>
 						
 

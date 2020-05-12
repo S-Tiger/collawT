@@ -390,11 +390,16 @@ $(document).ready(function() {
 							 <li><a class="dropdown-item" href="javascript:urlClipCopy()"><small>URL 복사</small></a></li>
 								</ul>
 							</div>
-							<!-- 본인만 글 수정, 삭제 가능-->
-							<c:if test="${member.mem_Id == voteRead.mem_Id}">
-								<span class="text-muted float-right"><small><a href="/project/vote/update?c_Id=${voteRead.c_Id}&v_Num=${voteRead.v_Num}">수정</a>｜</small> <small><a onclick="if(confirm('삭제하시겠습니까?')){alert('삭제되었습니다.');}else{return false;};"
-										href='/project/vote/delete?c_Id=${voteRead.c_Id}&v_Num=${voteRead.v_Num}'>삭제</a></small></span>
-							</c:if>
+                        <!-- 본인만 글 수정, 삭제 가능-->
+                        <span class="text-muted float-right">
+                        <c:if test="${member.mem_Id == voteRead.mem_Id}">
+                        <small><a href="/project/vote/update?c_Id=${voteRead.c_Id}&v_Num=${voteRead.v_Num}">수정</a>｜</small>
+                        </c:if>
+                        <!-- 협업공간 관리자는 모든 글 삭제 가능-->
+                        <c:if test="${member.mem_Id == voteRead.mem_Id || member.mem_Id == pjt.mem_Id}">
+						<small><a onclick="if(confirm('삭제하시겠습니까?')){alert('삭제되었습니다.');}else{return false;};" href='/project/vote/delete?c_Id=${voteRead.c_Id}&v_Num=${voteRead.v_Num}'>삭제</a></small>
+						</c:if>
+						</span>
 						</div>
 
 
