@@ -19,7 +19,7 @@ width: 100%;
 
 <script>
   $(function () {
-  //차트데이터
+  //bar차트데이터
     
     var areaChartData = {
       labels  : ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -38,7 +38,7 @@ width: 100%;
         
       ]
     }
-  //차트 
+  //bar차트 
     var barChartCanvas = $('#barChart').get(0).getContext('2d')
     var barChartData = jQuery.extend(true, {}, areaChartData)
     var temp0 = areaChartData.datasets[0]
@@ -61,7 +61,7 @@ width: 100%;
     
     <div class="content-wrapper" >
     <div class="page_title">
-    <span class="title"><b>관리자 메인</b></span>
+    <span class="title"><b>주간 차트</b></span>
   </div>
   <div class="main_content">
     <section class="content">
