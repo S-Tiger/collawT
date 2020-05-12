@@ -281,7 +281,12 @@ function checkAll() {
         return false;
     } else if (!checkQ_Email(form.q_Email.value)) {
         return false;
-    } 
+    } else if (form.q_Kind.value=="none"){
+    	console.log("none");
+    	alert("문의 종류를 입력해 주세요.")
+    	return false;
+    }
+ 
     return true;
 }
 //공백확인 함수
@@ -526,6 +531,7 @@ function checkQ_Email(q_Email) {
 								</div>
 								<div class="form-group">
 									<select class="form-control" id="q_Kind" name="q_Kind" style="height: 66px !important; color:#D7DBDD; font-weight: bold ">
+										<option value="none">문의 종류 *</option>
 										<option value="버그 관련"><spring:message code="site.sort" text="버그관련*" /></option>
 										<option value="일반 문의"><spring:message code="site.general" text="일반문의*" /></option>
 										<option value="아이디어 제의"><spring:message code="site.idea" text="아이디어제의*" /></option>
