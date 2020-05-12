@@ -122,14 +122,16 @@ function delbtn(applyCount){
 
 				<option value="${pjt.c_Category}" hidden>
 				<c:choose> 
-				 <c:when test = "${pjt.c_Category == 1}"> 협업업무관련</c:when>
-				 <c:when test = "${pjt.c_Category == 2}"> 개인업무관련</c:when>
-				 <c:when test = "${pjt.c_Category == 3}"> 학업과제관련</c:when>
+				 <c:when test = "${pjt.c_Category == 01}"> 협업업무관련</c:when>
+				 <c:when test = "${pjt.c_Category == 02}"> 개인업무관련</c:when>
+				 <c:when test = "${pjt.c_Category == 03}"> 학업과제관련</c:when>
+				 <c:when test = "${pjt.c_Category == 04}"> 기타</c:when>
 				 </c:choose>
 				</option>
-				<option value="1">협업업무관련</option>
-				<option value="2">개인업무관련</option>
-				<option value="3">학업과제관련</option>
+				<option value="01">협업업무관련</option>
+				<option value="02">개인업무관련</option>
+				<option value="03">학업과제관련</option>
+				<option value="04">기타</option>
 			</select>
 		</div>
 		</div>

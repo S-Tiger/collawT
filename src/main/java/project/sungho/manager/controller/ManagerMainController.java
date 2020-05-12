@@ -15,7 +15,4 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public interface ManagerMainController {
 	public ModelAndView searchInit(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
-	public Map searchList(HttpServletRequest request, HttpServletResponse response) throws Exception;
-	
-	public Map saveData(HttpServletRequest request, HttpServletResponse response) throws Exception;
 }

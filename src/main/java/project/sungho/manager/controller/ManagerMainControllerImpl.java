@@ -31,71 +31,30 @@ import org.springframework.web.servlet.ModelAndView;
 import project.hm.hmp002_d001.service.Hmp002_d001Service;
 import project.hm.hmp002_d001.vo.Hmp002_d001VO;
 import project.sungho.comember.service.ComemberService;
+import project.sungho.manager.service.ManagerMainService;
 import project.sungho.manager.service.ManagerService;
 
 @Controller
 @RequestMapping("/manager/*")
 public class ManagerMainControllerImpl implements ManagerMainController {
 	@Autowired 
-	ManagerService managerService;
+	ManagerMainService managerMainService;
 	
 	@Override
 	@RequestMapping(value = "/main", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView searchInit(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		ModelAndView mav = new ModelAndView("/manager/managermain");
+		List<Map> chartList = managerMainService.searchList();
+		int member_Count = managerMainService.memCount();
+		List<Map> donutList = managerMainService.donutList();
+		
+		System.out.println("회원가입 숫자"+chartList.get(0).get("mem_Joindate"));
+		mav.addObject("chartList",chartList);
+		mav.addObject("member_Count",member_Count);
+		mav.addObject("donutList",donutList);
+		
 		return mav;
 	} 
 	
-	@Override
-	@RequestMapping(value = "/searchList", method = { RequestMethod.GET, RequestMethod.POST })
-	@ResponseBody
-	public Map searchList(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		request.setCharacterEncoding("utf-8");
-		Map<String, Object> searchMap = new HashMap<String, Object>(); // 검색조건
-		Map<String, Object> resultMap = new HashMap<String, Object>(); // 조회결과
-		
-		
-		searchMap.put("mem_Id", request.getParameter("mem_Id"));
-		searchMap.put("mem_Name", request.getParameter("mem_Name"));
-		searchMap.put("mem_Loginapi", request.getParameter("mem_Loginapi"));
-		// 검색조건설정
-		//데이터 조회
-		List<Map> data = managerService.searchList(searchMap);
-        resultMap.put("Data", data);
-        
-        return resultMap;
-	}
-	
-	
-	@Override
-	@RequestMapping(value = "/saveData", method = { RequestMethod.GET, RequestMethod.POST })
-	@ResponseBody
-	public Map saveData(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		request.setCharacterEncoding("utf-8");
-		Map<String, String[]> dataMap = new HashMap<String, String[]>(); // 저장할Daa
-		Map<String, Object> resultMap = new HashMap<String, Object>(); // 처리결과
-		
-		// 저장 Data 추출하기
-		Enumeration enu = request.getParameterNames();
-		while (enu.hasMoreElements()) {
-			String name = (String) enu.nextElement();
-			String[] values = request.getParameterValues(name);
-			dataMap.put(name, values);
-		}
-		
-		Map<String, String> result = new HashMap<String, String>();
-		try {
-			managerService.saveData(dataMap);	
-			result.put("Code","0");
-			result.put("Message","저장되었습니다");
-		}catch(Exception e) {
-			result.put("Code","-1");
-			result.put("Message","저장에 실패하였습니다");
-			e.printStackTrace();
-		}
-		
-		resultMap.put("Result", result);         
-        return resultMap;
-	}
 }

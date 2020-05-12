@@ -556,10 +556,11 @@
               <div class="col-md-6" style="max-width: 100%;">
                 <h4 class="m-0 text-dark" style="font-family: Recipekorea; padding-bottom: 5px;">카테고리</h4>
                <select class="form-control custom-select" name= "c_Category" id="create_Category">
-                  <option value="00" hidden>선택해주세요</option>
+                  <option value="01" hidden="" >선택해주세요</option>
                   <option value="01">협업관련 업무관리</option>
                   <option value="02">개인 업무관리</option>
-                  <option value="03">학업관련 과제관리<option>
+                  <option value="03">학업관련 과제관리</option>
+                  <option value="04">기타</option>
                 </select>
               </div>
               </div>
