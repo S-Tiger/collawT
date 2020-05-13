@@ -102,7 +102,7 @@ width: 100%;
 		
 <body onload="LoadPage()">
   <div class="page_title">
-    <span class="title"><b>내 이슈 관리</b></span>
+    <span class="title"><b>개인 이슈 관리</b></span>
   </div>
   <div class="main_content">
 
@@ -116,7 +116,7 @@ width: 100%;
     </div>
     <div class="ib_function float_right">
 	  <a href="javascript:doAction('reload')" class="f1_btn_gray lightgray" style="color: black;">초기화</a>
-	  <!-- <a href="javascript:doAction('insert')" class="f1_btn_gray lightgray" style="color: black; margin-right: 527px;">추가</a> -->
+	  <a href="javascript:doAction('insert')" class="f1_btn_gray lightgray" style="color: black; margin-right: 527px; visibility:hidden;">추가</a>
 	  <a href="javascript:doAction('search')" class="f1_btn_white gray">조회</a>
 	  <a href="javascript:doAction('save')" class="f1_btn_white gray">저장</a>
 	</div>

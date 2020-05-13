@@ -22,7 +22,14 @@ width: 100%;
 	//시트 높이 계산용
 	var pageheightoffset = 200;
 	
-
+	function mySheet_OnClick(Row, Col, Value, CellX, CellY, CellW, CellH) {
+		  //특정 열을 클릭했을 때 다른 페이지로 이동하도록 처리
+		  if( mySheet.ColSaveName(Col) == "link"){
+		 
+		    location.href = "/manager/question/read?q_Num=" + mySheet.GetCellValue(Row,"q_Num");
+		 
+		  }
+		}
 	
 	/*Sheet 기본 설정 */
 	function LoadPage() {
@@ -32,14 +39,14 @@ width: 100%;
 		initSheet.Cfg = {SearchMode:smLazyLoad,ToolTip:1};
 		initSheet.HeaderMode = {Sort:1,ColMove:1,ColResize:1,HeaderCheck:1};
 		initSheet.Cols = [
-			{Header:"상태",Type:"Status",SaveName:"STATUS",MinWidth:50, Align:"Center"},
+			{Header:"상태",Type:"Status",SaveName:"STATUS",MinWidth:50, Align:"Center",Edit:false},
 			{Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:50},
-			{Header:"이메일",Type:"Text",SaveName:"mem_Id",MinWidth:200,KeyField:1,Align:"Center",Edit:false},
-			{Header:"비밀번호",Type:"Text",SaveName:"mem_Pwd",MinWidth:80 ,MultiLineText:1,UpdateEdit:false},			
-			{Header:"회원이름(별명)",Type:"Text",SaveName:"mem_Name",MinWidth:150,MultiLineText:1, Wrap:1},
-			{Header:"가입일",Type:"Date",SaveName:"mem_JoinDate",MinWidth:100,UpdateEdit:false},
-			{Header:"가입방식",Type:"Text",SaveName:"mem_Loginapi",MinWidth:100,UpdateEdit:false},
-			
+			{Header:"번호",Type:"Text",SaveName:"q_Num",MinWidth:50,KeyField:1 ,MultiLineText:1,Edit:false},			
+			{Header:"제목",Type:"Text",SaveName:"q_Subject",MinWidth:150 ,MultiLineText:1,Edit:false},			
+			{Header:"작성자 이메일",Type:"Text",SaveName:"q_Email",MinWidth:150 ,MultiLineText:1, Wrap:1,Edit:false},
+			{Header:"문의 유형",Type:"Text",SaveName:"q_Kind",MinWidth:100 ,MultiLineText:1,Edit:false},
+			{Header:"작성일",Type:"Date",SaveName:"q_Date",MinWidth:100,Edit:false},
+			{Header:"문의내용 보기",Type:"Button",SaveName:"link",MinWidth:100},
 		];   
 		IBS_InitSheet( mySheet , initSheet);
 
@@ -53,7 +60,7 @@ width: 100%;
 		switch(sAction) {
 			case "search": //조회
 			    var param = FormQueryStringEnc(document.frm);
-				mySheet.DoSearch("${contextPath}/manager/member/searchList", param);
+				mySheet.DoSearch("${contextPath}/manager/question/searchList", param);
 				//mySheet.DoSearch("transaction_data2.json");
 				break;
 			case "reload": //초기화
@@ -62,7 +69,7 @@ width: 100%;
 			case "save": // 저장
 				//var tempStr = mySheet.GetSaveString();
 				//alert("서버로 전달되는 문자열 확인 :"+tempStr);
-				mySheet.DoSave("${contextPath}/manager/member/saveData");
+				mySheet.DoSave("${contextPath}/manager/question/saveData");
 				break;			
 			case "insert": //신규행 추가
 				var row = mySheet.DataInsert();
@@ -83,7 +90,9 @@ width: 100%;
 			//번호 다시 매기기
             //mySheet.ReNumberSeq();
 		}	
-	}	
+	}
+	
+	function 오브젝트ID_OnButtonClick(Row, Col) { }
 	
 </script>
 <!-- Content Wrapper. Contains page content -->
@@ -94,21 +103,21 @@ width: 100%;
 		
 <body onload="LoadPage()">
   <div class="page_title">
-    <span class="title"><b>회원 관리</b></span>
+    <span class="title"><b>문의 관리</b></span>
   </div>
   <div class="main_content">
 
 			<div class="row">
     <div class="exp_product" style="width: 100%;">
       <form name='frm'>
-        이메일: <input type='text' id="mem_Id" name="mem_Id" /> 
-        회원이름(별명): <input type='text' id="mem_Name" name="mem_Name" /> 
-        가입방식: <input type='text' id="mem_Loginapi" name="mem_Loginapi" /> 
+        작성자 이메일: <input type='text' id="q_Email" name="q_Email" /> 
+          제목: <input type='text' id="q_Subject" name="q_Subject" /> 
+         내용: <input type='text' id="q_Content" name="q_Content" />
       </form>
     </div>
     <div class="ib_function float_right">
 	  <a href="javascript:doAction('reload')" class="f1_btn_gray lightgray" style="color: black;">초기화</a>
-	  <a href="javascript:doAction('insert')" class="f1_btn_gray lightgray" style="color: black; margin-right: 527px;">추가</a>
+	  <a href="javascript:doAction('insert')" class="f1_btn_gray lightgray" style="color: black; margin-right: 527px; visibility:hidden;">추가</a>
 	  <a href="javascript:doAction('search')" class="f1_btn_white gray">조회</a>
 	  <a href="javascript:doAction('save')" class="f1_btn_white gray">저장</a>
 	</div>

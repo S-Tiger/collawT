@@ -42,7 +42,7 @@ width: 100%;
 			{Header:"작성일",Type:"Date",SaveName:"v_Date",MinWidth:100},
 			{Header:"투표시작일",Type:"Date",SaveName:"v_Start",MinWidth:100},
 			{Header:"투표마감일",Type:"Date",SaveName:"v_End",MinWidth:100},
-			{Header:"링크",Type:"button",SaveName:"link",MinWidth:100}
+			{Header:"게시글 바로가기",Type:"Button",SaveName:"link",MinWidth:100}
 		];
 		IBS_InitSheet( mySheet , initSheet);
 
@@ -108,11 +108,10 @@ width: 100%;
 		
 <body onload="LoadPage()">
   <div class="page_title">
-    <span class="title"><b>투표관리</b></span>
+    <span class="title"><b>투표 관리</b></span>
   </div>
   <div class="main_content">
-    <div class="exp_product">각 행의 데이터를 수정하거나 입력,삭제시 상태컬럼의 변화를
-			확인하고,저장 버튼 클릭시 서버로 전송되는 데이터를 확인한다.</div>
+
 			<div class="row">
     <div class="exp_product" style="width: 100%;">
       <form name='frm'>
@@ -123,7 +122,7 @@ width: 100%;
     </div>
     <div class="ib_function float_right">
 	  <a href="javascript:doAction('reload')" class="f1_btn_gray lightgray" style="color: black;">초기화</a>
-	  <!-- <a href="javascript:doAction('insert')" class="f1_btn_gray lightgray" style="color: black; margin-right: 527px;">추가</a> -->
+	 <a href="javascript:doAction('insert')" class="f1_btn_gray lightgray" style="color: black; margin-right: 527px; visibility:hidden;">추가</a>
 	  <a href="javascript:doAction('search')" class="f1_btn_white gray">조회</a>
 	  <a href="javascript:doAction('save')" class="f1_btn_white gray">저장</a>
 	</div>

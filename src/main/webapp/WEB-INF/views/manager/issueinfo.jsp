@@ -40,7 +40,7 @@ width: 100%;
 		initSheet.HeaderMode = {Sort:1,ColMove:1,ColResize:1,HeaderCheck:1};
 		initSheet.Cols = [
 			{Header:"상태",Type:"Status",SaveName:"STATUS",MinWidth:50, Align:"Center",Edit:false},
-			{Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:50,Edit:false},
+			{Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:50},
 			{Header:"번호",Type:"Text",SaveName:"i_Num",MinWidth:50,KeyField:1 ,MultiLineText:1,Edit:false},			
 			{Header:"제목",Type:"Text",SaveName:"i_Name",MinWidth:150 ,MultiLineText:1,Edit:false},			
 			{Header:"작성자ID",Type:"Text",SaveName:"mem_Id",MinWidth:150 ,MultiLineText:1, Wrap:1,Edit:false},
@@ -104,7 +104,7 @@ width: 100%;
 		
 <body onload="LoadPage()">
   <div class="page_title">
-    <span class="title"><b>이슈관리</b></span>
+    <span class="title"><b>이슈 관리</b></span>
   </div>
   <div class="main_content">
 
@@ -119,7 +119,7 @@ width: 100%;
     </div>
     <div class="ib_function float_right">
 	  <a href="javascript:doAction('reload')" class="f1_btn_gray lightgray" style="color: black;">초기화</a>
-	  <!-- <a href="javascript:doAction('insert')" class="f1_btn_gray lightgray" style="color: black; margin-right: 527px;">추가</a> -->
+	  <a href="javascript:doAction('insert')" class="f1_btn_gray lightgray" style="color: black; margin-right: 527px; visibility:hidden;">추가</a>
 	  <a href="javascript:doAction('search')" class="f1_btn_white gray">조회</a>
 	  <a href="javascript:doAction('save')" class="f1_btn_white gray">저장</a>
 	</div>

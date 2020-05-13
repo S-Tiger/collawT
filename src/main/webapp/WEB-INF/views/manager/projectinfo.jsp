@@ -92,11 +92,10 @@ width: 100%;
 		
 <body onload="LoadPage()">
   <div class="page_title">
-    <span class="title"><b>협업공간관리</b></span>
+    <span class="title"><b>공간 관리</b></span>
   </div>
   <div class="main_content">
-    <div class="exp_product">각 행의 데이터를 수정하거나 입력,삭제시 상태컬럼의 변화를
-			확인하고,저장 버튼 클릭시 서버로 전송되는 데이터를 확인한다.</div>
+
 			<div class="row">
     <div class="exp_product" style="width: 100%;">
       <form name='frm'>

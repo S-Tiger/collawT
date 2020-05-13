@@ -50,6 +50,80 @@
 	rel="stylesheet">
 </head>
 
+
+<script type="text/javascript">
+
+
+	$(document).ready(function(){
+		
+		var getmenu = getCookie('menu');
+		var menuId = document.getElementById('menustat');
+		if (getmenu != null) {
+			menuId.className = getmenu;
+		}
+		//쿠키생성
+		var getmenu = getCookie('apply');
+		var menuId1 = document.getElementById('activity');
+		var menuId2 = document.getElementById('timeline');
+		var menuId3 = document.getElementById('activityMenu');
+		var menuId4 = document.getElementById('timelineMenu');
+		//var applysub = applymenus.siblings();
+		if (getmenu != null) {
+			menuId1.className = 'tab-pane';
+			menuId2.className = 'tab-pane active';
+			menuId3.className = 'nav-link';
+			menuId4.className = 'nav-link active';
+			deleteCookie('apply');
+		}
+		
+	});
+
+	
+	
+	
+	function menuclick() {
+		deleteCookie('menu');
+		var stat = document.getElementById('menustat').className;
+		if (stat == 'nav-item has-treeview menu-open') {
+			setCookie('menu', 'nav-item has-treeview', 1);
+		} else if (stat == 'nav-item has-treeview') {
+			setCookie('menu', 'nav-item has-treeview menu-open', 1);
+		}
+	}
+	function setCookie(name, value, exp) {
+		var date = new Date();
+		date.setTime(date.getTime() + exp * 24 * 60 * 60 * 1000);
+		document.cookie = name + '=' + value + ';expires=' + date.toUTCString()
+				+ ';path=/';
+	}
+	//쿠키가져오기
+	function getCookie(name) {
+		var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+		return value ? value[2] : null;
+	}
+	//쿠키삭제
+	var deleteCookie = function(name) {
+		var date = new Date();
+		document.cookie = name + "= " + "; expires=" + date.toUTCString()
+				+ "; path=/";
+	}
+	
+
+	
+</script>
+
+<script>
+
+ function move(url){
+
+    $('#content').children().remove();
+
+    $('#content').load(url);
+
+ }
+
+</script>
+
 <body class="sidebar-mini layout-fixed accent-teal">
 	<div class="wrapper" id="start">
 
@@ -107,6 +181,14 @@
 												
 					<!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+               		<li class="nav-item has-treeview" id="menustat" style="border-bottom: 1px solid #4f5962;"><a href="#"
+						class="nav-link active" onclick="menuclick()"> <i
+							class="nav-icon fas fa-users-cog"></i>
+							<p>
+								관리자 메뉴 <i class="right fas fa-angle-left"></i>
+							</p>
+					</a>
+						<ul class="nav nav-treeview" >
 						<li class="nav-item"><a href="/manager/member/main" class="nav-link">
 									<i class="nav-icon fas fa-user"></i>
 									<p>회원 관리</p>
@@ -128,16 +210,17 @@
 						class="nav-link" > <i class="nav-icon fas fa-user-lock"></i>
 							<p>개인 이슈 관리</p>
 					</a></li>
-					<li class="nav-item"><a href="/manager/reply/main" 
-						class="nav-link" > <i class="nav-icon fas fa-list"></i>
-							<p>댓글 및 메모 관리</p>
-					</a></li>
 					
 					<li class="nav-item"><a href="/manager/chat/main" 
 						class="nav-link" > <i class="nav-icon fas fa-comments"></i>
 							<p>채팅 관리</p>
 					</a></li>
 					
+					<li class="nav-item"><a href="/manager/question/main" 
+						class="nav-link" > <i class="nav-icon fas fa-question-circle"></i>
+							<p>문의 관리</p>
+					</a></li>
+					</ul>
 				</ul>
 			</nav>
 			<!-- /.sidebar-menu -->
