@@ -125,7 +125,7 @@ function withdrawal() {
 				</div>
 				<!-- /.col -->
 				<div class="col-sm-6">
-					<ol class="breadcrumb float-sm-right">
+					<ol class="breadcrumb float-right">
 
 						<li class="breadcrumb-item"><a style="font-size: 30px;"
 							href="/#" data-needpopup-show="#add-popup"> <i
