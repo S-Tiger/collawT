@@ -405,7 +405,7 @@ function checkQ_Email(q_Email) {
 					<!-- LINE CHART -->
 					<div class="card-body" style="border-color: white !important;">
 						<h1>&nbsp</h1>
-						<img src="../resources/img/teamproject.png" style="width: 544px; height: 326px;">
+						<img src="${contextPath}/resources/img/teamproject.png" style="width: 544px; height: 326px;">
 					</div>
 					<!-- /.card -->
 				</div>
@@ -451,25 +451,25 @@ function checkQ_Email(q_Email) {
 								<H1>
 									<spring:message code="site.description" text="화면소개" />
 								</H1>
-								<img class="indeximg" src="/resources/img/11.png">
+								<img class="indeximg" src="${contextPath}/resources/img/11.png">
 							</div>
 							<div class="swiper-slide">
 								<H1>
 									<spring:message code="site.description" text="화면소개" />
 								</H1>
-								<img class="indeximg" src="/resources/img/22.png">
+								<img class="indeximg" src="${contextPath}/resources/img/22.png">
 							</div>
 							<div class="swiper-slide">
 								<H1>
 									<spring:message code="site.description" text="화면소개" />
 								</H1>
-								<img class="indeximg" src="/resources/img/33.png">
+								<img class="indeximg" src="${contextPath}/resources/img/33.png">
 							</div>
 							<div class="swiper-slide">
 								<H1>
 									<spring:message code="site.description" text="화면소개" />
 								</H1>
-								<img class="indeximg" src="/resources/img/44.png">
+								<img class="indeximg" src="${contextPath}/resources/img/44.png">
 							</div>
 						</div>
 						<!-- Add Pagination -->
