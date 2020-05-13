@@ -52,64 +52,6 @@
 
 
 <script type="text/javascript">
-
-
-	$(document).ready(function(){
-		
-		var getmenu = getCookie('menu');
-		var menuId = document.getElementById('menustat');
-		if (getmenu != null) {
-			menuId.className = getmenu;
-		}
-		//쿠키생성
-		var getmenu = getCookie('apply');
-		var menuId1 = document.getElementById('activity');
-		var menuId2 = document.getElementById('timeline');
-		var menuId3 = document.getElementById('activityMenu');
-		var menuId4 = document.getElementById('timelineMenu');
-		//var applysub = applymenus.siblings();
-		if (getmenu != null) {
-			menuId1.className = 'tab-pane';
-			menuId2.className = 'tab-pane active';
-			menuId3.className = 'nav-link';
-			menuId4.className = 'nav-link active';
-			deleteCookie('apply');
-		}
-		
-	});
-
-	
-	
-	
-	function menuclick() {
-		deleteCookie('menu');
-		var stat = document.getElementById('menustat').className;
-		if (stat == 'nav-item has-treeview menu-open') {
-			setCookie('menu', 'nav-item has-treeview', 1);
-		} else if (stat == 'nav-item has-treeview') {
-			setCookie('menu', 'nav-item has-treeview menu-open', 1);
-		}
-	}
-	function setCookie(name, value, exp) {
-		var date = new Date();
-		date.setTime(date.getTime() + exp * 24 * 60 * 60 * 1000);
-		document.cookie = name + '=' + value + ';expires=' + date.toUTCString()
-				+ ';path=/';
-	}
-	//쿠키가져오기
-	function getCookie(name) {
-		var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
-		return value ? value[2] : null;
-	}
-	//쿠키삭제
-	var deleteCookie = function(name) {
-		var date = new Date();
-		document.cookie = name + "= " + "; expires=" + date.toUTCString()
-				+ "; path=/";
-	}
-	
-
-	
 </script>
 
 <script>
@@ -191,7 +133,7 @@
 					</a></li>
 					
                		<li class="nav-item has-treeview" id="menustat" style="border-bottom: 1px solid #4f5962;"><a href="#"
-						class="nav-link active" onclick="menuclick()"> <i
+						class="nav-link active"> <i
 							class="nav-icon fas fa-database"></i>
 							<p>
 								DB 관리 <i class="right fas fa-angle-left"></i>

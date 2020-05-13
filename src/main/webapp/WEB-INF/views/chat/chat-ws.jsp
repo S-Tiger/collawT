@@ -11,9 +11,8 @@
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script type="text/javascript">
 	var wsocket;
-	
 	function connect() {
-		wsocket = new WebSocket("ws://192.168.0.77:8090/chat-ws");
+		wsocket = new WebSocket("ws://13.209.120.180:8080/chat-ws");
 		wsocket.onopen = onOpen;
 		wsocket.onmessage = onMessage;
 		wsocket.onclose = onClose;

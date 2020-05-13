@@ -117,14 +117,12 @@
 </style>
 	
 	<footer class="main-footer" >
-    <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
+    <strong>Copyright &copy; 2020.04 - 2020.5 <a href="/main">Collaw T</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
 
-      <b>Version</b> 3.0.3-pre
+      <b>Version</b> 1.0.1-pre
     </div>
-    <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights
-    reserved.
   </footer>
 
   <!-- Control Sidebar -->
