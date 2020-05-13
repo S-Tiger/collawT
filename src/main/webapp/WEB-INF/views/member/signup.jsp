@@ -157,30 +157,38 @@
 				url : '${contextPath}/member/check_id?mem_Id='+ mem_Id,
 				type : 'get',
 				success : function(data) {
-					console.log("1 = 중복o / 0 = 중복x : "+ data);							
-					
+
 					if (data == 1) {
-							// 1 : 아이디가 중복되는 문구
-							$("#id_check").text("사용중인 아이디입니다.");
-							$("#id_check").css("color", "red");
-							$("#joinBtn").attr("disabled", true);
-						} else {
-							// 0 : 아이디 사용가능 문구
-							$("#id_check").text("사용가능한 아이디입니다.");
-							$("#id_check").css("color", "green");
-							$("#joinBtn").attr("disabled", false);
-							
-							//아이디 유효성 검사
-							if(idJ.test(mem_Id) ||_kor.test(mem_Id)){
-								if(mem_Id == ""){
-								$('#id_check').text('이메일을 입력해주세요.');
-								$('#id_check').css('color', 'red');
-								$("#joinBtn").attr("disabled", false);				
-								
-							} else {
-								$('#id_check').text("잘못된 아이디 형식입니다. 이메일 주소를 입력해 주세요 :)");
-								$('#id_check').css('color', 'red');
-								$("#joinBtn").attr("disabled", true);
+					console.log("1 = 중복o / 0 = 중복x : "+ data);							
+					// 1 : 아이디가 중복되는 문구
+					$("#id_check").text("사용중인 아이디입니다.");
+					$("#id_check").css("color", "red");
+					$("#joinBtn").attr("disabled", true);
+				} else {
+					// 0 : 아이디 사용가능 문구
+					$("#id_check").text("사용가능한 아이디입니다.");
+					$("#id_check").css("color", "green");
+					$("#joinBtn").attr("disabled", false);
+					if(mem_Id == ""){
+						$('#id_check').text('이메일을 입력해주세요.');
+						$('#id_check').css('color', 'red');
+						$("#joinBtn").attr("disabled", false);	
+					}
+					
+					
+					//아이디 유효성 검사
+					else if(idJ.test(mem_Id) ||_kor.test(mem_Id)){
+						console.log("유효성체크검사");
+						if(mem_Id.length == 0){
+						$('#id_check').text('이메일을 입력해주세요.');
+						$('#id_check').css('color', 'red');
+						$("#joinBtn").attr("disabled", false);				
+						
+					} else {
+						console.log("잘못된아이디");
+						$('#id_check').text("잘못된 아이디 형식입니다. 이메일 주소를 입력해 주세요 :)");
+						$('#id_check').css('color', 'red');
+						$("#joinBtn").attr("disabled", true);
 							}
 							}
 						}/*  else if(mem_Id == ""){
