@@ -257,7 +257,7 @@ public class Personal_searchControllerImpl implements Personal_searchController 
 		mav.addObject("coworkList", coworkList);
 		mav.addObject("fileWriter", fileWriter);
 		mav.addObject("fileEx", fileEx);
-		mav.addObject("keyword", keyword);
+		mav.addObject("fileSearchkeyword", keyword);
 		mav.addObject("c_Id", c_Id);
 		mav.addObject("order", order);
 		mav.addObject("wr_mem_Id", wr_mem_Id);

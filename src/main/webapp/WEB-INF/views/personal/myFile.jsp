@@ -37,7 +37,7 @@ $(document).ready(function() {
 
 	$("#c_Id").change(function(){
 		var c_Id = $("#c_Id").val();
-		var keyword = $("#keyword_1").val();
+		var keyword = $("#fileSearchkeyword").val();
 		
 		var url = "${contextPath}/personal/search/myFile";
 		url = url + "?keyword="+keyword;
@@ -49,7 +49,7 @@ $(document).ready(function() {
 	
 	$("#order").change(function(){
 		var c_Id = $("#c_Id").val();
-		var keyword = $("#keyword_1").val();
+		var keyword = $("#fileSearchkeyword").val();
 		var order = $("#order").val();
 		var wr_mem_Id = $("#wr_mem_Id").val();
 		var a_NameEx = $("#a_NameEx").val();
@@ -67,7 +67,7 @@ $(document).ready(function() {
 	
 	$("#wr_mem_Id").change(function(){
 		var c_Id = $("#c_Id").val();
-		var keyword = $("#keyword_1").val();
+		var keyword = $("#fileSearchkeyword").val();
 		var order = $("#order").val();
 		var wr_mem_Id = $("#wr_mem_Id").val();
 		var a_NameEx = $("#a_NameEx").val();
@@ -86,7 +86,7 @@ $(document).ready(function() {
 	
 	$("#a_NameEx").change(function(){
 		var c_Id = $("#c_Id").val();
-		var keyword = $("#keyword_1").val();
+		var keyword = $("#fileSearchkeyword").val();
 		var order = $("#order").val();
 		var a_NameEx = $("#a_NameEx").val();
 
@@ -117,8 +117,8 @@ $(document).ready(function() {
 		})
 		
 		//검색시 검색어 유지
-	var keyword_1 = $("#keyword_1").val();
-	 $("#filekeyword").val(keyword_1);
+	var fileSearchkeyword = $("#fileSearchkeyword").val();
+	 $("#filekeyword").val(fileSearchkeyword);
 	 
 	 
 	 //설정 초기화
@@ -150,7 +150,7 @@ $(document).ready(function() {
 
 	<!-- Main content -->
     <section class="content">
-    <input type="hidden" value="${keyword}" id="keyword_1" name="keyword_1">
+    <input type="hidden" value="${fileSearchkeyword}" id="fileSearchkeyword" name="fileSearchkeyword">
      <input type="hidden" value="${c_Id}" id="c_Id_1" name="c_Id_1">
     <input type="hidden" value="${order}" id="order_1" name="order_1">
    <input type="hidden" value="${a_NameEx}" id="a_NameEx_1" name="a_NameEx_1">
@@ -280,7 +280,7 @@ $(document).ready(function() {
                   
                     <span>
                    <img class="img-fluid img-circle img-sm"
-								src="/member/getByteImage?mem_Id=${item.wr_mem_Id}" alt="Alt Text" width="30" height="30" >
+								src="/member/getByteImage?mem_Id=${item.wr_mem_Id}" alt="Alt Text" width="30" height="30" onError="this.src='${contextPath}/resources/dist/img/profile.jpg';">
 								 <small>&nbsp;${item.mem_Name}(${item.wr_mem_Id})</small></span>
 								&nbsp;&nbsp;
 								
