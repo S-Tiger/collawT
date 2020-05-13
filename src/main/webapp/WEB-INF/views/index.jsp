@@ -5,7 +5,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
-<html lang="kor">
+<html lang="ko">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -359,7 +359,7 @@ function checkQ_Email(q_Email) {
 					<li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services" style="color: black"><spring:message code="site.information" text="제품 설명" /></a></li>
 					<li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact" style="color: black"><spring:message code="site.customers" text="고객 지원" /></a></li>
 					<li class="nav-item"><a class="nav-link js-scroll-trigger" href="/member/signup" style="color: black"><spring:message code="site.signup" text="회원가입" /></a></li>
-					<li class="nav-item" id="korea"><a class="nav-link js-scroll-trigger" style="color: black; margin-top: 12px;" href="<c:url value="/?lang=kor"/>">한국어</a></li>
+					<li class="nav-item" id="korea"><a class="nav-link js-scroll-trigger" style="color: black; margin-top: 12px;" href="<c:url value="/?lang=ko"/>">한국어</a></li>
 					<li class="nav-item" id="america"><a class="nav-link js-scroll-trigger" style="color: black; margin-top: 12px;" href="<c:url value="/?lang=en"/>">English</a></li>
 				</ul>
 			</div>

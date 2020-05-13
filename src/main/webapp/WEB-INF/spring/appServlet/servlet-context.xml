@@ -46,7 +46,7 @@
 
 	<beans:bean id="localeResolver"
 		class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
-		<beans:property name="defaultLocale" value="kor" />
+		<beans:property name="defaultLocale" value="ko" />
 	</beans:bean>
 
 	<!-- 타일즈 실습 설정 -->
