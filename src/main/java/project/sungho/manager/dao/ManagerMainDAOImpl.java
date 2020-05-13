@@ -33,5 +33,11 @@ public class ManagerMainDAOImpl implements ManagerMainDAO {
 		return list;
 	}
 
+	@Override
+	public List<Map> lineList() throws DataAccessException {
+		List<Map> list = sqlSession.selectList("chart.lineList");
+		return list;
+	}
+
 
 }

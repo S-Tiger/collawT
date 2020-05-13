@@ -13,4 +13,7 @@ public interface ManagerMainDAO {
 
 	 public List<Map> donutList() throws DataAccessException;
 	 
+	 public List<Map> lineList() throws DataAccessException;
+	 
+	 
 }

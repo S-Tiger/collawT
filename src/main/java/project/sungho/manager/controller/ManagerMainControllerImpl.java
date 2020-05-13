@@ -48,11 +48,13 @@ public class ManagerMainControllerImpl implements ManagerMainController {
 		List<Map> chartList = managerMainService.searchList();
 		int member_Count = managerMainService.memCount();
 		List<Map> donutList = managerMainService.donutList();
+		List<Map> lineList = managerMainService.lineList();
 		
 		System.out.println("회원가입 숫자"+chartList.get(0).get("mem_Joindate"));
 		mav.addObject("chartList",chartList);
 		mav.addObject("member_Count",member_Count);
 		mav.addObject("donutList",donutList);
+		mav.addObject("lineList",lineList);
 		
 		return mav;
 	} 

@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>에러페이지</title>
 <div style="text-align:center; margin-top:100px">
-	<img src="${contextPath}./resources/img/error_txt1.png">
+	<img src="${contextPath}/resources/img/error_txt1.png">
 </head>
 <body>
 	

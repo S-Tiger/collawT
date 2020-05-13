@@ -10,6 +10,11 @@
 		<result property="dayitem" column="dayitem" />
 		<result property="cnt" column="cnt" />
 	</resultMap>
+	
+	<resultMap id="lineResult01" type="java.util.Map">
+		<result property="dayitem" column="dayitem" />
+		<result property="cnt" column="cnt" />
+	</resultMap>
 
 	<select id="searchList" resultMap="chartResult01"
 		parameterType="java.util.Map"> 
@@ -49,6 +54,30 @@ FROM(
         select count(*) as cnt, c_category
 		from co_work group by c_category
 		order by c_category asc
+      ]]>
+	</select>
+	
+	
+	<select id="lineList" resultMap="lineResult01" parameterType="java.util.Map">
+      <![CDATA[
+        SELECT dayitem, 
+ 		 	NVL((
+  			SELECT cnt 
+  			FROM(
+    			SELECT count(*) as cnt,substr(i_date,3,8) as day
+    			FROM issue
+   		 		WHERE TO_DATE(substr(i_date,3,8))  BETWEEN  sysdate-6   AND  sysdate
+    			GROUP BY substr(i_date,3,8) )
+    		WHERE day = A.dayitem ),0) AS CNT
+		FROM(
+    		SELECT to_char(sysdate-6) AS dayitem FROM dual UNION all
+    		SELECT to_char(sysdate-5) AS dayitem FROM dual UNION all
+   		 	SELECT to_char(sysdate-4) AS dayitem FROM dual UNION all
+   			SELECT to_char(sysdate-3) AS dayitem FROM dual UNION all
+    		SELECT to_char(sysdate-2) AS dayitem FROM dual UNION all
+    		SELECT to_char(sysdate-1) AS dayitem FROM dual UNION all
+    		SELECT to_char(sysdate) AS dayitem FROM dual  
+			) A
       ]]>
 	</select>
 	

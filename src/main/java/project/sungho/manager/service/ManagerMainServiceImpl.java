@@ -34,5 +34,11 @@ public class ManagerMainServiceImpl implements ManagerMainService {
 		return list;
 	}
 
+	@Override
+	public List<Map> lineList() throws DataAccessException {
+		List<Map> list =  managerMainDAO.lineList(); 
+		return list;
+	}
+
 
 }

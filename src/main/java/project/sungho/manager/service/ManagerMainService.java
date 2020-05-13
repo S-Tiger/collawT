@@ -17,4 +17,6 @@ public interface ManagerMainService {
 	 public int memCount() throws DataAccessException;
 
 	 public List<Map> donutList() throws DataAccessException;
+	 
+	 public List<Map> lineList() throws DataAccessException;
 }

@@ -63,13 +63,13 @@ width: 100%;
 	    	        },
 	    	        {
 	    	          label               : '신규 회원',
-	    	          backgroundColor     : 'rgba(210, 214, 222, 1)',
-	    	          borderColor         : 'rgba(210, 214, 222, 1)',
+	    	          backgroundColor     : 'rgba(256, 192, 40, 1)',
+	    	          borderColor         : 'rgba(256, 192, 40, 1)',
 	    	          pointRadius         : false,
-	    	          pointColor          : 'rgba(210, 214, 222, 1)',
+	    	          pointColor          : 'rgba(256, 192, 40, 1)',
 	    	          pointStrokeColor    : '#c1c7d1',
 	    	          pointHighlightFill  : '#fff',
-	    	          pointHighlightStroke: 'rgba(220,220,220,1)',
+	    	          pointHighlightStroke: 'rgba(256, 192, 40, 1)',
 	    	          data                : ['${chartList.get(0).get("cnt")}','${chartList.get(1).get("cnt")}',
 	    	        	  '${chartList.get(2).get("cnt")}','${chartList.get(3).get("cnt")}','${chartList.get(4).get("cnt")}',
 	    	        	  '${chartList.get(5).get("cnt")}','${chartList.get(6).get("cnt")}']
@@ -123,8 +123,6 @@ width: 100%;
 	      maintainAspectRatio : false,
 	      responsive : true,
 	    }
-	    //Create pie or douhnut chart
-	    // You can switch between pie and douhnut using the method below.
 	    var donutChart = new Chart(donutChartCanvas, {
 	      type: 'doughnut',
 	      data: donutData,
@@ -132,13 +130,59 @@ width: 100%;
 	    })
 	  
 	  
+	  //라인차트 
+	    var lineChartCanvas = $('#lineChart').get(0).getContext('2d')
+	    var lineChartOptions = {
+	        maintainAspectRatio : false,
+	        responsive : true,
+	        legend: {
+	          display: false
+	        },
+	        scales: {
+	          xAxes: [{
+	            gridLines : {
+	              display : false,
+	            }
+	          }],
+	          yAxes: [{
+	            gridLines : {
+	              display : false,
+	            }
+	          }]
+	        }
+	      }
+	    var lineChartData = {
+	    	      labels  : [tomonth + '/' + (today-6), tomonth + '/' + (today-5), tomonth + '/' + (today-4), tomonth 
+	    	    	  + '/' + (today-3), tomonth + '/' + (today-2), tomonth + '/' + (today-1), tomonth + '/' + today],
+	    	      datasets: [
+	    	    	  {
+	    	              label               : '주간 이슈 등록수',
+	    	              backgroundColor     : 'rgba(210, 214, 222, 1)',
+	    	              borderColor         : 'rgba(210, 214, 222, 1)',
+	    	              pointRadius         : true,
+	    	              pointColor          : 'rgba(210, 214, 222, 1)',
+	    	              pointStrokeColor    : '#c1c7d1',
+	    	              pointHighlightFill  : '#fff',
+	    	              pointHighlightStroke: 'rgba(220,220,220,1)',
+	    	              data                : ['${lineList.get(0).get("cnt")}', '${lineList.get(1).get("cnt")}',
+	    	            	  '${lineList.get(2).get("cnt")}', '${lineList.get(3).get("cnt")}', '${lineList.get(4).get("cnt")}', 
+	    	            	  '${lineList.get(6).get("cnt")}', '${lineList.get(5).get("cnt")}']
+	    	            },
+	    	      ]
+	    	    }
+	    lineChartData.datasets[0].fill = false;
+	    lineChartOptions.datasetFill = false;
+	  
+	    var lineChart = new Chart(lineChartCanvas, { 
+	      type: 'line',
+	      data: lineChartData, 
+	      options: lineChartOptions
+	    })
+	  
 	  })
     </script>
     
     <div class="content-wrapper" >
-    <div class="page_title">
-    <span class="title"><b>주간 회원차트</b></span>
-  </div>
   <div class="main_content">
     <section class="content">
       <div class="container-fluid">
@@ -178,6 +222,28 @@ width: 100%;
               </div>
               <div class="card-body">
                 <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+            </div>
+             <!-- /.col (LEFT) -->
+          <div class="col-md-6">
+            <!-- LINE CHART -->
+            <div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">일별 이슈 등록차트</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="chart">
+                  <canvas id="lineChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                </div>
               </div>
               <!-- /.card-body -->
             </div>
