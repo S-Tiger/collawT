@@ -266,7 +266,7 @@ img {
 }
 section#contact {
     background-color: transparent;
-    background-image: url(/resources/img/cust.png); 
+    background-image: url(${contextPath}/resources/img/cust.png); 
     background-size :50%, 25%, 25% ;
     background-repeat: no-repeat;
     background-position: right;
