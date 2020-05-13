@@ -51,21 +51,6 @@
 </head>
 
 
-<script type="text/javascript">
-</script>
-
-<script>
-
- function move(url){
-
-    $('#content').children().remove();
-
-    $('#content').load(url);
-
- }
-
-</script>
-
 <body class="sidebar-mini layout-fixed accent-teal">
 	<div class="wrapper" id="start">
 
@@ -80,6 +65,7 @@
         <a href="/manager/main" class="nav-link">Home</a>
       </li>
     </ul>
+    </nav>
 	<!-- Main Sidebar Container -->
 	<aside class="main-sidebar elevation-4 sidebar-dark-info">
 		<!-- Brand Logo -->
