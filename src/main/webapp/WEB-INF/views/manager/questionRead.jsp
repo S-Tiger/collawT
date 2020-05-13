@@ -188,6 +188,10 @@ $(document).ready(function() {
 						</div>
 						<div class="card-body">
 				<table class="table table-striped table-bordered table-hover dataTable">
+			<c:choose>
+			<c:when test="${fn:length(beforeAnswerList)!=0}">
+			
+				
 				 <thead style="font-size:13px;">
 				 <tr role="row">
 				<th>답변날짜</th>
@@ -195,8 +199,7 @@ $(document).ready(function() {
 				</tr>
 				
               <tbody>
-			<c:choose>
-			<c:when test="${fn:length(beforeAnswerList)!=0}">
+			
                  <c:forEach var="answeritem" items="${beforeAnswerList}" >	
                   <tr>
                   
@@ -207,7 +210,7 @@ $(document).ready(function() {
                    </c:forEach>
                  </c:when>
                  <c:otherwise>
-                 <p style="text-align:center;"><small><br><br>답변내역이 없습니다.</small></p>
+                 <p style="text-align:center;"><small><br><br>답변내역이 없습니다.</small></p><br><br>
                  </c:otherwise>
                  </c:choose>
               </tbody>
