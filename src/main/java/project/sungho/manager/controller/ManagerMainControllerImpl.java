@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import project.euna.manager.dao.EManagerMainDAO;
 import project.hm.hmp002_d001.service.Hmp002_d001Service;
 import project.hm.hmp002_d001.vo.Hmp002_d001VO;
 import project.sungho.comember.service.ComemberService;
@@ -40,6 +41,9 @@ public class ManagerMainControllerImpl implements ManagerMainController {
 	@Autowired 
 	ManagerMainService managerMainService;
 	
+	@Autowired 
+	EManagerMainDAO eManagerMainDAO;
+	
 	@Override
 	@RequestMapping(value = "/main", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView searchInit(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -49,12 +53,14 @@ public class ManagerMainControllerImpl implements ManagerMainController {
 		int member_Count = managerMainService.memCount();
 		List<Map> donutList = managerMainService.donutList();
 		List<Map> lineList = managerMainService.lineList();
+		List<Map> list = eManagerMainDAO.main();
 		
 		System.out.println("회원가입 숫자"+chartList.get(0).get("mem_Joindate"));
 		mav.addObject("chartList",chartList);
 		mav.addObject("member_Count",member_Count);
 		mav.addObject("donutList",donutList);
 		mav.addObject("lineList",lineList);
+		mav.addObject("recentBoard", list);
 		
 		return mav;
 	} 

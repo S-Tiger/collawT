@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.mail.HtmlEmail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +24,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import project.euna.issue.vo.IssueVO;
 import project.euna.manager.service.QuestionManagerService;
+import project.jeongha.question.vo.QuestionVO;
 
 
 
@@ -115,12 +119,142 @@ public class QuestionManagerControllerImpl implements QuestionManagerController 
 		String mem_Id = (String) member.get("mem_Id");
 		
 		
-		Map<String, Object> list = managerService.questionRead(q_Num);
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!"+list);
+		Map<String, Object> questionRead = managerService.questionRead(q_Num);
+		List<Map> beforeAnswerList = managerService.beforeAnswerList(q_Num);
 		
 		ModelAndView mav = new ModelAndView("manager/questionRead");
 
-		mav.addObject("questionRead", list);
+		mav.addObject("questionRead", questionRead);
+		mav.addObject("beforeAnswerList", beforeAnswerList);
 		return mav;
 	}
+	
+	//답변 쓰기 DB에 넣기
+	@Override
+	@PostMapping("/insert")
+	public String answerInsert(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	
+		String q_Num = request.getParameter("q_Num");
+		String as_Subject = request.getParameter("as_Subject");
+		String as_Content = request.getParameter("as_Content");
+		String q_Email = request.getParameter("q_Email");
+		
+		Map<String, Object> insertmap = new HashMap<String,Object>();
+		insertmap.put("q_Num", q_Num);
+		insertmap.put("as_Subject", as_Subject);
+		insertmap.put("as_Content", as_Content);
+
+		managerService.answerInsert(insertmap);
+		
+		Map<String, Object> updatemap = new HashMap<String,Object>();
+		updatemap.put("q_Num", q_Num);
+		updatemap.put("q_Answer", "확인중");
+		
+		managerService.questionStatusUpdate(updatemap);
+		
+		
+		Map<String, Object> mailmap = new HashMap<String,Object>();
+		mailmap.put("q_Num", q_Num);
+		mailmap.put("as_Subject", as_Subject);
+		mailmap.put("as_Content", as_Content);
+		mailmap.put("q_Email", q_Email);
+		
+		sendEmail(mailmap);
+		
+	
+		return "redirect:/manager/question/read?q_Num="+q_Num;
+	
+	}
+	
+	@Override
+	public void sendEmail(Map<String, Object> mailmap) throws Exception {
+		String q_Num = (String) mailmap.get("q_Num");
+		String as_Subject = (String) mailmap.get("as_Subject");
+		String as_Content = (String) mailmap.get("as_Content");
+		String q_Email = (String) mailmap.get("q_Email");
+		
+		// Mail Server 설정
+				String charSet = "utf-8";
+				String hostSMTP = "smtp.gmail.com";
+
+				// google 아이디, 비밀번호
+				String hostSMTPid = "collawt@gmail.com";
+				String hostSMTPpwd = "zhffkdnxl%!00";
+
+				// 보내는 사람 EMail,이름, 제목, 내용
+				String fromEmail = "collawt@gmail.com";
+				String fromName = "collawT";
+				String subject = "";
+				String msg = "";
+
+				//회원가입시 인증메일
+					subject = "안녕하세요 :) CollawT 문의에 대한 답변 메일입니다.";
+					msg += "<html>";
+					msg += "<head>";
+					msg += "<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css\"/>";
+					msg += "</head>";
+					msg += "<body>";
+					msg += "<div style=\"font-family: 'Apple SD Gothic Neo', 'sans-serif' !important; width: 540px; height: 600px; border-top: 4px solid #02b875; margin: 100px auto; padding: 30px 0; box-sizing: border-box;\">\n" + 
+							"    <h1 style=\"margin: 0; padding: 0 5px; font-size: 28px; font-weight: 400;\">\n" + 
+							"        <span style=\"font-size: 15px; margin: 0 0 10px 3px;\">콜라우티</span><br />\n" + 
+							"        <span style=\"color: #02b875;\">문의</span> 메일입니다.\n" + 
+							"    </h1>\n";
+					
+					msg += 			""+
+							"    <p style=\"font-size: 16px; line-height: 26px; margin-top: 50px; padding: 0 5px;\">\n"+
+							"안녕하세요 :) CollawT입니다."+
+							"고객님께서 문의 주신 내용에 대한 답변입니다.<br><br>";
+					msg += 	as_Content;
+					msg+=	"    </p>\n" + 
+							"    <div style=\"border-top: 1px solid #DDD; padding: 5px;\">\n" + 
+							"        <p style=\"font-size: 13px; line-height: 21px; color: #555;\">\n" + 
+							"        </p>\n" + 
+							"    </div>\n" + 
+							"</div>";
+					msg += "</body>";
+					msg += "</html>";
+		String mail = q_Email;
+		try {
+			HtmlEmail email = new HtmlEmail();
+			email.setDebug(true);
+			email.setCharset(charSet);
+			email.setSSL(true);
+			email.setHostName(hostSMTP);
+			// google smtp 포트번호
+			email.setSmtpPort(587);
+
+			// 메일 아이디 비밀번호
+			email.setAuthentication(hostSMTPid, hostSMTPpwd);
+			email.setTLS(true);
+			// 받는사람
+			email.addTo(mail, charSet);
+			email.setFrom(fromEmail, fromName, charSet);
+			email.setSubject(subject);
+			email.setHtmlMsg(msg);
+			email.send();
+		} catch (Exception e) {
+			System.out.println("메일발송 실패 : " + e);
+		}
+	}
+	
+	//문의상태 변경
+	@Override
+	@GetMapping("/update")
+	public String questionStatusUpdate(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		String q_Num = request.getParameter("q_Num");
+		String q_Answer = request.getParameter("q_Answer");
+
+
+		Map<String, Object> updatemap = new HashMap<String,Object>();
+		updatemap.put("q_Num", q_Num);
+		updatemap.put("q_Answer", q_Answer);
+		
+		managerService.questionStatusUpdate(updatemap);
+
+		
+		//수정한 게시물로 리턴
+		return "redirect:/manager/question/read?q_Num="+q_Num;
+	}
+	
 }

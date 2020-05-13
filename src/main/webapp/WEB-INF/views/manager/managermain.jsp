@@ -248,7 +248,54 @@ width: 100%;
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
+            
+                        <div class="card card-warning">
+              <div class="card-header">
+                <h3 class="card-title">미답변 문의내역</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                </div>
+              </div>
+              <div class="card-body" style="min-height:290px; max-height:290px; overflow:auto">
+                <div class="table-responsive">
+                  <table class="table m-0">
+
+                    <tbody>
+              <c:choose>
+			<c:when test="${fn:length(recentBoard)!=0}">
+       <c:forEach var="recentBoarditem" items="${recentBoard}" >
+                    <tr>
+                      <td name="boarditem" style="width:70%">
+							<a style="color:black" href="/manager/question/read?q_Num=${recentBoarditem.q_Num}">${recentBoarditem.q_Subject}</a>                      
+                      </td>
+                        <td name="boarditem" style="width:30%">
+							${recentBoarditem.q_Date}                    
+                      </td>
+                    </tr>
+         </c:forEach>
+            </c:when>
+                 <c:otherwise>
+                 <p style="text-align:center;"><small><br><br><br><br>최근 등록된 문의가 없습니다.</small></p>
+                 </c:otherwise>
+                 </c:choose>
+                                      
+               
+                    </tbody>
+                  </table>
+                </div>
+
+
+              </div>
+              <!-- /.card-body -->
             </div>
+            </div>
+            
+
+            
+            
             </div>
             </div>
             </section>

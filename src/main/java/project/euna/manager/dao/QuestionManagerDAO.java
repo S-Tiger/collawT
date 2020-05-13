@@ -15,4 +15,7 @@ public interface QuestionManagerDAO {
 
 	public void deleteData(Map<String, String> row) throws DataAccessException;
 	public Map<String, Object> questionRead(String q_Num) throws DataAccessException; 
+	public int answerInsert(Map map);
+	public void questionStatusUpdate(Map map) throws Exception;
+	public List<Map> beforeAnswerList(String q_Num) throws DataAccessException;
 }

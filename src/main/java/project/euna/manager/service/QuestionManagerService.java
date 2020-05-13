@@ -16,4 +16,7 @@ public interface QuestionManagerService {
 
 	public void saveData(Map<String, String[]> dataMap)  throws DataAccessException ;
 	public Map<String, Object> questionRead(String q_Num) throws DataAccessException;
+	public void  answerInsert(Map map);
+	public void questionStatusUpdate(Map map) throws Exception;
+	public List<Map> beforeAnswerList(String q_Num) throws DataAccessException;
 }

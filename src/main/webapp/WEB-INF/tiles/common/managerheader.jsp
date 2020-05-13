@@ -135,13 +135,13 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="/manager/member/main" class="nav-link">Home</a>
+        <a href="/manager/main" class="nav-link">Home</a>
       </li>
     </ul>
 	<!-- Main Sidebar Container -->
 	<aside class="main-sidebar elevation-4 sidebar-dark-info">
 		<!-- Brand Logo -->
-		<a  href="/manager/member/main" class="brand-link navbar-info"> <img
+		<a  href="/manager/main" class="brand-link navbar-info"> <img
 			src="${contextPath}/resources/dist/img/logocollawT.png" alt="AdminLTE Logo"
 			class="brand-image img-circle elevation-3" style="opacity: .8">
 			<span class="brand-text font-weight-light" style="font-family:Tahoma;">&nbsp;Collaw T</span>
@@ -181,11 +181,20 @@
 												
 					<!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+                    <li class="nav-item"><a href="/manager/main" 
+						class="nav-link" > <i class="nav-icon fas fa-users-cog"></i>
+							<p>관리자 홈</p>
+					</a></li>
+               		<li class="nav-item"><a href="/manager/question/main" 
+						class="nav-link" > <i class="nav-icon fas fa-question-circle"></i>
+							<p>문의 및 답변</p>
+					</a></li>
+					
                		<li class="nav-item has-treeview" id="menustat" style="border-bottom: 1px solid #4f5962;"><a href="#"
 						class="nav-link active" onclick="menuclick()"> <i
-							class="nav-icon fas fa-users-cog"></i>
+							class="nav-icon fas fa-database"></i>
 							<p>
-								관리자 메뉴 <i class="right fas fa-angle-left"></i>
+								DB 관리 <i class="right fas fa-angle-left"></i>
 							</p>
 					</a>
 						<ul class="nav nav-treeview" >
@@ -216,10 +225,7 @@
 							<p>채팅 관리</p>
 					</a></li>
 					
-					<li class="nav-item"><a href="/manager/question/main" 
-						class="nav-link" > <i class="nav-icon fas fa-question-circle"></i>
-							<p>문의 관리</p>
-					</a></li>
+
 					</ul>
 				</ul>
 			</nav>

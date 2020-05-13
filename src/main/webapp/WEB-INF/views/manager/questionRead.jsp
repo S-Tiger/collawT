@@ -13,6 +13,23 @@
 
 <script type="text/javascript">
 
+$(document).ready(function() {
+	$("#submit").click(function(){
+		var as_Content = $("#as_Content").val();
+		
+		if(as_Content.length < 8||as_Content.length > 300){
+			alert("8 ~ 300자 내로 작성하세요. ");
+			return false;
+		}else{
+			if(confirm("문의 답변 이메일을 보내시겠습니까?")){
+				document.insertForm.submit();
+			}else{
+				return false;
+			}
+		}
+	})
+	
+})
 
 	
 	
@@ -40,22 +57,36 @@
 
 	<section class="content">
 
-		<div class="row" id="row">
+		<div class="row">
 			<div class="col-md-6">
 
 				<!-- Box Comment -->
 <!-- 본문 부분~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->				
 			
-				<form name="readForm" role="form">
 
 					<div class="card card-widget">
 						<div class="card-header">
 						
-						<span style= "vertical-align:text-top;"
+						<span style= "vertical-align:text-top;
+								<c:if test="${questionRead.q_Answer == '미확인'}">background-color:#ffc107;</c:if>
+								<c:if test="${questionRead.q_Answer == '확인중'}">background-color:#007bff;</c:if>
+								<c:if test="${questionRead.q_Answer == '답변완료'}">background-color:#28a745;</c:if>
+						"
 							id="q_Answer" name="q_Answer" class="badge badge-success"><c:out  value="${questionRead.q_Answer}" /></span>&nbsp;&nbsp;
 							<span id="q_Subject" name="q_Subject"><b><c:out	value="${questionRead.q_Subject}" /></b></span>
 
-							
+														<div class="btn-group float-right">
+                          <button type="button" class="btn btn-default" data-toggle="dropdown" aria-expanded="false" style="border:white;background-color:white;height:20px;padding-top: 0px;color:gray"><small>답변상태 변경 ▼</small>
+                          </button>
+                          <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; right: 0px; transform: translate3d(0px, 38px, 0px);">
+                            
+                        
+                            <li><small><a class="dropdown-item" href="/manager/question/update?q_Num=${questionRead.q_Num}&q_Answer=확인중">확인중</a></small></li>
+                            <li><small><a class="dropdown-item" href="/manager/question/update?q_Num=${questionRead.q_Num}&q_Answer=답변완료">답변완료</a></small></li>
+                          </ul>
+                       
+                        </div>
+
 							
 
 
@@ -88,8 +119,7 @@
 							<br>
 							<br>
 							<br>
-							 <input type="hidden" id="q_Num" name="q_Num"
-								value="${questionRead.q_Num}" /> <br>
+ <br>
 							<br>
 
 			
@@ -97,7 +127,7 @@
 							
 
 						
-						<a id="list_btn" class="btn btn-default btn-sm" href='#' style="color:#444; margin:3px;"> <i class="fas fa-list"></i>&nbsp;목록</a>
+						<a id="list_btn" class="btn btn-default btn-sm" href='/manager/question/main' style="color:#444; margin:3px;"> <i class="fas fa-list"></i>&nbsp;목록</a>
 
 								
 								<br><br>
@@ -119,21 +149,75 @@
 
 
 
-<!-- 댓글 부분~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->				
+<!-- 답변하기 부분~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->				
 
 			<div class="col-md-6">
-				<div class="card">
 
+			
+			<div class="card card-widget">
+						<div class="card-header">
+							<b>답변하기</b>
+						</div>
+						<div class="card-body">
+				<form name = insertForm action="/manager/question/insert" method="post" encType="UTF-8">
+               <div class="form-group">
+               <textarea name="as_Content" id="as_Content" class="form-control" style="height:263px;" placeholder=""></textarea>
+               
+				 <input type="hidden" id="q_Num" name="q_Num" value="${questionRead.q_Num}" />
+				 <input type="hidden" id="q_Email" name="q_Email" value="${questionRead.q_Email}" />
 					
-					<div id="replyList" style="max-height:631px; overflow:auto"></div>
+              </div>
+              
+			<input type="submit" id = "submit" value="메일 보내기" class="btn btn-danger btn-sm float-right" style="margin:3px;">
+              
+			
+			</form>		
+			</div>
+			</div>
+			
+			
+			
+</div>
+			</div>
+<!--  이전 답변 내역 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+		<div class="row">
+			<div class="col-md-12">		
+				<div class="card card-widget">
+						<div class="card-header">
+							<b>이전 답변내역</b>
+						</div>
+						<div class="card-body">
+				<table class="table table-striped table-bordered table-hover dataTable">
+				 <thead style="font-size:13px;">
+				 <tr role="row">
+				<th>답변날짜</th>
+               	<th>답변내용</th>
+				</tr>
+				
+              <tbody>
+			<c:choose>
+			<c:when test="${fn:length(beforeAnswerList)!=0}">
+                 <c:forEach var="answeritem" items="${beforeAnswerList}" >	
+                  <tr>
+                  
+					<td style="width:15%; vertical-align:top;"><font size="2em" color="#6c757d">${answeritem.as_Date}</font></td>
+					<td style="width:85%; vertical-align:top;"><font size="2em" color="#6c757d">${answeritem.as_Content}</font></td>
+	          	 </tr>
+                   
+                   </c:forEach>
+                 </c:when>
+                 <c:otherwise>
+                 <p style="text-align:center;"><small><br><br>답변내역이 없습니다.</small></p>
+                 </c:otherwise>
+                 </c:choose>
+              </tbody>
+          </table>
+						</div>
+			</div>
+			</div>
+		</div>
 					
 					
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-12"></div>
-			</div>
-			</div>
 	</section>
 	<!-- /.content -->
 </div>

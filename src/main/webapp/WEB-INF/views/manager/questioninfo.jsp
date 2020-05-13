@@ -42,6 +42,7 @@ width: 100%;
 			{Header:"상태",Type:"Status",SaveName:"STATUS",MinWidth:50, Align:"Center",Edit:false},
 			{Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:50},
 			{Header:"번호",Type:"Text",SaveName:"q_Num",MinWidth:50,KeyField:1 ,MultiLineText:1,Edit:false},			
+			{Header:"상태",Type:"Text",SaveName:"q_Answer",MinWidth:50,KeyField:1 ,MultiLineText:1,Edit:false},			
 			{Header:"제목",Type:"Text",SaveName:"q_Subject",MinWidth:150 ,MultiLineText:1,Edit:false},			
 			{Header:"작성자 이메일",Type:"Text",SaveName:"q_Email",MinWidth:150 ,MultiLineText:1, Wrap:1,Edit:false},
 			{Header:"문의 유형",Type:"Text",SaveName:"q_Kind",MinWidth:100 ,MultiLineText:1,Edit:false},

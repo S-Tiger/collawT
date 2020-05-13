@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import project.euna.issue.vo.IssueVO;
 import project.euna.manager.dao.QuestionManagerDAO;
 
 
@@ -59,6 +60,26 @@ public class QuestionManagerServiceImpl implements QuestionManagerService {
 	@Override
 	public Map<String, Object> questionRead(String q_Num) throws DataAccessException {
 		Map<String, Object> list =  managerDAO.questionRead(q_Num); 
+		return list;
+	}
+	
+	//답변 등록
+	@Override
+	public void  answerInsert(Map map) {
+		int result = managerDAO.answerInsert(map);
+		
+	}
+	
+	//상태 수정
+	@Override
+	public void questionStatusUpdate(Map map) throws Exception {
+		managerDAO.questionStatusUpdate(map);
+	}
+	
+	//이전 답변 내역
+	@Override
+	public List<Map> beforeAnswerList(String q_Num) throws DataAccessException {
+		List<Map> list =  managerDAO.beforeAnswerList(q_Num); 
 		return list;
 	}
 }
