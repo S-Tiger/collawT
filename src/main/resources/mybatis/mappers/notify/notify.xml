@@ -71,9 +71,10 @@
 		        select *
 		        from notify
 		        where not_Kind = '2' or not_Kind = '4'
-		        and not_status = '0'
+
 		        )
 		    where mem_Id = #{mem_Id}
+		    and not_status = '0'
 	         
 	      ]]>			
 	</select>
