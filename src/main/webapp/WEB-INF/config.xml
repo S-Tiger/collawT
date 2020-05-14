@@ -17,8 +17,8 @@
 	Configure the location of uploaded files. See the following article for more details:
 	http://docs.cksource.com/CKFinder_2.x/Developers_Guide/Java/Configuration/baseURL_and_baseDir
 	-->
-	<baseDir>/var/lib/tomcat8/webapps/img</baseDir>
-	<baseURL>/img/</baseURL>
+	<baseDir>/var/lib/tomcat8/webapps/collawT/resources/resources/ckstorage</baseDir>
+	<baseURL>/resources/ckstorage</baseURL>
 	<licenseKey></licenseKey>
 	<licenseName></licenseName>
 	<!--
