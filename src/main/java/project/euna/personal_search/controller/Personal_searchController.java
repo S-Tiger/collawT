@@ -30,5 +30,6 @@ public interface Personal_searchController {
 	public String issuereplyDelete(String r_Num, HttpSession session) throws Exception;
 	public String votereplyDelete(String v_Num, HttpSession session) throws Exception;
 	public String personalmemoDelete(String p_Num, HttpSession session) throws Exception;
+	public ModelAndView myissueList(Criteria cri, String mem_Id, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception;
 }
 

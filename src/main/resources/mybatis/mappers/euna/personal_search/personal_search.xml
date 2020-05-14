@@ -47,8 +47,25 @@
 		<result property="ig_Color" column="ig_Color" />
 	</resultMap>
 
-
 	
+	<resultMap id="personal_searchResult03" type="java.util.HashMap">
+		<!-- property는 화면단에서 쓸 이름, column은 데이터컬럼명이랑 동일 -->
+		<result property="i_Num" column="i_Num" />
+		<result property="i_Name" column="i_Name" />
+		<result property="i_Date" column="i_Date" />
+		<result property="i_Start" column="i_Start" />
+		<result property="i_End" column="i_End" />
+		<result property="mem_Id" column="mem_Id" />
+		<result property="rnum" column="rnum" />
+		<result property="ig_Num" column="ig_Num" />
+		<result property="ig_Name" column="ig_Name" />
+		<result property="ig_Color" column="ig_Color" />
+		<result property="c_Name" column="c_Name" />
+		<result property="c_Id" column="c_Id" />
+		
+	</resultMap>
+
+
 	<!-- 내가 쓴 글 확인-->
 	<select id="myBoardlist" resultMap="personal_searchResult01" parameterType="project.euna.personal_search.vo.Criteria"> 
 	<![CDATA[
@@ -142,6 +159,44 @@
             and m.mem_id = #{mem_Id}
         )
 		
+      ]]>
+
+	</select>
+	
+	
+		<!-- 내가 담당한 이슈 리스트 -->
+	<select id="myissueList"   resultMap="personal_searchResult03" parameterType="project.euna.personal_search.vo.Criteria"> 
+      <![CDATA[
+	select *
+	from(
+	    select i.i_Num, i.i_Name, i.i_Date, i.i_Start, i.i_End,
+	            c.mem_Id,
+	            ig.ig_Name, ig.ig_Color, ig.ig_Num,
+	            co.c_Name, co.c_Id,
+	            row_number() over(order by i_date desc) as rnum
+	    from charger c, issue i, issue_group ig, co_work co
+	    where i.i_Num = c.i_Num
+	    and ig.ig_Num = i.ig_Num
+	    and c.mem_Id=#{mem_Id}
+	    and co.c_Id = c.c_Id
+	    order by i_Date desc
+	    )
+		where rnum between #{rowStart} and #{rowEnd}
+      ]]>
+	</select> 
+	
+	
+	
+	
+	<!-- 내 담당 이슈리스트 게시물 총 갯수 -->
+	<select id="myissueListCount" resultType="int" parameterType="project.euna.personal_search.vo.Criteria"> 
+      <![CDATA[
+	    select count(*)
+	    from charger c, issue i, issue_group ig
+	    where i.i_Num = c.i_Num
+	    and ig.ig_Num = i.ig_Num
+	    and c.mem_Id=#{mem_Id}
+	    order by i_Date desc
       ]]>
 
 	</select>

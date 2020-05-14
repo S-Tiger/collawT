@@ -59,4 +59,18 @@ public class Personal_searchServiceImpl implements Personal_searchService {
 		return personal_searchDAO.myFile(mem_Id);
 
 }
+	
+	//내 담당 리스트 페이징
+	@Override
+	public List<Map> myissueList(Criteria cri) throws Exception{
+		List<Map> list = personal_searchDAO.myissueList(cri);
+		return list;
+	}
+	
+	//내 담당 리스트 총 갯수
+	@Override
+	public int myissueListCount(String mem_Id) throws Exception{
+		return personal_searchDAO.myissueListCount(mem_Id);
+	}
+	
 }

@@ -265,6 +265,32 @@ public class Personal_searchControllerImpl implements Personal_searchController 
 		return mav;
 		
 	}
+	
+	
+	//내 담당 리스트 목록 조회 페이징
+	@Override
+	@GetMapping("/myChargerlist")
+	public ModelAndView myissueList(Criteria cri, String mem_Id, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+//		Map<String, Object> member = new HashMap<String,Object>();
+//		member = (Map<String, Object>) session.getAttribute("member");
+//		mem_Id = (String) member.get("mem_Id");
+				
+		List<Map> list = personal_searchService.myissueList(cri);
+		System.out.println("!!!!!!!!!!!!!!!!!!!11"+list);
+		PageMaker pageMaker = new PageMaker();
+		
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(personal_searchService.myissueListCount(mem_Id));
+		
+	
+		ModelAndView mav = new ModelAndView("personal/myChargerlist");
+		mav.addObject("myChargerlist", list);
+		mav.addObject("pageMaker", pageMaker);		
+		
+		return mav;
+		
+	}
 
 
 }

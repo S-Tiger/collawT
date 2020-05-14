@@ -16,5 +16,7 @@ public interface Personal_searchService {
 	public List<Map> myFile(String mem_Id) throws DataAccessException;
 	public List<Map> myReplylist(Criteria cri) throws Exception;
 	public int myReplylistCount(String mem_Id) throws Exception;
+	public List<Map> myissueList(Criteria cri) throws Exception;
+	public int myissueListCount(String mem_Id) throws Exception;
 
 }

@@ -61,6 +61,22 @@ public class Personal_searchDAOImpl implements Personal_searchDAO {
 		return list;
 
 	}
+	
+	
+	// 내 담당 이슈 목록 페이징
+	@Override
+	public List<Map> myissueList(Criteria cri) throws DataAccessException {
+
+		List<Map> list = sqlSession.selectList("personal_search.myissueList", cri);
+		return list;
+
+	}
+
+	// 내 담당 이슈 총 갯수
+	@Override
+	public int myissueListCount(String mem_Id) throws Exception {
+		return sqlSession.selectOne("personal_search.myissueListCount", mem_Id);
+	}
 
 
 	

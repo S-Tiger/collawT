@@ -110,11 +110,13 @@ $(document).ready(function() {
 	<div class="col-md-9" style="max-width: 100%;">
 		<div class="card">
 			<div class="card-header p-2">
-				<ol class="nav nav-pills" style="font-family: Spoqa Han Sans; font-size:15px; margin:0px; border:none; padding-inline-start: 0px;  width:400px; float:left;  ">
+				<ol class="nav nav-pills" style="font-family: Spoqa Han Sans; font-size:15px; margin:0px; border:none; padding-inline-start: 0px;float:left;  ">
 					<li class="nav-item" ><a class="nav-link " 
 						href="/main"  id="activityMenu" >홈</a></li>
 					<li class="nav-item" ><a class="nav-link"
 						href="/personal/list?mem_Id=${member.mem_Id}" >내 이슈</a></li>
+					<li class="nav-item" ><a class="nav-link"
+						href="/personal/search/myChargerlist?mem_Id=${member.mem_Id}" id="activityMenu">내 담당 이슈</a></li>
 					<li class="nav-item" ><a class="nav-link"
 						href="/personal/search/myBoardlist?mem_Id=${member.mem_Id}" id="activityMenu">내가 쓴 글</a></li>
 					<li class="nav-item" ><a class="nav-link active"   style="background-color:#DC3545;"
