@@ -384,15 +384,19 @@ function checkQ_Email(q_Email) {
 					<div class="card-body" style="border-color: white !important;">
 						<h5>&nbsp</h5>
 						<br> <br>
-						<h1 style="text-align: left; margin: 10px" class="ng">
-							<spring:message code="site.detail1" text="&nbsp효과적인 팀워크 가벼워진 업무, 협업툴" />
-						</h1>
-						<h4 style="text-align: left; padding: 10px" class="ng">
-							<spring:message code="site.detail2" text="이메일이 필요없는 간편한 소통과 파일 공유, 빠른 피드백 확인까지. 바라던 기능들을 모두 담았습니다." />
-						</h4>
+						<h2 style="text-align: left; margin: 10px" class="ng">
+						
+							<spring:message code="site.detail1" text="&nbsp효과적인 팀워크 가벼워진 업무, Collaw T" />
+						</h2>
+						<h5 style="text-align: left; padding: 10px" class="ng">
+						
+							<spring:message code="site.detail2" text="간단한 회원가입과 손쉬운 문서작성, 파일 공유, 빠른 피드백과 소통까지. 바라던 기능들을 모두 담았습니다." />
+						</h5>
 						<p style="text-align: left; padding: 10px" class="ng">
-							<spring:message code="site.detail3" text="여러분이 더 협력적으로 일하고 더 많은 일을 할 수 있도록 협업 게시판, 목록, 칸반, 검색기능을 통해 유연한 방법으로 프로젝트를 정리하고 우선순위를 정할 수 있는 온라인 협업툴  Collaw T" />
-						</p>
+						
+							<spring:message code="site.detail3" text="콜라우티에서 제공하는 게시판, 칸반, 캘린더, 검색 기능을 통해 더욱 유연한 방법으로 프로젝트를 진행할 수 있습니다!
+콜라우티와 함께 더욱 효과적으로 일해보세요!" />
+						</p><br>
 						<a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger float-right ng" style="background-color: #fed136; font-size: large; border-color: #fed136; padding-top: 13px; padding-bottom: 13px; padding-left: 20px; padding-right: 20px; margin-right: 50px; margin-top: 5px"
 							href="member/loginPage"><spring:message code="site.login" text="로그인" /></a>
 						<h1>&nbsp</h1>
@@ -414,33 +418,7 @@ function checkQ_Email(q_Email) {
 			<!-- /.row -->
 		</div>
 	</header>
-	<!-- <header class="masthead" id="question">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
-					<div class="card-body" style="border-color: white !important;">
-						<h4 style="text-align: left;"><spring:message code="site.help" text="안녕하세요. 콜라우티 고객지원입니다. 무엇을 도와드릴까요?" /></h4>
-						<a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger float-right" style="font-size: large; background-color: #fed136; border-color: #fed136; padding-top: 13px; padding-bottom: 13px; padding-left: 20px; padding-right: 20px;" href="/question"> 고객지원 바로가기 </a>
-					</div>
-					<br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
-				</div>
-				/.col (LEFT)
-				<div class="col-md-6">
-					LINE CHART
-					<br> <br> <br><br> <br> <br><br> <br> <br><br> <br> <br>
-					<div class="card-body" style="border-color: white !important;">
-						<h1></h1>
-					</div>
-					<br> <br> <br><br> <br> <br><br> <br> <br><br> <br> <br>
-					/.card
-				</div>
-				/.col (RIGHT)
-			</div>
-			/.row
-		</div>
-	</header> -->
-	<!-- Header -->
+	
 	 <section class="py-5">
 		<div class="container">
 			<div class="row" id="services">

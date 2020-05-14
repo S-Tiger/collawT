@@ -79,9 +79,9 @@
           return false;
 	
       
-      var password1RegExp = /^[a-zA-z0-9]{10,12}$/;
+      var password1RegExp = /^[a-zA-z0-9]{6,12}$/;
       if (!password1RegExp.test(password1)) {
-          alert("비밀번호는 영문 대소문자와 숫자 10~12자리로 입력해야합니다!");
+          alert("비밀번호는 영문 소문자와 숫자 6~12자리로 입력해야합니다!");
           form.mem_Pwd.value = "";
           form.mem_Pwd.focus();
           return false;
