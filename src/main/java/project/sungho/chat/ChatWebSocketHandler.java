@@ -48,7 +48,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 		usersMap.remove(loginUser+target_Id);
 	}
 
-	@Override //웹소켓 서버단으로 메세지가 도착했을때 해주어야할 일들을 정의하는 메소드 입니다.
+	@Override //웹소켓 서버단으로 메세지가 도착했을때 해주어야할 일들을 정의하는 메소드
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		log(session.getId() + "로부터 메시지 수신: " + message.getPayload());
 		
