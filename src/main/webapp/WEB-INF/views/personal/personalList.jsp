@@ -72,6 +72,14 @@
         <div class="card-body p-0">
            
           <table class="table table-striped table-bordered projects">
+              <thead>
+              <tr>
+              <td style="font-size:13px; text-align:left"><b>글쓴이</b></td>
+              <td style="font-size:13px; text-align:left"><b>제목</b></td>
+              <td style="font-size:13px; text-align:left"><b>작성일</b></td>
+              </tr>
+              </thead>
+              
               <tbody>
 			<c:choose>
 			<c:when test="${fn:length(personalList)!=0}">

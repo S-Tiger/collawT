@@ -270,6 +270,14 @@ function delbtn(applyCount){
         <div class="card-body p-0">
            
           <table class="table table-striped projects">
+              <thead>
+              <tr>
+              <td style="font-size:13px; text-align:left"><b>상태</b></td>
+              <td style="font-size:13px; text-align:left"><b>제목</b></td>
+              <td style="font-size:13px; text-align:left"><b>기간</b></td>
+              </tr>
+              </thead>
+              
               <tbody>
 			<c:choose>
 			<c:when test="${fn:length(voteList)!=0}">
