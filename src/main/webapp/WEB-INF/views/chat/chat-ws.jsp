@@ -12,7 +12,7 @@
 <script type="text/javascript">
 	var wsocket;
 	function connect() {
-		wsocket = new WebSocket("ws://13.209.120.180:8080/chat-ws");
+		wsocket = new WebSocket("ws://collawt.site/chat-ws");
 		wsocket.onopen = onOpen;
 		wsocket.onmessage = onMessage;
 		wsocket.onclose = onClose;

@@ -513,7 +513,7 @@ public class MemberControllerImpl implements MemberController {
 		// 구글 로그인 인증키 비밀번호
 		query += "&client_secret=" + "D930_U4ICILL756vxBavV1W8";
 		// 리다렉트 할 주소
-		query += "&redirect_uri=" + "http://localhost:8090/member/googleLogin";
+		query += "&redirect_uri=" + "http://collawt.site/member/googleLogin";
 		query += "&grant_type=authorization_code";
 
 		// 토큰권한 google에 요청

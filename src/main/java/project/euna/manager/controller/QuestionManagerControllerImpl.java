@@ -175,15 +175,15 @@ public class QuestionManagerControllerImpl implements QuestionManagerController 
 		
 		// Mail Server 설정
 				String charSet = "utf-8";
-				String hostSMTP = "smtp.gmail.com";
+				String hostSMTP = "smtp.naver.com";
 
 				// google 아이디, 비밀번호
-				String hostSMTPid = "collawt@gmail.com";
+				String hostSMTPid = "collawt";
 				String hostSMTPpwd = "zhffkdnxl%!00";
 
 				// 보내는 사람 EMail,이름, 제목, 내용
-				String fromEmail = "collawt@gmail.com";
-				String fromName = "collawT";
+				String fromEmail = "collawt@naver.com";
+				String fromName = "CollawT 관리자";
 				String subject = "";
 				String msg = "";
 
@@ -218,14 +218,13 @@ public class QuestionManagerControllerImpl implements QuestionManagerController 
 			HtmlEmail email = new HtmlEmail();
 			email.setDebug(true);
 			email.setCharset(charSet);
-			email.setSSL(true);
 			email.setHostName(hostSMTP);
 			// google smtp 포트번호
+			email.setTLS(true);
 			email.setSmtpPort(587);
 
 			// 메일 아이디 비밀번호
 			email.setAuthentication(hostSMTPid, hostSMTPpwd);
-			email.setTLS(true);
 			// 받는사람
 			email.addTo(mail, charSet);
 			email.setFrom(fromEmail, fromName, charSet);

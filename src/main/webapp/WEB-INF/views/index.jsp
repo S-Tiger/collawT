@@ -366,45 +366,50 @@ function checkQ_Email(q_Email) {
 		</div>
 	</nav>
 	<!-- Header -->
+	<header class="masthead">
+		<div class="container">
+			<br> <br> <br>
+			<!-- <div class="intro-text">
+				<div class="intro-lead-in">콜라우티에 오신것을 환영합니다!</div>
+				<div class="intro-heading text-uppercase">온라인으로 함께 만드는 협업</div>
+				
+			</div> -->
+		</div>
+	</header>
+	<!--첫화면 -->
 	<header class="masthead" id="">
-	<div class="container">
-			   <div class="intro-text">
+		<div class="container">
+		<div class="intro-text" style="padding-top: 100px;">
 				<div class="col-md-6" style="position: absolute; z-index: 2;">
 					<div class="card-body" style="border-color: white !important;">
-						<h2 style="text-align: left; margin: 10px; font-size:40px;" class="intro-heading">
-						
+						<h2 style="text-align: left; padding: 10px; margin: 10px" class="ng">
 							<spring:message code="site.detail1" text="&nbsp효과적인 팀워크 가벼워진 업무, Collaw T" />
 						</h2>
-						<h5 style="text-align: left; padding: 10px; margin-top: 8px;" class="ng">
-						
-							<spring:message code="site.detail2" text="간단한 회원가입과 손쉬운 문서작성, 파일 공유, 빠른 피드백과 소통까지. 바라던 기능들을 모두 담았습니다." />
+						<h5 style="text-align: left; padding: 10px; margin: 10px;" class="ng">
+							<spring:message code="site.detail2" text="간단한 회원가입과 손쉬운 문서작성, 파일 공유, 빠른 피드백과 소통까지. 필요한 기능들을 모두 담았습니다." />
 						</h5>
-						<p style="text-align: left; padding: 10px; margin-bottom: 0px;">
-						
-							<spring:message code="site.detail3" text="콜라우티에서 제공하는 게시판, 칸반, 캘린더, 검색 기능을 통해 더욱 유연한 방법으로 프로젝트를 진행할 수 있습니다. 콜라우티와 함께 더욱 효과적으로 일해보세요!" />
+						<p style="text-align: left; padding: 10px; margin: 10px;" class="ng">
+							<spring:message code="site.detail3" text="콜라우티에서 제공하는 게시판, 칸반, 캘린더, 검색 기능을 통해 더욱 유연한 방법으로 프로젝트를 진행할 수 있습니다!
+콜라우티와 함께 더욱 효과적으로 일해보세요!" />
 						</p><br>
-						<a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger float-right ng" style="background-color: #fed136; font-size: large; border-color: #fed136; padding-top: 13px; padding-bottom: 13px; padding-left: 20px; padding-right: 20px; margin-right:20px;"
+						<a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger float-left ng" style="background-color: #fed136; font-size: large; border-color: #fed136; padding-top: 13px; padding-bottom: 13px; padding-left: 20px; padding-right: 20px; margin-left: 20px"
 							href="member/loginPage"><spring:message code="site.login" text="로그인" /></a>
-						<h1>&nbsp</h1>
-						<h1>&nbsp</h1>
-						<h1>&nbsp</h1>
 					</div>
-				</div>
+					</div>
+				
 				<!-- /.col (LEFT) -->
-				<div class="col-md-6" style="position: relative; left: 55%; z-index: 1; opacity: 0.5; padding-top: 40px">
-					<!-- LINE CHART -->
+				<div class="col-md-6" style="position: relative; margin-top:5px;left: 52%; z-index: 1; opacity: 0.6;">
 					<div class="card-body" style="border-color: white !important;">
-						<img src="${contextPath}/resources/img/teamproject.png">
+						<img src="${contextPath}/resources/img/teamproject1.png" style="width: 544px; height: 326px;">
 					</div>
 					<!-- /.card -->
 				</div>
 				<!-- /.col (RIGHT) -->
 			</div>
+			</div>
 			<!-- /.row -->
-		</div>
 	</header>
-	<!--첫화면 -->
-		
+	
 	 <section class="py-5">
 		<div class="container">
 			<div class="row" id="services">
@@ -556,15 +561,15 @@ function checkQ_Email(q_Email) {
 			</div>
 		</div>
 	</footer>
-	<!-- Bootstrap core JavaScript -->
+	<!— Bootstrap core JavaScript —>
 	<script src="${contextPath}/resources/vendor/jquery/jquery.min.js"></script>
 	<script src="${contextPath}/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-	<!-- Plugin JavaScript -->
+	<!— Plugin JavaScript —>
 	<script src="${contextPath}/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
-	<!-- Contact form JavaScript -->
+	<!— Contact form JavaScript —>
 	<script src="${contextPath}/resources/js/jqBootstrapValidation.js"></script>
 	<script src="${contextPath}/resources/js/contact_me.js"></script>
-	<!-- Custom scripts for this template -->
+	<!— Custom scripts for this template —>
 	<script src="${contextPath}/resources/js/agency.min.js"></script>
 </body>
 </html>
