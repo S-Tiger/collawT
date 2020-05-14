@@ -148,22 +148,22 @@
 	<div class="col-md-8">
    <ul class="pagination pagination-sm m-0" style="float:right">
     <c:if test="${pageMaker.prev}">
-    	<li class="page-item" id="liStyle"><a class="page-link" href="myChargerlistitem${pageMaker.makeQuery(pageMaker.startPage - 1)}">&laquo;</a></li>
+    	<li class="page-item" id="liStyle"><a class="page-link" href="myChargerlist${pageMaker.makeQuery(pageMaker.startPage - 1)}">&laquo;</a></li>
     </c:if> 
 
     <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
     <c:choose>
     <c:when test="${pageMaker.page==idx}">
-    	<li class="page-item" id="liStyle"><a class="page-link" href="myChargerlistitem${pageMaker.makeQuery(idx)}" style="background-color:#DC3545; color:white">${idx}</a></li>
+    	<li class="page-item" id="liStyle"><a class="page-link" href="myChargerlist${pageMaker.makeQuery(idx)}" style="background-color:#DC3545; color:white">${idx}</a></li>
     </c:when>
     <c:otherwise>
-    <li class="page-item" id="liStyle"><a class="page-link" href="myChargerlistitem${pageMaker.makeQuery(idx)}">${idx}</a></li>
+    <li class="page-item" id="liStyle"><a class="page-link" href="myChargerlist${pageMaker.makeQuery(idx)}">${idx}</a></li>
     </c:otherwise>
     </c:choose>
     </c:forEach>
 
     <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-    	<li class="page-item" id="liStyle"><a class="page-link" href="myChargerlistitem${pageMaker.makeQuery(pageMaker.endPage + 1)}">&raquo;</a></li>
+    	<li class="page-item" id="liStyle"><a class="page-link" href="myChargerlist${pageMaker.makeQuery(pageMaker.endPage + 1)}">&raquo;</a></li>
     </c:if> 
   </ul>
   </div>
