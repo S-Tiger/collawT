@@ -42,7 +42,7 @@ public class ReplyDAOImpl implements ReplyDAO {
 	@Override
 	public void replyDelete(String r_Num) throws Exception {
 		sqlSession.delete("reply.replyDelete", r_Num);
-		
+		sqlSession.update("notify.replyUpdate", r_Num);
 	}
 	
 	//댓글 수정

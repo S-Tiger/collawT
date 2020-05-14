@@ -36,9 +36,12 @@
 		<result property="c_Id" column="c_Id" />
 	</resultMap>
 	
+	
+	<!-- 헤더 알림 카운트~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- 이슈 개수 카운트 -->
 	<select id="viewNotify" resultMap = "notifyResult02" parameterType="java.util.Map">
 	<![CDATA[
-          select not_Num, i_Num, not_Status, not_Kind, mem_Id, c_Id 
+          select *
               from notify
               where not_Status = '0'
               and mem_Id = #{mem_Id}
@@ -46,9 +49,12 @@
       ]]>			
 	</select>
 	
+	
+	
+	<!-- 투표글 개수 카운트 -->
 	<select id="viewVote" resultMap="notifyResult02" parameterType="java.util.Map">
 	<![CDATA[
-		 select c_Id, v_Num
+		 select *
 		 from notify
 		 where not_Status = '0'
 		 and mem_Id = #{mem_Id}
@@ -57,28 +63,25 @@
 	
 	</select>
 	
-	<select id = "searchNotify" resultMap = "notifyResult02" parameterType = "java.util.Map">
-	<![CDATA[
-	select i.i_Date, i.mem_Id, i.i_Content, i.i_Num, i.c_Id
-		from issue i , notify n 
-		where i.i_Num = n.i_num
-		and n.mem_Id = #{mem_Id}
-		and n.not_status = '0'
-	]]>
+		<!-- 댓글 이슈 댓글 +투표 댓글개수 카운트 -->
+	<select id="viewReply" resultMap = "notifyResult02" parameterType="java.util.Map">
+		<![CDATA[
+		    select *
+		    from(
+		        select *
+		        from notify
+		        where not_Kind = '2' or not_Kind = '4'
+		        and not_status = '0'
+		        )
+		    where mem_Id = #{mem_Id}
+	         
+	      ]]>			
 	</select>
 	
-	<!-- list 뿌려주는 컨트롤러 -->
-	<select id = "replyList" resultMap = "notifyResult02" parameterType = "java.util.Map">
-	<![CDATA[
-	select i.i_Date, i.mem_Id, i.i_Num, i.c_Id, i.i_Content
-		from issue i , notify n 
-		where i.i_Num = n.i_num
-		and i.mem_Id = #{mem_Id}
-		and n.not_status = '0'
-		and n.not_Kind = '2'
-	]]>
-	</select>
+
+ <!-- 글 입력시 알림 DB에 넣는 것들~~~~~~~~~~~~~~~~~~ -->
  
+ <!-- 이슈 글 입력시 알림 추가 -->
  <insert id="notifyInsert" parameterType = "java.util.Map">
 <![CDATA[
 	insert into notify(not_Num, i_Num, not_Status, not_Kind, mem_Id, c_Id)
@@ -89,6 +92,7 @@
 	]]>
 </insert>
 	
+	 <!-- 이슈 댓글 입력시 알림 추가 -->
 <insert id="replyInsertNotify" parameterType="replyVO">
 <![CDATA[
     merge into notify n
@@ -100,6 +104,7 @@
 ]]>
 </insert>
 
+ <!-- 투표 글 입력시 알림 추가 -->
 <insert id="voteInsertNotify" parameterType ="java.util.Map">
 <![CDATA[
 	insert into notify(not_Num,v_Num, not_Status, not_Kind, mem_Id, c_Id)
@@ -110,6 +115,7 @@
 ]]>
 </insert>
 
+ <!-- 투표 댓글 입력시 알림 추가 -->
 <insert id="votereplyInsertNotify" parameterType="voteReplyVO">
 <![CDATA[
     merge into notify n
@@ -121,19 +127,12 @@
 ]]>
 </insert>
 
-<!-- 개수세는 컨트롤러 -->
-<select id="viewReply" resultMap = "notifyResult02" parameterType="java.util.Map">
-	<![CDATA[
-         select i_Num, c_Id
-			from issue
-			where mem_Id = #{mem_Id}
-			and i_Num in ( select i_Num from notify where not_Kind = '2'
-			and not_Status = '0')
-         
-      ]]>			
-</select>
+<!-- 글 읽거나 x 눌렀을 때 상태 변환하는 것들~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<!-- 글이나 댓글이 삭제되었을 경우 알림에서도 삭제하기 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
 	
-	<update id ="notifyUpdate" parameterType = "java.util.Map">
+	<!-- 이슈 상태 변환 -->
+	<update id ="notifyUpdate">
 	<![CDATA[
 	update notify set not_Status = '1'
 	where i_Num = #{i_Num}
@@ -142,7 +141,8 @@
 	  ]]>
 	</update>
 	
-	<update id ="replyUpdate" parameterType = "java.util.Map">
+		<!-- 이슈 댓글 상태 변환 -->
+	<update id ="replyUpdate">
 	<![CDATA[
 	update notify set not_Status = '1'
 	where r_Num = #{r_Num}
@@ -151,7 +151,8 @@
 	]]>
 	</update>
 	
-	<update id ="voteUpdate" parameterType = "java.util.Map">
+	<!-- 투표 상태 변환 -->
+	<update id ="voteUpdate">
 	<![CDATA[
 	update notify set not_Status = '1'
 	where v_Num = #{v_Num}
@@ -160,7 +161,8 @@
 	]]>
 	</update>
 	
-	<update id ="votereplyUpdate" parameterType = "java.util.Map">
+	<!-- 투표 댓글 상태 변환 -->
+	<update id ="votereplyUpdate">
 	<![CDATA[
 	update notify set not_Status = '1'
 	where vr_Num = #{vr_Num}
@@ -168,5 +170,9 @@
 	and not_Status = '0'
 	]]>
 	</update>
+	
+	
+	
+
 
 </mapper>

@@ -52,6 +52,7 @@ public class IssueDAOImpl implements IssueDAO {
 	@Override
 	public void issueDelete(String i_Num) throws Exception {
 		sqlSession.delete("issue.issueDelete", i_Num);
+		sqlSession.update("notify.notifyUpdate", i_Num);
 
 	}
 	

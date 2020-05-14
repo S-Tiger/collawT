@@ -82,7 +82,7 @@ public class EVoteDAOImpl implements EVoteDAO {
 	@Override
 	public void voteDelete(String i_Num) throws Exception {
 		sqlSession.delete("voteResult.voteDelete", i_Num);
-
+		sqlSession.update("notify.voteUpdate", i_Num);
 	}
 	
 	// 글 삭제 시 투표 보기 삭제

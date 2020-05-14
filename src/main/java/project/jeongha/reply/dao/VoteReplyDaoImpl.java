@@ -38,6 +38,7 @@ public class VoteReplyDaoImpl  implements VoteReplyDao{
 	@Override
 	public void replyDelete(String vr_Num) throws Exception {
 		sqlSession.delete("voteReply.replyDelete", vr_Num);
+		sqlSession.update("notify.votereplyUpdate", vr_Num);
 
 		
 	}

@@ -92,7 +92,7 @@
 			type : 'get',
 			success : function(data){
 				var itemcount = data.length;
-				var str='개의 글에 댓글이 달렸습니다'
+				var str='개의 댓글이 달렸습니다'
 				var no=itemcount+str;
 				 if(itemcount != 0){				
 					var div ='<div class="dropdown-divider"></div>'
