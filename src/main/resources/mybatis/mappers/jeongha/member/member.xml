@@ -120,21 +120,21 @@
 	<insert id="memberJoin" parameterType="java.util.Map">
 	<![CDATA[
 		insert into member(mem_id, mem_pwd, mem_name, mem_joindate, mem_kind, mem_key, mem_status )
-		values(#{mem_Id}, #{mem_Pwd}, #{mem_Name}, sysdate, '00', #{mem_Key}, 'false' )
+		values(#{mem_Id}, #{mem_Pwd}, #{mem_Name}, to_char(sysdate,'yyyy/mm/dd'), '00', #{mem_Key}, 'false' )
 		]]>
 	</insert>
 
 	<insert id="memberJoinApiNaver" parameterType="java.util.Map">
 		<![CDATA[
 		insert into member(mem_id, mem_name, mem_imgname, mem_joindate, mem_kind, mem_loginapi, mem_status)
-		values(#{mem_Id}, #{mem_Name}, #{mem_ImgName}, sysdate, '00', #{mem_LoginApi}, 'true')
+		values(#{mem_Id}, #{mem_Name}, #{mem_ImgName}, to_char(sysdate,'yyyy/mm/dd'), '00', #{mem_LoginApi}, 'true')
 		]]>
 	</insert>
 
 	<insert id="memberJoinApiGoogle" parameterType="java.util.Map">
 		<![CDATA[
 		insert into member(mem_id, mem_name, mem_joindate, mem_kind, mem_loginapi, mem_status)
-		values(#{mem_Id}, #{mem_Id}, sysdate, '00',  #{mem_LoginApi}, 'true')
+		values(#{mem_Id}, #{mem_Id}, to_char(sysdate,'yyyy/mm/dd'), '00',  #{mem_LoginApi}, 'true')
 		]]>
 	</insert>
 

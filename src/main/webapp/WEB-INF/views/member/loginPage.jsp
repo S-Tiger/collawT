@@ -8,7 +8,7 @@
 	request.setCharacterEncoding("UTF-8");
 %>
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,13 +18,13 @@
 
 <!-- Font Awesome -->
 <link rel="stylesheet"
-	href="../resources/plugins/fontawesome-free/css/all.min.css">
+	href="${contextPath}/resources/plugins/fontawesome-free/css/all.min.css">
 <!-- Ionicons -->
 <link rel="stylesheet"
 	href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 <!-- icheck bootstrap -->
 <link rel="stylesheet"
-	href="../resources/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+	href="${contextPath}/resources/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
 <!-- Theme style -->
 <link rel="stylesheet" href="../resources/dist/css/adminlte.min.css">
 <!-- Google Font: Source Sans Pro -->
@@ -195,11 +195,11 @@
 	<!-- /.login-box -->
 
 	<!-- jQuery -->
-	<script src="../resources/plugins/jquery/jquery.min.js"></script>
+	<script src="${contextPath}/resources/plugins/jquery/jquery.min.js"></script>
 	<!-- Bootstrap 4 -->
-	<script src="../resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="${contextPath}/resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<!-- AdminLTE App -->
-	<script src="../resources/dist/js/adminlte.min.js"></script>
+	<script src="${contextPath}/resources/dist/js/adminlte.min.js"></script>
 
 </body>
 </html>

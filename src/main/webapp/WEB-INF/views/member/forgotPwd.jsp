@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,13 +12,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Font Awesome -->
-  <link rel="stylesheet" href="../resources/plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="${contextPath}/resources/plugins/fontawesome-free/css/all.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- icheck bootstrap -->
-  <link rel="stylesheet" href="../resources/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <link rel="stylesheet" href="${contextPath}/resources/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="../resources/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="${contextPath}/resources/dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <script src="http://code.jquery.com/jquery-latest.js"></script>
@@ -64,11 +65,11 @@
 <!-- /.login-box -->
 
 <!-- jQuery -->
-<script src="../resources/plugins/jquery/jquery.min.js"></script>
+<script src="${contextPath}/resources/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
-<script src="../resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="${contextPath}/resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
-<script src="../resources/dist/js/adminlte.min.js"></script>
+<script src="${contextPath}/resources/dist/js/adminlte.min.js"></script>
 
 </body>
 </html>
