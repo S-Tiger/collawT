@@ -365,22 +365,17 @@ function checkQ_Email(q_Email) {
 			</div>
 		</div>
 	</nav>
-	<!-- Header -->
-	<header class="masthead">
-		<div class="container">
-			<br> <br> <br>
-			<!-- <div class="intro-text">
-				<div class="intro-lead-in">콜라우티에 오신것을 환영합니다!</div>
-				<div class="intro-heading text-uppercase">온라인으로 함께 만드는 협업</div>
-				
-			</div> -->
-		</div>
-	</header>
 	<!--첫화면 -->
 	<header class="masthead" id="">
 		<div class="container">
-		<div class="intro-text" style="padding-top: 100px;">
-				<div class="col-md-6" style="position: absolute; z-index: 2;">
+		<div class="row">
+		<br>
+		<div class="intro-text" style="margin-bottom: 100px; background-color: transparent;
+    background-image: url(${contextPath}/resources/img/cowork.png); 
+    background-size :65%, 25%, 25% ;
+    background-repeat: no-repeat;
+	background-position:100% 100%; padding-bottom: 200px;">
+				<div class="col-md-8">
 					<div class="card-body" style="border-color: white !important;">
 						<h2 style="text-align: left; padding: 10px; margin: 10px" class="ng">
 							<spring:message code="site.detail1" text="&nbsp효과적인 팀워크 가벼워진 업무, Collaw T" />
@@ -398,13 +393,8 @@ function checkQ_Email(q_Email) {
 					</div>
 				
 				<!-- /.col (LEFT) -->
-				<div class="col-md-6" style="position: relative; margin-top:5px;left: 52%; z-index: 1; opacity: 0.6;">
-					<div class="card-body" style="border-color: white !important;">
-						<img src="${contextPath}/resources/img/teamproject1.png" style="width: 544px; height: 326px;">
-					</div>
-					<!-- /.card -->
-				</div>
 				<!-- /.col (RIGHT) -->
+			</div>
 			</div>
 			</div>
 			<!-- /.row -->

@@ -1,14 +1,24 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="${contextPath}/resources/css/style.css"> 
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="${contextPath}/resources/ibsheet/ibsheetinfo.js"></script>
+<script src="${contextPath}/resources/ibsheet/ibsheet.js"></script>
+<script src="${contextPath}/resources/ibsheet/ibleaders.js"></script>
+<style>
+.ib_product{
+width: 100%;
+	}
+#content{
 
+    margin-left: 0px;
+}
 
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
-<link rel="stylesheet" href="/SRC2/modal/dist/needpopup.min.css">
-
+</style>
 
 
 <script type="text/javascript">
